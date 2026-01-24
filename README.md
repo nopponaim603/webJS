@@ -247,6 +247,29 @@ gamePlaceholder.innerHTML = `
 | Edge | ✅ Latest |
 | Opera | ✅ Latest |
 
+## 🌐 การ Deploy (Hosting)
+
+### Netlify (แนะนำ 🚀)
+
+1. เชื่อมต่อ GitHub Repository กับ Netlify
+2. **สำคัญ:** ในส่วน **Branch to deploy** ให้ระบุเป็น `main` (ไม่ใช่ master)
+3. ส่วน **Build command** ให้ปล่อยว่างไว้
+4. ส่วน **Publish directory** ให้ระบุเป็น `.` (หรือ root)
+
+### Vercel
+
+1. เชื่อมต่อ GitHub Repository กับ Vercel
+2. เลือก Framework Preset เป็น **Other**
+3. **Build Command**: ปล่อยว่าง
+4. **Output Directory**: ปล่อยว่าง (Vercel จะใช้ root อัตโนมัติ)
+
+### GitHub Pages
+
+1. ไปที่ Settings > Pages ใน GitHub Repository
+2. เลือก Source เป็น **Deploy from a branch**
+3. เลือก Branch **main** และโฟลเดอร์ **/ (root)**
+4. กด Save และรอสักครู่
+
 ## 🐛 Troubleshooting
 
 ### ปัญหา: รูปภาพไม่แสดง
