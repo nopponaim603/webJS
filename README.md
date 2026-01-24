@@ -8,6 +8,9 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Netlify-00AD9F?style=for-the-badge&logo=netlify)](https://mellifluous-sprite-70f0fc.netlify.app/)
+
+
 ## ✨ Features
 
 - 🎨 **Modern Design** - ใช้ธีมสี Cyan/Turquoise สดใส พร้อม Gradient และ Animations
@@ -255,6 +258,8 @@ gamePlaceholder.innerHTML = `
 2. **สำคัญ:** ในส่วน **Branch to deploy** ให้ระบุเป็น `main` (ไม่ใช่ master)
 3. ส่วน **Build command** ให้ปล่อยว่างไว้
 4. ส่วน **Publish directory** ให้ระบุเป็น `.` (หรือ root)
+
+**Live Demo:** [https://mellifluous-sprite-70f0fc.netlify.app/](https://mellifluous-sprite-70f0fc.netlify.app/)
 
 ### Vercel
 
