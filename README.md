@@ -2,9 +2,11 @@
 
 เว็บไซต์สำหรับแสดงผลงานเกม HTML5 และเกมที่สามารถรันผ่าน Browser ได้ พร้อมด้วย UI/UX ที่ทันสมัยและสวยงาม
 
+[![GitHub Repository](https://img.shields.io/badge/GitHub-nopponaim603%2FwebJS-181717?style=for-the-badge&logo=github)](https://github.com/nopponaim603/webJS)
 ![Game Portfolio](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
 
 ## ✨ Features
 
@@ -40,18 +42,20 @@ webJs/
 
 1. **Clone หรือ Download โปรเจค**
    ```bash
-   # ถ้าใช้ Git
-   git clone <repository-url>
-   cd webJs
+   # Clone จาก GitHub
+   git clone https://github.com/nopponaim603/webJS.git
+   cd webJS
    ```
 
-   หรือ Download ZIP และแตกไฟล์
+   หรือ Download ZIP จาก [GitHub Repository](https://github.com/nopponaim603/webJS) และแตกไฟล์
 
 2. **ตรวจสอบไฟล์**
-   ให้แน่ใจว่ามีไฟล์ทั้ง 3 ไฟล์:
-   - `index.html`
-   - `styles.css`
-   - `script.js`
+   ให้แน่ใจว่ามีไฟล์หลักทั้งหมด:
+   - `index.html` - หน้าเว็บหลัก
+   - `styles.css` - Styling
+   - `script.js` - Functionality
+   - `server.js` - Node.js Server (ถ้าต้องการใช้)
+   - `package.json` - NPM Configuration
 
 3. **เสร็จสิ้น!** 🎉
    ไม่ต้องติดตั้ง dependencies เพิ่มเติม เพราะเป็น Vanilla HTML/CSS/JS
