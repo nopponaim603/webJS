@@ -1,0 +1,23 @@
+{
+  "name": "game-portfolio",
+  "version": "1.0.0",
+  "description": "เว็บไซต์สำหรับแสดงผลงานเกม HTML5 และเกมที่สามารถรันผ่าน Browser",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "serve": "node server.js"
+  },
+  "keywords": [
+    "game",
+    "portfolio",
+    "html5",
+    "browser-games",
+    "showcase"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
