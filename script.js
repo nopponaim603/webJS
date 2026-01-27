@@ -1,6 +1,15 @@
 // Game Data
 const gamesData = [
     {
+        id: "2048-cubes",
+        title: "2048 Cubes",
+        category: "ปริศนา / ฟิสิกส์",
+        url: "2048-cubes/index.html",
+        aspectRatio: "450 / 720", // Tighter fit
+        image: "https://images.unsplash.com/photo-1611996575749-79a3a250f948?w=400&h=400&fit=crop",
+        gradient: "linear-gradient(135deg, #FF9F43 0%, #FF6B6B 100%)"
+    },
+    {
         id: 1,
         title: "Star Quest",
         category: "ผจญภัย",
@@ -193,7 +202,7 @@ function init() {
 // Render Games Grid
 function renderGames() {
     gamesGrid.innerHTML = '';
-    
+
     gamesData.forEach((game, index) => {
         const gameCard = createGameCard(game, index);
         gamesGrid.appendChild(gameCard);
@@ -206,7 +215,7 @@ function createGameCard(game, index) {
     card.className = 'game-card';
     card.style.animationDelay = `${index * 0.05}s`;
     card.dataset.gameId = game.id;
-    
+
     card.innerHTML = `
         <div class="game-card-image" style="background: ${game.gradient};">
             <img src="${game.image}" alt="${game.title}" 
@@ -218,59 +227,78 @@ function createGameCard(game, index) {
             <p class="game-card-category">${game.category}</p>
         </div>
     `;
-    
+
     card.addEventListener('click', () => loadGame(game));
-    
+
     return card;
 }
 
 // Load Game
 function loadGame(game) {
     currentGame = game;
-    
+
     // Update game player
-    gamePlaceholder.innerHTML = `
-        <div class="game-placeholder-content">
-            <div style="width: 100%; height: 100%; background: ${game.gradient}; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1rem;">
-                <img src="${game.image}" alt="${game.title}" 
-                     style="width: 120px; height: 120px; border-radius: 24px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); object-fit: cover;"
-                     onerror="this.style.display='none'">
-                <h2 style="color: white; font-size: 2rem; font-weight: 800; text-shadow: 0 2px 8px rgba(0,0,0,0.3);">${game.title}</h2>
-                <p style="color: rgba(255,255,255,0.9); font-size: 1.125rem;">กำลังโหลดเกม...</p>
-                <div style="width: 200px; height: 4px; background: rgba(255,255,255,0.3); border-radius: 2px; overflow: hidden;">
-                    <div style="width: 100%; height: 100%; background: white; animation: loading 1.5s ease-in-out infinite;"></div>
-                </div>
-            </div>
-        </div>
-    `;
-    
-    // Update game info
-    gameTitleDisplay.textContent = game.title;
-    gameAuthor.textContent = `หมวดหมู่: ${game.category}`;
-    
-    // Scroll to top
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    
-    // Simulate loading
-    setTimeout(() => {
+    const playerContainer = document.querySelector('.game-iframe-container');
+    if (game.aspectRatio) {
+        playerContainer.style.aspectRatio = game.aspectRatio;
+        playerContainer.style.minHeight = 'unset';
+        playerContainer.style.maxWidth = '500px';
+        playerContainer.style.margin = '0 auto';
+    } else {
+        playerContainer.style.aspectRatio = '16 / 9';
+        playerContainer.style.minHeight = '400px';
+        playerContainer.style.maxWidth = '100%';
+        playerContainer.style.margin = '0';
+    }
+
+    if (game.url) {
+        gamePlaceholder.innerHTML = `
+            <iframe src="${game.url}" style="width: 100%; height: 100%; border: none; background: #3c343b;" title="${game.title}"></iframe>
+        `;
+    } else {
         gamePlaceholder.innerHTML = `
             <div class="game-placeholder-content">
-                <div style="width: 100%; height: 100%; background: ${game.gradient}; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1.5rem; padding: 2rem;">
+                <div style="width: 100%; height: 100%; background: ${game.gradient}; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1rem;">
                     <img src="${game.image}" alt="${game.title}" 
-                         style="width: 160px; height: 160px; border-radius: 24px; box-shadow: 0 16px 48px rgba(0,0,0,0.4); object-fit: cover;"
+                         style="width: 120px; height: 120px; border-radius: 24px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); object-fit: cover;"
                          onerror="this.style.display='none'">
-                    <div style="text-align: center;">
-                        <h2 style="color: white; font-size: 2.5rem; font-weight: 800; text-shadow: 0 2px 8px rgba(0,0,0,0.3); margin-bottom: 0.5rem;">${game.title}</h2>
-                        <p style="color: rgba(255,255,255,0.95); font-size: 1.25rem; margin-bottom: 1.5rem;">เกม ${game.category}</p>
-                        <button onclick="alert('นี่คือตัวอย่างการแสดงผล! คุณสามารถเพิ่ม iframe หรือ canvas สำหรับเกมจริงได้')" 
-                                style="padding: 1rem 2rem; background: white; color: #0A1929; border: none; border-radius: 12px; font-size: 1.125rem; font-weight: 700; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.2); transition: all 0.3s;">
-                            🎮 เริ่มเล่น
-                        </button>
+                    <h2 style="color: white; font-size: 2rem; font-weight: 800; text-shadow: 0 2px 8px rgba(0,0,0,0.3);">${game.title}</h2>
+                    <p style="color: rgba(255,255,255,0.9); font-size: 1.125rem;">กำลังโหลดเกม...</p>
+                    <div style="width: 200px; height: 4px; background: rgba(255,255,255,0.3); border-radius: 2px; overflow: hidden;">
+                        <div style="width: 100%; height: 100%; background: white; animation: loading 1.5s ease-in-out infinite;"></div>
                     </div>
                 </div>
             </div>
         `;
-    }, 1500);
+
+        // Simulate loading
+        setTimeout(() => {
+            gamePlaceholder.innerHTML = `
+                <div class="game-placeholder-content">
+                    <div style="width: 100%; height: 100%; background: ${game.gradient}; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1.5rem; padding: 2rem;">
+                        <img src="${game.image}" alt="${game.title}" 
+                             style="width: 160px; height: 160px; border-radius: 24px; box-shadow: 0 16px 48px rgba(0,0,0,0.4); object-fit: cover;"
+                             onerror="this.style.display='none'">
+                        <div style="text-align: center;">
+                            <h2 style="color: white; font-size: 2.5rem; font-weight: 800; text-shadow: 0 2px 8px rgba(0,0,0,0.3); margin-bottom: 0.5rem;">${game.title}</h2>
+                            <p style="color: rgba(255,255,255,0.95); font-size: 1.25rem; margin-bottom: 1.5rem;">เกม ${game.category}</p>
+                            <button onclick="alert('นี่คือตัวอย่างการแสดงผล! คุณสามารถเพิ่ม iframe หรือ canvas สำหรับเกมจริงได้')" 
+                                    style="padding: 1rem 2rem; background: white; color: #0A1929; border: none; border-radius: 12px; font-size: 1.125rem; font-weight: 700; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.2); transition: all 0.3s;">
+                                🎮 เริ่มเล่น
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }, 1500);
+    }
+
+    // Update game info
+    gameTitleDisplay.textContent = game.title;
+    gameAuthor.textContent = `หมวดหมู่: ${game.category}`;
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // Attach Event Listeners
@@ -284,7 +312,7 @@ function attachEventListeners() {
             }
         });
     });
-    
+
     // Pause button
     pauseBtn.addEventListener('click', () => {
         isPaused = !isPaused;
@@ -299,10 +327,10 @@ function attachEventListeners() {
             </svg>
         `;
     });
-    
+
     // Fullscreen button
     fullscreenBtn.addEventListener('click', () => {
-        const gamePlayer = document.querySelector('.game-iframe-container');
+        const gamePlayer = gamePlaceholder; // Target the inner content directly
         if (!document.fullscreenElement) {
             gamePlayer.requestFullscreen().catch(err => {
                 alert(`ไม่สามารถเปิดโหมดเต็มจอได้: ${err.message}`);
@@ -311,7 +339,7 @@ function attachEventListeners() {
             document.exitFullscreen();
         }
     });
-    
+
     // Search button
     const searchBtn = document.getElementById('searchBtn');
     searchBtn.addEventListener('click', () => {
@@ -324,13 +352,13 @@ function attachEventListeners() {
 
 // Search Games
 function searchGames(query) {
-    const filtered = gamesData.filter(game => 
+    const filtered = gamesData.filter(game =>
         game.title.toLowerCase().includes(query.toLowerCase()) ||
         game.category.toLowerCase().includes(query.toLowerCase())
     );
-    
+
     gamesGrid.innerHTML = '';
-    
+
     if (filtered.length === 0) {
         gamesGrid.innerHTML = `
             <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 2rem;">
@@ -365,7 +393,7 @@ function addScrollAnimations() {
     }, {
         threshold: 0.1
     });
-    
+
     document.querySelectorAll('.game-card, .category-card').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(20px)';
@@ -398,13 +426,13 @@ document.addEventListener('keydown', (e) => {
         e.preventDefault();
         pauseBtn.click();
     }
-    
+
     // F to fullscreen
     if (e.code === 'KeyF' && currentGame) {
         e.preventDefault();
         fullscreenBtn.click();
     }
-    
+
     // Escape to exit fullscreen
     if (e.code === 'Escape' && document.fullscreenElement) {
         document.exitFullscreen();

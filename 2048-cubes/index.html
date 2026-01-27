@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>2048 Cubes - Physics Drop Game</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"></script>
+</head>
+
+<body>
+    <div id="game-container"></div>
+    <div id="ui-layer">
+        <div class="header">
+            <div class="score-container">
+                <div class="label">SCORE</div>
+                <div id="score" class="value">0</div>
+            </div>
+            <div class="highscore-container">
+                <div class="label">BEST</div>
+                <div id="highscore" class="value">0</div>
+            </div>
+            <button id="theme-btn" class="icon-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2ZM12,20V4A8,8 0 0,1 20,12A8,8 0 0,1 12,20Z" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div id="game-over" class="overlay hidden">
+        <div class="modal">
+            <h1>Game Over!</h1>
+            <p>Your Score: <span id="final-score">0</span></p>
+            <button id="restart-btn">Try Again</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>
