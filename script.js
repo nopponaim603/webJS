@@ -1,6 +1,15 @@
 // Game Data
 const gamesData = [
     {
+        id: "emoji-match",
+        title: "Emoji Match",
+        category: "ปริศนา / ฝึกสมอง",
+        url: "emoji-match/index.html",
+        aspectRatio: "1 / 1.2",
+        image: "https://images.unsplash.com/photo-1614332287897-cdc485fa562d?w=400&h=400&fit=crop",
+        gradient: "linear-gradient(135deg, #A78BFA 0%, #EC4899 100%)"
+    },
+    {
         id: "2048-cubes",
         title: "2048 Cubes",
         category: "ปริศนา / ฟิสิกส์",
