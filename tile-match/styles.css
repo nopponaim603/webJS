@@ -180,43 +180,49 @@ body {
     background: var(--tray-bg);
     border-radius: 16px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 15px 10px;
+    align-items: flex-start;
+    /* Flow from top */
+    justify-content: flex-start;
+    /* Flow from left */
+    padding: 15px;
     margin-top: auto;
 }
 
 .tray-slots {
     display: flex;
     gap: 8px;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
     width: 100%;
+    z-index: 1;
 }
 
 .slot {
     width: var(--tile-width);
-    height: 70px;
+    height: var(--tile-height);
     background: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
 }
 
 .tray-tiles {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    inset: 15px;
+    /* Matches .tray-container padding */
     display: flex;
     gap: 8px;
-    justify-content: center;
+    /* Matches .tray-slots gap */
+    justify-content: flex-start;
     flex-wrap: wrap;
     pointer-events: none;
-    width: 100%;
+    width: calc(100% - 30px);
+    /* Account for 15px padding on both sides */
+    height: auto;
+    z-index: 2;
 }
 
 .tray-tile {
     width: var(--tile-width);
-    height: 70px;
+    height: var(--tile-height);
     background: var(--card-bg);
     border-radius: 8px;
     display: flex;
@@ -383,12 +389,12 @@ body {
 /* Responsiveness for small screens */
 @media (max-width: 480px) {
     :root {
-        --tile-width: 50px;
-        --tile-height: 60px;
+        --tile-width: 44px;
+        --tile-height: 54px;
     }
 
     .game-container {
-        padding: 10px 5px;
+        padding: 5px 5px;
     }
 
     .header-info {
@@ -405,12 +411,23 @@ body {
     }
 
     .tray-container {
-        min-height: 120px;
+        min-height: 110px;
+        padding: 10px;
     }
 
     .tray-tile,
     .slot {
         font-size: 24px;
+    }
+
+    .tray-slots,
+    .tray-tiles {
+        gap: 6px;
+    }
+
+    .tray-tiles {
+        inset: 10px;
+        width: calc(100% - 20px);
     }
 
     .game-controls {

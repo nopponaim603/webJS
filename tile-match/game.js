@@ -197,12 +197,16 @@ class TileGame {
     }
 
     createTile(x, y, z, emoji, id) {
+        const { width: TILE_WIDTH, height: TILE_HEIGHT } = getTileDimensions();
         const el = document.createElement('div');
         el.className = 'tile';
         el.innerHTML = emoji;
         el.style.left = `${x}px`;
         el.style.top = `${y}px`;
         el.style.zIndex = z;
+
+        // Dynamic font size
+        el.style.fontSize = `${TILE_HEIGHT * 0.45}px`;
 
         const tile = {
             id,
@@ -306,11 +310,13 @@ class TileGame {
     }
 
     renderTray() {
+        const { height: TILE_HEIGHT } = getTileDimensions();
         this.trayContainer.innerHTML = '';
         this.tray.forEach(tile => {
             const trayEl = document.createElement('div');
             trayEl.className = 'tray-tile';
             trayEl.innerHTML = tile.emoji;
+            trayEl.style.fontSize = `${TILE_HEIGHT * 0.45}px`;
             this.trayContainer.appendChild(trayEl);
             // Hide original element
             tile.el.style.display = 'none';
