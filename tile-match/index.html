@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tile Match - Classic Triple Match</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="game-container">
+        <header class="game-header">
+            <button class="back-btn" id="backBtn">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                    <path d="M15.41 7.41L14 6L8 12L14 18L15.41 16.59L10.83 12L15.41 7.41Z" />
+                </svg>
+            </button>
+            <div class="header-info">
+                <div class="stat-item">
+                    <span class="label">เวลา</span>
+                    <span class="value" id="timerDisplay">00:00</span>
+                </div>
+                <div class="stat-item">
+                    <span class="label">คะแนน</span>
+                    <span class="value" id="scoreDisplay">0</span>
+                </div>
+            </div>
+            <h1 class="level-title">Level <span id="levelLabel">1</span></h1>
+        </header>
+
+        <main class="game-area" id="gameArea">
+            <div id="tileContainer" class="tile-container"></div>
+        </main>
+
+        <footer class="game-footer">
+            <div class="tray-container">
+                <div class="tray-slots" id="traySlots">
+                    <div class="slot"></div>
+                    <div class="slot"></div>
+                    <div class="slot"></div>
+                    <div class="slot"></div>
+                    <div class="slot"></div>
+                    <div class="slot"></div>
+                    <div class="slot"></div>
+                </div>
+                <div class="tray-tiles" id="trayTiles"></div>
+            </div>
+
+            <div class="game-controls">
+                <button class="control-item" id="undoBtn">
+                    <div class="icon-circle">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                            <path
+                                d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z" />
+                        </svg>
+                    </div>
+                    <span class="badge">1</span>
+                </button>
+                <button class="control-item locked">
+                    <div class="icon-circle">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                            <path
+                                d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1s3.1 1.39 3.1 3.1v2z" />
+                        </svg>
+                    </div>
+                </button>
+                <button class="control-item locked">
+                    <div class="icon-circle">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                            <path
+                                d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1s3.1 1.39 3.1 3.1v2z" />
+                        </svg>
+                    </div>
+                </button>
+            </div>
+        </footer>
+
+        <!-- Modals -->
+        <div class="overlay" id="victoryOverlay">
+            <div class="modal">
+                <div class="modal-icon">🎉</div>
+                <h2>ระดับสำเร็จ!</h2>
+                <p>คุณทำได้ดีมาก!</p>
+                <button class="btn btn-primary" id="nextLevelBtn">ระดับถัดไป</button>
+            </div>
+        </div>
+
+        <div class="overlay" id="gameOverOverlay">
+            <div class="modal">
+                <div class="modal-icon">😅</div>
+                <h2>จบเกม!</h2>
+                <p>ถาดเต็มแล้ว ลองใหม่อีกครั้งนะ</p>
+                <button class="btn btn-secondary" id="restartBtn">เริ่มใหม่</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>

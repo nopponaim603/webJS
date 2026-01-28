@@ -19,6 +19,15 @@ const gamesData = [
         gradient: "linear-gradient(135deg, #FF9F43 0%, #FF6B6B 100%)"
     },
     {
+        id: "tile-match",
+        title: "Tile Match",
+        category: "ปริศนา / จับคู่ทรีแมตช์",
+        url: "tile-match/index.html",
+        aspectRatio: "1 / 1.5",
+        image: "https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=400&h=400&fit=crop",
+        gradient: "linear-gradient(135deg, #5D2A35 0%, #A04050 100%)"
+    },
+    {
         id: 1,
         title: "Star Quest",
         category: "ผจญภัย",
@@ -313,9 +322,10 @@ function loadGame(game) {
 // Attach Event Listeners
 function attachEventListeners() {
     // Sidebar game cards
-    sidebarGameCards.forEach((card, index) => {
+    document.querySelectorAll('.sidebar-game-card').forEach((card) => {
         card.addEventListener('click', () => {
-            const game = gamesData[index];
+            const gameId = card.dataset.game;
+            const game = gamesData.find(g => g.id === gameId);
             if (game) {
                 loadGame(game);
             }
