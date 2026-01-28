@@ -3,14 +3,14 @@
 const config = {
     type: Phaser.AUTO,
     width: 450,
-    height: 700,
+    height: 600,
     parent: 'game-container',
     backgroundColor: '#3c343b',
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
         width: 450,
-        height: 700,
+        height: 600,
         expandParent: true
     },
     physics: {
@@ -104,7 +104,7 @@ function create() {
 
     // Fullscreen Exit Button Logic
     const exitFullscreenBtn = document.getElementById('exit-fullscreen-btn');
-    
+
     const updateFullscreenBtn = () => {
         if (document.fullscreenElement) {
             exitFullscreenBtn.classList.remove('hidden');
@@ -322,7 +322,7 @@ function update(time, delta) {
 
     let isAboveLine = false;
     const bodies = this.matter.world.getAllBodies();
-    
+
     for (let i = 0; i < bodies.length; i++) {
         const body = bodies[i];
         if (!body || !body.position || !body.velocity || !body.gameObject) continue;
