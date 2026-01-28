@@ -26,11 +26,10 @@ body {
     font-family: var(--font-family);
     overflow: hidden;
     height: 100vh;
+    width: 100vw;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    /* Align to top to reduce top gap */
-    padding-top: 10px;
+    align-items: center;
     transition: background-color 0.4s ease;
 }
 
@@ -39,15 +38,29 @@ body {
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
     border-radius: 8px;
     overflow: hidden;
-    width: 450px;
-    height: 700px;
+    width: 100%;
+    height: 100%;
+    max-width: 450px;
+    max-height: 700px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
 }
 
 #ui-layer {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 100%;
+    max-width: 450px;
     pointer-events: none;
     padding: 15px;
     z-index: 10;
@@ -56,20 +69,20 @@ body {
 .header {
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 10px;
     pointer-events: auto;
-    max-width: 500px;
-    margin: 0 auto;
+    width: 100%;
 }
 
 .score-container,
 .highscore-container {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-    padding: 8px 16px;
+    padding: 5px 10px;
     border-radius: 6px;
     text-align: center;
-    min-width: 100px;
+    flex: 1;
+    min-width: 80px;
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -80,14 +93,14 @@ body.light .highscore-container {
 }
 
 .label {
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 700;
     opacity: 0.8;
     letter-spacing: 1px;
 }
 
 .value {
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 800;
 }
 
@@ -95,14 +108,19 @@ body.light .highscore-container {
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: white;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 6px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.icon-btn.hidden {
+    display: none;
 }
 
 body.light .icon-btn {
@@ -136,23 +154,23 @@ body.light .icon-btn {
 
 .modal {
     background: var(--bg-color);
-    padding: 40px;
+    padding: 30px;
     border-radius: 16px;
     text-align: center;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    max-width: 90%;
-    width: 400px;
+    max-width: 85%;
+    width: 320px;
 }
 
 .modal h1 {
-    font-size: 40px;
-    margin-bottom: 20px;
+    font-size: 32px;
+    margin-bottom: 15px;
     color: var(--accent-color);
 }
 
 .modal p {
-    font-size: 20px;
-    margin-bottom: 30px;
+    font-size: 18px;
+    margin-bottom: 25px;
     opacity: 0.8;
 }
 
@@ -160,15 +178,22 @@ body.light .icon-btn {
     background: var(--accent-color);
     color: white;
     border: none;
-    padding: 16px 32px;
-    font-size: 18px;
+    padding: 14px 28px;
+    font-size: 16px;
     font-weight: 700;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.2s;
 }
 
-#restart-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+@media (max-height: 600px) {
+    #ui-layer {
+        padding: 5px;
+    }
+    .value {
+        font-size: 16px;
+    }
+    .label {
+        font-size: 8px;
+    }
 }
