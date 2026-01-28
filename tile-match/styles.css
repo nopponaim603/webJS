@@ -389,8 +389,8 @@ body {
 /* Responsiveness for small screens */
 @media (max-width: 480px) {
     :root {
-        --tile-width: 44px;
-        --tile-height: 54px;
+        --tile-width: 42px;
+        --tile-height: 52px;
     }
 
     .game-container {
@@ -411,7 +411,7 @@ body {
     }
 
     .tray-container {
-        min-height: 110px;
+        min-height: auto;
         padding: 10px;
     }
 
@@ -422,12 +422,13 @@ body {
 
     .tray-slots,
     .tray-tiles {
-        gap: 6px;
+        gap: 4px;
     }
 
     .tray-tiles {
         inset: 10px;
         width: calc(100% - 20px);
+        gap: 4px;
     }
 
     .game-controls {
@@ -447,11 +448,11 @@ body {
 
 @media (max-width: 360px) {
     :root {
-        --tile-width: 44px;
-        --tile-height: 54px;
+        --tile-width: 38px;
+        --tile-height: 48px;
     }
 
     .tray-container {
-        min-height: 110px;
+        min-height: 100px;
     }
 }
