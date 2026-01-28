@@ -322,9 +322,10 @@ function loadGame(game) {
 // Attach Event Listeners
 function attachEventListeners() {
     // Sidebar game cards
-    sidebarGameCards.forEach((card, index) => {
+    document.querySelectorAll('.sidebar-game-card').forEach((card) => {
         card.addEventListener('click', () => {
-            const game = gamesData[index];
+            const gameId = card.dataset.game;
+            const game = gamesData.find(g => g.id === gameId);
             if (game) {
                 loadGame(game);
             }
