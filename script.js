@@ -1,6 +1,15 @@
 // Game Data
 const gamesData = [
     {
+        id: "emoji-match",
+        title: "Emoji Match",
+        category: "ปริศนา / ฝึกสมอง",
+        url: "emoji-match/index.html",
+        aspectRatio: "390 / 480", // Optimized for narrow tall screens
+        image: "https://images.unsplash.com/photo-1614332287897-cdc485fa562d?w=400&h=400&fit=crop",
+        gradient: "linear-gradient(135deg, #A78BFA 0%, #EC4899 100%)"
+    },
+    {
         id: "2048-cubes",
         title: "2048 Cubes",
         category: "ปริศนา / ฟิสิกส์",
@@ -8,6 +17,15 @@ const gamesData = [
         aspectRatio: "450 / 720", // Tighter fit
         image: "https://images.unsplash.com/photo-1611996575749-79a3a250f948?w=400&h=400&fit=crop",
         gradient: "linear-gradient(135deg, #FF9F43 0%, #FF6B6B 100%)"
+    },
+    {
+        id: "tile-match",
+        title: "Tile Match",
+        category: "ปริศนา / จับคู่ทรีแมตช์",
+        url: "tile-match/index.html",
+        aspectRatio: "1 / 1.5",
+        image: "https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=400&h=400&fit=crop",
+        gradient: "linear-gradient(135deg, #5D2A35 0%, #A04050 100%)"
     },
     {
         id: 1,
@@ -185,12 +203,10 @@ const sidebarGameCards = document.querySelectorAll('.sidebar-game-card');
 const gamePlaceholder = document.querySelector('.game-placeholder');
 const gameTitleDisplay = document.querySelector('.game-title-display');
 const gameAuthor = document.querySelector('.game-author');
-const pauseBtn = document.querySelector('.pause-btn');
 const fullscreenBtn = document.querySelector('.fullscreen-btn');
 
 // State
 let currentGame = null;
-let isPaused = false;
 
 // Initialize
 function init() {
@@ -304,29 +320,16 @@ function loadGame(game) {
 // Attach Event Listeners
 function attachEventListeners() {
     // Sidebar game cards
-    sidebarGameCards.forEach((card, index) => {
+    document.querySelectorAll('.sidebar-game-card').forEach((card) => {
         card.addEventListener('click', () => {
-            const game = gamesData[index];
+            const gameId = card.dataset.game;
+            const game = gamesData.find(g => g.id === gameId);
             if (game) {
                 loadGame(game);
             }
         });
     });
 
-    // Pause button
-    pauseBtn.addEventListener('click', () => {
-        isPaused = !isPaused;
-        pauseBtn.innerHTML = isPaused ? `
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M8 5L19 12L8 19V5Z"/>
-            </svg>
-        ` : `
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <rect x="6" y="4" width="4" height="16" rx="1"/>
-                <rect x="14" y="4" width="4" height="16" rx="1"/>
-            </svg>
-        `;
-    });
 
     // Fullscreen button
     fullscreenBtn.addEventListener('click', () => {
@@ -421,11 +424,6 @@ if (document.readyState === 'loading') {
 
 // Add keyboard shortcuts
 document.addEventListener('keydown', (e) => {
-    // Space to pause/play
-    if (e.code === 'Space' && currentGame) {
-        e.preventDefault();
-        pauseBtn.click();
-    }
 
     // F to fullscreen
     if (e.code === 'KeyF' && currentGame) {

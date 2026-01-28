@@ -1,0 +1,457 @@
+:root {
+    --bg-color: #5D2A35;
+    --card-bg: #FFFFFF;
+    --card-shadow: rgba(0, 0, 0, 0.2);
+    --card-border: #E0E0E0;
+    --tray-bg: rgba(0, 0, 0, 0.2);
+    --text-color: #FFFFFF;
+    --primary-btn: #FFD25D;
+    --primary-btn-hover: #F0C040;
+    --secondary-btn: #A04050;
+    --font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --tile-width: 60px;
+    --tile-height: 70px;
+    --tray-slot-border: rgba(255, 255, 255, 0.05);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--bg-color);
+    font-family: var(--font-family);
+    color: var(--text-color);
+    height: 100vh;
+    overflow: hidden;
+    user-select: none;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-width: 500px;
+    margin: 0 auto;
+    position: relative;
+    padding: 20px 10px;
+}
+
+/* Header */
+.game-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 60px;
+    margin-bottom: 20px;
+}
+
+.back-btn {
+    position: absolute;
+    left: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.back-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.level-title {
+    font-size: 20px;
+    font-weight: 800;
+    margin-left: auto;
+    padding-right: 10px;
+}
+
+.header-info {
+    display: flex;
+    gap: 30px;
+    margin-left: 70px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-item .label {
+    font-size: 10px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.stat-item .value {
+    font-size: 20px;
+    font-weight: 800;
+    color: #FFD25D;
+}
+
+/* Game Area */
+.game-area {
+    flex: 1;
+    position: relative;
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tile-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.tile {
+    position: absolute;
+    width: var(--tile-width);
+    height: var(--tile-height);
+    background: var(--card-bg);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    cursor: pointer;
+    box-shadow: 0 4px 0 var(--card-border), 0 6px 10px var(--card-shadow);
+    transition: transform 0.1s, box-shadow 0.1s;
+    z-index: 10;
+}
+
+/* Mahjong Stack Effect */
+.tile::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.tile.locked {
+    cursor: default;
+}
+
+.tile.locked::after {
+    opacity: 1;
+}
+
+.tile.moving {
+    z-index: 1000 !important;
+    pointer-events: none;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), left 0.3s, top 0.3s;
+}
+
+/* Footer & Tray */
+.game-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.tray-container {
+    position: relative;
+    width: 100%;
+    min-height: 100px;
+    background: var(--tray-bg);
+    border-radius: 16px;
+    display: flex;
+    align-items: flex-start;
+    /* Flow from top */
+    justify-content: flex-start;
+    /* Flow from left */
+    padding: 15px;
+    margin-top: auto;
+}
+
+.tray-slots {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    z-index: 1;
+}
+
+.slot {
+    width: var(--tile-width);
+    height: var(--tile-height);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+.tray-tiles {
+    position: absolute;
+    inset: 15px;
+    /* Matches .tray-container padding */
+    display: flex;
+    gap: 8px;
+    /* Matches .tray-slots gap */
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    pointer-events: none;
+    width: calc(100% - 30px);
+    /* Account for 15px padding on both sides */
+    height: auto;
+    z-index: 2;
+}
+
+.tray-tile {
+    width: var(--tile-width);
+    height: var(--tile-height);
+    background: var(--card-bg);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    box-shadow: 0 2px 0 var(--card-border), 0 4px 8px var(--card-shadow);
+    position: static !important;
+    transform: none !important;
+}
+
+/* Controls */
+.game-controls {
+    display: flex;
+    gap: 30px;
+}
+
+.control-item {
+    position: relative;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.icon-circle {
+    width: 56px;
+    height: 56px;
+    background: #FFD25D;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #403010;
+    box-shadow: 0 4px 0 #D0A030;
+    transition: transform 0.1s;
+}
+
+.control-item:active .icon-circle {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #D0A030;
+}
+
+.badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: white;
+    color: black;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.control-item.locked .icon-circle {
+    background: #4A252E;
+    color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 0 #331A20;
+    cursor: not-allowed;
+}
+
+/* Modals */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    /* Changed via JS */
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    backdrop-filter: blur(5px);
+}
+
+.overlay.active {
+    display: flex;
+}
+
+.modal {
+    background: #FFFFFF;
+    color: #333;
+    padding: 40px;
+    border-radius: 24px;
+    text-align: center;
+    width: 80%;
+    max-width: 320px;
+}
+
+.modal-icon {
+    font-size: 64px;
+    margin-bottom: 20px;
+}
+
+.modal h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    font-weight: 800;
+}
+
+.modal p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.btn {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: none;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn-primary {
+    background: #4ECDC4;
+    color: white;
+    box-shadow: 0 4px 0 #389B94;
+}
+
+.btn-secondary {
+    background: #FF6B6B;
+    color: white;
+    box-shadow: 0 4px 0 #D64545;
+}
+
+/* Animations */
+@keyframes combo {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+.combo-out {
+    animation: combo 0.4s forwards;
+}
+
+/* Responsiveness for small screens */
+@media (max-width: 480px) {
+    :root {
+        --tile-width: 44px;
+        --tile-height: 54px;
+    }
+
+    .game-container {
+        padding: 5px 5px;
+    }
+
+    .header-info {
+        gap: 15px;
+        margin-left: 50px;
+    }
+
+    .stat-item .value {
+        font-size: 18px;
+    }
+
+    .level-title {
+        font-size: 18px;
+    }
+
+    .tray-container {
+        min-height: 110px;
+        padding: 10px;
+    }
+
+    .tray-tile,
+    .slot {
+        font-size: 24px;
+    }
+
+    .tray-slots,
+    .tray-tiles {
+        gap: 6px;
+    }
+
+    .tray-tiles {
+        inset: 10px;
+        width: calc(100% - 20px);
+    }
+
+    .game-controls {
+        gap: 15px;
+    }
+
+    .icon-circle {
+        width: 48px;
+        height: 48px;
+    }
+
+    .icon-circle svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 360px) {
+    :root {
+        --tile-width: 44px;
+        --tile-height: 54px;
+    }
+
+    .tray-container {
+        min-height: 110px;
+    }
+}
