@@ -14,7 +14,7 @@ const gamesData = [
         title: "2048 Cubes",
         category: "ปริศนา / ฟิสิกส์",
         url: "2048-cubes/index.html",
-        aspectRatio: "450 / 720", // Tighter fit
+        aspectRatio: "450 / 600",
         image: "https://images.unsplash.com/photo-1611996575749-79a3a250f948?w=400&h=400&fit=crop",
         gradient: "linear-gradient(135deg, #FF9F43 0%, #FF6B6B 100%)"
     },
