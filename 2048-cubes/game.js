@@ -10,7 +10,8 @@ const config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
         width: 450,
-        height: 700
+        height: 700,
+        expandParent: true
     },
     physics: {
         default: 'matter',
@@ -84,19 +85,6 @@ function create() {
 
     // Game Over Line
     gameOverLine = this.add.graphics();
-    const drawDashedLine = (graphics, x1, y1, x2, y2, dashLength = 10, gapLength = 10) => {
-        const distance = Phaser.Math.Distance.Between(x1, y1, x2, y2);
-        const dashCount = Math.floor(distance / (dashLength + gapLength));
-        const dx = (x2 - x1) / distance;
-        const dy = (y2 - y1) / distance;
-
-        for (let i = 0; i < dashCount; i++) {
-            const startX = x1 + (dx * (i * (dashLength + gapLength)));
-            const startY = y1 + (dy * (i * (dashLength + gapLength)));
-            graphics.lineBetween(startX, startY, startX + dx * dashLength, startY + dy * dashLength);
-        }
-    };
-
     const updateDashedLine = (isLight) => {
         gameOverLine.clear();
         gameOverLine.lineStyle(2, isLight ? 0x776e65 : 0xffffff, 0.3);
@@ -113,6 +101,28 @@ function create() {
         this.cameras.main.setBackgroundColor(isLight ? '#faf8ef' : '#3c343b');
         updateDashedLine(isLight);
     };
+
+    // Fullscreen Exit Button Logic
+    const exitFullscreenBtn = document.getElementById('exit-fullscreen-btn');
+    
+    const updateFullscreenBtn = () => {
+        if (document.fullscreenElement) {
+            exitFullscreenBtn.classList.remove('hidden');
+        } else {
+            exitFullscreenBtn.classList.add('hidden');
+        }
+    };
+
+    exitFullscreenBtn.onclick = () => {
+        if (document.fullscreenElement) {
+            document.exitFullscreen();
+        }
+    };
+
+    // Listen for fullscreen changes
+    document.addEventListener('fullscreenchange', updateFullscreenBtn);
+    // Initial check
+    updateFullscreenBtn();
 
     // Restart Button
     document.getElementById('restart-btn').onclick = () => {
@@ -135,7 +145,9 @@ function create() {
 
     this.input.on('pointerup', (pointer) => {
         if (!isGameOver && currentCube && currentCube.active && !isDropping) {
-            dropCube.call(this);
+            if (pointer.y > 0 && pointer.y < height) {
+                dropCube.call(this);
+            }
         }
     });
 
@@ -146,12 +158,10 @@ function create() {
             const bodyA = pair.bodyA;
             const bodyB = pair.bodyB;
 
-            // Ensure both bodies still exist and have valid game objects
             if (bodyA && bodyB && bodyA.gameObject && bodyB.gameObject) {
                 const objA = bodyA.gameObject;
                 const objB = bodyB.gameObject;
 
-                // Check if they are valid cubes of same value and not already merging
                 if (objA.isCube && objB.isCube &&
                     objA.active && objB.active &&
                     objA.value === objB.value &&
@@ -185,9 +195,8 @@ function dropCube() {
     currentCube.setMass(1);
     currentCube.setBounce(0.3);
     currentCube.setFriction(0.005);
-    currentCube.setVelocityY(2); // Give it a small push
+    currentCube.setVelocityY(2);
 
-    // Spawn next cube after a delay
     this.time.delayedCall(800, () => {
         if (!isGameOver) spawnCube.call(this);
     });
@@ -199,16 +208,13 @@ function createCubeGraphic(x, y, value) {
 
     const container = this.add.container(x, y);
 
-    // Shadow
     const shadow = this.add.rectangle(4, 4, size, size, 0x000000, 0.2);
     container.add(shadow);
 
-    // Main Body
     const rect = this.add.rectangle(0, 0, size, size, color);
     rect.setStrokeStyle(2, 0xffffff, 0.5);
     container.add(rect);
 
-    // Text
     const text = this.add.text(0, 0, value, {
         fontSize: Math.max(16, size * 0.4) + 'px',
         fontWeight: '800',
@@ -217,7 +223,6 @@ function createCubeGraphic(x, y, value) {
     }).setOrigin(0.5);
     container.add(text);
 
-    // Physics Body
     const body = this.matter.add.gameObject(container, {
         shape: { type: 'rectangle', width: size, height: size },
         chamfer: { radius: 8 },
@@ -235,21 +240,17 @@ function createCubeGraphic(x, y, value) {
 function mergeCubes(objA, objB) {
     if (!objA.active || !objB.active || objA.isMerging || objB.isMerging) return;
 
-    // Set merging flag immediately
     objA.isMerging = true;
     objB.isMerging = true;
 
-    // Handle if one of these is the current waiting cube (unlikely but possible if hit)
     if (objA === currentCube) currentCube = null;
     if (objB === currentCube) currentCube = null;
 
-    // Stop physics interactions immediately
     objA.setStatic(true);
     objB.setStatic(true);
     objA.setSensor(true);
     objB.setSensor(true);
 
-    // Stop any existing tweens to prevent property conflicts
     this.tweens.killTweensOf(objA);
     this.tweens.killTweensOf(objB);
 
@@ -257,7 +258,6 @@ function mergeCubes(objA, objB) {
     const midX = (objA.x + objB.x) / 2;
     const midY = (objA.y + objB.y) / 2;
 
-    // Animation
     this.tweens.add({
         targets: [objA, objB],
         x: midX,
@@ -266,7 +266,6 @@ function mergeCubes(objA, objB) {
         alpha: 0.5,
         duration: 100,
         onComplete: () => {
-            // Safety check before destroy
             if (objA.active) objA.destroy();
             if (objB.active) objB.destroy();
 
@@ -274,7 +273,6 @@ function mergeCubes(objA, objB) {
             newCube.setStatic(false);
             newCube.setBounce(0.3);
 
-            // Pop effect
             newCube.setScale(0.1);
             this.tweens.add({
                 targets: newCube,
@@ -283,10 +281,8 @@ function mergeCubes(objA, objB) {
                 ease: 'Back.out'
             });
 
-            // Particles
             createExplosion.call(this, midX, midY, cubeColors[newValue]);
 
-            // Score
             score += newValue;
             document.getElementById('score').innerText = score;
             if (score > highscore) {
@@ -295,7 +291,6 @@ function mergeCubes(objA, objB) {
                 document.getElementById('highscore').innerText = highscore;
             }
 
-            // If we lost our current cube, spawn a new one
             if (currentCube === null && !isDropping && !isGameOver) {
                 spawnCube.call(this);
             }
@@ -326,78 +321,56 @@ function update(time, delta) {
     if (isGameOver) return;
 
     let isAboveLine = false;
-
-    // Check all cubes for Game Over condition
     const bodies = this.matter.world.getAllBodies();
+    
     for (let i = 0; i < bodies.length; i++) {
         const body = bodies[i];
-
-        // Safety check for body and its properties
         if (!body || !body.position || !body.velocity || !body.gameObject) continue;
-
         const obj = body.gameObject;
 
-        // Only check cubes that aren't static (already dropped), active, and not currently merging
         if (obj.isCube && !body.isStatic && obj.active && !obj.isMerging) {
             const size = cubeSizes[obj.value] || 60;
             const topEdge = body.position.y - (size / 2);
-
-            // Check if top edge is above the game over line (150)
-            // and the cube is relatively settled (speed < 0.5)
             const speed = Math.sqrt(body.velocity.x * body.velocity.x + body.velocity.y * body.velocity.y);
 
             if (topEdge < 150 && speed < 0.5) {
                 isAboveLine = true;
-                break; // One cube is enough to start the timer
+                break;
             }
         }
     }
 
+    const { width } = this.scale;
     if (isAboveLine) {
         gameOverLineTimer += delta;
-        // Visual feedback: Line turns red when timer is active
         gameOverLine.clear();
-        gameOverLine.lineStyle(3, 0xff4757, 0.8); // Brighter red
-        const { width } = this.scale;
-        const drawDashedLine = (graphics, x1, y1, x2, y2, dashLength = 10, gapLength = 10) => {
-            const distance = Phaser.Math.Distance.Between(x1, y1, x2, y2);
-            const dashCount = Math.floor(distance / (dashLength + gapLength));
-            const dx = (x2 - x1) / distance;
-            const dy = (y2 - y1) / distance;
-
-            for (let i = 0; i < dashCount; i++) {
-                const startX = x1 + (dx * (i * (dashLength + gapLength)));
-                const startY = y1 + (dy * (i * (dashLength + gapLength)));
-                graphics.lineBetween(startX, startY, startX + dx * dashLength, startY + dy * dashLength);
-            }
-        };
+        gameOverLine.lineStyle(3, 0xff4757, 0.8);
         drawDashedLine(gameOverLine, 0, 150, width, 150);
 
-        if (gameOverLineTimer > 3000) { // 3 seconds above line
+        if (gameOverLineTimer > 3000) {
             endGame.call(this);
         }
     } else {
         if (gameOverLineTimer > 0) {
-            // Reset line color to original
             const isLight = document.body.classList.contains('light');
             gameOverLine.clear();
             gameOverLine.lineStyle(2, isLight ? 0x776e65 : 0xffffff, 0.3);
-            const { width } = this.scale;
-            const drawDashedLine = (graphics, x1, y1, x2, y2, dashLength = 10, gapLength = 10) => {
-                const distance = Phaser.Math.Distance.Between(x1, y1, x2, y2);
-                const dashCount = Math.floor(distance / (dashLength + gapLength));
-                const dx = (x2 - x1) / distance;
-                const dy = (y2 - y1) / distance;
-
-                for (let i = 0; i < dashCount; i++) {
-                    const startX = x1 + (dx * (i * (dashLength + gapLength)));
-                    const startY = y1 + (dy * (i * (dashLength + gapLength)));
-                    graphics.lineBetween(startX, startY, startX + dx * dashLength, startY + dy * dashLength);
-                }
-            };
             drawDashedLine(gameOverLine, 0, 150, width, 150);
         }
         gameOverLineTimer = 0;
+    }
+}
+
+function drawDashedLine(graphics, x1, y1, x2, y2, dashLength = 10, gapLength = 10) {
+    const distance = Phaser.Math.Distance.Between(x1, y1, x2, y2);
+    const dashCount = Math.floor(distance / (dashLength + gapLength));
+    const dx = (x2 - x1) / distance;
+    const dy = (y2 - y1) / distance;
+
+    for (let i = 0; i < dashCount; i++) {
+        const startX = x1 + (dx * (i * (dashLength + gapLength)));
+        const startY = y1 + (dy * (i * (dashLength + gapLength)));
+        graphics.lineBetween(startX, startY, startX + dx * dashLength, startY + dy * dashLength);
     }
 }
 
