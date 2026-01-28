@@ -1,9 +1,12 @@
 const EMOJIS = ['🍎', '🍌', '🍉', '🍊', '🥝', '🫐', '🍇', '🍐', '🍓', '🍒', '🥑', '🥥'];
 const TRAY_SIZE = 7;
-const TILE_WIDTH = 60;
-const TILE_HEIGHT = 70;
-const OFFSET_X = 30; // Half-tile overlap if needed
-const OFFSET_Y = 35;
+
+function getTileDimensions() {
+    const root = getComputedStyle(document.documentElement);
+    const width = parseInt(root.getPropertyValue('--tile-width')) || 60;
+    const height = parseInt(root.getPropertyValue('--tile-height')) || 70;
+    return { width, height };
+}
 
 class TileGame {
     constructor() {
@@ -97,6 +100,7 @@ class TileGame {
     }
 
     createGridLayout(cols, rows, layers) {
+        const { width: TILE_WIDTH, height: TILE_HEIGHT } = getTileDimensions();
         const layout = [];
         const startX = (this.container.clientWidth - cols * TILE_WIDTH) / 2;
         const startY = 40;
@@ -116,6 +120,7 @@ class TileGame {
     }
 
     createStackLayout() {
+        const { width: TILE_WIDTH, height: TILE_HEIGHT } = getTileDimensions();
         const layout = [];
         const width = this.container.clientWidth || 360;
         const centerX = width / 2 - TILE_WIDTH / 2;
@@ -140,6 +145,7 @@ class TileGame {
     }
 
     createMahjongLayout() {
+        const { width: TILE_WIDTH, height: TILE_HEIGHT } = getTileDimensions();
         const layout = [];
         const width = this.container.clientWidth || 360;
         const height = this.container.clientHeight || 500;
@@ -237,6 +243,7 @@ class TileGame {
     }
 
     isOverlapping(a, b) {
+        const { width: TILE_WIDTH, height: TILE_HEIGHT } = getTileDimensions();
         const margin = 5; // Allow minor overlap
         return !(a.x + TILE_WIDTH - margin <= b.x ||
             a.x + margin >= b.x + TILE_WIDTH ||

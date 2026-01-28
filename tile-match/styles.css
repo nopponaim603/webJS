@@ -11,6 +11,7 @@
     --font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --tile-width: 60px;
     --tile-height: 70px;
+    --tray-slot-border: rgba(255, 255, 255, 0.05);
 }
 
 * {
@@ -175,13 +176,13 @@ body {
 .tray-container {
     position: relative;
     width: 100%;
-    height: 100px;
+    min-height: 100px;
     background: var(--tray-bg);
     border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 10px;
+    padding: 15px 10px;
     margin-top: auto;
 }
 
@@ -189,7 +190,8 @@ body {
     display: flex;
     gap: 8px;
     justify-content: center;
-    width: 468px;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
 .slot {
@@ -206,9 +208,10 @@ body {
     transform: translate(-50%, -50%);
     display: flex;
     gap: 8px;
-    justify-content: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
     pointer-events: none;
-    width: 468px;
+    width: 100%;
 }
 
 .tray-tile {
@@ -375,4 +378,63 @@ body {
 
 .combo-out {
     animation: combo 0.4s forwards;
+}
+
+/* Responsiveness for small screens */
+@media (max-width: 480px) {
+    :root {
+        --tile-width: 50px;
+        --tile-height: 60px;
+    }
+
+    .game-container {
+        padding: 10px 5px;
+    }
+
+    .header-info {
+        gap: 15px;
+        margin-left: 50px;
+    }
+
+    .stat-item .value {
+        font-size: 18px;
+    }
+
+    .level-title {
+        font-size: 18px;
+    }
+
+    .tray-container {
+        min-height: 120px;
+    }
+
+    .tray-tile,
+    .slot {
+        font-size: 24px;
+    }
+
+    .game-controls {
+        gap: 15px;
+    }
+
+    .icon-circle {
+        width: 48px;
+        height: 48px;
+    }
+
+    .icon-circle svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 360px) {
+    :root {
+        --tile-width: 44px;
+        --tile-height: 54px;
+    }
+
+    .tray-container {
+        min-height: 110px;
+    }
 }
