@@ -5,7 +5,7 @@ const gamesData = [
         title: "Emoji Match",
         category: "ปริศนา / ฝึกสมอง",
         url: "emoji-match/index.html",
-        aspectRatio: "1 / 1.2",
+        aspectRatio: "390 / 480", // Optimized for narrow tall screens
         image: "https://images.unsplash.com/photo-1614332287897-cdc485fa562d?w=400&h=400&fit=crop",
         gradient: "linear-gradient(135deg, #A78BFA 0%, #EC4899 100%)"
     },
@@ -203,12 +203,10 @@ const sidebarGameCards = document.querySelectorAll('.sidebar-game-card');
 const gamePlaceholder = document.querySelector('.game-placeholder');
 const gameTitleDisplay = document.querySelector('.game-title-display');
 const gameAuthor = document.querySelector('.game-author');
-const pauseBtn = document.querySelector('.pause-btn');
 const fullscreenBtn = document.querySelector('.fullscreen-btn');
 
 // State
 let currentGame = null;
-let isPaused = false;
 
 // Initialize
 function init() {
@@ -332,20 +330,6 @@ function attachEventListeners() {
         });
     });
 
-    // Pause button
-    pauseBtn.addEventListener('click', () => {
-        isPaused = !isPaused;
-        pauseBtn.innerHTML = isPaused ? `
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M8 5L19 12L8 19V5Z"/>
-            </svg>
-        ` : `
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <rect x="6" y="4" width="4" height="16" rx="1"/>
-                <rect x="14" y="4" width="4" height="16" rx="1"/>
-            </svg>
-        `;
-    });
 
     // Fullscreen button
     fullscreenBtn.addEventListener('click', () => {
@@ -440,11 +424,6 @@ if (document.readyState === 'loading') {
 
 // Add keyboard shortcuts
 document.addEventListener('keydown', (e) => {
-    // Space to pause/play
-    if (e.code === 'Space' && currentGame) {
-        e.preventDefault();
-        pauseBtn.click();
-    }
 
     // F to fullscreen
     if (e.code === 'KeyF' && currentGame) {
