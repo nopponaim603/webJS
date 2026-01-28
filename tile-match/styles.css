@@ -11,6 +11,7 @@
     --font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --tile-width: 60px;
     --tile-height: 70px;
+    --tray-slot-border: rgba(255, 255, 255, 0.05);
 }
 
 * {
@@ -175,45 +176,53 @@ body {
 .tray-container {
     position: relative;
     width: 100%;
-    height: 100px;
+    min-height: 100px;
     background: var(--tray-bg);
     border-radius: 16px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 10px;
+    align-items: flex-start;
+    /* Flow from top */
+    justify-content: flex-start;
+    /* Flow from left */
+    padding: 15px;
     margin-top: auto;
 }
 
 .tray-slots {
     display: flex;
     gap: 8px;
-    justify-content: center;
-    width: 468px;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    z-index: 1;
 }
 
 .slot {
     width: var(--tile-width);
-    height: 70px;
+    height: var(--tile-height);
     background: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
 }
 
 .tray-tiles {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    inset: 15px;
+    /* Matches .tray-container padding */
     display: flex;
     gap: 8px;
+    /* Matches .tray-slots gap */
     justify-content: flex-start;
+    flex-wrap: wrap;
     pointer-events: none;
-    width: 468px;
+    width: calc(100% - 30px);
+    /* Account for 15px padding on both sides */
+    height: auto;
+    z-index: 2;
 }
 
 .tray-tile {
     width: var(--tile-width);
-    height: 70px;
+    height: var(--tile-height);
     background: var(--card-bg);
     border-radius: 8px;
     display: flex;
@@ -375,4 +384,74 @@ body {
 
 .combo-out {
     animation: combo 0.4s forwards;
+}
+
+/* Responsiveness for small screens */
+@media (max-width: 480px) {
+    :root {
+        --tile-width: 44px;
+        --tile-height: 54px;
+    }
+
+    .game-container {
+        padding: 5px 5px;
+    }
+
+    .header-info {
+        gap: 15px;
+        margin-left: 50px;
+    }
+
+    .stat-item .value {
+        font-size: 18px;
+    }
+
+    .level-title {
+        font-size: 18px;
+    }
+
+    .tray-container {
+        min-height: 110px;
+        padding: 10px;
+    }
+
+    .tray-tile,
+    .slot {
+        font-size: 24px;
+    }
+
+    .tray-slots,
+    .tray-tiles {
+        gap: 6px;
+    }
+
+    .tray-tiles {
+        inset: 10px;
+        width: calc(100% - 20px);
+    }
+
+    .game-controls {
+        gap: 15px;
+    }
+
+    .icon-circle {
+        width: 48px;
+        height: 48px;
+    }
+
+    .icon-circle svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 360px) {
+    :root {
+        --tile-width: 44px;
+        --tile-height: 54px;
+    }
+
+    .tray-container {
+        min-height: 110px;
+    }
 }
