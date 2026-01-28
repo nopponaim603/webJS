@@ -230,7 +230,8 @@ body {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    min-width: 0; /* Prevent overflow in grid */
+    min-width: 0;
+    /* Prevent overflow in grid */
 }
 
 /* ===== Featured Game Player ===== */
@@ -292,8 +293,17 @@ body {
 }
 
 @keyframes pulse {
-    0%, 100% { opacity: 0.5; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.05); }
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
 }
 
 .game-controls {
@@ -537,33 +547,51 @@ body {
 
 @media (max-width: 600px) {
     .main-container {
-        gap: 1.25rem;
-        padding: 0.75rem;
+        gap: 1rem;
+        /* Reduced from 1.25rem */
+        padding: 0.5rem;
+        /* Reduced from 0.75rem */
     }
 
     .game-controls {
-        flex-direction: column;
+        flex-direction: row;
+        /* Keep on one row if possible */
         align-items: center;
-        gap: 0.75rem;
-        padding: 1rem;
-        text-align: center;
+        gap: 0.5rem;
+        padding: 0.5rem 0.75rem;
+        text-align: left;
+    }
+
+    .control-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
     }
 
     .game-info {
-        width: 100%;
-        align-items: center;
+        width: auto;
+        align-items: flex-start;
+    }
+
+    .game-title-display {
+        font-size: 0.8125rem;
+    }
+
+    .game-author {
+        font-size: 0.75rem;
     }
 
     .game-actions {
-        width: 100%;
-        justify-content: center;
-        gap: 0.5rem;
+        width: auto;
+        justify-content: flex-end;
+        gap: 0.25rem;
     }
 
     .action-btn span {
-        display: none; /* Hide text on small screens */
+        display: none;
+        /* Hide text on small screens */
     }
-    
+
     .action-btn {
         padding: 0.625rem;
     }
