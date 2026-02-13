@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,15 +11,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <!-- Header -->
     <header class="header">
         <div class="header-content">
             <div class="logo">
                 <svg width="60" height="40" viewBox="0 0 60 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 5L20 5C25 5 28 8 28 13C28 18 25 21 20 21L10 21L10 5Z" fill="currentColor"/>
-                    <circle cx="45" cy="13" r="8" fill="currentColor"/>
-                    <rect x="10" y="25" width="18" height="10" rx="5" fill="currentColor"/>
+                    <path d="M10 5L20 5C25 5 28 8 28 13C28 18 25 21 20 21L10 21L10 5Z" fill="currentColor" />
+                    <circle cx="45" cy="13" r="8" fill="currentColor" />
+                    <rect x="10" y="25" width="18" height="10" rx="5" fill="currentColor" />
                 </svg>
                 <span class="logo-text">GameHub</span>
             </div>
@@ -31,14 +33,15 @@
             <div class="header-actions">
                 <button class="search-btn" id="searchBtn">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="2"/>
-                        <path d="M14 14L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="2" />
+                        <path d="M14 14L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                     </svg>
                 </button>
                 <button class="user-btn">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="10" cy="7" r="4" stroke="currentColor" stroke-width="2"/>
-                        <path d="M4 18C4 14.6863 6.68629 12 10 12C13.3137 12 16 14.6863 16 18" stroke="currentColor" stroke-width="2"/>
+                        <circle cx="10" cy="7" r="4" stroke="currentColor" stroke-width="2" />
+                        <path d="M4 18C4 14.6863 6.68629 12 10 12C13.3137 12 16 14.6863 16 18" stroke="currentColor"
+                            stroke-width="2" />
                     </svg>
                 </button>
             </div>
@@ -51,35 +54,49 @@
             <h3 class="sidebar-title">เกมแนะนำ</h3>
             <div class="sidebar-games">
                 <div class="sidebar-game-card" data-game="emoji-match">
-                    <div class="sidebar-game-icon" style="background: linear-gradient(135deg, #A78BFA 0%, #EC4899 100%);">
+                    <div class="sidebar-game-icon"
+                        style="background: linear-gradient(135deg, #A78BFA 0%, #EC4899 100%);">
                         <svg width="32" height="32" viewBox="0 0 32 32" fill="white">
-                            <circle cx="16" cy="16" r="10" stroke="white" stroke-width="2" fill="none"/>
-                            <circle cx="12" cy="14" r="1.5" fill="white"/>
-                            <circle cx="20" cy="14" r="1.5" fill="white"/>
-                            <path d="M11 20C11 20 13 23 16 23C19 23 21 20 21 20" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="16" cy="16" r="10" stroke="white" stroke-width="2" fill="none" />
+                            <circle cx="12" cy="14" r="1.5" fill="white" />
+                            <circle cx="20" cy="14" r="1.5" fill="white" />
+                            <path d="M11 20C11 20 13 23 16 23C19 23 21 20 21 20" stroke="white" stroke-width="2"
+                                stroke-linecap="round" />
                         </svg>
                     </div>
                     <span class="sidebar-game-name">Emoji Match</span>
                 </div>
                 <div class="sidebar-game-card" data-game="2048-cubes">
-                    <div class="sidebar-game-icon" style="background: linear-gradient(135deg, #FF9F43 0%, #FF6B6B 100%);">
+                    <div class="sidebar-game-icon"
+                        style="background: linear-gradient(135deg, #FF9F43 0%, #FF6B6B 100%);">
                         <svg width="32" height="32" viewBox="0 0 32 32" fill="white">
-                            <rect x="8" y="8" width="16" height="16" rx="2" stroke="white" stroke-width="2" fill="none"/>
-                            <path d="M12 14H20M12 18H20" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                            <rect x="8" y="8" width="16" height="16" rx="2" stroke="white" stroke-width="2"
+                                fill="none" />
+                            <path d="M12 14H20M12 18H20" stroke="white" stroke-width="2" stroke-linecap="round" />
                         </svg>
                     </div>
                     <span class="sidebar-game-name">2048 Cubes</span>
                 </div>
                 <div class="sidebar-game-card" data-game="tile-match">
-                    <div class="sidebar-game-icon" style="background: linear-gradient(135deg, #5D2A35 0%, #A04050 100%);">
+                    <div class="sidebar-game-icon"
+                        style="background: linear-gradient(135deg, #5D2A35 0%, #A04050 100%);">
                         <svg width="32" height="32" viewBox="0 0 32 32" fill="white">
-                            <rect x="6" y="6" width="8" height="8" rx="1" fill="white" opacity="0.8"/>
-                            <rect x="18" y="6" width="8" height="8" rx="1" fill="white" opacity="0.8"/>
-                            <rect x="6" y="18" width="8" height="8" rx="1" fill="white" opacity="0.8"/>
-                            <rect x="18" y="18" width="8" height="8" rx="1" fill="white" opacity="0.8"/>
+                            <rect x="6" y="6" width="8" height="8" rx="1" fill="white" opacity="0.8" />
+                            <rect x="18" y="6" width="8" height="8" rx="1" fill="white" opacity="0.8" />
+                            <rect x="6" y="18" width="8" height="8" rx="1" fill="white" opacity="0.8" />
+                            <rect x="18" y="18" width="8" height="8" rx="1" fill="white" opacity="0.8" />
                         </svg>
                     </div>
                     <span class="sidebar-game-name">Tile Match</span>
+                </div>
+                <div class="sidebar-game-card" data-game="xo-multiplayer">
+                    <div class="sidebar-game-icon"
+                        style="background: linear-gradient(135deg, #38bdf8 0%, #f43f5e 100%);">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="white">
+                            <path d="M8 8L24 24M24 8L8 24" stroke="white" stroke-width="4" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <span class="sidebar-game-name">XO Multiplayer</span>
                 </div>
             </div>
         </aside>
@@ -92,9 +109,11 @@
                     <div class="game-iframe-container">
                         <div class="game-placeholder">
                             <div class="game-placeholder-content">
-                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="40" cy="40" r="35" stroke="currentColor" stroke-width="3" opacity="0.3"/>
-                                    <path d="M32 28L56 40L32 52V28Z" fill="currentColor"/>
+                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="40" cy="40" r="35" stroke="currentColor" stroke-width="3"
+                                        opacity="0.3" />
+                                    <path d="M32 28L56 40L32 52V28Z" fill="currentColor" />
                                 </svg>
                                 <p>คลิกเกมด้านล่างเพื่อเริ่มเล่น</p>
                             </div>
@@ -107,28 +126,33 @@
                         </div>
                         <div class="game-actions">
                             <button class="action-btn" title="ถูกใจ">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M10 17L3 10C1 8 1 5 3 3C5 1 8 1 10 3C12 1 15 1 17 3C19 5 19 8 17 10L10 17Z"/>
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path
+                                        d="M10 17L3 10C1 8 1 5 3 3C5 1 8 1 10 3C12 1 15 1 17 3C19 5 19 8 17 10L10 17Z" />
                                 </svg>
                                 <span>2.6k</span>
                             </button>
                             <button class="action-btn" title="แชร์">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="15" cy="5" r="3"/>
-                                    <circle cx="5" cy="10" r="3"/>
-                                    <circle cx="15" cy="15" r="3"/>
-                                    <path d="M8 9L12 7M8 11L12 13"/>
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <circle cx="15" cy="5" r="3" />
+                                    <circle cx="5" cy="10" r="3" />
+                                    <circle cx="15" cy="15" r="3" />
+                                    <path d="M8 9L12 7M8 11L12 13" />
                                 </svg>
                                 <span>424.4k</span>
                             </button>
                             <button class="action-btn" title="รายงาน">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M10 2L2 6V10C2 14 10 18 10 18C10 18 18 14 18 10V6L10 2Z"/>
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M10 2L2 6V10C2 14 10 18 10 18C10 18 18 14 18 10V6L10 2Z" />
                                 </svg>
                             </button>
                             <button class="action-btn fullscreen-btn" title="เต็มจอ">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M2 7V3H6M14 3H18V7M18 13V17H14M6 17H2V13"/>
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M2 7V3H6M14 3H18V7M18 13V17H14M6 17H2V13" />
                                 </svg>
                             </button>
                         </div>
@@ -151,7 +175,7 @@
                     <a href="#" class="category-card">
                         <div class="category-icon">
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="currentColor">
-                                <path d="M20 5L25 15L35 16L27 24L29 35L20 29L11 35L13 24L5 16L15 15L20 5Z"/>
+                                <path d="M20 5L25 15L35 16L27 24L29 35L20 29L11 35L13 24L5 16L15 15L20 5Z" />
                             </svg>
                         </div>
                         <div class="category-info">
@@ -162,8 +186,8 @@
                     <a href="#" class="category-card">
                         <div class="category-icon">
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="currentColor">
-                                <circle cx="15" cy="20" r="8"/>
-                                <circle cx="25" cy="20" r="8"/>
+                                <circle cx="15" cy="20" r="8" />
+                                <circle cx="25" cy="20" r="8" />
                             </svg>
                         </div>
                         <div class="category-info">
@@ -174,7 +198,8 @@
                     <a href="#" class="category-card">
                         <div class="category-icon">
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="currentColor">
-                                <path d="M20 10C15 10 12 13 12 18C12 23 15 26 20 30C25 26 28 23 28 18C28 13 25 10 20 10Z"/>
+                                <path
+                                    d="M20 10C15 10 12 13 12 18C12 23 15 26 20 30C25 26 28 23 28 18C28 13 25 10 20 10Z" />
                             </svg>
                         </div>
                         <div class="category-info">
@@ -185,8 +210,8 @@
                     <a href="#" class="category-card">
                         <div class="category-icon">
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="currentColor">
-                                <circle cx="15" cy="15" r="6"/>
-                                <circle cx="25" cy="25" r="6"/>
+                                <circle cx="15" cy="15" r="6" />
+                                <circle cx="25" cy="25" r="6" />
                             </svg>
                         </div>
                         <div class="category-info">
@@ -197,9 +222,9 @@
                     <a href="#" class="category-card">
                         <div class="category-icon">
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="currentColor">
-                                <rect x="10" y="8" width="6" height="24" rx="2"/>
-                                <rect x="18" y="12" width="6" height="20" rx="2"/>
-                                <rect x="26" y="6" width="6" height="26" rx="2"/>
+                                <rect x="10" y="8" width="6" height="24" rx="2" />
+                                <rect x="18" y="12" width="6" height="20" rx="2" />
+                                <rect x="26" y="6" width="6" height="26" rx="2" />
                             </svg>
                         </div>
                         <div class="category-info">
@@ -210,8 +235,8 @@
                     <a href="#" class="category-card">
                         <div class="category-icon">
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="currentColor">
-                                <rect x="8" y="10" width="24" height="20" rx="3"/>
-                                <circle cx="20" cy="20" r="5"/>
+                                <rect x="8" y="10" width="24" height="20" rx="3" />
+                                <circle cx="20" cy="20" r="5" />
                             </svg>
                         </div>
                         <div class="category-info">
@@ -222,7 +247,7 @@
                     <a href="#" class="category-card">
                         <div class="category-icon">
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="currentColor">
-                                <path d="M5 10L20 5L35 10V15L20 35L5 15V10Z"/>
+                                <path d="M5 10L20 5L35 10V15L20 35L5 15V10Z" />
                             </svg>
                         </div>
                         <div class="category-info">
@@ -237,4 +262,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P2P Tic-Tac-Toe | PeerJS Multiplayer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>TIC <span class="accent">TAC</span> TOE</h1>
+            <p class="subtitle">Multiplayer P2P Game</p>
+        </header>
+
+        <main id="app">
+            <div id="lobby" class="card">
+                <div class="status-badge" id="peer-status">
+                    <span class="dot"></span>
+                    <span id="status-text">Connecting to server...</span>
+                </div>
+
+                <div class="peer-id-container">
+                    <label for="my-id">Your ID:</label>
+                    <div class="input-group">
+                        <input type="text" id="my-id" readonly placeholder="Generating ID...">
+                        <button id="copy-id" class="btn-icon" title="Copy ID">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                        <button id="show-qr" class="btn-icon" title="Show QR Code">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                                <path d="M7 7h.01M17 7h.01M17 17h.01M7 17h.01"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="qr-modal" class="modal hidden">
+                    <div class="modal-content">
+                        <h3>Share QR Code</h3>
+                        <p>Let your friend scan this to join!</p>
+                        <div id="qrcode"></div>
+                        <button id="close-qr" class="btn-secondary">Close</button>
+                    </div>
+                </div>
+
+                <div class="divider"><span>OR</span></div>
+
+                <div class="join-container">
+                    <label for="peer-id-input">Friend's ID:</label>
+                    <div class="input-group">
+                        <input type="text" id="peer-id-input" placeholder="Paste ID here...">
+                        <button id="connect-btn" class="btn-primary">Connect</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="game-room" class="card hidden">
+                <div class="game-info">
+                    <div class="player-info player-x active" id="p1-info">
+                        <div class="symbol">X</div>
+                        <div class="name">You</div>
+                    </div>
+                    <div class="vs">VS</div>
+                    <div class="player-info player-o" id="p2-info">
+                        <div class="symbol">O</div>
+                        <div class="name">Peer</div>
+                    </div>
+                </div>
+
+                <div id="turn-indicator">Waiting for opponent...</div>
+
+                <div class="board" id="board">
+                    <div class="cell" data-index="0"></div>
+                    <div class="cell" data-index="1"></div>
+                    <div class="cell" data-index="2"></div>
+                    <div class="cell" data-index="3"></div>
+                    <div class="cell" data-index="4"></div>
+                    <div class="cell" data-index="5"></div>
+                    <div class="cell" data-index="6"></div>
+                    <div class="cell" data-index="7"></div>
+                    <div class="cell" data-index="8"></div>
+                    <div id="winning-line" class="line"></div>
+                </div>
+
+                <div class="controls">
+                    <button id="reset-btn" class="btn-secondary hidden" disabled>Restart Game</button>
+                    <button id="disconnect-btn" class="btn-danger">Leave Game</button>
+                </div>
+            </div>
+        </main>
+
+        <div id="toast" class="toast hidden"></div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>

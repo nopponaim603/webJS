@@ -28,6 +28,15 @@ const gamesData = [
         gradient: "linear-gradient(135deg, #5D2A35 0%, #A04050 100%)"
     },
     {
+        id: "xo-multiplayer",
+        title: "XO Multiplayer",
+        category: "กระดาน / WebRTC P2P",
+        url: "xo-multiplayer/index.html",
+        aspectRatio: "1 / 1.4",
+        image: "https://images.unsplash.com/photo-1611996575749-79a3a250f948?w=400&h=400&fit=crop",
+        gradient: "linear-gradient(135deg, #38bdf8 0%, #f43f5e 100%)"
+    },
+    {
         id: 1,
         title: "Star Quest",
         category: "ผจญภัย",
