@@ -70,6 +70,10 @@ webJS/
 3. **Documentation Sync (`game-doc-manager`)**:
    - อัปเดตเอกสารใน `docs/` ทุกครั้งเมื่อปรับเปลี่ยนโครงสร้างโปรเจค
 
+4. **Version & Build Management**:
+   - **Version Number**: ปรับเปลี่ยนเลข `version` ใน `public/build.json` ให้ตรงกับเวอร์ชันล่าสุดในเอกสาร `docs/changelog.md` เสมอ
+   - **Build Number**: เลข `build` ใน `public/build.json` ให้ใช้เวลาอัปเดตในรูปแบบ `HHMM` (เช่น `2237`)
+
 ---
 
 ## 🚀 Execution & Verification Commands
