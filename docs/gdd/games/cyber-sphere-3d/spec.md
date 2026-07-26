@@ -1,6 +1,7 @@
 # 🔮 Cyber Sphere 3D — Game Design Document & Dev Specs
 
-**Game ID:** `babylon-demo` (`cyber-sphere-3d`)  
+**Code Name:** `cyber-sphere` (G005)
+**Game ID:** `cyber-sphere-3d` (`babylon-demo`)  
 **Engine / Tech:** Babylon.js 3D Engine, WebGL, Modern Shader System  
 **Version:** 1.0.0 | **Last Updated:** 2026-07-26  
 **Status:** Released / Active  

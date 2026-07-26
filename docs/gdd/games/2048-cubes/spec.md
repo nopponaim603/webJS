@@ -1,5 +1,6 @@
 # 🎲 2048 Cubes — Game Design Document & Dev Specs
 
+**Code Name:** `2048-cubes` (G002)
 **Game ID:** `2048-cubes`  
 **Engine / Tech:** HTML5 Canvas, Physics Engine, Vanilla JavaScript  
 **Version:** 1.0.0 | **Last Updated:** 2026-07-26  

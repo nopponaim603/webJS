@@ -13,6 +13,18 @@
 - [03-art-direction.md — Visual Style & UI/UX Guidelines](./gdd/03-art-direction.md)
 - [04-audio-direction.md — Music & Sound Effects Specs](./gdd/04-audio-direction.md)
 
+### 🎮 Game Index Code Names
+
+| # | Code Name | Game Title | Engine | Folder |
+|---|-----------|------------|--------|--------|
+| G001 | `emoji-match` | Emoji Match | Vanilla JS | `emoji-match/` |
+| G002 | `2048-cubes` | 2048 Cubes | Canvas 2D | `2048-cubes/` |
+| G003 | `tile-match` | Tile Match | Vanilla JS | `tile-match/` |
+| G004 | `space-shooter` | Space Shooter | Phaser 2D | `phaser-demo/` |
+| G005 | `cyber-sphere` | Cyber Sphere 3D | Babylon.js 3D | `babylon-demo/` |
+| G006 | `match-3` | Kenney Match 3 | Phaser 2D | `match3/` |
+| G007 | `3d-platformer` | Kenney 3D Platformer | Babylon.js 8 | `3d-platformer/` |
+
 ### 🎮 Individual Game Specifications (`docs/gdd/games/`)
 - [Space Shooter (Phaser 2D)](./gdd/games/space-shooter/spec.md)
 - [Emoji Match](./gdd/games/emoji-match/spec.md)

@@ -8,61 +8,61 @@ import buildInfo from '../../public/build.json';
 
 const initialGames = [
   {
-    id: "emoji-match",
-    title: "Emoji Match",
-    category: "ปริศนา / ฝึกสมอง",
-    url: "/games/emoji-match/index.html",
-    image: "https://images.unsplash.com/photo-1614332287897-cdc485fa562d?w=400&h=400&fit=crop",
-    gradient: "linear-gradient(135deg, #A78BFA 0%, #EC4899 100%)"
-  },
-  {
-    id: "2048-cubes",
-    title: "2048 Cubes",
-    category: "ปริศนา / ฟิสิกส์",
-    url: "/games/2048-cubes/index.html",
-    image: "https://images.unsplash.com/photo-1611996575749-79a3a250f948?w=400&h=400&fit=crop",
-    gradient: "linear-gradient(135deg, #FF9F43 0%, #FF6B6B 100%)"
-  },
-  {
-    id: "tile-match",
-    title: "Tile Match",
-    category: "ปริศนา / จับคู่ทรีแมตช์",
-    url: "/games/tile-match/index.html",
-    image: "https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=400&h=400&fit=crop",
-    gradient: "linear-gradient(135deg, #5D2A35 0%, #A04050 100%)"
-  },
-  {
-    id: "phaser-demo",
-    title: "Space Shooter (Phaser 2D)",
-    category: "Phaser 2D Engine",
-    url: "/games/phaser-demo/index.html",
-    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&h=400&fit=crop",
-    gradient: "linear-gradient(135deg, #00F2FE 0%, #4FACFE 100%)"
-  },
-  {
-    id: "babylon-demo",
-    title: "Cyber Sphere 3D (Babylon.js)",
-    category: "Babylon 3D Engine",
-    url: "/games/babylon-demo/index.html",
-    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&h=400&fit=crop",
-    gradient: "linear-gradient(135deg, #7F00FF 0%, #E100FF 100%)"
-  },
-  {
-    id: "3d-platformer",
-    title: "Kenney 3D Platformer (Babylon.js)",
-    category: "Babylon 3D Engine",
-    url: "/games/3d-platformer/index.html",
-    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&h=400&fit=crop",
-    gradient: "linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)"
-  },
-  {
-    id: "match3",
-    title: "Kenney Match 3 (Phaser 2D)",
-    category: "ปริศนา / Phaser 2D",
-    url: "/games/match3/index.html",
-    image: "https://images.unsplash.com/photo-1528819622765-d6bcf132f793?w=400&h=400&fit=crop",
-    gradient: "linear-gradient(135deg, #10B981 0%, #3B82F6 100%)"
-  }
+      id: "emoji-match",
+      title: "Emoji Match",
+      category: "ปริศนา / ฝึกสมอง",
+      url: "/games/emoji-match/index.html",
+      image: "https://images.unsplash.com/photo-1614332287897-cdc485fa562d?w=400&h=400&fit=crop",
+      gradient: "linear-gradient(135deg, #A78BFA 0%, #EC4899 100%)"
+    },
+    {
+      id: "2048-cubes",
+      title: "2048 Cubes",
+      category: "ปริศนา / ฟิสิกส์",
+      url: "/games/2048-cubes/index.html",
+      image: "https://images.unsplash.com/photo-1611996575749-79a3a250f948?w=400&h=400&fit=crop",
+      gradient: "linear-gradient(135deg, #FF9F43 0%, #FF6B6B 100%)"
+    },
+    {
+      id: "tile-match",
+      title: "Tile Match",
+      category: "ปริศนา / จับคู่ทรีแมตช์",
+      url: "/games/tile-match/index.html",
+      image: "https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=400&h=400&fit=crop",
+      gradient: "linear-gradient(135deg, #5D2A35 0%, #A04050 100%)"
+    },
+    {
+      id: "space-shooter",
+      title: "Space Shooter (Phaser 2D)",
+      category: "Phaser 2D Engine",
+      url: "/games/phaser-demo/index.html",
+      image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&h=400&fit=crop",
+      gradient: "linear-gradient(135deg, #00F2FE 0%, #4FACFE 100%)"
+    },
+    {
+      id: "cyber-sphere",
+      title: "Cyber Sphere 3D (Babylon.js)",
+      category: "Babylon 3D Engine",
+      url: "/games/babylon-demo/index.html",
+      image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&h=400&fit=crop",
+      gradient: "linear-gradient(135deg, #7F00FF 0%, #E100FF 100%)"
+    },
+    {
+      id: "3d-platformer",
+      title: "Kenney 3D Platformer (Babylon.js)",
+      category: "Babylon 3D Engine",
+      url: "/games/3d-platformer/index.html",
+      image: "https://images.unsplash.com/photo-1558618666-fcd25c85f32e?w=400&h=400&fit=crop",
+      gradient: "linear-gradient(135deg, #10b981 0%, #059669 100%)"
+    },
+    {
+      id: "match-3",
+      title: "Kenney Match 3 (Phaser 2D)",
+      category: "Phaser 2D Engine",
+      url: "/games/match3/index.html",
+      image: "https://images.unsplash.com/photo-1605901309584-818e25360a67?w=400&h=400&fit=crop",
+      gradient: "linear-gradient(135deg, #F97316 0%, #FB923C 100%)"
+    },
 ];
 
 const categories = ["ทั้งหมด", "ปริศนา", "Phaser 2D", "Babylon 3D"];

@@ -27,14 +27,17 @@
 
 ---
 
-## 3. Game Collection
+### 🎮 Game Collection (Index Code Names)
 
-1. **Emoji Match** (`emoji-match/`) — เกมจับคู่ Emoji ทดสอบความจำและความไว
-2. **2048 Cubes** (`2048-cubes/`) — เกมยิงลูกบาศก์รวมตัวเลข 2048 แบบฟิสิกส์
-3. **Tile Match** (`tile-match/`) — เกมจับคู่ไพ่ 3 ใบ (Mahjong Triple Match)
-4. **Space Shooter** (`phaser-demo/`) — เกมยิงยานอวกาศ 2D แบบ Wave-based Action (Phaser 3)
-5. **Cyber Sphere 3D** (`babylon-demo/`) — เกมทรงกลมไซเบอร์ 3D (Babylon.js)
-6. **Kenney Match 3** (`match3/`) — เกมจับคู่เพชรอัญมณี 3 ในแถวสไตล์คลาสสิก (Phaser 3)
+| # | Code Name | Game Title | Folder | Engine |
+|---|-----------|------------|--------|--------|
+| G001 | `emoji-match` | Emoji Match | `emoji-match/` | Vanilla JS |
+| G002 | `2048-cubes` | 2048 Cubes | `2048-cubes/` | Canvas 2D |
+| G003 | `tile-match` | Tile Match | `tile-match/` | Vanilla JS |
+| G004 | `space-shooter` | Space Shooter | `phaser-demo/` | Phaser 2D |
+| G005 | `cyber-sphere` | Cyber Sphere 3D | `babylon-demo/` | Babylon.js 3D |
+| G006 | `match-3` | Kenney Match 3 | `match3/` | Phaser 2D |
+| G007 | `3d-platformer` | Kenney 3D Platformer | `3d-platformer/` | Babylon.js 8 |
 
 ---
 

@@ -1,5 +1,6 @@
 # 💎 Kenney Match 3 (Phaser 2D) — Game Design Document & Dev Specs
 
+**Code Name:** `match-3` (G006)
 **Game ID:** `match3`  
 **Engine:** Phaser 3 (v3.80.1)  
 **Assets Pack:** Kenney Starter-Kit-Match-3 & Puzzle Pack 2 (CC0 Public Domain License)  

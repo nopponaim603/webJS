@@ -1,5 +1,6 @@
 # 🏃‍♂️ Kenney 3D Platformer (Babylon.js 8) — Game Design Document & Dev Specs
 
+**Code Name:** `3d-platformer` (G007)
 **Game ID:** `3d-platformer`  
 **Engine:** Babylon.js 8 (WebGL2 / WebGPU)  
 **Assets Pack:** Kenney Starter-Kit-3D-Platformer (CC0 Public Domain License)  

@@ -1,5 +1,6 @@
 # 🧩 Emoji Match — Game Design Document & Dev Specs
 
+**Code Name:** `emoji-match` (G001)
 **Game ID:** `emoji-match`  
 **Engine / Tech:** HTML5, CSS3, Vanilla JavaScript  
 **Version:** 1.0.0 | **Last Updated:** 2026-07-26  

@@ -1,5 +1,6 @@
 # 🀄 Tile Match — Game Design Document & Dev Specs
 
+**Code Name:** `tile-match` (G003)
 **Game ID:** `tile-match`  
 **Engine / Tech:** HTML5, CSS Grid & Transforms, Vanilla JavaScript  
 **Version:** 1.0.0 | **Last Updated:** 2026-07-26  

@@ -1,5 +1,6 @@
 # 🚀 Space Shooter (Phaser 2D) — Game Design Document & Asset Specs
 
+**Code Name:** `space-shooter` (G004)
 **Game ID:** `space-shooter` (`phaser-demo`)  
 **Engine:** Phaser 3 (v3.80.1) — Arcade Physics  
 **Assets Pack:** Kenney Simple Space (CC0 Public Domain License)  
