@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Babylon.js - Start</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            display: flex; flex-direction: column; 
+            align-items: center; justify-content: center; 
+            min-height: 100vh; font-family: 'Segoe UI', sans-serif;
+        }
+        h1 { color: #00d4ff; font-size: 32px; margin-bottom: 15px; }
+        p { color: #888; font-size: 16px; margin-bottom: 40px; }
+        .cards { display: flex; gap: 25px; flex-wrap: wrap; justify-content: center; }
+        .card { 
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(0,212,255,0.2);
+            border-radius: 16px; padding: 30px; width: 220px; text-align: center;
+            text-decoration: none; transition: all 0.3s;
+        }
+        .card:hover { background: rgba(0,212,255,0.1); transform: translateY(-5px); border-color: #00d4ff; }
+        .card h2 { color: #fff; font-size: 20px; margin-bottom: 10px; }
+        .card p { color: #aaa; font-size: 14px; }
+        .card .icon { font-size: 40px; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+    <h1>🎮 Babylon.js Starter</h1>
+    <p>เลือกรูปแบบเพื่อเริ่มเรียน</p>
+    <div class="cards">
+        <a href="2d-game/" class="card">
+            <div class="icon">🎴</div>
+            <h2>2D Card Game</h2>
+            <p>Memory card matching game with flip animations</p>
+        </a>
+        <a href="3d-scene/" class="card">
+            <div class="icon">🌐</div>
+            <h2>3D Playground</h2>
+            <p>PBR materials, lighting, and animations</p>
+        </a>
+        <a href="minimal/" class="card">
+            <div class="icon">🚀</div>
+            <h2>Minimal</h2>
+            <p>Bare minimum setup for reference</p>
+        </a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Babylon.js - 3D Playground</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #0a0a1a; overflow: hidden; }
+        canvas { width: 100%; height: 100%; display: block; }
+        #info {
+            position: absolute; top: 15px; left: 15px;
+            color: #00d4ff; font-family: 'Segoe UI', sans-serif;
+            font-size: 14px; background: rgba(0,0,0,0.6);
+            padding: 12px 18px; border-radius: 8px;
+            border: 1px solid rgba(0,212,255,0.3);
+            pointer-events: none;
+        }
+    </style>
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+</head>
+<body>
+    <div id="info">
+        🖱️ หมุน: click+drag &nbsp;|&nbsp; Zoom: scroll<br>
+        🔴 Red Box &nbsp; 🟢 Green Sphere &nbsp; 🟡 Yellow Cylinder &nbsp; ⚪ Blue Torus<br>
+        📐 Ground grid
+    </div>
+
+    <canvas id="renderCanvas"></canvas>
+
+    <script>
+    const canvas = document.getElementById('renderCanvas');
+    const engine = new BABYLON.Engine(canvas, true);
+    const scene = new BABYLON.Scene(engine);
+    scene.clearColor = new BABYLON.Color4(0.04, 0.04, 0.1, 1);
+
+    // Camera
+    const camera = new BABYLON.ArcRotateCamera("cam", -Math.PI/2, Math.PI/3, 15, BABYLON.Vector3.Zero(), scene);
+    camera.attachControl(canvas, true);
+    camera.lowerRadiusLimit = 5;
+    camera.upperRadiusLimit = 30;
+
+    // Lighting
+    const hemiLight = new BABYLON.HemisphericLight("hemi", new BABYLON.Vector3(0,1,0), scene);
+    hemiLight.intensity = 0.4;
+
+    const pointLight = new BABYLON.PointLight("point", new BABYLON.Vector3(0, 5, 0), scene);
+    pointLight.intensity = 0.8;
+    pointLight.diffuse = new BABYLON.Color3(1, 1, 1);
+
+    const dirLight = new BABYLON.DirectionalLight("dir", new BABYLON.Vector3(-1, -2, 1), scene);
+    dirLight.intensity = 0.6;
+
+    // === GROUND WITH GRID ===
+    const ground = BABYLON.MeshBuilder.CreateGround("ground", {width: 20, height: 20, subdivisions: 20}, scene);
+    const groundMat = new BABYLON.StandardMaterial("gndMat", scene);
+    groundMat.diffuseColor = new BABYLON.Color3(0.08, 0.08, 0.15);
+    groundMat.specularColor = new BABYLON.Color3(0.05, 0.05, 0.1);
+    groundMat.specularPower = 32;
+    ground.material = groundMat;
+
+    // === RED BOX ===
+    const redBox = BABYLON.MeshBuilder.CreateBox("redBox", {size: 1.2}, scene);
+    redBox.position.y = 0.6;
+    const redMat = new BABYLON.PBRMaterial("redMat", scene);
+    redMat.metallic = 0.3;
+    redMat.roughness = 0.4;
+    redMat.albedoColor = new BABYLON.Color3(0.9, 0.15, 0.15);
+    redMat.emissiveColor = new BABYLON.Color3(0.15, 0.02, 0.02);
+    redBox.material = redMat;
+
+    // === GREEN SPHERE ===
+    const greenSphere = BABYLON.MeshBuilder.CreateSphere("greenSphere", {diameter: 1.5, segments: 32}, scene);
+    greenSphere.position.set(-3, 0.75, 0);
+    const greenMat = new BABYLON.PBRMaterial("greenMat", scene);
+    greenMat.metallic = 0.1;
+    greenMat.roughness = 0.5;
+    greenMat.albedoColor = new BABYLON.Color3(0.1, 0.7, 0.2);
+    greenMat.emissiveColor = new BABYLON.Color3(0.05, 0.15, 0.05);
+    greenSphere.material = greenMat;
+
+    // === YELLOW CYLINDER ===
+    const yellowCyl = BABYLON.MeshBuilder.CreateCylinder("yellowCyl", {height: 2, diameter: 0.8, tessellation: 24}, scene);
+    yellowCyl.position.set(3, 1, 0);
+    const yellowMat = new BABYLON.PBRMaterial("yellowMat", scene);
+    yellowMat.metallic = 0.5;
+    yellowMat.roughness = 0.3;
+    yellowMat.albedoColor = new BABYLON.Color3(0.9, 0.8, 0.1);
+    yellowMat.emissiveColor = new BABYLON.Color3(0.2, 0.2, 0.0);
+    yellowCyl.material = yellowMat;
+
+    // === BLUE TORUS ===
+    const torus = BABYLON.MeshBuilder.CreateTorus("torus", {diameter: 1.8, thickness: 0.4, tessellation: 48}, scene);
+    torus.position.set(0, 2.5, -3);
+    const blueMat = new BABYLON.PBRMaterial("blueMat", scene);
+    blueMat.metallic = 0.8;
+    blueMat.roughness = 0.2;
+    blueMat.albedoColor = new BABYLON.Color3(0.1, 0.3, 0.9);
+    blueMat.emissiveColor = new BABYLON.Color3(0.05, 0.1, 0.3);
+    torus.material = blueMat;
+
+    // === SMALL SPHERES (particles) ===
+    for (let i = 0; i < 20; i++) {
+        const tiny = BABYLON.MeshBuilder.CreateSphere("tiny" + i, {diameter: 0.1}, scene);
+        tiny.position = new BABYLON.Vector3(
+            (Math.random() - 0.5) * 15,
+            Math.random() * 3,
+            (Math.random() - 0.5) * 15
+        );
+        const tinyMat = new BABYLON.StandardMaterial("tinyMat" + i, scene);
+        tinyMat.emissiveColor = new BABYLON.Color3(
+            Math.random() * 0.5,
+            Math.random() * 0.5,
+            Math.random() * 0.5
+        );
+        tiny.material = tinyMat;
+    }
+
+    // === ANIMATIONS ===
+    // Rotate red box
+    BABYLON.Animation.CreateAndStartAnimation("rotateBox", redBox, "rotation.y", 60, 200, 0, Math.PI * 2,
+        BABYLON.Animation.AnimationLoopMode.LoopAnimation);
+
+    // Float sphere up/down
+    BABYLON.Animation.CreateAndStartAnimation("float", greenSphere, "position.y", 60, 120, 0.75, 1.2,
+        BABYLON.Animation.AnimationLoopMode.LoopAnimation);
+
+    // Rotate torus
+    BABYLON.Animation.CreateAndStartAnimation("rotateTorus", torus, "rotation.x", 60, 200, 0, Math.PI * 2,
+        BABYLON.Animation.AnimationLoopMode.LoopAnimation);
+
+    // Animate point light
+    BABYLON.Animation.CreateAndStartAnimation("moveLight", pointLight, "position.x", 30, 200, -4, 4,
+        BABYLON.Animation.AnimationLoopMode.LoopAnimation);
+
+    // === RENDER LOOP ===
+    engine.runRenderLoop(() => scene.render());
+    window.addEventListener('resize', () => engine.resize());
+    </script>
+</body>
+</html>
