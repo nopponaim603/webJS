@@ -1,6 +1,6 @@
 {
-  "name": "GameHub - HTML5 Games Portfolio",
-  "short_name": "GameHub",
+  "name": "GameDevJS Hub - HTML5 Games Portfolio",
+  "short_name": "GameDevJS Hub",
   "description": "ศูนย์รวมเกม HTML5 และ Browser Games เล่นได้ทันทีแบบไม่ต้องติดตั้ง รองรับ PWA",
   "start_url": "/",
   "display": "standalone",

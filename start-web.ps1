@@ -3,7 +3,7 @@
 # ===================================================
 
 Write-Host "==================================================" -ForegroundColor Cyan
-Write-Host " 🚀 กำลังเริ่มต้นเซิร์ฟเวอร์ Next.js GameHub..." -ForegroundColor Green
+Write-Host " 🚀 กำลังเริ่มต้นเซิร์ฟเวอร์ Next.js GameDevJS Hub..." -ForegroundColor Green
 Write-Host "==================================================" -ForegroundColor Cyan
 
 # สร้าง Background Job เพื่อเปิด Browser หลังเซิร์ฟเวอร์เริ่มทำงาน (3 วินาที)

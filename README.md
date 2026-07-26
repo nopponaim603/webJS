@@ -1,4 +1,4 @@
-# 🎮 Game Portfolio — Next.js & Multi-Engine Showcase
+# 🎮 GameDevJS Hub — Next.js & Multi-Engine Showcase
 
 เว็บไซต์สำหรับแสดงผลงานเกม HTML5, Phaser 2D และ Babylon.js 3D บนสถาปัตยกรรม **Next.js (App Router)** พร้อมด้วย UI/UX Modern Glassmorphism, ระบบ **Progressive Web App (PWA)** ออฟไลน์, และเตรียมพร้อมสำหรับการ Deploy บน **Vercel**
 

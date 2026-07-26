@@ -1,6 +1,6 @@
 # 🤖 AGENT.md — Workspace Guidance & Project Specification
 
-**Project:** Game Portfolio — HTML5 & Multi-Engine Games Showcase (`webJS`)  
+**Project:** GameDevJS Hub — HTML5 & Multi-Engine Games Showcase (`webJS`)  
 **Repository:** [nopponaim603/webJS](https://github.com/nopponaim603/webJS)  
 **Last Updated:** 2026-07-26  
 

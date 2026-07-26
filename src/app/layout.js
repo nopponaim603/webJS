@@ -5,13 +5,13 @@ export const viewport = {
 };
 
 export const metadata = {
-  title: 'Game Portfolio — Next.js & Multi-Engine Games Showcase',
+  title: 'GameDevJS Hub — Next.js & Multi-Engine Games Showcase',
   description: 'ศูนย์รวมเกม HTML5, Phaser 2D และ Babylon.js 3D บนระบบ Next.js Framework (PWA Ready)',
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
-    title: 'GameHub'
+    title: 'GameDevJS Hub'
   }
 };
 

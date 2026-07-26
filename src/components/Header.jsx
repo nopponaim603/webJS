@@ -48,7 +48,7 @@ export default function Header({ searchKeyword, setSearchKeyword }) {
           <rect x="10" y="25" width="18" height="10" rx="5" fill="#00F2FE"/>
         </svg>
         <span className="gradient-text" style={{ fontSize: '1.5rem', fontWeight: '800', letterSpacing: '-0.5px' }}>
-          GameHub <span style={{ fontSize: '0.8rem', color: '#38bdf8', padding: '2px 8px', borderRadius: '12px', background: 'rgba(56, 189, 248, 0.15)' }}>Next.js</span>
+          GameDevJS Hub <span style={{ fontSize: '0.8rem', color: '#38bdf8', padding: '2px 8px', borderRadius: '12px', background: 'rgba(56, 189, 248, 0.15)' }}>Next.js</span>
         </span>
       </div>
 

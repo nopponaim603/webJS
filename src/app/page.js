@@ -76,7 +76,7 @@ export default function Home() {
           backdropFilter: 'blur(12px)'
         }}>
           <h1 style={{ fontSize: '2.25rem', fontWeight: '800', marginBottom: '0.75rem' }}>
-            🎮 HTML5 & Multi-Engine <span className="gradient-text">Game Portfolio</span>
+            🎮 HTML5 & Multi-Engine <span className="gradient-text">GameDevJS Hub</span>
           </h1>
           <p style={{ color: '#cbd5e1', fontSize: '1.05rem', maxWidth: '700px', lineHeight: '1.6' }}>
             ศูนย์รวมเกม HTML5, Phaser 2D และ Babylon.js 3D บนสถาปัตยกรรม Next.js App Router พร้อมรองรับ PWA ออฟไลน์ และการแสดงผลระดับพรีเมียม
@@ -136,7 +136,7 @@ export default function Home() {
         borderTop: '1px solid rgba(255, 255, 255, 0.05)',
         fontSize: '0.875rem'
       }}>
-        © 2026 GameHub — Built with Next.js & Antigravity AI
+        © 2026 GameDevJS Hub — Built with Next.js & Antigravity AI
       </footer>
 
       {/* Modal Loader */}

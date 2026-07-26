@@ -1,6 +1,6 @@
-# 🎮 Game Portfolio (webJS) — Project Index
+# 🎮 GameDevJS Hub (webJS) — Project Index
 
-**Project:** HTML5 Games Showcase & Portfolio  
+**Project:** GameDevJS Hub — HTML5 Games Showcase & Portfolio  
 **Status:** Active | **Current Sprint:** Sprint 01  
 **Last Updated:** 2026-07-26 | **Knowledge Hub:** [Project Wiki](./wiki/wiki.md)  
 
