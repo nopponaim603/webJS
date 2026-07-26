@@ -1,0 +1,25 @@
+{
+  "name": "GameHub - HTML5 Games Portfolio",
+  "short_name": "GameHub",
+  "description": "ศูนย์รวมเกม HTML5 และ Browser Games เล่นได้ทันทีแบบไม่ต้องติดตั้ง รองรับ PWA",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#00F2FE",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["games", "entertainment", "puzzles"]
+}

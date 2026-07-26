@@ -22,7 +22,7 @@ gantt
     section Sprint 01
     Portfolio UI & Glassmorphism   :done, s1_1, 2026-07-20, 3d
     Games Integration (3 Games)     :done, s1_2, 2026-07-23, 3d
-    Doc Suite & AGENTS.md Setup     :active, s1_3, 2026-07-26, 2d
+    Doc Suite & AGENT.md Setup      :active, s1_3, 2026-07-26, 2d
     section Sprint 02
     LocalStorage High Score System  :s2_1, 2026-07-28, 3d
     Web Audio SFX Synthetic Engine  :s2_2, 2026-07-31, 3d

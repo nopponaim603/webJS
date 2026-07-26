@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Babylon.js 3D Demo - Cyber Sphere</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #0f172a; color: #fff; font-family: sans-serif; overflow: hidden; width: 100vw; height: 100vh; }
+        #renderCanvas { width: 100vw; height: 100vh; touch-action: none; }
+        #ui-overlay { position: absolute; top: 20px; left: 20px; pointer-events: none; }
+        h1 { color: #00F2FE; font-size: 20px; text-shadow: 0 0 10px rgba(0,242,254,0.5); }
+    </style>
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+</head>
+<body>
+    <div id="ui-overlay">
+        <h1>🌐 Babylon.js 3D Interactive World</h1>
+        <p style="font-size: 14px; opacity: 0.8;">Drag mouse / touch to rotate 3D Scene</p>
+    </div>
+    <canvas id="renderCanvas"></canvas>
+    <script>
+        const canvas = document.getElementById("renderCanvas");
+        const engine = new BABYLON.Engine(canvas, true);
+
+        const createScene = function () {
+            const scene = new BABYLON.Scene(engine);
+            scene.clearColor = new BABYLON.Color4(0.06, 0.09, 0.16, 1);
+
+            // ArcRotateCamera
+            const camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI / 2, Math.PI / 2.5, 6, BABYLON.Vector3.Zero(), scene);
+            camera.attachControl(canvas, true);
+
+            // Hemispheric Light
+            const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
+            light.intensity = 0.7;
+
+            // Point light
+            const pointLight = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(3, 4, -3), scene);
+            pointLight.diffuse = new BABYLON.Color3(0, 0.95, 1);
+
+            // Torus Knot Mesh
+            const knot = BABYLON.MeshBuilder.CreateTorusKnot("knot", {
+                radius: 1.2,
+                tube: 0.3,
+                radialSegments: 128,
+                tubularSegments: 64
+            }, scene);
+
+            const mat = new BABYLON.StandardMaterial("knotMat", scene);
+            mat.diffuseColor = new BABYLON.Color3(0, 0.8, 1);
+            mat.specularColor = new BABYLON.Color3(1, 1, 1);
+            mat.emissiveColor = new BABYLON.Color3(0.05, 0.2, 0.3);
+            knot.material = mat;
+
+            // Ground grid
+            const ground = BABYLON.MeshBuilder.CreateGround("ground", { width: 10, height: 10 }, scene);
+            ground.position.y = -2;
+            const groundMat = new BABYLON.StandardMaterial("groundMat", scene);
+            groundMat.wireframe = true;
+            groundMat.diffuseColor = new BABYLON.Color3(0, 0.5, 0.8);
+            ground.material = groundMat;
+
+            // Animation
+            scene.onBeforeRenderObservable.add(() => {
+                knot.rotation.y += 0.01;
+                knot.rotation.x += 0.005;
+            });
+
+            return scene;
+        };
+
+        const scene = createScene();
+
+        engine.runRenderLoop(function () {
+            scene.render();
+        });
+
+        window.addEventListener("resize", function () {
+            engine.resize();
+        });
+    </script>
+</body>
+</html>

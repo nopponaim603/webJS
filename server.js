@@ -12,6 +12,8 @@ const mimeTypes = {
     '.css': 'text/css',
     '.js': 'text/javascript',
     '.json': 'application/json',
+    '.webmanifest': 'application/manifest+json',
+    '.wasm': 'application/wasm',
     '.png': 'image/png',
     '.jpg': 'image/jpeg',
     '.jpeg': 'image/jpeg',
@@ -30,11 +32,9 @@ const mimeTypes = {
 const server = http.createServer((req, res) => {
     console.log(`${new Date().toLocaleTimeString()} - ${req.method} ${req.url}`);
 
-    // Get file path
-    let filePath = '.' + req.url;
-    if (filePath === './') {
-        filePath = './index.html';
-    }
+    // Get file path inside src directory
+    const requestUrl = req.url.split('?')[0];
+    let filePath = path.join(__dirname, 'src', requestUrl === '/' ? 'index.html' : requestUrl);
 
     // Get file extension
     const extname = String(path.extname(filePath)).toLowerCase();

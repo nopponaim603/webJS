@@ -3,8 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="แสดงผลงานเกม HTML5 และเกมที่รันผ่าน Browser - Game Portfolio Showcase">
-    <title>Game Portfolio - HTML5 Games Showcase</title>
+    <meta name="description" content="แสดงผลงานเกม HTML5 และเกมที่รันผ่าน Browser - Game Portfolio Showcase (PWA Ready, Phaser & Babylon.js Enabled)">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Game Portfolio - HTML5 & Multi-Engine Games Showcase</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,6 +34,9 @@
                 <a href="#" class="nav-link">เกมใหม่</a>
             </nav>
             <div class="header-actions">
+                <button class="pwa-install-btn" id="pwaInstallBtn" style="display: none;">
+                    📲 ติดตั้งแอป
+                </button>
                 <button class="search-btn" id="searchBtn">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="2"/>

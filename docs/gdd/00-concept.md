@@ -23,7 +23,7 @@
 | UI Style | CSS Custom Properties, Glassmorphism, CSS Grid/Flexbox | ธีม Cyan-Blue Gradient |
 | Game Engine / Rendering | HTML5 Canvas API, Three.js (สำหรับ 3D) | รองรับทั้ง 2D และ 3D physics |
 | Dev Server | Node.js Native HTTP Server (`server.js`) | ไม่ต้องลง npm dependencies |
-| Deployment | Netlify (`netlify.toml`) | Static site hosting ready |
+| Deployment | Vercel (`vercel.json`) | Static PWA hosting ready |
 
 ---
 

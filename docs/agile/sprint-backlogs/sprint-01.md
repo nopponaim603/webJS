@@ -14,7 +14,7 @@ gantt
     section Tasks
     Portfolio Grid UI & Styling  :done, 2026-07-20, 3d
     3 Mini Games Implementation  :done, 2026-07-23, 3d
-    Docs Suite & AGENTS.md Setup :active, 2026-07-26, 2d
+    Docs Suite & AGENT.md Setup :active, 2026-07-26, 2d
 ```
 
 ---
@@ -28,7 +28,7 @@ gantt
 | [US-02-01](../user-stories/US-02-games.md) | Emoji Match Mini Game | Dev Team | 12 hrs | ✅ Done |
 | [US-02-02](../user-stories/US-02-games.md) | 2048 Cubes Mini Game | Dev Team | 16 hrs | ✅ Done |
 | [US-02-03](../user-stories/US-02-games.md) | Tile Match Mini Game | Dev Team | 16 hrs | ✅ Done |
-| US-01-03 | AGENTS.md & Game Doc Suite (`docs/`) | AI Agent | 4 hrs | 🔵 In Progress |
+| US-01-03 | AGENT.md & Game Doc Suite (`docs/`) | AI Agent | 4 hrs | 🔵 In Progress |
 
 ---
 

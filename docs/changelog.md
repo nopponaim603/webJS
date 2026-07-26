@@ -8,7 +8,7 @@
 ## [1.0.0] - 2026-07-26
 
 ### Added
-- **AGENTS.md & AGENT.md**: สเปคโครงสร้างโปรเจค เทคโนโลยี และกฎการพัฒนาของ AI Agent
+- **AGENT.md**: สเปคโครงสร้างโปรเจค เทคโนโลยี และกฎการพัฒนาของ AI Agent
 - **GDD Suite**:
   - `docs/gdd/00-concept.md`: ภาพรวมโปรเจค Portfolio และมินิเกมทั้ง 3 เกม (`Emoji Match`, `2048 Cubes`, `Tile Match`)
   - `docs/gdd/01-mechanics.md`: กฎ กลไกการเล่น และคอนโทรลของทุกเกม

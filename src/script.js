@@ -4,7 +4,7 @@ const gamesData = [
         id: "emoji-match",
         title: "Emoji Match",
         category: "ปริศนา / ฝึกสมอง",
-        url: "emoji-match/index.html",
+        url: "games/emoji-match/index.html",
         aspectRatio: "390 / 480", // Optimized for narrow tall screens
         image: "https://images.unsplash.com/photo-1614332287897-cdc485fa562d?w=400&h=400&fit=crop",
         gradient: "linear-gradient(135deg, #A78BFA 0%, #EC4899 100%)"
@@ -13,7 +13,7 @@ const gamesData = [
         id: "2048-cubes",
         title: "2048 Cubes",
         category: "ปริศนา / ฟิสิกส์",
-        url: "2048-cubes/index.html",
+        url: "games/2048-cubes/index.html",
         aspectRatio: "450 / 600",
         image: "https://images.unsplash.com/photo-1611996575749-79a3a250f948?w=400&h=400&fit=crop",
         gradient: "linear-gradient(135deg, #FF9F43 0%, #FF6B6B 100%)"
@@ -22,10 +22,28 @@ const gamesData = [
         id: "tile-match",
         title: "Tile Match",
         category: "ปริศนา / จับคู่ทรีแมตช์",
-        url: "tile-match/index.html",
+        url: "games/tile-match/index.html",
         aspectRatio: "1 / 1.5",
         image: "https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=400&h=400&fit=crop",
         gradient: "linear-gradient(135deg, #5D2A35 0%, #A04050 100%)"
+    },
+    {
+        id: "phaser-demo",
+        title: "Cosmic Bouncer (Phaser 2D)",
+        category: "Phaser 2D Engine",
+        url: "games/phaser-demo/index.html",
+        aspectRatio: "4 / 3",
+        image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&h=400&fit=crop",
+        gradient: "linear-gradient(135deg, #00F2FE 0%, #4FACFE 100%)"
+    },
+    {
+        id: "babylon-demo",
+        title: "Cyber Sphere 3D (Babylon.js)",
+        category: "Babylon 3D Engine",
+        url: "games/babylon-demo/index.html",
+        aspectRatio: "16 / 9",
+        image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&h=400&fit=crop",
+        gradient: "linear-gradient(135deg, #7F00FF 0%, #E100FF 100%)"
     },
     {
         id: 1,
@@ -437,5 +455,36 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-console.log('🎮 Game Portfolio Loaded!');
+// PWA Service Worker & Install Prompt Registration
+let deferredPrompt = null;
+
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then((reg) => console.log('[PWA] Service Worker registered successfully:', reg.scope))
+            .catch((err) => console.warn('[PWA] Service Worker registration failed:', err));
+    });
+}
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    const installBtn = document.getElementById('pwaInstallBtn');
+    if (installBtn) {
+        installBtn.style.display = 'inline-flex';
+        installBtn.addEventListener('click', () => {
+            installBtn.style.display = 'none';
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('[PWA] User accepted the install prompt');
+                }
+                deferredPrompt = null;
+            });
+        });
+    }
+});
+
+console.log('🎮 Game Portfolio & PWA Multi-Engine Loaded!');
 console.log(`📊 Total Games: ${gamesData.length}`);
+
