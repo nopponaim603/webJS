@@ -34,6 +34,7 @@
 3. **Tile Match** (`tile-match/`) — เกมจับคู่ไพ่ 3 ใบ (Mahjong Triple Match)
 4. **Space Shooter** (`phaser-demo/`) — เกมยิงยานอวกาศ 2D แบบ Wave-based Action (Phaser 3)
 5. **Cyber Sphere 3D** (`babylon-demo/`) — เกมทรงกลมไซเบอร์ 3D (Babylon.js)
+6. **Kenney Match 3** (`match3/`) — เกมจับคู่เพชรอัญมณี 3 ในแถวสไตล์คลาสสิก (Phaser 3)
 
 ---
 
@@ -48,6 +49,7 @@ graph TD
     Modal --> G3[tile-match/index.html]
     Modal --> G4[phaser-demo/index.html - Space Shooter]
     Modal --> G5[babylon-demo/index.html - Cyber Sphere 3D]
+    Modal --> G6[match3/index.html - Kenney Match 3]
     
     ScriptJS --> LocalStorage[(Browser LocalStorage - High Scores)]
     NodeServer[server.js - Custom Node HTTP Server] --> IndexHTML

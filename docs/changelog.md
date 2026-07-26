@@ -5,6 +5,18 @@
 
 ---
 
+## [1.3.0] - 2026-07-26
+
+### Added
+- **Kenney Match 3 (`public/games/match3/`)**: พัฒนาเกมจับคู่เพชรอัญมณี 3 ในแถว (Match-3 Puzzle Game) ด้วย Phaser 3 และสินทรัพย์กราฟิก/เสียงจาก `KenneyNL/Starter-Kit-Match-3`:
+  - ตาราง 7x7 พร้อมระบบสลับอัญมณีด้วยเมาส์และทัชสกรีน (Smooth Swap Tweens)
+  - ระบบตรวจสอบการจับคู่ (Horizontal & Vertical Matches) 3, 4, 5+ ในแถว
+  - ระบบสลายเพชร, เอฟเฟกต์ละอองสี (Particle Burst VFX), แรงโน้มถ่วง (Gravity Fall) และสปอว์นเพชรใหม่จากด้านบน
+  - ระบบคอมโบล่วงหน้า (Cascade Combo Chains `Combo x2`, `Combo x3`...)
+  - เสียงประกอบจาก Kenney (`sfx_swap`, `sfx_match`, `sfx_land`) พร้อม Web Audio SFX Fallback
+  - หน้าต่าง Modal สรุปผลชัยชนะ/หมด Moves และปุ่มเล่นอีกครั้ง
+- **GDD Specification**: เพิ่มเอกสารกำกับ [docs/gdd/games/match3/spec.md](./gdd/games/match3/spec.md)
+
 ## [1.2.0] - 2026-07-26
 
 ### Added

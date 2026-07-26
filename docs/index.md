@@ -19,6 +19,7 @@
 - [2048 Cubes](./gdd/games/2048-cubes/spec.md)
 - [Tile Match](./gdd/games/tile-match/spec.md)
 - [Cyber Sphere 3D](./gdd/games/cyber-sphere-3d/spec.md)
+- [Kenney Match 3 (Phaser 2D)](./gdd/games/match3/spec.md)
 
 ---
 

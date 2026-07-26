@@ -46,6 +46,14 @@ const initialGames = [
     url: "/games/babylon-demo/index.html",
     image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&h=400&fit=crop",
     gradient: "linear-gradient(135deg, #7F00FF 0%, #E100FF 100%)"
+  },
+  {
+    id: "match3",
+    title: "Kenney Match 3 (Phaser 2D)",
+    category: "ปริศนา / Phaser 2D",
+    url: "/games/match3/index.html",
+    image: "https://images.unsplash.com/photo-1528819622765-d6bcf132f793?w=400&h=400&fit=crop",
+    gradient: "linear-gradient(135deg, #10B981 0%, #3B82F6 100%)"
   }
 ];
 
