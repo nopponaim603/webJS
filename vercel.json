@@ -1,13 +1,5 @@
 {
-  "version": 2,
-  "outputDirectory": "src",
-  "cleanUrls": true,
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
-  ],
+  "framework": "nextjs",
   "headers": [
     {
       "source": "/sw.js",

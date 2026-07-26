@@ -48,11 +48,11 @@ webJS/
 
 ## 🛠 Tech Stack & Environment
 
-- **Frontend Core**: Vanilla HTML5, CSS3, JavaScript (ES6+), PWA Standards (Service Worker, Web Manifest)
+- **Frontend Core**: Next.js (App Router), React, JavaScript (ES6+), PWA Standards (Service Worker, Web Manifest)
 - **Game Engines & Libraries**:
   - **Phaser 3**: 2D Sprite Rendering, Arcade Physics, Scene Lifecycle
   - **Babylon.js**: Real-time 3D WebGL Rendering, PBR Materials, Lighting, Physics & Camera
-- **Server**: Node.js HTTP Server (`server.js`) - Zero External Dependencies
+- **Framework Dev Server**: Next.js (`npm run dev` / `next dev`)
 - **Hosting / CI/CD**: Vercel Ready (`vercel.json`)
 
 ---
@@ -74,5 +74,6 @@ webJS/
 
 ## 🚀 Execution & Verification Commands
 
-- **Run Dev Server**: `npm run dev` หรือ `node server.js` (Server จะเปิดที่ `http://localhost:5500` หรือ Port ที่ว่างอยู่)
+- **Run Dev Server & Open Browser (PowerShell)**: `.\start-web.ps1` หรือ `.\run.ps1`
+- **Run Dev Server (NPM)**: `npm run dev` (เปิดใช้งานที่ `http://localhost:3000`)
 - **Check PWA Audit**: เปิด Chrome DevTools > Lighthouse > Select PWA Check
