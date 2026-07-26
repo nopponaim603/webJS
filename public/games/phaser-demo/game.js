@@ -61,13 +61,14 @@ class MainScene extends Phaser.Scene {
         this.explosions = this.add.group();
 
         // Collisions
-        this.physics.add.collider(this.bullets, this.enemies, this.hitEnemy, null, this);
-        this.physics.add.collider(this.enemies, this, this.enemyHitPlayer, null, this);
-        this.physics.add.collider(this.enemies, this.bullets, null, null, this);
+        this.physics.add.overlap(this.bullets, this.enemies, this.hitEnemy, null, this);
+        this.physics.add.overlap(this.player, this.enemies, this.enemyHitPlayer, null, this);
 
         // Controls
         this.cursors = this.input.keyboard.createCursorKeys();
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+        this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
 
         // UI
         this.createUI();
@@ -348,13 +349,18 @@ class MainScene extends Phaser.Scene {
     update(time, delta) {
         if (this.gameOver) return;
 
-        // Player movement
-        if (this.cursors.left.isDown) {
-            this.player.setVelocityX(-300);
-        } else if (this.cursors.right.isDown) {
-            this.player.setVelocityX(300);
+        // Player movement (Keyboard & Pointer)
+        if (this.cursors.left.isDown || (this.keyA && this.keyA.isDown)) {
+            this.player.setVelocityX(-350);
+        } else if (this.cursors.right.isDown || (this.keyD && this.keyD.isDown)) {
+            this.player.setVelocityX(350);
         } else {
             this.player.setVelocityX(0);
+        }
+
+        if (this.input.activePointer.isDown) {
+            this.player.x = Phaser.Math.Clamp(this.input.activePointer.x, 30, 770);
+            this.fireBullet();
         }
 
         // Shooting

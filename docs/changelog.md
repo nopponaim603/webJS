@@ -5,6 +5,23 @@
 
 ---
 
+## [1.2.0] - 2026-07-26
+
+### Added
+- **Game Specs Suite (`docs/gdd/games/`)**: สร้าง Subfolders แยกเอกสารรายละเอียดการพัฒนาเกมเป็นรายเกม:
+  - `docs/gdd/games/space-shooter/spec.md`: GDD และสเปคการพัฒนาเกม **Space Shooter** (Phaser 2D)
+  - `docs/gdd/games/emoji-match/spec.md`: GDD เกม **Emoji Match**
+  - `docs/gdd/games/2048-cubes/spec.md`: GDD เกม **2048 Cubes**
+  - `docs/gdd/games/tile-match/spec.md`: GDD เกม **Tile Match**
+  - `docs/gdd/games/cyber-sphere-3d/spec.md`: GDD เกม **Cyber Sphere 3D**
+
+## [1.1.0] - 2026-07-26
+
+### Added / Updated
+- **GDD Suite**:
+  - `docs/gdd/00-concept.md`: เพิ่มสเปคเกม **Space Shooter** (Phaser 2D) และ **Cyber Sphere 3D** เข้าสู่อาร์คิเทคเจอร์และ Game Collection
+  - `docs/gdd/01-mechanics.md`: เพิ่มกลไกการเล่น (Core Loops, Rules, Win/Lose Conditions) และ Input Action Matrix สำหรับเกม **Space Shooter**
+
 ## [1.0.0] - 2026-07-26
 
 ### Added

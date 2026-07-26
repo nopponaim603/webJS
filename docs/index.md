@@ -13,6 +13,13 @@
 - [03-art-direction.md — Visual Style & UI/UX Guidelines](./gdd/03-art-direction.md)
 - [04-audio-direction.md — Music & Sound Effects Specs](./gdd/04-audio-direction.md)
 
+### 🎮 Individual Game Specifications (`docs/gdd/games/`)
+- [Space Shooter (Phaser 2D)](./gdd/games/space-shooter/spec.md)
+- [Emoji Match](./gdd/games/emoji-match/spec.md)
+- [2048 Cubes](./gdd/games/2048-cubes/spec.md)
+- [Tile Match](./gdd/games/tile-match/spec.md)
+- [Cyber Sphere 3D](./gdd/games/cyber-sphere-3d/spec.md)
+
 ---
 
 ## 💻 Software Design

@@ -3,85 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phaser 2D Demo - Cosmic Runner</title>
+    <title>Space Shooter - Phaser 2D</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: #0f172a; color: #fff; font-family: sans-serif; overflow: hidden; display: flex; justify-content: center; align-items: center; height: 100vh; }
-        #phaser-game { width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; }
+        #game-container { width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
 </head>
 <body>
-    <div id="phaser-game"></div>
-    <script>
-        class MainScene extends Phaser.Scene {
-            constructor() {
-                super({ key: 'MainScene' });
-            }
-
-            preload() {
-                // Create synthetic texture shapes
-                const graphics = this.make.graphics({ x: 0, y: 0, add: false });
-                graphics.fillStyle(0x00F2FE, 1);
-                graphics.fillCircle(16, 16, 16);
-                graphics.generateTexture('ball', 32, 32);
-
-                graphics.clear();
-                graphics.fillStyle(0x4FACFE, 1);
-                graphics.fillRect(0, 0, 120, 20);
-                graphics.generateTexture('paddle', 120, 20);
-            }
-
-            create() {
-                this.add.text(400, 50, '🎮 Phaser 2D Bouncing Ball', {
-                    font: '24px Arial',
-                    fill: '#00F2FE'
-                }).setOrigin(0.5);
-
-                this.paddle = this.physics.add.image(400, 500, 'paddle').setImmovable(true);
-                this.paddle.body.allowGravity = false;
-
-                this.ball = this.physics.add.image(400, 300, 'ball');
-                this.ball.setCollideWorldBounds(true);
-                this.ball.setBounce(1, 1);
-                this.ball.setVelocity(200, -200);
-
-                this.physics.world.setBounds(0, 0, 800, 600);
-                this.physics.add.collider(this.ball, this.paddle);
-
-                this.score = 0;
-                this.scoreText = this.add.text(20, 20, 'Score: 0', { font: '18px Arial', fill: '#ffffff' });
-
-                this.input.on('pointermove', (pointer) => {
-                    this.paddle.x = Phaser.Math.Clamp(pointer.x, 60, 740);
-                });
-            }
-
-            update() {
-                if (this.ball.y > 580) {
-                    this.ball.setPosition(400, 300);
-                    this.ball.setVelocity(200, -200);
-                }
-            }
-        }
-
-        const config = {
-            type: Phaser.AUTO,
-            width: 800,
-            height: 600,
-            parent: 'phaser-game',
-            scale: {
-                mode: Phaser.Scale.FIT,
-                autoCenter: Phaser.Scale.CENTER_BOTH
-            },
-            physics: {
-                default: 'arcade',
-                arcade: { gravity: { y: 0 }, debug: false }
-            },
-            scene: MainScene
-        };
-
-        new Phaser.Game(config);
-    </script>
+    <div id="game-container"></div>
+    <script src="game.js"></script>
 </body>
 </html>

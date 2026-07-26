@@ -32,6 +32,8 @@
 1. **Emoji Match** (`emoji-match/`) — เกมจับคู่ Emoji ทดสอบความจำและความไว
 2. **2048 Cubes** (`2048-cubes/`) — เกมยิงลูกบาศก์รวมตัวเลข 2048 แบบฟิสิกส์
 3. **Tile Match** (`tile-match/`) — เกมจับคู่ไพ่ 3 ใบ (Mahjong Triple Match)
+4. **Space Shooter** (`phaser-demo/`) — เกมยิงยานอวกาศ 2D แบบ Wave-based Action (Phaser 3)
+5. **Cyber Sphere 3D** (`babylon-demo/`) — เกมทรงกลมไซเบอร์ 3D (Babylon.js)
 
 ---
 
@@ -39,12 +41,13 @@
 
 ```mermaid
 graph TD
-    User[Web Browser User] --> IndexHTML[index.html - Portfolio Dashboard]
-    IndexHTML --> ScriptJS[script.js - Dynamic UI & Modal Controller]
-    ScriptJS --> Modal[Game Modal Iframe Overlay]
+    User[Web Browser User] --> IndexHTML[Next.js App Router - Portfolio Hub]
+    IndexHTML --> Modal[Game Modal Iframe Overlay]
     Modal --> G1[emoji-match/index.html]
     Modal --> G2[2048-cubes/index.html]
     Modal --> G3[tile-match/index.html]
+    Modal --> G4[phaser-demo/index.html - Space Shooter]
+    Modal --> G5[babylon-demo/index.html - Cyber Sphere 3D]
     
     ScriptJS --> LocalStorage[(Browser LocalStorage - High Scores)]
     NodeServer[server.js - Custom Node HTTP Server] --> IndexHTML

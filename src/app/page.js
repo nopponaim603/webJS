@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Header from '@/components/Header';
 import GameCard from '@/components/GameCard';
 import GameModal from '@/components/GameModal';
+import buildInfo from '../../public/build.json';
 
 const initialGames = [
   {
@@ -32,7 +33,7 @@ const initialGames = [
   },
   {
     id: "phaser-demo",
-    title: "Cosmic Bouncer (Phaser 2D)",
+    title: "Space Shooter (Phaser 2D)",
     category: "Phaser 2D Engine",
     url: "/games/phaser-demo/index.html",
     image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&h=400&fit=crop",
@@ -134,9 +135,16 @@ export default function Home() {
         textAlign: 'center',
         color: '#64748b',
         borderTop: '1px solid rgba(255, 255, 255, 0.05)',
-        fontSize: '0.875rem'
+        fontSize: '0.875rem',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '0.35rem',
+        alignItems: 'center'
       }}>
-        © 2026 GameDevJS Hub — Built with Next.js & Antigravity AI
+        <div>© 2026 GameDevJS Hub — Built with Next.js & Antigravity AI</div>
+        <div style={{ fontSize: '0.75rem', color: '#475569' }}>
+          v{buildInfo.version} (Build #{buildInfo.build})
+        </div>
       </footer>
 
       {/* Modal Loader */}

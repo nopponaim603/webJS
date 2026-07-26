@@ -33,6 +33,13 @@
 - **Win Condition**: เคลียร์ไทล์ทั้งหมดออกจากกระดาน
 - **Lose Condition**: ถาดพักไทล์เต็ม 7 ใบโดยไม่เกิดการจับคู่ 3 ใบ
 
+### 🚀 Game 4: Space Shooter (`phaser-demo/`)
+- **Engine**: Phaser 3 (2D Arcade Physics)
+- **Core Loop**: ควบคุมยานอวกาศเคลื่อนที่ยิงต่อสู้กับฝูงเอเลี่ยน (Wave-based Spawning) พร้อมหลบหลีกอุกกาบาต สะสมคะแนนจากการทำลายศัตรู
+- **Controls**: เคลื่อนที่ด้วย Keyboard (`←`/`→` หรือ `A`/`D`) หรือลาก Touch/Mouse, ยิงด้วย `Space` หรือคลิกเมาส์
+- **Win Condition**: เคลียร์ Wave และทำคะแนนสูงสุด (High Score)
+- **Lose Condition**: ยานถูกศัตรูยิงชน/พลังชีวิต (Lives: 3) หมดลง หรือศัตรูหลุดรอดผ่านขอบล่าง
+
 ---
 
 ## 3. Player Actions Matrix
@@ -46,6 +53,7 @@
 | Match Cards | Mouse Click / Touch | Emoji Match Canvas | เปิดและจับคู่การ์ด |
 | Aim & Fire Cube | Drag & Release | 2048 Cubes Engine | ยิง Cube ไปในทิศทางที่เล็ง |
 | Pick Tile | Mouse Click | Tile Match Board | ย้ายไทล์ลงถาดพักและตรวจสอบ 3-Match |
+| Move & Shoot Ship | Arrows / A,D / Touch / Space | Space Shooter Engine | เคลื่อนที่ยานอวกาศและยิงกระสุนทำลายศัตรู |
 
 ---
 

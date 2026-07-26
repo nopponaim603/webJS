@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import buildInfo from '../../public/build.json';
 
 export default function GameModal({ game, onClose }) {
   useEffect(() => {
@@ -93,7 +94,7 @@ export default function GameModal({ game, onClose }) {
           fontSize: '0.7rem',
           color: '#64748b'
         }}>
-          <span>Build: v0.3.0 #030</span>
+          <span>Build: v{buildInfo.version} #{buildInfo.build}</span>
           <span>{new Date().toLocaleDateString('th-TH', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
         </div>
       </div>
