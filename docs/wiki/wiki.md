@@ -22,6 +22,7 @@
 - [Product Backlog](../agile/01-product-backlog.md)
 
 ### 📚 Guidelines & Standards
+- [Game Assets Guide & Catalog](./assets-guide.md)
 - [System Test Guideline](./guidelines/system-test-guideline.md)
 - [Documentation Changelog](../changelog.md)
 

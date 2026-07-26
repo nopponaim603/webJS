@@ -40,4 +40,5 @@
 
 ## Related Documents
 - Concept: [Game Concept & Architecture](./00-concept.md)
+- Assets Guide: [Game Assets Catalog & Game Ideas](../wiki/assets-guide.md)
 - System Design: [Software System Design](../software/01-system-design.md)

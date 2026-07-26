@@ -27,4 +27,5 @@
   - `docs/agile/user-stories/`: รายละเอียด User Stories (US-01, US-02)
 - **Knowledge Wiki**:
   - `docs/wiki/wiki.md`: ศูนย์รวมความรู้และการเข้าถึงด่วน
+  - `docs/wiki/assets-guide.md`: เอกสารคู่มือ Game Assets และไอเดียการพัฒนาเกมสำหรับ Assets ทั้งหมดใน `public/assets/`
   - `docs/wiki/guidelines/system-test-guideline.md`: แนวทางการทดสอบระบบ
