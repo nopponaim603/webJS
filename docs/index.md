@@ -20,6 +20,7 @@
 - [Tile Match](./gdd/games/tile-match/spec.md)
 - [Cyber Sphere 3D](./gdd/games/cyber-sphere-3d/spec.md)
 - [Kenney Match 3 (Phaser 2D)](./gdd/games/match3/spec.md)
+- [Kenney 3D Platformer (Babylon.js)](./gdd/games/3d-platformer/spec.md)
 
 ---
 

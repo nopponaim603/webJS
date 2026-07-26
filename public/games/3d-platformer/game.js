@@ -58,6 +58,8 @@ let gameState = {
     isGrounded: false,
     isJumping: false,
     canJump: true,
+    jumpCount: 0,
+    maxJumps: 2,
     velocityY: 0
 };
 
@@ -315,17 +317,47 @@ function setupMobileJoystick() {
     });
 }
 
-// Player Jump Action
+// Player Jump Action (Double Jump Support)
 function triggerJump() {
     if (!gameState.isPlaying) return;
+
     if (gameState.isGrounded || coyoteTimer > 0) {
+        // First Jump from ground
         gameState.velocityY = PHYSICS.jumpForce;
         gameState.isGrounded = false;
         gameState.isJumping = true;
+        gameState.jumpCount = 1;
         coyoteTimer = 0;
         soundFX.play('jump', 0.7);
         spawnJumpDust(playerRoot.position);
+    } else if (gameState.jumpCount < gameState.maxJumps) {
+        // Second Jump (Air / Double Jump)
+        gameState.velocityY = PHYSICS.jumpForce * 0.95;
+        gameState.jumpCount += 1;
+        soundFX.play('jump', 0.85);
+        spawnDoubleJumpEffect(playerRoot.position);
+        playAnimation('jump');
     }
+}
+
+// Double Jump Particle Burst FX
+function spawnDoubleJumpEffect(pos) {
+    const particleSystem = new BABYLON.ParticleSystem("doubleJumpRing", 35, scene);
+    particleSystem.particleTexture = new BABYLON.Texture("https://raw.githubusercontent.com/BabylonJS/Babylon.js/master/packages/tools/playground/public/textures/flare.png", scene);
+    particleSystem.emitter = pos.clone().add(new BABYLON.Vector3(0, -0.2, 0));
+    particleSystem.color1 = new BABYLON.Color4(0.2, 0.8, 1.0, 1.0);
+    particleSystem.color2 = new BABYLON.Color4(0.9, 0.4, 1.0, 0.8);
+    particleSystem.minSize = 0.25;
+    particleSystem.maxSize = 0.6;
+    particleSystem.minLifeTime = 0.2;
+    particleSystem.maxLifeTime = 0.4;
+    particleSystem.emitRate = 250;
+    particleSystem.targetStopDuration = 0.12;
+    particleSystem.direction1 = new BABYLON.Vector3(-2, 0.5, -2);
+    particleSystem.direction2 = new BABYLON.Vector3(2, 1.0, 2);
+    particleSystem.minEmitPower = 2;
+    particleSystem.maxEmitPower = 4;
+    particleSystem.start();
 }
 
 // Jump Dust Particle FX
@@ -721,6 +753,7 @@ function updatePlayerMovement(dt) {
         gameState.velocityY = 0;
         gameState.isGrounded = true;
         gameState.isJumping = false;
+        gameState.jumpCount = 0;
         coyoteTimer = PHYSICS.coyoteTimeMax;
 
         if (!prevGrounded) {

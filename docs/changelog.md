@@ -3,7 +3,15 @@
 **Project:** Game Portfolio (`webJS`)  
 **Maintained by:** Antigravity AI & Dev Team  
 
----
+## [1.4.0] - 2026-07-26
+
+### Added
+- **Kenney 3D Platformer (`public/games/3d-platformer/`)**: พัฒนาเกมผจญภัย 3D Platformer ด้วย Babylon.js 8 Engine และสินทรัพย์ 3D/เสียงจาก `KenneyNL/Starter-Kit-3D-Platformer`:
+  - ตัวละคร 3D พร้อมโครงกระดูก แอนิเมชัน (`Idle`, `Walk`, `Jump`, `Fall`) และระบบฟิสิกส์ Multi-Ray Ground Check
+  - ระบบ **Double Jump (กระโดด 2 ครั้ง)** พร้อมเอฟเฟกต์ละอองดาววงแหวน (Air Ring Particle Burst)
+  - วัตถุโต้ตอบในด่าน: เหรียญทอง 3D, บล็อกคำถามเสกเหรียญ, บล็อกอิฐระเบิดทำลาย, แพลตฟอร์มเคลื่อนที่ และแพลตฟอร์มสั่นร่วง
+  - อินเทอร์เฟซ HUD สไตล์ Glassmorphism และระบบควบคุม Touch Joystick สำหรับหน้าจอมือถือ
+- **GDD Specification**: เพิ่มเอกสารกำกับ [docs/gdd/games/3d-platformer/spec.md](./gdd/games/3d-platformer/spec.md)
 
 ## [1.3.0] - 2026-07-26
 
