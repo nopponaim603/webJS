@@ -48,6 +48,14 @@ const initialGames = [
     gradient: "linear-gradient(135deg, #7F00FF 0%, #E100FF 100%)"
   },
   {
+    id: "3d-platformer",
+    title: "Kenney 3D Platformer (Babylon.js)",
+    category: "Babylon 3D Engine",
+    url: "/games/3d-platformer/index.html",
+    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&h=400&fit=crop",
+    gradient: "linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)"
+  },
+  {
     id: "match3",
     title: "Kenney Match 3 (Phaser 2D)",
     category: "ปริศนา / Phaser 2D",

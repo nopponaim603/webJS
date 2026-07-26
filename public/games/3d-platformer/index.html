@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kenney 3D Platformer - Babylon.js</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Babylon.js CDN (Matching Pinned Version) -->
+    <script src="https://cdn.jsdelivr.net/npm/babylonjs@7.50.0/babylon.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/babylonjs-loaders@7.50.0/babylonjs.loaders.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/babylonjs-gui@7.50.0/babylon.gui.min.js"></script>
+    
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --accent: #f59e0b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --bg-dark: rgba(15, 23, 42, 0.75);
+            --border-glass: rgba(255, 255, 255, 0.18);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #0b0f19;
+            font-family: 'Outfit', 'Inter', sans-serif;
+            color: #ffffff;
+        }
+
+        #renderCanvas {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+            touch-action: none;
+            outline: none;
+        }
+
+        /* Loading Screen Overlay */
+        #loader-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            transition: opacity 0.5s ease, visibility 0.5s;
+        }
+
+        #loader-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-glass);
+            backdrop-filter: blur(16px);
+            border-radius: 24px;
+            padding: 2.5rem 3rem;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            max-width: 420px;
+            width: 90%;
+        }
+
+        .loader-card h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .loader-card p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 999px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 50%, #f59e0b 100%);
+            border-radius: 999px;
+            transition: width 0.2s ease;
+        }
+
+        #loading-text {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            font-weight: 500;
+        }
+
+        /* Main HUD Overlay */
+        #hud {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 1.25rem;
+        }
+
+        .hud-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        .hud-stats-group {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .hud-badge {
+            background: var(--bg-dark);
+            border: 1px solid var(--border-glass);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 0.6rem 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .hud-badge.coins { color: #f59e0b; }
+        .hud-badge.score { color: #38bdf8; }
+        .hud-badge.lives { color: #ef4444; }
+        .hud-badge.timer { color: #a78bfa; }
+
+        .hud-badge-icon {
+            font-size: 1.3rem;
+        }
+
+        .level-title-badge {
+            background: var(--bg-dark);
+            border: 1px solid var(--border-glass);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 0.6rem 1.25rem;
+            font-weight: 800;
+            font-size: 1.1rem;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(139, 92, 246, 0.3) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            letter-spacing: 0.5px;
+        }
+
+        /* Controls Instructions Overlay */
+        .controls-hint {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-dark);
+            border: 1px solid var(--border-glass);
+            backdrop-filter: blur(12px);
+            border-radius: 999px;
+            padding: 0.5rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+
+        .key-cap {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            padding: 0.15rem 0.45rem;
+            font-weight: 700;
+            color: #fff;
+            font-family: monospace;
+            font-size: 0.8rem;
+        }
+
+        /* Mobile Touch Controls */
+        #mobile-controls {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 0;
+            width: 100%;
+            padding: 0 1.5rem;
+            display: none;
+            justify-content: space-between;
+            align-items: flex-end;
+            pointer-events: none;
+        }
+
+        @media (max-width: 900px) {
+            .controls-hint { display: none; }
+            #mobile-controls { display: flex; }
+        }
+
+        .dpad-container {
+            width: 140px;
+            height: 140px;
+            position: relative;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-glass);
+            border-radius: 50%;
+            backdrop-filter: blur(10px);
+            pointer-events: auto;
+            touch-action: none;
+        }
+
+        .dpad-stick {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+            border-radius: 50%;
+            position: absolute;
+            top: 45px;
+            left: 45px;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.5);
+            pointer-events: none;
+            transition: transform 0.05s ease-out;
+        }
+
+        .mobile-btn-group {
+            display: flex;
+            gap: 1rem;
+            pointer-events: auto;
+        }
+
+        .mobile-btn {
+            width: 68px;
+            height: 68px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            color: #fff;
+            font-weight: 800;
+            font-size: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+            touch-action: none;
+        }
+
+        .mobile-btn:active {
+            transform: scale(0.92);
+        }
+
+        /* Modal Dialogs (Victory / Game Over / Pause) */
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(11, 15, 25, 0.75);
+            backdrop-filter: blur(12px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s;
+            padding: 1rem;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-card {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%);
+            border: 1px solid var(--border-glass);
+            border-radius: 28px;
+            padding: 2.5rem 3rem;
+            text-align: center;
+            max-width: 440px;
+            width: 100%;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+            transform: translateY(20px) scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-icon {
+            font-size: 3.5rem;
+            margin-bottom: 0.75rem;
+            animation: bounceIcon 2s infinite ease-in-out;
+        }
+
+        @keyframes bounceIcon {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .modal-title {
+            font-size: 2.25rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-title.victory {
+            background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .modal-title.gameover {
+            background: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .modal-stats {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: #fff;
+            border: none;
+            border-radius: 14px;
+            padding: 0.9rem 1.8rem;
+            font-weight: 700;
+            font-size: 1rem;
+            font-family: inherit;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(59, 130, 246, 0.6);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: none;
+            border: 1px solid var(--border-glass);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Canvas -->
+    <canvas id="renderCanvas"></canvas>
+
+    <!-- Loading Screen -->
+    <div id="loader-overlay">
+        <div class="loader-card">
+            <h1>Kenney 3D Platformer</h1>
+            <p>กำลังโหลดโมเดล 3D และองค์ประกอบของด่าน...</p>
+            <div class="progress-bar-container">
+                <div id="progress-fill" class="progress-bar-fill"></div>
+            </div>
+            <div id="loading-text">กำลังเริ่มต้น Babylon.js Engine...</div>
+        </div>
+    </div>
+
+    <!-- HUD Overlay -->
+    <div id="hud">
+        <div class="hud-top">
+            <div class="hud-stats-group">
+                <div class="hud-badge coins">
+                    <span class="hud-badge-icon">🪙</span>
+                    <span id="coins-val">0</span>
+                </div>
+                <div class="hud-badge score">
+                    <span class="hud-badge-icon">⭐</span>
+                    <span id="score-val">0</span>
+                </div>
+                <div class="hud-badge lives">
+                    <span class="hud-badge-icon">❤️</span>
+                    <span id="lives-val">3</span>
+                </div>
+            </div>
+
+            <div class="level-title-badge" id="level-title">
+                Level 1: Grassland Gateway
+            </div>
+
+            <div class="hud-badge timer">
+                <span class="hud-badge-icon">⏱️</span>
+                <span id="timer-val">00:00</span>
+            </div>
+        </div>
+
+        <!-- Desktop Keyboard Controls Hint -->
+        <div class="controls-hint">
+            <span><span class="key-cap">W</span><span class="key-cap">A</span><span class="key-cap">S</span><span class="key-cap">D</span> เคลื่อนที่</span>
+            <span><span class="key-cap">Space</span> กระโดด</span>
+            <span><span class="key-cap">Mouse Drag</span> หมุนมุมกล้อง</span>
+        </div>
+
+        <!-- Mobile Touch Controls -->
+        <div id="mobile-controls">
+            <div class="dpad-container" id="dpad-area">
+                <div class="dpad-stick" id="dpad-stick"></div>
+            </div>
+            <div class="mobile-btn-group">
+                <div class="mobile-btn" id="mobile-jump-btn">JUMP</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Victory Modal -->
+    <div class="modal-overlay" id="victory-modal">
+        <div class="modal-card">
+            <div class="modal-icon">🏆</div>
+            <div class="modal-title victory">ด่านสำเร็จแล้ว!</div>
+            <p style="color: #94a3b8; font-size: 0.95rem;">คุณเดินทางถึงธงชัยชนะอย่างสวยงาม</p>
+            
+            <div class="modal-stats">
+                <div class="stat-item">
+                    <div class="stat-label">เหรียญที่เก็บได้</div>
+                    <div class="stat-value" id="victory-coins">0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">คะแนนรวม</div>
+                    <div class="stat-value" id="victory-score">0</div>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn btn-secondary" onclick="restartLevel()">เล่นอีกครั้ง</button>
+                <button class="btn" id="next-level-btn" onclick="nextLevel()">ด่านถัดไป ➔</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div class="modal-overlay" id="gameover-modal">
+        <div class="modal-card">
+            <div class="modal-icon">💀</div>
+            <div class="modal-title gameover">GAME OVER</div>
+            <p style="color: #94a3b8; font-size: 0.95rem;">คุณตกจากแพลตฟอร์มหรือหมดชีวิต</p>
+
+            <div class="modal-stats">
+                <div class="stat-item">
+                    <div class="stat-label">เหรียญสะสม</div>
+                    <div class="stat-value" id="gameover-coins">0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">คะแนน</div>
+                    <div class="stat-value" id="gameover-score">0</div>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn" onclick="restartLevel()">ลองอีกครั้ง 🔄</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load Game Script -->
+    <script src="game.js"></script>
+</body>
+</html>
