@@ -81,6 +81,21 @@ export default function GameModal({ game, onClose }) {
             allow="fullscreen; autoplay; gamepad"
           />
         </div>
+
+        {/* Modal Footer - Build Info */}
+        <div style={{
+          padding: '0.5rem 1.5rem',
+          background: 'rgba(15, 23, 42, 0.6)',
+          borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          fontSize: '0.7rem',
+          color: '#64748b'
+        }}>
+          <span>Build: v0.3.0 #030</span>
+          <span>{new Date().toLocaleDateString('th-TH', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+        </div>
       </div>
     </div>
   );
