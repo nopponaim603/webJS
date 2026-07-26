@@ -198,6 +198,7 @@ function setupPlayerFromContainer() {
     characterContainer = entries.rootNodes[0];
     characterContainer.parent = playerRoot;
     characterContainer.position = new BABYLON.Vector3(0, -0.5, 0);
+    characterContainer.rotation.y = 0;
     characterContainer.scaling = new BABYLON.Vector3(1.2, 1.2, 1.2);
 
     // Cast shadows for all player meshes
@@ -257,7 +258,7 @@ function setupInputs() {
     });
 }
 
-// Mobile Virtual Touch Joystick
+// Mobile & Desktop Virtual Touch Joystick
 function setupMobileJoystick() {
     const dpadArea = document.getElementById('dpad-area');
     const dpadStick = document.getElementById('dpad-stick');
@@ -265,40 +266,35 @@ function setupMobileJoystick() {
 
     if (!dpadArea || !jumpBtn) return;
 
-    let touchId = null;
+    let activePointerId = null;
     const radius = 45;
 
-    dpadArea.addEventListener('touchstart', (e) => {
-        const touch = e.changedTouches[0];
-        touchId = touch.identifier;
-        updateJoystick(touch);
-    });
+    function handleStart(clientX, clientY, pointerId) {
+        activePointerId = pointerId;
+        updateJoystickPosition(clientX, clientY);
+    }
 
-    dpadArea.addEventListener('touchmove', (e) => {
-        for (let i = 0; i < e.changedTouches.length; i++) {
-            if (e.changedTouches[i].identifier === touchId) {
-                updateJoystick(e.changedTouches[i]);
-                break;
-            }
+    function handleMove(clientX, clientY, pointerId) {
+        if (activePointerId === pointerId) {
+            updateJoystickPosition(clientX, clientY);
         }
-    });
+    }
 
-    const resetJoystick = () => {
-        touchId = null;
-        joystickInput = { x: 0, y: 0 };
-        dpadStick.style.transform = `translate(0px, 0px)`;
-    };
+    function handleEnd(pointerId) {
+        if (activePointerId === pointerId) {
+            activePointerId = null;
+            joystickInput = { x: 0, y: 0 };
+            dpadStick.style.transform = `translate(0px, 0px)`;
+        }
+    }
 
-    dpadArea.addEventListener('touchend', resetJoystick);
-    dpadArea.addEventListener('touchcancel', resetJoystick);
-
-    function updateJoystick(touch) {
+    function updateJoystickPosition(clientX, clientY) {
         const rect = dpadArea.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
 
-        let dx = touch.clientX - centerX;
-        let dy = touch.clientY - centerY;
+        let dx = clientX - centerX;
+        let dy = clientY - centerY;
         let dist = Math.sqrt(dx * dx + dy * dy);
 
         if (dist > radius) {
@@ -311,7 +307,29 @@ function setupMobileJoystick() {
         joystickInput.y = dy / radius;
     }
 
-    jumpBtn.addEventListener('touchstart', (e) => {
+    // Pointer Events for Touch + Mouse support!
+    dpadArea.addEventListener('pointerdown', (e) => {
+        dpadArea.setPointerCapture(e.pointerId);
+        handleStart(e.clientX, e.clientY, e.pointerId);
+    });
+
+    dpadArea.addEventListener('pointermove', (e) => {
+        if (activePointerId === e.pointerId) {
+            handleMove(e.clientX, e.clientY, e.pointerId);
+        }
+    });
+
+    dpadArea.addEventListener('pointerup', (e) => {
+        if (activePointerId === e.pointerId) {
+            dpadArea.releasePointerCapture(e.pointerId);
+            handleEnd(e.pointerId);
+        }
+    });
+
+    dpadArea.addEventListener('pointercancel', (e) => handleEnd(e.pointerId));
+
+    // Jump button (Pointer + Touch + Mouse support)
+    jumpBtn.addEventListener('pointerdown', (e) => {
         e.preventDefault();
         triggerJump();
     });
@@ -709,8 +727,8 @@ function updatePlayerMovement(dt) {
         playerRoot.position.x += moveVector.x * speed * dt;
         playerRoot.position.z += moveVector.z * speed * dt;
 
-        // Smooth Character Face Rotation
-        const targetAngle = Math.atan2(moveVector.x, moveVector.z);
+        // Smooth Character Face Rotation (Facing Movement Direction)
+        const targetAngle = Math.atan2(moveVector.x, moveVector.z) + Math.PI;
         let currentAngle = playerRoot.rotation.y;
         let diff = targetAngle - currentAngle;
         while (diff < -Math.PI) diff += Math.PI * 2;
