@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Header from '@/components/Header';
 import GameCard from '@/components/GameCard';
 import GameModal from '@/components/GameModal';
+import PWAInstallButton from '@/components/PWAInstallButton';
 import buildInfo from '../../public/build.json';
 
 const initialGames = [
@@ -103,9 +104,15 @@ export default function Home() {
           <h1 style={{ fontSize: '2.25rem', fontWeight: '800', marginBottom: '0.75rem' }}>
             🎮 HTML5 & Multi-Engine <span className="gradient-text">GameDevJS Hub</span>
           </h1>
-          <p style={{ color: '#cbd5e1', fontSize: '1.05rem', maxWidth: '700px', lineHeight: '1.6' }}>
+          <p style={{ color: '#cbd5e1', fontSize: '1.05rem', maxWidth: '700px', lineHeight: '1.6', marginBottom: '1.25rem' }}>
             ศูนย์รวมเกม HTML5, Phaser 2D และ Babylon.js 3D บนสถาปัตยกรรม Next.js App Router พร้อมรองรับ PWA ออฟไลน์ และการแสดงผลระดับพรีเมียม
           </p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+            <PWAInstallButton variant="hero" />
+            <span style={{ fontSize: '0.85rem', color: '#94a3b8' }}>
+              ⚡ เล่นได้ทันที รองรับบราวเซอร์ทุกอุปกรณ์ และเล่นแบบออฟไลน์ได้
+            </span>
+          </div>
         </section>
 
         {/* Category Filters */}
