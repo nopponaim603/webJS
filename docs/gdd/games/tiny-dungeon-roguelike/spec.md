@@ -72,8 +72,8 @@
 | ![XP Gem](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0115.png) | Frame 115 | `tile_0115.png` | `xp_gem` | เม็ดผลึก XP ดร็อปเมื่อกำจัดมอนสเตอร์/ศัตรู เมื่อเก็บจะเพิ่มเกจเลเวลอัป |
 | ![Sword Blade](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0106.png) | Frame 106 | `tile_0106.png` | `sword_blade` | คมดาบหมุนเวียน (Orbiting Blade) หมุนวนรอบตัวทำความเสียหาย |
 | ![Fireball](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0117.png) | Frame 117 | `tile_0117.png` | `fireball` | กระสุนลูกไฟเวทมนตร์ พุ่งใส่ศัตรูที่อยู่ใกล้ที่สุด |
-| ![Poison Dart](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0104.png) | Frame 104 | `tile_0104.png` | `poison_dart` | มีดสั้นพิษ ยิงกระจายรอบตัวผู้เล่น |
-| ![Critical Knife](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0104.png) | Frame 104 | `tile_0104.png` | `critical_knife` | มีดขว้างใส่ศัตรูที่ใกล้ที่สุด มีโอกาส critical โดนแรงขึ้น 2 เท่า (ใช้สไปรต์ร่วมกับ Poison Dart) |
+| ![Poison Dart](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0104.png) | Frame 104 (ย้อมสีเขียว) | `tile_0104.png` | `poison_dart` | มีดสั้นพิษ ยิงใส่ศัตรูที่ใกล้ที่สุดเป้าเดียว ยิงถี่ขึ้นตามเลเวล ย้อมสีเขียวให้ดูเป็นพิษ |
+| ![Critical Knife](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0104.png) | Frame 104 | `tile_0104.png` | `critical_knife` | มีดขว้างใส่ศัตรูที่ใกล้ที่สุด มีโอกาส critical โดนแรงขึ้น 2 เท่า (ใช้สไปรต์ร่วมกับ Poison Dart แต่ไม่ย้อมสี) |
 | ![Crit Sparkle](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0062.png) | Frame 62 | `tile_0062.png` | `crit_spark` | เอฟเฟกต์ประกายวิบวับ แสดงทับศัตรูที่โดน critical hit |
 | Render Graphics | - | - | `lightning` | เอฟเฟกต์สายฟ้าฟาดผ่าลงมาจากท้องฟ้า |
 

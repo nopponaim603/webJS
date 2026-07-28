@@ -205,7 +205,7 @@ const UPGRADE_POOL = [
     {
         id: 'darts_add',
         title: '🗡️ Poison Darts',
-        desc: 'เพิ่มมีดพิษยิงกระจายรอบทิศทาง',
+        desc: 'เพิ่มมีดพิษยิงใส่ศัตรูที่ใกล้ที่สุดเป้าเดียว ยิงถี่ขึ้นตามเลเวล',
         icon: '🗡️',
         classId: 'rogue',
         apply: (player) => {
@@ -534,7 +534,8 @@ class MainGameScene extends Phaser.Scene {
         this.time.addEvent({ delay: 1400, callback: this.fireFireballWeapon, callbackScope: this, loop: true }); // slow, hard-hitting
         this.time.addEvent({ delay: 400, callback: this.fireDartsWeapon, callbackScope: this, loop: true });     // fast, short range
         this.time.addEvent({ delay: 1600, callback: this.fireLightningWeapon, callbackScope: this, loop: true }); // narrow AoE, slower than normal fire rate
-        this.time.addEvent({ delay: 700, callback: this.fireKnifeWeapon, callbackScope: this, loop: true });
+        // Stored so fireKnifeWeapon() can shrink its own delay as the skill levels up
+        this.knifeTimerEvent = this.time.addEvent({ delay: 700, callback: this.fireKnifeWeapon, callbackScope: this, loop: true });
     }
 
     createDungeonArena(mapW, mapH) {
@@ -702,12 +703,18 @@ class MainGameScene extends Phaser.Scene {
         this.performMeleeAttack();
     }
 
-    // Fireball (Wizard) — hits hard, fires slow: a single heavy nuke on a long cooldown
+    // Fireball (Wizard) — hits hard, fires slow: a single heavy nuke on a long cooldown.
+    // Higher levels grow both the projectile's visual size and its blast radius, so a
+    // leveled-up fireball explodes across several clustered enemies instead of just one.
     fireFireballWeapon() {
         if (this.isGameOver || this.player.skills.fireball <= 0) return;
 
         const nearestEnemy = this.getNearestEnemy();
         if (!nearestEnemy) return;
+
+        const fireballLevel = this.player.skills.fireball;
+        const explosionRadius = 30 + (fireballLevel - 1) * 12;
+        const visualScale = 1 + (fireballLevel - 1) * 0.25;
 
         sounds.playShoot();
         for (let i = 0; i < this.player.skills.fireball; i++) {
@@ -717,6 +724,7 @@ class MainGameScene extends Phaser.Scene {
                 // Create a physics body using a tiny invisible sprite as anchor
                 const proj = this.projectiles.create(this.player.x, this.player.y, 'dungeon_tiles', 0).setAlpha(0).setScale(0.1);
                 proj.damage = 65 * this.player.damageMult;
+                proj.explosionRadius = explosionRadius;
                 this.physics.moveToObject(proj, nearestEnemy, 240);
 
                 // Draw red-orange fireball gfx on top of proj position
@@ -725,13 +733,13 @@ class MainGameScene extends Phaser.Scene {
                     gfx.clear();
                     // Outer glow (orange)
                     gfx.fillStyle(0xff6600, 0.35);
-                    gfx.fillCircle(proj.x, proj.y, 9);
+                    gfx.fillCircle(proj.x, proj.y, 9 * visualScale);
                     // Inner core (bright red-orange)
                     gfx.fillStyle(0xff3300, 0.85);
-                    gfx.fillCircle(proj.x, proj.y, 6);
+                    gfx.fillCircle(proj.x, proj.y, 6 * visualScale);
                     // Bright white center
                     gfx.fillStyle(0xffcc44, 1);
-                    gfx.fillCircle(proj.x, proj.y, 3);
+                    gfx.fillCircle(proj.x, proj.y, 3 * visualScale);
                 };
 
                 // Update gfx each frame to follow proj
@@ -755,19 +763,34 @@ class MainGameScene extends Phaser.Scene {
     fireDartsWeapon() {
         if (this.isGameOver || this.player.skills.darts <= 0) return;
 
-        const dartCount = 4 + (this.player.skills.darts - 1) * 2;
+        const nearestEnemy = this.getNearestEnemy();
+        if (!nearestEnemy) return;
+
         sounds.playShoot();
+
+        // Single-target volley: every dart in the burst is aimed at the same nearest enemy,
+        // staggered like Fireball's volley, instead of the old full-circle spread.
+        const dartCount = this.player.skills.darts;
         for (let i = 0; i < dartCount; i++) {
-            const angle = (i * (2 * Math.PI / dartCount));
-            const proj = this.projectiles.create(this.player.x, this.player.y, 'dungeon_tiles', 104).setScale(1.5);
-            proj.damage = 10 * this.player.damageMult;
-            proj.setRotation(angle);
-            this.physics.velocityFromRotation(angle, 220, proj.body.velocity);
-            this.time.delayedCall(550, () => proj.destroy());
+            this.time.delayedCall(i * 80, () => {
+                if (!this.player.active || !nearestEnemy.active) return;
+
+                const proj = this.projectiles.create(this.player.x, this.player.y, 'dungeon_tiles', 104)
+                    .setScale(1.5)
+                    .setTint(0x22c55e); // poison green
+                proj.damage = 10 * this.player.damageMult;
+                const angle = Phaser.Math.Angle.Between(this.player.x, this.player.y, nearestEnemy.x, nearestEnemy.y);
+                proj.setRotation(angle);
+                this.physics.moveToObject(proj, nearestEnemy, 220);
+                this.time.delayedCall(550, () => proj.destroy());
+            });
         }
     }
 
-    // Chain Lightning (Wizard's second weapon) — narrow strike radius, slower fire rate than the norm
+    // Chain Lightning (Wizard's second weapon) — narrow strike radius, slower fire rate than the norm.
+    // Each individual bolt also splashes nearby enemies using the same distance-based
+    // calculation as Fireball's blast (dealSplashDamage) — only enemies clustered close
+    // to that specific strike take splash damage from it.
     fireLightningWeapon() {
         if (this.isGameOver || this.player.skills.lightning <= 0) return;
 
@@ -777,6 +800,9 @@ class MainGameScene extends Phaser.Scene {
             e.active && Phaser.Math.Distance.Between(this.player.x, this.player.y, e.x, e.y) <= strikeRadius
         );
         if (nearbyEnemies.length === 0) return;
+
+        // Same blast-radius formula as Fireball — grows with level, still short-range
+        const splashRadius = 30 + (this.player.skills.lightning - 1) * 12;
 
         Phaser.Utils.Array.Shuffle(nearbyEnemies);
         const targetCount = Math.min(this.player.skills.lightning, nearbyEnemies.length);
@@ -789,7 +815,7 @@ class MainGameScene extends Phaser.Scene {
             bolt.lineTo(enemy.x, enemy.y);
             bolt.strokePath();
 
-            this.damageEnemy(enemy, 40 * this.player.damageMult);
+            this.dealSplashDamage(enemy.x, enemy.y, splashRadius, 40 * this.player.damageMult);
 
             this.tweens.add({
                 targets: bolt,
@@ -800,10 +826,15 @@ class MainGameScene extends Phaser.Scene {
         }
     }
 
-    // Critical Knife (universal pickup) — a single precise throw at the nearest enemy;
-    // growth axis is crit CHANCE, not damage or count, so higher levels gamble bigger hits more often.
+    // Critical Knife (Rogue's starting weapon) — a single precise throw at the nearest enemy;
+    // growth axis is crit CHANCE plus attack SPEED (shorter delay each level), not damage or count.
     fireKnifeWeapon() {
         if (this.isGameOver || this.player.skills.knife <= 0) return;
+
+        // Delay shrinks as the skill levels up, floored at 250ms so it never becomes instant
+        if (this.knifeTimerEvent) {
+            this.knifeTimerEvent.delay = Math.max(250, 700 - (this.player.skills.knife - 1) * 80);
+        }
 
         const nearestEnemy = this.getNearestEnemy();
         if (!nearestEnemy) return;
@@ -958,8 +989,26 @@ class MainGameScene extends Phaser.Scene {
 
     handleProjectileEnemyHit(proj, enemy) {
         if (!proj.active || !enemy.active) return;
-        this.damageEnemy(enemy, proj.damage || 20, !!proj.isCrit);
+
+        if (proj.explosionRadius) {
+            this.dealSplashDamage(proj.x, proj.y, proj.explosionRadius, proj.damage || 20, !!proj.isCrit);
+        } else {
+            this.damageEnemy(enemy, proj.damage || 20, !!proj.isCrit);
+        }
+
         proj.destroy();
+    }
+
+    // Shared AoE helper: damages every active enemy within `radius` of (x, y), including
+    // whichever enemy triggered the splash (it's always within radius of itself). Used by
+    // any attack that explodes/splashes on impact — Fireball's blast, Chain Lightning's strike.
+    dealSplashDamage(x, y, radius, damage, isCrit = false) {
+        this.enemies.getChildren().forEach(target => {
+            if (!target.active) return;
+            if (Phaser.Math.Distance.Between(x, y, target.x, target.y) <= radius) {
+                this.damageEnemy(target, damage, isCrit);
+            }
+        });
     }
 
     damageEnemy(enemy, amount, isCrit = false) {
