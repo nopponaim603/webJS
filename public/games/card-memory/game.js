@@ -1,362 +1,836 @@
 // ============================================================
-// Card Memory Match — Game Logic
-// Covers: US-08-02 to US-08-07
+// Card Memory Match — High Performance Canvas 2D Engine
+// Engine: HTML5 Canvas 2D API | Assets: Kenney Cards (large)
 // ============================================================
 
-(function() {
+(function () {
   'use strict';
 
-  // ========================
-  // Constants & State
-  // ========================
+  // --- Constants ---
+  const ASSETS_PATH = '/assets/kenney_playing-cards-pack/PNG/Cards (large)/';
   const SUITS = ['clubs', 'diamonds', 'hearts', 'spades'];
   const VALUES = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
-  const ASSETS_PATH = '/assets/kenney_playing-cards-pack/PNG/Cards (small)/';
   const TOTAL_PAIRS = 8;
-  const TOTAL_CARDS = TOTAL_PAIRS * 2; // 16
+  const GRID_COLS = 4;
+  const GRID_ROWS = 4;
 
-  let cards = [];          // array of card objects {suit, value, face, element, matched}
-  let flippedCards = [];   // currently face-up (max 2)
-  let locked = false;      // prevent clicks during flip animation
-  let moves = 0;
-  let matchedCount = 0;
-  let timerInterval = null;
-  let secondsElapsed = 0;
-  let gameStarted = false;
+  // --- Canvas Setup ---
+  const canvas = document.getElementById('game-canvas');
+  const ctx = canvas.getContext('2d');
 
-  // ========================
-  // Card Data
-  // ========================
-  function getCardImage(suit, value) {
-    return `${ASSETS_PATH}card_${suit}_${value}.png`;
-  }
+  let width = 800;
+  let height = 600;
+  let dpr = 1;
 
-  function getCardLabel(suit, value) {
-    const suitEmojis = { clubs: '♣', diamonds: '♦', hearts: '♥', spades: '♠' };
-    return `${suitEmojis[suit]} ${value}`;
-  }
+  // --- Audio Context (Synthesized Web Audio API) ---
+  let audioCtx = null;
+  let soundEnabled = true;
 
-  function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  }
-
-  // ========================
-  // Preload Assets (US-08-07)
-  // ========================
-  const preloadPromises = [];
-  const preloadImages = {};
-
-  function preloadImagesAsync() {
-    const neededFaces = [];
-    for (const suit of SUITS) {
-      for (let i = 0; i < 13; i++) {
-        neededFaces.push(`${ASSETS_PATH}card_${suit}_${VALUES[i]}.png`);
+  function initAudio() {
+    if (!audioCtx) {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (AudioContextClass) {
+        audioCtx = new AudioContextClass();
       }
     }
-    // Also preloaded: card_back.png (used as background, not img)
-    const count = Math.min(neededFaces.length, TOTAL_PAIRS * 2);
-    return neededFaces.slice(0, count).map((src) => {
-      return new Promise((resolve) => {
-        const img = new Image();
-        img.onload = () => resolve();
-        img.onerror = () => resolve(); // fail gracefully
-        img.src = src;
+    if (audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+  }
+
+  function playTone(freq, type, duration, startVol = 0.15, endVol = 0.001) {
+    if (!soundEnabled || !audioCtx) return;
+    try {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+      gain.gain.setValueAtTime(startVol, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(endVol, audioCtx.currentTime + duration);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + duration);
+    } catch {}
+  }
+
+  function playFlipSound() {
+    playTone(400, 'sine', 0.08, 0.12);
+  }
+
+  function playMatchSound() {
+    if (!soundEnabled || !audioCtx) return;
+    try {
+      const now = audioCtx.currentTime;
+      [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, now + i * 0.06);
+        gain.gain.setValueAtTime(0.18, now + i * 0.06);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.06 + 0.25);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now + i * 0.06);
+        osc.stop(now + i * 0.06 + 0.25);
       });
+    } catch {}
+  }
+
+  function playMismatchSound() {
+    if (!soundEnabled || !audioCtx) return;
+    try {
+      const now = audioCtx.currentTime;
+      [220, 180].forEach((freq, i) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(freq, now + i * 0.1);
+        gain.gain.setValueAtTime(0.12, now + i * 0.1);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.1 + 0.2);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now + i * 0.1);
+        osc.stop(now + i * 0.1 + 0.2);
+      });
+    } catch {}
+  }
+
+  function playVictorySound() {
+    if (!soundEnabled || !audioCtx) return;
+    try {
+      const notes = [523.25, 659.25, 783.99, 1046.5, 880, 1046.5];
+      const durations = [0.15, 0.15, 0.15, 0.25, 0.15, 0.4];
+      let t = audioCtx.currentTime;
+      notes.forEach((freq, i) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, t);
+        gain.gain.setValueAtTime(0.2, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + durations[i]);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(t);
+        osc.stop(t + durations[i]);
+        t += durations[i];
+      });
+    } catch {}
+  }
+
+  // --- Texture Loader ---
+  const images = {};
+  let imagesLoaded = 0;
+  let totalImagesNeeded = 1; // card_back + 8 pairs
+
+  function getCardFilename(suit, value) {
+    let formattedValue = value;
+    if (!isNaN(value) && parseInt(value, 10) < 10) {
+      formattedValue = '0' + value;
+    }
+    return `card_${suit}_${formattedValue}.png`;
+  }
+
+  function loadImage(key, src) {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => {
+        images[key] = img;
+        imagesLoaded++;
+        resolve(img);
+      };
+      img.onerror = () => {
+        images[key] = null;
+        resolve(null);
+      };
+      img.src = src;
     });
   }
 
-  // ========================
-  // Create Card Element
-  // ========================
-  function createCardElement(suit, value, index) {
-    const card = document.createElement('div');
-    card.classList.add('card');
-    card.dataset.index = index;
-    card.dataset.suit = suit;
-    card.dataset.value = value;
+  // Preload card back
+  loadImage('card_back', ASSETS_PATH + 'card_back.png');
 
-    const front = document.createElement('div');
-    front.classList.add('card-face', 'card-front');
+  // --- Game State ---
+  let cards = [];
+  let flippedCards = [];
+  let locked = false;
+  let moves = 0;
+  let matchedPairs = 0;
+  let secondsElapsed = 0;
+  let timerInterval = null;
+  let gameStarted = false;
+  let gameOver = false;
+  let particles = [];
 
-    const img = document.createElement('img');
-    img.src = getCardImage(suit, value);
-    img.alt = getCardLabel(suit, value);
-    img.style.opacity = '0';
-    img.onload = () => {
-      img.style.opacity = '1';
-      img.style.transition = 'opacity 0.2s ease';
-    };
-    // Fallback: show text if image fails
-    img.onerror = () => {
-      img.style.opacity = '0';
-      front.innerHTML = `<div style="text-align:center;font-size:18px;font-weight:bold;color:#333">${getCardLabel(suit, value)}</div>`;
-    };
+  // Interactive Buttons on Canvas
+  let buttons = [];
+  let mousePos = { x: -1, y: -1 };
 
-    front.appendChild(img);
+  // --- Card Object ---
+  class Card {
+    constructor(id, suit, value, imageKey) {
+      this.id = id;
+      this.suit = suit;
+      this.value = value;
+      this.imageKey = imageKey;
 
-    const back = document.createElement('div');
-    back.classList.add('card-face', 'card-back');
+      this.x = 0;
+      this.y = 0;
+      this.width = 100;
+      this.height = 140;
 
-    card.appendChild(front);
-    card.appendChild(back);
+      this.isFlipped = false;
+      this.isMatched = false;
 
-    // Click handler (US-08-02: prevent double-click, max 2 open)
-    card.addEventListener('click', () => handleCardClick(card));
-    card.addEventListener('touchstart', (e) => {
-      e.preventDefault(); // prevent delay on mobile
-      handleCardClick(card);
-    }, { passive: false });
-
-    return card;
-  }
-
-  // ========================
-  // Build Grid (US-08-01)
-  // ========================
-  function buildGrid() {
-    const grid = document.getElementById('grid');
-    grid.innerHTML = '';
-    cards = [];
-
-    // Create card pairs
-    const selectedCards = [];
-    for (let i = 0; i < TOTAL_PAIRS; i++) {
-      const suit = SUITS[Math.floor(Math.random() * SUITS.length)];
-      const value = VALUES[Math.floor(Math.random() * VALUES.length)];
-      selectedCards.push({ suit, value });
-      selectedCards.push({ suit, value });
+      // Animation properties
+      this.flipProgress = 0; // 0 = face down (back), 1 = face up (front)
+      this.targetFlip = 0;
+      this.scale = 1;
+      this.shakeX = 0;
+      this.bounceY = 0;
+      this.isHovered = false;
     }
 
-    shuffle(selectedCards);
+    update(dt) {
+      // Flip animation interpolation
+      if (Math.abs(this.flipProgress - this.targetFlip) > 0.01) {
+        this.flipProgress += (this.targetFlip - this.flipProgress) * 14 * dt;
+      } else {
+        this.flipProgress = this.targetFlip;
+      }
 
-    selectedCards.forEach((data, index) => {
-      const cardEl = createCardElement(data.suit, data.value, index);
-      cards.push({
-        element: cardEl,
-        suit: data.suit,
-        value: data.value,
-        matched: false,
+      // Shake animation for mismatch
+      if (this.shakeX !== 0) {
+        this.shakeX *= 0.85;
+        if (Math.abs(this.shakeX) < 0.1) this.shakeX = 0;
+      }
+
+      // Hover animation
+      const targetScale = this.isMatched ? 0.96 : this.isHovered ? 1.05 : 1.0;
+      this.scale += (targetScale - this.scale) * 10 * dt;
+    }
+
+    draw(ctx) {
+      ctx.save();
+      const centerX = this.x + this.width / 2 + this.shakeX;
+      const centerY = this.y + this.height / 2 + this.bounceY;
+
+      ctx.translate(centerX, centerY);
+      ctx.scale(this.scale, this.scale);
+
+      // Cosine flip scale effect
+      const flipScaleX = Math.cos(this.flipProgress * Math.PI);
+      ctx.scale(Math.abs(flipScaleX), 1);
+
+      const drawW = this.width;
+      const drawH = this.height;
+      const rx = -drawW / 2;
+      const ry = -drawH / 2;
+      const radius = 10;
+
+      // Card Drop Shadow
+      if (!this.isMatched) {
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
+        ctx.shadowBlur = this.isHovered ? 18 : 10;
+        ctx.shadowOffsetY = this.isHovered ? 8 : 4;
+      }
+
+      // Determine Front vs Back image
+      const showFront = flipScaleX <= 0; // When flip passes 90 deg (scaleX crosses 0)
+      const img = showFront ? images[this.imageKey] : images['card_back'];
+
+      if (img && img.complete && img.naturalWidth !== 0) {
+        // Draw rounded image
+        ctx.beginPath();
+        ctx.roundRect(rx, ry, drawW, drawH, radius);
+        ctx.clip();
+        ctx.drawImage(img, rx, ry, drawW, drawH);
+      } else {
+        // Fallback procedural card
+        ctx.fillStyle = showFront ? '#ffffff' : '#2563eb';
+        ctx.beginPath();
+        ctx.roundRect(rx, ry, drawW, drawH, radius);
+        ctx.fill();
+
+        ctx.strokeStyle = '#38bdf8';
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        if (showFront) {
+          ctx.fillStyle = (this.suit === 'hearts' || this.suit === 'diamonds') ? '#ef4444' : '#0f172a';
+          ctx.font = 'bold 22px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          const suitIcon = { clubs: '♣', diamonds: '♦', hearts: '♥', spades: '♠' }[this.suit] || '';
+          ctx.fillText(`${this.value}${suitIcon}`, 0, 0);
+        }
+      }
+
+      ctx.restore();
+
+      // Highlight / Matched Glow Overlay
+      ctx.save();
+      ctx.translate(centerX, centerY);
+      ctx.scale(this.scale, this.scale);
+      if (this.isMatched) {
+        ctx.beginPath();
+        ctx.roundRect(rx, ry, drawW, drawH, radius);
+        ctx.strokeStyle = 'rgba(52, 211, 153, 0.8)';
+        ctx.lineWidth = 3;
+        ctx.stroke();
+      } else if (this.isHovered && !this.isFlipped) {
+        ctx.beginPath();
+        ctx.roundRect(rx, ry, drawW, drawH, radius);
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.9)';
+        ctx.lineWidth = 3;
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+
+    containsPoint(px, py) {
+      return (
+        px >= this.x &&
+        px <= this.x + this.width &&
+        py >= this.y &&
+        py <= this.y + this.height
+      );
+    }
+  }
+
+  // --- Particles ---
+  function spawnSparkles(x, y, count = 16) {
+    for (let i = 0; i < count; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = 60 + Math.random() * 120;
+      particles.push({
+        x: x,
+        y: y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed - 40,
+        size: 3 + Math.random() * 5,
+        color: ['#fbbf24', '#34d399', '#38bdf8', '#f472b6'][Math.floor(Math.random() * 4)],
+        alpha: 1,
+        life: 0.6 + Math.random() * 0.4,
       });
-      grid.appendChild(cardEl);
+    }
+  }
+
+  function updateParticles(dt) {
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.life -= dt;
+      if (p.life <= 0) {
+        particles.splice(i, 1);
+        continue;
+      }
+      p.x += p.vx * dt;
+      p.y += p.vy * dt;
+      p.vy += 120 * dt; // gravity
+      p.alpha = p.life;
+    }
+  }
+
+  function drawParticles(ctx) {
+    particles.forEach((p) => {
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, p.alpha);
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
     });
   }
 
-  // ========================
-  // Handle Card Click (US-08-02)
-  // ========================
-  function handleCardClick(cardElement) {
-    if (locked) return;
-    if (cardElement.classList.contains('flipped') || cardElement.classList.contains('matched')) return;
-    if (flippedCards.length >= 2) return; // prevent third card
+  // --- Game Mechanics ---
+  function initGame() {
+    // Stop previous timer
+    if (timerInterval) clearInterval(timerInterval);
+    timerInterval = null;
 
-    // Start game on first click
+    secondsElapsed = 0;
+    moves = 0;
+    matchedPairs = 0;
+    gameStarted = false;
+    gameOver = false;
+    locked = false;
+    flippedCards = [];
+    particles = [];
+
+    // Select 8 random pairs
+    const selectedPairs = [];
+    const pool = [];
+    for (const suit of SUITS) {
+      for (const value of VALUES) {
+        pool.push({ suit, value });
+      }
+    }
+    // Shuffle pool and take 8
+    for (let i = pool.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+
+    const chosen8 = pool.slice(0, TOTAL_PAIRS);
+    const cardList = [];
+    chosen8.forEach((data) => {
+      const filename = getCardFilename(data.suit, data.value);
+      const key = `${data.suit}_${data.value}`;
+      loadImage(key, ASSETS_PATH + filename);
+      cardList.push({ suit: data.suit, value: data.value, key });
+      cardList.push({ suit: data.suit, value: data.value, key });
+    });
+
+    // Shuffle 16 cards
+    for (let i = cardList.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [cardList[i], cardList[j]] = [cardList[j], cardList[i]];
+    }
+
+    cards = cardList.map((item, idx) => new Card(idx, item.suit, item.value, item.key));
+    layoutGrid();
+  }
+
+  function startTimer() {
+    if (timerInterval) clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+      if (!gameOver) {
+        secondsElapsed++;
+      }
+    }, 1000);
+  }
+
+  function handleCardClick(card) {
+    initAudio();
+    if (locked || gameOver) return;
+    if (card.isFlipped || card.isMatched) return;
+    if (flippedCards.length >= 2) return;
+
     if (!gameStarted) {
       gameStarted = true;
       startTimer();
     }
 
-    // Flip animation
-    cardElement.classList.add('flipped');
-    flippedCards.push(cardElement);
+    card.isFlipped = true;
+    card.targetFlip = 1;
+    flippedCards.push(card);
+    playFlipSound();
 
     if (flippedCards.length === 2) {
-      checkMatch();
-    }
-  }
+      locked = true;
+      moves++;
 
-  // ========================
-  // Check Match (US-08-02)
-  // ========================
-  function checkMatch() {
-    locked = true;
-    const [card1, card2] = flippedCards;
-    const data1 = cards.find(c => c.element === card1);
-    const data2 = cards.find(c => c.element === card2);
+      const [c1, c2] = flippedCards;
+      if (c1.suit === c2.suit && c1.value === c2.value) {
+        // MATCH!
+        setTimeout(() => {
+          c1.isMatched = true;
+          c2.isMatched = true;
+          matchedPairs++;
+          playMatchSound();
+          spawnSparkles(c1.x + c1.width / 2, c1.y + c1.height / 2, 20);
+          spawnSparkles(c2.x + c2.width / 2, c2.y + c2.height / 2, 20);
+          flippedCards = [];
+          locked = false;
 
-    const isMatch = data1.suit === data2.suit && data1.value === data2.value;
+          if (matchedPairs >= TOTAL_PAIRS) {
+            handleVictory();
+          }
+        }, 300);
+      } else {
+        // MISMATCH!
+        setTimeout(() => {
+          c1.shakeX = 12;
+          c2.shakeX = 12;
+          playMismatchSound();
+        }, 300);
 
-    moves++;
-    updateMovesCounter();
-
-    if (isMatch) {
-      // Matched — locked open
-      card1.classList.remove('flipped');
-      card1.classList.add('matched');
-      card2.classList.remove('flipped');
-      card2.classList.add('matched');
-      data1.matched = true;
-      data2.matched = true;
-
-      if (matchedCount + 1 >= TOTAL_PAIRS) {
-        setTimeout(() => showResults(), 500);
+        setTimeout(() => {
+          c1.isFlipped = false;
+          c1.targetFlip = 0;
+          c2.isFlipped = false;
+          c2.targetFlip = 0;
+          flippedCards = [];
+          locked = false;
+        }, 1100);
       }
-      matchedCount++;
-      flippedCards = [];
-      locked = false;
-    } else {
-      // Mismatch — flip back after 1.5s
-      setTimeout(() => {
-        card1.classList.remove('flipped');
-        card2.classList.remove('flipped');
-        flippedCards = [];
-        locked = false;
-      }, 1500);
     }
   }
 
-  // ========================
-  // Timer (US-08-03)
-  // ========================
-  function startTimer() {
-    timerInterval = setInterval(() => {
-      secondsElapsed++;
-      updateTimerDisplay();
-    }, 1000);
+  function handleVictory() {
+    gameOver = true;
+    if (timerInterval) clearInterval(timerInterval);
+
+    playVictorySound();
+    saveHighScore();
   }
 
-  function stopTimer() {
-    if (timerInterval) {
-      clearInterval(timerInterval);
-      timerInterval = null;
-    }
+  function calculateScore(m, t) {
+    const base = 1000;
+    const movePenalty = Math.max(0, (m - 8) * 30);
+    const timePenalty = Math.max(0, (t - 40) * 5);
+    return Math.max(100, base - movePenalty - timePenalty);
   }
 
-  function resetTimer() {
-    stopTimer();
-    secondsElapsed = 0;
-    updateTimerDisplay();
-  }
-
-  function updateTimerDisplay() {
-    const minutes = Math.floor(secondsElapsed / 60);
-    const secs = secondsElapsed % 60;
-    document.getElementById('timer-display').textContent =
-      `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-  }
-
-  function updateMovesCounter() {
-    document.getElementById('moves-count').textContent = moves;
-  }
-
-  // ========================
-  // Results Modal (US-08-04)
-  // ========================
-  function calculateScore(moves, time) {
-    // Base score 1000, penalize for moves and time
-    const baseScore = 1000;
-    const movePenalty = Math.max(0, (moves - 8) * 30); // lose 30 per extra move
-    const timePenalty = Math.max(0, (time - 60) * 5); // lose 5 per extra second
-    return Math.max(0, baseScore - movePenalty - timePenalty);
-  }
-
-  function calculateRating(moves, time) {
-    if (moves < 10 || time < 30) return 5;
-    if (moves <= 14 || time <= 60) return 4;
-    if (moves <= 18 || time <= 90) return 3;
-    if (moves <= 22 || time <= 120) return 2;
+  function calculateRating(m, t) {
+    if (m <= 10 && t <= 35) return 5;
+    if (m <= 14 && t <= 60) return 4;
+    if (m <= 18 && t <= 90) return 3;
+    if (m <= 22 && t <= 120) return 2;
     return 1;
   }
 
-  function getBestScore() {
+  function saveHighScore() {
     try {
-      const saved = localStorage.getItem('card-memory-best');
-      return saved ? JSON.parse(saved) : null;
+      const score = calculateScore(moves, secondsElapsed);
+      const prev = localStorage.getItem('card-memory-best');
+      if (!prev || score > JSON.parse(prev).score) {
+        localStorage.setItem(
+          'card-memory-best',
+          JSON.stringify({ score, moves, time: secondsElapsed })
+        );
+      }
+    } catch {}
+  }
+
+  function getHighScore() {
+    try {
+      const prev = localStorage.getItem('card-memory-best');
+      return prev ? JSON.parse(prev) : null;
     } catch {
       return null;
     }
   }
 
-  function saveBestScore(score) {
-    try {
-      localStorage.setItem('card-memory-best', JSON.stringify(score));
-    } catch {
-      // localStorage unavailable
+  // --- Responsive Layout Positioning ---
+  function layoutGrid() {
+    const topHudHeight = 70;
+    const availableWidth = width;
+    const availableHeight = height - topHudHeight - 20;
+
+    // Determine optimal card size to fit inside container perfectly
+    const padding = 12;
+    const maxCardW = Math.floor((availableWidth - (GRID_COLS + 1) * padding) / GRID_COLS);
+    const maxCardH = Math.floor((availableHeight - (GRID_ROWS + 1) * padding) / GRID_ROWS);
+
+    // Keep standard 1 : 1.4 aspect ratio for cards
+    let cardW = Math.min(maxCardW, Math.floor(maxCardH / 1.4));
+    let cardH = Math.floor(cardW * 1.4);
+
+    // Clamp card sizes
+    cardW = Math.max(48, Math.min(110, cardW));
+    cardH = Math.floor(cardW * 1.4);
+
+    const totalGridW = GRID_COLS * cardW + (GRID_COLS - 1) * padding;
+    const totalGridH = GRID_ROWS * cardH + (GRID_ROWS - 1) * padding;
+
+    const startX = Math.floor((width - totalGridW) / 2);
+    const startY = topHudHeight + Math.floor((availableHeight - totalGridH) / 2);
+
+    cards.forEach((card, idx) => {
+      const col = idx % GRID_COLS;
+      const row = Math.floor(idx / GRID_COLS);
+      card.x = startX + col * (cardW + padding);
+      card.y = startY + row * (cardH + padding);
+      card.width = cardW;
+      card.height = cardH;
+    });
+  }
+
+  function resizeCanvas() {
+    const rect = canvas.getBoundingClientRect();
+    width = rect.width || window.innerWidth;
+    height = rect.height || window.innerHeight;
+    dpr = window.devicePixelRatio || 1;
+
+    canvas.width = Math.floor(width * dpr);
+    canvas.height = Math.floor(height * dpr);
+
+    layoutGrid();
+  }
+
+  window.addEventListener('resize', resizeCanvas);
+
+  // --- Input Handlers ---
+  function handleInput(px, py, isClick = false) {
+    if (isClick) initAudio();
+
+    mousePos = { x: px, y: py };
+
+    // Check canvas buttons
+    buttons.forEach((btn) => {
+      btn.isHovered = btn.containsPoint(px, py);
+      if (isClick && btn.isHovered) {
+        btn.onClick();
+      }
+    });
+
+    if (gameOver) {
+      if (isClick && victoryBtn && victoryBtn.containsPoint(px, py)) {
+        initGame();
+      }
+      return;
     }
+
+    // Check cards
+    cards.forEach((card) => {
+      card.isHovered = card.containsPoint(px, py);
+      if (isClick && card.isHovered) {
+        handleCardClick(card);
+      }
+    });
   }
 
-  function showResults() {
-    stopTimer();
-    const score = calculateScore(moves, secondsElapsed);
-    const rating = calculateRating(moves, secondsElapsed);
-
-    document.getElementById('stat-time').textContent =
-      `${String(Math.floor(secondsElapsed / 60)).padStart(2, '0')}:${String(secondsElapsed % 60).padStart(2, '0')}`;
-    document.getElementById('stat-moves').textContent = moves;
-    document.getElementById('stat-score').textContent = score;
-
-    let stars = '';
-    for (let i = 0; i < 5; i++) {
-      stars += i < rating ? '⭐' : '☆';
-    }
-    document.getElementById('stat-stars').textContent = stars;
-
-    // Best score
-    const best = getBestScore();
-    const highScoreEl = document.getElementById('high-score');
-    if (best && score > best.score) {
-      saveBestScore({ score, moves, time: secondsElapsed, date: new Date().toISOString() });
-      highScoreEl.textContent = `🏆 Record ใหม่!`;
-    } else if (best) {
-      highScoreEl.textContent = `Best: ${best.score} pts (${best.moves} moves, ${formatTime(best.time)})`;
-    }
-
-    document.getElementById('results-modal').classList.remove('hidden');
-  }
-
-  function formatTime(totalSeconds) {
-    const m = Math.floor(totalSeconds / 60);
-    const s = totalSeconds % 60;
-    return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
-  }
-
-  // ========================
-  // Game Reset (US-08-05)
-  // ========================
-  function resetGame() {
-    // Close modal if open
-    document.getElementById('results-modal').classList.add('hidden');
-
-    // Reset state
-    flippedCards = [];
-    locked = false;
-    moves = 0;
-    matchedCount = 0;
-    gameStarted = false;
-    secondsElapsed = 0;
-
-    updateMovesCounter();
-    updateTimerDisplay();
-    resetTimer();
-
-    buildGrid();
-  }
-
-  // ========================
-  // Event Listeners
-  // ========================
-  document.getElementById('new-game-btn').addEventListener('click', resetGame);
-  document.getElementById('play-again-btn').addEventListener('click', resetGame);
-  document.getElementById('close-modal-btn').addEventListener('click', () => {
-    document.getElementById('results-modal').classList.add('hidden');
+  canvas.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    handleInput(e.clientX - rect.left, e.clientY - rect.top, false);
   });
 
-  // Prevent double-tap zoom on mobile (US-08-06)
-  document.addEventListener('touchend', (e) => {
-    if (e.detail > 1) e.preventDefault();
+  canvas.addEventListener('click', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    handleInput(e.clientX - rect.left, e.clientY - rect.top, true);
+  });
+
+  canvas.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    if (e.touches.length > 0) {
+      const rect = canvas.getBoundingClientRect();
+      const touch = e.touches[0];
+      handleInput(touch.clientX - rect.left, touch.clientY - rect.top, true);
+    }
   }, { passive: false });
 
-  // ========================
-  // Init
-  // ========================
-  function init() {
-    buildGrid();
+  // --- Render Loop ---
+  let lastTime = performance.now();
+  let victoryBtn = null;
+
+  function render(time) {
+    const dt = Math.min(0.1, (time - lastTime) / 1000);
+    lastTime = time;
+
+    ctx.save();
+    ctx.scale(dpr, dpr);
+
+    // 1. Background
+    const bgGradient = ctx.createRadialGradient(
+      width / 2, height / 2, 50,
+      width / 2, height / 2, Math.max(width, height) * 0.8
+    );
+    bgGradient.addColorStop(0, '#1e1b4b');
+    bgGradient.addColorStop(1, '#0f172a');
+    ctx.fillStyle = bgGradient;
+    ctx.fillRect(0, 0, width, height);
+
+    // Subtle ambient grid pattern
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.03)';
+    ctx.lineWidth = 1;
+    const gridStep = 40;
+    for (let x = 0; x < width; x += gridStep) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, height);
+      ctx.stroke();
+    }
+
+    // 2. HUD Bar
+    drawHUD(ctx);
+
+    // 3. Cards
+    cards.forEach((card) => {
+      card.update(dt);
+      card.draw(ctx);
+    });
+
+    // 4. Particles
+    updateParticles(dt);
+    drawParticles(ctx);
+
+    // 5. Victory Overlay Modal
+    if (gameOver) {
+      drawVictoryModal(ctx);
+    }
+
+    ctx.restore();
+    requestAnimationFrame(render);
   }
 
-  // Start
-  init();
+  function drawHUD(ctx) {
+    const hudW = Math.min(width - 24, 720);
+    const hudH = 50;
+    const hudX = (width - hudW) / 2;
+    const hudY = 10;
+
+    // Glass panel
+    ctx.save();
+    ctx.fillStyle = 'rgba(15, 23, 42, 0.75)';
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.roundRect(hudX, hudY, hudW, hudH, 14);
+    ctx.fill();
+    ctx.stroke();
+
+    // Text Formatting
+    const minutes = Math.floor(secondsElapsed / 60);
+    const secs = secondsElapsed % 60;
+    const timeStr = `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+    ctx.fillStyle = '#f8fafc';
+    ctx.font = '600 13px system-ui, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+
+    // Stats Labels
+    const stat1 = `🎯 Pairs: ${matchedPairs} / ${TOTAL_PAIRS}`;
+    const stat2 = `👆 Moves: ${moves}`;
+    const stat3 = `⏱️ Time: ${timeStr}`;
+
+    ctx.fillText(stat1, hudX + 16, hudY + hudH / 2);
+    ctx.fillText(stat2, hudX + 160, hudY + hudH / 2);
+    ctx.fillText(stat3, hudX + 280, hudY + hudH / 2);
+
+    // Canvas Buttons
+    buttons = [];
+
+    // New Game Button
+    const btnW = 94;
+    const btnH = 34;
+    const btnX = hudX + hudW - btnW - 12;
+    const btnY = hudY + (hudH - btnH) / 2;
+
+    const btnHover = mousePos.x >= btnX && mousePos.x <= btnX + btnW && mousePos.y >= btnY && mousePos.y <= btnY + btnH;
+
+    ctx.fillStyle = btnHover ? '#2563eb' : 'rgba(37, 99, 235, 0.8)';
+    ctx.beginPath();
+    ctx.roundRect(btnX, btnY, btnW, btnH, 8);
+    ctx.fill();
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 12px system-ui, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('↻ New Game', btnX + btnW / 2, btnY + btnH / 2);
+
+    buttons.push({
+      containsPoint: (px, py) => px >= btnX && px <= btnX + btnW && py >= btnY && py <= btnY + btnH,
+      onClick: () => initGame(),
+    });
+
+    // Sound Toggle Button
+    const soundW = 38;
+    const soundX = btnX - soundW - 8;
+    const soundHover = mousePos.x >= soundX && mousePos.x <= soundX + soundW && mousePos.y >= btnY && mousePos.y <= btnY + btnH;
+
+    ctx.fillStyle = soundHover ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.1)';
+    ctx.beginPath();
+    ctx.roundRect(soundX, btnY, soundW, btnH, 8);
+    ctx.fill();
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '14px system-ui, sans-serif';
+    ctx.fillText(soundEnabled ? '🔊' : '🔇', soundX + soundW / 2, btnY + btnH / 2);
+
+    buttons.push({
+      containsPoint: (px, py) => px >= soundX && px <= soundX + soundW && py >= btnY && py <= btnY + btnH,
+      onClick: () => {
+        soundEnabled = !soundEnabled;
+      },
+    });
+
+    ctx.restore();
+  }
+
+  function drawVictoryModal(ctx) {
+    ctx.save();
+
+    // Dim Backdrop
+    ctx.fillStyle = 'rgba(15, 23, 42, 0.82)';
+    ctx.fillRect(0, 0, width, height);
+
+    // Modal Box
+    const boxW = Math.min(width - 32, 420);
+    const boxH = 340;
+    const boxX = (width - boxW) / 2;
+    const boxY = (height - boxH) / 2;
+
+    ctx.fillStyle = 'rgba(30, 41, 59, 0.95)';
+    ctx.strokeStyle = 'rgba(56, 189, 248, 0.3)';
+    ctx.lineWidth = 2;
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+    ctx.shadowBlur = 30;
+
+    ctx.beginPath();
+    ctx.roundRect(boxX, boxY, boxW, boxH, 20);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.shadowColor = 'transparent';
+
+    // Title
+    ctx.fillStyle = '#f8fafc';
+    ctx.font = 'bold 24px system-ui, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    ctx.fillText('🎉 ยินดีด้วย! จับคู่สำเร็จ!', width / 2, boxY + 28);
+
+    // Stars Rating
+    const rating = calculateRating(moves, secondsElapsed);
+    let starsStr = '';
+    for (let i = 0; i < 5; i++) {
+      starsStr += i < rating ? '⭐' : '☆';
+    }
+    ctx.font = '26px system-ui, sans-serif';
+    ctx.fillText(starsStr, width / 2, boxY + 70);
+
+    // Stats Summary
+    const score = calculateScore(moves, secondsElapsed);
+    const minutes = Math.floor(secondsElapsed / 60);
+    const secs = secondsElapsed % 60;
+    const timeStr = `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+    ctx.font = '14px system-ui, sans-serif';
+    ctx.fillStyle = '#cbd5e1';
+    ctx.fillText(`เวลาที่ใช้: ${timeStr}  |  จำนวนเปิด: ${moves} ครั้ง`, width / 2, boxY + 120);
+
+    ctx.font = 'bold 20px system-ui, sans-serif';
+    ctx.fillStyle = '#38bdf8';
+    ctx.fillText(`คะแนนสะสม: ${score} pts`, width / 2, boxY + 155);
+
+    // High Score Record
+    const best = getHighScore();
+    if (best) {
+      ctx.font = '13px system-ui, sans-serif';
+      ctx.fillStyle = '#fbbf24';
+      ctx.fillText(`🏆 Record สูงสุด: ${best.score} pts`, width / 2, boxY + 195);
+    }
+
+    // Play Again Button on Canvas
+    const pBtnW = 180;
+    const pBtnH = 44;
+    const pBtnX = (width - pBtnW) / 2;
+    const pBtnY = boxY + boxH - pBtnH - 24;
+
+    const pHover = mousePos.x >= pBtnX && mousePos.x <= pBtnX + pBtnW && mousePos.y >= pBtnY && mousePos.y <= pBtnY + pBtnH;
+
+    ctx.fillStyle = pHover ? '#10b981' : '#059669';
+    ctx.beginPath();
+    ctx.roundRect(pBtnX, pBtnY, pBtnW, pBtnH, 12);
+    ctx.fill();
+
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 15px system-ui, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('🎮 Play Again', width / 2, pBtnY + pBtnH / 2);
+
+    victoryBtn = {
+      containsPoint: (px, py) => px >= pBtnX && px <= pBtnX + pBtnW && py >= pBtnY && py <= pBtnY + pBtnH,
+    };
+
+    ctx.restore();
+  }
+
+  // --- Start ---
+  resizeCanvas();
+  initGame();
+  requestAnimationFrame(render);
 
 })();

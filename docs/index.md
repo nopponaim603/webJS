@@ -33,6 +33,7 @@
 | G013 | `block-collapse` | Block Collapse | Canvas 2D | `public/games/block-collapse/` |
 | G014 | `tiny-farm-tycoon` | Tiny Farm Tycoon | Phaser 3 | `public/games/tiny-farm-tycoon/` |
 | G015 | `lunar-lander` | Lunar Lander Gravity | Phaser Physics | `public/games/lunar-lander/` |
+| G016 | `goosl-marbles` | Goosl Glass Marbles | WebGL 2 / Shader | `public/games/goosl-marbles/` |
 
 ### 🎮 Individual Game Specifications (`docs/gdd/games/`)
 - [Space Shooter (Phaser 2D)](./gdd/games/space-shooter/spec.md)
@@ -43,6 +44,7 @@
 - [Kenney Match 3 (Phaser 2D)](./gdd/games/match3/spec.md)
 - [Kenney 3D Platformer (Babylon.js)](./gdd/games/3d-platformer/spec.md)
 - [Card Memory Match (Kenney)](./gdd/games/card-memory/spec.md)
+- [Goosl Glass Marbles (구슬치기)](./gdd/games/goosl-marbles/spec.md)
 - [Ocean Frenzy (Kenney Fish Pack)](./gdd/games/ocean-frenzy/spec.md)
 - [Dice Quest (Kenney Boardgame)](./gdd/games/dice-quest/spec.md)
 - [Pico Tower Climber (Pico-8)](./gdd/games/pico-tower-climber/spec.md)

@@ -2,39 +2,14 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Card Memory Match</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Card Memory Match (Kenney)</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="game-container">
-    <!-- HUD -->
-    <div id="hud">
-      <div id="hud-moves">Moves: <span id="moves-count">0</span></div>
-      <div id="hud-timer">Time: <span id="timer-display">00:00</span></div>
-      <button id="new-game-btn" class="hud-btn">New Game</button>
-    </div>
-
-    <!-- Card Grid -->
-    <div id="grid" class="grid-container"></div>
-
-    <!-- Results Modal -->
-    <div id="results-modal" class="modal-overlay hidden">
-      <div class="modal-content">
-        <h2>🎉 ยินดี! จับครบทั้งหมด!</h2>
-        <div id="stats-container">
-          <div class="stat">เวลา: <span id="stat-time">00:00</span></div>
-          <div class="stat">จำนวนครั้งที่เปิด: <span id="stat-moves">0</span></div>
-          <div class="stat">คะแนน: <span id="stat-score">0</span></div>
-          <div class="stat">ดาว: <span id="stat-stars">☆☆☆☆☆</span></div>
-        </div>
-        <div id="high-score"></div>
-        <button id="play-again-btn" class="primary-btn">Play Again</button>
-        <button id="close-modal-btn" class="secondary-btn">Close</button>
-      </div>
-    </div>
+  <div id="game-stage">
+    <canvas id="game-canvas"></canvas>
   </div>
-
   <script src="game.js"></script>
 </body>
 </html>
