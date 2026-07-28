@@ -23,6 +23,7 @@
 
 ### 📚 Guidelines & Standards
 - [Game Assets Guide & Catalog](./assets-guide.md)
+- [Cross-Platform Display & Mobile Portrait Standard](./guidelines/cross-platform-display-standard.md)
 - [System Test Guideline](./guidelines/system-test-guideline.md)
 - [Documentation Changelog](../changelog.md)
 

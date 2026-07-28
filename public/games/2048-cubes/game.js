@@ -132,7 +132,7 @@ function create() {
     // Spawn First Cube
     spawnCube.call(this);
 
-    // Input Handling
+    // Input Handling (Pointer Touch & Mouse)
     this.input.on('pointermove', (pointer) => {
         if (!isGameOver && currentCube && currentCube.active && !isDropping) {
             const size = cubeSizes[currentCube.value] || 60;
@@ -148,6 +148,30 @@ function create() {
             if (pointer.y > 0 && pointer.y < height) {
                 dropCube.call(this);
             }
+        }
+    });
+
+    // Keyboard Controls for PC Play
+    const cursors = this.input.keyboard.createCursorKeys();
+    const keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+    const keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+    const keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+
+    this.input.keyboard.on('keydown', (event) => {
+        if (isGameOver || !currentCube || !currentCube.active || isDropping) return;
+        const step = 20;
+        const size = cubeSizes[currentCube.value] || 60;
+        const minX = size / 2 + 10;
+        const maxX = width - size / 2 - 10;
+
+        if (event.code === 'ArrowLeft' || event.code === 'KeyA') {
+            const newX = Phaser.Math.Clamp(currentCube.x - step, minX, maxX);
+            currentCube.setPosition(newX, currentCube.y);
+        } else if (event.code === 'ArrowRight' || event.code === 'KeyD') {
+            const newX = Phaser.Math.Clamp(currentCube.x + step, minX, maxX);
+            currentCube.setPosition(newX, currentCube.y);
+        } else if (event.code === 'Space' || event.code === 'ArrowDown' || event.code === 'Enter') {
+            dropCube.call(this);
         }
     });
 

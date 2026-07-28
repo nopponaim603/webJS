@@ -1,5 +1,5 @@
 // ==========================================
-// 🚀 SPACE SHOOTER - Phaser Game
+// 🚀 SPACE SHOOTER - Phaser Game (Portrait Responsive)
 // Assets: Kenney Simple Space (CC0)
 // ==========================================
 
@@ -43,11 +43,11 @@ class MainScene extends Phaser.Scene {
         this.wave = 1;
         this.gameOver = false;
         this.paused = false;
-        this.fireRate = 200; // ms between shots
+        this.fireRate = 180; // ms between shots
         this.lastFire = 0;
-        this.enemySpeed = 100;
+        this.enemySpeed = 110;
         this.spawnTimer = 0;
-        this.spawnInterval = 1500; // ms between enemy spawns
+        this.spawnInterval = 1400; // ms between enemy spawns
 
         // Background stars (parallax layers)
         this.createStarfield();
@@ -64,13 +64,13 @@ class MainScene extends Phaser.Scene {
         this.physics.add.overlap(this.bullets, this.enemies, this.hitEnemy, null, this);
         this.physics.add.overlap(this.player, this.enemies, this.enemyHitPlayer, null, this);
 
-        // Controls
+        // Keyboard Controls
         this.cursors = this.input.keyboard.createCursorKeys();
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
 
-        // UI
+        // UI Setup
         this.createUI();
 
         // Start spawning enemies
@@ -83,16 +83,16 @@ class MainScene extends Phaser.Scene {
 
         // Start spawning meteors from top area
         this.time.addEvent({
-            delay: 2200,
+            delay: 2000,
             callback: this.spawnMeteor,
             callbackScope: this,
             repeat: -1
         });
 
         // Instructions
-        this.add.text(400, 300, '🚀 Click/Touch to Start', {
-            font: '20px Arial', fill: '#ffffff', align: 'center'
-        }).setOrigin(0.5);
+        this.instructionText = this.add.text(270, 480, '🚀 Touch/Drag or WASD to Move & Shoot', {
+            font: 'bold 18px Arial', fill: '#00F2FE', align: 'center', stroke: '#000000', strokeThickness: 3
+        }).setOrigin(0.5).setDepth(150);
 
         this.input.once('pointerdown', () => {
             this.hideInstructions();
@@ -105,79 +105,82 @@ class MainScene extends Phaser.Scene {
     }
 
     hideInstructions() {
-        this.children.list.forEach(child => {
-            if (child instanceof Phaser.GameObjects.Text) {
-                child.visible = false;
-            }
-        });
+        if (this.instructionText) {
+            this.instructionText.destroy();
+        }
     }
 
     createStarfield() {
         this.stars = [];
 
-        // 1. Slow background stars (small) - 15 stars
+        // 1. Slow background stars (small) - 25 stars
+        for (let i = 0; i < 25; i++) {
+            const star = this.add.image(
+                Phaser.Math.Between(0, 540),
+                Phaser.Math.Between(0, 960),
+                'star_bg1'
+            ).setAlpha(0.35).setDepth(-10);
+            star.speed = 50;
+            this.stars.push(star);
+        }
+
+        // 2. Medium background stars - 15 stars
         for (let i = 0; i < 15; i++) {
             const star = this.add.image(
-                Phaser.Math.Between(0, 800),
-                Phaser.Math.Between(0, 600),
-                'star_bg1'
-            ).setAlpha(0.3).setDepth(-10);
-            star.speed = 40;
-            this.stars.push(star);
-        }
-
-        // 2. Medium background stars - 10 stars
-        for (let i = 0; i < 10; i++) {
-            const star = this.add.image(
-                Phaser.Math.Between(0, 800),
-                Phaser.Math.Between(0, 600),
+                Phaser.Math.Between(0, 540),
+                Phaser.Math.Between(0, 960),
                 'star_bg2'
-            ).setAlpha(0.5).setDepth(-9);
-            star.speed = 80;
+            ).setAlpha(0.6).setDepth(-9);
+            star.speed = 100;
             this.stars.push(star);
         }
 
-        // 3. Fast foreground stars (large) - 5 stars
-        for (let i = 0; i < 5; i++) {
+        // 3. Fast foreground stars (large) - 8 stars
+        for (let i = 0; i < 8; i++) {
             const star = this.add.image(
-                Phaser.Math.Between(0, 800),
-                Phaser.Math.Between(0, 600),
+                Phaser.Math.Between(0, 540),
+                Phaser.Math.Between(0, 960),
                 'star_bg3'
-            ).setAlpha(0.7).setDepth(-8);
-            star.speed = 120;
+            ).setAlpha(0.85).setDepth(-8);
+            star.speed = 160;
             this.stars.push(star);
         }
     }
 
     createPlayer() {
-        this.player = this.physics.add.image(400, 520, 'ship_player');
+        this.player = this.physics.add.image(270, 840, 'ship_player');
         this.player.setCollideWorldBounds(true);
         this.player.setDepth(10);
 
-        // Player shield indicator
-        this.shieldAlpha = 1;
+        // Touch drag input binding
+        this.input.on('pointermove', (pointer) => {
+            if (!this.gameOver && pointer.isDown) {
+                this.player.x = Phaser.Math.Clamp(pointer.x, 35, 505);
+                this.player.y = Phaser.Math.Clamp(pointer.y, 100, 900);
+            }
+        });
     }
 
     createUI() {
         // Score display
-        this.scoreText = this.add.text(16, 16, 'SCORE: 0', {
-            font: '18px Arial', fill: '#00ff00', stroke: '#000000', strokeThickness: 2
+        this.scoreText = this.add.text(20, 24, 'SCORE: 0', {
+            font: 'bold 20px Arial', fill: '#00ff00', stroke: '#000000', strokeThickness: 3
         }).setDepth(100);
 
         // Lives display
-        this.livesText = this.add.text(16, 40, 'LIVES: ', {
-            font: '18px Arial', fill: '#ffffff', stroke: '#000000', strokeThickness: 2
+        this.livesText = this.add.text(20, 54, 'LIVES: ', {
+            font: 'bold 18px Arial', fill: '#ffffff', stroke: '#000000', strokeThickness: 3
         }).setDepth(100);
         this.updateLivesUI();
 
         // Wave display
-        this.waveText = this.add.text(650, 16, 'WAVE: 1', {
-            font: '18px Arial', fill: '#ffff00', stroke: '#000000', strokeThickness: 2
+        this.waveText = this.add.text(420, 24, 'WAVE: 1', {
+            font: 'bold 20px Arial', fill: '#ffff00', stroke: '#000000', strokeThickness: 3
         }).setDepth(100);
 
         // Controls hint
-        this.controlsText = this.add.text(400, 570, '← → Move | SPACE Shoot', {
-            font: '12px Arial', fill: '#888888'
+        this.controlsText = this.add.text(270, 935, 'Touch / WASD / Space', {
+            font: '13px Arial', fill: '#888888'
         }).setOrigin(0.5).setDepth(100);
     }
 
@@ -196,11 +199,11 @@ class MainScene extends Phaser.Scene {
         if (this.gameOver) return;
 
         const enemyTypes = [
-            { sprite: 'enemy_red', speed: 80, health: 1, score: 10 },
-            { sprite: 'enemy_green', speed: 60, health: 2, score: 20 },
-            { sprite: 'enemy_blue', speed: 100, health: 1, score: 15 },
-            { sprite: 'enemy_purple', speed: 70, health: 3, score: 30 },
-            { sprite: 'enemy_yellow', speed: 50, health: 5, score: 50 }
+            { sprite: 'enemy_red', speed: 90, health: 1, score: 10 },
+            { sprite: 'enemy_green', speed: 70, health: 2, score: 20 },
+            { sprite: 'enemy_blue', speed: 120, health: 1, score: 15 },
+            { sprite: 'enemy_purple', speed: 85, health: 3, score: 30 },
+            { sprite: 'enemy_yellow', speed: 60, health: 5, score: 50 }
         ];
 
         // Pick enemy based on wave difficulty
@@ -211,7 +214,7 @@ class MainScene extends Phaser.Scene {
 
         const type = enemyTypes[idx];
         const enemy = this.enemies.create(
-            Phaser.Math.Between(50, 750),
+            Phaser.Math.Between(45, 495),
             -40,
             type.sprite
         );
@@ -223,7 +226,7 @@ class MainScene extends Phaser.Scene {
 
         // Increase difficulty over time
         if (this.spawnTimer > 0) {
-            this.spawnInterval = Math.max(500, this.spawnInterval - 50);
+            this.spawnInterval = Math.max(450, this.spawnInterval - 40);
         }
     }
 
@@ -232,23 +235,24 @@ class MainScene extends Phaser.Scene {
 
         const isLarge = Math.random() > 0.4;
         const sprite = isLarge ? 'meteor2' : 'meteor1';
-        const speed = isLarge ? Phaser.Math.Between(40, 80) : Phaser.Math.Between(90, 140);
+        const speed = isLarge ? Phaser.Math.Between(50, 90) : Phaser.Math.Between(100, 150);
         const health = isLarge ? 3 : 1;
         const score = isLarge ? 20 : 10;
 
         const meteor = this.enemies.create(
-            Phaser.Math.Between(50, 750),
+            Phaser.Math.Between(45, 495),
             -50,
             sprite
         );
 
-        meteor.setVelocity(Phaser.Math.Between(-25, 25), speed);
+        meteor.setVelocity(Phaser.Math.Between(-30, 30), speed);
         meteor.setAngularVelocity(Phaser.Math.Between(-80, 80));
         meteor.setData('health', health);
         meteor.setData('score', score);
         meteor.setDepth(4);
     }
 
+    // --- Audio Synthesizer (Web Audio API Fallback) ---
     initAudio() {
         if (!this.audioCtx) {
             const AudioCtx = window.AudioContext || window.webkitAudioContext;
@@ -264,7 +268,7 @@ class MainScene extends Phaser.Scene {
             if (!this.audioCtx || this.bgmInterval) return;
             if (this.audioCtx.state === 'suspended') this.audioCtx.resume();
 
-            // Sci-fi synth space arpeggio loop (C minor: C3, Eb3, G3, Bb3)
+            // Sci-fi synth space arpeggio loop
             const notes = [130.81, 155.56, 196.00, 233.08, 261.63, 233.08, 196.00, 155.56];
             let noteIdx = 0;
 
@@ -355,18 +359,18 @@ class MainScene extends Phaser.Scene {
             const osc = this.audioCtx.createOscillator();
             const gain = this.audioCtx.createGain();
 
-            osc.type = 'triangle';
-            osc.frequency.setValueAtTime(320, this.audioCtx.currentTime);
-            osc.frequency.linearRampToValueAtTime(80, this.audioCtx.currentTime + 0.08);
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(300, this.audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(100, this.audioCtx.currentTime + 0.15);
 
             gain.gain.setValueAtTime(0.15, this.audioCtx.currentTime);
-            gain.gain.linearRampToValueAtTime(0.001, this.audioCtx.currentTime + 0.08);
+            gain.gain.exponentialRampToValueAtTime(0.001, this.audioCtx.currentTime + 0.15);
 
             osc.connect(gain);
             gain.connect(this.audioCtx.destination);
 
             osc.start();
-            osc.stop(this.audioCtx.currentTime + 0.08);
+            osc.stop(this.audioCtx.currentTime + 0.15);
         } catch (e) {}
     }
 
@@ -406,7 +410,7 @@ class MainScene extends Phaser.Scene {
         if (bullet) {
             bullet.setScale(0.6);
             bullet.setDepth(9);
-            bullet.setVelocity(0, -600);
+            bullet.setVelocity(0, -750);
             this.playLaserSFX();
         }
     }
@@ -449,31 +453,20 @@ class MainScene extends Phaser.Scene {
             this.playHitSFX();
             this.tweens.add({
                 targets: enemy,
-                alpha: 0.2,
+                alpha: 0.3,
                 duration: 50,
-                yoyo: true,
-                repeat: 2
+                yoyo: true
             });
         }
     }
 
     enemyHitPlayer(player, enemy) {
         enemy.destroy();
+        this.playHitSFX();
+        this.cameras.main.shake(150, 0.01);
+
         this.lives--;
         this.updateLivesUI();
-        this.playHitSFX();
-
-        // Screen shake
-        this.cameras.main.shake(200, 0.01);
-
-        // Flash player red
-        this.tweens.add({
-            targets: player,
-            alpha: 0.2,
-            duration: 100,
-            yoyo: true,
-            repeat: 3
-        });
 
         if (this.lives <= 0) {
             this.gameOver = true;
@@ -490,9 +483,9 @@ class MainScene extends Phaser.Scene {
             this.enemySpeed += 20;
 
             // Show wave text
-            const waveText = this.add.text(400, 300, 'WAVE ' + this.wave, {
-                font: '36px Arial', fill: '#ffff00', stroke: '#000000', strokeThickness: 3
-            }).setOrigin(0.5).setDepth(50);
+            const waveText = this.add.text(270, 480, 'WAVE ' + this.wave, {
+                font: 'bold 44px Arial', fill: '#ffff00', stroke: '#000000', strokeThickness: 4
+            }).setOrigin(0.5).setDepth(150);
 
             this.tweens.add({
                 targets: waveText,
@@ -508,24 +501,24 @@ class MainScene extends Phaser.Scene {
         this.stopBackgroundMusic();
         this.playGameOverSFX();
         const overlay = this.add.graphics();
-        overlay.fillStyle(0x000000, 0.7);
-        overlay.fillRect(0, 0, 800, 600);
+        overlay.fillStyle(0x000000, 0.75);
+        overlay.fillRect(0, 0, 540, 960);
 
-        this.add.text(400, 200, 'GAME OVER', {
-            font: '48px Arial', fill: '#ff0000', stroke: '#000000', strokeThickness: 4
-        }).setOrigin(0.5);
+        this.add.text(270, 380, 'GAME OVER', {
+            font: 'bold 48px Arial', fill: '#ff0000', stroke: '#000000', strokeThickness: 5
+        }).setOrigin(0.5).setDepth(200);
 
-        this.add.text(400, 280, 'SCORE: ' + this.score, {
-            font: '24px Arial', fill: '#ffffff'
-        }).setOrigin(0.5);
+        this.add.text(270, 450, 'SCORE: ' + this.score, {
+            font: 'bold 28px Arial', fill: '#ffffff'
+        }).setOrigin(0.5).setDepth(200);
 
-        this.add.text(400, 320, 'WAVE: ' + this.wave, {
-            font: '20px Arial', fill: '#ffff00'
-        }).setOrigin(0.5);
+        this.add.text(270, 495, 'WAVE: ' + this.wave, {
+            font: 'bold 22px Arial', fill: '#ffff00'
+        }).setOrigin(0.5).setDepth(200);
 
-        const restartText = this.add.text(400, 400, 'Click to Restart', {
-            font: '20px Arial', fill: '#00ff00'
-        }).setOrigin(0.5);
+        const restartText = this.add.text(270, 580, '🔄 Touch / Click to Restart', {
+            font: 'bold 20px Arial', fill: '#00F2FE', backgroundColor: '#1e293b', padding: { x: 20, y: 10 }
+        }).setOrigin(0.5).setDepth(200);
 
         this.input.once('pointerdown', () => {
             this.scene.restart();
@@ -533,35 +526,38 @@ class MainScene extends Phaser.Scene {
     }
 
     update(time, delta) {
-        // Parallax starfield scrolling (moves even if gameOver is false/true for dynamic space feel)
+        // Parallax starfield scrolling
         if (this.stars) {
             this.stars.forEach(star => {
                 star.y += star.speed * (delta / 1000);
-                if (star.y > 620) {
+                if (star.y > 980) {
                     star.y = -20;
-                    star.x = Phaser.Math.Between(0, 800);
+                    star.x = Phaser.Math.Between(0, 540);
                 }
             });
         }
 
         if (this.gameOver) return;
 
-        // Player movement (Keyboard & Pointer)
+        // Player movement (Keyboard)
         if (this.cursors.left.isDown || (this.keyA && this.keyA.isDown)) {
-            this.player.setVelocityX(-350);
+            this.player.setVelocityX(-400);
         } else if (this.cursors.right.isDown || (this.keyD && this.keyD.isDown)) {
-            this.player.setVelocityX(350);
-        } else {
+            this.player.setVelocityX(400);
+        } else if (!this.input.activePointer.isDown) {
             this.player.setVelocityX(0);
         }
 
-        if (this.input.activePointer.isDown) {
-            this.player.x = Phaser.Math.Clamp(this.input.activePointer.x, 30, 770);
-            this.fireBullet();
+        if (this.cursors.up.isDown) {
+            this.player.setVelocityY(-350);
+        } else if (this.cursors.down.isDown) {
+            this.player.setVelocityY(350);
+        } else if (!this.input.activePointer.isDown) {
+            this.player.setVelocityY(0);
         }
 
-        // Shooting
-        if (this.spaceKey.isDown) {
+        // Auto-fire / Pointer fire
+        if (this.input.activePointer.isDown || this.spaceKey.isDown) {
             this.fireBullet();
         }
 
@@ -574,9 +570,9 @@ class MainScene extends Phaser.Scene {
 
         // Cleanup offscreen enemies
         this.enemies.children.each(enemy => {
-            if (enemy.active && enemy.y > 650) {
+            if (enemy.active && enemy.y > 1000) {
                 enemy.destroy();
-                // Lost a life if enemy passes
+                // Lost a life if enemy passes bottom
                 if (!this.gameOver) {
                     this.lives--;
                     this.updateLivesUI();
@@ -595,8 +591,8 @@ class MainScene extends Phaser.Scene {
 // ---- Game Config ----
 const config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    width: 540,
+    height: 960,
     parent: 'game-container',
     scale: {
         mode: Phaser.Scale.FIT,

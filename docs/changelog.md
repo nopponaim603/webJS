@@ -3,6 +3,21 @@
 **Project:** Game Portfolio (`webJS`)  
 **Maintained by:** Antigravity AI & Dev Team  
 
+## [1.10.0] - 2026-07-28
+
+### Added & Upgraded
+- **Cross-Platform Responsive & Mobile Portrait Standard ([docs/wiki/guidelines/cross-platform-display-standard.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/wiki/guidelines/cross-platform-display-standard.md))**:
+  - จัดทำเอกสารข้อกำหนดมาตรฐานการพัฒนาเกมที่ต้องรองรับทั้ง **PC (Desktop Landscape)** และ **Mobile แนวตั้ง (Portrait First)**
+  - กำหนด Base Aspect Ratio `9:16` (720x1280 px / 540x960 px), Safe Area Top/Bottom Insets
+  - กำหนดแนวคิด **Centered Portrait Cabinet Frame** บน PC ร่วมกับ **Glassmorphic Ambient Backdrop**
+  - กำหนดระบบ **Dual Control Auto-Sensing** (Touch Virtual Controls บน Mobile และ WASD/Space/Mouse บน PC)
+- **Public Games Compliance Upgrades ([public/games/](file:///c:/Users/noppon/source/06-WEB/webJS/public/games/))**:
+  - **`2048-cubes`**: ปรับสเกลเป็น Responsive Mobile Portrait (`max-width: 540px`), เพิ่มการควบคุมด้วย Keyboard บน PC (`ArrowLeft`, `ArrowRight`, `A`, `D`, `Space`, `ArrowDown`)
+  - **`space-shooter` (`phaser-demo`)**: ปรับ Base Aspect Ratio เป็น `540x960` Portrait Standard, เพิ่ม Touch Drag Pointer & Auto Fire สำหรับมือถือ (แก้ไขปัญหาเล่นบนมือถือไม่ได้), เพิ่มการควบคุม WASD/Space บน PC
+  - **`match3`**: ปรับเปลี่ยนกฎการเล่นเป็น **Endless Mode** — ยกเลิกการจำกัด 25 ตาและคะแนนเป้าหมาย เล่นต่อเนื่องได้ไม่จำกัด เพิ่มระบบตรวจสอบ `hasPossibleMoves()` อัตโนมัติ เกมจะจบลงเมื่อ **ไม่มีคู่ที่สามารถสลับจับคู่เหลืออยู่บนกระดาน** (`🚫 NO MORE MOVES!`) พร้อมแสดงสถิติจำนวนครั้งที่สลับ (SWAPS), คะแนนรวม และ Max Combo
+  - **`card-memory`**: เพิ่ม Safe Area Insets และ Desktop Centered Frame Styling
+  - ตรวจสอบความสมบูรณ์ของ **`3d-platformer`**, **`goosl-marbles`**, **`tile-match`**, **`emoji-match`**, **`babylon-demo`** ผ่านเกณฑ์มาตรฐานครบถ้วนทั้ง 9 เกม
+
 ## [1.9.0] - 2026-07-28
 
 ### Added / Updated

@@ -74,6 +74,7 @@
 
 ## 📚 Resources & Guidelines
 - [Project Wiki](./wiki/wiki.md) - Central knowledge hub and logs
+- [Cross-Platform Display & Mobile Portrait Standard](./wiki/guidelines/cross-platform-display-standard.md) - PC & Mobile Portrait UI/UX Standard
 - [Game Assets Guide](./wiki/assets-guide.md) - Complete catalog & game ideas for all public assets
 - [Testing Guidelines](./wiki/guidelines/system-test-guideline.md) - System & QA testing guide
 - [Documentation Changelog](./changelog.md) - Detailed doc update history
