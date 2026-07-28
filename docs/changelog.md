@@ -3,6 +3,16 @@
 **Project:** Game Portfolio (`webJS`)  
 **Maintained by:** Antigravity AI & Dev Team  
 
+## [1.9.0] - 2026-07-28
+
+### Added / Updated
+- **PWA Installation System ([src/components/Header.jsx](file:///c:/Users/noppon/source/06-WEB/webJS/src/components/Header.jsx))**:
+  - เพิ่มปุ่ม `📲 ติดตั้งแอป (PWA)` บนแถบ Header สำหรับเรียกใช้งานหน้าต่างติดตั้ง Progressive Web App (Native Browser Prompt)
+  - เพิ่มป๊อปอัปคำแนะนำ **วิธีติดตั้งแอป (PWA Guide Modal)** สำหรับแนะนำขั้นตอนการติดตั้งบน iOS (Safari), Android (Chrome/Edge) และ Desktop
+  - เพิ่มระบบตรวจจับสถานะ PWA Standalone Mode (`✅ ติดตั้งแล้ว`)
+- **Build Release Update**:
+  - อัปเดต Build Info ใน `public/build.json` และ `package.json` เป็นเวอร์ชัน **v1.9.0 #2239**
+
 ## [1.8.0] - 2026-07-28
 
 ### Added
