@@ -153,19 +153,24 @@ Darts no longer spray in a full-circle spread — they now target the single nea
 
 ```js
 const orbitCount = this.player.skills.orbit;   // 1 blade per skill level
+const orbitRadius = 45 + (orbitCount - 1) * 8; // ring widens per level
+const bladeScale = 1.8 + (orbitCount - 1) * 0.3; // blades render bigger per level
+const bladeBodyRadius = 6 * (bladeScale / 1.8);  // hitbox grows to match the visual size
 this.damageEnemy(enemy, 20 * this.player.damageMult); // per hit, 400ms cooldown PER ENEMY
 ```
 
 Locked to `classId: 'knight'` — only Knight ever sees this card, and only Knight starts at `skills.orbit = 0` needing to draw it. It's the second half of Knight's kit alongside Melee Slash (§4.1): a continuous, always-on 360° ring rather than a periodic directional swing, giving the Knight a passive-coverage option distinct from Melee's active-aimed cone.
 
-| Skill Level | Blades | Dmg/hit | Per-target cap (dmg per 400ms cd) |
-|:---:|:---:|:---:|:---:|
-| 1 | 1 | 20×`dmg` | 20×`dmg` |
-| 2 | 2 | 20×`dmg` | 20×`dmg` (unchanged — see note) |
-| 3 | 3 | 20×`dmg` | 20×`dmg` |
-| 5 | 5 | 20×`dmg` | 20×`dmg` |
+As of this pass, leveling Orbit grows the ring on **two axes at once**: the orbit radius widens by `8px` per level (blades sweep further from the player) and each blade's render scale grows by `0.3` per level (`+ ~17%` per level relative to the base `1.8`), with the physics hitbox (`body.setCircle`) scaled to match so the bigger blades are backed by a bigger actual hit area — not just a cosmetic change. Both values are recalculated every frame in `updateOrbitBlades`, so existing blades resize and widen immediately the moment a new Orbit card is picked, rather than only affecting blades spawned after the level-up.
 
-**Important growth nuance**: the 400ms hit cooldown (`enemy.lastOrbitHitTime`) is tracked **per enemy**, not per blade — so adding blades does *not* multiply damage against a single target standing still. What it buys instead is **angular coverage**: with `N` blades spaced `2π/N` apart, more enemies around the player get caught in a swing simultaneously — a full 360° passive alternative to Melee Slash's directional, auto-aimed 130° swing.
+| Skill Level | Blades | Orbit Radius | Blade Scale | Dmg/hit | Per-target cap (dmg per 400ms cd) |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| 1 | 1 | 45px | 1.8× | 20×`dmg` | 20×`dmg` |
+| 2 | 2 | 53px | 2.1× | 20×`dmg` | 20×`dmg` (unchanged — see note) |
+| 3 | 3 | 61px | 2.4× | 20×`dmg` | 20×`dmg` |
+| 5 | 5 | 77px | 3.0× | 20×`dmg` | 20×`dmg` |
+
+**Important growth nuance**: the 400ms hit cooldown (`enemy.lastOrbitHitTime`) is tracked **per enemy**, not per blade — so adding blades does *not* multiply damage against a single target standing still. What it buys instead is **angular AND spatial coverage**: with `N` blades spaced `2π/N` apart on a widening, thickening ring, more enemies around the player get caught in a swing simultaneously, and each blade also physically reaches further out and covers more area per pass — a full 360° passive alternative to Melee Slash's directional, auto-aimed 130° swing.
 
 ### 4.5 Chain Lightning — Wizard's second weapon, starts at 0 (`fireLightningWeapon`)
 
@@ -256,6 +261,8 @@ Because each class's deck is only 6 cards (2 weapons + 4 stat boosts) instead of
 | Darts stagger | `fireDartsWeapon` | `80ms` between darts | Visual/timing only, does not change total volley damage |
 | Darts tint | `fireDartsWeapon` | `0x22c55e` (green) | Cosmetic only — visually distinguishes it from Critical Knife's untinted sprite |
 | Orbit per-enemy cooldown | `updateOrbitBlades` | `400ms` | Shorter = more blades start mattering for single-target DPS too |
+| Orbit radius per level | `updateOrbitBlades` | `45 + (lvl-1)*8` px | Wider ring reaches enemies further from the player |
+| Orbit blade scale per level | `updateOrbitBlades` | `1.8 + (lvl-1)*0.3` | Bigger blades read as more threatening; hitbox scales with it |
 | Lightning fire rate | timer in `create()` | `1600ms` | Slower than the 800ms "normal" tier by design — lower makes Lightning less of a commitment |
 | Lightning strike radius | `fireLightningWeapon` | `260px` | Widens which enemies are eligible to be picked as a bolt's primary target |
 | Lightning targets/level | `fireLightningWeapon` | `lvl` (was `lvl * 2`) | Fewer simultaneous primary strikes per level than before this pass |

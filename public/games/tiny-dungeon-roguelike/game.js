@@ -671,10 +671,17 @@ class MainGameScene extends Phaser.Scene {
         const orbitCount = this.player.skills.orbit;
         if (orbitCount <= 0) return;
 
+        // Both the orbit radius and blade size grow with level, so a leveled-up ring
+        // reads as a visibly wider and bigger sweep, not just more blades on it.
+        const orbitRadius = 45 + (orbitCount - 1) * 8;
+        const bladeScale = 1.8 + (orbitCount - 1) * 0.3;
+        const bladeBodyRadius = 6 * (bladeScale / 1.8);
+        const bladeBodyOffset = 8 - bladeBodyRadius;
+
         // Ensure correct sprite count
         while (this.orbitBladeSprites.length < orbitCount) {
-            const blade = this.physics.add.sprite(this.player.x, this.player.y, 'dungeon_tiles', 106).setScale(1.8);
-            blade.body.setCircle(6, 2, 2);
+            const blade = this.physics.add.sprite(this.player.x, this.player.y, 'dungeon_tiles', 106).setScale(bladeScale);
+            blade.body.setCircle(bladeBodyRadius, bladeBodyOffset, bladeBodyOffset);
             this.orbitBladeSprites.push(blade);
 
             // Overlap with enemies
@@ -686,13 +693,17 @@ class MainGameScene extends Phaser.Scene {
             });
         }
 
-        const radius = 45;
         const angleSpeed = time * 0.003;
 
         this.orbitBladeSprites.forEach((blade, idx) => {
+            // Re-apply size every frame so existing blades grow immediately on level-up,
+            // not just newly spawned ones.
+            blade.setScale(bladeScale);
+            blade.body.setCircle(bladeBodyRadius, bladeBodyOffset, bladeBodyOffset);
+
             const angle = angleSpeed + (idx * (2 * Math.PI / orbitCount));
-            blade.x = this.player.x + Math.cos(angle) * radius;
-            blade.y = this.player.y + Math.sin(angle) * radius;
+            blade.x = this.player.x + Math.cos(angle) * orbitRadius;
+            blade.y = this.player.y + Math.sin(angle) * orbitRadius;
             blade.setRotation(angle + Math.PI / 4);
         });
     }
