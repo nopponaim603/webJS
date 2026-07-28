@@ -62,7 +62,7 @@
 
 - **GDD Specification:** [Card Memory Spec](../../gdd/games/card-memory/spec.md)
 - **Product Backlog:** [Product Backlog](../01-product-backlog.md)
-- **Previous Story:** [US-08-05](./US-08-05-game-restart.md)
+- **Previous Story:** [US-08-05](./archive/US-08-05-game-restart.md)
 - **Next Story:** [US-08-07](./US-08-07-performance-preload.md)
 
 ---
@@ -73,3 +73,10 @@
 1. **จัดกลุ่ม Breakpoints ชัดเจน (Standardized Breakpoints):** สรุปขนาดการ์ดและ Grid Gap เป็นตาราง Breakpoint ชัดเจนสำหรับ Phone, Tablet, Desktop
 2. **ปรับปรุงสำนวนภาษาไทย:** แก้ไขประโยคสับสนเดิม ให้ระบุชัดเจนเรื่องการรองรับ Touch Events และป้องกันปัญหา UI Clipping บนหน้าจอมือถือ
 3. **จัดระเบียบชื่อไฟล์ (Descriptive Filename):** เปลี่ยนชื่อไฟล์เป็น `US-08-06-mobile-responsive.md` ตามข้อกำหนดมาตรฐาน `task-tracker` skill
+
+### 🐛 Known Issue Found During Verification (2026-07-28)
+ทดสอบด้วย automated browser test ที่ viewport 360px (ขอบล่างสุดของ breakpoint "Phone" ตามสเปก) พบว่าแถบ HUD ด้านบนมีข้อความซ้อนทับปุ่ม:
+- ปุ่ม "New Game" บังข้อความ "Time: 00:00" บางส่วน
+- ปุ่มเปิด/ปิดเสียง (🔊) บังตัวเลข "Moves: 0" บางส่วน
+
+สาเหตุ: `drawHUD()` ใน `game.js` คำนวณตำแหน่งข้อความและปุ่มด้วยค่า pixel คงที่ (เช่น `hudX + 160`, `hudX + 280`) ที่ไม่ได้ปรับตาม `hudW` เมื่อหน้าจอแคบกว่า ~400px ทำให้ AC ข้อ 5 (ไม่เกิด UI Overflow/Clipping) ยังไม่ผ่านที่ breakpoint 360px แม้ว่า Canvas จะ resize และปรับขนาดการ์ดได้ถูกต้อง (AC 1–3) ก็ตาม ยังไม่ได้แก้ไข — สถานะคงเป็น In Progress

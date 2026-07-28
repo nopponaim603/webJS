@@ -71,9 +71,9 @@
 
 ## 🔗 Related Files
 
-- **GDD Specification:** [Card Memory Spec](../../gdd/games/card-memory/spec.md)
-- **Product Backlog:** [Product Backlog](../01-product-backlog.md)
-- **Sprint Backlog:** [Sprint 01 Backlog](../sprint-backlogs/sprint-01.md)
+- **GDD Specification:** [Card Memory Spec](../../../gdd/games/card-memory/spec.md)
+- **Product Backlog:** [Product Backlog](../../01-product-backlog.md)
+- **Sprint Backlog:** [Sprint 01 Backlog](../../sprint-backlogs/sprint-01.md)
 - **Next Story:** [US-08-02](./US-08-02-match-logic.md)
 
 ---
@@ -82,5 +82,5 @@
 
 ### 🔄 รายละเอียดการปรับปรุงเอกสาร (Revision Summary — 2026-07-28):
 1. **ปรับปรุงภาษาและคำศัพท์ (Language Polish):** แก้ไขคำว่า "การ์ดป๊อกปก" เป็น "การ์ดแบบคว่ำหน้า (Card Back)" และปรับแต่งสำนวนประโยคใน Description ให้ตรงตามรูปแบบมาตรฐาน Agile User Story
-2. **แก้ไขลิงก์อ้างอิงเสีย (Fixed Broken Links):** ซ่อมแซมลิงก์ GDD เดิมที่ไม่ถูกต้อง ให้ชี้ไปยังเอกสาร GDD Spec จริงของเกม [Card Memory Spec](../../gdd/games/card-memory/spec.md)
+2. **แก้ไขลิงก์อ้างอิงเสีย (Fixed Broken Links):** ซ่อมแซมลิงก์ GDD เดิมที่ไม่ถูกต้อง ให้ชี้ไปยังเอกสาร GDD Spec จริงของเกม [Card Memory Spec](../../../gdd/games/card-memory/spec.md)
 3. **จัดระเบียบชื่อไฟล์ (Descriptive Filename):** เปลี่ยนชื่อไฟล์เป็น `US-08-01-card-grid.md` ตามข้อกำหนดมาตรฐาน `task-tracker` skill

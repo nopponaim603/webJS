@@ -21,12 +21,12 @@
 
 | ID | User Story | Acceptance Criteria | Estimate | Status |
 |----|-----------|---------------------|----------|--------|
-| [US-08-01](./user-stories/US-08-01-card-grid.md) | แสดงตารางการ์ด 16 ใบ (4x4 Grid) คว่ำหน้าทั้งหมดเมื่อเริ่มเกม | สุ่มการ์ด 8 คู่ มี 3D Flip animation บนมือถือ/เดสก์ท็อป | M | ✅ Done |
-| [US-08-02](./user-stories/US-08-02-match-logic.md) | คลิกการ์ดเพื่อเปิดและตรวจจับคู่ความถูกต้อง | ตรวจจับ 2 ใบ ป้องกันการคลิกซ้ำ ป้องกันใบที่ 3 | M | 🔵 In Progress |
-| [US-08-03](./user-stories/US-08-03-move-timer.md) | แสดงตัวนับ Moves และ Timer บน HUD | Moves นับเพิ่มทีละ 1 (2 ใบ) และ Timer เดินอัตโนมัติ | S | 🔵 In Progress |
-| [US-08-04](./user-stories/US-08-04-results-modal.md) | แสดง Modal สรุปผลลัพธ์เวลา คะแนน และดาว 1-5 ดาว | แสดงผลเวลา Moves แต้ม และระดับดาวเมื่อชนะ | S | 🔵 In Progress |
-| [US-08-05](./user-stories/US-08-05-game-restart.md) | ปุ่ม New Game และ Play Again เริ่มเกมใหม่โดยไม่ต้องโหลดหน้าเว็บ | สุ่มการ์ดใหม่ รีเซ็ต Timer/Moves โดยไม่ reload | S | 🔵 In Progress |
-| [US-08-06](./user-stories/US-08-06-mobile-responsive.md) | แสดงผล Responsive และสนับสนุน Touch Events บนมือถือ | รองรับ Touch, Auto Scale Card Size 360px+ | M | 🔵 In Progress |
+| [US-08-01](./user-stories/archive/US-08-01-card-grid.md) | แสดงตารางการ์ด 16 ใบ (4x4 Grid) คว่ำหน้าทั้งหมดเมื่อเริ่มเกม | สุ่มการ์ด 8 คู่ มี 3D Flip animation บนมือถือ/เดสก์ท็อป | M | ✅ Done |
+| [US-08-02](./user-stories/archive/US-08-02-match-logic.md) | คลิกการ์ดเพื่อเปิดและตรวจจับคู่ความถูกต้อง | ตรวจจับ 2 ใบ ป้องกันการคลิกซ้ำ ป้องกันใบที่ 3 | M | ✅ Done |
+| [US-08-03](./user-stories/archive/US-08-03-move-timer.md) | แสดงตัวนับ Moves และ Timer บน HUD | Moves นับเพิ่มทีละ 1 (2 ใบ) และ Timer เดินอัตโนมัติ | S | ✅ Done |
+| [US-08-04](./user-stories/archive/US-08-04-results-modal.md) | แสดง Modal สรุปผลลัพธ์เวลา คะแนน และดาว 1-5 ดาว | แสดงผลเวลา Moves แต้ม และระดับดาวเมื่อชนะ | S | ✅ Done |
+| [US-08-05](./user-stories/archive/US-08-05-game-restart.md) | ปุ่ม New Game และ Play Again เริ่มเกมใหม่โดยไม่ต้องโหลดหน้าเว็บ | สุ่มการ์ดใหม่ รีเซ็ต Timer/Moves โดยไม่ reload | S | ✅ Done |
+| [US-08-06](./user-stories/US-08-06-mobile-responsive.md) | แสดงผล Responsive และสนับสนุน Touch Events บนมือถือ | รองรับ Touch, Auto Scale Card Size 360px+ | M | 🔵 In Progress (พบบั๊ก HUD ซ้อนทับที่ 360px) |
 | [US-08-07](./user-stories/US-08-07-performance-preload.md) | เพิ่มประสิทธิภาพการโหลดและ Preload Assets | Preload ภาพการ์ด Kenney Pack 144px 60 FPS | S | 🔵 In Progress |
 
 ---

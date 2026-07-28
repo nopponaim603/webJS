@@ -1,6 +1,6 @@
 # User Story: US-08-05 — Game Restart and New Game Button
 
-**Status:** 🔵 In Progress  
+**Status:** ✅ Done  
 **Epic:** Epic 08 — Card Memory Match (`card-memory`)  
 **Owner:** Dev Team  
 **Created:** 2026-07-27  
@@ -20,21 +20,21 @@
 
 ## ✅ Acceptance Criteria
 
-1. [ ] มีปุ่ม "New Game" บน HUD ที่สามารถคลิกกดเริ่มใหม่ได้ทุกเมื่อ
-2. [ ] มีปุ่ม "Play Again" บนหน้าต่างสรุปผล (Results Modal)
-3. [ ] เมื่อกดเริ่มเกมใหม่ → ระบบสุ่มการ์ดใหม่ รีเซ็ตตัวนับ Moves เป็น 0 และรีเซ็ต Timer เป็น `00:00`
-4. [ ] เริ่มเกมใหม่แบบไร้รอยต่อโดยไม่ต้องรีเฟรชเบราว์เซอร์ (No Page Reload)
-5. [ ] ปิดหน้าต่าง Modal สรุปผลอัตโนมัติเมื่อกดเริ่มเกมใหม่
+1. [x] มีปุ่ม "New Game" บน HUD ที่สามารถคลิกกดเริ่มใหม่ได้ทุกเมื่อ
+2. [x] มีปุ่ม "Play Again" บนหน้าต่างสรุปผล (Results Modal)
+3. [x] เมื่อกดเริ่มเกมใหม่ → ระบบสุ่มการ์ดใหม่ รีเซ็ตตัวนับ Moves เป็น 0 และรีเซ็ต Timer เป็น `00:00`
+4. [x] เริ่มเกมใหม่แบบไร้รอยต่อโดยไม่ต้องรีเฟรชเบราว์เซอร์ (No Page Reload)
+5. [x] ปิดหน้าต่าง Modal สรุปผลอัตโนมัติเมื่อกดเริ่มเกมใหม่
 
 ---
 
 ## 🛠 Technical Tasks
 
-- [ ] สร้างปุ่ม "New Game" ใน HUD Layout
-- [ ] พัฒนาฟังก์ชัน `resetGame()` ล้างค่า State เดิมทั้งหมด
-- [ ] เรียกใช้อัลกอริทึม Fisher-Yates Shuffle เพื่อสุ่มไพ่เซ็ตใหม่
-- [ ] รีเซ็ตตัวนับเวลาและตัวนับจำนวนครั้งเปิดไพ่
-- [ ] คืนค่าแอนิเมชันและการ์ดให้อยู่ในสถานะคว่ำหน้าทั้งหมด (Face Down)
+- [x] สร้างปุ่ม "New Game" ใน HUD Layout
+- [x] พัฒนาฟังก์ชัน `resetGame()` ล้างค่า State เดิมทั้งหมด (`initGame()`)
+- [x] เรียกใช้อัลกอริทึม Fisher-Yates Shuffle เพื่อสุ่มไพ่เซ็ตใหม่
+- [x] รีเซ็ตตัวนับเวลาและตัวนับจำนวนครั้งเปิดไพ่
+- [x] คืนค่าแอนิเมชันและการ์ดให้อยู่ในสถานะคว่ำหน้าทั้งหมด (Face Down)
 
 ---
 
@@ -63,10 +63,10 @@
 
 ## 🔗 Related Files
 
-- **GDD Specification:** [Card Memory Spec](../../gdd/games/card-memory/spec.md)
-- **Product Backlog:** [Product Backlog](../01-product-backlog.md)
+- **GDD Specification:** [Card Memory Spec](../../../gdd/games/card-memory/spec.md)
+- **Product Backlog:** [Product Backlog](../../01-product-backlog.md)
 - **Previous Story:** [US-08-04](./US-08-04-results-modal.md)
-- **Next Story:** [US-08-06](./US-08-06-mobile-responsive.md)
+- **Next Story:** [US-08-06](../US-08-06-mobile-responsive.md)
 
 ---
 
@@ -76,3 +76,6 @@
 1. **จัดระเบียบลำดับขั้นตอน Reset (Clean Reset Sequence):** เพิ่มแผนภาพลำดับการทำงานเมื่อผู้เล่นคลิกเริ่มเกมใหม่ เพื่อให้นักพัฒนาเข้าใจและไม่ลืมการ Reset State ตัวนับเวลาและ Shuffle การ์ด
 2. **ปรับปรุงสำนวนภาษาไทย:** แก้ไขคำว่า "ตัวเล่า" เป็น "ตัวนับจำนวนครั้ง (Moves)" และเน้นย้ำความสำคัญของการเริ่มใหม่โดยไม่รีเฟรชเบราว์เซอร์ (No Page Reload)
 3. **จัดระเบียบชื่อไฟล์ (Descriptive Filename):** เปลี่ยนชื่อไฟล์เป็น `US-08-05-game-restart.md` ตามข้อกำหนดมาตรฐาน `task-tracker` skill
+
+### ✅ Verification Note (2026-07-28)
+ทดสอบกดปุ่ม "Play Again" หลังชนะเกมด้วย automated browser test ยืนยันว่ากระดานรีเซ็ตครบถ้วน (Pairs 0/8, Moves 0, การ์ดกลับเป็นคว่ำหน้าทั้งหมด, Modal ปิดอัตโนมัติ) โดยไม่มีการรีเฟรชหน้าเว็บ
