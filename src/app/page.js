@@ -8,6 +8,14 @@ import buildInfo from '../../public/build.json';
 
 const initialGames = [
   {
+    id: "goosl-marbles",
+    title: "Goosl Glass Marbles (구슬치기)",
+    category: "ปริศนา / ฟิสิกส์",
+    url: "/games/goosl-marbles/index.html",
+    image: "/games/goosl-marbles/thumbnail.png",
+    gradient: "linear-gradient(135deg, #14B8A6 0%, #06B6D4 100%)"
+  },
+  {
       id: "emoji-match",
       title: "Emoji Match",
       category: "ปริศนา / ฝึกสมอง",
