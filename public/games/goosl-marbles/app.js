@@ -11,7 +11,6 @@ function t(key, variables) {
 }
 
 const PUBLIC_GAME_URL = "https://plan9.kr/goosl/";
-const DISCORD_URL = "https://discord.gg/MA6xyVAkt";
 
 const canvas = document.querySelector("#marble-canvas");
 const stage = document.querySelector(".stage");
@@ -53,7 +52,6 @@ const powerMeter = document.querySelector("#power-meter");
 const powerFill = document.querySelector("#power-fill");
 const powerOutput = document.querySelector("#power-output");
 const motionState = document.querySelector("#motion-state");
-const discordLink = document.querySelector(".discord-link");
 const resultTitle = document.querySelector("#result-title");
 const HELP_SEEN_STORAGE_KEY = "goosl-help-seen-v1";
 let helpReturnFocus = helpButton;
@@ -2664,7 +2662,6 @@ canvas.addEventListener("webglcontextlost", (event) => {
 });
 
 try {
-  discordLink.href = DISCORD_URL;
   updateTiltButton();
   setMenuHidden(false);
   

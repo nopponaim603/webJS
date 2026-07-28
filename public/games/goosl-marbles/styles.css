@@ -232,12 +232,11 @@ a {
   border-radius: 12px;
 }
 
-button,
-.discord-link {
+button {
   min-height: 38px;
   padding: 0 13px;
   border: 1px solid rgba(22, 73, 72, 0.12);
-  border-radius: 9px;
+  border-radius: 99px;
   color: #174746;
   background: rgba(255, 255, 255, 0.54);
   box-shadow: 0 2px 8px rgba(28, 68, 67, 0.04);
@@ -252,15 +251,13 @@ button,
     box-shadow 150ms ease;
 }
 
-button:hover,
-.discord-link:hover {
+button:hover {
   border-color: rgba(22, 73, 72, 0.25);
   background: rgba(255, 255, 255, 0.88);
   transform: translateY(-1px);
 }
 
-button:active,
-.discord-link:active {
+button:active {
   transform: translateY(1px);
 }
 
