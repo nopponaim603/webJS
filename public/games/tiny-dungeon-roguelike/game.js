@@ -195,7 +195,7 @@ const UPGRADE_POOL = [
     {
         id: 'lightning_add',
         title: '⚡ Chain Lightning',
-        desc: 'ผ่าสายฟ้าฟาดใส่ศัตรูสุ่มบนหน้าจออย่างรุนแรง',
+        desc: 'ผ่าสายฟ้าฟาดใส่ศัตรูสุ่มที่อยู่ใกล้ตัวอย่างรุนแรง แต่จังหวะโจมตีช้ากว่าอาวุธทั่วไป',
         icon: '⚡',
         classId: 'wizard',
         apply: (player) => {
@@ -533,7 +533,7 @@ class MainGameScene extends Phaser.Scene {
         this.time.addEvent({ delay: 800, callback: this.fireMeleeWeapon, callbackScope: this, loop: true });
         this.time.addEvent({ delay: 1400, callback: this.fireFireballWeapon, callbackScope: this, loop: true }); // slow, hard-hitting
         this.time.addEvent({ delay: 400, callback: this.fireDartsWeapon, callbackScope: this, loop: true });     // fast, short range
-        this.time.addEvent({ delay: 800, callback: this.fireLightningWeapon, callbackScope: this, loop: true });
+        this.time.addEvent({ delay: 1600, callback: this.fireLightningWeapon, callbackScope: this, loop: true }); // narrow AoE, slower than normal fire rate
         this.time.addEvent({ delay: 700, callback: this.fireKnifeWeapon, callbackScope: this, loop: true });
     }
 
@@ -767,17 +767,21 @@ class MainGameScene extends Phaser.Scene {
         }
     }
 
-    // Chain Lightning (universal pickup) — unchanged fire rate
+    // Chain Lightning (Wizard's second weapon) — narrow strike radius, slower fire rate than the norm
     fireLightningWeapon() {
         if (this.isGameOver || this.player.skills.lightning <= 0) return;
 
-        const activeEnemies = this.enemies.getChildren().filter(e => e.active);
-        if (activeEnemies.length === 0) return;
+        // Narrowed scope: only strikes enemies close to the player, not anywhere on screen
+        const strikeRadius = 260;
+        const nearbyEnemies = this.enemies.getChildren().filter(e =>
+            e.active && Phaser.Math.Distance.Between(this.player.x, this.player.y, e.x, e.y) <= strikeRadius
+        );
+        if (nearbyEnemies.length === 0) return;
 
-        Phaser.Utils.Array.Shuffle(activeEnemies);
-        const targetCount = Math.min(this.player.skills.lightning * 2, activeEnemies.length);
+        Phaser.Utils.Array.Shuffle(nearbyEnemies);
+        const targetCount = Math.min(this.player.skills.lightning, nearbyEnemies.length);
         for (let i = 0; i < targetCount; i++) {
-            const enemy = activeEnemies[i];
+            const enemy = nearbyEnemies[i];
             const bolt = this.add.graphics();
             bolt.lineStyle(4, 0x38bdf8, 1);
             bolt.beginPath();

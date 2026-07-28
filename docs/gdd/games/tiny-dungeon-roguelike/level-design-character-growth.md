@@ -112,7 +112,7 @@ for (let i = 0; i < this.player.skills.fireball; i++) { /* one shot, 120ms apart
 proj.damage = 65 * this.player.damageMult;
 ```
 
-All shots in a volley target whatever `getNearestEnemy()` returns at cast time. Unlike the other three weapons, Fireball has its **own dedicated timer at a slower 1400ms cadence** (`fireFireballWeapon`, vs. the 800ms shared by Melee/Lightning and the 400ms of Darts) — this is the mechanical expression of "ยิงแรงแต่ยิงช้า" (hits hard, fires slow).
+All shots in a volley target whatever `getNearestEnemy()` returns at cast time. Fireball has its **own dedicated timer at a slower 1400ms cadence** (`fireFireballWeapon`, vs. the 800ms baseline of Melee and the 400ms of Darts) — this is the mechanical expression of "ยิงแรงแต่ยิงช้า" (hits hard, fires slow).
 
 | Skill Level | Shots/volley | Dmg/shot | Dmg/volley (same target) | Sustained DPS (single target) |
 |:---:|:---:|:---:|:---:|:---:|
@@ -131,7 +131,7 @@ proj.damage = 10 * this.player.damageMult;
 this.time.delayedCall(550, () => proj.destroy()); // short lifetime = short range
 ```
 
-Darts have their **own dedicated timer at a faster 400ms cadence** (`fireDartsWeapon`, twice as often as the 800ms shared by Melee/Lightning) and a short `550ms` projectile lifetime — at the dart's `220px/s` travel speed that caps effective range at roughly **120px**, about a third of the old 330px range. This is the mechanical expression of "โจมตีเร็วแต่ระยะสั้น" (attacks fast, but short range).
+Darts have their **own dedicated timer at a faster 400ms cadence** (`fireDartsWeapon`, twice as often as the 800ms baseline of Melee) and a short `550ms` projectile lifetime — at the dart's `220px/s` travel speed that caps effective range at roughly **120px**, about a third of the old 330px range. This is the mechanical expression of "โจมตีเร็วแต่ระยะสั้น" (attacks fast, but short range).
 
 | Skill Level | Darts/volley | Dmg/dart | Total volley dmg (if all connect) | Effective range |
 |:---:|:---:|:---:|:---:|:---:|
@@ -163,17 +163,23 @@ Locked to `classId: 'knight'` — only Knight ever sees this card, and only Knig
 ### 4.5 Chain Lightning — Wizard's second weapon, starts at 0 (`fireLightningWeapon`)
 
 ```js
-const targetCount = Math.min(this.player.skills.lightning * 2, activeEnemies.length);
+const strikeRadius = 260; // narrowed from "anywhere on screen" to a radius around the player
+const nearbyEnemies = this.enemies.getChildren().filter(e =>
+    e.active && Phaser.Math.Distance.Between(this.player.x, this.player.y, e.x, e.y) <= strikeRadius
+);
+const targetCount = Math.min(this.player.skills.lightning, nearbyEnemies.length); // 1 target/level, not 2
 this.damageEnemy(enemy, 40 * this.player.damageMult); // per bolt, instant
 ```
 
-| Skill Level | Random targets hit | Dmg/bolt | Total dmg (if enough enemies present) |
-|:---:|:---:|:---:|:---:|
-| 1 | 2 | 40×`dmg` | 80×`dmg` |
-| 2 | 4 | 40×`dmg` | 160×`dmg` |
-| 3 | 6 | 40×`dmg` | 240×`dmg` |
+Lightning also has its **own dedicated timer at a slower 1600ms cadence** (double the 800ms "normal" tier shared by Melee/Orbit) — narrower scope traded for a longer cooldown between strikes.
 
-Locked to `classId: 'wizard'` — the second half of Wizard's kit alongside Fireball (§4.2). Where Fireball is a slow single-target nuke on a long cooldown, Lightning is instant and multi-target, giving the Wizard an answer to a spread-out crowd instead of only a lone priority target.
+| Skill Level | Targets hit (within 260px) | Dmg/bolt | Total dmg (if enough nearby enemies) |
+|:---:|:---:|:---:|:---:|
+| 1 | 1 | 40×`dmg` | 40×`dmg` |
+| 2 | 2 | 40×`dmg` | 80×`dmg` |
+| 3 | 3 | 40×`dmg` | 120×`dmg` |
+
+Locked to `classId: 'wizard'` — the second half of Wizard's kit alongside Fireball (§4.2). Where Fireball is a slow single-target nuke on a long cooldown, Lightning is instant and multi-target, giving the Wizard an answer to a small nearby cluster instead of only a lone priority target — but no longer a screen-wide panic button: it only reaches enemies within `260px` of the player, and only 1 per level (down from 2), on the slowest fire rate of the two.
 
 ### 4.6 Critical Knife — Rogue's second weapon, starts at 0 (`fireKnifeWeapon`)
 
@@ -231,8 +237,9 @@ Because each class's deck is only 6 cards (2 weapons + 4 stat boosts) instead of
 | Darts projectile lifetime | `fireDartsWeapon` | `550ms` (→ ~120px range at 220px/s) | The "short range" half of Rogue's trade-off — higher = darts reach further |
 | Darts base count | `fireDartsWeapon` | `4 + (lvl-1)*2` | Denser ring per level |
 | Orbit per-enemy cooldown | `updateOrbitBlades` | `400ms` | Shorter = more blades start mattering for single-target DPS too |
-| Lightning fire rate | timer in `create()` | `800ms` | Unchanged — not part of this pass |
-| Lightning targets/level | `fireLightningWeapon` | `lvl * 2` | More simultaneous nuke targets per level |
+| Lightning fire rate | timer in `create()` | `1600ms` | Slower than the 800ms "normal" tier by design — lower makes Lightning less of a commitment |
+| Lightning strike radius | `fireLightningWeapon` | `260px` | Narrowed AoE — higher widens it back toward the old screen-wide behavior |
+| Lightning targets/level | `fireLightningWeapon` | `lvl` (was `lvl * 2`) | Fewer simultaneous nuke targets per level than before this pass |
 | Knife fire rate | timer in `create()` | `700ms` | Faster = more crit rolls per second |
 | Knife crit chance per level | `fireKnifeWeapon` | `0.2 + (lvl-1)*0.1`, capped `0.8` | Higher cap = crits become closer to guaranteed at max level |
 | Knife dmg (normal / crit) | `fireKnifeWeapon` | `22` / `44` (2×) | Raising the multiplier makes high-level Knife swingier, not just stronger |
