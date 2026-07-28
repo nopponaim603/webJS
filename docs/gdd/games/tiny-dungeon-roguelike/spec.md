@@ -39,7 +39,7 @@
 |:---:|:---:|:---:|---|:---:|:---:|---|---|
 | ![Knight](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0096.png) | Frame 96 | `tile_0096.png` | **Knight (อัศวิน)** | 150 HP | 95 px/s | Melee Slash (30 dmg, 130° cone) | ถึกทนที่สุดในเกม เดินช้าที่สุด โจมตีระยะประชิดฟันเป็นวงกว้าง 130 องศาเข้าหาศัตรูที่ใกล้ที่สุด |
 | ![Wizard](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0084.png) | Frame 84 | `tile_0084.png` | **Wizard (จอมเวท)** | 65 HP | 125 px/s | Fireball Spell (65 dmg, ทุก 1.4s) | เลือดน้อยที่สุด เปราะบางที่สุด ยิงช้าแต่ยิงแรงที่สุดในเกม ใส่เป้าหมายเดียวจากระยะไกล |
-| ![Rogue](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0086.png) | Frame 86 | `tile_0086.png` | **Rogue (จอมโจร)** | 100 HP | 165 px/s | Poison Darts (10 dmg × 4, ทุก 0.4s) | เคลื่อนที่เร็วที่สุดในเกม โจมตีถี่ที่สุดในเกมแต่ระยะสั้น ต้องเข้าประชิดจึงจะโดน |
+| ![Rogue](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0086.png) | Frame 86 | `tile_0086.png` | **Rogue (จอมโจร)** | 100 HP | 165 px/s | Critical Knife (22 dmg, โอกาส crit 20%+) | เคลื่อนที่เร็วที่สุดในเกม ขว้างมีดใส่ศัตรูที่ใกล้ที่สุด มีโอกาสติด critical โดนแรงขึ้น 2 เท่า |
 
 ---
 
@@ -110,7 +110,7 @@ graph TD
 2. **Wave & Scaling**: จำนวนมอนสเตอร์สูงสุดที่สปอว์น, ความหลากหลายของศัตรู, และค่า HP จะเพิ่มขึ้นตามทั้งเวลาที่รอด **และ** เลเวลของผู้เล่น (ใครเลเวลไวจะโดนกดดันไวตาม) นอกจากนี้ยังมี **Swarm Wave** ที่สุ่มเกิดขึ้นเป็นระยะเพื่อรุมผู้เล่นจากทิศทางเดียวกันเป็นชุดใหญ่ — รายละเอียดสูตรทั้งหมดอยู่ใน [Level Design: Monster Spawning & Difficulty Pacing](level-design-monster-spawning.md)
 3. **Roguelike Skill Cards Level-Up System**:
    - เมื่อเกจ XP เต็ม เกมจะหยุดเวลาชั่วคราวและเปิด Modal UI
-   - ผู้เล่นเลือกอัปเกรด 1 จาก 3 ความสามารถแบบสุ่ม โดยการ์ดอาวุธถูกล็อกตาม Class (Knight: ดาบหมุน+ดาบวงกว้าง, Wizard: ลูกไฟ+สายฟ้า, Rogue: มีดพิษ+มีด critical) ส่วนการ์ดสเตตัส (Max HP, Speed, พลังโจมตี, ดูดเลือด) เปิดให้ทุก Class เลือกได้เหมือนกัน — รายละเอียดทั้งหมดอยู่ใน [Level Design: Player Character Growth per Class](level-design-character-growth.md)
+   - ผู้เล่นเลือกอัปเกรด 1 จาก 3 ความสามารถแบบสุ่ม โดยการ์ดอาวุธถูกล็อกตาม Class (Knight: ดาบหมุน+ดาบวงกว้าง, Wizard: ลูกไฟ+สายฟ้า, Rogue: มีด critical+มีดพิษ) ส่วนการ์ดสเตตัส (Max HP, Speed, พลังโจมตี, ดูดเลือด) เปิดให้ทุก Class เลือกได้เหมือนกัน — รายละเอียดทั้งหมดอยู่ใน [Level Design: Player Character Growth per Class](level-design-character-growth.md)
 4. **Vampiric Drain & Health**: สามารถอัปเกรดความสามารถในการฟื้นฟู HP เมื่อฆ่ามอนสเตอร์ได้
 
 ---

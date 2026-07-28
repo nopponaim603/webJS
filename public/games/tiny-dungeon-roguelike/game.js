@@ -155,8 +155,8 @@ const HERO_CLASSES = {
         frame: 86,
         maxHp: 100,
         speed: 165,
-        desc: 'เคลื่อนที่ว่องไวที่สุดในเกม เลือดปานกลาง ยิงมีดกระจายหลายเล่มรอบตัวแต่ดาเมจต่อเล่มต่ำ',
-        weapon: 'darts'
+        desc: 'เคลื่อนที่ว่องไวที่สุดในเกม เลือดปานกลาง ขว้างมีดใส่ศัตรูที่ใกล้ที่สุด มีโอกาสติด critical โดนแรงขึ้น 2 เท่า',
+        weapon: 'knife'
     }
 };
 
@@ -491,7 +491,7 @@ class MainGameScene extends Phaser.Scene {
             darts: this.heroConfig.weapon === 'darts' ? 1 : 0,
             melee: this.heroConfig.weapon === 'melee' ? 1 : 0,
             lightning: 0,
-            knife: 0
+            knife: this.heroConfig.weapon === 'knife' ? 1 : 0
         };
 
         // Tracks how many times each upgrade card has been picked, for the HUD skill tray

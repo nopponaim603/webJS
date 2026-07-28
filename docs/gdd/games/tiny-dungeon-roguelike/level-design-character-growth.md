@@ -15,13 +15,13 @@ All three classes level up through the same XP curve and draw from the same 4 st
 |---|---|
 | **Knight** | 🌀 Cleave Slash (starting) + ⚔️ Orbiting Blades |
 | **Wizard** | 🔥 Fireball Spell (starting) + ⚡ Chain Lightning |
-| **Rogue** | 🗡️ Poison Darts (starting) + 🔪 Critical Knife |
+| **Rogue** | 🔪 Critical Knife (starting) + 🗡️ Poison Darts |
 
 Class identity comes from three levers:
 
 1. **Different starting baseline** (`maxHp`, `speed` in `HERO_CLASSES`) — the flat bonuses from stat cards land on a different foundation per class.
 2. **A free head start on one weapon, plus a guaranteed second** — each class begins at skill level 1 in its signature weapon, and its other weapon (starting at 0) is the *only* extra weapon card that will ever appear in its level-up offers — never diluted by, or competing against, the other four classes' weapon cards.
-3. **The two weapons in a class's pair scale along deliberately different axes** (e.g. Knight's reach-based cone vs. always-on 360° ring; Wizard's slow-hard single-target nuke vs. instant multi-target nuke; Rogue's fast-short-range spread vs. gambler's crit throw) — so investing in "the other weapon" always feels like a distinct playstyle, not a numerical clone of the starting one.
+3. **The two weapons in a class's pair scale along deliberately different axes** (e.g. Knight's reach-based cone vs. always-on 360° ring; Wizard's slow-hard single-target nuke vs. instant multi-target nuke; Rogue's gambler's crit throw vs. fast-short-range spread) — so investing in "the other weapon" always feels like a distinct playstyle, not a numerical clone of the starting one.
 
 ---
 
@@ -123,7 +123,7 @@ All shots in a volley target whatever `getNearestEnemy()` returns at cast time. 
 
 **Growth axis: single-target burst.** Every level stacks the *entire* volley onto the same nearest enemy, so Fireball scales as pure focused burst — fitting the Wizard's glass-cannon identity (lowest HP baseline, longest cooldown, biggest single hit): a Wizard commits to a slow windup, then deletes a priority target before it closes the distance.
 
-### 4.3 Poison Darts — Rogue's starting weapon (`fireDartsWeapon`)
+### 4.3 Poison Darts — Rogue's second weapon, starts at 0 (`fireDartsWeapon`)
 
 ```js
 const dartCount = 4 + (this.player.skills.darts - 1) * 2; // full-circle spread
@@ -181,7 +181,7 @@ Lightning also has its **own dedicated timer at a slower 1600ms cadence** (doubl
 
 Locked to `classId: 'wizard'` — the second half of Wizard's kit alongside Fireball (§4.2). Where Fireball is a slow single-target nuke on a long cooldown, Lightning is instant and multi-target, giving the Wizard an answer to a small nearby cluster instead of only a lone priority target — but no longer a screen-wide panic button: it only reaches enemies within `260px` of the player, and only 1 per level (down from 2), on the slowest fire rate of the two.
 
-### 4.6 Critical Knife — Rogue's second weapon, starts at 0 (`fireKnifeWeapon`)
+### 4.6 Critical Knife — Rogue's starting weapon (`fireKnifeWeapon`)
 
 ```js
 const critChance = Math.min(0.2 + (this.player.skills.knife - 1) * 0.1, 0.8);
@@ -198,7 +198,7 @@ A single knife thrown at the nearest enemy every 700ms, sharing the `poison_dart
 | 4 | 50% | 22×`dmg` | 44×`dmg` | 33.0×`dmg` |
 | 7 | 80% (cap) | 22×`dmg` | 44×`dmg` | 39.6×`dmg` |
 
-**Growth axis: crit chance, not damage or count.** Unlike every other weapon, a Critical Knife level-up doesn't add projectiles, range, or a flat damage bump — it raises the odds of the existing 2× multiplier landing, capped at 80% so a throw is never fully guaranteed to crit. Locked to `classId: 'rogue'` — the second half of Rogue's kit alongside Poison Darts (§4.3): Darts is reliable, wide, close-range chip damage, while Knife is a single volatile long-range gamble, giving the Rogue a low-risk (spread) and a high-variance (crit) option side by side.
+**Growth axis: crit chance, not damage or count.** Unlike every other weapon, a Critical Knife level-up doesn't add projectiles, range, or a flat damage bump — it raises the odds of the existing 2× multiplier landing, capped at 80% so a throw is never fully guaranteed to crit. Locked to `classId: 'rogue'` — paired with Poison Darts (§4.3) as Rogue's kit: Knife is a single volatile long-range gamble, while Darts is reliable, wide, close-range chip damage, giving the Rogue a high-variance (crit) option from the start and a low-risk (spread) option to grow into.
 
 ---
 
@@ -210,7 +210,7 @@ Weapon cards are locked (§3), so "build diversity" no longer comes from *which 
 |---|---|---|---|---|
 | **Knight** | 🌀 Cleave Slash + ⚔️ Orbiting Blades | 150 HP / 95 spd, Melee Lv1 | Cleave Slash + Orbiting Blades + ❤️ HP | Melee rewards standing in a crowd within its cone; Orbit adds passive 360° coverage for whatever the cone missed; more HP lets the Knight tank long enough for both to matter |
 | **Wizard** | 🔥 Fireball Spell + ⚡ Chain Lightning | 65 HP / 125 spd, Fireball Lv1 | Fireball + 💥 Dmg + Lightning | Fireball's growth is pure single-target burst that `damageMult` scales hardest; Lightning covers the crowd-control gap Fireball leaves; HP is a safety net for the lowest baseline in the game |
-| **Rogue** | 🗡️ Poison Darts + 🔪 Critical Knife | 100 HP / 165 spd, Darts Lv1 | Darts + 👟 Speed + Critical Knife | Darts' spread growth pairs with the fastest movement speed to hit-and-run through packs; Critical Knife adds a long-range gamble option once the reliable spread is established |
+| **Rogue** | 🔪 Critical Knife + 🗡️ Poison Darts | 100 HP / 165 spd, Knife Lv1 | Critical Knife + 👟 Speed + Poison Darts | Critical Knife's crit-chance growth pairs with the fastest movement speed to hit-and-run, gambling on burst while repositioning; Poison Darts adds a reliable close-range spread once the Rogue commits to diving into a crowd |
 
 Because each class's deck is only 6 cards (2 weapons + 4 stat boosts) instead of the old 10-card shared pool, a class reaches "has drawn everything at least once" much faster — variance now lives in *ordering* (does Wizard see Lightning at level 3 or level 8?) rather than in *whether* a class ever sees its second weapon at all.
 
