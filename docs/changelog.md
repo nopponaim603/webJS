@@ -3,6 +3,18 @@
 **Project:** Game Portfolio (`webJS`)  
 **Maintained by:** Antigravity AI & Dev Team  
 
+## [1.8.0] - 2026-07-28
+
+### Added
+- **Goosl Glass Marbles GDD Spec ([docs/gdd/games/goosl-marbles/spec.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/goosl-marbles/spec.md))**:
+  - จัดทำเอกสารข้อกำหนดการพัฒนาเกม (GDD & Dev Specs) สำหรับ **Goosl Glass Marbles (구슬치기)** ครอบคลุม:
+    - กลไกการเล่นโหมดหลัก ยิงเคาะลูกแก้วเป้าหมาย 7 ลูกออกนอกวงภายใน 6 ครั้ง
+    - โหมดเล่นอิสระ (Free Play Mode) และระบบเอียงเครื่อง (Tilt Motion Sensor)
+    - สถาปัตยกรรม WebGL 2 Ray-marching Glass Shader, 2D Circle Elastic Physics Engine
+    - ระบบสังเคราะห์เสียงกระทบแก้ว (Glass Clinking SFX) ด้วย Web Audio API
+    - ระบบสลับภาษาอัตโนมัติ (TH, EN, KO)
+  - ลงทะเบียนดัชนีคลังเกม G016 ใน [docs/gdd/00-concept.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/00-concept.md) และ [docs/index.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/index.md) สมบูรณ์
+
 ## [1.7.0] - 2026-07-28
 
 ### Added

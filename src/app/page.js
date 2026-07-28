@@ -8,13 +8,21 @@ import buildInfo from '../../public/build.json';
 
 const initialGames = [
   {
-      id: "emoji-match",
-      title: "Emoji Match",
-      category: "ปริศนา / ฝึกสมอง",
-      url: "/games/emoji-match/index.html",
-      image: "https://images.unsplash.com/photo-1614332287897-cdc485fa562d?w=400&h=400&fit=crop",
-      gradient: "linear-gradient(135deg, #A78BFA 0%, #EC4899 100%)"
-    },
+    id: "card-memory",
+    title: "Card Memory Match (Kenney)",
+    category: "ปริศนา / ฝึกสมอง",
+    url: "/games/card-memory/index.html",
+    image: "https://images.unsplash.com/photo-1541278107931-e006523892df?w=400&h=400&fit=crop",
+    gradient: "linear-gradient(135deg, #10B981 0%, #3B82F6 100%)"
+  },
+  {
+    id: "goosl-marbles",
+    title: "Goosl Glass Marbles (구슬치기)",
+    category: "ปริศนา / ฟิสิกส์",
+    url: "/games/goosl-marbles/index.html",
+    image: "/games/goosl-marbles/thumbnail.png",
+    gradient: "linear-gradient(135deg, #14B8A6 0%, #06B6D4 100%)"
+  },
     {
       id: "2048-cubes",
       title: "2048 Cubes",
@@ -52,7 +60,7 @@ const initialGames = [
       title: "Kenney 3D Platformer (Babylon.js)",
       category: "Babylon 3D Engine",
       url: "/games/3d-platformer/index.html",
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85f32e?w=400&h=400&fit=crop",
+      image: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=400&h=400&fit=crop",
       gradient: "linear-gradient(135deg, #10b981 0%, #059669 100%)"
     },
     {
@@ -60,7 +68,7 @@ const initialGames = [
       title: "Kenney Match 3 (Phaser 2D)",
       category: "Phaser 2D Engine",
       url: "/games/match3/index.html",
-      image: "https://images.unsplash.com/photo-1605901309584-818e25360a67?w=400&h=400&fit=crop",
+      image: "https://images.unsplash.com/photo-1563089145-599997674d42?w=400&h=400&fit=crop",
       gradient: "linear-gradient(135deg, #F97316 0%, #FB923C 100%)"
     },
 ];
