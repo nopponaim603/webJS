@@ -1,0 +1,225 @@
+{
+  "main": {
+    "id": "3041e71a8c0b1f34",
+    "type": "split",
+    "children": [
+      {
+        "id": "8ba0efa72c2e54be",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7078f206382bf3eb",
+            "type": "leaf",
+            "state": {
+              "type": "kanban",
+              "state": {
+                "file": "docs/agile/Kanban-board.md",
+                "kanbanViewState": {
+                  "kanban-plugin": "board",
+                  "list-collapse": [
+                    false,
+                    false,
+                    false
+                  ]
+                }
+              },
+              "icon": "lucide-trello",
+              "title": "Kanban-board"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "a6b702edff369edc",
+    "type": "split",
+    "children": [
+      {
+        "id": "0e595d9b84c3fd72",
+        "type": "tabs",
+        "dimension": 71.62962962962963,
+        "children": [
+          {
+            "id": "528b36bbe731f8ce",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "70bd0243108baece",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "d692f0c7c18085e7",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      },
+      {
+        "id": "4439ca3cbb4b0dc4",
+        "type": "tabs",
+        "dimension": 28.370370370370367,
+        "children": [
+          {
+            "id": "00565ab91a0842df",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {},
+              "icon": "calendar-with-checkmark",
+              "title": "Calendar"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "53c853e632beb605",
+    "type": "split",
+    "children": [
+      {
+        "id": "5d3c85c812ffd11c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "702176650092ffac",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "docs/agile/Kanban-board.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Kanban-board"
+            }
+          },
+          {
+            "id": "19334a89d5818f75",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "630e28b3401b56d3",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "5378d375cb30023e",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "59b2af7d06285f09",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false,
+      "obsidian-kanban:Create new board": false,
+      "obsidian-excalidraw-plugin:New drawing": false,
+      "templater-obsidian:Templater": false,
+      "obsidian-git:Open Git source control": false
+    }
+  },
+  "active": "528b36bbe731f8ce",
+  "lastOpenFiles": [
+    "docs/agile/user-stories/archive/US-02-03-tile-match.md",
+    "docs/agile/user-stories/archive/US-02-02-2048-cubes.md",
+    "docs/agile/user-stories/archive/US-02-01-emoji-match.md",
+    "docs/agile/user-stories/archive/US-01-03-search-filter.md",
+    "docs/agile/user-stories/archive/US-01-02-modal-loader.md",
+    "docs/agile/user-stories/archive/US-01-01-portfolio-cards.md",
+    "docs/agile/user-stories/archive",
+    "docs/agile/kanban.md",
+    "docs/agile/Kanban-board.md",
+    "2026-07-28.md"
+  ]
+}
