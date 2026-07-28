@@ -34,8 +34,10 @@
 | G014 | `tiny-farm-tycoon` | Tiny Farm Tycoon | Phaser 3 | `public/games/tiny-farm-tycoon/` |
 | G015 | `lunar-lander` | Lunar Lander Gravity | Phaser Physics | `public/games/lunar-lander/` |
 | G016 | `goosl-marbles` | Goosl Glass Marbles | WebGL 2 / Shader | `public/games/goosl-marbles/` |
+| G017 | `tiny-dungeon-roguelike` | Tiny Dungeon Survivor | Phaser 2D / Roguelike | `public/games/tiny-dungeon-roguelike/` |
 
 ### 🎮 Individual Game Specifications (`docs/gdd/games/`)
+- [Tiny Dungeon Survivor (Action Roguelike)](./gdd/games/tiny-dungeon-roguelike/spec.md)
 - [Space Shooter (Phaser 2D)](./gdd/games/space-shooter/spec.md)
 - [Emoji Match](./gdd/games/emoji-match/spec.md)
 - [2048 Cubes](./gdd/games/2048-cubes/spec.md)

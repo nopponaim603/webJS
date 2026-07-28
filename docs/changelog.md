@@ -6,6 +6,9 @@
 ## [1.10.0] - 2026-07-28
 
 ### Added & Upgraded
+- **Tiny Dungeon Survivor GDD Spec ([docs/gdd/games/tiny-dungeon-roguelike/spec.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/tiny-dungeon-roguelike/spec.md))**:
+  - จัดทำเอกสาร GDD ฉบับสมบูรณ์สำหรับเกม **Tiny Dungeon Survivor (G017)**
+  - ครอบคลุม Overview, Asset Pack breakdown (`kenney_tiny-dungeon`), Core Loop Sequence Diagram (Mermaid), Skill Upgrade System (Roguelike Card Upgrades), Controls & Input Mapping และ System Architecture
 - **Cross-Platform Responsive & Mobile Portrait Standard ([docs/wiki/guidelines/cross-platform-display-standard.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/wiki/guidelines/cross-platform-display-standard.md))**:
   - จัดทำเอกสารข้อกำหนดมาตรฐานการพัฒนาเกมที่ต้องรองรับทั้ง **PC (Desktop Landscape)** และ **Mobile แนวตั้ง (Portrait First)**
   - กำหนด Base Aspect Ratio `9:16` (720x1280 px / 540x960 px), Safe Area Top/Bottom Insets

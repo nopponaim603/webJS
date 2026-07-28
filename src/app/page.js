@@ -9,6 +9,14 @@ import buildInfo from '../../public/build.json';
 
 const initialGames = [
   {
+    id: "tiny-dungeon-roguelike",
+    title: "Tiny Dungeon Survivor (Action Roguelike)",
+    category: "Phaser 2D Engine",
+    url: "/games/tiny-dungeon-roguelike/index.html",
+    image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&h=400&fit=crop",
+    gradient: "linear-gradient(135deg, #00F2FE 0%, #7F00FF 100%)"
+  },
+  {
     id: "card-memory",
     title: "Card Memory Match (Kenney)",
     category: "ปริศนา / ฝึกสมอง",
