@@ -12,6 +12,7 @@
 - [02-narrative.md — Story & Player Experience](./gdd/02-narrative.md)
 - [03-art-direction.md — Visual Style & UI/UX Guidelines](./gdd/03-art-direction.md)
 - [04-audio-direction.md — Music & Sound Effects Specs](./gdd/04-audio-direction.md)
+- [05-asset-game-proposals.md — Asset Expansion Game Proposals](./gdd/05-asset-game-proposals.md)
 
 ### 🎮 Game Index Code Names
 

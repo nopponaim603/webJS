@@ -3,6 +3,20 @@
 **Project:** Game Portfolio (`webJS`)  
 **Maintained by:** Antigravity AI & Dev Team  
 
+## [1.6.0] - 2026-07-28
+
+### Added
+- **Asset Expansion Game Proposals ([docs/gdd/05-asset-game-proposals.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/05-asset-game-proposals.md))**:
+  - วิเคราะห์ Asset Packs ทั้งหมดใน `public/assets/` และจัดทำข้อเสนอแนวคิดการพัฒนาเป็นมินิเกมใหม่ 7 เกม:
+    1. **G009 Ocean Frenzy** (`kenney_fish-pack_2`): เกมปลาใหญ่กินปลาเล็ก (Phaser 3)
+    2. **G010 Dice Quest** (`kenney_boardgame-pack`): เกมกระดานวางกลยุทธ์ทอยลูกเต๋า (Vanilla JS / Phaser)
+    3. **G011 Pico Tower Climber** (`kenney_pico-8-platformer`): เกมพิกเซล 8-bit ไต่หอคอยไร้ขีดจำกัด (Phaser 3 Tilemap)
+    4. **G012 Pixel Bullet Hell** (`kenney_pixel-shmup`): เกมยานยิงแนวตั้งยิงสู้บอส (Phaser 3)
+    5. **G013 Block Collapse** (`kenney_puzzle-pack-2`): เกมปริศนาสลับและแตะทำลายบล็อกสี (Canvas 2D)
+    6. **G014 Tiny Farm Tycoon** (`kenney_tiny-farm`): เกมผสานพืชผลและบริหารฟาร์มพิกเซล (Phaser 3 Top-down)
+    7. **G015 Lunar Lander Gravity** (`kenney_simple-space`): เกมจรวดลงจอดดาวเคราะห์ระบบฟิสิกส์ (Phaser Physics)
+  - เพิ่ม Game Development Summary Matrix และแผนงานปรับใช้ร่วมกับสถาปัตยกรรม Modal Iframe / High Score System
+
 ## [1.5.0] - 2026-07-28
 
 ### Updated / Synchronized

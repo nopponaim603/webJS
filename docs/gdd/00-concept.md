@@ -71,6 +71,7 @@ graph TD
 - Core Mechanics: [Core Mechanics](./01-mechanics.md)
 - Art Direction: [Art & UI/UX Guidelines](./03-art-direction.md)
 - Audio Direction: [Audio Direction](./04-audio-direction.md)
+- Asset Proposals Roadmap: [Asset Game Proposals & Roadmap](./05-asset-game-proposals.md)
 - Software Design: [System Design](../software/01-system-design.md)
 - Product Backlog: [Product Backlog](../agile/01-product-backlog.md)
 - Sprint Planning: [Sprint Planning & Roadmap](../agile/02-sprint-planning.md)
