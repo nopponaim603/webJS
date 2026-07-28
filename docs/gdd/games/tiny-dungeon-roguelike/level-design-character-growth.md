@@ -2,7 +2,7 @@
 
 **Game:** Tiny Dungeon Survivor (`tiny-dungeon-roguelike`)
 **File:** [`public/games/tiny-dungeon-roguelike/game.js`](../../../../public/games/tiny-dungeon-roguelike/game.js)
-**Key sections:** `HERO_CLASSES`, `UPGRADE_POOL`, `MainGameScene.levelUp()`, `.fireMeleeWeapon()`, `.fireFireballWeapon()`, `.fireDartsWeapon()`, `.fireLightningWeapon()`, `.performMeleeAttack()`, `.updateOrbitBlades()`
+**Key sections:** `HERO_CLASSES`, `UPGRADE_POOL`, `MainGameScene.levelUp()`, `.fireMeleeWeapon()`, `.fireFireballWeapon()`, `.fireDartsWeapon()`, `.fireLightningWeapon()`, `.fireKnifeWeapon()`, `.performMeleeAttack()`, `.updateOrbitBlades()`, `.damageEnemy()`
 **Last Updated:** 2026-07-28
 
 ---
@@ -58,6 +58,7 @@ Note: `this.level` also feeds directly into monster difficulty (population cap, 
 | 🗡️ Poison Darts | `skills.darts += 1` | Linear, uncapped | See §4.3 |
 | ⚔️ Orbiting Blades | `skills.orbit += 1` | Linear, uncapped | See §4.4 |
 | ⚡ Chain Lightning | `skills.lightning += 1` | Linear, uncapped | See §4.5 |
+| 🔪 Critical Knife | `skills.knife += 1` | Linear, uncapped | See §4.6 |
 | ❤️ Max HP +30% | `maxHp += 30`, heal `+30` instantly | Flat, additive per pick | Larger relative gain for low-HP classes |
 | 👟 Movement Speed +20% | `speedBonus += 0.2` (starts at `1.0`) | Additive to multiplier | 3rd pick → `speedBonus = 1.6` (+60% over base, not compounding) |
 | 💥 Attack Power +25% | `damageMult += 0.25` (starts at `1.0`) | Additive to multiplier | Applies to **all** weapons the player owns, not just the starting one |
@@ -161,6 +162,25 @@ this.damageEnemy(enemy, 40 * this.player.damageMult); // per bolt, instant
 
 No class starts with Lightning — it must be drawn as a card by any of the three, at which point it becomes the highest raw total-damage weapon per level (multi-target nuke), available equally to all classes as a build-defining pickup.
 
+### 4.6 Critical Knife — universal pickup, no starting class (`fireKnifeWeapon`)
+
+```js
+const critChance = Math.min(0.2 + (this.player.skills.knife - 1) * 0.1, 0.8);
+const isCrit = Math.random() < critChance;
+proj.damage = (isCrit ? 22 * 2 : 22) * this.player.damageMult;
+```
+
+A single knife thrown at the nearest enemy every 700ms, sharing the `poison_dart` sprite (Frame 104) visually but behaving as its own weapon — one precise throw instead of a circular spread. On a critical hit, `damageEnemy()` renders a `CRIT!` floating label and a fading gold-tinted **Frame 62 sparkle** (`crit_spark`) over the enemy, in addition to the normal hit flash and damage text.
+
+| Skill Level | Crit Chance | Normal Dmg | Crit Dmg (2×) | Expected Dmg/throw |
+|:---:|:---:|:---:|:---:|:---:|
+| 1 | 20% | 22×`dmg` | 44×`dmg` | 26.4×`dmg` |
+| 2 | 30% | 22×`dmg` | 44×`dmg` | 28.6×`dmg` |
+| 4 | 50% | 22×`dmg` | 44×`dmg` | 33.0×`dmg` |
+| 7 | 80% (cap) | 22×`dmg` | 44×`dmg` | 39.6×`dmg` |
+
+**Growth axis: crit chance, not damage or count.** Unlike every other weapon, a Critical Knife level-up doesn't add projectiles, range, or a flat damage bump — it raises the odds of the existing 2× multiplier landing, capped at 80% so a throw is never fully guaranteed to crit. This makes Knife the volatility/gambler's pick of the pool: low-level Knife is mostly whiffing on the crit and hitting for a modest 22, while a heavily-invested Knife build becomes a near-guaranteed burst hit — appealing as a supplementary pickup for any class (particularly pairing well with Wizard's `damage_boost`-heavy build, since the multiplier compounds with `damageMult`).
+
 ---
 
 ## 5. Class Growth Arcs
@@ -199,6 +219,9 @@ A run that draws unfavorable cards (e.g. a Wizard offered no `damage_boost` for 
 | Orbit per-enemy cooldown | `updateOrbitBlades` | `400ms` | Shorter = more blades start mattering for single-target DPS too |
 | Lightning fire rate | timer in `create()` | `800ms` | Unchanged — not part of this pass |
 | Lightning targets/level | `fireLightningWeapon` | `lvl * 2` | More simultaneous nuke targets per level |
+| Knife fire rate | timer in `create()` | `700ms` | Faster = more crit rolls per second |
+| Knife crit chance per level | `fireKnifeWeapon` | `0.2 + (lvl-1)*0.1`, capped `0.8` | Higher cap = crits become closer to guaranteed at max level |
+| Knife dmg (normal / crit) | `fireKnifeWeapon` | `22` / `44` (2×) | Raising the multiplier makes high-level Knife swingier, not just stronger |
 
 ---
 

@@ -208,6 +208,15 @@ const UPGRADE_POOL = [
         }
     },
     {
+        id: 'knife_add',
+        title: '🔪 Critical Knife',
+        desc: 'ขว้างมีดใส่ศัตรูที่ใกล้ที่สุด มีโอกาสติด critical โดนแรงขึ้น 2 เท่า',
+        icon: '🔪',
+        apply: (player) => {
+            player.skills.knife = (player.skills.knife || 0) + 1;
+        }
+    },
+    {
         id: 'hp_boost',
         title: '❤️ Max HP +30%',
         desc: 'เพิ่มค่าพลังชีวิตสูงสุดและฟื้นฟูเลือดทันที 30 หน่วย',
@@ -475,8 +484,12 @@ class MainGameScene extends Phaser.Scene {
             fireball: this.heroConfig.weapon === 'fireball' ? 1 : 0,
             darts: this.heroConfig.weapon === 'darts' ? 1 : 0,
             melee: this.heroConfig.weapon === 'melee' ? 1 : 0,
-            lightning: 0
+            lightning: 0,
+            knife: 0
         };
+
+        // Tracks how many times each upgrade card has been picked, for the HUD skill tray
+        this.player.upgradeCounts = { [`${this.heroConfig.weapon}_add`]: 1 };
 
         // 3. Camera Setup
         this.cameras.main.setBounds(0, 0, MAP_WIDTH, MAP_HEIGHT);
@@ -515,6 +528,7 @@ class MainGameScene extends Phaser.Scene {
         this.time.addEvent({ delay: 1400, callback: this.fireFireballWeapon, callbackScope: this, loop: true }); // slow, hard-hitting
         this.time.addEvent({ delay: 400, callback: this.fireDartsWeapon, callbackScope: this, loop: true });     // fast, short range
         this.time.addEvent({ delay: 800, callback: this.fireLightningWeapon, callbackScope: this, loop: true });
+        this.time.addEvent({ delay: 700, callback: this.fireKnifeWeapon, callbackScope: this, loop: true });
     }
 
     createDungeonArena(mapW, mapH) {
@@ -776,6 +790,29 @@ class MainGameScene extends Phaser.Scene {
         }
     }
 
+    // Critical Knife (universal pickup) — a single precise throw at the nearest enemy;
+    // growth axis is crit CHANCE, not damage or count, so higher levels gamble bigger hits more often.
+    fireKnifeWeapon() {
+        if (this.isGameOver || this.player.skills.knife <= 0) return;
+
+        const nearestEnemy = this.getNearestEnemy();
+        if (!nearestEnemy) return;
+
+        sounds.playShoot();
+
+        const critChance = Math.min(0.2 + (this.player.skills.knife - 1) * 0.1, 0.8);
+        const isCrit = Math.random() < critChance;
+        const baseDamage = 22;
+
+        const proj = this.projectiles.create(this.player.x, this.player.y, 'dungeon_tiles', 104).setScale(1.5);
+        proj.damage = (isCrit ? baseDamage * 2 : baseDamage) * this.player.damageMult;
+        proj.isCrit = isCrit;
+        const angle = Phaser.Math.Angle.Between(this.player.x, this.player.y, nearestEnemy.x, nearestEnemy.y);
+        proj.setRotation(angle);
+        this.physics.moveToObject(proj, nearestEnemy, 260);
+        this.time.delayedCall(1200, () => proj.destroy());
+    }
+
     performMeleeAttack() {
         const nearestEnemy = this.getNearestEnemy();
         if (!nearestEnemy) return;
@@ -911,24 +948,24 @@ class MainGameScene extends Phaser.Scene {
 
     handleProjectileEnemyHit(proj, enemy) {
         if (!proj.active || !enemy.active) return;
-        this.damageEnemy(enemy, proj.damage || 20);
+        this.damageEnemy(enemy, proj.damage || 20, !!proj.isCrit);
         proj.destroy();
     }
 
-    damageEnemy(enemy, amount) {
+    damageEnemy(enemy, amount, isCrit = false) {
         enemy.hp -= amount;
         sounds.playHit();
 
-        // Flash Red Effect
-        enemy.setTint(0xff0000);
+        // Flash Red Effect (gold flash on crit)
+        enemy.setTint(isCrit ? 0xfff59d : 0xff0000);
         this.time.delayedCall(100, () => {
             if (enemy.active) enemy.clearTint();
         });
 
         // Floating Damage Text
-        const dmgText = this.add.text(enemy.x, enemy.y - 10, `-${Math.round(amount)}`, {
-            font: 'bold 12px Outfit, sans-serif',
-            fill: '#facc15'
+        const dmgText = this.add.text(enemy.x, enemy.y - 10, `${isCrit ? 'CRIT! ' : ''}-${Math.round(amount)}`, {
+            font: isCrit ? 'bold 15px Outfit, sans-serif' : 'bold 12px Outfit, sans-serif',
+            fill: isCrit ? '#fbbf24' : '#facc15'
         }).setOrigin(0.5);
 
         this.tweens.add({
@@ -938,6 +975,18 @@ class MainGameScene extends Phaser.Scene {
             duration: 500,
             onComplete: () => dmgText.destroy()
         });
+
+        // Critical Hit VFX (Frame 62 sparkle burst) on the enemy that got crit
+        if (isCrit) {
+            const spark = this.add.sprite(enemy.x, enemy.y, 'dungeon_tiles', 62).setScale(2).setTint(0xfff59d);
+            this.tweens.add({
+                targets: spark,
+                scale: 3.2,
+                alpha: 0,
+                duration: 300,
+                onComplete: () => spark.destroy()
+            });
+        }
 
         // Enemy Death
         if (enemy.hp <= 0) {
@@ -1070,6 +1119,34 @@ class UIScene extends Phaser.Scene {
         this.levelText = this.add.text(430, 16, 'LVL: 1', { font: 'bold 14px Outfit', fill: '#facc15' });
         this.timeText = this.add.text(width - 240, 16, '⏱️ 00:00', { font: 'bold 14px Outfit', fill: '#f8fafc' });
         this.killsText = this.add.text(width - 130, 16, '☠️ Kills: 0', { font: 'bold 14px Outfit', fill: '#f43f5e' });
+
+        // Skill Tray: icon + pick count for every upgrade card the player currently owns
+        this.skillTrayContainer = this.add.container(20, 54);
+        this.lastUpgradeSnapshot = '';
+    }
+
+    updateSkillTray(player) {
+        const counts = player.upgradeCounts || {};
+        const snapshot = JSON.stringify(counts);
+        if (snapshot === this.lastUpgradeSnapshot) return;
+        this.lastUpgradeSnapshot = snapshot;
+
+        this.skillTrayContainer.removeAll(true);
+
+        let x = 0;
+        UPGRADE_POOL.forEach(card => {
+            const count = counts[card.id];
+            if (!count) return;
+
+            const chip = this.add.text(x, 0, `${card.icon} x${count}`, {
+                font: 'bold 13px Outfit',
+                fill: '#f8fafc',
+                backgroundColor: 'rgba(15, 23, 42, 0.7)',
+                padding: { x: 6, y: 3 }
+            });
+            this.skillTrayContainer.add(chip);
+            x += chip.width + 8;
+        });
     }
 
     update() {
@@ -1104,6 +1181,8 @@ class UIScene extends Phaser.Scene {
         const mins = Math.floor(this.mainScene.gameTime / 60).toString().padStart(2, '0');
         const secs = (this.mainScene.gameTime % 60).toString().padStart(2, '0');
         this.timeText.setText(`⏱️ ${mins}:${secs}`);
+
+        this.updateSkillTray(p);
     }
 }
 
@@ -1178,6 +1257,8 @@ class UpgradeModalScene extends Phaser.Scene {
                 sounds.playPickup();
                 const mainScene = this.scene.get('MainGameScene');
                 cardData.apply(mainScene.player);
+
+                mainScene.player.upgradeCounts[cardData.id] = (mainScene.player.upgradeCounts[cardData.id] || 0) + 1;
 
                 this.scene.stop('UpgradeModalScene');
                 this.scene.resume('MainGameScene');
