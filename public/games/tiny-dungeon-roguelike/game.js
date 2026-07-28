@@ -411,6 +411,9 @@ class MainGameScene extends Phaser.Scene {
         this.gameTime = 0; // seconds
         this.isGameOver = false;
 
+        // First swarm rush arrives at 20s, then re-scheduled after each swarm fires
+        this.nextSwarmTime = 20;
+
         // Touch Joystick State
         this.touchMove = { x: 0, y: 0 };
 
@@ -741,9 +744,11 @@ class MainGameScene extends Phaser.Scene {
     spawnEnemyWave() {
         if (this.isGameOver) return;
 
-        // Wave density increases with time
-        const maxEnemies = Math.min(15 + Math.floor(this.gameTime / 10) * 3, 60);
-        if (this.enemies.countActive(true) >= maxEnemies) return;
+        // Wave density increases with both elapsed time AND player level —
+        // a player who levels up fast gets pressured faster, not just one who survives long.
+        const timeFactor = Math.floor(this.gameTime / 10);
+        const levelFactor = this.level - 1;
+        const maxEnemies = Math.min(15 + timeFactor * 3 + levelFactor * 4, 90);
 
         // Enemy Types Configuration (Monsters: 108-110, 120-124 | Human Enemies: 111 Mage, 112 Swordsman)
         const enemyTypes = [
@@ -759,12 +764,32 @@ class MainGameScene extends Phaser.Scene {
             { name: 'boss_reaper', frame: 124, hp: 120, speed: 55, xp: 15 }
         ];
 
-        // Pick enemy based on game time and progression
+        // Pick enemy variety based on game time OR player level, whichever unlocks more first
         let availableCount = 3; // start with first 3 types
-        if (this.gameTime > 20) availableCount = 5; // unlock Human Mage & Swordsman
-        if (this.gameTime > 45) availableCount = 8; // unlock Ogres & Demons
-        if (this.gameTime > 75) availableCount = 10; // unlock Bosses
+        if (this.gameTime > 20 || this.level >= 3) availableCount = 5;  // unlock Human Mage & Swordsman
+        if (this.gameTime > 45 || this.level >= 6) availableCount = 8;  // unlock Ogres & Demons
+        if (this.gameTime > 75 || this.level >= 9) availableCount = 10; // unlock Bosses
 
+        // Periodic Swarm Wave: a sudden mob rush from one direction ("โดนรุม")
+        // gets more frequent as the player levels up, capped at every 12s.
+        if (this.gameTime >= this.nextSwarmTime) {
+            this.spawnSwarmWave(enemyTypes, availableCount);
+            const swarmInterval = Math.max(12, 25 - this.level);
+            this.nextSwarmTime = this.gameTime + swarmInterval;
+            return;
+        }
+
+        if (this.enemies.countActive(true) >= maxEnemies) return;
+
+        // Normal spawn: more enemies land per tick as the player levels up
+        const spawnCount = 1 + Math.floor(this.level / 4);
+        for (let i = 0; i < spawnCount; i++) {
+            if (this.enemies.countActive(true) >= maxEnemies) break;
+            this.spawnSingleEnemy(enemyTypes, availableCount);
+        }
+    }
+
+    spawnSingleEnemy(enemyTypes, availableCount) {
         const typeIdx = Math.floor(Math.random() * availableCount);
         const config = enemyTypes[typeIdx];
 
@@ -775,11 +800,41 @@ class MainGameScene extends Phaser.Scene {
         const spawnY = Phaser.Math.Clamp(this.player.y + Math.sin(angle) * spawnDist, 50, 1350);
 
         const enemy = this.enemies.create(spawnX, spawnY, 'dungeon_tiles', config.frame).setScale(2);
-        enemy.maxHp = config.hp + Math.floor(this.gameTime / 15) * 5;
+        enemy.maxHp = config.hp + Math.floor(this.gameTime / 15) * 5 + (this.level - 1) * 3;
         enemy.hp = enemy.maxHp;
         enemy.speed = config.speed;
         enemy.xpValue = config.xp;
         enemy.body.setCircle(6, 2, 2);
+        return enemy;
+    }
+
+    spawnSwarmWave(enemyTypes, availableCount) {
+        // A dense burst of enemies rushing in from roughly one direction, so it reads
+        // as an ambush rather than the steady trickle of the normal spawn loop.
+        const swarmSize = Math.min(8 + this.level, 20);
+        const baseAngle = Math.random() * Math.PI * 2;
+        const spread = Math.PI / 3; // 60° cone
+        const swarmTypeCount = Math.min(availableCount, 5); // keep the rush to common enemy types
+
+        for (let i = 0; i < swarmSize; i++) {
+            const typeIdx = Math.floor(Math.random() * swarmTypeCount);
+            const config = enemyTypes[typeIdx];
+
+            const angle = baseAngle + (Math.random() - 0.5) * spread;
+            const spawnDist = 380 + Math.random() * 80;
+            const spawnX = Phaser.Math.Clamp(this.player.x + Math.cos(angle) * spawnDist, 50, 1350);
+            const spawnY = Phaser.Math.Clamp(this.player.y + Math.sin(angle) * spawnDist, 50, 1350);
+
+            const enemy = this.enemies.create(spawnX, spawnY, 'dungeon_tiles', config.frame).setScale(2);
+            enemy.maxHp = config.hp + Math.floor(this.gameTime / 15) * 5 + (this.level - 1) * 3;
+            enemy.hp = enemy.maxHp;
+            enemy.speed = config.speed;
+            enemy.xpValue = config.xp;
+            enemy.body.setCircle(6, 2, 2);
+        }
+
+        // Telegraph the rush with a quick red screen flash
+        this.cameras.main.flash(200, 255, 60, 60, false);
     }
 
     handleProjectileEnemyHit(proj, enemy) {
