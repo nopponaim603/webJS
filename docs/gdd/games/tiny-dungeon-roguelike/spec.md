@@ -105,7 +105,7 @@ graph TD
 
 ### 3.1 Gameplay Rules
 1. **Movement & Auto-Aiming**: ผู้เล่นบังคับทิศทางการเดิน อาวุธจะยิง/สเปรย์ใส่ศัตรูโดยอัตโนมัติ (Auto-Attack)
-2. **Wave & Scaling**: ทุกๆ 10-15 วินาที จำนวนมอนสเตอร์สูงสุดที่จะสปอว์นและค่า HP ของมอนสเตอร์จะเพิ่มขึ้นตามลำดับ
+2. **Wave & Scaling**: จำนวนมอนสเตอร์สูงสุดที่สปอว์น, ความหลากหลายของศัตรู, และค่า HP จะเพิ่มขึ้นตามทั้งเวลาที่รอด **และ** เลเวลของผู้เล่น (ใครเลเวลไวจะโดนกดดันไวตาม) นอกจากนี้ยังมี **Swarm Wave** ที่สุ่มเกิดขึ้นเป็นระยะเพื่อรุมผู้เล่นจากทิศทางเดียวกันเป็นชุดใหญ่ — รายละเอียดสูตรทั้งหมดอยู่ใน [Level Design: Monster Spawning & Difficulty Pacing](level-design-monster-spawning.md)
 3. **Roguelike Skill Cards Level-Up System**:
    - เมื่อเกจ XP เต็ม เกมจะหยุดเวลาชั่วคราวและเปิด Modal UI
    - ผู้เล่นเลือกอัปเกรด 1 จาก 3 ความสามารถแบบสุ่ม (เช่น เพิ่มดาบหมุน, เพิ่มลูกไฟ, เพิ่มมีดพิษ, ผ่าสายฟ้า, เพิ่ม Max HP, เพิ่ม Speed, เพิ่มพลังโจมตี, และดูดเลือด)
@@ -144,3 +144,5 @@ MainGameScene ─── (Parallel Overlay) ───► UIScene (HUD: HP/XP Bar,
 - [Main Concept](../00-concept.md)
 - [Core Mechanics](../01-mechanics.md)
 - [Technical Note: Dungeon Floor Generation](technical-floor-generation.md)
+- [Level Design: Monster Spawning & Difficulty Pacing](level-design-monster-spawning.md)
+- [Level Design: Player Character Growth per Class](level-design-character-growth.md)
