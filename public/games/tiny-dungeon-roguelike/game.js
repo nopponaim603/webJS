@@ -121,27 +121,27 @@ const HERO_CLASSES = {
         id: 'knight',
         name: 'Knight (อัศวิน)',
         frame: 96,
-        maxHp: 120,
-        speed: 110,
-        desc: 'เน้นความถึกทน เลือดเยอะ เริ่มด้วย ดาบหมุนเวียนรอบตัว',
+        maxHp: 150,
+        speed: 95,
+        desc: 'ถึกทนที่สุดในเกม เลือดเยอะแต่เดินช้า เริ่มด้วยดาบหมุนเวียนรอบตัว ฟันโดนศัตรูทุกตัวที่เข้าใกล้',
         weapon: 'orbit'
     },
     wizard: {
         id: 'wizard',
         name: 'Wizard (จอมเวท)',
         frame: 84,
-        maxHp: 85,
-        speed: 120,
-        desc: 'โจมตีด้วยเวทมนตร์ ยิงยิงลูกไฟความเสียหายสูงใส่ศัตรู',
+        maxHp: 65,
+        speed: 125,
+        desc: 'เลือดน้อยที่สุด เปราะบางแต่ยิงลูกไฟดาเมจสูงสุดใส่เป้าหมายเดียว เน้นตั้งระยะยิงจากที่ปลอดภัย',
         weapon: 'fireball'
     },
     rogue: {
         id: 'rogue',
         name: 'Rogue (จอมโจร)',
         frame: 86,
-        maxHp: 95,
-        speed: 145,
-        desc: 'เคลื่อนที่ว่องไว ยิงมีดสั้นกระจายใส่เป้าหมายรอบข้าง',
+        maxHp: 100,
+        speed: 165,
+        desc: 'เคลื่อนที่ว่องไวที่สุดในเกม เลือดปานกลาง ยิงมีดกระจายหลายเล่มรอบตัวแต่ดาเมจต่อเล่มต่ำ',
         weapon: 'darts'
     }
 };
@@ -631,7 +631,7 @@ class MainGameScene extends Phaser.Scene {
                 const now = this.time.now;
                 if (enemy.lastOrbitHitTime && now - enemy.lastOrbitHitTime < 400) return;
                 enemy.lastOrbitHitTime = now;
-                this.damageEnemy(enemy, 15 * this.player.damageMult);
+                this.damageEnemy(enemy, 20 * this.player.damageMult);
             });
         }
 
@@ -660,7 +660,7 @@ class MainGameScene extends Phaser.Scene {
 
                         // Create a physics body using a tiny invisible sprite as anchor
                         const proj = this.projectiles.create(this.player.x, this.player.y, 'dungeon_tiles', 0).setAlpha(0).setScale(0.1);
-                        proj.damage = 25 * this.player.damageMult;
+                        proj.damage = 42 * this.player.damageMult;
                         this.physics.moveToObject(proj, nearestEnemy, 240);
 
                         // Draw red-orange fireball gfx on top of proj position
@@ -698,12 +698,12 @@ class MainGameScene extends Phaser.Scene {
 
         // 2. Poison Darts
         if (this.player.skills.darts > 0) {
-            const dartCount = 3 + (this.player.skills.darts - 1) * 2;
+            const dartCount = 4 + (this.player.skills.darts - 1) * 2;
             sounds.playShoot();
             for (let i = 0; i < dartCount; i++) {
                 const angle = (i * (2 * Math.PI / dartCount));
                 const proj = this.projectiles.create(this.player.x, this.player.y, 'dungeon_tiles', 104).setScale(1.5);
-                proj.damage = 18 * this.player.damageMult;
+                proj.damage = 13 * this.player.damageMult;
                 proj.setRotation(angle);
                 this.physics.velocityFromRotation(angle, 220, proj.body.velocity);
                 this.time.delayedCall(1500, () => proj.destroy());

@@ -37,9 +37,9 @@
 
 | Sprite Image | Frame Index | Tile File | Class Name | Base HP | Speed | Starting Weapon | Description |
 |:---:|:---:|:---:|---|:---:|:---:|---|---|
-| ![Knight](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0096.png) | Frame 96 | `tile_0096.png` | **Knight (อัศวิน)** | 120 HP | 110 px/s | Orbiting Blades | เน้นความถึกทน ป้องกันสูง เริ่มเกมด้วยดาบหมุนเวียนรอบตัว |
-| ![Wizard](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0084.png) | Frame 84 | `tile_0084.png` | **Wizard (จอมเวท)** | 85 HP | 120 px/s | Fireball Spell | พลังโจมตีระยะไกลสูง ยิงลูกไฟเวทมนตร์พุ่งใส่ศัตรู |
-| ![Rogue](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0086.png) | Frame 86 | `tile_0086.png` | **Rogue (จอมโจร)** | 95 HP | 145 px/s | Poison Darts | เคลื่อนที่เร็ว ว่องไว ยิงมีดสั้นกระจายใส่ศัตรูรอบทิศ |
+| ![Knight](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0096.png) | Frame 96 | `tile_0096.png` | **Knight (อัศวิน)** | 150 HP | 95 px/s | Orbiting Blades (20 dmg) | ถึกทนที่สุดในเกม เดินช้าที่สุด เริ่มเกมด้วยดาบหมุนเวียนรอบตัวโจมตีทุกตัวที่เข้าใกล้ |
+| ![Wizard](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0084.png) | Frame 84 | `tile_0084.png` | **Wizard (จอมเวท)** | 65 HP | 125 px/s | Fireball Spell (42 dmg) | เลือดน้อยที่สุด เปราะบางที่สุด แลกกับดาเมจต่อนัดสูงสุดในเกม ยิงใส่เป้าหมายเดียว |
+| ![Rogue](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0086.png) | Frame 86 | `tile_0086.png` | **Rogue (จอมโจร)** | 100 HP | 165 px/s | Poison Darts (13 dmg × 4) | เคลื่อนที่เร็วที่สุดในเกม เลือดปานกลาง ยิงมีดสั้นกระจายรอบทิศดาเมจต่อเล่มต่ำแต่จำนวนเยอะ |
 
 ---
 
@@ -143,3 +143,4 @@ MainGameScene ─── (Parallel Overlay) ───► UIScene (HUD: HP/XP Bar,
 - [Project Index](../../index.md)
 - [Main Concept](../00-concept.md)
 - [Core Mechanics](../01-mechanics.md)
+- [Technical Note: Dungeon Floor Generation](technical-floor-generation.md)
