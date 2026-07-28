@@ -61,37 +61,12 @@
 
 ---
 
-## 🎨 Asset References
-
-- **Asset Pack:** Kenney Playing Cards Pack (`public/assets/kenney_playing-cards-pack/`)
-- **Card Back:** `card_back.png`
-- **Card Faces:** `card_clubs_*`, `card_diamonds_*`, `card_hearts_*`, `card_spades_*`
-
----
-
-## 📐 Design Notes
-
-### Card State Machine
-| State | Event | Next State |
-|-------|-------|------------|
-| FACE_DOWN | User Click | FACE_UP |
-| FACE_UP | Click 2nd Card | MATCH_CHECKING |
-| MATCH_CHECKING | Match | MATCHED (Locked) |
-| MATCH_CHECKING | Mismatch | 1.5s → FACE_DOWN |
-
-### Implementation Notes
-- ใช้ `rotateY` transform สำหรับ flip animation
-- Lock state ต้องถูกตั้งทันทีก่อน render card faces
-- Timeout 1.5s สำหรับ mismatch ค่อย flip back
-
----
-
 ## 🔗 Related Files
 
 - **GDD Specification:** [Card Memory Spec](../../gdd/games/card-memory/spec.md)
 - **Product Backlog:** [Product Backlog](../01-product-backlog.md)
-- **Previous Story:** [US-08-01](./US-08-01.md)
-- **Next Story:** [US-08-03](./US-08-03.md)
+- **Previous Story:** [US-08-01](./US-08-01-card-grid.md)
+- **Next Story:** [US-08-03](./US-08-03-move-timer.md)
 
 ---
 
@@ -100,4 +75,4 @@
 ### 🔄 รายละเอียดการปรับปรุงเอกสาร (Revision Summary — 2026-07-28):
 1. **แก้ไขคำสับสนและคำสะกดผิด (Grammar & Terminology Fixes):** แก้ไขคำว่า "เรื่อยรับ click event", "ป้องการคลิกใบที่ 3" เป็นภาษาไทยเทคนิคที่ถูกต้องและเข้าใจง่าย ("รับ Event ได้แม่นยำ", "ป้องกันการคลิกการ์ดใบที่ 3 ขณะเปรียบเทียบ")
 2. **แก้ไขลิงก์อ้างอิงเสีย (Fixed Broken Links):** แก้ไขลิงก์ไปยังเอกสาร GDD Spec จริงของเกม [Card Memory Spec](../../gdd/games/card-memory/spec.md)
-3. **เพิ่ม State Machine Diagram (Added Visual Diagram):** เพิ่มแผนภาพจำลองสถานะการสลับไพ่เพื่อให้นักพัฒนาเข้าใจลอจิกการทำงานได้ชัดเจนยิ่งขึ้น
+3. **จัดระเบียบชื่อไฟล์ (Descriptive Filename):** เปลี่ยนชื่อไฟล์เป็น `US-08-02-match-logic.md` ตามข้อกำหนดมาตรฐาน `task-tracker` skill

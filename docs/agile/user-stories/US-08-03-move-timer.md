@@ -58,29 +58,12 @@
 
 ---
 
-## 📐 Design Notes
-
-### HUD Layout
-| Element | Position | Format |
-|---------|----------|--------|
-| Moves | Top-left | `Moves: 0` |
-| Timer | Top-right | `Time: 00:00` (MM:SS) |
-
-### State Management
-| Variable | Type | Initial | Update Trigger |
-|----------|------|---------|----------------|
-| `movesCount` | integer | 0 | +1 each pair matched |
-| `timerInterval` | interval | null | Start on first click |
-| `secondsElapsed` | integer | 0 | Increment per second |
-
----
-
 ## 🔗 Related Files
 
 - **GDD Specification:** [Card Memory Spec](../../gdd/games/card-memory/spec.md)
 - **Product Backlog:** [Product Backlog](../01-product-backlog.md)
-- **Previous Story:** [US-08-02](./US-08-02.md)
-- **Next Story:** [US-08-04](./US-08-04.md)
+- **Previous Story:** [US-08-02](./US-08-02-match-logic.md)
+- **Next Story:** [US-08-04](./US-08-04-results-modal.md)
 
 ---
 
@@ -89,4 +72,4 @@
 ### 🔄 รายละเอียดการปรับปรุงเอกสาร (Revision Summary — 2026-07-28):
 1. **แก้ไขภาษาและคำสับสน (Fixed Phrasing Errors):** แก้ไขคำว่า "ตัวเล่านับการตี", "หน้าที่เล่นเกม" และ "จับ 1 ตี" ให้เป็นคำศัพท์การออกแบบเกมที่ถูกต้อง ("ตัวนับจำนวนครั้งเปิดการ์ด (Moves)", "ตัวจับเวลา (Timer)", "1 Move = 2 Cards Opened")
 2. **แก้ไขข้อความสับสนใน Acceptance Criteria:** ลบข้อความที่แปลผิดพลาด ("ไม่ต้องการแสดงที่จะเล่นเกมที่จะเล่น") และปรับปรุงเกณฑ์การแสดงผล HUD ด้านบนของหน้าจอให้ชัดเจน
-3. **แก้ไขลิงก์อ้างอิงเสีย (Fixed Broken Links):** แก้ไขลิงก์ไปยังเอกสาร GDD Spec จริงของเกม [Card Memory Spec](../../gdd/games/card-memory/spec.md)
+3. **จัดระเบียบชื่อไฟล์ (Descriptive Filename):** เปลี่ยนชื่อไฟล์เป็น `US-08-03-move-timer.md` ตามข้อกำหนดมาตรฐาน `task-tracker` skill

@@ -58,29 +58,12 @@
 
 ---
 
-## 📐 Design Notes
-
-### Responsive Breakpoints
-| Breakpoint | Width | Grid Size | Card Size | Gap |
-|------------|-------|-----------|-----------|-----|
-| Mobile | 360-767px | 4×4 | 65-80px | 4px |
-| Tablet | 768-1023px | 4×4 | 100-120px | 6px |
-| Desktop | 1024px+ | 4×4 | 144px | 8px |
-
-### Touch Event Handling
-- `touchstart` event for mobile responsiveness
-- No delay from `touchstart` to action
-- Prevent default touch behaviors (scrolling, zooming) during gameplay
-- Target size: min 48×48px per interactive element for accessibility
-
----
-
 ## 🔗 Related Files
 
 - **GDD Specification:** [Card Memory Spec](../../gdd/games/card-memory/spec.md)
 - **Product Backlog:** [Product Backlog](../01-product-backlog.md)
-- **Previous Story:** [US-08-05](./US-08-05.md)
-- **Next Story:** [US-08-07](./US-08-07.md)
+- **Previous Story:** [US-08-05](./US-08-05-game-restart.md)
+- **Next Story:** [US-08-07](./US-08-07-performance-preload.md)
 
 ---
 
@@ -89,4 +72,4 @@
 ### 🔄 รายละเอียดการปรับปรุงเอกสาร (Revision Summary — 2026-07-28):
 1. **จัดกลุ่ม Breakpoints ชัดเจน (Standardized Breakpoints):** สรุปขนาดการ์ดและ Grid Gap เป็นตาราง Breakpoint ชัดเจนสำหรับ Phone, Tablet, Desktop
 2. **ปรับปรุงสำนวนภาษาไทย:** แก้ไขประโยคสับสนเดิม ให้ระบุชัดเจนเรื่องการรองรับ Touch Events และป้องกันปัญหา UI Clipping บนหน้าจอมือถือ
-3. **แก้ไขลิงก์อ้างอิงเสีย (Fixed Broken Links):** แก้ไขลิงก์ไปยังเอกสาร GDD Spec จริงของเกม [Card Memory Spec](../../gdd/games/card-memory/spec.md)
+3. **จัดระเบียบชื่อไฟล์ (Descriptive Filename):** เปลี่ยนชื่อไฟล์เป็น `US-08-06-mobile-responsive.md` ตามข้อกำหนดมาตรฐาน `task-tracker` skill

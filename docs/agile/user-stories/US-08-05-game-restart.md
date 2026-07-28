@@ -65,35 +65,8 @@
 
 - **GDD Specification:** [Card Memory Spec](../../gdd/games/card-memory/spec.md)
 - **Product Backlog:** [Product Backlog](../01-product-backlog.md)
-- **Previous Story:** [US-08-04](./US-08-04.md)
-- **Next Story:** [US-08-06](./US-08-06.md)
-
----
-
-## 📐 Design Notes
-
-### Reset Process
-1. User clicks "New Game" / "Play Again"
-2. Close Results Modal (if open)
-3. resetGame() called:
-   - Shuffle card grid (Fisher-Yates)
-   - Reset move counter to 0
-   - Reset timer to 00:00, stop interval
-   - Reset all cards to FACE_DOWN state
-4. Render new grid with animations
-
-### Button Positions
-- **HUD:** "New Game" button at top of game board
-- **Modal:** "Play Again" as primary CTA button
-
----
-
-## 🔗 Related Files
-
-- **GDD Specification:** [Card Memory Spec](../../gdd/games/card-memory/spec.md)
-- **Product Backlog:** [Product Backlog](../01-product-backlog.md)
-- **Previous Story:** [US-08-04](./US-08-04.md)
-- **Next Story:** [US-08-06](./US-08-06.md)
+- **Previous Story:** [US-08-04](./US-08-04-results-modal.md)
+- **Next Story:** [US-08-06](./US-08-06-mobile-responsive.md)
 
 ---
 
@@ -102,4 +75,4 @@
 ### 🔄 รายละเอียดการปรับปรุงเอกสาร (Revision Summary — 2026-07-28):
 1. **จัดระเบียบลำดับขั้นตอน Reset (Clean Reset Sequence):** เพิ่มแผนภาพลำดับการทำงานเมื่อผู้เล่นคลิกเริ่มเกมใหม่ เพื่อให้นักพัฒนาเข้าใจและไม่ลืมการ Reset State ตัวนับเวลาและ Shuffle การ์ด
 2. **ปรับปรุงสำนวนภาษาไทย:** แก้ไขคำว่า "ตัวเล่า" เป็น "ตัวนับจำนวนครั้ง (Moves)" และเน้นย้ำความสำคัญของการเริ่มใหม่โดยไม่รีเฟรชเบราว์เซอร์ (No Page Reload)
-3. **แก้ไขลิงก์อ้างอิงเสีย (Fixed Broken Links):** แก้ไขลิงก์ไปยังเอกสาร GDD Spec จริงของเกม [Card Memory Spec](../../gdd/games/card-memory/spec.md)
+3. **จัดระเบียบชื่อไฟล์ (Descriptive Filename):** เปลี่ยนชื่อไฟล์เป็น `US-08-05-game-restart.md` ตามข้อกำหนดมาตรฐาน `task-tracker` skill

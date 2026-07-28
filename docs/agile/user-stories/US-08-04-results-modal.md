@@ -62,32 +62,12 @@
 
 ---
 
-## 📐 Design Notes
-
-### Score Calculation
-```
-Score = (Perfect Moves / Actual Moves) × 1000
-หรือ
-Score = (Best Possible Time / Actual Time) × 1000
-```
-
-### Rating (1-5 ดาว)
-| ดาว | Conditions |
-|-----|------------|
-| ⭐⭐⭐⭐⭐ | น้อยกว่า 10 moves หรือน้อยกว่า 30s |
-| ⭐⭐⭐⭐☆ | 10-14 moves หรือ 30-60s |
-| ⭐⭐⭐☆☆ | 15-18 moves หรือ 61-90s |
-| ⭐⭐☆☆☆ | 19-22 moves หรือ 91-120s |
-| ⭐☆☆☆☆ | เกิน 22 moves หรือ เกิน 120s |
-
----
-
 ## 🔗 Related Files
 
 - **GDD Specification:** [Card Memory Spec](../../gdd/games/card-memory/spec.md)
 - **Product Backlog:** [Product Backlog](../01-product-backlog.md)
-- **Previous Story:** [US-08-03](./US-08-03.md)
-- **Next Story:** [US-08-05](./US-08-05.md)
+- **Previous Story:** [US-08-03](./US-08-03-move-timer.md)
+- **Next Story:** [US-08-05](./US-08-05-game-restart.md)
 
 ---
 
@@ -96,4 +76,4 @@ Score = (Best Possible Time / Actual Time) × 1000
 ### 🔄 รายละเอียดการปรับปรุงเอกสาร (Revision Summary — 2026-07-28):
 1. **ปรับปรุงสูตรและเกณฑ์การให้ดาว (Clarified Rating Rules):** ปรับเกณฑ์การประเมินดาว 1-5 ดาวให้ชัดเจนและสอดคล้องกับจำนวนการเปิดการ์ด 16 ใบ (8 คู่)
 2. **แก้ไขสำนวนภาษา (Language Refinement):** เปลี่ยนคำว่า "การตี" เป็น "จำนวนครั้งเปิดการ์ด (Moves)" และจัดรูปแบบกล่องตัวอย่างการแสดงผลให้เป็นมาตรฐาน
-3. **แก้ไขลิงก์อ้างอิงเสีย (Fixed Broken Links):** แก้ไขลิงก์ไปยังเอกสาร GDD Spec จริงของเกม [Card Memory Spec](../../gdd/games/card-memory/spec.md)
+3. **จัดระเบียบชื่อไฟล์ (Descriptive Filename):** เปลี่ยนชื่อไฟล์เป็น `US-08-04-results-modal.md` ตามข้อกำหนดมาตรฐาน `task-tracker` skill

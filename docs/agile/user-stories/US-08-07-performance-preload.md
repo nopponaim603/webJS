@@ -64,38 +64,11 @@
 
 ---
 
-## 📐 Design Notes
-
-### Asset Loading Strategy
-| Asset | Priority | Loading |
-|-------|----------|---------|
-| Card Back | High | Preload (sync) |
-| Card Faces (8 pairs) | High | Preload (async) |
-| Sound Effects | Low | Lazy load |
-| Background | Low | Inline CSS gradient |
-
-### Performance Targets
-| Metric | Target |
-|--------|--------|
-| First load time | <2 seconds |
-| FPS during flip | 60fps |
-| Memory usage | <50MB |
-| Image resolution | 144px / 240px (not 480/960) |
-| Cache | HTTP Cache-Control headers |
-
-### CSS Optimization
-- `will-change: transform` on card flip elements
-- `backface-visibility: hidden` to prevent double-render
-- Use `transform: rotateY(180deg)` not `width/height` transition
-- GPU compositing via `translateZ(0)` or `translate3d(0,0,0)`
-
----
-
 ## 🔗 Related Files
 
 - **GDD Specification:** [Card Memory Spec](../../gdd/games/card-memory/spec.md)
 - **Product Backlog:** [Product Backlog](../01-product-backlog.md)
-- **Previous Story:** [US-08-06](./US-08-06.md)
+- **Previous Story:** [US-08-06](./US-08-06-mobile-responsive.md)
 
 ---
 
@@ -104,4 +77,4 @@
 ### 🔄 รายละเอียดการปรับปรุงเอกสาร (Revision Summary — 2026-07-28):
 1. **เพิ่มเทคนิค GPU Acceleration (Added Optimization Snippet):** เพิ่มข้อแนะนำทางเทคนิค CSS (`will-change: transform`, `backface-visibility: hidden`) เพื่อช่วยเร่งความเร็วการเรนเดอร์ Flip Animation ด้วย GPU
 2. **เน้นย้ำเรื่อง Asset Resolution:** กำหนดให้เลือกใช้รูปการ์ดขนาด 144px / 240px จาก Kenney Pack เพื่อช่วยลดขนาดดาวน์โหลดและเพิ่มความเร็ว First Load
-3. **แก้ไขลิงก์อ้างอิงเสีย (Fixed Broken Links):** แก้ไขลิงก์ไปยังเอกสาร GDD Spec จริงของเกม [Card Memory Spec](../../gdd/games/card-memory/spec.md)
+3. **จัดระเบียบชื่อไฟล์ (Descriptive Filename):** เปลี่ยนชื่อไฟล์เป็น `US-08-07-performance-preload.md` ตามข้อกำหนดมาตรฐาน `task-tracker` skill

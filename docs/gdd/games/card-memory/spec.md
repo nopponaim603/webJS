@@ -78,4 +78,13 @@
 
 - GDD Concept: [docs/gdd/00-concept.md](../../00-concept.md)
 - GDD Mechanics: [docs/gdd/01-mechanics.md](../../01-mechanics.md)
+- Product Backlog: [Product Backlog](../../../agile/01-product-backlog.md)
+- User Stories:
+  - [US-08-01 — Card Grid Display](../../../agile/user-stories/US-08-01-card-grid.md)
+  - [US-08-02 — Card Flip & Match Logic](../../../agile/user-stories/US-08-02-match-logic.md)
+  - [US-08-03 — Move Counter & Timer](../../../agile/user-stories/US-08-03-move-timer.md)
+  - [US-08-04 — Results Screen & Rating](../../../agile/user-stories/US-08-04-results-modal.md)
+  - [US-08-05 — Game Restart & New Game](../../../agile/user-stories/US-08-05-game-restart.md)
+  - [US-08-06 — Mobile Touch Support](../../../agile/user-stories/US-08-06-mobile-responsive.md)
+  - [US-08-07 — Performance & Preloading](../../../agile/user-stories/US-08-07-performance-preload.md)
 - Asset Pack: [Kenney Playing Cards Pack](https://kenney.nl/assets/playing-cards-pack)

@@ -40,6 +40,7 @@
 | G005 | `cyber-sphere` | Cyber Sphere 3D | `babylon-demo/` | Babylon.js 3D | ✅ Released |
 | G006 | `match-3` | Kenney Match 3 | `match3/` | Phaser 2D | ✅ Released |
 | G007 | `3d-platformer` | Kenney 3D Platformer | `3d-platformer/` | Babylon.js 8 | ✅ Released |
+| G008 | `card-memory` | Card Memory Match | `public/games/card-memory/` | Vanilla JS | 🔵 In Progress ([US-08-01](../agile/user-stories/US-08-01-card-grid.md)) |
 
 ---
 
