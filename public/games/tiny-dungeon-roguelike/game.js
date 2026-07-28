@@ -7,6 +7,7 @@
 class SoundManager {
     constructor() {
         this.ctx = null;
+        this.lastPlayedAt = {}; // sound name -> AudioContext time it last fired
     }
 
     init() {
@@ -19,8 +20,21 @@ class SoundManager {
         }
     }
 
+    // Throttles a sound name so rapid repeat triggers (high-level skills hitting many
+    // enemies in one tick, a swarm wave dying at once) collapse into one audible hit
+    // instead of stacking dozens of overlapping copies.
+    canPlay(name, minInterval) {
+        if (!this.ctx) return false;
+        const now = this.ctx.currentTime;
+        if (this.lastPlayedAt[name] !== undefined && now - this.lastPlayedAt[name] < minInterval) {
+            return false;
+        }
+        this.lastPlayedAt[name] = now;
+        return true;
+    }
+
     playShoot() {
-        if (!this.ctx) return;
+        if (!this.canPlay('shoot', 0.06)) return;
         const osc = this.ctx.createOscillator();
         const gain = this.ctx.createGain();
         osc.type = 'square';
@@ -35,7 +49,7 @@ class SoundManager {
     }
 
     playHit() {
-        if (!this.ctx) return;
+        if (!this.canPlay('hit', 0.05)) return;
         const osc = this.ctx.createOscillator();
         const gain = this.ctx.createGain();
         osc.type = 'sawtooth';
@@ -50,7 +64,7 @@ class SoundManager {
     }
 
     playPickup() {
-        if (!this.ctx) return;
+        if (!this.canPlay('pickup', 0.06)) return;
         const osc = this.ctx.createOscillator();
         const gain = this.ctx.createGain();
         osc.type = 'sine';
