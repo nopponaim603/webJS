@@ -108,7 +108,7 @@ const HERO_CLASSES = {
     knight: {
         id: 'knight',
         name: 'Knight (อัศวิน)',
-        frame: 84,
+        frame: 96,
         maxHp: 120,
         speed: 110,
         desc: 'เน้นความถึกทน เลือดเยอะ เริ่มด้วย ดาบหมุนเวียนรอบตัว',
@@ -117,7 +117,7 @@ const HERO_CLASSES = {
     wizard: {
         id: 'wizard',
         name: 'Wizard (จอมเวท)',
-        frame: 85,
+        frame: 84,
         maxHp: 85,
         speed: 120,
         desc: 'โจมตีด้วยเวทมนตร์ ยิงยิงลูกไฟความเสียหายสูงใส่ศัตรู',
@@ -254,7 +254,7 @@ class BootScene extends Phaser.Scene {
             frameWidth: 16,
             frameHeight: 16,
             margin: 0,
-            spacing: 1
+            spacing: 0
         });
     }
 
@@ -486,8 +486,10 @@ class MainGameScene extends Phaser.Scene {
                     // Wall border
                     const wall = this.add.image(x, y, 'dungeon_tiles', 14).setScale(2);
                 } else {
-                    // Dungeon Floor
-                    const floorFrame = (c + r) % 7 === 0 ? 1 : 0;
+                    // Dungeon Floor Variations (Frames: 48, 42, 49)
+                    const floorTiles = [48, 42, 49];
+                    const floorIdx = (c * 3 + r * 7) % floorTiles.length;
+                    const floorFrame = floorTiles[floorIdx];
                     this.add.image(x, y, 'dungeon_tiles', floorFrame).setScale(2);
                 }
             }
@@ -619,7 +621,7 @@ class MainGameScene extends Phaser.Scene {
     fireAutoWeapons() {
         if (this.isGameOver) return;
 
-        // 1. Fireball
+        // 1. Fireball — Render Graphics (จุดไฟสีแดงส้ม)
         if (this.player.skills.fireball > 0) {
             const nearestEnemy = this.getNearestEnemy();
             if (nearestEnemy) {
@@ -627,11 +629,40 @@ class MainGameScene extends Phaser.Scene {
                 for (let i = 0; i < this.player.skills.fireball; i++) {
                     this.time.delayedCall(i * 120, () => {
                         if (!this.player.active || !nearestEnemy.active) return;
-                        const proj = this.projectiles.create(this.player.x, this.player.y, 'dungeon_tiles', 117).setScale(1.6);
+
+                        // Create a physics body using a tiny invisible sprite as anchor
+                        const proj = this.projectiles.create(this.player.x, this.player.y, 'dungeon_tiles', 0).setAlpha(0).setScale(0.1);
                         proj.damage = 25 * this.player.damageMult;
                         this.physics.moveToObject(proj, nearestEnemy, 240);
-                        proj.setRotation(Phaser.Math.Angle.Between(this.player.x, this.player.y, nearestEnemy.x, nearestEnemy.y));
-                        this.time.delayedCall(2000, () => proj.destroy());
+
+                        // Draw red-orange fireball gfx on top of proj position
+                        const gfx = this.add.graphics();
+                        const drawFireball = () => {
+                            gfx.clear();
+                            // Outer glow (orange)
+                            gfx.fillStyle(0xff6600, 0.35);
+                            gfx.fillCircle(proj.x, proj.y, 9);
+                            // Inner core (bright red-orange)
+                            gfx.fillStyle(0xff3300, 0.85);
+                            gfx.fillCircle(proj.x, proj.y, 6);
+                            // Bright white center
+                            gfx.fillStyle(0xffcc44, 1);
+                            gfx.fillCircle(proj.x, proj.y, 3);
+                        };
+
+                        // Update gfx each frame to follow proj
+                        const listener = this.events.on('update', drawFireball);
+
+                        this.time.delayedCall(2000, () => {
+                            this.events.off('update', drawFireball);
+                            gfx.destroy();
+                            proj.destroy();
+                        });
+
+                        proj.on('destroy', () => {
+                            this.events.off('update', drawFireball);
+                            gfx.destroy();
+                        });
                     });
                 }
             }
@@ -686,18 +717,27 @@ class MainGameScene extends Phaser.Scene {
         const maxEnemies = Math.min(15 + Math.floor(this.gameTime / 10) * 3, 60);
         if (this.enemies.countActive(true) >= maxEnemies) return;
 
-        // Enemy Types Configuration
+        // Enemy Types Configuration (Monsters: 108-110, 120-124 | Human Enemies: 111 Mage, 112 Swordsman)
         const enemyTypes = [
-            { name: 'skeleton', frame: 88, hp: 20, speed: 75, xp: 2 },
-            { name: 'slime', frame: 99, hp: 35, speed: 60, xp: 4 },
-            { name: 'demon', frame: 90, hp: 60, speed: 85, xp: 8 }
+            { name: 'skeleton', frame: 108, hp: 20, speed: 75, xp: 2 },
+            { name: 'zombie', frame: 109, hp: 25, speed: 70, xp: 3 },
+            { name: 'goblin', frame: 110, hp: 30, speed: 80, xp: 3 },
+            { name: 'enemy_mage', frame: 111, hp: 35, speed: 85, xp: 4 },      // ศัตรูคน: นักเวท
+            { name: 'enemy_swordsman', frame: 112, hp: 45, speed: 90, xp: 5 }, // ศัตรูคน: นักดาบ
+            { name: 'ogre', frame: 120, hp: 55, speed: 60, xp: 6 },
+            { name: 'demon_red', frame: 121, hp: 65, speed: 75, xp: 7 },
+            { name: 'demon_blue', frame: 122, hp: 75, speed: 80, xp: 8 },
+            { name: 'boss_minotaur', frame: 123, hp: 90, speed: 65, xp: 10 },
+            { name: 'boss_reaper', frame: 124, hp: 120, speed: 55, xp: 15 }
         ];
 
-        // Pick enemy based on game time
-        let typeIdx = 0;
-        if (this.gameTime > 30) typeIdx = Math.random() < 0.4 ? 1 : 0;
-        if (this.gameTime > 75) typeIdx = Math.random() < 0.3 ? 2 : (Math.random() < 0.5 ? 1 : 0);
+        // Pick enemy based on game time and progression
+        let availableCount = 3; // start with first 3 types
+        if (this.gameTime > 20) availableCount = 5; // unlock Human Mage & Swordsman
+        if (this.gameTime > 45) availableCount = 8; // unlock Ogres & Demons
+        if (this.gameTime > 75) availableCount = 10; // unlock Bosses
 
+        const typeIdx = Math.floor(Math.random() * availableCount);
         const config = enemyTypes[typeIdx];
 
         // Spawn position off-screen
@@ -749,8 +789,8 @@ class MainGameScene extends Phaser.Scene {
             this.kills++;
             this.score += 10;
 
-            // Spawn XP Gem
-            const gem = this.xpGems.create(enemy.x, enemy.y, 'dungeon_tiles', 112).setScale(1.5);
+            // Spawn XP Gem (Frame 115)
+            const gem = this.xpGems.create(enemy.x, enemy.y, 'dungeon_tiles', 115).setScale(1.5);
             gem.xpValue = enemy.xpValue;
 
             // Vampiric Heal Chance

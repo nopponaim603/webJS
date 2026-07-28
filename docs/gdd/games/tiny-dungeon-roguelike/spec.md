@@ -23,35 +23,68 @@
 
 สินทรัพย์กราฟิกทั้งหมดนำมาจากชุด **Kenney Tiny Dungeon** (Pixel Art ขนาด 16x16 px)
 
+### 🖼️ Pack Visual Preview & Full Spritesheet
+![Kenney Tiny Dungeon Pack Preview](../../../../public/assets/kenney_tiny-dungeon/Preview.png)
+
+![Kenney Tiny Dungeon Sample](../../../../public/assets/kenney_tiny-dungeon/Sample.png)
+
+#### 🧩 Full Tilemap Sheet (`tilemap_packed.png` — 192x176px / 12x11 Tiles, 16x16px Each, Spacing: 0)
+![Kenney Tiny Dungeon Tilemap](../../../../public/assets/kenney_tiny-dungeon/Tilemap/tilemap_packed.png)
+
+---
+
 ### 🛡️ 2.1 Player Characters (ฮีโร่ผู้เล่น)
 
-| Visual / Frame | Class Name | Base HP | Speed | Starting Weapon | Description |
-|:---:|---|:---:|:---:|---|---|
-| Frame 84 | **Knight (อัศวิน)** | 120 HP | 110 px/s | Orbiting Blades | เน้นความถึกทน ป้องกันสูง เริ่มเกมด้วยดาบหมุนเวียนรอบตัว |
-| Frame 85 | **Wizard (จอมเวท)** | 85 HP | 120 px/s | Fireball Spell | พลังโจมตีระยะไกลสูง ยิงลูกไฟเวทมนตร์พุ่งใส่ศัตรู |
-| Frame 86 | **Rogue (จอมโจร)** | 95 HP | 145 px/s | Poison Darts | เคลื่อนที่เร็ว ว่องไว ยิงมีดสั้นกระจายใส่ศัตรูรอบทิศ |
+| Sprite Image | Frame Index | Tile File | Class Name | Base HP | Speed | Starting Weapon | Description |
+|:---:|:---:|:---:|---|:---:|:---:|---|---|
+| ![Knight](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0096.png) | Frame 96 | `tile_0096.png` | **Knight (อัศวิน)** | 120 HP | 110 px/s | Orbiting Blades | เน้นความถึกทน ป้องกันสูง เริ่มเกมด้วยดาบหมุนเวียนรอบตัว |
+| ![Wizard](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0084.png) | Frame 84 | `tile_0084.png` | **Wizard (จอมเวท)** | 85 HP | 120 px/s | Fireball Spell | พลังโจมตีระยะไกลสูง ยิงลูกไฟเวทมนตร์พุ่งใส่ศัตรู |
+| ![Rogue](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0086.png) | Frame 86 | `tile_0086.png` | **Rogue (จอมโจร)** | 95 HP | 145 px/s | Poison Darts | เคลื่อนที่เร็ว ว่องไว ยิงมีดสั้นกระจายใส่ศัตรูรอบทิศ |
 
 ---
 
-### 👾 2.2 Monsters & Enemies (ฝูงมอนสเตอร์)
+### 👾 2.2 Monsters & Human Enemies (ฝูงมอนสเตอร์ & ศัตรูมนุษย์)
 
-| Visual / Frame | Monster Type | Base HP | Speed | XP Value | Behavior |
-|:---:|---|:---:|:---:|:---:|---|
-| Frame 88 | **Skeleton** | 20 HP | 75 px/s | 2 XP | มอนสเตอร์โครงกระดูก เคลื่อนที่เร็วปานกลาง รุมเข้าหาผู้เล่น |
-| Frame 99 | **Slime / Goblin** | 35 HP | 60 px/s | 4 XP | มอนสเตอร์สไลม์ เลือดปานกลาง เดินช้าๆ กดดันพื้นที่ |
-| Frame 90 | **Demon / Orc** | 60 HP | 85 px/s | 8 XP | มอนสเตอร์ปีศาจ เลือดเยอะและเคลื่อนที่เร็ว กดดันสูง |
+#### 🧟 Monsters (มอนสเตอร์ทั่วไป & บอส)
+| Sprite Image | Frame Index | Tile File | Monster Name | Base HP | Speed | XP Value | Behavior |
+|:---:|:---:|:---:|---|:---:|:---:|:---:|---|
+| ![Monster 108](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0108.png) | Frame 108 | `tile_0108.png` | **Skeleton Warrior** | 20 HP | 75 px/s | 2 XP | มอนสเตอร์โครงกระดูกจู่โจมระลอกแรก |
+| ![Monster 109](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0109.png) | Frame 109 | `tile_0109.png` | **Zombie Crawler** | 25 HP | 70 px/s | 3 XP | ซอมบี้เดินกดดันพื้นที่ |
+| ![Monster 110](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0110.png) | Frame 110 | `tile_0110.png` | **Goblin Raider** | 30 HP | 80 px/s | 3 XP | ก็อบลินเคลื่อนที่เร็ว |
+| ![Monster 120](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0120.png) | Frame 120 | `tile_0120.png` | **Ogre Heavy** | 55 HP | 60 px/s | 6 XP | อสูรกายถึกทน เลือดเยอะ |
+| ![Monster 121](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0121.png) | Frame 121 | `tile_0121.png` | **Red Demon** | 65 HP | 75 px/s | 7 XP | ปีศาจสีแดงเคลื่อนที่เร็ว |
+| ![Monster 122](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0122.png) | Frame 122 | `tile_0122.png` | **Blue Demon** | 75 HP | 80 px/s | 8 XP | ปีศาจสีฟ้าพลังโจมตีสูง |
+| ![Monster 123](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0123.png) | Frame 123 | `tile_0123.png` | **Minotaur Boss** | 90 HP | 65 px/s | 10 XP | บอสมิโนทอร์ เลือดสูง ดันพื้นที่ |
+| ![Monster 124](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0124.png) | Frame 124 | `tile_0124.png` | **Reaper Boss** | 120 HP | 55 px/s | 15 XP | บอสมัจจุราชขนาดใหญ่ อึดพิเศษ |
+
+#### 👤 Human Enemies (ศัตรูประเภทคน)
+| Sprite Image | Frame Index | Tile File | Enemy Class | Base HP | Speed | XP Value | Description |
+|:---:|:---:|:---:|---|:---:|:---:|:---:|---|
+| ![Enemy Mage](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0111.png) | Frame 111 | `tile_0111.png` | **Enemy Mage (นักเวทศัตรู)** | 35 HP | 85 px/s | 4 XP | จอมเวทศัตรู เคลื่อนที่รวดเร็ว รุมล้อมผู้เล่น |
+| ![Enemy Swordsman](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0112.png) | Frame 112 | `tile_0112.png` | **Enemy Swordsman (นักดาบศัตรู)** | 45 HP | 90 px/s | 5 XP | นักดาบศัตรูถือดาบวิ่งเข้าฟันผู้เล่น |
 
 ---
 
-### 💎 2.3 Items, Pickups & VFX
+### 💎 2.3 Items, Pickups & Weapons VFX
 
-| Visual / Frame | Item Key | Usage & Effect |
-|:---:|---|---|
-| Frame 112 | `xp_gem` | เม็ดพลังงาน XP ดร็อปเมื่อกำจัดมอนสเตอร์ เมื่อเก็บจะเพิ่มเกจเลเวลอัป |
-| Frame 106 | `sword_blade` | คมดาบหมุนเวียน (Orbiting Blade) หมุนวนรอบตัวทำความเสียหาย |
-| Frame 117 | `fireball` | กระสุนลูกไฟเวทมนตร์ พุ่งใส่ศัตรูที่อยู่ใกล้ที่สุด |
-| Frame 104 | `poison_dart` | มีดสั้นพิษ ยิงกระจายรอบตัวผู้เล่น |
-| Render Graphics | `lightning` | เอฟเฟกต์สายฟ้าฟาดผ่าลงมาจากท้องฟ้า |
+| Sprite Image | Frame Index | Tile File | Item Key | Usage & Effect |
+|:---:|:---:|:---:|---|---|
+| ![XP Gem](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0115.png) | Frame 115 | `tile_0115.png` | `xp_gem` | เม็ดผลึก XP ดร็อปเมื่อกำจัดมอนสเตอร์/ศัตรู เมื่อเก็บจะเพิ่มเกจเลเวลอัป |
+| ![Sword Blade](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0106.png) | Frame 106 | `tile_0106.png` | `sword_blade` | คมดาบหมุนเวียน (Orbiting Blade) หมุนวนรอบตัวทำความเสียหาย |
+| ![Fireball](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0117.png) | Frame 117 | `tile_0117.png` | `fireball` | กระสุนลูกไฟเวทมนตร์ พุ่งใส่ศัตรูที่อยู่ใกล้ที่สุด |
+| ![Poison Dart](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0104.png) | Frame 104 | `tile_0104.png` | `poison_dart` | มีดสั้นพิษ ยิงกระจายรอบตัวผู้เล่น |
+| Render Graphics | - | - | `lightning` | เอฟเฟกต์สายฟ้าฟาดผ่าลงมาจากท้องฟ้า |
+
+---
+
+### 🏰 2.4 Dungeon Arena Environment Tiles
+
+| Sprite Image | Frame Index | Tile File | Usage |
+|:---:|:---:|:---:|---|
+| ![Floor 48](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0048.png) | Frame 48 | `tile_0048.png` | พื้นดันเจี้ยนหลัก (Main Dungeon Floor) |
+| ![Floor 42](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0042.png) | Frame 42 | `tile_0042.png` | พื้นดันเจี้ยนแบบที่ 2 (Carved Pattern Floor) |
+| ![Floor 49](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0049.png) | Frame 49 | `tile_0049.png` | พื้นดันเจี้ยนแบบที่ 3 (Dark Cobblestone Floor) |
+| ![Wall 14](../../../../public/assets/kenney_tiny-dungeon/Tiles/tile_0014.png) | Frame 14 | `tile_0014.png` | กำแพงขอบสนามดันเจี้ยน (Arena Border Wall) |
 
 ---
 
