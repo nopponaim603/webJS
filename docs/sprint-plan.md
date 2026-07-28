@@ -7,28 +7,18 @@
 
 ---
 
-## Sprint 01 Summary
+## Sprint 03 Goals & Summary (G017 - Tiny Dungeon Survivor)
 
-| Game | Status | Sprint |
+| Game / Feature | Status | Sprint |
 |------|--------|--------|
-| 🃏 Card Memory Match | ✅ Ready to dev | Sprint 01 |
+| 🗡️ Tiny Dungeon Survivor (Action Roguelike) | ✅ Completed | Sprint 03 |
 
-## Sprint 02 Goals
-
-### Game A — Pixel Shmup (G009)
-- ✅ สุ่มเลเวล 2D shoot 'em up
-- ✅ 3 enemy types (basic, fast, tank)
-- ✅ 3 asteroid types (small, medium, large)
-- ✅ Wave-based progression
-- ✅ Score-based difficulty
-- ✅ Deploy Vercel
-
-### Game B — Pico-8 Platformer (G010)
-- ✅ สุ่มเลเวล 3D platformer
-- ✅ Side-scrolling movement
-- ✅ Jump + double jump
-- ✅ Collect coins, avoid obstacles
-- ✅ Deploy Vercel
+### Deliverables & User Stories
+- ✅ **US-17-01 (P0)**: Hero Selection & Boot Engine (Knight, Wizard, Rogue)
+- ✅ **US-17-02 (P0)**: Top-Down Movement & Dual Controls (WASD / Touch Joystick)
+- ✅ **US-17-03 (P0)**: Auto-Attacks & Weapons Engine (Orbiting Blades, Fireball, Darts, Lightning)
+- ✅ **US-17-04 (P0)**: Roguelike Card Upgrade Modal System (Pause Game & Pick 1 of 3 Skill Cards)
+- ✅ **US-17-05 (P1)**: Dynamic HUD (HP, XP, Level, Kills, Timer) & GameOver Summary
 
 ---
 

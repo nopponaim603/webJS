@@ -31,6 +31,17 @@
 
 ---
 
+## 🗡️ Epic 17 — Tiny Dungeon Survivor (Action Roguelike - G017)
+
+| ID | User Story | Acceptance Criteria | Estimate | Status |
+|----|-----------|---------------------|----------|--------|
+| [US-17-01](./user-stories/US-17-01-hero-selection.md) | เลือกตัวละครฮีโร่ (Knight, Wizard, Rogue) ก่อนเริ่มเกม | แสดง MenuScene 3 ตัวละครพร้อมสถิติ และปุ่มเลือกฮีโร่ | M | ✅ Done |
+| [US-17-02](./user-stories/US-17-02-movement-controls.md) | ควบคุมตัวละครเดิน 8 ทิศทางลื่นไหลบน PC และสัมผัส | รองรับ WASD/Arrow Keys และ Virtual Touch Joystick | M | ✅ Done |
+| [US-17-03](./user-stories/US-17-03-auto-weapons.md) | ระบบอาวุธปล่อยอัตโนมัติ (Orbiting Blades, Fireball, Darts, Lightning) | อาวุธปล่อยอัตโนมัติ มี Damage Floating Text | L | ✅ Done |
+| [US-17-04](./user-stories/US-17-04-card-upgrades.md) | สุ่มการ์ดอัปเกรด 1 ใน 3 ใบเมื่อเลเวลอัปแบบ Roguelike | เลเวลอัปแล้วหยุดเกมชั่วคราว เลือกการ์ดแล้วเล่นต่อ | L | ✅ Done |
+
+---
+
 ## 🚀 Should Have (Enhancements)
 
 | ID | User Story | Acceptance Criteria | Estimate | Status |

@@ -31,6 +31,10 @@ kanban-plugin: board
 - [x] [US-02-03](./user-stories/archive/US-02-03-tile-match.md): Tile Match Game
 - [x] [US-08-01](./user-stories/US-08-01-card-grid.md): Card Grid Display with Flip Animation (G008)
 - [x] US-03-02: Custom Node Server
+- [x] [US-17-01](./user-stories/US-17-01-hero-selection.md): Hero Selection & MenuScene (G017)
+- [x] [US-17-02](./user-stories/US-17-02-movement-controls.md): Top-Down Movement & Dual Controls (G017)
+- [x] [US-17-03](./user-stories/US-17-03-auto-weapons.md): Auto-Attacks & Weapons Engine (G017)
+- [x] [US-17-04](./user-stories/US-17-04-card-upgrades.md): Roguelike Card Upgrade Modal (G017)
 - [x] Task-01: Documentation Suite & AGENT.md Setup
 
 

@@ -6,6 +6,9 @@
 ## [1.10.0] - 2026-07-28
 
 ### Added & Upgraded
+- **Agile Sprint 03 & User Stories ([docs/agile/sprint-backlogs/sprint-03.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/agile/sprint-backlogs/sprint-03.md))**:
+  - จัดตัดรอบ **Sprint 03** สำหรับเกม Tiny Dungeon Survivor (G017) อย่างเป็นระบบ
+  - สร้าง User Stories (US-17-01 ถึง US-17-04), อัปเดต Product Backlog (`01-product-backlog.md`), Sprint Planning (`02-sprint-planning.md`), และ Kanban Board (`Kanban-board.md`)
 - **Tiny Dungeon Survivor GDD Spec ([docs/gdd/games/tiny-dungeon-roguelike/spec.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/tiny-dungeon-roguelike/spec.md))**:
   - จัดทำเอกสาร GDD ฉบับสมบูรณ์สำหรับเกม **Tiny Dungeon Survivor (G017)**
   - ครอบคลุม Overview, Asset Pack breakdown (`kenney_tiny-dungeon`), Core Loop Sequence Diagram (Mermaid), Skill Upgrade System (Roguelike Card Upgrades), Controls & Input Mapping และ System Architecture

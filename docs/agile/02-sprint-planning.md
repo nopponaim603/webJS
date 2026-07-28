@@ -10,6 +10,7 @@
 |:---|:---|:---|:---|
 | [sprint-01](./sprint-backlogs/sprint-01.md) | 2026-07-20 → 2026-07-27 | Portfolio Glassmorphism UI, Native Node HTTP Server, 3 HTML5 Games Integration & Doc Setup | ✅ Completed |
 | sprint-02 | 2026-07-28 → 2026-08-04 | High Score System & Audio SFX Polish | 🔵 In Progress |
+| [sprint-03](./sprint-backlogs/sprint-03.md) | 2026-07-28 → 2026-08-04 | Tiny Dungeon Survivor (Action Roguelike - G017) Implementation & Integration | ✅ Completed |
 
 ---
 
@@ -26,6 +27,8 @@ gantt
     section Sprint 02
     LocalStorage High Score System  :active, s2_1, 2026-07-28, 3d
     Web Audio SFX Synthetic Engine  :s2_2, 2026-07-31, 3d
+    section Sprint 03
+    Tiny Dungeon Survivor (G017)    :done, s3_1, 2026-07-28, 2d
 ```
 
 ---
@@ -33,3 +36,5 @@ gantt
 ## Related Documents
 - Product Backlog: [Product Backlog](./01-product-backlog.md)
 - Sprint 01 Details: [Sprint 01 Backlog](./sprint-backlogs/sprint-01.md)
+- Sprint 03 Details: [Sprint 03 Backlog](./sprint-backlogs/sprint-03.md)
+
