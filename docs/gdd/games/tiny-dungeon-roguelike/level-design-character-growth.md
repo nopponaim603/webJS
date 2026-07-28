@@ -9,13 +9,19 @@
 
 ## 1. Design Goal
 
-All three classes level up through **one shared growth engine** — the same XP curve, the same pool of 8 upgrade cards, the same random-3-of-8 offer at every level-up. Classes do **not** get class-exclusive upgrades or a different XP curve.
+All three classes level up through the same XP curve and draw from the same 4 stat-boost cards (HP/Speed/Damage/Vampire) — but **weapon cards are class-exclusive**: each class has a locked pair of two weapons, and can never draw a weapon card belonging to another class. There is no cross-class hybridization; a Knight will never end up slinging Fireballs.
 
-Class identity instead comes from three levers layered on top of that shared engine:
+| Class | Locked Weapon Pair |
+|---|---|
+| **Knight** | 🌀 Cleave Slash (starting) + ⚔️ Orbiting Blades |
+| **Wizard** | 🔥 Fireball Spell (starting) + ⚡ Chain Lightning |
+| **Rogue** | 🗡️ Poison Darts (starting) + 🔪 Critical Knife |
 
-1. **Different starting baseline** (`maxHp`, `speed` in `HERO_CLASSES`) — the flat bonuses from cards land on a different foundation per class.
-2. **A free head start on one weapon** — each class begins at skill level 1 in its signature weapon, while the other two weapons start at 0 and must be drawn as upgrade cards from scratch.
-3. **Each weapon type scales along a different axis** (coverage vs. single-target burst vs. spread vs. multi-target nuke) — so the same card pool grows each class in a different practical direction even though the numbers are class-agnostic.
+Class identity comes from three levers:
+
+1. **Different starting baseline** (`maxHp`, `speed` in `HERO_CLASSES`) — the flat bonuses from stat cards land on a different foundation per class.
+2. **A free head start on one weapon, plus a guaranteed second** — each class begins at skill level 1 in its signature weapon, and its other weapon (starting at 0) is the *only* extra weapon card that will ever appear in its level-up offers — never diluted by, or competing against, the other four classes' weapon cards.
+3. **The two weapons in a class's pair scale along deliberately different axes** (e.g. Knight's reach-based cone vs. always-on 360° ring; Wizard's slow-hard single-target nuke vs. instant multi-target nuke; Rogue's fast-short-range spread vs. gambler's crit throw) — so investing in "the other weapon" always feels like a distinct playstyle, not a numerical clone of the starting one.
 
 ---
 
@@ -43,36 +49,43 @@ Identical for every class — XP requirement grows ×1.4 per level, uncapped:
 | 9 → 10 | 137 | 460 |
 | 10 → 11 | 191 | 651 |
 
-Each level-up pauses `MainGameScene`, launches `UpgradeModalScene`, and offers **3 random cards** drawn from the 8-card `UPGRADE_POOL` (`Phaser.Utils.Array.Shuffle([...UPGRADE_POOL]).slice(0, 3)`) — every class draws from the exact same deck.
+Each level-up pauses `MainGameScene`, launches `UpgradeModalScene`, and offers **3 random cards**. The deck is filtered per class before shuffling:
+
+```js
+const availablePool = UPGRADE_POOL.filter(card => !card.classId || card.classId === mainScene.heroId);
+const choices = Phaser.Utils.Array.Shuffle([...availablePool]).slice(0, 3);
+```
+
+Cards with no `classId` (the 4 stat boosts) are always eligible; cards with a `classId` only appear for the matching `heroId`. Each class therefore draws from a **6-card personal deck** (its 2 weapons + the 4 universal stat boosts), not the full 10-card pool.
 
 Note: `this.level` also feeds directly into monster difficulty (population cap, enemy HP, swarm frequency) — see [Level Design: Monster Spawning & Difficulty Pacing](level-design-monster-spawning.md). Leveling up faster makes the *player* stronger but also raises the threat curve, so growth and difficulty are coupled by design.
 
 ---
 
-## 3. Universal Upgrade Pool (class-agnostic)
+## 3. Upgrade Pool: Class-Locked Weapons + Universal Stat Boosts
 
-| Card | Effect | Stacking Formula | Notes |
-|---|---|---|---|
-| 🌀 Cleave Slash | `skills.melee += 1` | Linear, uncapped | See §4.1 |
-| 🔥 Fireball Spell | `skills.fireball += 1` | Linear, uncapped | See §4.2 |
-| 🗡️ Poison Darts | `skills.darts += 1` | Linear, uncapped | See §4.3 |
-| ⚔️ Orbiting Blades | `skills.orbit += 1` | Linear, uncapped | See §4.4 |
-| ⚡ Chain Lightning | `skills.lightning += 1` | Linear, uncapped | See §4.5 |
-| 🔪 Critical Knife | `skills.knife += 1` | Linear, uncapped | See §4.6 |
-| ❤️ Max HP +30% | `maxHp += 30`, heal `+30` instantly | Flat, additive per pick | Larger relative gain for low-HP classes |
-| 👟 Movement Speed +20% | `speedBonus += 0.2` (starts at `1.0`) | Additive to multiplier | 3rd pick → `speedBonus = 1.6` (+60% over base, not compounding) |
-| 💥 Attack Power +25% | `damageMult += 0.25` (starts at `1.0`) | Additive to multiplier | Applies to **all** weapons the player owns, not just the starting one |
-| 🧛 Vampiric Drain | `vampireChance += 0.15` | Additive probability | Rolled once per kill in `damageEnemy()` |
+| Card | `classId` | Effect | Stacking Formula | Notes |
+|---|:---:|---|---|---|
+| 🌀 Cleave Slash | `knight` | `skills.melee += 1` | Linear, uncapped | See §4.1 |
+| ⚔️ Orbiting Blades | `knight` | `skills.orbit += 1` | Linear, uncapped | See §4.4 |
+| 🔥 Fireball Spell | `wizard` | `skills.fireball += 1` | Linear, uncapped | See §4.2 |
+| ⚡ Chain Lightning | `wizard` | `skills.lightning += 1` | Linear, uncapped | See §4.5 |
+| 🗡️ Poison Darts | `rogue` | `skills.darts += 1` | Linear, uncapped | See §4.3 |
+| 🔪 Critical Knife | `rogue` | `skills.knife += 1` | Linear, uncapped | See §4.6 |
+| ❤️ Max HP +30% | *(none)* | `maxHp += 30`, heal `+30` instantly | Flat, additive per pick | Universal. Larger relative gain for low-HP classes |
+| 👟 Movement Speed +20% | *(none)* | `speedBonus += 0.2` (starts at `1.0`) | Additive to multiplier | Universal. 3rd pick → `speedBonus = 1.6` (+60% over base, not compounding) |
+| 💥 Attack Power +25% | *(none)* | `damageMult += 0.25` (starts at `1.0`) | Additive to multiplier | Universal. Applies to **both** of the class's weapons at once |
+| 🧛 Vampiric Drain | *(none)* | `vampireChance += 0.15` | Additive probability | Universal. Rolled once per kill in `damageEnemy()` |
 
-`damageMult` and `speedBonus` are shared multipliers applied at read-time (`proj.damage = BASE * this.player.damageMult`, `currentSpeed = this.player.speed * this.player.speedBonus`) — a single `damage_boost` pick buffs every weapon the player has simultaneously, which matters once a class has drawn a second or third weapon card (see §5).
+`damageMult` and `speedBonus` are shared multipliers applied at read-time (`proj.damage = BASE * this.player.damageMult`, `currentSpeed = this.player.speed * this.player.speedBonus`) — a single `damage_boost` pick buffs both of the player's class-locked weapons simultaneously (see §5).
 
 ---
 
 ## 4. Per-Weapon Scaling Curves
 
-Each weapon's *skill level* (`player.skills.<weapon>`) increases by 1 per matching card drawn. Base damage constants already reflect the [class rebalance pass](spec.md#21-player-characters-ฮีโร่ผู้เล่น) (Knight/orbit ↑, Wizard/fireball ↑, Rogue/darts ↓ per-hit + more projectiles).
+Each weapon's *skill level* (`player.skills.<weapon>`) increases by 1 per matching card drawn. Base damage constants already reflect the [class rebalance pass](spec.md#21-player-characters-ฮีโร่ผู้เล่น) (Knight/orbit ↑, Wizard/fireball ↑, Rogue/darts ↓ per-hit + more projectiles). Every weapon below is now gated by `classId` (§3) — only the owning class will ever be offered its card.
 
-### 4.1 Melee Slash — Knight's signature (`performMeleeAttack`)
+### 4.1 Melee Slash — Knight's starting weapon (`performMeleeAttack`)
 
 ```js
 const meleeRange = 70 + (this.player.skills.melee - 1) * 15; // reach grows per level
@@ -92,7 +105,7 @@ The swing auto-aims at whatever `getNearestEnemy()` returns (same helper Firebal
 
 **Growth axis: reach, not width or per-hit damage.** The 130° cone angle is a fixed characteristic of the attack (per design brief), so each level instead extends `meleeRange` by `15px` — letting the Knight threaten a wider ring of close-quarters space as levels stack, while every enemy caught in the swing takes the same flat `30 × damageMult` regardless of how many are hit. This keeps Knight's identity as "safe to stand in the middle of a crowd" without needing Orbiting Blades' continuous-collision model.
 
-### 4.2 Fireball Spell — Wizard's signature (`fireFireballWeapon`)
+### 4.2 Fireball Spell — Wizard's starting weapon (`fireFireballWeapon`)
 
 ```js
 for (let i = 0; i < this.player.skills.fireball; i++) { /* one shot, 120ms apart */ }
@@ -110,7 +123,7 @@ All shots in a volley target whatever `getNearestEnemy()` returns at cast time. 
 
 **Growth axis: single-target burst.** Every level stacks the *entire* volley onto the same nearest enemy, so Fireball scales as pure focused burst — fitting the Wizard's glass-cannon identity (lowest HP baseline, longest cooldown, biggest single hit): a Wizard commits to a slow windup, then deletes a priority target before it closes the distance.
 
-### 4.3 Poison Darts — Rogue's signature (`fireDartsWeapon`)
+### 4.3 Poison Darts — Rogue's starting weapon (`fireDartsWeapon`)
 
 ```js
 const dartCount = 4 + (this.player.skills.darts - 1) * 2; // full-circle spread
@@ -129,14 +142,14 @@ Darts have their **own dedicated timer at a faster 400ms cadence** (`fireDartsWe
 
 **Growth axis: spread/crowd poke, traded against range.** Darts fire in a full 360° ring at high frequency, so more levels mean a denser ring rather than more damage on any one enemy — but every dart fizzles out close to the Rogue, so the payoff only lands if the Rogue's speed advantage is used to stay inside that short bubble. This pairs with Rogue's highest movement speed, encouraging a kite-through-the-middle-of-a-crowd playstyle rather than either Knight's reach-based Melee Slash or Wizard's snipe-from-max-range.
 
-### 4.4 Orbiting Blades — universal pickup, no starting class (`updateOrbitBlades`)
+### 4.4 Orbiting Blades — Knight's second weapon, starts at 0 (`updateOrbitBlades`)
 
 ```js
 const orbitCount = this.player.skills.orbit;   // 1 blade per skill level
 this.damageEnemy(enemy, 20 * this.player.damageMult); // per hit, 400ms cooldown PER ENEMY
 ```
 
-Since the Knight's signature moved to Melee Slash (§4.1), Orbiting Blades is now a card any class can draw from scratch — a continuous, always-on ring of blades rather than a periodic swing.
+Locked to `classId: 'knight'` — only Knight ever sees this card, and only Knight starts at `skills.orbit = 0` needing to draw it. It's the second half of Knight's kit alongside Melee Slash (§4.1): a continuous, always-on 360° ring rather than a periodic directional swing, giving the Knight a passive-coverage option distinct from Melee's active-aimed cone.
 
 | Skill Level | Blades | Dmg/hit | Per-target cap (dmg per 400ms cd) |
 |:---:|:---:|:---:|:---:|
@@ -147,7 +160,7 @@ Since the Knight's signature moved to Melee Slash (§4.1), Orbiting Blades is no
 
 **Important growth nuance**: the 400ms hit cooldown (`enemy.lastOrbitHitTime`) is tracked **per enemy**, not per blade — so adding blades does *not* multiply damage against a single target standing still. What it buys instead is **angular coverage**: with `N` blades spaced `2π/N` apart, more enemies around the player get caught in a swing simultaneously — a full 360° passive alternative to Melee Slash's directional, auto-aimed 130° swing.
 
-### 4.5 Chain Lightning — universal pickup, no starting class (`fireLightningWeapon`)
+### 4.5 Chain Lightning — Wizard's second weapon, starts at 0 (`fireLightningWeapon`)
 
 ```js
 const targetCount = Math.min(this.player.skills.lightning * 2, activeEnemies.length);
@@ -160,9 +173,9 @@ this.damageEnemy(enemy, 40 * this.player.damageMult); // per bolt, instant
 | 2 | 4 | 40×`dmg` | 160×`dmg` |
 | 3 | 6 | 40×`dmg` | 240×`dmg` |
 
-No class starts with Lightning — it must be drawn as a card by any of the three, at which point it becomes the highest raw total-damage weapon per level (multi-target nuke), available equally to all classes as a build-defining pickup.
+Locked to `classId: 'wizard'` — the second half of Wizard's kit alongside Fireball (§4.2). Where Fireball is a slow single-target nuke on a long cooldown, Lightning is instant and multi-target, giving the Wizard an answer to a spread-out crowd instead of only a lone priority target.
 
-### 4.6 Critical Knife — universal pickup, no starting class (`fireKnifeWeapon`)
+### 4.6 Critical Knife — Rogue's second weapon, starts at 0 (`fireKnifeWeapon`)
 
 ```js
 const critChance = Math.min(0.2 + (this.player.skills.knife - 1) * 0.1, 0.8);
@@ -179,21 +192,21 @@ A single knife thrown at the nearest enemy every 700ms, sharing the `poison_dart
 | 4 | 50% | 22×`dmg` | 44×`dmg` | 33.0×`dmg` |
 | 7 | 80% (cap) | 22×`dmg` | 44×`dmg` | 39.6×`dmg` |
 
-**Growth axis: crit chance, not damage or count.** Unlike every other weapon, a Critical Knife level-up doesn't add projectiles, range, or a flat damage bump — it raises the odds of the existing 2× multiplier landing, capped at 80% so a throw is never fully guaranteed to crit. This makes Knife the volatility/gambler's pick of the pool: low-level Knife is mostly whiffing on the crit and hitting for a modest 22, while a heavily-invested Knife build becomes a near-guaranteed burst hit — appealing as a supplementary pickup for any class (particularly pairing well with Wizard's `damage_boost`-heavy build, since the multiplier compounds with `damageMult`).
+**Growth axis: crit chance, not damage or count.** Unlike every other weapon, a Critical Knife level-up doesn't add projectiles, range, or a flat damage bump — it raises the odds of the existing 2× multiplier landing, capped at 80% so a throw is never fully guaranteed to crit. Locked to `classId: 'rogue'` — the second half of Rogue's kit alongside Poison Darts (§4.3): Darts is reliable, wide, close-range chip damage, while Knife is a single volatile long-range gamble, giving the Rogue a low-risk (spread) and a high-variance (crit) option side by side.
 
 ---
 
 ## 5. Class Growth Arcs
 
-Because the upgrade pool is shared, "build diversity" comes from which cards a run happens to offer and which the player chooses — any class *can* end up wielding all four weapons. The table below describes the growth path each class's starting baseline naturally leans toward, not a hard restriction.
+Weapon cards are locked (§3), so "build diversity" no longer comes from *which weapons* a class ends up with — that's fixed at 2 per class from the start. It instead comes from **how a run's random 3-of-6 offers pace the split between a class's two weapons and its 4 universal stat boosts**. Every class eventually has access to its full kit; the only open question each run is the order and ratio it arrives in.
 
-| Class | Starting Baseline | Natural Growth Priority | Why |
-|---|---|---|---|
-| **Knight** | 150 HP / 95 spd, Melee Lv1 | 🌀 Cleave Slash + ❤️ HP + 💥 Dmg | Melee Slash rewards standing in a crowd within its 130° cone; more HP lets the Knight tank longer to make that reach matter, and `damageMult` buffs the swing directly |
-| **Wizard** | 65 HP / 125 spd, Fireball Lv1 | Fireball + 💥 Dmg + ❤️ HP | Fireball's growth is pure single-target burst — `damageMult` scales it hardest of any weapon; HP is a safety net for the lowest baseline in the game |
-| **Rogue** | 100 HP / 165 spd, Darts Lv1 | Darts + 👟 Speed + 🧛 Vampire | Darts' spread growth pairs with the fastest movement speed to hit-and-run through packs; Vampiric Drain sustains a playstyle built on staying in contact briefly rather than tanking or kiting at max range |
+| Class | Locked Kit | Starting Baseline | Natural Growth Priority | Why |
+|---|---|---|---|---|
+| **Knight** | 🌀 Cleave Slash + ⚔️ Orbiting Blades | 150 HP / 95 spd, Melee Lv1 | Cleave Slash + Orbiting Blades + ❤️ HP | Melee rewards standing in a crowd within its cone; Orbit adds passive 360° coverage for whatever the cone missed; more HP lets the Knight tank long enough for both to matter |
+| **Wizard** | 🔥 Fireball Spell + ⚡ Chain Lightning | 65 HP / 125 spd, Fireball Lv1 | Fireball + 💥 Dmg + Lightning | Fireball's growth is pure single-target burst that `damageMult` scales hardest; Lightning covers the crowd-control gap Fireball leaves; HP is a safety net for the lowest baseline in the game |
+| **Rogue** | 🗡️ Poison Darts + 🔪 Critical Knife | 100 HP / 165 spd, Darts Lv1 | Darts + 👟 Speed + Critical Knife | Darts' spread growth pairs with the fastest movement speed to hit-and-run through packs; Critical Knife adds a long-range gamble option once the reliable spread is established |
 
-A run that draws unfavorable cards (e.g. a Wizard offered no `damage_boost` for several levels) is expected — the shared pool means no class is guaranteed its "ideal" curve every run, which is the intended roguelite variance.
+Because each class's deck is only 6 cards (2 weapons + 4 stat boosts) instead of the old 10-card shared pool, a class reaches "has drawn everything at least once" much faster — variance now lives in *ordering* (does Wizard see Lightning at level 3 or level 8?) rather than in *whether* a class ever sees its second weapon at all.
 
 ---
 
@@ -203,6 +216,7 @@ A run that draws unfavorable cards (e.g. a Wizard offered no `damage_boost` for 
 |---|---|:---:|---|
 | XP curve growth rate | `levelUp()` | `×1.4` | Slower/faster leveling pace over a run |
 | Base XP requirement | `init()` | `10` | Shifts the whole curve up/down uniformly |
+| Weapon card class-lock | `card.classId` in `UPGRADE_POOL`, filtered in `UpgradeModalScene.create()` | 1 owning class per weapon card | Removing a `classId` returns that weapon to the universal pool (pre-this-pass behavior); reassigning it changes which class it's locked to |
 | `hp_boost` amount | `UPGRADE_POOL` | `+30` flat | Bigger relative gain for low-HP classes (Wizard) |
 | `speed_boost` amount | `UPGRADE_POOL` | `+0.2` to `speedBonus` | Rogue benefits most in absolute px/s terms (highest base speed) |
 | `damage_boost` amount | `UPGRADE_POOL` | `+0.25` to `damageMult` | Scales hardest on high base-damage weapons (Fireball, Lightning) |

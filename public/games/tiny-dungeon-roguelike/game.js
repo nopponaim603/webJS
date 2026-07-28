@@ -163,12 +163,13 @@ const HERO_CLASSES = {
 // Available Upgrades List
 const UPGRADE_POOL = [
     {
-        id: 'fireball_add',
-        title: '🔥 Fireball Spell',
-        desc: 'ยิงลูกไฟเวทมนตร์สุ่มพุ่งใส่ศัตรูที่อยู่ใกล้ที่สุด',
-        icon: '🔥',
+        id: 'melee_add',
+        title: '🌀 Cleave Slash',
+        desc: 'เพิ่มระยะโจมตีของท่าฟันระยะประชิดแบบวงกว้าง 130 องศา',
+        icon: '🌀',
+        classId: 'knight',
         apply: (player) => {
-            player.skills.fireball = (player.skills.fireball || 0) + 1;
+            player.skills.melee = (player.skills.melee || 0) + 1;
         }
     },
     {
@@ -176,26 +177,19 @@ const UPGRADE_POOL = [
         title: '⚔️ Orbiting Blades',
         desc: 'เพิ่มคมดาบหมุนเวียนรอบตัวทำความเสียหายแก่ศัตรูที่เข้าใกล้',
         icon: '⚔️',
+        classId: 'knight',
         apply: (player) => {
             player.skills.orbit = (player.skills.orbit || 0) + 1;
         }
     },
     {
-        id: 'melee_add',
-        title: '🌀 Cleave Slash',
-        desc: 'เพิ่มระยะโจมตีของท่าฟันระยะประชิดแบบวงกว้าง 130 องศา',
-        icon: '🌀',
+        id: 'fireball_add',
+        title: '🔥 Fireball Spell',
+        desc: 'ยิงลูกไฟเวทมนตร์สุ่มพุ่งใส่ศัตรูที่อยู่ใกล้ที่สุด',
+        icon: '🔥',
+        classId: 'wizard',
         apply: (player) => {
-            player.skills.melee = (player.skills.melee || 0) + 1;
-        }
-    },
-    {
-        id: 'darts_add',
-        title: '🗡️ Poison Darts',
-        desc: 'เพิ่มมีดพิษยิงกระจายรอบทิศทาง',
-        icon: '🗡️',
-        apply: (player) => {
-            player.skills.darts = (player.skills.darts || 0) + 1;
+            player.skills.fireball = (player.skills.fireball || 0) + 1;
         }
     },
     {
@@ -203,8 +197,19 @@ const UPGRADE_POOL = [
         title: '⚡ Chain Lightning',
         desc: 'ผ่าสายฟ้าฟาดใส่ศัตรูสุ่มบนหน้าจออย่างรุนแรง',
         icon: '⚡',
+        classId: 'wizard',
         apply: (player) => {
             player.skills.lightning = (player.skills.lightning || 0) + 1;
+        }
+    },
+    {
+        id: 'darts_add',
+        title: '🗡️ Poison Darts',
+        desc: 'เพิ่มมีดพิษยิงกระจายรอบทิศทาง',
+        icon: '🗡️',
+        classId: 'rogue',
+        apply: (player) => {
+            player.skills.darts = (player.skills.darts || 0) + 1;
         }
     },
     {
@@ -212,6 +217,7 @@ const UPGRADE_POOL = [
         title: '🔪 Critical Knife',
         desc: 'ขว้างมีดใส่ศัตรูที่ใกล้ที่สุด มีโอกาสติด critical โดนแรงขึ้น 2 เท่า',
         icon: '🔪',
+        classId: 'rogue',
         apply: (player) => {
             player.skills.knife = (player.skills.knife || 0) + 1;
         }
@@ -1206,8 +1212,11 @@ class UpgradeModalScene extends Phaser.Scene {
             shadow: { color: '#facc15', blur: 12, fill: true }
         }).setOrigin(0.5);
 
-        // Pick 3 Random Upgrades
-        const choices = Phaser.Utils.Array.Shuffle([...UPGRADE_POOL]).slice(0, 3);
+        // Pick 3 Random Upgrades — weapon cards are locked to their owning class,
+        // stat-boost cards (no classId) stay available to everyone
+        const mainScene = this.scene.get('MainGameScene');
+        const availablePool = UPGRADE_POOL.filter(card => !card.classId || card.classId === mainScene.heroId);
+        const choices = Phaser.Utils.Array.Shuffle([...availablePool]).slice(0, 3);
         const cardWidth = 220;
         const startX = width / 2 - (choices.length * cardWidth) / 2 + cardWidth / 2 - 20;
 
@@ -1255,7 +1264,6 @@ class UpgradeModalScene extends Phaser.Scene {
 
             const chooseCard = () => {
                 sounds.playPickup();
-                const mainScene = this.scene.get('MainGameScene');
                 cardData.apply(mainScene.player);
 
                 mainScene.player.upgradeCounts[cardData.id] = (mainScene.player.upgradeCounts[cardData.id] || 0) + 1;
