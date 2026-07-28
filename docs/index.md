@@ -24,6 +24,7 @@
 | G005 | `cyber-sphere` | Cyber Sphere 3D | Babylon.js 3D | `babylon-demo/` |
 | G006 | `match-3` | Kenney Match 3 | Phaser 2D | `match3/` |
 | G007 | `3d-platformer` | Kenney 3D Platformer | Babylon.js 8 | `3d-platformer/` |
+| G008 | `card-memory` | Card Memory Match | Vanilla JS | `public/games/card-memory/` |
 
 ### 🎮 Individual Game Specifications (`docs/gdd/games/`)
 - [Space Shooter (Phaser 2D)](./gdd/games/space-shooter/spec.md)
@@ -33,6 +34,7 @@
 - [Cyber Sphere 3D](./gdd/games/cyber-sphere-3d/spec.md)
 - [Kenney Match 3 (Phaser 2D)](./gdd/games/match3/spec.md)
 - [Kenney 3D Platformer (Babylon.js)](./gdd/games/3d-platformer/spec.md)
+- [Card Memory Match (Kenney)](./gdd/games/card-memory/spec.md)
 
 ---
 

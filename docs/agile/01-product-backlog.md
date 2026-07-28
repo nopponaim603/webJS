@@ -1,6 +1,6 @@
 # Product Backlog — webJS Game Portfolio
 
-**Last Updated:** 2026-07-28 | **Version:** 1.1.0
+**Last Updated:** 2026-07-28 | **Version:** 1.2.0
 
 ---
 
@@ -14,6 +14,20 @@
 | [US-02-01](./user-stories/archive/US-02-01-emoji-match.md) | ในฐานะผู้เล่น ฉันต้องการเล่นเกม Emoji Match เพื่อทดสอบความจำ | จับคู่การ์ดที่เหมือนกัน บันทึกคะแนน และแสดงผลแพ้/ชนะ | L | ✅ Done |
 | [US-02-02](./user-stories/archive/US-02-02-2048-cubes.md) | ในฐานะผู้เล่น ฉันต้องการเล่นเกม 2048 Cubes รวมตัวเลขฟิสิกส์ | ยิง Cube รวมตัวเลข 2048 ได้ถูกต้องตามกฎฟิสิกส์ | L | ✅ Done |
 | [US-02-03](./user-stories/archive/US-02-03-tile-match.md) | ในฐานะผู้เล่น ฉันต้องการเล่นเกม Tile Match จับคู่ไพ่ 3 ใบ | เลือกไทล์ลงถาด 7 ช่อง และจับคู่ 3 ใบหายไป | L | ✅ Done |
+
+---
+
+## 🃏 Epic 08 — Card Memory Match (G008)
+
+| ID | User Story | Acceptance Criteria | Estimate | Status |
+|----|-----------|---------------------|----------|--------|
+| [US-08-01](./user-stories/US-08-01.md) | แสดงตารางการ์ด 16 ใบ (4x4 Grid) คว่ำหน้าทั้งหมดเมื่อเริ่มเกม | สุ่มการ์ด 8 คู่ มี 3D Flip animation บนมือถือ/เดสก์ท็อป | M | ✅ Done |
+| [US-08-02](./user-stories/US-08-02.md) | คลิกการ์ดเพื่อเปิดและตรวจจับคู่ความถูกต้อง | ตรวจจับ 2 ใบ ป้องกันการคลิกซ้ำ ป้องกันใบที่ 3 | M | 🔵 In Progress |
+| [US-08-03](./user-stories/US-08-03.md) | แสดงตัวนับ Moves และ Timer บน HUD | Moves นับเพิ่มทีละ 1 (2 ใบ) และ Timer เดินอัตโนมัติ | S | 🔵 In Progress |
+| [US-08-04](./user-stories/US-08-04.md) | แสดง Modal สรุปผลลัพธ์เวลา คะแนน และดาว 1-5 ดาว | แสดงผลเวลา Moves แต้ม และระดับดาวเมื่อชนะ | S | 🔵 In Progress |
+| [US-08-05](./user-stories/US-08-05.md) | ปุ่ม New Game และ Play Again เริ่มเกมใหม่โดยไม่ต้องโหลดหน้าเว็บ | สุ่มการ์ดใหม่ รีเซ็ต Timer/Moves โดยไม่ reload | S | 🔵 In Progress |
+| [US-08-06](./user-stories/US-08-06.md) | แสดงผล Responsive และสนับสนุน Touch Events บนมือถือ | รองรับ Touch, Auto Scale Card Size 360px+ | M | 🔵 In Progress |
+| [US-08-07](./user-stories/US-08-07.md) | เพิ่มประสิทธิภาพการโหลดและ Preload Assets | Preload ภาพการ์ด Kenney Pack 144px 60 FPS | S | 🔵 In Progress |
 
 ---
 
@@ -36,4 +50,4 @@
 ---
 
 ## Linked GDD Features
-- Derived from: [Game Concept & Architecture](../gdd/00-concept.md), [Core Mechanics](../gdd/01-mechanics.md)
+- Derived from: [Game Concept & Architecture](../gdd/00-concept.md), [Core Mechanics](../gdd/01-mechanics.md), [Card Memory Spec](../gdd/games/card-memory/spec.md)
