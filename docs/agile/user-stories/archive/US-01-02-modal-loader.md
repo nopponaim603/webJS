@@ -1,8 +1,8 @@
 # User Story: US-01-02 — Modal Iframe Game Launcher & Shortcuts
 
-**Status:** ✅ Done  
-**Epic:** [Product Backlog](../01-product-backlog.md)  
-**Sprint:** [Sprint 01](../sprint-backlogs/sprint-01.md)  
+**Status:** ✅ Done (Archived)  
+**Epic:** [Product Backlog](../../01-product-backlog.md)  
+**Sprint:** [Sprint 01](../../sprint-backlogs/sprint-01.md)  
 **Owner:** Dev Team & AI Agent  
 
 ---
@@ -25,5 +25,5 @@
 
 ## 🔗 Related Files
 
-- Code: [script.js](../../../script.js), [index.html](../../../index.html), [styles.css](../../../styles.css)
-- Backlog: [Product Backlog](../01-product-backlog.md)
+- Code: [script.js](../../../../script.js), [index.html](../../../../index.html), [styles.css](../../../../styles.css)
+- Backlog: [Product Backlog](../../01-product-backlog.md)

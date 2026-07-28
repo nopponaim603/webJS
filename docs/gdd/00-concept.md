@@ -33,9 +33,9 @@
 
 | # | Code Name | Game Title | Folder | Engine | Status |
 |---|-----------|------------|--------|--------|--------|
-| G001 | `emoji-match` | Emoji Match | `emoji-match/` | Vanilla JS | ✅ Released ([US-02-01](../agile/user-stories/US-02-01-emoji-match.md)) |
-| G002 | `2048-cubes` | 2048 Cubes | `2048-cubes/` | Canvas 2D | ✅ Released ([US-02-02](../agile/user-stories/US-02-02-2048-cubes.md)) |
-| G003 | `tile-match` | Tile Match | `tile-match/` | Vanilla JS | ✅ Released ([US-02-03](../agile/user-stories/US-02-03-tile-match.md)) |
+| G001 | `emoji-match` | Emoji Match | `emoji-match/` | Vanilla JS | ✅ Released ([US-02-01](../agile/user-stories/archive/US-02-01-emoji-match.md)) |
+| G002 | `2048-cubes` | 2048 Cubes | `2048-cubes/` | Canvas 2D | ✅ Released ([US-02-02](../agile/user-stories/archive/US-02-02-2048-cubes.md)) |
+| G003 | `tile-match` | Tile Match | `tile-match/` | Vanilla JS | ✅ Released ([US-02-03](../agile/user-stories/archive/US-02-03-tile-match.md)) |
 | G004 | `space-shooter` | Space Shooter | `phaser-demo/` | Phaser 2D | ✅ Released |
 | G005 | `cyber-sphere` | Cyber Sphere 3D | `babylon-demo/` | Babylon.js 3D | ✅ Released |
 | G006 | `match-3` | Kenney Match 3 | `match3/` | Phaser 2D | ✅ Released |

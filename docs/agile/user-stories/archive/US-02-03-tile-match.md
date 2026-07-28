@@ -1,8 +1,8 @@
 # User Story: US-02-03 — Tile Match Triple Tile Mini Game
 
-**Status:** ✅ Done  
-**Epic:** [Product Backlog](../01-product-backlog.md)  
-**Sprint:** [Sprint 01](../sprint-backlogs/sprint-01.md)  
+**Status:** ✅ Done (Archived)  
+**Epic:** [Product Backlog](../../01-product-backlog.md)  
+**Sprint:** [Sprint 01](../../sprint-backlogs/sprint-01.md)  
 **Owner:** Dev Team  
 
 ---
@@ -26,5 +26,5 @@
 ## 🔗 Related Files
 
 - Code: `tile-match/`
-- Mechanics: [Core Mechanics](../../gdd/01-mechanics.md)
-- Backlog: [Product Backlog](../01-product-backlog.md)
+- Mechanics: [Core Mechanics](../../../gdd/01-mechanics.md)
+- Backlog: [Product Backlog](../../01-product-backlog.md)
