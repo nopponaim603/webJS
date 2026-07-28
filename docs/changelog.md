@@ -3,6 +3,19 @@
 **Project:** Game Portfolio (`webJS`)  
 **Maintained by:** Antigravity AI & Dev Team  
 
+## [1.5.0] - 2026-07-28
+
+### Updated / Synchronized
+- **Agile to GDD & Software Doc Sync**: อัปเดตเอกสารระบบและเกมทั้งหมดให้สอดคล้องกับแผนการพัฒนา Agile (Sprint 01/02):
+  - **GDD Suite ([docs/gdd/](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd)):**
+    - `00-concept.md`: เพิ่มสถานะการพัฒนา Sprint 01/02 และเชื่อมโยง Agile User Stories
+    - `01-mechanics.md`: เพิ่มไดอะล็อกการสืบค้น real-time, คีย์บอร์ดลัด (`Space`, `F`, `Esc`), และสเปค High Score Persistence
+    - `04-audio-direction.md`: สเปคการสังเคราะห์เสียงเอฟเฟกต์เรียลไทม์ด้วย Synthetic Web Audio API Engine
+  - **Software Design Suite ([docs/software/](file:///c:/Users/noppon/source/06-WEB/webJS/docs/software)):**
+    - `01-system-design.md`: เพิ่มย่อยระบบ High Score Manager และโครงสร้าง Zero-Dependency Node HTTP Server
+    - `02-class-diagram.md`: เพิ่ม Sequence Diagram ลำดับการส่งคะแนนผ่าน `window.postMessage` และ Class Diagram สำหรับ `HighScoreManager` / `AudioEngine`
+    - `03-data-schema.md`: กำหนดข้อกำหนด Schema สำหรับ `postMessage` Event และ JSON Structure ของ LocalStorage
+
 ## [1.4.0] - 2026-07-26
 
 ### Added

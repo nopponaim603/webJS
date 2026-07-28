@@ -1,6 +1,6 @@
 # Data Schema & Persistence — webJS Game Portfolio
 
-**Version:** 1.0.0 | **Last Updated:** 2026-07-26
+**Version:** 1.1.0 | **Last Updated:** 2026-07-28
 
 ---
 
@@ -15,22 +15,47 @@ interface GameItem {
     aspectRatio?: string;        // อัตราส่วนหน้าจอของ Modal Iframe (e.g. "390 / 480", "1 / 1.5")
     image: string;               // URL รูปภาพปกการ์ดเกม
     gradient: string;            // CSS Gradient background
+    highScore?: number;          // คะแนนสูงสุดที่ดึงมาจาก LocalStorage
 }
 ```
 
 ---
 
-## 2. LocalStorage Persistence Schema
+## 2. Cross-Iframe Message Payload Schema (`window.postMessage`)
 
-ระบบบันทึกคะแนนและตั้งค่าของผู้ใช้จะบันทึกลงใน Browser `localStorage`:
+เมื่อมินิเกมทำงานเสร็จสิ้นหรือทำคะแนนใหม่ มินิเกมจะส่ง Payload ในรูปแบบต่อไปนี้ไปยัง Host Window (`script.js`):
+
+```typescript
+interface HighScoreMessagePayload {
+    type: 'WEBJS_HIGH_SCORE_UPDATE';  // Identifies postMessage event type
+    gameId: string;                    // รหัสประจำเกม (e.g. "emoji-match")
+    score: number;                     // คะแนนล่าสุดที่ทำได้ในเกม
+    timestamp?: number;                // UNIX timestamp
+}
+```
+
+---
+
+## 3. LocalStorage Persistence Schema
+
+ระบบบันทึกคะแนนและตั้งค่าของผู้ใช้จะบันทึกลงใน Browser `localStorage` ภายใต้ Key หลัก `webjs_highscores` และ `webjs_settings`:
 
 ```json
 {
-  "webjs_portfolio_theme": "dark",
-  "webjs_highscore_emoji_match": 1420,
-  "webjs_highscore_2048_cubes": 8192,
-  "webjs_highscore_tile_match": 3500,
-  "webjs_recent_played": ["tile-match", "emoji-match"]
+  "webjs_settings": {
+    "theme": "dark",
+    "soundMuted": false,
+    "recentPlayed": ["tile-match", "emoji-match", "2048-cubes"]
+  },
+  "webjs_highscores": {
+    "emoji-match": 1420,
+    "2048-cubes": 8192,
+    "tile-match": 3500,
+    "space-shooter": 12500,
+    "cyber-sphere": 4800,
+    "match3": 9600,
+    "3d-platformer": 520
+  }
 }
 ```
 
@@ -38,4 +63,5 @@ interface GameItem {
 
 ## Related Documents
 - System Design: [Software System Design](./01-system-design.md)
+- Class Diagram: [Class Diagram & Data Flow](./02-class-diagram.md)
 - Product Backlog: [Product Backlog](../agile/01-product-backlog.md)

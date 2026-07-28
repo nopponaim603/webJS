@@ -49,7 +49,7 @@
 - [03-meeting-backlogs.md — Meeting Logs Hub](./agile/03-meeting-backlogs.md)
 - [04-retrospectives-backlog.md — Retrospectives Hub](./agile/04-retrospectives-backlog.md)
 - [05-report-backlog.md — QA & Test Reports Hub](./agile/05-report-backlog.md)
-- [kanban.md — Kanban Board](./agile/kanban.md)
+- [Kanban-board.md — Kanban Board](./agile/Kanban-board.md)
 
 ---
 
