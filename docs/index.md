@@ -26,6 +26,13 @@
 | G006 | `match-3` | Kenney Match 3 | Phaser 2D | `match3/` |
 | G007 | `3d-platformer` | Kenney 3D Platformer | Babylon.js 8 | `3d-platformer/` |
 | G008 | `card-memory` | Card Memory Match | Vanilla JS | `public/games/card-memory/` |
+| G009 | `ocean-frenzy` | Ocean Frenzy | Phaser 3 | `public/games/ocean-frenzy/` |
+| G010 | `dice-quest` | Dice Quest | Vanilla JS / Phaser | `public/games/dice-quest/` |
+| G011 | `pico-tower-climber` | Pico Tower Climber | Phaser 3 Tilemap | `public/games/pico-tower-climber/` |
+| G012 | `pixel-bullet-hell` | Pixel Bullet Hell | Phaser 3 | `public/games/pixel-bullet-hell/` |
+| G013 | `block-collapse` | Block Collapse | Canvas 2D | `public/games/block-collapse/` |
+| G014 | `tiny-farm-tycoon` | Tiny Farm Tycoon | Phaser 3 | `public/games/tiny-farm-tycoon/` |
+| G015 | `lunar-lander` | Lunar Lander Gravity | Phaser Physics | `public/games/lunar-lander/` |
 
 ### 🎮 Individual Game Specifications (`docs/gdd/games/`)
 - [Space Shooter (Phaser 2D)](./gdd/games/space-shooter/spec.md)
@@ -36,6 +43,13 @@
 - [Kenney Match 3 (Phaser 2D)](./gdd/games/match3/spec.md)
 - [Kenney 3D Platformer (Babylon.js)](./gdd/games/3d-platformer/spec.md)
 - [Card Memory Match (Kenney)](./gdd/games/card-memory/spec.md)
+- [Ocean Frenzy (Kenney Fish Pack)](./gdd/games/ocean-frenzy/spec.md)
+- [Dice Quest (Kenney Boardgame)](./gdd/games/dice-quest/spec.md)
+- [Pico Tower Climber (Pico-8)](./gdd/games/pico-tower-climber/spec.md)
+- [Pixel Bullet Hell (Kenney Shmup)](./gdd/games/pixel-bullet-hell/spec.md)
+- [Block Collapse (Puzzle Pack 2)](./gdd/games/block-collapse/spec.md)
+- [Tiny Farm Tycoon (Kenney Tiny Farm)](./gdd/games/tiny-farm-tycoon/spec.md)
+- [Lunar Lander Gravity (Simple Space)](./gdd/games/lunar-lander/spec.md)
 
 ---
 

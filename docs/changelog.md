@@ -3,6 +3,20 @@
 **Project:** Game Portfolio (`webJS`)  
 **Maintained by:** Antigravity AI & Dev Team  
 
+## [1.7.0] - 2026-07-28
+
+### Added
+- **Detailed Game Specifications Suite ([docs/gdd/games/](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games))**:
+  - จัดทำเอกสารข้อกำหนดการพัฒนาเกม (GDD Spec) รายละเอียดเจาะจงระดับระบบ ศิลป์ การควบคุม และระบบเสียง สังเคราะห์ สำหรับเกมใหม่ทั้ง 7 เกม:
+    - [Ocean Frenzy Spec (G009)](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/ocean-frenzy/spec.md) — เกมปลาใหญ่กินปลาเล็ก (Phaser 3)
+    - [Dice Quest Spec (G010)](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/dice-quest/spec.md) — เกมกระดานวางกลยุทธ์ทอยลูกเต๋า (Vanilla JS / Phaser)
+    - [Pico Tower Climber Spec (G011)](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/pico-tower-climber/spec.md) — เกมพิกเซล 8-bit ไต่หอคอย (Phaser Tilemap)
+    - [Pixel Bullet Hell Spec (G012)](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/pixel-bullet-hell/spec.md) — เกมยานยิงแนวตั้งยิงสู้บอส (Phaser 3)
+    - [Block Collapse Spec (G013)](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/block-collapse/spec.md) — เกมปริศนาสลับทำลายบล็อกสี (Canvas 2D)
+    - [Tiny Farm Tycoon Spec (G014)](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/tiny-farm-tycoon/spec.md) — เกมผสานพืชผลและบริหารฟาร์มพิกเซล (Phaser Top-down)
+    - [Lunar Lander Gravity Spec (G015)](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/lunar-lander/spec.md) — เกมจรวดลงจอดดาวเคราะห์ระบบฟิสิกส์ (Phaser Physics)
+  - ลงทะเบียนดัชนีคลังเกม G001 ถึง G015 พร้อมเอกสารกำกับใน [docs/index.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/index.md) ครบถ้วน
+
 ## [1.6.0] - 2026-07-28
 
 ### Added
