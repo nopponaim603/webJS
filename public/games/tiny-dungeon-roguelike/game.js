@@ -103,6 +103,18 @@ class SoundManager {
 
 const sounds = new SoundManager();
 
+// Seeded PRNG (mulberry32) — same seed always produces the same sequence,
+// so a dungeon layout can be reproduced/debugged instead of relying on Math.random().
+function mulberry32(seed) {
+    let state = seed >>> 0;
+    return function () {
+        state = (state + 0x6D2B79F5) | 0;
+        let t = Math.imul(state ^ (state >>> 15), 1 | state);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+}
+
 // Global Hero Classes Config
 const HERO_CLASSES = {
     knight: {
@@ -401,6 +413,9 @@ class MainGameScene extends Phaser.Scene {
 
         // Touch Joystick State
         this.touchMove = { x: 0, y: 0 };
+
+        // Seed for this run's dungeon layout — same seed always regenerates the same floor
+        this.mapSeed = data.mapSeed || ((Math.random() * 0xFFFFFFFF) >>> 0);
     }
 
     create() {
@@ -477,6 +492,21 @@ class MainGameScene extends Phaser.Scene {
         const cols = Math.ceil(mapW / tileSize);
         const rows = Math.ceil(mapH / tileSize);
 
+        // Seeded RNG so the floor pattern is random-looking but reproducible from this.mapSeed
+        const rng = mulberry32(this.mapSeed);
+
+        // Weighted floor tiles: main floor dominates, variants combined stay within ~5-10%
+        const mainFloor = 48;
+        const variantFloors = [42, 49];
+        const variantChance = 0.07; // ~7% combined chance for a variant tile
+
+        const pickFloorFrame = () => {
+            if (rng() < variantChance) {
+                return variantFloors[Math.floor(rng() * variantFloors.length)];
+            }
+            return mainFloor;
+        };
+
         for (let r = 0; r < rows; r++) {
             for (let c = 0; c < cols; c++) {
                 const x = c * tileSize + tileSize / 2;
@@ -484,13 +514,10 @@ class MainGameScene extends Phaser.Scene {
 
                 if (r === 0 || r === rows - 1 || c === 0 || c === cols - 1) {
                     // Wall border
-                    const wall = this.add.image(x, y, 'dungeon_tiles', 14).setScale(2);
+                    this.add.image(x, y, 'dungeon_tiles', 14).setScale(2);
                 } else {
-                    // Dungeon Floor Variations (Frames: 48, 42, 49)
-                    const floorTiles = [48, 42, 49];
-                    const floorIdx = (c * 3 + r * 7) % floorTiles.length;
-                    const floorFrame = floorTiles[floorIdx];
-                    this.add.image(x, y, 'dungeon_tiles', floorFrame).setScale(2);
+                    // Dungeon Floor Variations
+                    this.add.image(x, y, 'dungeon_tiles', pickFloorFrame()).setScale(2);
                 }
             }
         }
@@ -601,8 +628,9 @@ class MainGameScene extends Phaser.Scene {
 
             // Overlap with enemies
             this.physics.add.overlap(blade, this.enemies, (b, enemy) => {
-                if (enemy.lastOrbitHitTime && time - enemy.lastOrbitHitTime < 400) return;
-                enemy.lastOrbitHitTime = time;
+                const now = this.time.now;
+                if (enemy.lastOrbitHitTime && now - enemy.lastOrbitHitTime < 400) return;
+                enemy.lastOrbitHitTime = now;
                 this.damageEnemy(enemy, 15 * this.player.damageMult);
             });
         }
