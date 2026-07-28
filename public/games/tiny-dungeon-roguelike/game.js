@@ -123,8 +123,8 @@ const HERO_CLASSES = {
         frame: 96,
         maxHp: 150,
         speed: 95,
-        desc: 'ถึกทนที่สุดในเกม เลือดเยอะแต่เดินช้า เริ่มด้วยดาบหมุนเวียนรอบตัว ฟันโดนศัตรูทุกตัวที่เข้าใกล้',
-        weapon: 'orbit'
+        desc: 'ถึกทนที่สุดในเกม เลือดเยอะแต่เดินช้า โจมตีระยะประชิดฟันเป็นวงกว้าง 130 องศาตรงหน้า',
+        weapon: 'melee'
     },
     wizard: {
         id: 'wizard',
@@ -164,6 +164,15 @@ const UPGRADE_POOL = [
         icon: '⚔️',
         apply: (player) => {
             player.skills.orbit = (player.skills.orbit || 0) + 1;
+        }
+    },
+    {
+        id: 'melee_add',
+        title: '🌀 Cleave Slash',
+        desc: 'เพิ่มระยะโจมตีของท่าฟันระยะประชิดแบบวงกว้าง 130 องศา',
+        icon: '🌀',
+        apply: (player) => {
+            player.skills.melee = (player.skills.melee || 0) + 1;
         }
     },
     {
@@ -451,6 +460,7 @@ class MainGameScene extends Phaser.Scene {
             orbit: this.heroConfig.weapon === 'orbit' ? 1 : 0,
             fireball: this.heroConfig.weapon === 'fireball' ? 1 : 0,
             darts: this.heroConfig.weapon === 'darts' ? 1 : 0,
+            melee: this.heroConfig.weapon === 'melee' ? 1 : 0,
             lightning: 0
         };
 
@@ -484,10 +494,13 @@ class MainGameScene extends Phaser.Scene {
         // 6. Launch Parallel UI Scene
         this.scene.launch('UIScene');
 
-        // 7. Timers & Weapon Fire Loops
+        // 7. Timers & Weapon Fire Loops — each weapon fires on its own cadence
         this.time.addEvent({ delay: 1000, callback: this.updateGameTimer, callbackScope: this, loop: true });
         this.time.addEvent({ delay: 1200, callback: this.spawnEnemyWave, callbackScope: this, loop: true });
-        this.time.addEvent({ delay: 800, callback: this.fireAutoWeapons, callbackScope: this, loop: true });
+        this.time.addEvent({ delay: 800, callback: this.fireMeleeWeapon, callbackScope: this, loop: true });
+        this.time.addEvent({ delay: 1400, callback: this.fireFireballWeapon, callbackScope: this, loop: true }); // slow, hard-hitting
+        this.time.addEvent({ delay: 400, callback: this.fireDartsWeapon, callbackScope: this, loop: true });     // fast, short range
+        this.time.addEvent({ delay: 800, callback: this.fireLightningWeapon, callbackScope: this, loop: true });
     }
 
     createDungeonArena(mapW, mapH) {
@@ -649,96 +662,141 @@ class MainGameScene extends Phaser.Scene {
         });
     }
 
-    fireAutoWeapons() {
-        if (this.isGameOver) return;
+    // Melee Slash (Knight) — close-range cone swing aimed at the nearest enemy
+    fireMeleeWeapon() {
+        if (this.isGameOver || this.player.skills.melee <= 0) return;
+        this.performMeleeAttack();
+    }
 
-        // 1. Fireball — Render Graphics (จุดไฟสีแดงส้ม)
-        if (this.player.skills.fireball > 0) {
-            const nearestEnemy = this.getNearestEnemy();
-            if (nearestEnemy) {
-                sounds.playShoot();
-                for (let i = 0; i < this.player.skills.fireball; i++) {
-                    this.time.delayedCall(i * 120, () => {
-                        if (!this.player.active || !nearestEnemy.active) return;
+    // Fireball (Wizard) — hits hard, fires slow: a single heavy nuke on a long cooldown
+    fireFireballWeapon() {
+        if (this.isGameOver || this.player.skills.fireball <= 0) return;
 
-                        // Create a physics body using a tiny invisible sprite as anchor
-                        const proj = this.projectiles.create(this.player.x, this.player.y, 'dungeon_tiles', 0).setAlpha(0).setScale(0.1);
-                        proj.damage = 42 * this.player.damageMult;
-                        this.physics.moveToObject(proj, nearestEnemy, 240);
+        const nearestEnemy = this.getNearestEnemy();
+        if (!nearestEnemy) return;
 
-                        // Draw red-orange fireball gfx on top of proj position
-                        const gfx = this.add.graphics();
-                        const drawFireball = () => {
-                            gfx.clear();
-                            // Outer glow (orange)
-                            gfx.fillStyle(0xff6600, 0.35);
-                            gfx.fillCircle(proj.x, proj.y, 9);
-                            // Inner core (bright red-orange)
-                            gfx.fillStyle(0xff3300, 0.85);
-                            gfx.fillCircle(proj.x, proj.y, 6);
-                            // Bright white center
-                            gfx.fillStyle(0xffcc44, 1);
-                            gfx.fillCircle(proj.x, proj.y, 3);
-                        };
+        sounds.playShoot();
+        for (let i = 0; i < this.player.skills.fireball; i++) {
+            this.time.delayedCall(i * 120, () => {
+                if (!this.player.active || !nearestEnemy.active) return;
 
-                        // Update gfx each frame to follow proj
-                        const listener = this.events.on('update', drawFireball);
+                // Create a physics body using a tiny invisible sprite as anchor
+                const proj = this.projectiles.create(this.player.x, this.player.y, 'dungeon_tiles', 0).setAlpha(0).setScale(0.1);
+                proj.damage = 65 * this.player.damageMult;
+                this.physics.moveToObject(proj, nearestEnemy, 240);
 
-                        this.time.delayedCall(2000, () => {
-                            this.events.off('update', drawFireball);
-                            gfx.destroy();
-                            proj.destroy();
-                        });
+                // Draw red-orange fireball gfx on top of proj position
+                const gfx = this.add.graphics();
+                const drawFireball = () => {
+                    gfx.clear();
+                    // Outer glow (orange)
+                    gfx.fillStyle(0xff6600, 0.35);
+                    gfx.fillCircle(proj.x, proj.y, 9);
+                    // Inner core (bright red-orange)
+                    gfx.fillStyle(0xff3300, 0.85);
+                    gfx.fillCircle(proj.x, proj.y, 6);
+                    // Bright white center
+                    gfx.fillStyle(0xffcc44, 1);
+                    gfx.fillCircle(proj.x, proj.y, 3);
+                };
 
-                        proj.on('destroy', () => {
-                            this.events.off('update', drawFireball);
-                            gfx.destroy();
-                        });
-                    });
-                }
-            }
+                // Update gfx each frame to follow proj
+                const listener = this.events.on('update', drawFireball);
+
+                this.time.delayedCall(2000, () => {
+                    this.events.off('update', drawFireball);
+                    gfx.destroy();
+                    proj.destroy();
+                });
+
+                proj.on('destroy', () => {
+                    this.events.off('update', drawFireball);
+                    gfx.destroy();
+                });
+            });
         }
+    }
 
-        // 2. Poison Darts
-        if (this.player.skills.darts > 0) {
-            const dartCount = 4 + (this.player.skills.darts - 1) * 2;
-            sounds.playShoot();
-            for (let i = 0; i < dartCount; i++) {
-                const angle = (i * (2 * Math.PI / dartCount));
-                const proj = this.projectiles.create(this.player.x, this.player.y, 'dungeon_tiles', 104).setScale(1.5);
-                proj.damage = 13 * this.player.damageMult;
-                proj.setRotation(angle);
-                this.physics.velocityFromRotation(angle, 220, proj.body.velocity);
-                this.time.delayedCall(1500, () => proj.destroy());
-            }
+    // Poison Darts (Rogue) — fires fast, short range: a quick spray that fizzles out close by
+    fireDartsWeapon() {
+        if (this.isGameOver || this.player.skills.darts <= 0) return;
+
+        const dartCount = 4 + (this.player.skills.darts - 1) * 2;
+        sounds.playShoot();
+        for (let i = 0; i < dartCount; i++) {
+            const angle = (i * (2 * Math.PI / dartCount));
+            const proj = this.projectiles.create(this.player.x, this.player.y, 'dungeon_tiles', 104).setScale(1.5);
+            proj.damage = 10 * this.player.damageMult;
+            proj.setRotation(angle);
+            this.physics.velocityFromRotation(angle, 220, proj.body.velocity);
+            this.time.delayedCall(550, () => proj.destroy());
         }
+    }
 
-        // 3. Lightning Strike
-        if (this.player.skills.lightning > 0) {
-            const activeEnemies = this.enemies.getChildren().filter(e => e.active);
-            if (activeEnemies.length > 0) {
-                Phaser.Utils.Array.Shuffle(activeEnemies);
-                const targetCount = Math.min(this.player.skills.lightning * 2, activeEnemies.length);
-                for (let i = 0; i < targetCount; i++) {
-                    const enemy = activeEnemies[i];
-                    const bolt = this.add.graphics();
-                    bolt.lineStyle(4, 0x38bdf8, 1);
-                    bolt.beginPath();
-                    bolt.moveTo(enemy.x, enemy.y - 150);
-                    bolt.lineTo(enemy.x, enemy.y);
-                    bolt.strokePath();
+    // Chain Lightning (universal pickup) — unchanged fire rate
+    fireLightningWeapon() {
+        if (this.isGameOver || this.player.skills.lightning <= 0) return;
 
-                    this.damageEnemy(enemy, 40 * this.player.damageMult);
+        const activeEnemies = this.enemies.getChildren().filter(e => e.active);
+        if (activeEnemies.length === 0) return;
 
-                    this.tweens.add({
-                        targets: bolt,
-                        alpha: 0,
-                        duration: 200,
-                        onComplete: () => bolt.destroy()
-                    });
-                }
-            }
+        Phaser.Utils.Array.Shuffle(activeEnemies);
+        const targetCount = Math.min(this.player.skills.lightning * 2, activeEnemies.length);
+        for (let i = 0; i < targetCount; i++) {
+            const enemy = activeEnemies[i];
+            const bolt = this.add.graphics();
+            bolt.lineStyle(4, 0x38bdf8, 1);
+            bolt.beginPath();
+            bolt.moveTo(enemy.x, enemy.y - 150);
+            bolt.lineTo(enemy.x, enemy.y);
+            bolt.strokePath();
+
+            this.damageEnemy(enemy, 40 * this.player.damageMult);
+
+            this.tweens.add({
+                targets: bolt,
+                alpha: 0,
+                duration: 200,
+                onComplete: () => bolt.destroy()
+            });
         }
+    }
+
+    performMeleeAttack() {
+        const nearestEnemy = this.getNearestEnemy();
+        if (!nearestEnemy) return;
+
+        // Range grows with skill level; the 130° arc width itself stays fixed —
+        // Knight's growth axis here is reach, not a wider swing.
+        const meleeRange = 70 + (this.player.skills.melee - 1) * 15;
+        const arcHalfWidth = Phaser.Math.DegToRad(65); // 130° total cone
+        const facingAngle = Phaser.Math.Angle.Between(this.player.x, this.player.y, nearestEnemy.x, nearestEnemy.y);
+
+        sounds.playShoot();
+
+        this.enemies.getChildren().forEach(enemy => {
+            if (!enemy.active) return;
+            const dist = Phaser.Math.Distance.Between(this.player.x, this.player.y, enemy.x, enemy.y);
+            if (dist > meleeRange) return;
+
+            const angleToEnemy = Phaser.Math.Angle.Between(this.player.x, this.player.y, enemy.x, enemy.y);
+            const diff = Math.abs(Phaser.Math.Angle.Wrap(angleToEnemy - facingAngle));
+            if (diff > arcHalfWidth) return;
+
+            this.damageEnemy(enemy, 30 * this.player.damageMult);
+        });
+
+        // Visual: fading fan-shaped slash toward the nearest enemy
+        const gfx = this.add.graphics();
+        gfx.fillStyle(0xe2e8f0, 0.35);
+        gfx.slice(this.player.x, this.player.y, meleeRange, facingAngle - arcHalfWidth, facingAngle + arcHalfWidth, false);
+        gfx.fillPath();
+        this.tweens.add({
+            targets: gfx,
+            alpha: 0,
+            duration: 180,
+            onComplete: () => gfx.destroy()
+        });
     }
 
     spawnEnemyWave() {
