@@ -505,12 +505,13 @@
 
   // --- Responsive Layout Positioning ---
   function layoutGrid() {
-    const topHudHeight = 70;
+    const isSmallScreen = width < 480;
+    const topHudHeight = isSmallScreen ? 56 : 70;
     const availableWidth = width;
     const availableHeight = height - topHudHeight - 20;
 
     // Determine optimal card size to fit inside container perfectly
-    const padding = 12;
+    const padding = isSmallScreen ? 6 : 12;
     const maxCardW = Math.floor((availableWidth - (GRID_COLS + 1) * padding) / GRID_COLS);
     const maxCardH = Math.floor((availableHeight - (GRID_ROWS + 1) * padding) / GRID_ROWS);
 
@@ -519,7 +520,7 @@
     let cardH = Math.floor(cardW * 1.4);
 
     // Clamp card sizes
-    cardW = Math.max(48, Math.min(110, cardW));
+    cardW = Math.max(44, Math.min(110, cardW));
     cardH = Math.floor(cardW * 1.4);
 
     const totalGridW = GRID_COLS * cardW + (GRID_COLS - 1) * padding;
@@ -656,10 +657,11 @@
   }
 
   function drawHUD(ctx) {
-    const hudW = Math.min(width - 24, 720);
-    const hudH = 50;
+    const isSmallScreen = width < 480;
+    const hudW = Math.min(width - 16, 720);
+    const hudH = isSmallScreen ? 44 : 50;
     const hudX = (width - hudW) / 2;
-    const hudY = 10;
+    const hudY = isSmallScreen ? 6 : 10;
 
     // Glass panel
     ctx.save();
@@ -667,7 +669,7 @@
     ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
     ctx.lineWidth = 1.5;
     ctx.beginPath();
-    ctx.roundRect(hudX, hudY, hudW, hudH, 14);
+    ctx.roundRect(hudX, hudY, hudW, hudH, isSmallScreen ? 10 : 14);
     ctx.fill();
     ctx.stroke();
 
@@ -676,29 +678,38 @@
     const secs = secondsElapsed % 60;
     const timeStr = `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
 
+    // Canvas Buttons Setup first to calculate available width
+    buttons = [];
+
+    const btnW = isSmallScreen ? 72 : 94;
+    const btnH = isSmallScreen ? 30 : 34;
+    const btnX = hudX + hudW - btnW - (isSmallScreen ? 6 : 12);
+    const btnY = hudY + (hudH - btnH) / 2;
+
+    const soundW = isSmallScreen ? 32 : 38;
+    const soundX = btnX - soundW - (isSmallScreen ? 4 : 8);
+
+    // Left available area for Stats
+    const leftMargin = isSmallScreen ? 8 : 16;
+    const rightBoundary = soundX - 6;
+    const availableStatW = rightBoundary - (hudX + leftMargin);
+
     ctx.fillStyle = '#f8fafc';
-    ctx.font = '600 13px system-ui, sans-serif';
+    ctx.font = isSmallScreen ? '600 11px system-ui, sans-serif' : '600 13px system-ui, sans-serif';
     ctx.textAlign = 'left';
     ctx.textBaseline = 'middle';
 
-    // Stats Labels
-    const stat1 = `🎯 Pairs: ${matchedPairs} / ${TOTAL_PAIRS}`;
-    const stat2 = `👆 Moves: ${moves}`;
-    const stat3 = `⏱️ Time: ${timeStr}`;
+    // Dynamic stats label text for small screens
+    const stat1 = isSmallScreen ? `🎯 ${matchedPairs}/${TOTAL_PAIRS}` : `🎯 Pairs: ${matchedPairs}/${TOTAL_PAIRS}`;
+    const stat2 = isSmallScreen ? `👆 ${moves}` : `👆 Moves: ${moves}`;
+    const stat3 = isSmallScreen ? `⏱️ ${timeStr}` : `⏱️ Time: ${timeStr}`;
 
-    ctx.fillText(stat1, hudX + 16, hudY + hudH / 2);
-    ctx.fillText(stat2, hudX + 160, hudY + hudH / 2);
-    ctx.fillText(stat3, hudX + 280, hudY + hudH / 2);
-
-    // Canvas Buttons
-    buttons = [];
+    const stepX = availableStatW / 3;
+    ctx.fillText(stat1, hudX + leftMargin, hudY + hudH / 2);
+    ctx.fillText(stat2, hudX + leftMargin + stepX, hudY + hudH / 2);
+    ctx.fillText(stat3, hudX + leftMargin + stepX * 2, hudY + hudH / 2);
 
     // New Game Button
-    const btnW = 94;
-    const btnH = 34;
-    const btnX = hudX + hudW - btnW - 12;
-    const btnY = hudY + (hudH - btnH) / 2;
-
     const btnHover = mousePos.x >= btnX && mousePos.x <= btnX + btnW && mousePos.y >= btnY && mousePos.y <= btnY + btnH;
 
     ctx.fillStyle = btnHover ? '#2563eb' : 'rgba(37, 99, 235, 0.8)';
@@ -706,9 +717,9 @@
     ctx.roundRect(btnX, btnY, btnW, btnH, 8);
     ctx.fill();
     ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 12px system-ui, sans-serif';
+    ctx.font = isSmallScreen ? 'bold 11px system-ui, sans-serif' : 'bold 12px system-ui, sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('↻ New Game', btnX + btnW / 2, btnY + btnH / 2);
+    ctx.fillText(isSmallScreen ? '↻ New' : '↻ New Game', btnX + btnW / 2, btnY + btnH / 2);
 
     buttons.push({
       containsPoint: (px, py) => px >= btnX && px <= btnX + btnW && py >= btnY && py <= btnY + btnH,
@@ -716,8 +727,6 @@
     });
 
     // Sound Toggle Button
-    const soundW = 38;
-    const soundX = btnX - soundW - 8;
     const soundHover = mousePos.x >= soundX && mousePos.x <= soundX + soundW && mousePos.y >= btnY && mousePos.y <= btnY + btnH;
 
     ctx.fillStyle = soundHover ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.1)';
@@ -725,7 +734,7 @@
     ctx.roundRect(soundX, btnY, soundW, btnH, 8);
     ctx.fill();
     ctx.fillStyle = '#ffffff';
-    ctx.font = '14px system-ui, sans-serif';
+    ctx.font = isSmallScreen ? '12px system-ui, sans-serif' : '14px system-ui, sans-serif';
     ctx.fillText(soundEnabled ? '🔊' : '🔇', soundX + soundW / 2, btnY + btnH / 2);
 
     buttons.push({
