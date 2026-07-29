@@ -1,6 +1,6 @@
 // ==========================================
-// 💎 KENNEY MATCH 3 - Endless Mode (Portrait Responsive)
-// Assets: Kenney Match 3 & Puzzle Pack 2
+// 🧩 TILE SWAP - Endless Mode (Portrait Responsive)
+// Assets: Kenney Puzzle Pack 2
 // Rule: Endless play — Game ends when no valid swaps remain!
 // ==========================================
 

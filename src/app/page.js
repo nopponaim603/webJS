@@ -8,17 +8,10 @@ import PWAInstallButton from '@/components/PWAInstallButton';
 import buildInfo from '../../public/build.json';
 
 const initialGames = [
-  {
-    id: "tiny-dungeon-roguelike",
-    title: "Tiny Dungeon Survivor (Action Roguelike)",
-    category: "Phaser 2D Engine",
-    url: "/games/tiny-dungeon-roguelike/index.html",
-    image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&h=400&fit=crop",
-    gradient: "linear-gradient(135deg, #00F2FE 0%, #7F00FF 100%)"
-  },
+  // 1. กลุ่มปริศนา (Puzzle)
   {
     id: "card-memory",
-    title: "Card Memory Match (Kenney)",
+    title: "Card Memory Match",
     category: "ปริศนา / ฝึกสมอง",
     url: "/games/card-memory/index.html",
     image: "https://images.unsplash.com/photo-1541278107931-e006523892df?w=400&h=400&fit=crop",
@@ -26,60 +19,80 @@ const initialGames = [
   },
   {
     id: "goosl-marbles",
-    title: "Goosl Glass Marbles (구슬치기)",
+    title: "Goosl Glass Marbles",
     category: "ปริศนา / ฟิสิกส์",
     url: "/games/goosl-marbles/index.html",
     image: "/games/goosl-marbles/thumbnail.png",
     gradient: "linear-gradient(135deg, #14B8A6 0%, #06B6D4 100%)"
   },
-    {
-      id: "2048-cubes",
-      title: "2048 Cubes",
-      category: "ปริศนา / ฟิสิกส์",
-      url: "/games/2048-cubes/index.html",
-      image: "https://images.unsplash.com/photo-1611996575749-79a3a250f948?w=400&h=400&fit=crop",
-      gradient: "linear-gradient(135deg, #FF9F43 0%, #FF6B6B 100%)"
-    },
-    {
-      id: "tile-match",
-      title: "Tile Match",
-      category: "ปริศนา / จับคู่ทรีแมตช์",
-      url: "/games/tile-match/index.html",
-      image: "https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=400&h=400&fit=crop",
-      gradient: "linear-gradient(135deg, #5D2A35 0%, #A04050 100%)"
-    },
-    {
-      id: "space-shooter",
-      title: "Space Shooter (Phaser 2D)",
-      category: "Phaser 2D Engine",
-      url: "/games/phaser-demo/index.html",
-      image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&h=400&fit=crop",
-      gradient: "linear-gradient(135deg, #00F2FE 0%, #4FACFE 100%)"
-    },
-    {
-      id: "cyber-sphere",
-      title: "Cyber Sphere 3D (Babylon.js)",
-      category: "Babylon 3D Engine",
-      url: "/games/babylon-demo/index.html",
-      image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&h=400&fit=crop",
-      gradient: "linear-gradient(135deg, #7F00FF 0%, #E100FF 100%)"
-    },
-    {
-      id: "3d-platformer",
-      title: "Kenney 3D Platformer (Babylon.js)",
-      category: "Babylon 3D Engine",
-      url: "/games/3d-platformer/index.html",
-      image: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=400&h=400&fit=crop",
-      gradient: "linear-gradient(135deg, #10b981 0%, #059669 100%)"
-    },
-    {
-      id: "match-3",
-      title: "Kenney Match 3 (Phaser 2D)",
-      category: "Phaser 2D Engine",
-      url: "/games/match3/index.html",
-      image: "https://images.unsplash.com/photo-1563089145-599997674d42?w=400&h=400&fit=crop",
-      gradient: "linear-gradient(135deg, #F97316 0%, #FB923C 100%)"
-    },
+  {
+    id: "2048-cubes",
+    title: "2048 Cubes",
+    category: "ปริศนา / ฟิสิกส์",
+    url: "/games/2048-cubes/index.html",
+    image: "https://images.unsplash.com/photo-1611996575749-79a3a250f948?w=400&h=400&fit=crop",
+    gradient: "linear-gradient(135deg, #FF9F43 0%, #FF6B6B 100%)"
+  },
+  {
+    id: "mahjong-tile-match",
+    title: "Mahjong Tile Match",
+    category: "ปริศนา / จับคู่ทรีแมตช์",
+    url: "/games/mahjong-tile-match/index.html",
+    image: "https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=400&h=400&fit=crop",
+    gradient: "linear-gradient(135deg, #5D2A35 0%, #A04050 100%)"
+  },
+
+  // 2. กลุ่ม Phaser 2D Engine
+  {
+    id: "tiny-dungeon-roguelike",
+    title: "Tiny Dungeon Survivor",
+    category: "Phaser 2D Engine",
+    url: "/games/tiny-dungeon-roguelike/index.html",
+    image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&h=400&fit=crop",
+    gradient: "linear-gradient(135deg, #00F2FE 0%, #7F00FF 100%)"
+  },
+  {
+    id: "space-shooter",
+    title: "Space Shooter",
+    category: "Phaser 2D Engine",
+    url: "/games/phaser-demo/index.html",
+    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&h=400&fit=crop",
+    gradient: "linear-gradient(135deg, #00F2FE 0%, #4FACFE 100%)"
+  },
+  {
+    id: "tile-swap",
+    title: "Tile Swap",
+    category: "ปริศนา / สลับไทล์",
+    url: "/games/tile-swap/index.html",
+    image: "https://images.unsplash.com/photo-1563089145-599997674d42?w=400&h=400&fit=crop",
+    gradient: "linear-gradient(135deg, #F97316 0%, #FB923C 100%)"
+  },
+
+  // 3. กลุ่ม Babylon 3D Engine
+  {
+    id: "3d-platformer",
+    title: "Kenney 3D Platformer",
+    category: "Babylon 3D Engine",
+    url: "/games/3d-platformer/index.html",
+    image: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=400&h=400&fit=crop",
+    gradient: "linear-gradient(135deg, #10b981 0%, #059669 100%)"
+  },
+  {
+    id: "hole-io",
+    title: "Hole.io 3D",
+    category: "Babylon 3D Engine",
+    url: "/games/hole-io/index.html",
+    image: "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=400&h=400&fit=crop",
+    gradient: "linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)"
+  },
+  {
+    id: "cyber-sphere",
+    title: "Cyber Sphere 3D",
+    category: "Babylon 3D Engine",
+    url: "/games/babylon-demo/index.html",
+    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&h=400&fit=crop",
+    gradient: "linear-gradient(135deg, #7F00FF 0%, #E100FF 100%)"
+  }
 ];
 
 const categories = ["ทั้งหมด", "ปริศนา", "Phaser 2D", "Babylon 3D"];
@@ -148,24 +161,91 @@ export default function Home() {
           ))}
         </div>
 
-        {/* Games Grid */}
-        <section>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-            gap: '1.5rem'
-          }}>
-            {filteredGames.map(game => (
-              <GameCard key={game.id} game={game} onPlay={setActiveGame} />
-            ))}
-          </div>
+        {/* Games Grid grouped by Category Sections */}
+        {selectedCategory === 'ทั้งหมด' && !searchKeyword ? (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+            {/* Section 1: กลุ่มเกมปริศนา */}
+            <section>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
+                <h2 style={{ fontSize: '1.4rem', fontWeight: '800', color: '#f8fafc', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  🧩 กลุ่มเกมปริศนา (Puzzle Games)
+                </h2>
+                <span style={{ fontSize: '0.8rem', background: 'rgba(16, 185, 129, 0.15)', border: '1px solid rgba(16, 185, 129, 0.3)', color: '#34d399', padding: '0.2rem 0.75rem', borderRadius: '9999px', fontWeight: '700' }}>
+                  5 เกม
+                </span>
+              </div>
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(270px, 1fr))',
+                gap: '1.5rem'
+              }}>
+                {initialGames.filter(g => g.category.includes('ปริศนา')).map(game => (
+                  <GameCard key={game.id} game={game} onPlay={setActiveGame} />
+                ))}
+              </div>
+            </section>
 
-          {filteredGames.length === 0 && (
-            <div style={{ textAlign: 'center', padding: '4rem', color: '#64748b' }}>
-              <p style={{ fontSize: '1.2rem' }}>ไม่พบเกมที่คุณค้นหา</p>
+            {/* Section 2: กลุ่ม Phaser 2D Engine */}
+            <section>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
+                <h2 style={{ fontSize: '1.4rem', fontWeight: '800', color: '#f8fafc', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  ⚡ Phaser 2D Engine
+                </h2>
+                <span style={{ fontSize: '0.8rem', background: 'rgba(59, 130, 246, 0.15)', border: '1px solid rgba(59, 130, 246, 0.3)', color: '#60a5fa', padding: '0.2rem 0.75rem', borderRadius: '9999px', fontWeight: '700' }}>
+                  2 เกม
+                </span>
+              </div>
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(270px, 1fr))',
+                gap: '1.5rem'
+              }}>
+                {initialGames.filter(g => g.category.includes('Phaser')).map(game => (
+                  <GameCard key={game.id} game={game} onPlay={setActiveGame} />
+                ))}
+              </div>
+            </section>
+
+            {/* Section 3: กลุ่ม Babylon 3D Engine */}
+            <section>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
+                <h2 style={{ fontSize: '1.4rem', fontWeight: '800', color: '#f8fafc', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  🪐 Babylon 3D Engine
+                </h2>
+                <span style={{ fontSize: '0.8rem', background: 'rgba(168, 85, 247, 0.15)', border: '1px solid rgba(168, 85, 247, 0.3)', color: '#c084fc', padding: '0.2rem 0.75rem', borderRadius: '9999px', fontWeight: '700' }}>
+                  3 เกม
+                </span>
+              </div>
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(270px, 1fr))',
+                gap: '1.5rem'
+              }}>
+                {initialGames.filter(g => g.category.includes('Babylon')).map(game => (
+                  <GameCard key={game.id} game={game} onPlay={setActiveGame} />
+                ))}
+              </div>
+            </section>
+          </div>
+        ) : (
+          <section>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(270px, 1fr))',
+              gap: '1.5rem'
+            }}>
+              {filteredGames.map(game => (
+                <GameCard key={game.id} game={game} onPlay={setActiveGame} />
+              ))}
             </div>
-          )}
-        </section>
+
+            {filteredGames.length === 0 && (
+              <div style={{ textAlign: 'center', padding: '4rem', color: '#64748b' }}>
+                <p style={{ fontSize: '1.2rem' }}>ไม่พบเกมที่คุณค้นหา</p>
+              </div>
+            )}
+          </section>
+        )}
       </main>
 
       {/* Footer */}

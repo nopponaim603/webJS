@@ -1,9 +1,9 @@
-# 🀄 Tile Match — Game Design Document & Dev Specs
+# 🀄 Mahjong Tile Match (ไพ่นกกระจอก) — Game Design Document & Dev Specs
 
-**Code Name:** `tile-match` (G003)
-**Game ID:** `tile-match`  
+**Code Name:** `tile-match` (G003)  
+**Game ID:** `tile-match` / `mahjong-tile-match`  
 **Engine / Tech:** HTML5, CSS Grid & Transforms, Vanilla JavaScript  
-**Version:** 1.0.0 | **Last Updated:** 2026-07-26  
+**Version:** 1.1.0 | **Last Updated:** 2026-07-29  
 **Status:** Released / Active  
 
 ---
@@ -11,7 +11,7 @@
 ## 1. Game Overview
 
 ### Elevator Pitch
-เกมปริศนาจับคู่ไทล์ 3 ใบสไตล์นกกระจอกเทศ (Mahjong Triple Match / Sheep N Sheep style) ผู้เล่นคลิกเลือกไทล์จากชั้นต่างๆ ลงมาพักในถาดเก็บ เมื่อสะสมไทล์หน้าเดียวกันได้ครบ 3 ใบ ไทล์จะหายไปและได้คะแนน
+เกมปริศนาจับคู่ไทล์ 3 ใบสไตล์ไพ่นกกระจอก (Mahjong Triple Match / Sheep N Sheep style) ผู้เล่นคลิกเลือกไทล์จากชั้นต่างๆ ลงมาพักในถาดเก็บ เมื่อสะสมไทล์หน้าเดียวกันได้ครบ 3 ใบ ไทล์จะหายไปและได้คะแนน
 
 ---
 
@@ -29,7 +29,7 @@
 
 ## 3. File Structure & Assets
 
-- **Game Files:** `public/games/tile-match/`
+- **Game Files:** `public/games/mahjong-tile-match/`
   - `index.html` — Board Layout & Holder Container
   - `styles.css` — Tile Layering, Shadow Depth & Match Animations
   - `game.js` — Board Layout Generator, Layer Overlap Check, Match Engine

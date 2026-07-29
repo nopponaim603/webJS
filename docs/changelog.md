@@ -5,6 +5,19 @@
 
 ## [1.21.0] - 2026-07-29
 
+### Added & Developed
+- **Planned Games Specs Reorganization ([docs/gdd/planning/index.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/planning/index.md))**:
+  - คัดแยกเอกสาร Game Design Spec ที่ยังไม่ได้สร้างตัวเกมจริงจำนวน 7 เกม ได้แก่ `ocean-frenzy`, `dice-quest`, `pico-tower-climber`, `pixel-bullet-hell`, `block-collapse`, `tiny-farm-tycoon`, และ `lunar-lander` ย้ายไปเก็บในโฟลเดอร์ **`docs/gdd/planning/`** พร้อมสร้างหน้าดรรชนีรวมแผนงานพัฒนา
+  - คงเหลือโฟลเดอร์ **`docs/gdd/games/`** ไว้เฉพาะ 11 เกมที่มีการเปิดเล่นจริงใน `public/games/` สอดคล้องกัน 100%
+- **Tile Swap Game Renaming & Category Re-alignment ([docs/gdd/games/tile-swap/spec.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/tile-swap/spec.md))**:
+  - เปลี่ยนชื่อเกมจาก `Kenney Match 3` เป็น **`Tile Swap` (G006)** เพื่อให้ตรงกับรูปทรงไทล์สี่เหลี่ยมหลากสีในเกม 100%
+  - ย้ายโฟลเดอร์เกมเป็น `public/games/tile-swap/` และย้ายหมวดหมู่มาอยู่ใน **กลุ่มเกมปริศนา (Puzzle Games)** บนหน้าแรก
+- **Mahjong Tile Match GDD Renaming ([docs/gdd/games/mahjong-tile-match/spec.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/mahjong-tile-match/spec.md))**:
+  - เปลี่ยนชื่อโฟลเดอร์จาก `docs/gdd/games/tile-match` เป็นชื่อภาษาอังกฤษของเกมไพ่นกกระจอก **`docs/gdd/games/mahjong-tile-match/`** พร้อมอัปเดตลิงก์อ้างอิงใน `docs/index.md`
+- **Hole.io 3D Game Design Document & Development Specs ([docs/gdd/games/hole-io/spec.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/hole-io/spec.md))**:
+  - จัดทำเอกสาร GDD และพิกัดฟีเจอร์ของ **Hole.io 3D (G018)** อย่างสมบูรณ์ ครอบคลุมระบบ Suction Physics, Selective Collision Filtering, True 3D Isometric View, Hole Evolution (LVL 1 - 4), และ Transparent Force-Field Boundaries
+  - อัปเดตตารางดรรชนีเกมใน `docs/index.md` และการจัดเรียงบนหมวดหมู่หน้าแรก (`src/app/page.js`)
+
 ### Fixed & Resolved (HTTP 404 Root Cause Resolution)
 - **Kenney 3D Platformer Self-Contained Asset Mirroring ([public/games/3d-platformer/assets/](file:///c:/Users/noppon/source/06-WEB\webJS\public\games\3d-platformer\assets\))**:
   - แก้ไข **HTTP 404 Iframe Resolution Failure**: สาเหตุที่ขึ้น 404 เกิดจากเมื่อเกมรันใน Iframe/Modal ค่า `window.location.href` ของ Iframe ขาด สแลช (`/`) ปิดท้าย ทำให้การคำนวณย้อนกลับด้วย `../../assets/` เพี้ยนขึ้นไปผิดชั้นจนตอบกลับเป็น HTTP 404

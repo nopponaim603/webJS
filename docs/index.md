@@ -20,10 +20,10 @@
 |---|-----------|------------|--------|--------|
 | G001 | `emoji-match` | Emoji Match | Vanilla JS | `emoji-match/` |
 | G002 | `2048-cubes` | 2048 Cubes | Canvas 2D | `2048-cubes/` |
-| G003 | `tile-match` | Tile Match | Vanilla JS | `tile-match/` |
+| G003 | `mahjong-tile-match` | Mahjong Tile Match | Vanilla JS | `public/games/mahjong-tile-match/` |
 | G004 | `space-shooter` | Space Shooter | Phaser 2D | `phaser-demo/` |
 | G005 | `cyber-sphere` | Cyber Sphere 3D | Babylon.js 3D | `babylon-demo/` |
-| G006 | `match-3` | Kenney Match 3 | Phaser 2D | `match3/` |
+| G006 | `tile-swap` | Tile Swap | Phaser 2D | `public/games/tile-swap/` |
 | G007 | `3d-platformer` | Kenney 3D Platformer | Babylon.js 8 | `3d-platformer/` |
 | G008 | `card-memory` | Card Memory Match | Vanilla JS | `public/games/card-memory/` |
 | G009 | `ocean-frenzy` | Ocean Frenzy | Phaser 3 | `public/games/ocean-frenzy/` |
@@ -35,25 +35,29 @@
 | G015 | `lunar-lander` | Lunar Lander Gravity | Phaser Physics | `public/games/lunar-lander/` |
 | G016 | `goosl-marbles` | Goosl Glass Marbles | WebGL 2 / Shader | `public/games/goosl-marbles/` |
 | G017 | `tiny-dungeon-roguelike` | Tiny Dungeon Survivor | Phaser 2D / Roguelike | `public/games/tiny-dungeon-roguelike/` |
+| G018 | `hole-io` | Hole.io 3D | Babylon.js 7.50 / 8 | `public/games/hole-io/` |
 
-### 🎮 Individual Game Specifications (`docs/gdd/games/`)
+### 🎮 Active Released Game Specifications (`docs/gdd/games/`)
+- [Card Memory Match](./gdd/games/card-memory/spec.md)
+- [Goosl Glass Marbles](./gdd/games/goosl-marbles/spec.md)
+- [2048 Cubes](./gdd/games/2048-cubes/spec.md)
+- [Mahjong Tile Match (ไพ่นกกระจอก)](./gdd/games/mahjong-tile-match/spec.md)
+- [Tile Swap (Phaser 2D)](./gdd/games/tile-swap/spec.md)
+- [Emoji Match](./gdd/games/emoji-match/spec.md)
 - [Tiny Dungeon Survivor (Action Roguelike)](./gdd/games/tiny-dungeon-roguelike/spec.md)
 - [Space Shooter (Phaser 2D)](./gdd/games/space-shooter/spec.md)
-- [Emoji Match](./gdd/games/emoji-match/spec.md)
-- [2048 Cubes](./gdd/games/2048-cubes/spec.md)
-- [Tile Match](./gdd/games/tile-match/spec.md)
-- [Cyber Sphere 3D](./gdd/games/cyber-sphere-3d/spec.md)
-- [Kenney Match 3 (Phaser 2D)](./gdd/games/match3/spec.md)
 - [Kenney 3D Platformer (Babylon.js)](./gdd/games/3d-platformer/spec.md)
-- [Card Memory Match (Kenney)](./gdd/games/card-memory/spec.md)
-- [Goosl Glass Marbles (구슬치기)](./gdd/games/goosl-marbles/spec.md)
-- [Ocean Frenzy (Kenney Fish Pack)](./gdd/games/ocean-frenzy/spec.md)
-- [Dice Quest (Kenney Boardgame)](./gdd/games/dice-quest/spec.md)
-- [Pico Tower Climber (Pico-8)](./gdd/games/pico-tower-climber/spec.md)
-- [Pixel Bullet Hell (Kenney Shmup)](./gdd/games/pixel-bullet-hell/spec.md)
-- [Block Collapse (Puzzle Pack 2)](./gdd/games/block-collapse/spec.md)
-- [Tiny Farm Tycoon (Kenney Tiny Farm)](./gdd/games/tiny-farm-tycoon/spec.md)
-- [Lunar Lander Gravity (Simple Space)](./gdd/games/lunar-lander/spec.md)
+- [Hole.io 3D (Babylon.js)](./gdd/games/hole-io/spec.md)
+- [Cyber Sphere 3D](./gdd/games/cyber-sphere-3d/spec.md)
+
+### 📋 Planned Game Specifications Roadmap (`docs/gdd/planning/`) — [Full Index](./gdd/planning/index.md)
+- [Ocean Frenzy (เกมปลาใหญ่กินปลาเล็ก)](./gdd/planning/ocean-frenzy/spec.md)
+- [Dice Quest (เกมกระดานทอยลูกเต๋า)](./gdd/planning/dice-quest/spec.md)
+- [Pico Tower Climber (เกมพิกเซลไต่หอคอย)](./gdd/planning/pico-tower-climber/spec.md)
+- [Pixel Bullet Hell (เกมยานยิงหลบกระสุน)](./gdd/planning/pixel-bullet-hell/spec.md)
+- [Block Collapse (เกมทุบบล็อกจับคู่)](./gdd/planning/block-collapse/spec.md)
+- [Tiny Farm Tycoon (เกมทำฟาร์มปลูกผัก)](./gdd/planning/tiny-farm-tycoon/spec.md)
+- [Lunar Lander Gravity (เกมบังคับยานลงจอด)](./gdd/planning/lunar-lander/spec.md)
 
 ---
 
