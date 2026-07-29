@@ -3,6 +3,12 @@
 **Project:** Game Portfolio (`webJS`)  
 **Maintained by:** Antigravity AI & Dev Team  
 
+## [1.22.0] - 2026-07-29
+
+### Chore & Version Bump
+- **Build Version Update ([public/build.json](file:///c:/Users/noppon/source/06-WEB/webJS/public/build.json))**:
+  - อัปเดตข้อมูลเวอร์ชันโปรเจกต์และ Build Tag เป็น **v1.22.0 #1418** ใน `package.json`, `public/build.json`, `docs/agile/01-product-backlog.md`, และเอกสารระบบที่เกี่ยวข้อง
+
 ## [1.21.0] - 2026-07-29
 
 ### Added & Developed

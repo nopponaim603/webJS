@@ -3,7 +3,7 @@
 **Document ID:** `GUIDE-3D-ASSET-01`  
 **Category:** Technical Troubleshooting & Best Practices  
 **Engine:** Babylon.js 7.x (Next.js / HTML5 Browser Games)  
-**Last Updated:** 2026-07-29 | **Version:** 1.21.0  
+**Last Updated:** 2026-07-29 | **Version:** 1.22.0  
 **Author:** Antigravity AI & Dev Team  
 
 ---
