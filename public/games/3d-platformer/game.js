@@ -197,7 +197,13 @@ function ensureGLTFLoader() {
 
 // Bulletproof Native Asset Container Loader for Babylon.js 7.x
 async function loadAssetContainerWithFallback(filename) {
-    await ensureGLTFLoader();
+    const pluginOk = ensureGLTFLoader();
+    if (!pluginOk) {
+        gameState.errorCode = "E01: NO_GLTF_PLUGIN";
+        gameState.lastErrorMsg = "GLTF FileLoader plugin is missing";
+        console.error("[AssetLoader] Diagnostic Error: E01 (GLTF Loader plugin unavailable)");
+        return null;
+    }
 
     const origin = window.location.origin;
     const pageUrl = window.location.href;
@@ -212,38 +218,61 @@ async function loadAssetContainerWithFallback(filename) {
     candidates.push('../../assets/kenney-starter-kit-3d-platformer/models/');
     candidates.push('/assets/kenney-starter-kit-3d-platformer/models/');
 
-    let detectedErrorCode = null;
+    let lastErrDetail = "";
+    let detectedCode = "";
 
     for (const rawRoot of candidates) {
         const rootUrl = rawRoot.endsWith('/') ? rawRoot : rawRoot + '/';
         const fullUrl = rootUrl + filename;
 
+        // Attempt A: Direct SceneLoader LoadAssetContainerAsync
         try {
             const container = await BABYLON.SceneLoader.LoadAssetContainerAsync(rootUrl, filename, scene);
             if (container && container.meshes && container.meshes.length > 0) {
                 console.log(`[AssetLoader] Successfully loaded 3D GLB model: ${filename} from ${rootUrl}`);
                 return container;
             }
-        } catch (err) {
-            const msg = String(err.message || err);
-            console.warn(`[AssetLoader] LoadAssetContainerAsync failed for ${fullUrl}:`, err);
+        } catch (errA) {
+            lastErrDetail = String(errA.message || errA);
+            console.warn(`[AssetLoader] SceneLoader attempt failed for ${fullUrl}:`, errA);
+        }
 
-            if (msg.includes('404') || msg.includes('Not Found') || msg.includes('ENOENT')) {
-                detectedErrorCode = "ERR-E02 (HTTP_404_PATH)";
-            } else if (msg.includes('CORS') || msg.includes('Cross-Origin') || msg.includes('Security')) {
-                detectedErrorCode = "ERR-E03 (CORS_BLOCK)";
-            } else if (msg.includes('NetworkError') || msg.includes('Failed to fetch')) {
-                detectedErrorCode = "ERR-E04 (NETWORK_FAIL)";
+        // Attempt B: Direct fetch -> Blob URL
+        try {
+            const resp = await fetch(fullUrl, { mode: 'cors', credentials: 'omit' });
+            if (!resp.ok) {
+                detectedCode = `E02: HTTP_${resp.status}`;
+                lastErrDetail = `Fetch status ${resp.status} for ${filename}`;
             } else {
-                detectedErrorCode = "ERR-E05 (DECODE_PARSE_FAIL)";
+                const blob = await resp.blob();
+                const blobUrl = URL.createObjectURL(blob);
+                try {
+                    const container = await BABYLON.SceneLoader.LoadAssetContainerAsync("", blobUrl, scene, undefined, ".glb");
+                    if (container && container.meshes && container.meshes.length > 0) {
+                        console.log(`[AssetLoader] Successfully loaded 3D GLB via Blob URL: ${filename}`);
+                        return container;
+                    }
+                } catch (errB) {
+                    lastErrDetail = String(errB.message || errB);
+                    detectedCode = "E05: GLTF_PARSE_FAIL";
+                }
+            }
+        } catch (errFetch) {
+            lastErrDetail = String(errFetch.message || errFetch);
+            if (lastErrDetail.includes('CORS') || lastErrDetail.includes('Cross-Origin')) {
+                detectedCode = "E03: CORS_BLOCK";
+            } else {
+                detectedCode = "E04: FETCH_NETWORK_FAIL";
             }
         }
     }
 
     if (!gameState.errorCode) {
-        gameState.errorCode = detectedErrorCode || "ERR-E02 (HTTP_404_PATH)";
+        gameState.errorCode = detectedCode || "E02: 404_NOT_FOUND";
+        gameState.lastErrorMsg = lastErrDetail || "All URL candidates failed";
     }
-    console.error(`[AssetLoader] All candidates failed for ${filename}. Final Diagnostic Code: ${gameState.errorCode}`);
+
+    console.error(`[AssetLoader] All candidates failed for ${filename}. Diagnostic: [${gameState.errorCode}] ${gameState.lastErrorMsg}`);
     return null;
 }
 
@@ -1250,10 +1279,10 @@ function startGame() {
     gameState.isPlaying = true;
     gameState.startTime = Date.now();
     updateHUD();
-    showAssetStatusPopup(gameState.isFallbackMode);
+    showAssetStatusPopup(gameState.isFallbackMode, gameState.errorCode, gameState.lastErrorMsg);
 }
 
-function showAssetStatusPopup(isFallback) {
+function showAssetStatusPopup(isFallback, errorCode, errorMsg) {
     const hud = document.getElementById('hud');
     if (!hud) return;
 
@@ -1266,27 +1295,28 @@ function showAssetStatusPopup(isFallback) {
     popup.style.top = '4.5rem';
     popup.style.left = '50%';
     popup.style.transform = 'translateX(-50%)';
-    popup.style.padding = '0.5rem 1.1rem';
+    popup.style.padding = '0.55rem 1.2rem';
     popup.style.borderRadius = '999px';
     popup.style.fontSize = '0.8rem';
     popup.style.fontWeight = '700';
     popup.style.zIndex = '100';
-    popup.style.backdropFilter = 'blur(12px)';
-    popup.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.4)';
+    popup.style.backdropFilter = 'blur(14px)';
+    popup.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.5)';
     popup.style.pointerEvents = 'none';
     popup.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     popup.style.whiteSpace = 'nowrap';
 
     if (isFallback) {
-        popup.style.background = 'rgba(239, 68, 68, 0.88)';
-        popup.style.border = '1px solid rgba(248, 113, 113, 0.6)';
+        popup.style.background = 'rgba(239, 68, 68, 0.92)';
+        popup.style.border = '1.5px solid rgba(248, 113, 113, 0.8)';
         popup.style.color = '#ffffff';
-        popup.innerHTML = '⚙️ Output: Procedural 3D Geometry Fallback Mode';
+        const displayCode = errorCode || 'E02: 404_NOT_FOUND';
+        popup.innerHTML = `⚙️ Fallback Geometry [${displayCode}]`;
     } else {
-        popup.style.background = 'rgba(16, 185, 129, 0.88)';
-        popup.style.border = '1px solid rgba(52, 211, 153, 0.6)';
+        popup.style.background = 'rgba(16, 185, 129, 0.92)';
+        popup.style.border = '1.5px solid rgba(52, 211, 153, 0.8)';
         popup.style.color = '#ffffff';
-        popup.innerHTML = '🎉 Output: Real Kenney 3D Models Loaded';
+        popup.innerHTML = '🎉 Real Kenney 3D Models Loaded';
     }
 
     hud.appendChild(popup);
@@ -1295,7 +1325,7 @@ function showAssetStatusPopup(isFallback) {
         popup.style.opacity = '0';
         popup.style.transform = 'translateX(-50%) translateY(-10px)';
         setTimeout(() => popup.remove(), 600);
-    }, 4500);
+    }, 6500);
 }
 
 function triggerVictory() {

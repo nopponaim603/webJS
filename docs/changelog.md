@@ -3,6 +3,14 @@
 **Project:** Game Portfolio (`webJS`)  
 **Maintained by:** Antigravity AI & Dev Team  
 
+## [1.20.0] - 2026-07-29
+
+### Fixed & Resolved (Diagnostic Popup Unblock)
+- **Kenney 3D Platformer Dynamic Diagnostic Code Popup Fix ([public/games/3d-platformer/game.js](file:///c:/Users/noppon/source/06-WEB\webJS\public\games\3d-platformer\game.js))**:
+  - แก้ไข **Static Popup Text Trap**: แก้ไขจุดหลุดเงื่อนไขใน `showAssetStatusPopup()` ที่เดิมมีข้อความ Hardcoded เป็น `'⚙️ Output: Procedural 3D Geometry Fallback Mode'` ทำให้ Popup แสดงผลข้อความเดิมเสมอโดยไม่ยอมส่งผ่าน `gameState.errorCode` ออกมา
+  - พัฒนา **Live Diagnostic Reporting**: ปรับแต่ง `startGame()` และ `showAssetStatusPopup(isFallback, errorCode, lastErrorMsg)` ให้ส่งผ่านและแสดงผลรหัสข้อผิดพลาดสดๆ (เช่น `⚙️ Fallback Geometry [E02: HTTP_404]` หรือ `⚙️ Fallback Geometry [E01: NO_GLTF_PLUGIN]`) ทันทีที่รันบนมือถือ
+  - อัปเดตข้อมูลเวอร์ชันใน `package.json`, `public/build.json` เป็น **v1.20.0 #2280**
+
 ## [1.19.0] - 2026-07-29
 
 ### Fixed & Resolved (Core Architectural Root Cause)
