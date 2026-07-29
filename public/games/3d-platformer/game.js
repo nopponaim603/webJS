@@ -175,7 +175,7 @@ function ensureGLTFLoader() {
     }
 }
 
-// Direct Blob Fetch Asset Loader (Bypasses Iframe & Edge Mobile Restrictions)
+// Direct Blob & Multi-candidate Path Asset Loader
 async function loadAssetContainerWithFallback(filename) {
     ensureGLTFLoader();
 
@@ -183,42 +183,44 @@ async function loadAssetContainerWithFallback(filename) {
     const pageUrl = window.location.href;
     const currentDir = pageUrl.substring(0, pageUrl.lastIndexOf('/') + 1);
 
-    const candidates = [
-        // 1. Full URL relative to current iframe window location
-        new URL('../../assets/kenney-starter-kit-3d-platformer/models/' + filename, currentDir).href,
-        // 2. Absolute root path
-        origin + '/assets/kenney-starter-kit-3d-platformer/models/' + filename,
-        // 3. Direct relative path
-        '../../assets/kenney-starter-kit-3d-platformer/models/' + filename,
-        '/assets/kenney-starter-kit-3d-platformer/models/' + filename
+    const rootCandidates = [
+        new URL('../../assets/kenney-starter-kit-3d-platformer/models/', currentDir).href,
+        origin + '/assets/kenney-starter-kit-3d-platformer/models/',
+        '../../assets/kenney-starter-kit-3d-platformer/models/',
+        '/assets/kenney-starter-kit-3d-platformer/models/'
     ];
 
-    for (const url of candidates) {
+    for (const rootUrl of rootCandidates) {
+        const cleanRoot = rootUrl.endsWith('/') ? rootUrl : rootUrl + '/';
+        const fullUrl = cleanRoot + filename;
+
+        // Approach 1: Direct Babylon SceneLoader with cleanRoot and filename
         try {
-            // Strategy A: Direct Fetch ArrayBuffer -> Blob URL
-            const resp = await fetch(url, { mode: 'cors', credentials: 'omit' });
-            if (resp.ok) {
-                const blob = await resp.blob();
-                const blobUrl = URL.createObjectURL(blob);
-                const container = await BABYLON.SceneLoader.LoadAssetContainerAsync("", blobUrl, scene, null, ".glb");
-                URL.revokeObjectURL(blobUrl);
-                if (container && container.meshes && container.meshes.length > 0) {
-                    return container;
-                }
+            const container = await BABYLON.SceneLoader.LoadAssetContainerAsync(cleanRoot, filename, scene, null, ".glb");
+            if (container && container.meshes && container.meshes.length > 0) {
+                console.log(`[AssetLoader] Successfully loaded GLB model: ${filename} from ${cleanRoot}`);
+                return container;
             }
-        } catch (e) {
-            // Strategy B: Babylon Direct Load Fallback
+        } catch (err1) {
+            // Approach 2: Fetch ArrayBuffer & Load via Babylon File Object
             try {
-                const container = await BABYLON.SceneLoader.LoadAssetContainerAsync("", url, scene);
-                if (container && container.meshes && container.meshes.length > 0) {
-                    return container;
+                const resp = await fetch(fullUrl, { mode: 'cors', credentials: 'omit' });
+                if (resp.ok) {
+                    const arrayBuffer = await resp.arrayBuffer();
+                    const fileObj = new File([arrayBuffer], filename, { type: 'model/gltf-binary' });
+                    const container = await BABYLON.SceneLoader.LoadAssetContainerAsync("file:", fileObj, scene, null, ".glb");
+                    if (container && container.meshes && container.meshes.length > 0) {
+                        console.log(`[AssetLoader] Successfully loaded GLB File Blob: ${filename}`);
+                        return container;
+                    }
                 }
-            } catch (err) {
-                // Continue to next candidate URL
+            } catch (err2) {
+                // Continue to next candidate
             }
         }
     }
 
+    console.error(`[AssetLoader] All candidates failed for ${filename}`);
     return null;
 }
 
