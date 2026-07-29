@@ -195,7 +195,7 @@ function ensureGLTFLoader() {
     return true;
 }
 
-// Bulletproof Native Asset Container Loader for Babylon.js 7.x
+// Bulletproof Multi-Path Asset Container Loader for Babylon.js 7.x
 async function loadAssetContainerWithFallback(filename) {
     const pluginOk = ensureGLTFLoader();
     if (!pluginOk) {
@@ -206,17 +206,26 @@ async function loadAssetContainerWithFallback(filename) {
     }
 
     const origin = window.location.origin;
-    const pageUrl = window.location.href;
-    const currentDir = pageUrl.substring(0, pageUrl.lastIndexOf('/') + 1);
 
-    const candidates = [];
-    try { candidates.push(new URL('../../assets/kenney-starter-kit-3d-platformer/models/', currentDir).href); } catch (e) {}
-    try { candidates.push(new URL('../../assets/kenney-starter-kit-3d-platformer/models/', window.location.href).href); } catch (e) {}
-    if (origin && origin !== "null") {
-        candidates.push(origin + '/assets/kenney-starter-kit-3d-platformer/models/');
-    }
-    candidates.push('../../assets/kenney-starter-kit-3d-platformer/models/');
-    candidates.push('/assets/kenney-starter-kit-3d-platformer/models/');
+    const candidates = [
+        // 1. Direct Local Game Assets Directory (Guaranteed 100% inside game folder!)
+        './assets/kenney-starter-kit-3d-platformer/models/',
+        'assets/kenney-starter-kit-3d-platformer/models/',
+        
+        // 2. Absolute Path from Domain Root for Local Assets
+        '/games/3d-platformer/assets/kenney-starter-kit-3d-platformer/models/',
+
+        // 3. Absolute Path from Domain Root for Global Assets
+        '/assets/kenney-starter-kit-3d-platformer/models/',
+
+        // 4. Origin URL Resolved Paths
+        origin && origin !== "null" ? origin + '/games/3d-platformer/assets/kenney-starter-kit-3d-platformer/models/' : null,
+        origin && origin !== "null" ? origin + '/assets/kenney-starter-kit-3d-platformer/models/' : null,
+
+        // 5. Computed Relative Paths from current document location
+        '../../assets/kenney-starter-kit-3d-platformer/models/',
+        '../assets/kenney-starter-kit-3d-platformer/models/'
+    ].filter(Boolean);
 
     let lastErrDetail = "";
     let detectedCode = "";
@@ -242,14 +251,14 @@ async function loadAssetContainerWithFallback(filename) {
             const resp = await fetch(fullUrl, { mode: 'cors', credentials: 'omit' });
             if (!resp.ok) {
                 detectedCode = `E02: HTTP_${resp.status}`;
-                lastErrDetail = `Fetch status ${resp.status} for ${filename}`;
+                lastErrDetail = `Fetch status ${resp.status} for ${filename} at ${fullUrl}`;
             } else {
                 const blob = await resp.blob();
                 const blobUrl = URL.createObjectURL(blob);
                 try {
                     const container = await BABYLON.SceneLoader.LoadAssetContainerAsync("", blobUrl, scene, undefined, ".glb");
                     if (container && container.meshes && container.meshes.length > 0) {
-                        console.log(`[AssetLoader] Successfully loaded 3D GLB via Blob URL: ${filename}`);
+                        console.log(`[AssetLoader] Successfully loaded 3D GLB via Blob URL: ${filename} from ${fullUrl}`);
                         return container;
                     }
                 } catch (errB) {

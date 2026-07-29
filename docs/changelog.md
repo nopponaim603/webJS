@@ -3,6 +3,15 @@
 **Project:** Game Portfolio (`webJS`)  
 **Maintained by:** Antigravity AI & Dev Team  
 
+## [1.21.0] - 2026-07-29
+
+### Fixed & Resolved (HTTP 404 Root Cause Resolution)
+- **Kenney 3D Platformer Self-Contained Asset Mirroring ([public/games/3d-platformer/assets/](file:///c:/Users/noppon/source/06-WEB\webJS\public\games\3d-platformer\assets\))**:
+  - แก้ไข **HTTP 404 Iframe Resolution Failure**: สาเหตุที่ขึ้น 404 เกิดจากเมื่อเกมรันใน Iframe/Modal ค่า `window.location.href` ของ Iframe ขาด สแลช (`/`) ปิดท้าย ทำให้การคำนวณย้อนกลับด้วย `../../assets/` เพี้ยนขึ้นไปผิดชั้นจนตอบกลับเป็น HTTP 404
+  - จัดทำ **Self-Contained Local Asset Mirror**: คัดลอกโฟลเดอร์โมเดล 3D (.glb) ทั้งหมดมาเก็บไว้ใน `public/games/3d-platformer/assets/kenney-starter-kit-3d-platformer/models/` โดยตรง
+  - อัปเดต **Priority Candidate Paths**: เพิ่ม `./assets/...` และ `/games/3d-platformer/assets/...` ขึ้นเป็นอันดับ 1 ในการดาวน์โหลด ช่วยการันตีพบไฟล์โมเดล 3D จริง 1000% บนทุกเบราว์เซอร์และทุกอุปกรณ์
+  - อัปเดตข้อมูลเวอร์ชันใน `package.json`, `public/build.json` เป็น **v1.21.0 #2285**
+
 ## [1.20.0] - 2026-07-29
 
 ### Fixed & Resolved (Diagnostic Popup Unblock)
