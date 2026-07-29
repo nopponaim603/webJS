@@ -164,7 +164,7 @@ function initScene() {
     playerRoot.position = new BABYLON.Vector3(0, 3, 0);
 }
 
-// Asset Loading Pipeline
+// Asset Loading Pipeline with Multi-path candidates & Procedural Fallbacks
 async function loadAllAssets() {
     const progressFill = document.getElementById('progress-fill');
     const loadingText = document.getElementById('loading-text');
@@ -183,17 +183,36 @@ async function loadAllAssets() {
         { id: 'grass', file: 'grass.glb' }
     ];
 
-    const basePath = "/assets/kenney-starter-kit-3d-platformer/models/";
+    const origin = window.location.origin;
+    const pathCandidates = [
+        "/assets/kenney-starter-kit-3d-platformer/models/",
+        "../../assets/kenney-starter-kit-3d-platformer/models/",
+        origin + "/assets/kenney-starter-kit-3d-platformer/models/"
+    ];
+
     let loaded = 0;
 
     for (const item of modelFiles) {
         loadingText.innerText = `กำลังโหลดโมเดล: ${item.file}`;
-        try {
-            const container = await BABYLON.SceneLoader.LoadAssetContainerAsync(basePath, item.file, scene);
-            assets.containers[item.id] = container;
-        } catch (e) {
-            console.warn(`Failed to load ${item.file}`, e);
+        let success = false;
+
+        for (const basePath of pathCandidates) {
+            try {
+                const container = await BABYLON.SceneLoader.LoadAssetContainerAsync(basePath, item.file, scene);
+                if (container && container.meshes && container.meshes.length > 0) {
+                    assets.containers[item.id] = container;
+                    success = true;
+                    break;
+                }
+            } catch (e) {
+                // Try next candidate path
+            }
         }
+
+        if (!success) {
+            console.warn(`[AssetLoader] Fallback mode active for ${item.id} (${item.file})`);
+        }
+
         loaded++;
         progressFill.style.width = `${Math.round((loaded / modelFiles.length) * 100)}%`;
     }
@@ -205,36 +224,60 @@ async function loadAllAssets() {
 // Setup Player Mesh & Animation Groups
 function setupPlayerFromContainer() {
     const charContainer = assets.containers['character'];
-    if (!charContainer) return;
+    if (charContainer) {
+        const entries = charContainer.instantiateModelsToScene(name => `player_${name}`);
+        characterContainer = entries.rootNodes[0];
+        characterContainer.parent = playerRoot;
+        characterContainer.position = new BABYLON.Vector3(0, -0.5, 0);
+        characterContainer.rotation.y = 0;
+        characterContainer.scaling = new BABYLON.Vector3(1.2, 1.2, 1.2);
 
-    const entries = charContainer.instantiateModelsToScene(name => `player_${name}`);
-    characterContainer = entries.rootNodes[0];
-    characterContainer.parent = playerRoot;
-    characterContainer.position = new BABYLON.Vector3(0, -0.5, 0);
-    characterContainer.rotation.y = 0;
-    characterContainer.scaling = new BABYLON.Vector3(1.2, 1.2, 1.2);
-
-    // Cast shadows for all player meshes
-    entries.rootNodes.forEach(node => {
-        node.getChildMeshes().forEach(m => {
-            shadowGenerator.addShadowCaster(m);
+        // Cast shadows for all player meshes
+        entries.rootNodes.forEach(node => {
+            node.getChildMeshes().forEach(m => {
+                if (shadowGenerator) shadowGenerator.addShadowCaster(m);
+            });
         });
-    });
 
-    // Extract Animation Groups
-    if (entries.animationGroups) {
-        entries.animationGroups.forEach(ag => {
-            ag.stop();
-            const name = ag.name.toLowerCase();
-            if (name.includes('idle')) activeAnimations['idle'] = ag;
-            else if (name.includes('walk') || name.includes('run')) activeAnimations['walk'] = ag;
-            else if (name.includes('jump')) activeAnimations['jump'] = ag;
-            else if (name.includes('fall')) activeAnimations['fall'] = ag;
-        });
+        // Extract Animation Groups
+        if (entries.animationGroups) {
+            entries.animationGroups.forEach(ag => {
+                ag.stop();
+                const name = ag.name.toLowerCase();
+                if (name.includes('idle')) activeAnimations['idle'] = ag;
+                else if (name.includes('walk') || name.includes('run')) activeAnimations['walk'] = ag;
+                else if (name.includes('jump')) activeAnimations['jump'] = ag;
+                else if (name.includes('fall')) activeAnimations['fall'] = ag;
+            });
+        }
+
+        playAnimation('idle');
+        return;
     }
 
-    // Play default Idle
-    playAnimation('idle');
+    // === PROCEDURAL PLAYER FALLBACK ===
+    console.log("[Fallback] Creating procedural 3D Hero Mesh...");
+    const playerCapsule = BABYLON.MeshBuilder.CreateCapsule("proceduralPlayer", { height: 1.4, radius: 0.4 }, scene);
+    const mat = new BABYLON.StandardMaterial("procPlayerMat", scene);
+    mat.diffuseColor = new BABYLON.Color3(0.23, 0.51, 0.96);
+    mat.specularColor = new BABYLON.Color3(0.5, 0.5, 0.5);
+    playerCapsule.material = mat;
+    playerCapsule.parent = playerRoot;
+    playerCapsule.position = new BABYLON.Vector3(0, 0.2, 0);
+
+    const eye1 = BABYLON.MeshBuilder.CreateSphere("eye1", { diameter: 0.15 }, scene);
+    const eye2 = BABYLON.MeshBuilder.CreateSphere("eye2", { diameter: 0.15 }, scene);
+    const eyeMat = new BABYLON.StandardMaterial("eyeMat", scene);
+    eyeMat.diffuseColor = new BABYLON.Color3(1, 1, 1);
+    eye1.material = eyeMat;
+    eye2.material = eyeMat;
+    eye1.parent = playerCapsule;
+    eye2.parent = playerCapsule;
+    eye1.position = new BABYLON.Vector3(-0.15, 0.4, -0.35);
+    eye2.position = new BABYLON.Vector3(0.15, 0.4, -0.35);
+
+    characterContainer = playerCapsule;
+    if (shadowGenerator) shadowGenerator.addShadowCaster(playerCapsule);
 }
 
 // Animation State Switcher
@@ -555,36 +598,75 @@ function buildLevel2() {
     spawnCloud(new BABYLON.Vector3(-16, 20, 50));
 }
 
-// Level Helpers
+// Level Helpers with Procedural Fallbacks
 function createPlatform(type, position) {
     const container = assets.containers[type];
-    if (!container) return;
+    if (container) {
+        const entries = container.instantiateModelsToScene(name => `lvl_${type}_${name}`);
+        const root = entries.rootNodes[0];
+        root.position = position;
+        root.getChildMeshes().forEach(m => {
+            m.isPlatform = true;
+            m.isPickable = true;
+            if (shadowGenerator) shadowGenerator.getShadowMap().renderList.push(m);
+        });
+        return;
+    }
 
-    const entries = container.instantiateModelsToScene(name => `lvl_${type}_${name}`);
-    const root = entries.rootNodes[0];
-    root.position = position;
-    root.getChildMeshes().forEach(m => {
-        m.isPlatform = true;
-        m.isPickable = true;
-        shadowGenerator.getShadowMap().renderList.push(m);
-    });
+    // === PROCEDURAL PLATFORM FALLBACK ===
+    let w = 4, h = 0.8, d = 4;
+    if (type === 'platformLarge') { w = 7; h = 1.0; d = 7; }
+    if (type === 'platformMedium') { w = 4.5; h = 0.8; d = 4.5; }
+    if (type === 'platform') { w = 3.0; h = 0.6; d = 3.0; }
+
+    const box = BABYLON.MeshBuilder.CreateBox(`lvl_proc_${type}`, { width: w, height: h, depth: d }, scene);
+    box.position = position.clone();
+    
+    const mat = new BABYLON.StandardMaterial(`mat_${type}`, scene);
+    mat.diffuseColor = new BABYLON.Color3(0.2, 0.65, 0.32);
+    mat.specularColor = new BABYLON.Color3(0.1, 0.1, 0.1);
+    box.material = mat;
+    
+    box.isPlatform = true;
+    box.isPickable = true;
+    if (shadowGenerator) shadowGenerator.getShadowMap().renderList.push(box);
 }
 
 function createMovingPlatform(startPos, deltaPos, speed) {
-    const container = assets.containers["platformMedium"];
-    if (!container) return;
+    const container = assets.containers["platformMedium"] || assets.containers["platformLarge"];
+    if (container) {
+        const entries = container.instantiateModelsToScene(name => `lvl_mov_${name}`);
+        const root = entries.rootNodes[0];
+        root.position = startPos.clone();
+        root.getChildMeshes().forEach(m => {
+            m.isPlatform = true;
+            m.isPickable = true;
+            if (shadowGenerator) shadowGenerator.getShadowMap().renderList.push(m);
+        });
 
-    const entries = container.instantiateModelsToScene(name => `lvl_mov_${name}`);
-    const root = entries.rootNodes[0];
-    root.position = startPos.clone();
-    root.getChildMeshes().forEach(m => {
-        m.isPlatform = true;
-        m.isPickable = true;
-        shadowGenerator.getShadowMap().renderList.push(m);
-    });
-    
+        assets.movingPlatforms.push({
+            mesh: root,
+            startPos: startPos.clone(),
+            deltaPos: deltaPos.clone(),
+            speed: speed,
+            time: 0,
+            lastPos: startPos.clone()
+        });
+        return;
+    }
+
+    // === PROCEDURAL MOVING PLATFORM FALLBACK ===
+    const box = BABYLON.MeshBuilder.CreateBox(`lvl_proc_mov`, { width: 4.5, height: 0.8, depth: 4.5 }, scene);
+    box.position = startPos.clone();
+    const mat = new BABYLON.StandardMaterial("procMovMat", scene);
+    mat.diffuseColor = new BABYLON.Color3(0.25, 0.6, 0.9);
+    box.material = mat;
+    box.isPlatform = true;
+    box.isPickable = true;
+    if (shadowGenerator) shadowGenerator.getShadowMap().renderList.push(box);
+
     assets.movingPlatforms.push({
-        mesh: root,
+        mesh: box,
         startPos: startPos.clone(),
         deltaPos: deltaPos.clone(),
         speed: speed,
@@ -595,36 +677,69 @@ function createMovingPlatform(startPos, deltaPos, speed) {
 
 function createFallingPlatform(position) {
     const container = assets.containers["platformFalling"] || assets.containers["platformMedium"];
-    if (!container) return;
+    if (container) {
+        const entries = container.instantiateModelsToScene(name => `lvl_fall_${name}`);
+        const root = entries.rootNodes[0];
+        root.position = position.clone();
+        root.getChildMeshes().forEach(m => {
+            m.isPlatform = true;
+            m.isPickable = true;
+            if (shadowGenerator) shadowGenerator.getShadowMap().renderList.push(m);
+        });
 
-    const entries = container.instantiateModelsToScene(name => `lvl_fall_${name}`);
-    const root = entries.rootNodes[0];
-    root.position = position.clone();
-    root.getChildMeshes().forEach(m => {
-        m.isPlatform = true;
-        m.isPickable = true;
-        shadowGenerator.getShadowMap().renderList.push(m);
-    });
+        assets.fallingPlatforms.push({
+            mesh: root,
+            initialPos: position.clone(),
+            state: 'idle',
+            timer: 0
+        });
+        return;
+    }
+
+    // === PROCEDURAL FALLING PLATFORM FALLBACK ===
+    const box = BABYLON.MeshBuilder.CreateBox(`lvl_proc_fall`, { width: 3.5, height: 0.7, depth: 3.5 }, scene);
+    box.position = position.clone();
+    const mat = new BABYLON.StandardMaterial("procFallMat", scene);
+    mat.diffuseColor = new BABYLON.Color3(0.9, 0.5, 0.2);
+    box.material = mat;
+    box.isPlatform = true;
+    box.isPickable = true;
+    if (shadowGenerator) shadowGenerator.getShadowMap().renderList.push(box);
 
     assets.fallingPlatforms.push({
-        mesh: root,
+        mesh: box,
         initialPos: position.clone(),
-        state: 'idle', // idle, shaking, falling, respawning
+        state: 'idle',
         timer: 0
     });
 }
 
 function spawnCoin(position) {
     const container = assets.containers["coin"];
-    if (!container) return;
+    if (container) {
+        const entries = container.instantiateModelsToScene(name => `lvl_coin_${name}`);
+        const root = entries.rootNodes[0];
+        root.position = position;
+        root.scaling = new BABYLON.Vector3(1.3, 1.3, 1.3);
 
-    const entries = container.instantiateModelsToScene(name => `lvl_coin_${name}`);
-    const root = entries.rootNodes[0];
-    root.position = position;
-    root.scaling = new BABYLON.Vector3(1.3, 1.3, 1.3);
+        assets.coins.push({
+            mesh: root,
+            pos: position,
+            collected: false
+        });
+        return;
+    }
+
+    // === PROCEDURAL COIN FALLBACK ===
+    const coinDisc = BABYLON.MeshBuilder.CreateCylinder("procCoin", { diameter: 0.8, height: 0.15 }, scene);
+    coinDisc.position = position.clone();
+    coinDisc.rotation.x = Math.PI / 2;
+    const mat = new BABYLON.StandardMaterial("procCoinMat", scene);
+    mat.diffuseColor = new BABYLON.Color3(0.98, 0.75, 0.15);
+    coinDisc.material = mat;
 
     assets.coins.push({
-        mesh: root,
+        mesh: coinDisc,
         pos: position,
         collected: false
     });
@@ -632,19 +747,37 @@ function spawnCoin(position) {
 
 function spawnQuestionBlock(position) {
     const container = assets.containers["blockCoin"];
-    if (!container) return;
+    if (container) {
+        const entries = container.instantiateModelsToScene(name => `lvl_qblock_${name}`);
+        const root = entries.rootNodes[0];
+        root.position = position;
+        root.getChildMeshes().forEach(m => {
+            m.isPlatform = true;
+            m.isPickable = true;
+            if (shadowGenerator) shadowGenerator.getShadowMap().renderList.push(m);
+        });
 
-    const entries = container.instantiateModelsToScene(name => `lvl_qblock_${name}`);
-    const root = entries.rootNodes[0];
-    root.position = position;
-    root.getChildMeshes().forEach(m => {
-        m.isPlatform = true;
-        m.isPickable = true;
-        shadowGenerator.getShadowMap().renderList.push(m);
-    });
+        assets.questionBlocks.push({
+            mesh: root,
+            initialPos: position.clone(),
+            hit: false,
+            animTimer: 0
+        });
+        return;
+    }
+
+    // === PROCEDURAL QUESTION BLOCK FALLBACK ===
+    const box = BABYLON.MeshBuilder.CreateBox("procQBlock", { size: 1.2 }, scene);
+    box.position = position.clone();
+    const mat = new BABYLON.StandardMaterial("procQMat", scene);
+    mat.diffuseColor = new BABYLON.Color3(0.95, 0.65, 0.1);
+    box.material = mat;
+    box.isPlatform = true;
+    box.isPickable = true;
+    if (shadowGenerator) shadowGenerator.getShadowMap().renderList.push(box);
 
     assets.questionBlocks.push({
-        mesh: root,
+        mesh: box,
         initialPos: position.clone(),
         hit: false,
         animTimer: 0
@@ -653,43 +786,89 @@ function spawnQuestionBlock(position) {
 
 function spawnBrickBlock(position) {
     const container = assets.containers["brick"];
-    if (!container) return;
+    if (container) {
+        const entries = container.instantiateModelsToScene(name => `lvl_brick_${name}`);
+        const root = entries.rootNodes[0];
+        root.position = position;
+        root.getChildMeshes().forEach(m => {
+            m.isPlatform = true;
+            m.isPickable = true;
+            if (shadowGenerator) shadowGenerator.getShadowMap().renderList.push(m);
+        });
 
-    const entries = container.instantiateModelsToScene(name => `lvl_brick_${name}`);
-    const root = entries.rootNodes[0];
-    root.position = position;
-    root.getChildMeshes().forEach(m => {
-        m.isPlatform = true;
-        m.isPickable = true;
-        shadowGenerator.getShadowMap().renderList.push(m);
-    });
+        assets.brickBlocks.push({
+            mesh: root,
+            destroyed: false
+        });
+        return;
+    }
+
+    // === PROCEDURAL BRICK BLOCK FALLBACK ===
+    const box = BABYLON.MeshBuilder.CreateBox("procBrick", { size: 1.2 }, scene);
+    box.position = position.clone();
+    const mat = new BABYLON.StandardMaterial("procBrickMat", scene);
+    mat.diffuseColor = new BABYLON.Color3(0.7, 0.3, 0.2);
+    box.material = mat;
+    box.isPlatform = true;
+    box.isPickable = true;
+    if (shadowGenerator) shadowGenerator.getShadowMap().renderList.push(box);
 
     assets.brickBlocks.push({
-        mesh: root,
+        mesh: box,
         destroyed: false
     });
 }
 
 function spawnFinishFlag(position) {
     const container = assets.containers["flag"];
-    if (!container) return;
+    if (container) {
+        const entries = container.instantiateModelsToScene(name => `lvl_flag_${name}`);
+        const root = entries.rootNodes[0];
+        root.position = position;
+        root.scaling = new BABYLON.Vector3(1.4, 1.4, 1.4);
+        assets.finishFlag = root;
+        return;
+    }
 
-    const entries = container.instantiateModelsToScene(name => `lvl_flag_${name}`);
-    const root = entries.rootNodes[0];
-    root.position = position;
-    root.scaling = new BABYLON.Vector3(1.4, 1.4, 1.4);
-    assets.finishFlag = root;
+    // === PROCEDURAL FINISH FLAG FALLBACK ===
+    const pole = BABYLON.MeshBuilder.CreateCylinder("procFlagPole", { diameter: 0.15, height: 3.5 }, scene);
+    pole.position = position.clone().add(new BABYLON.Vector3(0, 1.75, 0));
+    const poleMat = new BABYLON.StandardMaterial("poleMat", scene);
+    poleMat.diffuseColor = new BABYLON.Color3(0.9, 0.9, 0.9);
+    pole.material = poleMat;
+
+    const flagBanner = BABYLON.MeshBuilder.CreateBox("procFlagBanner", { width: 1.2, height: 0.8, depth: 0.05 }, scene);
+    flagBanner.position = position.clone().add(new BABYLON.Vector3(0.6, 3.0, 0));
+    const flagMat = new BABYLON.StandardMaterial("flagMat", scene);
+    flagMat.diffuseColor = new BABYLON.Color3(0.9, 0.2, 0.2);
+    flagBanner.material = flagMat;
+
+    const flagRoot = new BABYLON.TransformNode("procFlagRoot", scene);
+    pole.parent = flagRoot;
+    flagBanner.parent = flagRoot;
+    flagRoot.position = position;
+    assets.finishFlag = flagRoot;
 }
 
 function spawnCloud(position) {
     const container = assets.containers["cloud"];
-    if (!container) return;
+    if (container) {
+        const entries = container.instantiateModelsToScene(name => `lvl_cloud_${name}`);
+        const root = entries.rootNodes[0];
+        root.position = position;
+        root.scaling = new BABYLON.Vector3(2.5, 2.5, 2.5);
+        assets.clouds.push(root);
+        return;
+    }
 
-    const entries = container.instantiateModelsToScene(name => `lvl_cloud_${name}`);
-    const root = entries.rootNodes[0];
-    root.position = position;
-    root.scaling = new BABYLON.Vector3(2.5, 2.5, 2.5);
-    assets.clouds.push(root);
+    // === PROCEDURAL CLOUD FALLBACK ===
+    const cloudBox = BABYLON.MeshBuilder.CreateSphere("procCloud", { diameterX: 5, diameterY: 2, diameterZ: 3 }, scene);
+    cloudBox.position = position;
+    const mat = new BABYLON.StandardMaterial("procCloudMat", scene);
+    mat.diffuseColor = new BABYLON.Color3(0.9, 0.95, 1.0);
+    mat.alpha = 0.85;
+    cloudBox.material = mat;
+    assets.clouds.push(cloudBox);
 }
 
 // Game Loop & Update System

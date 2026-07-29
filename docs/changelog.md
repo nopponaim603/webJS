@@ -3,6 +3,14 @@
 **Project:** Game Portfolio (`webJS`)  
 **Maintained by:** Antigravity AI & Dev Team  
 
+## [1.13.0] - 2026-07-29
+
+### Fixed & Enhanced
+- **Kenney 3D Platformer Edge Mobile & Iframe Asset Fallback ([public/games/3d-platformer/game.js](file:///c:/Users/noppon/source/06-WEB/webJS/public/games/3d-platformer/game.js))**:
+  - แก้ไขปัญหา Microsoft Edge Mobile และ Iframe Environment ในการดาวน์โหลด `.glb` 3D Assets ด้วยระบบ **Multi-Path Candidate Loader** (`/assets/...`, `./../../assets/...`, `origin + /assets/...`)
+  - สร้างระบบ **Procedural 3D Mesh Fallback Generator** สำหรับตัวละคร 3D (`CreateCapsule`), แพลตฟอร์ม 3D (`CreateBox`), แพลตฟอร์มเคลื่อนที่, แพลตฟอร์มถล่ม, เหรียญทอง, บล็อกคำถาม, และธงชัยชนะ
+  - การันตีว่าเกมสามารถสร้างฉาก 3D และตัวละครให้เล่นได้สมบูรณ์ 100% ปราศจากอาการตกทะลุพื้นตกตายตลอดเวลา แม้เบราว์เซอร์บนมือถือจะบล็อกหรือล้มเหลวในการดาวน์โหลดไฟล์ GLB
+
 ## [1.12.0] - 2026-07-29
 
 ### Added & Fixed
