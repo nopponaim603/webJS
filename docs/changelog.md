@@ -3,6 +3,19 @@
 **Project:** Game Portfolio (`webJS`)  
 **Maintained by:** Antigravity AI & Dev Team  
 
+## [1.18.0] - 2026-07-29
+
+### Added & Fixed
+- **Kenney 3D Platformer Asset Diagnostic Error Code System ([public/games/3d-platformer/game.js](file:///c:/Users/noppon/source/06-WEB\webJS\public\games\3d-platformer\game.js))**:
+  - เพิ่ม **Diagnostic Error Code Taxonomy**: พัฒนาระบบรหัสข้อผิดพลาด 5 หมวดหมู่เพื่อระบุสาเหตุที่เกมตกลงไปรันในโหมด Fallback อย่างกระชับและแม่นยำ 100%:
+    - `ERR-E01 (NO_GLTF_PLUGIN)`: ปลั๊กอิน GLTF Loader โหลดล้มเหลว
+    - `ERR-E02 (HTTP_404_PATH)`: หาไฟล์ GLB ไม่พบบน Host Path
+    - `ERR-E03 (CORS_BLOCK)`: โดนบล็อกโดย CORS / Security Policy
+    - `ERR-E04 (NETWORK_FAIL)`: สัญญาณเน็ตล้มเหลว หรือ Data Saver Intercept
+    - `ERR-E05 (DECODE_PARSE_FAIL)`: การถอดรหัสไฟล์ GLB ล้มเหลวในเอนจิน
+  - อัปเดต **Glassmorphic Popup Banner**: แสดง Error Code กระชับต่อการอ่านและทดสอบบนหน้าจอมือถือ (เช่น `⚙️ Fallback Geometry Mode [ERR-E02 (HTTP_404_PATH)]`)
+  - อัปเดตข้อมูลเวอร์ชันใน `package.json`, `public/build.json` เป็น **v1.18.0 #2270**
+
 ## [1.17.0] - 2026-07-29
 
 ### Fixed & Resolved

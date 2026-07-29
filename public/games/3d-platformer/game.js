@@ -61,7 +61,9 @@ let gameState = {
     jumpCount: 0,
     maxJumps: 2,
     velocityY: 0,
-    isFallbackMode: false
+    isFallbackMode: false,
+    errorCode: null,
+    lastErrorMsg: ""
 };
 
 // Physics & Controls Settings
@@ -205,32 +207,35 @@ async function ensureGLTFLoader() {
     return false;
 }
 
-// Bulletproof Asset Loader for Babylon.js
+// Bulletproof Asset Loader for Babylon.js with Diagnostic Error Codes
 async function loadAssetContainerWithFallback(filename) {
-    await ensureGLTFLoader();
+    const pluginOk = await ensureGLTFLoader();
+    if (!pluginOk) {
+        gameState.errorCode = "ERR-E01 (NO_GLTF_PLUGIN)";
+        console.error("[AssetLoader] Diagnostic Error: ERR-E01 (GLTF Loader plugin unavailable)");
+        return null;
+    }
 
     const origin = window.location.origin;
     const pageUrl = window.location.href;
     const currentDir = pageUrl.substring(0, pageUrl.lastIndexOf('/') + 1);
 
     const candidates = [];
-    try {
-        candidates.push(new URL('../../assets/kenney-starter-kit-3d-platformer/models/', currentDir).href);
-    } catch (e) {}
-    try {
-        candidates.push(new URL('../../assets/kenney-starter-kit-3d-platformer/models/', window.location.href).href);
-    } catch (e) {}
+    try { candidates.push(new URL('../../assets/kenney-starter-kit-3d-platformer/models/', currentDir).href); } catch (e) {}
+    try { candidates.push(new URL('../../assets/kenney-starter-kit-3d-platformer/models/', window.location.href).href); } catch (e) {}
     if (origin && origin !== "null") {
         candidates.push(origin + '/assets/kenney-starter-kit-3d-platformer/models/');
     }
     candidates.push('../../assets/kenney-starter-kit-3d-platformer/models/');
     candidates.push('/assets/kenney-starter-kit-3d-platformer/models/');
 
+    let detectedErrorCode = null;
+
     for (const rawRoot of candidates) {
         const rootUrl = rawRoot.endsWith('/') ? rawRoot : rawRoot + '/';
         const fullUrl = rootUrl + filename;
 
-        // Method 1: Direct ImportMeshAsync template cloning (Most reliable method across mobile engines)
+        // Method 1: Direct ImportMeshAsync
         try {
             const tempRoot = new BABYLON.TransformNode(`template_${filename}`, scene);
             tempRoot.setEnabled(false);
@@ -263,22 +268,44 @@ async function loadAssetContainerWithFallback(filename) {
                 return customContainer;
             }
         } catch (err1) {
-            console.warn(`[AssetLoader] Method 1 (ImportMeshAsync) failed for ${fullUrl}:`, err1);
+            const msg = String(err1.message || err1);
+            console.warn(`[AssetLoader] Method 1 failed for ${fullUrl}:`, err1);
+
+            if (msg.includes('404') || msg.includes('Not Found') || msg.includes('ENOENT')) {
+                detectedErrorCode = "ERR-E02 (HTTP_404_PATH)";
+            } else if (msg.includes('CORS') || msg.includes('Cross-Origin') || msg.includes('Security')) {
+                detectedErrorCode = "ERR-E03 (CORS_BLOCK)";
+            } else if (msg.includes('NetworkError') || msg.includes('Failed to fetch')) {
+                detectedErrorCode = "ERR-E04 (NETWORK_FAIL)";
+            } else {
+                detectedErrorCode = "ERR-E05 (DECODE_PARSE_FAIL)";
+            }
         }
 
-        // Method 2: LoadAssetContainerAsync
+        // Method 2: Direct Fetch Check
         try {
-            const container = await BABYLON.SceneLoader.LoadAssetContainerAsync(rootUrl, filename, scene, undefined, ".glb");
-            if (container && container.meshes && container.meshes.length > 0) {
-                console.log(`[AssetLoader] Successfully loaded GLB container: ${filename} from ${rootUrl}`);
-                return container;
+            const resp = await fetch(fullUrl);
+            if (!resp.ok) {
+                if (resp.status === 404) detectedErrorCode = "ERR-E02 (HTTP_404_PATH)";
+                else detectedErrorCode = `ERR-E04 (HTTP_${resp.status})`;
+            } else {
+                const container = await BABYLON.SceneLoader.LoadAssetContainerAsync(rootUrl, filename, scene, undefined, ".glb");
+                if (container && container.meshes && container.meshes.length > 0) {
+                    console.log(`[AssetLoader] Successfully loaded GLB container: ${filename} from ${rootUrl}`);
+                    return container;
+                }
             }
         } catch (err2) {
-            console.warn(`[AssetLoader] Method 2 (LoadAssetContainerAsync) failed for ${fullUrl}:`, err2);
+            const msg = String(err2.message || err2);
+            console.warn(`[AssetLoader] Method 2 failed for ${fullUrl}:`, err2);
+            if (msg.includes('CORS') || msg.includes('Cross-Origin')) detectedErrorCode = "ERR-E03 (CORS_BLOCK)";
         }
     }
 
-    console.error(`[AssetLoader] All candidates failed for ${filename}`);
+    if (!gameState.errorCode) {
+        gameState.errorCode = detectedErrorCode || "ERR-E02 (HTTP_404_PATH)";
+    }
+    console.error(`[AssetLoader] All candidates failed for ${filename}. Final Diagnostic Code: ${gameState.errorCode}`);
     return null;
 }
 
