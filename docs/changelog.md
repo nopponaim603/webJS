@@ -3,6 +3,15 @@
 **Project:** Game Portfolio (`webJS`)  
 **Maintained by:** Antigravity AI & Dev Team  
 
+## [1.19.0] - 2026-07-29
+
+### Fixed & Resolved (Core Architectural Root Cause)
+- **Kenney 3D Platformer Babylon 7.x Plugin & Clone Architectural Fix ([public/games/3d-platformer/game.js](file:///c:/Users/noppon/source/06-WEB\webJS\public\games\3d-platformer\game.js))**:
+  - แก้ไข **Babylon.js 7.x GLTF Plugin Namespace**: เพิ่มการรองรับ `BABYLON.GLTF2.GLTFFileLoader` ซึ่งเป็นมาตรฐาน Plugin Namespace หลักของ Babylon.js 7.x (เดิมระบบเช็คเพียง `BABYLON.GLTFFileLoader` ทำให้ตัวเอนจินมองไม่เห็นปลั๊กอินอ่าน `.glb`)
+  - แก้ไข **Empty Mesh Child Clone Logic**: ยกเลิกการใช้ `ImportMeshAsync` แบบมี `tempRoot.setEnabled(false)` และ `clone(..., null, false)` ซึ่งทำให้ Children Meshes หายไปทั้งหมดจนเรนเดอร์เป็น TransformNode เปล่า
+  - สลับกลับมาใช้ **`BABYLON.SceneLoader.LoadAssetContainerAsync` Direct Native Pipeline**: โหลดโมเดลพร้อม Children, Skeletons และ Animations สมบูรณ์ 100%
+  - อัปเดตข้อมูลเวอร์ชันใน `package.json`, `public/build.json` เป็น **v1.19.0 #2275**
+
 ## [1.18.0] - 2026-07-29
 
 ### Added & Fixed
