@@ -91,6 +91,23 @@
                 display: block;
             }
         }
+
+        /* Mobile portrait: pin game to the top instead of centering vertically,
+           since Phaser's FIT scaling leaves large empty gaps above/below on tall screens */
+        @media (max-width: 768px) and (orientation: portrait) {
+            html, body {
+                align-items: flex-start;
+            }
+
+            #game-wrapper {
+                align-items: flex-start;
+                padding-top: env(safe-area-inset-top, 0px);
+            }
+
+            #game-container {
+                align-items: flex-start;
+            }
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
 </head>
