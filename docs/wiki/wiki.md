@@ -21,6 +21,9 @@
 - [Sprint Retrospectives](../agile/04-retrospectives-backlog.md)
 - [Product Backlog](../agile/01-product-backlog.md)
 
+### 🛠️ Development & Shader Architecture
+- [Goosl Glass Marbles — WebGL 2 Shader & Physics Rendering Knowledge Base](./development/goosl-marbles-rendering.md)
+
 ### 📚 Guidelines & Standards
 - [Game Assets Guide & Catalog](./assets-guide.md)
 - [3D Asset Loading & Mobile Edge Troubleshooting Guide](./guidelines/mobile-edge-3d-asset-loading-troubleshooting.md)

@@ -6,6 +6,8 @@
 ## [1.21.0] - 2026-07-29
 
 ### Added & Developed
+- **Goosl Glass Marbles WebGL 2 Rendering Knowledge Base ([docs/wiki/development/goosl-marbles-rendering.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/wiki/development/goosl-marbles-rendering.md))**:
+  - ถอดองค์ความรู้และสถาปัตยกรรมการเรนเดอร์กราฟิกลูกแก้วของ `public/games/goosl-marbles/app.js` ครอบคลุม Procedural Ray-Marched Quads, Analytical Normal Derivation, Quaternion 3D Spin Matrices, Multi-Chromatic Dispersion Refraction, 120Hz Sub-Stepping Physics Engine และ Web Audio API Stereo Sound Synthesizer
 - **Planned Games Specs Reorganization ([docs/gdd/planning/index.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/planning/index.md))**:
   - คัดแยกเอกสาร Game Design Spec ที่ยังไม่ได้สร้างตัวเกมจริงจำนวน 7 เกม ได้แก่ `ocean-frenzy`, `dice-quest`, `pico-tower-climber`, `pixel-bullet-hell`, `block-collapse`, `tiny-farm-tycoon`, และ `lunar-lander` ย้ายไปเก็บในโฟลเดอร์ **`docs/gdd/planning/`** พร้อมสร้างหน้าดรรชนีรวมแผนงานพัฒนา
   - คงเหลือโฟลเดอร์ **`docs/gdd/games/`** ไว้เฉพาะ 11 เกมที่มีการเปิดเล่นจริงใน `public/games/` สอดคล้องกัน 100%
