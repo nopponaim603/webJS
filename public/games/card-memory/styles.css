@@ -34,6 +34,8 @@ html, body {
   border-radius: 16px;
   overflow: hidden;
   border: 1px solid rgba(16, 185, 129, 0.2);
+  will-change: transform;
+  transform-style: preserve-3d;
 }
 
 #game-canvas {
@@ -42,4 +44,8 @@ html, body {
   height: 100%;
   touch-action: none;
   cursor: default;
+  will-change: transform;
+  backface-visibility: hidden;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }

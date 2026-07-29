@@ -13,7 +13,6 @@ kanban-plugin: board
 ## 🔵 IN PROGRESS
 
 - [/] US-03-01: LocalStorage High Score Persistence
-- [/] [US-08-07](./user-stories/US-08-07-performance-preload.md): Performance Optimization & Asset Loading (G008)
 
 
 ## ✅ DONE
@@ -30,6 +29,7 @@ kanban-plugin: board
 - [x] [US-08-04](./user-stories/archive/US-08-04-results-modal.md): Match Results Screen with Stats (G008)
 - [x] [US-08-05](./user-stories/archive/US-08-05-game-restart.md): Game Restart and New Game Button (G008)
 - [x] [US-08-06](./user-stories/archive/US-08-06-mobile-responsive.md): Mobile-Responsive Touch Support (G008)
+- [x] [US-08-07](./user-stories/archive/US-08-07-performance-preload.md): Performance Optimization & Asset Loading (G008)
 - [x] [US-17-01](./user-stories/archive/US-17-01-hero-selection.md): Hero Selection & MenuScene (G017)
 - [x] [US-17-02](./user-stories/archive/US-17-02-movement-controls.md): Top-Down Movement & Dual Controls (G017)
 - [x] [US-17-03](./user-stories/archive/US-17-03-auto-weapons.md): Auto-Attacks & Weapons Engine (G017)

@@ -7,7 +7,7 @@
   'use strict';
 
   // --- Constants ---
-  const ASSETS_PATH = '/assets/kenney_playing-cards-pack/PNG/Cards (large)/';
+  const ASSETS_PATH = '/assets/kenney_playing-cards-pack/PNG/Cards (medium)/';
   const SUITS = ['clubs', 'diamonds', 'hearts', 'spades'];
   const VALUES = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
   const TOTAL_PAIRS = 8;
@@ -118,10 +118,11 @@
     } catch {}
   }
 
-  // --- Texture Loader ---
+  // --- Asset Preloader & Texture Pool ---
   const images = {};
-  let imagesLoaded = 0;
-  let totalImagesNeeded = 1; // card_back + 8 pairs
+  let imagesLoadedCount = 0;
+  const TOTAL_DECK_IMAGES = 53; // 1 card_back + 52 playing cards
+  let isPreloading = true;
 
   function getCardFilename(suit, value) {
     let formattedValue = value;
@@ -133,10 +134,14 @@
 
   function loadImage(key, src) {
     return new Promise((resolve) => {
+      if (images[key]) {
+        resolve(images[key]);
+        return;
+      }
       const img = new Image();
       img.onload = () => {
         images[key] = img;
-        imagesLoaded++;
+        imagesLoadedCount++;
         resolve(img);
       };
       img.onerror = () => {
@@ -147,8 +152,25 @@
     });
   }
 
-  // Preload card back
-  loadImage('card_back', ASSETS_PATH + 'card_back.png');
+  async function preloadAllAssets() {
+    isPreloading = true;
+    imagesLoadedCount = 0;
+
+    const promises = [];
+    promises.push(loadImage('card_back', ASSETS_PATH + 'card_back.png'));
+
+    for (const suit of SUITS) {
+      for (const value of VALUES) {
+        const filename = getCardFilename(suit, value);
+        const key = `${suit}_${value}`;
+        promises.push(loadImage(key, ASSETS_PATH + filename));
+      }
+    }
+
+    await Promise.all(promises);
+    isPreloading = false;
+    initGame();
+  }
 
   // --- Game State ---
   let cards = [];
@@ -314,6 +336,9 @@
         life: 0.6 + Math.random() * 0.4,
       });
     }
+    if (particles.length > 50) {
+      particles.splice(0, particles.length - 50);
+    }
   }
 
   function updateParticles(dt) {
@@ -375,9 +400,7 @@
     const chosen8 = pool.slice(0, TOTAL_PAIRS);
     const cardList = [];
     chosen8.forEach((data) => {
-      const filename = getCardFilename(data.suit, data.value);
       const key = `${data.suit}_${data.value}`;
-      loadImage(key, ASSETS_PATH + filename);
       cardList.push({ suit: data.suit, value: data.value, key });
       cardList.push({ suit: data.suit, value: data.value, key });
     });
@@ -623,6 +646,13 @@
     ctx.fillStyle = bgGradient;
     ctx.fillRect(0, 0, width, height);
 
+    if (isPreloading) {
+      drawLoadingScreen(ctx);
+      ctx.restore();
+      requestAnimationFrame(render);
+      return;
+    }
+
     // Subtle ambient grid pattern
     ctx.strokeStyle = 'rgba(255, 255, 255, 0.03)';
     ctx.lineWidth = 1;
@@ -654,6 +684,30 @@
 
     ctx.restore();
     requestAnimationFrame(render);
+  }
+
+  function drawLoadingScreen(ctx) {
+    ctx.fillStyle = '#f8fafc';
+    ctx.font = '600 16px system-ui, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('🃏 Loading Card Assets...', width / 2, height / 2 - 20);
+
+    const barW = Math.min(240, width - 60);
+    const barH = 8;
+    const barX = (width - barW) / 2;
+    const barY = height / 2 + 15;
+
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+    ctx.beginPath();
+    ctx.roundRect(barX, barY, barW, barH, 4);
+    ctx.fill();
+
+    const pct = Math.min(1, imagesLoadedCount / TOTAL_DECK_IMAGES);
+    ctx.fillStyle = '#34d399';
+    ctx.beginPath();
+    ctx.roundRect(barX, barY, barW * pct, barH, 4);
+    ctx.fill();
   }
 
   function drawHUD(ctx) {
@@ -839,7 +893,7 @@
 
   // --- Start ---
   resizeCanvas();
-  initGame();
+  preloadAllAssets();
   requestAnimationFrame(render);
 
 })();
