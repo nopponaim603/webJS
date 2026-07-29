@@ -798,43 +798,99 @@ class MainGameScene extends Phaser.Scene {
         }
     }
 
-    // Chain Lightning (Wizard's second weapon) — narrow strike radius, slower fire rate than the norm.
-    // Each individual bolt also splashes nearby enemies using the same distance-based
-    // calculation as Fireball's blast (dealSplashDamage) — only enemies clustered close
-    // to that specific strike take splash damage from it.
+    // Chain Lightning (Wizard's second weapon) — strikes a primary target near the player
+    // and chains (jumps) to nearby secondary targets in a chain reaction with zig-zag lightning.
     fireLightningWeapon() {
         if (this.isGameOver || this.player.skills.lightning <= 0) return;
 
-        // Narrowed scope: only strikes enemies close to the player, not anywhere on screen
-        const strikeRadius = 260;
-        const nearbyEnemies = this.enemies.getChildren().filter(e =>
+        const strikeRadius = 260; // Initial target detection radius from player
+        const chainRadius = 160;  // Max jump distance between chained targets
+
+        // Find primary target (nearest active enemy within strikeRadius)
+        const activeEnemies = this.enemies.getChildren().filter(e =>
             e.active && Phaser.Math.Distance.Between(this.player.x, this.player.y, e.x, e.y) <= strikeRadius
         );
-        if (nearbyEnemies.length === 0) return;
+        if (activeEnemies.length === 0) return;
 
-        // Same blast-radius formula as Fireball — grows with level, still short-range
-        const splashRadius = 30 + (this.player.skills.lightning - 1) * 12;
+        activeEnemies.sort((a, b) =>
+            Phaser.Math.Distance.Between(this.player.x, this.player.y, a.x, a.y) -
+            Phaser.Math.Distance.Between(this.player.x, this.player.y, b.x, b.y)
+        );
 
-        Phaser.Utils.Array.Shuffle(nearbyEnemies);
-        const targetCount = Math.min(this.player.skills.lightning, nearbyEnemies.length);
-        for (let i = 0; i < targetCount; i++) {
-            const enemy = nearbyEnemies[i];
-            const bolt = this.add.graphics();
-            bolt.lineStyle(4, 0x38bdf8, 1);
-            bolt.beginPath();
-            bolt.moveTo(enemy.x, enemy.y - 150);
-            bolt.lineTo(enemy.x, enemy.y);
-            bolt.strokePath();
+        const primaryTarget = activeEnemies[0];
+        // Lv1 = 2 targets (1 jump), Lv2 = 3 targets (2 jumps), Lv3 = 4 targets (3 jumps)...
+        const maxChains = 1 + this.player.skills.lightning;
+        const baseDamage = 35 * this.player.damageMult;
 
-            this.dealSplashDamage(enemy.x, enemy.y, splashRadius, 40 * this.player.damageMult);
+        const chainedTargets = [primaryTarget];
+        let currentTarget = primaryTarget;
 
-            this.tweens.add({
-                targets: bolt,
-                alpha: 0,
-                duration: 200,
-                onComplete: () => bolt.destroy()
+        // Find chain of targets jumping from current target to nearest unchained target
+        for (let i = 1; i < maxChains; i++) {
+            let nextTarget = null;
+            let minDist = Infinity;
+
+            this.enemies.getChildren().forEach(e => {
+                if (!e.active || chainedTargets.includes(e)) return;
+                const dist = Phaser.Math.Distance.Between(currentTarget.x, currentTarget.y, e.x, e.y);
+                if (dist <= chainRadius && dist < minDist) {
+                    minDist = dist;
+                    nextTarget = e;
+                }
             });
+
+            if (nextTarget) {
+                chainedTargets.push(nextTarget);
+                currentTarget = nextTarget;
+            } else {
+                break;
+            }
         }
+
+        sounds.playShoot();
+
+        // Visual: Draw zig-zag lightning graphics along the chain
+        const boltGfx = this.add.graphics();
+        boltGfx.lineStyle(3, 0x38bdf8, 1);
+
+        const drawZigZagLine = (x1, y1, x2, y2) => {
+            const steps = 4;
+            boltGfx.moveTo(x1, y1);
+            for (let s = 1; s < steps; s++) {
+                const t = s / steps;
+                const nx = Phaser.Math.Interpolation.Linear([x1, x2], t) + (Math.random() - 0.5) * 14;
+                const ny = Phaser.Math.Interpolation.Linear([y1, y2], t) + (Math.random() - 0.5) * 14;
+                boltGfx.lineTo(nx, ny);
+            }
+            boltGfx.lineTo(x2, y2);
+        };
+
+        // 1. Strike sky to primary target
+        boltGfx.beginPath();
+        drawZigZagLine(primaryTarget.x + (Math.random() - 0.5) * 20, primaryTarget.y - 140, primaryTarget.x, primaryTarget.y);
+
+        // 2. Chain jumps between targets
+        for (let i = 0; i < chainedTargets.length - 1; i++) {
+            const from = chainedTargets[i];
+            const to = chainedTargets[i + 1];
+            drawZigZagLine(from.x, from.y, to.x, to.y);
+        }
+
+        boltGfx.strokePath();
+
+        // Apply damage to all chained enemies (with minor distance falloff per jump)
+        chainedTargets.forEach((target, index) => {
+            const falloff = Math.max(0.6, 1 - index * 0.12);
+            this.damageEnemy(target, baseDamage * falloff);
+        });
+
+        // Fade out lightning bolt
+        this.tweens.add({
+            targets: boltGfx,
+            alpha: 0,
+            duration: 220,
+            onComplete: () => boltGfx.destroy()
+        });
     }
 
     // Critical Knife (Rogue's starting weapon) — a single precise throw at the nearest enemy;

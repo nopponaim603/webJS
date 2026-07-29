@@ -28,10 +28,10 @@ gantt
 
 | ID | User Story / Task | Owner | Estimate | Status |
 |----|-------------------|-------|----------|--------|
-| [US-17-01](../user-stories/US-17-01-hero-selection.md) | Hero Selection & Boot Engine | GameDev | M | ✅ Done |
-| [US-17-02](../user-stories/US-17-02-movement-controls.md) | Top-Down Movement & Dual Controls | GameDev | M | ✅ Done |
-| [US-17-03](../user-stories/US-17-03-auto-weapons.md) | Auto-Attacks & Weapons Engine | GameDev | L | ✅ Done |
-| [US-17-04](../user-stories/US-17-04-card-upgrades.md) | Roguelike Card Upgrade Modal | GameDev | L | ✅ Done |
+| [US-17-01](../user-stories/archive/US-17-01-hero-selection.md) | Hero Selection & Boot Engine | GameDev | M | ✅ Done |
+| [US-17-02](../user-stories/archive/US-17-02-movement-controls.md) | Top-Down Movement & Dual Controls | GameDev | M | ✅ Done |
+| [US-17-03](../user-stories/archive/US-17-03-auto-weapons.md) | Auto-Attacks & Weapons Engine | GameDev | L | ✅ Done |
+| [US-17-04](../user-stories/archive/US-17-04-card-upgrades.md) | Roguelike Card Upgrade Modal | GameDev | L | ✅ Done |
 
 ---
 

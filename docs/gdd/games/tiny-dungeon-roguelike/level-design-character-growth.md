@@ -67,11 +67,11 @@ Note: `this.level` also feeds directly into monster difficulty (population cap, 
 | Card | `classId` | Effect | Stacking Formula | Notes |
 |---|:---:|---|---|---|
 | 🌀 Cleave Slash | `knight` | `skills.melee += 1` | Linear, uncapped | See §4.1 |
-| ⚔️ Orbiting Blades | `knight` | `skills.orbit += 1` | Linear, uncapped | See §4.4 |
-| 🔥 Fireball Spell | `wizard` | `skills.fireball += 1` | Linear, uncapped | See §4.2 |
-| ⚡ Chain Lightning | `wizard` | `skills.lightning += 1` | Linear, uncapped | See §4.5 |
-| 🗡️ Poison Darts | `rogue` | `skills.darts += 1` | Linear, uncapped | See §4.3 |
-| 🔪 Critical Knife | `rogue` | `skills.knife += 1` | Linear, uncapped | See §4.6 |
+| ⚔️ Orbiting Blades | `knight` | `skills.orbit += 1` | Linear, uncapped | See §4.2 |
+| 🔥 Fireball Spell | `wizard` | `skills.fireball += 1` | Linear, uncapped | See §4.3 |
+| ⚡ Chain Lightning | `wizard` | `skills.lightning += 1` | Linear, uncapped | See §4.4 |
+| 🔪 Critical Knife | `rogue` | `skills.knife += 1` | Linear, uncapped | See §4.5 |
+| 🗡️ Poison Darts | `rogue` | `skills.darts += 1` | Linear, uncapped | See §4.6 |
 | ❤️ Max HP +30% | *(none)* | `maxHp += 30`, heal `+30` instantly | Flat, additive per pick | Universal. Larger relative gain for low-HP classes |
 | 👟 Movement Speed +20% | *(none)* | `speedBonus += 0.2` (starts at `1.0`) | Additive to multiplier | Universal. 3rd pick → `speedBonus = 1.6` (+60% over base, not compounding) |
 | 💥 Attack Power +25% | *(none)* | `damageMult += 0.25` (starts at `1.0`) | Additive to multiplier | Universal. Applies to **both** of the class's weapons at once |
@@ -84,6 +84,10 @@ Note: `this.level` also feeds directly into monster difficulty (population cap, 
 ## 4. Per-Weapon Scaling Curves
 
 Each weapon's *skill level* (`player.skills.<weapon>`) increases by 1 per matching card drawn. Base damage constants already reflect the [class rebalance pass](spec.md#21-player-characters-ฮีโร่ผู้เล่น) (Knight/orbit ↑, Wizard/fireball ↑, Rogue/darts ↓ per-hit + more projectiles). Every weapon below is now gated by `classId` (§3) — only the owning class will ever be offered its card.
+
+---
+
+### ⚔️ Knight
 
 ### 4.1 Melee Slash — Knight's starting weapon (`performMeleeAttack`)
 
@@ -105,51 +109,7 @@ The swing auto-aims at whatever `getNearestEnemy()` returns (same helper Firebal
 
 **Growth axis: reach, not width or per-hit damage.** The 130° cone angle is a fixed characteristic of the attack (per design brief), so each level instead extends `meleeRange` by `15px` — letting the Knight threaten a wider ring of close-quarters space as levels stack, while every enemy caught in the swing takes the same flat `30 × damageMult` regardless of how many are hit. This keeps Knight's identity as "safe to stand in the middle of a crowd" without needing Orbiting Blades' continuous-collision model.
 
-### 4.2 Fireball Spell — Wizard's starting weapon (`fireFireballWeapon`)
-
-```js
-const explosionRadius = 30 + (fireballLevel - 1) * 12; // blast radius grows per level
-const visualScale = 1 + (fireballLevel - 1) * 0.25;    // rendered fireball grows to match
-for (let i = 0; i < this.player.skills.fireball; i++) { /* one shot, 120ms apart */ }
-proj.damage = 65 * this.player.damageMult;
-proj.explosionRadius = explosionRadius; // AoE on impact, handled in handleProjectileEnemyHit
-```
-
-All shots in a volley target whatever `getNearestEnemy()` returns at cast time. Fireball has its **own dedicated timer at a slower 1400ms cadence** (`fireFireballWeapon`, vs. the 800ms baseline of Melee and the 400ms of Darts) — this is the mechanical expression of "ยิงแรงแต่ยิงช้า" (hits hard, fires slow).
-
-As of this pass, each fireball also **explodes on impact**: `handleProjectileEnemyHit` checks `proj.explosionRadius` and, if set, calls the shared `dealSplashDamage(x, y, radius, damage, isCrit)` helper, which damages every enemy within that radius of the impact point instead of only the one enemy it physically collided with — splash only reaches enemies clustered close to where the fireball actually lands, not the whole screen. `dealSplashDamage` is a generic AoE helper, not Fireball-specific — Chain Lightning's bolts use the exact same function for their own splash (§4.5). Darts/Knife leave `explosionRadius` unset and keep their old single-target behavior.
-
-| Skill Level | Shots/volley | Dmg/shot | Blast Radius | Visual Size | Dmg/volley (same target) |
-|:---:|:---:|:---:|:---:|:---:|:---:|
-| 1 | 1 | 65×`dmg` | 30px | 1.00× | 65×`dmg` (+ splash) |
-| 2 | 2 | 65×`dmg` | 42px | 1.25× | 130×`dmg` (+ splash) |
-| 3 | 3 | 65×`dmg` | 54px | 1.50× | 195×`dmg` (+ splash) |
-| 4 | 4 | 65×`dmg` | 66px | 1.75× | 260×`dmg` (+ splash) |
-
-**Growth axis: single-target burst, now with growing splash.** Every level still stacks another 65-damage shot onto the same nearest enemy (unchanged), but each of those shots now also explodes across a radius that grows `+12px` per level, visually scaled to match (`+25%` render size per level) — so a leveled-up Fireball reads as a genuinely bigger explosion that catches whatever else is clustered around the primary target, instead of a pure single-target nuke. This keeps the "hits hard, fires slow" identity while adding the requested "hits multiple monsters" payoff at higher levels.
-
-### 4.3 Poison Darts — Rogue's second weapon, starts at 0 (`fireDartsWeapon`)
-
-```js
-const dartCount = this.player.skills.darts; // single-target volley, 1 dart per level
-// each dart staggered 80ms apart, all aimed at the same nearest enemy
-proj.setTint(0x22c55e); // poison green
-proj.damage = 10 * this.player.damageMult;
-this.time.delayedCall(550, () => proj.destroy()); // short lifetime = short range
-```
-
-Darts no longer spray in a full-circle spread — they now target the single nearest enemy (same `getNearestEnemy()` helper as Fireball/Melee/Knife), firing `dartCount` darts staggered 80ms apart at that one target, tinted **poison green** to read as venomous. Darts still have their **own dedicated timer at a faster 400ms cadence** (`fireDartsWeapon`, twice as often as the 800ms baseline of Melee) and a short `550ms` projectile lifetime — at the dart's `220px/s` travel speed that caps effective range at roughly **120px**. This is the mechanical expression of "โจมตีเร็วแต่ระยะสั้น" (attacks fast, but short range), now aimed rather than sprayed.
-
-| Skill Level | Darts/volley (same target) | Dmg/dart | Total volley dmg (if all connect) | Effective range |
-|:---:|:---:|:---:|:---:|:---:|
-| 1 | 1 | 10×`dmg` | 10×`dmg` | ~120px |
-| 2 | 2 | 10×`dmg` | 20×`dmg` | ~120px |
-| 3 | 3 | 10×`dmg` | 30×`dmg` | ~120px |
-| 4 | 4 | 10×`dmg` | 40×`dmg` | ~120px |
-
-**Growth axis: single-target rapid poke, traded against range.** Every level adds one more dart to the staggered burst aimed at the same nearest enemy, so more levels mean more total damage focused on one target rather than covering a crowd — but every dart still fizzles out close to the Rogue, so landing the full burst still requires the Rogue's speed advantage to stay in that short bubble next to the target. This pairs with Rogue's highest movement speed, encouraging a hit-and-run playstyle rather than either Knight's reach-based Melee Slash or Wizard's snipe-from-max-range.
-
-### 4.4 Orbiting Blades — Knight's second weapon, starts at 0 (`updateOrbitBlades`)
+### 4.2 Orbiting Blades — Knight's second weapon, starts at 0 (`updateOrbitBlades`)
 
 ```js
 const orbitCount = this.player.skills.orbit;   // 1 blade per skill level
@@ -172,31 +132,58 @@ As of this pass, leveling Orbit grows the ring on **two axes at once**: the orbi
 
 **Important growth nuance**: the 400ms hit cooldown (`enemy.lastOrbitHitTime`) is tracked **per enemy**, not per blade — so adding blades does *not* multiply damage against a single target standing still. What it buys instead is **angular AND spatial coverage**: with `N` blades spaced `2π/N` apart on a widening, thickening ring, more enemies around the player get caught in a swing simultaneously, and each blade also physically reaches further out and covers more area per pass — a full 360° passive alternative to Melee Slash's directional, auto-aimed 130° swing.
 
-### 4.5 Chain Lightning — Wizard's second weapon, starts at 0 (`fireLightningWeapon`)
+---
+
+### 🔥 Wizard
+
+### 4.3 Fireball Spell — Wizard's starting weapon (`fireFireballWeapon`)
 
 ```js
-const strikeRadius = 260; // narrowed from "anywhere on screen" to a radius around the player
-const nearbyEnemies = this.enemies.getChildren().filter(e =>
-    e.active && Phaser.Math.Distance.Between(this.player.x, this.player.y, e.x, e.y) <= strikeRadius
-);
-const splashRadius = 30 + (this.player.skills.lightning - 1) * 12; // same formula as Fireball's blast
-const targetCount = Math.min(this.player.skills.lightning, nearbyEnemies.length); // 1 primary strike/level
-this.dealSplashDamage(enemy.x, enemy.y, splashRadius, 40 * this.player.damageMult); // splash per bolt
+const explosionRadius = 30 + (fireballLevel - 1) * 12; // blast radius grows per level
+const visualScale = 1 + (fireballLevel - 1) * 0.25;    // rendered fireball grows to match
+for (let i = 0; i < this.player.skills.fireball; i++) { /* one shot, 120ms apart */ }
+proj.damage = 65 * this.player.damageMult;
+proj.explosionRadius = explosionRadius; // AoE on impact, handled in handleProjectileEnemyHit
 ```
 
-Lightning also has its **own dedicated timer at a slower 1600ms cadence** (double the 800ms "normal" tier shared by Melee/Orbit) — narrower scope traded for a longer cooldown between strikes.
+All shots in a volley target whatever `getNearestEnemy()` returns at cast time. Fireball has its **own dedicated timer at a slower 1400ms cadence** (`fireFireballWeapon`, vs. the 800ms baseline of Melee and the 400ms of Darts) — this is the mechanical expression of "ยิงแรงแต่ยิงช้า" (hits hard, fires slow).
 
-As of this pass, each individual bolt **splashes** using the exact same `dealSplashDamage(x, y, radius, damage, isCrit)` helper Fireball's blast uses (§4.2) — every bolt picks one primary target within the 260px `strikeRadius`, strikes at that enemy's position, and then damages every enemy within the smaller `splashRadius` of that impact point, not just the primary target. The two radii serve different purposes: `strikeRadius` decides *which* enemies can be picked as a bolt's primary target (wide, player-centered), while `splashRadius` decides how far damage spreads *from* each individual strike (narrow, impact-centered) — mirroring Fireball's own "target far, splash close" structure.
+As of this pass, each fireball also **explodes on impact**: `handleProjectileEnemyHit` checks `proj.explosionRadius` and, if set, calls the shared `dealSplashDamage(x, y, radius, damage, isCrit)` helper, which damages every enemy within that radius of the impact point instead of only the one enemy it physically collided with — splash only reaches enemies clustered close to where the fireball actually lands, not the whole screen. `dealSplashDamage` is a generic AoE helper, not Fireball-specific — Chain Lightning's bolts use the exact same function for their own splash (§4.4). Darts/Knife leave `explosionRadius` unset and keep their old single-target behavior.
 
-| Skill Level | Primary Strikes (within 260px) | Splash Radius (per strike) | Dmg/bolt | Total dmg (primary only, if enough nearby enemies) |
+| Skill Level | Shots/volley | Dmg/shot | Blast Radius | Visual Size | Dmg/volley (same target) |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| 1 | 1 | 65×`dmg` | 30px | 1.00× | 65×`dmg` (+ splash) |
+| 2 | 2 | 65×`dmg` | 42px | 1.25× | 130×`dmg` (+ splash) |
+| 3 | 3 | 65×`dmg` | 54px | 1.50× | 195×`dmg` (+ splash) |
+| 4 | 4 | 65×`dmg` | 66px | 1.75× | 260×`dmg` (+ splash) |
+
+**Growth axis: single-target burst, now with growing splash.** Every level still stacks another 65-damage shot onto the same nearest enemy (unchanged), but each of those shots now also explodes across a radius that grows `+12px` per level, visually scaled to match (`+25%` render size per level) — so a leveled-up Fireball reads as a genuinely bigger explosion that catches whatever else is clustered around the primary target, instead of a pure single-target nuke. This keeps the "hits hard, fires slow" identity while adding the requested "hits multiple monsters" payoff at higher levels.
+
+### 4.4 Chain Lightning — Wizard's second weapon, starts at 0 (`fireLightningWeapon`)
+
+```js
+const strikeRadius = 260; // Initial target search radius from player
+const chainRadius = 160;  // Max jump distance between chained targets
+const maxChains = 1 + this.player.skills.lightning; // Lv1 = 2 targets (1 jump), Lv2 = 3 targets (2 jumps)...
+// Primary target struck from sky, then lightning chains to nearest unchained enemy within chainRadius
+```
+
+Lightning has its **own dedicated timer at a 1600ms cadence**. It strikes a primary target within `strikeRadius` (260px) of the player, and then **chains (jumps)** to nearby secondary targets within `chainRadius` (160px) in a rapid chain reaction, rendering connected zig-zag lightning bolts between targets.
+
+| Skill Level | Max Chained Targets | Initial Target Radius | Max Jump Distance | Base Dmg/target |
 |:---:|:---:|:---:|:---:|:---:|
-| 1 | 1 | 30px | 40×`dmg` | 40×`dmg` |
-| 2 | 2 | 42px | 40×`dmg` | 80×`dmg` |
-| 3 | 3 | 54px | 40×`dmg` | 120×`dmg` |
+| 1 | 2 (1 jump) | 260px | 160px | 35×`dmg` |
+| 2 | 3 (2 jumps) | 260px | 160px | 35×`dmg` |
+| 3 | 4 (3 jumps) | 260px | 160px | 35×`dmg` |
+| 4 | 5 (4 jumps) | 260px | 160px | 35×`dmg` |
 
-Locked to `classId: 'wizard'` — the second half of Wizard's kit alongside Fireball (§4.2). Where Fireball is a slow single-target-plus-splash nuke on a long cooldown, Lightning is instant and picks multiple *separate* primary strikes (each with its own smaller splash), giving the Wizard an answer to several small pockets of enemies spread around the player instead of one dense cluster — but no longer a screen-wide panic button: primary targets are limited to `260px` of the player, and only 1 per level (down from 2), on the slowest fire rate of the two.
+**Growth axis: chain count & crowd propagation.** Leveling up Chain Lightning increases the maximum number of targets the lightning bolt can jump to in a single cast (`1 + skillLevel`), turning it into a powerful crowd-sweeping weapon when enemies are grouped together.
 
-### 4.6 Critical Knife — Rogue's starting weapon (`fireKnifeWeapon`)
+---
+
+### 🔪 Rogue
+
+### 4.5 Critical Knife — Rogue's starting weapon (`fireKnifeWeapon`)
 
 ```js
 // Delay shrinks as the skill levels up, floored at 250ms
@@ -218,7 +205,28 @@ Knife levels up along **two axes at once**: crit chance (as before) and attack s
 | 4 | 50% | 460ms | 22×`dmg` | 44×`dmg` | ~71.7×`dmg`/s |
 | 7 | 80% (cap) | 250ms (floor) | 22×`dmg` | 44×`dmg` | ~158.4×`dmg`/s |
 
-**Growth axis: crit chance AND attack speed, not damage or projectile count.** A Critical Knife level-up never adds projectiles or bumps the flat 22/44 damage numbers directly — it compounds two multipliers simultaneously: the odds of the 2× crit landing, and how often a throw happens at all. Both cap out (crit chance at 80%, delay at 250ms) so Knife never becomes a guaranteed-crit machine-gun, but the combination is why its DPS curve accelerates faster than any single-axis weapon in the pool. Locked to `classId: 'rogue'` — paired with Poison Darts (§4.3) as Rogue's kit: Knife is a single volatile long-range gamble that gets faster and swingier with levels, while Darts is reliable, close-range rapid poke, giving the Rogue a high-variance option from the start and a low-risk option to grow into.
+**Growth axis: crit chance AND attack speed, not damage or projectile count.** A Critical Knife level-up never adds projectiles or bumps the flat 22/44 damage numbers directly — it compounds two multipliers simultaneously: the odds of the 2× crit landing, and how often a throw happens at all. Both cap out (crit chance at 80%, delay at 250ms) so Knife never becomes a guaranteed-crit machine-gun, but the combination is why its DPS curve accelerates faster than any single-axis weapon in the pool. Locked to `classId: 'rogue'` — paired with Poison Darts (§4.6) as Rogue's kit: Knife is a single volatile long-range gamble that gets faster and swingier with levels, while Darts is reliable, close-range rapid poke, giving the Rogue a high-variance option from the start and a low-risk option to grow into.
+
+### 4.6 Poison Darts — Rogue's second weapon, starts at 0 (`fireDartsWeapon`)
+
+```js
+const dartCount = this.player.skills.darts; // single-target volley, 1 dart per level
+// each dart staggered 80ms apart, all aimed at the same nearest enemy
+proj.setTint(0x22c55e); // poison green
+proj.damage = 10 * this.player.damageMult;
+this.time.delayedCall(550, () => proj.destroy()); // short lifetime = short range
+```
+
+Darts no longer spray in a full-circle spread — they now target the single nearest enemy (same `getNearestEnemy()` helper as Fireball/Melee/Knife), firing `dartCount` darts staggered 80ms apart at that one target, tinted **poison green** to read as venomous. Darts still have their **own dedicated timer at a faster 400ms cadence** (`fireDartsWeapon`, twice as often as the 800ms baseline of Melee) and a short `550ms` projectile lifetime — at the dart's `220px/s` travel speed that caps effective range at roughly **120px**. This is the mechanical expression of "โจมตีเร็วแต่ระยะสั้น" (attacks fast, but short range), now aimed rather than sprayed.
+
+| Skill Level | Darts/volley (same target) | Dmg/dart | Total volley dmg (if all connect) | Effective range |
+|:---:|:---:|:---:|:---:|:---:|
+| 1 | 1 | 10×`dmg` | 10×`dmg` | ~120px |
+| 2 | 2 | 10×`dmg` | 20×`dmg` | ~120px |
+| 3 | 3 | 10×`dmg` | 30×`dmg` | ~120px |
+| 4 | 4 | 10×`dmg` | 40×`dmg` | ~120px |
+
+**Growth axis: single-target rapid poke, traded against range.** Every level adds one more dart to the staggered burst aimed at the same nearest enemy, so more levels mean more total damage focused on one target rather than covering a crowd — but every dart still fizzles out close to the Rogue, so landing the full burst still requires the Rogue's speed advantage to stay in that short bubble next to the target. This pairs with Rogue's highest movement speed, encouraging a hit-and-run playstyle rather than either Knight's reach-based Melee Slash or Wizard's snipe-from-max-range.
 
 ---
 
@@ -234,7 +242,6 @@ Weapon cards are locked (§3), so "build diversity" no longer comes from *which 
 
 Because each class's deck is only 6 cards (2 weapons + 4 stat boosts) instead of the old 10-card shared pool, a class reaches "has drawn everything at least once" much faster — variance now lives in *ordering* (does Wizard see Lightning at level 3 or level 8?) rather than in *whether* a class ever sees its second weapon at all.
 
----
 
 ## 6. Tuning Reference
 
@@ -263,11 +270,10 @@ Because each class's deck is only 6 cards (2 weapons + 4 stat boosts) instead of
 | Orbit per-enemy cooldown | `updateOrbitBlades` | `400ms` | Shorter = more blades start mattering for single-target DPS too |
 | Orbit radius per level | `updateOrbitBlades` | `45 + (lvl-1)*8` px | Wider ring reaches enemies further from the player |
 | Orbit blade scale per level | `updateOrbitBlades` | `1.8 + (lvl-1)*0.3` | Bigger blades read as more threatening; hitbox scales with it |
-| Lightning fire rate | timer in `create()` | `1600ms` | Slower than the 800ms "normal" tier by design — lower makes Lightning less of a commitment |
-| Lightning strike radius | `fireLightningWeapon` | `260px` | Widens which enemies are eligible to be picked as a bolt's primary target |
-| Lightning targets/level | `fireLightningWeapon` | `lvl` (was `lvl * 2`) | Fewer simultaneous primary strikes per level than before this pass |
-| Lightning splash radius per level | `fireLightningWeapon` | `30 + (lvl-1)*12` (same formula as Fireball) | Bigger splash per individual bolt, independent of `strikeRadius` |
-| Fireball/Lightning shared splash helper | `dealSplashDamage()` | n/a | Both weapons' splash logic lives in one function — changing it affects both consistently |
+| Lightning fire rate | timer in `create()` | `1600ms` | Cadence between lightning casts |
+| Lightning initial strike radius | `fireLightningWeapon` | `260px` | Maximum distance from player to detect the primary target |
+| Lightning max chain jump radius | `fireLightningWeapon` | `160px` | Maximum distance between consecutive chained enemies |
+| Lightning max chained targets | `fireLightningWeapon` | `1 + lvl` | Number of enemies the lightning can jump to in a single cast |
 | Knife base fire rate | timer in `create()` | `700ms` (level 1) | Starting point for the per-level delay reduction below |
 | Knife fire rate per level | `fireKnifeWeapon` | `700 - (lvl-1)*80`, floored `250ms` | Lower floor = attack speed keeps scaling further at high levels |
 | Knife crit chance per level | `fireKnifeWeapon` | `0.2 + (lvl-1)*0.1`, capped `0.8` | Higher cap = crits become closer to guaranteed at max level |
