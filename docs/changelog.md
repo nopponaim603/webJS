@@ -3,6 +3,23 @@
 **Project:** Game Portfolio (`webJS`)  
 **Maintained by:** Antigravity AI & Dev Team  
 
+## [1.12.0] - 2026-07-29
+
+### Added & Fixed
+- **Kenney 3D Platformer Mobile Physics & Render Fix ([public/games/3d-platformer/game.js](file:///c:/Users/noppon/source/06-WEB/webJS/public/games/3d-platformer/game.js))**:
+  - แก้ไขการ Render และ Hardware Scaling บนอุปกรณ์มือถือ (Hardware Scaling Level cap max DPR 1.5) เพิ่ม FPS 60FPS
+  - พัฒนาระบบ **Swept Dynamic Raycast** และ **Upward Ray Recovery** ป้องกันการตกลงทะลุพื้นแพลตฟอร์มเมื่อเกิดอาการเฟรมตกชั่วขณะบนมือถือ
+  - ปรับจุดเกิด (Spawn / Respawn Point) ให้อยู่บนแพลตฟอร์มเริ่มต้นอย่างปลอดภัยที่ `Y = 1.2`
+- **Card Memory Match Optimizations ([public/games/card-memory/](file:///c:/Users/noppon/source/06-WEB/webJS/public/games/card-memory/))**:
+  - **`US-08-06` (Mobile Responsive HUD)**: ปรับแต่ง Canvas HUD Responsive สำหรับ Mobile Viewports (<480px) แก้ไขบั๊กข้อความซ้อนทับปุ่มกดที่ 360px
+  - **`US-08-07` (Performance & Preload)**: สลับใช้รูปการ์ด `Cards (medium)` ขนาดกระทัดรัด พัฒนาระบบ `preloadAllAssets()` แบบ Async/Promise.all และจำกัด Memory Particles
+- **Tiny Dungeon Survivor Chain Lightning Rebalance ([public/games/tiny-dungeon-roguelike/game.js](file:///c:/Users/noppon/source/06-WEB/webJS/public/games/tiny-dungeon-roguelike/game.js))**:
+  - ปรับปรุงสกิล **Chain Lightning** ของ Wizard ให้มีระบบ Chain Jump Reaction ชิ่งความเสียหายไปยังศัตรูใกล้เคียงเป็นทอดๆ ตามระดับเลเวล พร้อมเพิ่มเส้นสายฟ้า Zig-Zag VFX
+  - อัปเดตเอกสาร GDD [`level-design-character-growth.md`](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/tiny-dungeon-roguelike/level-design-character-growth.md) ให้สอดคล้องกัน
+- **Agile User Stories Cleanup & Archive ([docs/agile/user-stories/archive/](file:///c:/Users/noppon/source/06-WEB/webJS/docs/agile/user-stories/archive/))**:
+  - ย้ายและจัดเก็บ User Stories ที่ทำเสร็จสมบูรณ์เข้าสู่ `archive/` (US-17-01..04, US-08-01..07)
+  - อัปเดตสถานะบอร์ด Kanban (`Kanban-board.md`) และลิงก์อ้างอิงใน Product Backlog (`01-product-backlog.md`)
+
 ## [1.10.0] - 2026-07-28
 
 ### Added & Upgraded

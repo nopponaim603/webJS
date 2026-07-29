@@ -92,12 +92,22 @@ const assets = {
 // Initialize Game Engine
 window.addEventListener('DOMContentLoaded', () => {
     canvas = document.getElementById('renderCanvas');
-    engine = new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true });
-    
+    engine = new BABYLON.Engine(canvas, true, {
+        preserveDrawingBuffer: false,
+        stencil: false,
+        powerPreference: "high-performance",
+        doNotHandleTouchAction: true
+    });
+
+    // Optimize hardware scaling for high-DPI mobile screens (caps DPR to max 1.5)
+    const maxDPR = Math.min(window.devicePixelRatio || 1, 1.5);
+    engine.setHardwareScalingLevel(1 / maxDPR);
+    engine.enableOfflineSupport = false;
+
     initScene();
     setupInputs();
     setupMobileJoystick();
-    
+
     loadAllAssets().then(() => {
         document.getElementById('loader-overlay').classList.add('hidden');
         buildLevel(gameState.level);
@@ -106,7 +116,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
     engine.runRenderLoop(() => {
         if (scene) {
-            updateGameLoop(engine.getDeltaTime() / 1000);
+            // Cap delta time to max 0.033s (30fps equivalent step) to prevent physics tunneling during mobile frame drops
+            const rawDt = engine.getDeltaTime() / 1000;
+            const clampedDt = Math.min(0.033, rawDt);
+            updateGameLoop(clampedDt);
             scene.render();
         }
     });
@@ -430,8 +443,9 @@ function buildLevel(levelNum) {
         buildLevel2();
     }
 
-    playerRoot.position = new BABYLON.Vector3(0, 3, 0);
+    playerRoot.position = new BABYLON.Vector3(0, 1.2, 0);
     gameState.velocityY = 0;
+    gameState.isGrounded = true;
 }
 
 function clearLevel() {
@@ -713,12 +727,15 @@ function updatePlayerMovement(dt) {
     let normZ = inputMag > 0 ? inputZ / Math.max(1, inputMag) : 0;
 
     // 2. Camera-relative movement
-    const cameraForward = camera.getForwardRay().direction;
+    let cameraForward = camera.getForwardRay().direction;
     cameraForward.y = 0;
-    cameraForward.normalize();
+    if (cameraForward.lengthSquared() > 0.001) {
+        cameraForward.normalize();
+    } else {
+        cameraForward = new BABYLON.Vector3(0, 0, 1);
+    }
 
     const cameraRight = BABYLON.Vector3.Cross(BABYLON.Vector3.Up(), cameraForward).normalize();
-
     const moveVector = cameraRight.scale(normX).add(cameraForward.scale(normZ));
 
     // 3. Horizontal Movement
@@ -736,13 +753,18 @@ function updatePlayerMovement(dt) {
         playerRoot.rotation.y += diff * Math.min(1.0, PHYSICS.rotationSpeed * dt);
     }
 
-    // 4. Ground Collision Check (Multi-ray for high stability)
+    // 4. Ground Collision Check (Swept Multi-ray for high stability and anti-tunneling)
+    const fallSpeed = Math.max(0, -gameState.velocityY);
+    const rayLength = Math.max(1.6, 0.8 + fallSpeed * dt * 2.5);
+
     const rayOrigins = [
-        playerRoot.position.add(new BABYLON.Vector3(0, 0.4, 0)),
-        playerRoot.position.add(new BABYLON.Vector3(0.25, 0.4, 0)),
-        playerRoot.position.add(new BABYLON.Vector3(-0.25, 0.4, 0)),
-        playerRoot.position.add(new BABYLON.Vector3(0, 0.4, 0.25)),
-        playerRoot.position.add(new BABYLON.Vector3(0, 0.4, -0.25))
+        playerRoot.position.add(new BABYLON.Vector3(0, 0.5, 0)),
+        playerRoot.position.add(new BABYLON.Vector3(0.3, 0.5, 0)),
+        playerRoot.position.add(new BABYLON.Vector3(-0.3, 0.5, 0)),
+        playerRoot.position.add(new BABYLON.Vector3(0, 0.5, 0.3)),
+        playerRoot.position.add(new BABYLON.Vector3(0, 0.5, -0.3)),
+        playerRoot.position.add(new BABYLON.Vector3(0.2, 0.5, 0.2)),
+        playerRoot.position.add(new BABYLON.Vector3(-0.2, 0.5, -0.2))
     ];
 
     const predicate = (mesh) => {
@@ -755,12 +777,25 @@ function updatePlayerMovement(dt) {
     let groundHit = null;
     let highestGroundY = -Infinity;
 
+    // Downward Raycast
     for (const origin of rayOrigins) {
-        const ray = new BABYLON.Ray(origin, new BABYLON.Vector3(0, -1, 0), 1.2);
+        const ray = new BABYLON.Ray(origin, new BABYLON.Vector3(0, -1, 0), rayLength);
         const hit = scene.pickWithRay(ray, predicate);
         if (hit.hit && hit.pickedPoint.y > highestGroundY) {
             groundHit = hit;
             highestGroundY = hit.pickedPoint.y;
+        }
+    }
+
+    // Upward recovery raycast (In case character slightly penetrated platform during lag spike)
+    if (!groundHit && gameState.velocityY <= 0) {
+        for (const origin of rayOrigins) {
+            const upRay = new BABYLON.Ray(origin.add(new BABYLON.Vector3(0, -0.6, 0)), new BABYLON.Vector3(0, 1, 0), 1.4);
+            const hit = scene.pickWithRay(upRay, predicate);
+            if (hit.hit && hit.pickedPoint.y > highestGroundY) {
+                groundHit = hit;
+                highestGroundY = hit.pickedPoint.y;
+            }
         }
     }
 
@@ -945,8 +980,9 @@ function checkOutOfBounds() {
         updateHUD();
 
         if (gameState.lives > 0) {
-            playerRoot.position = new BABYLON.Vector3(0, 4, 0);
+            playerRoot.position = new BABYLON.Vector3(0, 1.2, 0);
             gameState.velocityY = 0;
+            gameState.isGrounded = true;
         } else {
             triggerGameOver();
         }
