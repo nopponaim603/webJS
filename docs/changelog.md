@@ -3,6 +3,14 @@
 **Project:** Game Portfolio (`webJS`)  
 **Maintained by:** Antigravity AI & Dev Team  
 
+## [1.16.0] - 2026-07-29
+
+### Fixed & Resolved
+- **Kenney 3D Platformer Asset Loader Fundamental Fix ([public/games/3d-platformer/game.js](file:///c:/Users/noppon/source/06-WEB/webJS/public/games/3d-platformer/game.js))**:
+  - แก้ไข **Core Function Signature**: ปรับแก้คำสั่ง `BABYLON.SceneLoader.LoadAssetContainerAsync(rootUrl, filename, scene)` โดยเอาพารามิเตอร์ `null, ".glb"` สองตัวท้ายออก ซึ่งเดิมส่ง `null` ไปยัง `onProgress` callback จนทำให้ Babylon.js 7.x โยน TypeError/Rejection
+  - พัฒนาระบบ **`BABYLON.FilesInputStore` ArrayBuffer Loading**: เมื่อใช้วิธีดาวน์โหลด `fetch(fullUrl)` ไฟล์ Binary จะถูกลงทะเบียนลงใน `BABYLON.FilesInputStore[filename]` แล้วให้ `LoadAssetContainerAsync("file:", filename, scene)` ดึงข้อมูลจาก Memory ไปสร้างโมเดล 3D จริงอย่างแม่นยำ
+  - อัปเดตข้อมูลเวอร์ชันใน `package.json`, `public/build.json` เป็น **v1.16.0 #2260**
+
 ## [1.15.0] - 2026-07-29
 
 ### Fixed

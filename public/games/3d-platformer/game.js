@@ -60,7 +60,8 @@ let gameState = {
     canJump: true,
     jumpCount: 0,
     maxJumps: 2,
-    velocityY: 0
+    velocityY: 0,
+    isFallbackMode: false
 };
 
 // Physics & Controls Settings
@@ -175,48 +176,61 @@ function ensureGLTFLoader() {
     }
 }
 
-// Direct Blob & Multi-candidate Path Asset Loader
+// Robust Asset Loader for Babylon.js 7.x
 async function loadAssetContainerWithFallback(filename) {
     ensureGLTFLoader();
 
-    const origin = window.location.origin;
-    const pageUrl = window.location.href;
-    const currentDir = pageUrl.substring(0, pageUrl.lastIndexOf('/') + 1);
+    const candidates = [];
+    
+    // 1. Current document location relative URL
+    try {
+        const relUrl = new URL('../../assets/kenney-starter-kit-3d-platformer/models/', window.location.href).href;
+        candidates.push(relUrl);
+    } catch (e) {}
 
-    const rootCandidates = [
-        new URL('../../assets/kenney-starter-kit-3d-platformer/models/', currentDir).href,
-        origin + '/assets/kenney-starter-kit-3d-platformer/models/',
-        '../../assets/kenney-starter-kit-3d-platformer/models/',
-        '/assets/kenney-starter-kit-3d-platformer/models/'
-    ];
+    // 2. Window Origin URL
+    if (window.location && window.location.origin && window.location.origin !== "null") {
+        candidates.push(window.location.origin + '/assets/kenney-starter-kit-3d-platformer/models/');
+    }
 
-    for (const rootUrl of rootCandidates) {
-        const cleanRoot = rootUrl.endsWith('/') ? rootUrl : rootUrl + '/';
-        const fullUrl = cleanRoot + filename;
+    // 3. Standard relative paths
+    candidates.push('../../assets/kenney-starter-kit-3d-platformer/models/');
+    candidates.push('/assets/kenney-starter-kit-3d-platformer/models/');
 
-        // Approach 1: Direct Babylon SceneLoader with cleanRoot and filename
+    for (const rawRoot of candidates) {
+        const rootUrl = rawRoot.endsWith('/') ? rawRoot : rawRoot + '/';
+        const fullUrl = rootUrl + filename;
+
+        // Method 1: Babylon Native LoadAssetContainerAsync
         try {
-            const container = await BABYLON.SceneLoader.LoadAssetContainerAsync(cleanRoot, filename, scene, null, ".glb");
+            const container = await BABYLON.SceneLoader.LoadAssetContainerAsync(rootUrl, filename, scene);
             if (container && container.meshes && container.meshes.length > 0) {
-                console.log(`[AssetLoader] Successfully loaded GLB model: ${filename} from ${cleanRoot}`);
+                console.log(`[AssetLoader] Successfully loaded GLB model: ${filename} from ${rootUrl}`);
                 return container;
             }
         } catch (err1) {
-            // Approach 2: Fetch ArrayBuffer & Load via Babylon File Object
-            try {
-                const resp = await fetch(fullUrl, { mode: 'cors', credentials: 'omit' });
-                if (resp.ok) {
-                    const arrayBuffer = await resp.arrayBuffer();
-                    const fileObj = new File([arrayBuffer], filename, { type: 'model/gltf-binary' });
-                    const container = await BABYLON.SceneLoader.LoadAssetContainerAsync("file:", fileObj, scene, null, ".glb");
-                    if (container && container.meshes && container.meshes.length > 0) {
-                        console.log(`[AssetLoader] Successfully loaded GLB File Blob: ${filename}`);
-                        return container;
-                    }
+            console.warn(`[AssetLoader] Method 1 failed for ${fullUrl}:`, err1);
+        }
+
+        // Method 2: Fetch ArrayBuffer & Load via FilesInputStore
+        try {
+            const resp = await fetch(fullUrl);
+            if (resp.ok) {
+                const arrayBuffer = await resp.arrayBuffer();
+                const fileObj = new File([arrayBuffer], filename, { type: 'model/gltf-binary' });
+                
+                // Register in Babylon FilesInputStore for "file:" protocol loader
+                BABYLON.FilesInputStore = BABYLON.FilesInputStore || {};
+                BABYLON.FilesInputStore[filename.toLowerCase()] = fileObj;
+
+                const container = await BABYLON.SceneLoader.LoadAssetContainerAsync("file:", filename, scene);
+                if (container && container.meshes && container.meshes.length > 0) {
+                    console.log(`[AssetLoader] Successfully loaded GLB via FilesInputStore: ${filename}`);
+                    return container;
                 }
-            } catch (err2) {
-                // Continue to next candidate
             }
+        } catch (err2) {
+            console.warn(`[AssetLoader] Method 2 failed for ${fullUrl}:`, err2);
         }
     }
 
@@ -244,6 +258,7 @@ async function loadAllAssets() {
     ];
 
     let loaded = 0;
+    let fallbackCount = 0;
 
     for (const item of modelFiles) {
         loadingText.innerText = `กำลังโหลดโมเดล 3D: ${item.file}`;
@@ -253,12 +268,16 @@ async function loadAllAssets() {
             assets.containers[item.id] = container;
         } else {
             console.warn(`[AssetLoader] Fallback active for ${item.id} (${item.file})`);
+            if (item.id === 'character' || item.id === 'platformLarge' || item.id === 'platformMedium') {
+                fallbackCount++;
+            }
         }
 
         loaded++;
         progressFill.style.width = `${Math.round((loaded / modelFiles.length) * 100)}%`;
     }
 
+    gameState.isFallbackMode = fallbackCount > 0;
     loadingText.innerText = `จัดเตรียมตัวละครและฉาก 3D...`;
     setupPlayerFromContainer();
 }
@@ -1222,6 +1241,52 @@ function startGame() {
     gameState.isPlaying = true;
     gameState.startTime = Date.now();
     updateHUD();
+    showAssetStatusPopup(gameState.isFallbackMode);
+}
+
+function showAssetStatusPopup(isFallback) {
+    const hud = document.getElementById('hud');
+    if (!hud) return;
+
+    const oldPopup = document.getElementById('asset-status-popup');
+    if (oldPopup) oldPopup.remove();
+
+    const popup = document.createElement('div');
+    popup.id = 'asset-status-popup';
+    popup.style.position = 'absolute';
+    popup.style.top = '4.5rem';
+    popup.style.left = '50%';
+    popup.style.transform = 'translateX(-50%)';
+    popup.style.padding = '0.5rem 1.1rem';
+    popup.style.borderRadius = '999px';
+    popup.style.fontSize = '0.8rem';
+    popup.style.fontWeight = '700';
+    popup.style.zIndex = '100';
+    popup.style.backdropFilter = 'blur(12px)';
+    popup.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.4)';
+    popup.style.pointerEvents = 'none';
+    popup.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    popup.style.whiteSpace = 'nowrap';
+
+    if (isFallback) {
+        popup.style.background = 'rgba(239, 68, 68, 0.88)';
+        popup.style.border = '1px solid rgba(248, 113, 113, 0.6)';
+        popup.style.color = '#ffffff';
+        popup.innerHTML = '⚙️ Output: Procedural 3D Geometry Fallback Mode';
+    } else {
+        popup.style.background = 'rgba(16, 185, 129, 0.88)';
+        popup.style.border = '1px solid rgba(52, 211, 153, 0.6)';
+        popup.style.color = '#ffffff';
+        popup.innerHTML = '🎉 Output: Real Kenney 3D Models Loaded';
+    }
+
+    hud.appendChild(popup);
+
+    setTimeout(() => {
+        popup.style.opacity = '0';
+        popup.style.transform = 'translateX(-50%) translateY(-10px)';
+        setTimeout(() => popup.remove(), 600);
+    }, 4500);
 }
 
 function triggerVictory() {
