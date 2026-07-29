@@ -40,7 +40,7 @@ class SoundFXManager {
 
 // Global Game Variables
 let canvas, engine, scene, camera, light, shadowGenerator;
-let playerMesh, playerRoot, characterContainer;
+let playerMesh, playerRoot, characterContainer, playerBlobShadow = null;
 let soundFX = new SoundFXManager();
 
 let activeAnimations = {};
@@ -130,37 +130,51 @@ window.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', () => engine.resize());
 });
 
-// Scene Setup with PBR Lighting & Shadows
+// Scene Setup with PBR Lighting & Soft Shadows (Kenney 3D Platformer Style)
 function initScene() {
     scene = new BABYLON.Scene(engine);
-    scene.clearColor = new BABYLON.Color4(0.08, 0.12, 0.22, 1.0);
+    // Soft pastel sky background matching reference screenshot
+    scene.clearColor = new BABYLON.Color4(0.70, 0.74, 0.95, 1.0);
     scene.fogMode = BABYLON.Scene.FOGMODE_EXP2;
-    scene.fogDensity = 0.006;
-    scene.fogColor = new BABYLON.Color3(0.08, 0.12, 0.22);
+    scene.fogDensity = 0.004;
+    scene.fogColor = new BABYLON.Color3(0.70, 0.74, 0.95);
 
-    // ArcRotateCamera (Third Person Camera)
-    camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI / 2, Math.PI / 3, 14, new BABYLON.Vector3(0, 2, 0), scene);
-    camera.lowerBetaLimit = 0.2;
-    camera.upperBetaLimit = Math.PI / 2.1;
-    camera.lowerRadiusLimit = 6;
-    camera.upperRadiusLimit = 22;
-    camera.attachControl(canvas, true, false);
-    camera.inputs.attached.pointers.buttons = [0, 1, 2]; // Allow drag rotation
+    // Locked Third-Person Platformer Camera (Fixed 3/4 Elevated Perspective)
+    const fixedAlpha = -Math.PI / 2.3;   // Slightly rotated 3/4 isometric angle for enhanced 3D platform depth
+    const fixedBeta = Math.PI / 3.3;     // ~54 degree downward view angle for optimal jump visibility
+    const defaultRadius = 17;            // Clean viewing distance
 
-    // Ambient Hemispheric Light
+    camera = new BABYLON.ArcRotateCamera("Camera", fixedAlpha, fixedBeta, defaultRadius, new BABYLON.Vector3(0, 1.5, 0), scene);
+    
+    // Lock angle parameters to maintain consistent, clear platformer perspective
+    camera.lowerAlphaLimit = fixedAlpha;
+    camera.upperAlphaLimit = fixedAlpha;
+    camera.lowerBetaLimit = fixedBeta;
+    camera.upperBetaLimit = fixedBeta;
+    camera.lowerRadiusLimit = 12;
+    camera.upperRadiusLimit = 24;
+
+    // Remove drag-rotation pointer inputs so camera stays locked in place
+    camera.inputs.clear();
+    camera.inputs.addMouseWheel(); // Allow slight wheel zoom for convenience
+
+    // Vibrant Ambient Hemispheric Light with Pastel Lavender Fill
     const hemiLight = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(0, 1, 0), scene);
-    hemiLight.intensity = 0.7;
-    hemiLight.skyColor = new BABYLON.Color3(0.85, 0.92, 1.0);
-    hemiLight.groundColor = new BABYLON.Color3(0.2, 0.25, 0.35);
+    hemiLight.intensity = 0.85;
+    hemiLight.skyColor = new BABYLON.Color3(0.88, 0.92, 1.0);
+    hemiLight.groundColor = new BABYLON.Color3(0.68, 0.60, 0.82);
 
-    // Directional Light with Shadows
-    const dirLight = new BABYLON.DirectionalLight("dirLight", new BABYLON.Vector3(-1, -2, 1), scene);
-    dirLight.position = new BABYLON.Vector3(20, 40, -20);
-    dirLight.intensity = 1.1;
+    // Main Directional Sunlight (Positioned for clean diagonal platform shadows)
+    const dirLight = new BABYLON.DirectionalLight("dirLight", new BABYLON.Vector3(-0.6, -1.2, 0.8).normalize(), scene);
+    dirLight.position = new BABYLON.Vector3(25, 45, -20);
+    dirLight.intensity = 1.25;
 
-    shadowGenerator = new BABYLON.ShadowGenerator(1024, dirLight);
-    shadowGenerator.useBlurExponentialShadowMap = true;
-    shadowGenerator.blurKernel = 16;
+    // High Quality Percentage-Closer Filtering (PCF) Soft Shadow Generator
+    shadowGenerator = new BABYLON.ShadowGenerator(2048, dirLight);
+    shadowGenerator.usePercentageCloserFiltering = true;
+    shadowGenerator.filteringQuality = BABYLON.ShadowGenerator.QUALITY_HIGH;
+    shadowGenerator.bias = 0.001;
+    shadowGenerator.normalBias = 0.01;
 
     // Default Player Collider Root
     playerRoot = new BABYLON.TransformNode("playerRoot", scene);
@@ -330,7 +344,10 @@ async function loadAllAssets() {
 }
 
 // Setup Player Mesh & Animation Groups
+// Setup Player Mesh & Animation Groups
 function setupPlayerFromContainer() {
+    createPlayerFeetShadow();
+
     const charContainer = assets.containers['character'];
     if (charContainer) {
         const entries = charContainer.instantiateModelsToScene(name => `player_${name}`);
@@ -386,6 +403,75 @@ function setupPlayerFromContainer() {
 
     characterContainer = playerCapsule;
     if (shadowGenerator) shadowGenerator.addShadowCaster(playerCapsule);
+}
+
+// Procedural Dynamic Drop/Blob Shadow Projector directly under character feet for jump landings
+function createPlayerFeetShadow() {
+    if (playerBlobShadow) return;
+
+    const disc = BABYLON.MeshBuilder.CreateDisc("playerFeetBlobShadow", { radius: 0.6, tessellation: 32 }, scene);
+    disc.rotation.x = Math.PI / 2;
+    disc.isPickable = false;
+
+    const mat = new BABYLON.StandardMaterial("blobShadowMat", scene);
+    mat.diffuseColor = new BABYLON.Color3(0, 0, 0);
+    mat.specularColor = new BABYLON.Color3(0, 0, 0);
+    mat.emissiveColor = new BABYLON.Color3(0, 0, 0);
+    mat.alpha = 0.75;
+    mat.backFaceCulling = false;
+    mat.disableLighting = true; // Uniform soft shadow regardless of environment light
+
+    const dynamicTexture = new BABYLON.DynamicTexture("blobShadowTex", { width: 128, height: 128 }, scene, false);
+    const ctx = dynamicTexture.getContext();
+    const grad = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
+    grad.addColorStop(0, 'rgba(0, 0, 0, 0.95)');
+    grad.addColorStop(0.5, 'rgba(0, 0, 0, 0.65)');
+    grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, 128, 128);
+    dynamicTexture.update();
+
+    mat.opacityTexture = dynamicTexture;
+    disc.material = mat;
+    playerBlobShadow = disc;
+}
+
+// Raycasts downward every frame to position the landing shadow disc directly under player feet
+function updateFeetShadow() {
+    if (!playerBlobShadow || !playerRoot) return;
+
+    const rayOrigin = playerRoot.position.clone();
+    rayOrigin.y += 0.5;
+    const ray = new BABYLON.Ray(rayOrigin, new BABYLON.Vector3(0, -1, 0), 25);
+
+    const predicate = (mesh) => {
+        return (mesh.isPlatform || mesh.name.startsWith("lvl_")) &&
+               !mesh.name.includes("coin") &&
+               !mesh.name.includes("flag") &&
+               !mesh.name.includes("cloud") &&
+               mesh.name !== "playerFeetBlobShadow";
+    };
+
+    const hit = scene.pickWithRay(ray, predicate);
+
+    if (hit && hit.hit) {
+        const heightAboveGround = Math.max(0, (playerRoot.position.y - 0.5) - hit.pickedPoint.y);
+        
+        playerBlobShadow.position.x = playerRoot.position.x;
+        playerBlobShadow.position.y = hit.pickedPoint.y + 0.02; // Offset above surface to prevent z-fighting
+        playerBlobShadow.position.z = playerRoot.position.z;
+
+        // Dynamic scale & opacity: scales up slightly and softens when higher in the air
+        const scaleFactor = 1.0 + Math.min(heightAboveGround * 0.15, 0.8);
+        playerBlobShadow.scaling = new BABYLON.Vector3(scaleFactor, scaleFactor, 1.0);
+
+        const targetAlpha = Math.max(0.2, 0.75 - heightAboveGround * 0.08);
+        playerBlobShadow.material.alpha = targetAlpha;
+
+        playerBlobShadow.isVisible = true;
+    } else {
+        playerBlobShadow.isVisible = false;
+    }
 }
 
 // Animation State Switcher
@@ -716,6 +802,7 @@ function createPlatform(type, position) {
         root.getChildMeshes().forEach(m => {
             m.isPlatform = true;
             m.isPickable = true;
+            m.receiveShadows = true;
             if (shadowGenerator) shadowGenerator.getShadowMap().renderList.push(m);
         });
         return;
@@ -737,6 +824,7 @@ function createPlatform(type, position) {
     
     box.isPlatform = true;
     box.isPickable = true;
+    box.receiveShadows = true;
     if (shadowGenerator) shadowGenerator.getShadowMap().renderList.push(box);
 }
 
@@ -749,6 +837,7 @@ function createMovingPlatform(startPos, deltaPos, speed) {
         root.getChildMeshes().forEach(m => {
             m.isPlatform = true;
             m.isPickable = true;
+            m.receiveShadows = true;
             if (shadowGenerator) shadowGenerator.getShadowMap().renderList.push(m);
         });
 
@@ -771,6 +860,7 @@ function createMovingPlatform(startPos, deltaPos, speed) {
     box.material = mat;
     box.isPlatform = true;
     box.isPickable = true;
+    box.receiveShadows = true;
     if (shadowGenerator) shadowGenerator.getShadowMap().renderList.push(box);
 
     assets.movingPlatforms.push({
@@ -792,6 +882,7 @@ function createFallingPlatform(position) {
         root.getChildMeshes().forEach(m => {
             m.isPlatform = true;
             m.isPickable = true;
+            m.receiveShadows = true;
             if (shadowGenerator) shadowGenerator.getShadowMap().renderList.push(m);
         });
 
@@ -812,6 +903,7 @@ function createFallingPlatform(position) {
     box.material = mat;
     box.isPlatform = true;
     box.isPickable = true;
+    box.receiveShadows = true;
     if (shadowGenerator) shadowGenerator.getShadowMap().renderList.push(box);
 
     assets.fallingPlatforms.push({
@@ -862,6 +954,7 @@ function spawnQuestionBlock(position) {
         root.getChildMeshes().forEach(m => {
             m.isPlatform = true;
             m.isPickable = true;
+            m.receiveShadows = true;
             if (shadowGenerator) shadowGenerator.getShadowMap().renderList.push(m);
         });
 
@@ -882,6 +975,7 @@ function spawnQuestionBlock(position) {
     box.material = mat;
     box.isPlatform = true;
     box.isPickable = true;
+    box.receiveShadows = true;
     if (shadowGenerator) shadowGenerator.getShadowMap().renderList.push(box);
 
     assets.questionBlocks.push({
@@ -901,6 +995,7 @@ function spawnBrickBlock(position) {
         root.getChildMeshes().forEach(m => {
             m.isPlatform = true;
             m.isPickable = true;
+            m.receiveShadows = true;
             if (shadowGenerator) shadowGenerator.getShadowMap().renderList.push(m);
         });
 
@@ -919,6 +1014,7 @@ function spawnBrickBlock(position) {
     box.material = mat;
     box.isPlatform = true;
     box.isPickable = true;
+    box.receiveShadows = true;
     if (shadowGenerator) shadowGenerator.getShadowMap().renderList.push(box);
 
     assets.brickBlocks.push({
@@ -990,6 +1086,7 @@ function updateGameLoop(dt) {
     document.getElementById('timer-val').innerText = `${mins}:${secs}`;
 
     updatePlayerMovement(dt);
+    updateFeetShadow();
     updateMovingPlatforms(dt);
     updateFallingPlatforms(dt);
     updateInteractiveObjects(dt);
