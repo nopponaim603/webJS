@@ -165,35 +165,64 @@ function initScene() {
     playerRoot.position = new BABYLON.Vector3(0, 3, 0);
 }
 
-// Explicit GLTF Loader Plugin Check for Edge Mobile
-function ensureGLTFLoader() {
+// Dynamic GLTF Loader Script Verification with Fallback CDN
+async function ensureGLTFLoader() {
     if (typeof BABYLON !== 'undefined' && BABYLON.SceneLoader) {
-        if (!BABYLON.SceneLoader.IsPluginForExtensionAvailable(".glb")) {
-            if (BABYLON.GLTFFileLoader) {
-                BABYLON.SceneLoader.RegisterPlugin(new BABYLON.GLTFFileLoader());
-            }
+        if (BABYLON.SceneLoader.IsPluginForExtensionAvailable && BABYLON.SceneLoader.IsPluginForExtensionAvailable(".glb")) {
+            return true;
         }
+        if (BABYLON.GLTFFileLoader) {
+            BABYLON.SceneLoader.RegisterPlugin(new BABYLON.GLTFFileLoader());
+            return true;
+        }
+
+        // Dynamically load loaders script if CDN failed or was deferred
+        return new Promise((resolve) => {
+            console.log("[AssetLoader] Injecting GLTF Loaders script...");
+            const script = document.createElement('script');
+            script.src = "https://cdnjs.cloudflare.com/ajax/libs/babylonjs-loaders/7.50.0/babylonjs.loaders.min.js";
+            script.onload = () => {
+                if (BABYLON.GLTFFileLoader) {
+                    BABYLON.SceneLoader.RegisterPlugin(new BABYLON.GLTFFileLoader());
+                }
+                resolve(true);
+            };
+            script.onerror = () => {
+                const script2 = document.createElement('script');
+                script2.src = "https://unpkg.com/babylonjs-loaders@7.50.0/babylonjs.loaders.min.js";
+                script2.onload = () => {
+                    if (BABYLON.GLTFFileLoader) {
+                        BABYLON.SceneLoader.RegisterPlugin(new BABYLON.GLTFFileLoader());
+                    }
+                    resolve(true);
+                };
+                script2.onerror = () => resolve(false);
+                document.head.appendChild(script2);
+            };
+            document.head.appendChild(script);
+        });
     }
+    return false;
 }
 
-// Robust Asset Loader for Babylon.js 7.x
+// Bulletproof Asset Loader for Babylon.js
 async function loadAssetContainerWithFallback(filename) {
-    ensureGLTFLoader();
+    await ensureGLTFLoader();
+
+    const origin = window.location.origin;
+    const pageUrl = window.location.href;
+    const currentDir = pageUrl.substring(0, pageUrl.lastIndexOf('/') + 1);
 
     const candidates = [];
-    
-    // 1. Current document location relative URL
     try {
-        const relUrl = new URL('../../assets/kenney-starter-kit-3d-platformer/models/', window.location.href).href;
-        candidates.push(relUrl);
+        candidates.push(new URL('../../assets/kenney-starter-kit-3d-platformer/models/', currentDir).href);
     } catch (e) {}
-
-    // 2. Window Origin URL
-    if (window.location && window.location.origin && window.location.origin !== "null") {
-        candidates.push(window.location.origin + '/assets/kenney-starter-kit-3d-platformer/models/');
+    try {
+        candidates.push(new URL('../../assets/kenney-starter-kit-3d-platformer/models/', window.location.href).href);
+    } catch (e) {}
+    if (origin && origin !== "null") {
+        candidates.push(origin + '/assets/kenney-starter-kit-3d-platformer/models/');
     }
-
-    // 3. Standard relative paths
     candidates.push('../../assets/kenney-starter-kit-3d-platformer/models/');
     candidates.push('/assets/kenney-starter-kit-3d-platformer/models/');
 
@@ -201,36 +230,51 @@ async function loadAssetContainerWithFallback(filename) {
         const rootUrl = rawRoot.endsWith('/') ? rawRoot : rawRoot + '/';
         const fullUrl = rootUrl + filename;
 
-        // Method 1: Babylon Native LoadAssetContainerAsync
+        // Method 1: Direct ImportMeshAsync template cloning (Most reliable method across mobile engines)
         try {
-            const container = await BABYLON.SceneLoader.LoadAssetContainerAsync(rootUrl, filename, scene);
-            if (container && container.meshes && container.meshes.length > 0) {
-                console.log(`[AssetLoader] Successfully loaded GLB model: ${filename} from ${rootUrl}`);
-                return container;
+            const tempRoot = new BABYLON.TransformNode(`template_${filename}`, scene);
+            tempRoot.setEnabled(false);
+
+            const result = await BABYLON.SceneLoader.ImportMeshAsync("", rootUrl, filename, scene);
+            if (result && result.meshes && result.meshes.length > 0) {
+                result.meshes.forEach(m => {
+                    if (!m.parent) m.parent = tempRoot;
+                });
+
+                const customContainer = {
+                    templateRoot: tempRoot,
+                    animationGroups: result.animationGroups || [],
+                    instantiateModelsToScene: (namePredicate) => {
+                        const clonedRoot = tempRoot.clone(`inst_${filename}_${Date.now()}`, null, false);
+                        clonedRoot.setEnabled(true);
+                        clonedRoot.getChildMeshes().forEach(cm => {
+                            cm.setEnabled(true);
+                            cm.isVisible = true;
+                        });
+
+                        return {
+                            rootNodes: [clonedRoot],
+                            animationGroups: result.animationGroups || []
+                        };
+                    }
+                };
+
+                console.log(`[AssetLoader] Successfully imported GLB model via ImportMeshAsync: ${filename} from ${rootUrl}`);
+                return customContainer;
             }
         } catch (err1) {
-            console.warn(`[AssetLoader] Method 1 failed for ${fullUrl}:`, err1);
+            console.warn(`[AssetLoader] Method 1 (ImportMeshAsync) failed for ${fullUrl}:`, err1);
         }
 
-        // Method 2: Fetch ArrayBuffer & Load via FilesInputStore
+        // Method 2: LoadAssetContainerAsync
         try {
-            const resp = await fetch(fullUrl);
-            if (resp.ok) {
-                const arrayBuffer = await resp.arrayBuffer();
-                const fileObj = new File([arrayBuffer], filename, { type: 'model/gltf-binary' });
-                
-                // Register in Babylon FilesInputStore for "file:" protocol loader
-                BABYLON.FilesInputStore = BABYLON.FilesInputStore || {};
-                BABYLON.FilesInputStore[filename.toLowerCase()] = fileObj;
-
-                const container = await BABYLON.SceneLoader.LoadAssetContainerAsync("file:", filename, scene);
-                if (container && container.meshes && container.meshes.length > 0) {
-                    console.log(`[AssetLoader] Successfully loaded GLB via FilesInputStore: ${filename}`);
-                    return container;
-                }
+            const container = await BABYLON.SceneLoader.LoadAssetContainerAsync(rootUrl, filename, scene, undefined, ".glb");
+            if (container && container.meshes && container.meshes.length > 0) {
+                console.log(`[AssetLoader] Successfully loaded GLB container: ${filename} from ${rootUrl}`);
+                return container;
             }
         } catch (err2) {
-            console.warn(`[AssetLoader] Method 2 failed for ${fullUrl}:`, err2);
+            console.warn(`[AssetLoader] Method 2 (LoadAssetContainerAsync) failed for ${fullUrl}:`, err2);
         }
     }
 

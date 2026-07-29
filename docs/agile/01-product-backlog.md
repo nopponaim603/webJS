@@ -1,6 +1,6 @@
 # Product Backlog — webJS Game Portfolio
 
-**Last Updated:** 2026-07-29 | **Version:** 1.16.0
+**Last Updated:** 2026-07-29 | **Version:** 1.17.0
 
 ---
 

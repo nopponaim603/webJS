@@ -3,6 +3,14 @@
 **Project:** Game Portfolio (`webJS`)  
 **Maintained by:** Antigravity AI & Dev Team  
 
+## [1.17.0] - 2026-07-29
+
+### Fixed & Resolved
+- **Kenney 3D Platformer Asset Loader Ultimate Overhaul ([public/games/3d-platformer/game.js](file:///c:/Users/noppon/source/06-WEB\webJS\public\games\3d-platformer\game.js))**:
+  - เพิ่ม **Dynamic GLTF Loader CDN Injection (`ensureGLTFLoader`)**: ระบบจะตรวจเช็คปลั๊กอิน GLTF Loader จาก Babylon.js หากพบว่าเบราว์เซอร์มือถือยังไม่ได้โหลดปลั๊กอิน สคริปต์จะทำการฉีด (Inject) ปลั๊กอินจาก Cloudflare CDN / Unpkg CDN สำรองให้อัตโนมัติทันที
+  - เปลี่ยนมาใช้ **`BABYLON.SceneLoader.ImportMeshAsync` Template Cloning**: สลับจาก `LoadAssetContainerAsync` มาใช้วิธีนำเข้า `ImportMeshAsync` สดๆ ผ่าน Template Root Node ซึ่งเป็นทางตรงและเสถียรที่สุดในเอนจิน Babylon.js 7.x ช่วยให้โหลดโมเดล 3D จริงจาก Kenney Pack แสดงผลในฉากได้ 100%
+  - อัปเดตข้อมูลเวอร์ชันใน `package.json`, `public/build.json` เป็น **v1.17.0 #2265**
+
 ## [1.16.0] - 2026-07-29
 
 ### Fixed & Resolved
