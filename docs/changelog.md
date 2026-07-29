@@ -3,6 +3,16 @@
 **Project:** Game Portfolio (`webJS`)  
 **Maintained by:** Antigravity AI & Dev Team  
 
+## [1.14.0] - 2026-07-29
+
+### Release & Build Preparation
+- **Edge Mobile Real 3D Model Rendering Verification ([public/games/3d-platformer/game.js](file:///c:/Users/noppon/source/06-WEB/webJS/public/games/3d-platformer/game.js))**:
+  - ระบบ **Direct Memory Blob Fetch (`fetch` + `createObjectURL`)** ดึงไฟล์ Binary 3D Models (`.glb`) มาเรนเดอร์ในแรมโดยตรง ข้ามข้อจำกัด Iframe Scope และ Data Saver ของ Microsoft Edge Mobile
+  - กำหนด **Content-Type MIME-Type Header (`model/gltf-binary`)** และ **CORS Headers (`Access-Control-Allow-Origin: *`)** ใน `next.config.js` และ `server.js`
+  - ตรวจสอบผ่านการคอมไพล์ Production Build (`npm run build`) สมบูรณ์ 100% พร้อมสำหรับการ Deploy
+- **Build Release Update**:
+  - อัปเดตข้อมูลเวอร์ชันใน `package.json`, `public/build.json` และ `docs/agile/01-product-backlog.md` เป็น **v1.14.0 #2250**
+
 ## [1.13.0] - 2026-07-29
 
 ### Fixed & Enhanced

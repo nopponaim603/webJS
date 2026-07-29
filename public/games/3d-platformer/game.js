@@ -164,7 +164,65 @@ function initScene() {
     playerRoot.position = new BABYLON.Vector3(0, 3, 0);
 }
 
-// Asset Loading Pipeline with Multi-path candidates & Procedural Fallbacks
+// Explicit GLTF Loader Plugin Check for Edge Mobile
+function ensureGLTFLoader() {
+    if (typeof BABYLON !== 'undefined' && BABYLON.SceneLoader) {
+        if (!BABYLON.SceneLoader.IsPluginForExtensionAvailable(".glb")) {
+            if (BABYLON.GLTFFileLoader) {
+                BABYLON.SceneLoader.RegisterPlugin(new BABYLON.GLTFFileLoader());
+            }
+        }
+    }
+}
+
+// Direct Blob Fetch Asset Loader (Bypasses Iframe & Edge Mobile Restrictions)
+async function loadAssetContainerWithFallback(filename) {
+    ensureGLTFLoader();
+
+    const origin = window.location.origin;
+    const pageUrl = window.location.href;
+    const currentDir = pageUrl.substring(0, pageUrl.lastIndexOf('/') + 1);
+
+    const candidates = [
+        // 1. Full URL relative to current iframe window location
+        new URL('../../assets/kenney-starter-kit-3d-platformer/models/' + filename, currentDir).href,
+        // 2. Absolute root path
+        origin + '/assets/kenney-starter-kit-3d-platformer/models/' + filename,
+        // 3. Direct relative path
+        '../../assets/kenney-starter-kit-3d-platformer/models/' + filename,
+        '/assets/kenney-starter-kit-3d-platformer/models/' + filename
+    ];
+
+    for (const url of candidates) {
+        try {
+            // Strategy A: Direct Fetch ArrayBuffer -> Blob URL
+            const resp = await fetch(url, { mode: 'cors', credentials: 'omit' });
+            if (resp.ok) {
+                const blob = await resp.blob();
+                const blobUrl = URL.createObjectURL(blob);
+                const container = await BABYLON.SceneLoader.LoadAssetContainerAsync("", blobUrl, scene, null, ".glb");
+                URL.revokeObjectURL(blobUrl);
+                if (container && container.meshes && container.meshes.length > 0) {
+                    return container;
+                }
+            }
+        } catch (e) {
+            // Strategy B: Babylon Direct Load Fallback
+            try {
+                const container = await BABYLON.SceneLoader.LoadAssetContainerAsync("", url, scene);
+                if (container && container.meshes && container.meshes.length > 0) {
+                    return container;
+                }
+            } catch (err) {
+                // Continue to next candidate URL
+            }
+        }
+    }
+
+    return null;
+}
+
+// Asset Loading Pipeline
 async function loadAllAssets() {
     const progressFill = document.getElementById('progress-fill');
     const loadingText = document.getElementById('loading-text');
@@ -183,34 +241,16 @@ async function loadAllAssets() {
         { id: 'grass', file: 'grass.glb' }
     ];
 
-    const origin = window.location.origin;
-    const pathCandidates = [
-        "/assets/kenney-starter-kit-3d-platformer/models/",
-        "../../assets/kenney-starter-kit-3d-platformer/models/",
-        origin + "/assets/kenney-starter-kit-3d-platformer/models/"
-    ];
-
     let loaded = 0;
 
     for (const item of modelFiles) {
-        loadingText.innerText = `กำลังโหลดโมเดล: ${item.file}`;
-        let success = false;
+        loadingText.innerText = `กำลังโหลดโมเดล 3D: ${item.file}`;
+        const container = await loadAssetContainerWithFallback(item.file);
 
-        for (const basePath of pathCandidates) {
-            try {
-                const container = await BABYLON.SceneLoader.LoadAssetContainerAsync(basePath, item.file, scene);
-                if (container && container.meshes && container.meshes.length > 0) {
-                    assets.containers[item.id] = container;
-                    success = true;
-                    break;
-                }
-            } catch (e) {
-                // Try next candidate path
-            }
-        }
-
-        if (!success) {
-            console.warn(`[AssetLoader] Fallback mode active for ${item.id} (${item.file})`);
+        if (container) {
+            assets.containers[item.id] = container;
+        } else {
+            console.warn(`[AssetLoader] Fallback active for ${item.id} (${item.file})`);
         }
 
         loaded++;

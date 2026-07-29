@@ -25,7 +25,9 @@ const mimeTypes = {
     '.woff2': 'font/woff2',
     '.ttf': 'font/ttf',
     '.eot': 'application/vnd.ms-fontobject',
-    '.otf': 'font/otf'
+    '.otf': 'font/otf',
+    '.glb': 'model/gltf-binary',
+    '.gltf': 'model/gltf+json'
 };
 
 // Create HTTP server
