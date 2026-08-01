@@ -1,6 +1,6 @@
 {
   "name": "gamedevjs-hub",
-  "version": "1.22.0",
+  "version": "1.23.0",
   "description": "เว็บไซต์สำหรับแสดงผลงานเกม HTML5 และเกมที่สามารถรันผ่าน Browser",
   "main": "server.js",
   "scripts": {
@@ -17,7 +17,7 @@
     "browser-games",
     "showcase"
   ],
-  "author": "",
+  "author": "Noppon Wongta",
   "license": "MIT",
   "engines": {
     "node": ">=14.0.0"
