@@ -84,14 +84,6 @@ const initialGames = [
     gradient: "linear-gradient(135deg, #00F2FE 0%, #3B82F6 100%)"
   },
   {
-    id: "openfront",
-    title: "OpenFront.io (Offline Strategy)",
-    category: "กระดาน / วางกลยุทธ์",
-    url: "/games/openfront/index.html",
-    image: "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?w=400&h=400&fit=crop",
-    gradient: "linear-gradient(135deg, #06B6D4 0%, #3B82F6 100%)"
-  },
-  {
     id: "tile-swap",
     title: "Tile Swap",
     category: "ปริศนา / สลับไทล์",
