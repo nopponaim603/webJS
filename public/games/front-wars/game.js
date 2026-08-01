@@ -785,8 +785,11 @@ class FrontWarsGame {
       this.ctx.fillStyle = 'rgba(15, 23, 42, 0.9)';
       this.ctx.strokeStyle = hFaction.color;
       this.ctx.lineWidth = 1;
-      this.ctx.beginPath();
-      this.ctx.roundRect(tx, ty, tw, 26, 6);
+      if (this.ctx.roundRect) {
+        this.ctx.roundRect(tx, ty, tw, 26, 6);
+      } else {
+        this.ctx.rect(tx, ty, tw, 26);
+      }
       this.ctx.fill();
       this.ctx.stroke();
 

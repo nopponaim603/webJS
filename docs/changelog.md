@@ -6,6 +6,10 @@
 ## [1.27.0] - 2026-08-01
 
 ### Added & Completed
+- **OpenFront.io Offline Strategy RTS Game (G020)**:
+  - พอร์ตและพัฒนาตัวเกมวางแผนยึดครองโลกจาก [openfrontio/OpenFrontIO](https://github.com/openfrontio/OpenFrontIO) ให้อยู่ในรูปแบบ **Offline Single-Player Mode 100%** ใน `public/games/openfront/`
+  - รองรับระบบสลับแผนที่ (World, Europe, Asia, Pangaea, Archipelago), สู้กับ 5 AI Factions, ระบบการทูต (Diplomacy Alliances), และอาวุธ Silo Missiles
+  - จัดทำเอกสาร GDD ที่ [gdd.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/openfront/gdd.md) และเชื่อมต่อตัวเกมบนหน้าหลัก `src/app/page.js`
 - **FrontWars RTS Territory Domination Game (G019)**:
   - จัดทำเอกสารฉบับเต็ม [gdd.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/front-wars/gdd.md) ครอบคลุมระบบการเล่น Core Loop, Faction Balance, Terrain Multipliers, Battle Formula, Building Upgrades (City/Fortress/Port), Web Audio Synthesizer, และ UI Architecture
 - **Dice Quest Monopoly Board Game (G010)**:

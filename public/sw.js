@@ -7,7 +7,10 @@ const ASSETS_TO_CACHE = [
   '/manifest.json',
   '/engines/base-adapter.js',
   '/engines/phaser-adapter.js',
-  '/engines/babylon-adapter.js'
+  '/engines/babylon-adapter.js',
+  '/games/front-wars/index.html',
+  '/games/front-wars/styles.css',
+  '/games/front-wars/game.js'
 ];
 
 // Install Event
