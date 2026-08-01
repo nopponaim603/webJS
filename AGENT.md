@@ -2,7 +2,7 @@
 
 **Project:** GameDevJS Hub — HTML5 & Multi-Engine Games Showcase (`webJS`)  
 **Repository:** [nopponaim603/webJS](https://github.com/nopponaim603/webJS)  
-**Last Updated:** 2026-07-26  
+**Last Updated:** 2026-08-01  
 
 ---
 
@@ -34,14 +34,28 @@ webJS/
 │   ├── tile-match/             # เกมที่ 3: Tile Match (Mahjong Triple Match Puzzle)
 │   ├── phaser-demo/            # เกมที่ 4: Cosmic Bouncer (Phaser 3 2D Arcade Demo)
 │   └── babylon-demo/           # เกมที่ 5: Cyber Sphere 3D (Babylon.js 3D WebGL Demo)
-├── docs/                       # เอกสารการพัฒนา (Managed by game-doc-manager)
-│   ├── index.md                # ศูนย์กลางเอกสาร (Document Inventory)
-│   ├── changelog.md            # บันทึกการเปลี่ยนแปลงเอกสาร
-│   ├── gdd/                    # Game Design Documents (Concept, Mechanics, Art, Audio)
-│   ├── software/               # System Architecture, Class Diagrams, Data Schemas
-│   ├── agile/                  # Backlog, Sprint Planning, User Stories, Reports
-│   └── wiki/                   # Knowledge Hub & Development Guidelines
-└── .agents/                    # Custom Agent Skills & Configurations
+├── docs/                       # ศูนย์รวมเอกสารการพัฒนา (Managed by game-doc-manager & task-tracker)
+│   ├── index.md                # ศูนย์กลางดรรชนีเอกสารระบบ (Master Document Index)
+│   ├── changelog.md            # บันทึกประวัติการอัปเดตเอกสารและเวอร์ชันระบบ
+│   ├── sprint-plan.md          # สรุปแผนงานพัฒนาสปรินท์ในภาพรวม
+│   ├── agile/                  # การบริหารจัดการโปรเจกต์ Agile แบบครบวงจร
+│   │   ├── 01-product-backlog.md       # Product Backlog รวมทุก Epic/User Story
+│   │   ├── 02-sprint-planning.md     # แผนงาน Sprint Roadmap
+│   │   ├── 03-meeting-backlogs.md      # บันทึกการประชุมทีมพัฒนา
+│   │   ├── 04-retrospectives-backlog.md# บันทึก Retrospective & Review Log
+│   │   ├── 05-report-backlog.md       # ศูนย์รวมสรุปรายงาน QA/Testing
+│   │   ├── Kanban-board.md            # บอร์ดติดตามสถานะงาน (Kanban Board)
+│   │   ├── reports/                   # สรุปรายงาน Audit Feedback รายเกม (เช่น feedback-g009-ocean-frenzy.md)
+│   │   ├── sprint-backlogs/           # Sprint Logs รายรอบแบบฟอร์แมตมาตรฐาน (sprint-01.md - sprint-11.md)
+│   │   └── user-stories/              # User Stories แยกรายฟีเจอร์และคลังเก็บย้อนหลัง (archive/)
+│   ├── gdd/                    # Game Design Documents (GDD Specs & Proposals)
+│   │   ├── 00-concept.md ~ 05-*.md     # แนวคิดหลัก กลไก อาร์ต เสียง และข้อเสนอเกมใหม่
+│   │   ├── games/                     # GDD Specs ของเกมที่พัฒนาสำเร็จและเปิดใช้งานแล้ว
+│   │   └── planning/                  # GDD Specs และ Roadmap ของเกมที่อยู่ระหว่างวางแผน
+│   ├── software/               # System Architecture, Engine Adapters, Data Schemas
+│   ├── asset-list/             # แคตตาล็อกแสดงรายการ Asset รูปภาพและเสียงประกอบ
+│   └── wiki/                   # คลังความรู้ พฤติกรรมที่ดีที่สุด (Best Practices) และการแก้ไขปัญหา
+└── .agents/                    # Custom Agent Skills & Configurations (phaser, babylonjs, task-tracker ฯลฯ)
 ```
 
 ---

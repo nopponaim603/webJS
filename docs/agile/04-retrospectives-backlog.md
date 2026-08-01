@@ -6,20 +6,22 @@
 
 ## 🔁 Retrospective Summary
 
-### Sprint 01 Retrospective (2026-07-26)
-- **What went well (ข้อดี)**:
-  - เว็บไซต์ Portfolio มีดีไซน์ Glassmorphism สวยงาม โหลดเร็ว และไม่ต้องพึ่ง External Dependencies หนักๆ
-  - Custom Node HTTP Server รันได้รวดเร็ว ปรับพอร์ตอัตโนมัติหากพบพอร์ตซ้ำ
-  - มีเกมสำเร็จรูปหลากหลายแนว ทั้ง Emoji Match, 2048 Cubes, Tile Match
-- **What could be improved (สิ่งที่ควรปรับปรุง)**:
-  - ควรมีระบบ LocalStorage บันทึก High Score กลาง
-  - ควรเพิ่มการเชื่อมโยงระบบเอกสารให้เป็นอัตโนมัติผ่าน `game-doc-manager`
+### G009 Ocean Frenzy Audit & Feedback (2026-08-01)
+- **What went well**:
+  - Core game loop, smooth Phaser 3 Arcade physics, 9-level growth evolution, Web Audio API synthesizer, particle effects, and high score persistence are fully implemented and functional.
+- **What was implemented incorrectly / incompletely**:
+  - **Jellyfish Hazard**: Omitted in code despite being defined in GDD spec.
+  - **Speed Boost Power-Up**: Omitted in code despite being defined in GDD spec.
+  - **Doc & Asset Mapping Inconsistencies**: Asset names in `spec.md` mismatch `game.js` asset filenames; GDD index status remained marked as `⏳ Proposed`.
 - **Action Items**:
-  - สร้างไฟล์ `AGENT.md` และไดเรกทอรีเอกสาร `docs/` ตามมาตรฐาน
-  - วางแผน Sprint 02 สำหรับระบบ High Score
+  - Detailed English feedback report generated at [feedback-g009-ocean-frenzy.md](./reports/feedback-g009-ocean-frenzy.md).
+  - Implement missing Jellyfish and Speed Boost items in `game.js`.
+  - Sync GDD spec asset tables and update project documentation indices.
 
 ---
 
 ## Related Documents
+- G009 Detailed Audit: [G009 Feedback & Audit Report](./reports/feedback-g009-ocean-frenzy.md)
 - Sprint Planning: [Sprint Planning](./02-sprint-planning.md)
 - Product Backlog: [Product Backlog](./01-product-backlog.md)
+
