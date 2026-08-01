@@ -39,7 +39,7 @@
 | G019 | `front-wars` | State.IO | Canvas 2D / Web Audio | `public/games/front-wars/` |
 
 ### 🎮 Active Released Game Specifications (`docs/gdd/games/`)
-- [State.IO (Territory Domination G019)](./gdd/games/front-wars/gdd.md)
+- [State.IO (Territory Domination G019)](./gdd/games/stateIO/gdd.md)
 - [Dice Quest (เกมกระดานทอยลูกเต๋า G010)](./gdd/games/dice-quest/spec.md)
 - [Ocean Frenzy (เกมปลาใหญ่กินปลาเล็ก)](./gdd/games/ocean-frenzy/spec.md)
 - [Card Memory Match](./gdd/games/card-memory/spec.md)

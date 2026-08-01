@@ -76,7 +76,7 @@ class FrontWarsGame {
     this.selectedProvince = null;
     this.hoveredProvince = null;
     this.isDragging = false;
-    this.dragStartProvince = null;
+    this.dragStartProvinces = [];
     this.mouseX = 0;
     this.mouseY = 0;
     this.dpr = window.devicePixelRatio || 1;
@@ -158,10 +158,12 @@ class FrontWarsGame {
       const clicked = this.findProvinceAt(pos.x, pos.y);
       if (clicked && clicked.owner === 'player') {
         this.isDragging = true;
-        this.dragStartProvince = clicked;
+        this.dragStartProvinces = [clicked];
         this.selectedProvince = clicked;
         this.openCard(clicked);
         this.sound.playSelect();
+      } else {
+        this.dragStartProvinces = [];
       }
     };
 
@@ -170,14 +172,37 @@ class FrontWarsGame {
       this.mouseX = pos.x;
       this.mouseY = pos.y;
       this.hoveredProvince = this.findProvinceAt(pos.x, pos.y);
+
+      if (this.isDragging) {
+        if (this.hoveredProvince && this.hoveredProvince.owner === 'player') {
+          if (!this.dragStartProvinces.some(p => p.id === this.hoveredProvince.id)) {
+            this.dragStartProvinces.push(this.hoveredProvince);
+            this.sound.playSelect();
+          }
+        }
+      }
     };
 
     const handlePointerUp = (e) => {
-      if (this.isDragging && this.dragStartProvince) {
+      if (this.isDragging && this.dragStartProvinces && this.dragStartProvinces.length > 0) {
         const target = this.hoveredProvince;
-        if (target && target.id !== this.dragStartProvince.id) {
-          if (this.canAttack(this.dragStartProvince, target)) {
-            this.dispatchTroops(this.dragStartProvince, target);
+        if (target) {
+          let dispatchedCount = 0;
+          this.dragStartProvinces.forEach(src => {
+            if (src.id !== target.id && this.canAttack(src, target)) {
+              if (src.troops > 1) {
+                this.dispatchTroops(src, target);
+                dispatchedCount++;
+              }
+            }
+          });
+
+          if (dispatchedCount > 0) {
+            if (target.owner === 'player') {
+              this.logEvent(`ส่งกำลังพลจาก ${dispatchedCount} โหนดไปเสริม ณ ${target.name}!`, 'sys');
+            } else {
+              this.logEvent(`สั่งเปิดการบุกรวม ${dispatchedCount} ฐานไปยัง ${target.name}!`, 'sys');
+            }
           }
         }
       } else if (!this.isDragging && !e.touches) {
@@ -185,7 +210,7 @@ class FrontWarsGame {
         this.handleCanvasClick(clicked);
       }
       this.isDragging = false;
-      this.dragStartProvince = null;
+      this.dragStartProvinces = [];
     };
 
     this.canvas.addEventListener('mousedown', handlePointerDown);
@@ -294,15 +319,13 @@ class FrontWarsGame {
 
   canAttack(source, target) {
     if (!source || !target || source.id === target.id) return false;
-    if (this.isConnected(source.id, target.id)) return true;
-    if (source.building === 'port' || target.building === 'port') return true;
-    if (source.building === 'airbase') return true; // Airbase can attack any node
-    return false;
+    return true; // In State.IO mode, any node can dispatch troops to reinforce or attack any target node
   }
 
   startNewGame() {
     this.gameOver = false;
     this.selectedProvince = null;
+    this.dragStartProvinces = [];
     this.marchingTroops = [];
     this.particles = [];
     this.closeCard();
@@ -577,7 +600,7 @@ class FrontWarsGame {
     }
 
     this.aiTimer += dt * this.gameSpeed;
-    if (this.aiTimer >= 1.2) {
+    if (this.aiTimer >= 2.8) {
       this.aiTimer = 0;
       this.runAIEngine();
     }
@@ -614,6 +637,8 @@ class FrontWarsGame {
 
     if (target.owner === troopGroup.owner) {
       target.troops += troopGroup.count;
+      target.pulse = 0.6;
+      this.createParticleBurst(target.x, target.y, attackerFaction.color);
     } else {
       let defMultiplier = 1.0;
       if (target.building === 'fortress') defMultiplier = 1.8;
@@ -657,33 +682,34 @@ class FrontWarsGame {
       const ownedProvinces = this.provinces.filter(p => p.owner === fKey);
 
       ownedProvinces.forEach(source => {
-        if (source.troops > 18) {
-          const neighbors = this.provinces.filter(p => 
-            p.owner !== fKey && this.canAttack(source, p)
+        // Reduced frequency per node so AI doesn't dispatch all nodes at once
+        if (Math.random() > 0.50) return;
+
+        if (source.troops > 22) {
+          const enemyNeighbors = this.provinces.filter(p => 
+            p.owner !== fKey && this.isConnected(source.id, p.id)
           );
 
-          if (neighbors.length > 0) {
-            neighbors.sort((a, b) => a.troops - b.troops);
-            const target = neighbors[0];
+          if (enemyNeighbors.length > 0) {
+            enemyNeighbors.sort((a, b) => a.troops - b.troops);
+            const target = enemyNeighbors[0];
 
-            if (source.troops > target.troops * 1.2) {
-              const sendCount = Math.floor(source.troops * 0.65);
-              source.troops -= sendCount;
-
-              this.marchingTroops.push({
-                fromId: source.id,
-                toId: target.id,
-                startX: source.x, startY: source.y,
-                targetX: target.x, targetY: target.y,
-                x: source.x, y: source.y,
-                count: sendCount,
-                owner: fKey,
-                progress: 0,
-                speed: 0.015 * this.gameSpeed
-              });
+            if (source.troops > target.troops * 1.1) {
+              this.dispatchTroops(source, target);
             }
           } else {
-            if (source.troops > 45 && !source.building) {
+            // AI Rear Node Reinforcement: Send troops to reinforce front-line friendly nodes!
+            const friendlyFrontLines = ownedProvinces.filter(p => 
+              p.id !== source.id && this.provinces.some(n => n.owner !== fKey && this.isConnected(p.id, n.id))
+            );
+
+            if (friendlyFrontLines.length > 0) {
+              friendlyFrontLines.sort((a, b) => a.troops - b.troops);
+              const target = friendlyFrontLines[0];
+              if (source.troops > 20) {
+                this.dispatchTroops(source, target);
+              }
+            } else if (source.troops > 40 && !source.building) {
               source.troops -= 30;
               source.building = Math.random() > 0.5 ? 'city' : 'fortress';
             }
@@ -838,15 +864,17 @@ class FrontWarsGame {
       }
     });
 
-    // Draw Tactical Drag Line
-    if (this.isDragging && this.dragStartProvince) {
+    // Draw Tactical Drag Lines for Multi-selection
+    if (this.isDragging && this.dragStartProvinces && this.dragStartProvinces.length > 0) {
       this.ctx.strokeStyle = '#00f2fe';
       this.ctx.lineWidth = 3;
       this.ctx.setLineDash([8, 6]);
-      this.ctx.beginPath();
-      this.ctx.moveTo(this.dragStartProvince.x, this.dragStartProvince.y);
-      this.ctx.lineTo(this.mouseX, this.mouseY);
-      this.ctx.stroke();
+      this.dragStartProvinces.forEach(src => {
+        this.ctx.beginPath();
+        this.ctx.moveTo(src.x, src.y);
+        this.ctx.lineTo(this.mouseX, this.mouseY);
+        this.ctx.stroke();
+      });
       this.ctx.setLineDash([]);
     }
 
@@ -854,8 +882,9 @@ class FrontWarsGame {
     this.provinces.forEach(p => {
       const faction = this.factions[p.owner];
 
-      // Selected Highlight Ring
-      if (this.selectedProvince && this.selectedProvince.id === p.id) {
+      // Multi-drag highlight ring / Selected highlight ring
+      const isMultiSelected = this.isDragging && this.dragStartProvinces && this.dragStartProvinces.some(dp => dp.id === p.id);
+      if (isMultiSelected || (this.selectedProvince && this.selectedProvince.id === p.id)) {
         this.ctx.fillStyle = 'rgba(0, 242, 254, 0.25)';
         this.ctx.beginPath();
         this.ctx.arc(p.x, p.y, p.radius + 10, 0, Math.PI * 2);
@@ -864,6 +893,17 @@ class FrontWarsGame {
         this.ctx.strokeStyle = '#00f2fe';
         this.ctx.lineWidth = 3;
         this.ctx.stroke();
+      }
+
+      // Pulse wave effect (on reinforce / capture)
+      if (p.pulse > 0) {
+        this.ctx.strokeStyle = 'rgba(255, 255, 255, ' + p.pulse + ')';
+        this.ctx.lineWidth = 3;
+        this.ctx.beginPath();
+        this.ctx.arc(p.x, p.y, p.radius + (1.0 - p.pulse) * 20, 0, Math.PI * 2);
+        this.ctx.stroke();
+        p.pulse -= 0.04;
+        if (p.pulse < 0) p.pulse = 0;
       }
 
       // Hovered Ring
