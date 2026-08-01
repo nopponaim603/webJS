@@ -165,6 +165,6 @@ AI ของทั้ง 3 ฝ่าย (Red, Green, Yellow) ทำงานผ�
 
 ## 10. เอกสารอ้างอิงและไฟล์ระบบ (Linked Technical Assets)
 
-- **Source Code:** [game.js](file:///c:/Users/noppon/source/06-WEB/webJS/public/games/front-wars/game.js)
-- **Styling Architecture:** [styles.css](file:///c:/Users/noppon/source/06-WEB/webJS/public/games/front-wars/styles.css)
-- **HTML Structure:** [index.html](file:///c:/Users/noppon/source/06-WEB/webJS/public/games/front-wars/index.html)
+- **Source Code:** [game.js](file:///c:/Users/noppon/source/06-WEB/webJS/public/games/stateIO/game.js)
+- **Styling Architecture:** [styles.css](file:///c:/Users/noppon/source/06-WEB/webJS/public/games/stateIO/styles.css)
+- **HTML Structure:** [index.html](file:///c:/Users/noppon/source/06-WEB/webJS/public/games/stateIO/index.html)

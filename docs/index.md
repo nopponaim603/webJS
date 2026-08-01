@@ -36,7 +36,7 @@
 | G016 | `goosl-marbles` | Goosl Glass Marbles | WebGL 2 / Shader | `public/games/goosl-marbles/` |
 | G017 | `tiny-dungeon-roguelike` | Tiny Dungeon Survivor | Phaser 2D / Roguelike | `public/games/tiny-dungeon-roguelike/` |
 | G018 | `hole-io` | Hole.io 3D | Babylon.js 7.50 / 8 | `public/games/hole-io/` |
-| G019 | `front-wars` | State.IO | Canvas 2D / Web Audio | `public/games/front-wars/` |
+| G019 | `stateIO` | State.IO | Canvas 2D / Web Audio | `public/games/stateIO/` |
 
 ### 🎮 Active Released Game Specifications (`docs/gdd/games/`)
 - [State.IO (Territory Domination G019)](./gdd/games/stateIO/gdd.md)
