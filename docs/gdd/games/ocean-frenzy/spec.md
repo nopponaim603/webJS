@@ -4,8 +4,8 @@
 **Game ID:** `ocean-frenzy`  
 **Engine / Tech:** Phaser 3 (2D Arcade Physics)  
 **Asset Pack:** Kenney Fish Pack 2 (`public/assets/kenney_fish-pack_2/`)  
-**Version:** 1.0.0 | **Last Updated:** 2026-07-28  
-**Status:** Proposal / Design Phase | **Priority:** Medium (Sprint 03)  
+**Version:** 1.1.0 | **Last Updated:** 2026-08-01  
+**Status:** 🟢 Released / Active | **Priority:** Completed  
 
 ---
 
@@ -24,26 +24,27 @@
 ### Core Gameplay Loop
 1. **Swim & Control**: ผู้เล่นควบคุมทิศทางการว่ายน้ำของปลาด้วย Mouse Pointer หรือ Touch Control บนมือถือ
 2. **Feed & Grow**: ว่ายน้ำไล่จับกินปลาที่มีขนาดเล็กกว่าเพื่อเพิ่มคะแนน (Score Points) และสะสมหลอดเติบโต (Growth Bar)
-3. **Evolution Level**: เมื่อหลอดเติบโตเต็ม ปลาผู้เล่นจะขยายขนาดร่างกายใหญ่ขึ้น 1 ระดับ (Level 1 ➔ Level 2 ➔ Level 3) ทำให้กินปลาประเภทใหญ่ขึ้นได้
-4. **Avoid Hazards**: หลบหลีกปลาใหญ่ที่มีขนาดโตกว่าตัวผู้เล่น และหลบแมงกะพรุนพิษ (ทำให้เคลื่อนที่ช้าลง 3 วินาที)
-5. **Victory Condition**: สะสมคะแนนได้สูงสุด และเติบโตจนกลายเป็นปลาเจ้าแห่งท้องทะเล (Level Max)
-6. **Game Over Condition**: โดนปลาใหญ่กว่างับกิน หรือพลังชีวิต (3 Lives) หมดลง
+3. **Evolution Level**: เมื่อหลอดเติบโตเต็ม ปลาผู้เล่นจะขยายขนาดร่างกายใหญ่ขึ้น 1 ระดับ (Level 1 ➔ Level 9 KING) ทำให้กินปลาประเภทใหญ่ขึ้นได้
+4. **Avoid Hazards & Stings**: หลบหลีกปลาใหญ่ที่มีขนาดโตกว่าตัวผู้เล่น และหลบแมงกะพรุนพิษ (ทำให้เคลื่อนที่ช้าลง 3 วินาที)
+5. **Collect Speed Boosts**: เก็บฟองอากาศเร่งความเร็ว (Speed Boost +50% นาน 5 วินาที)
+6. **Victory & Record Condition**: สะสมคะแนนได้สูงสุด และเติบโตจนกลายเป็นปลาเจ้าแห่งท้องทะเล (KING) บันทึก High Score ลง LocalStorage
+7. **Game Over Condition**: โดนปลาใหญ่กว่างับกิน หรือพลังชีวิต (3 Lives) หมดลง
 
 ---
 
 ## 3. Asset Catalog & Visual Breakdown
 
-- **Asset Path:** `public/assets/kenney_fish-pack_2/PNG/`
+- **Asset Path:** `public/games/ocean-frenzy/assets/kenney_fish-pack_2/PNG/Default/`
 
 | Category | Asset Key | File Name | Score / Effect | Description |
 |---|---|---|---|---|
-| **Player Fish** | `player_fish` | `fishTile_073.png` | Main Character | ปลาผู้เล่นหลัก ขยายขนาดตาม Evolution Level |
-| **Small Prey** | `fish_small_1` | `fishTile_079.png` | +10 pts | ปลาขนาดเล็ก เหยื่อระดับแรก |
-| **Small Prey** | `fish_small_2` | `fishTile_081.png` | +15 pts | ปลาการ์ตูนขนาดเล็ก |
-| **Medium Fish** | `fish_med_1` | `fishTile_075.png` | +30 pts | ปลาขนาดกลาง กินได้เมื่อผู้เล่นอยู่ Level 2+ |
-| **Big Predator** | `fish_shark` | `fishTile_090.png` | Instant Kill | ฉลามยักษ์ สัตว์ดุร้ายที่ต้องหลบหลีก |
-| **Hazard** | `jellyfish` | `fishTile_101.png` | Slow Down 3s | แมงกะพรุนพิษ ทำให้ผู้เล่นช้าลง |
-| **Power-up** | `bubble_item` | `fishTile_105.png` | Speed Boost | ทุ่นฟองอากาศเพิ่มความเร็ว 5 วินาที |
+| **Player Fish** | `player_fish` | `fish_blue.png` | Main Character | ปลาผู้เล่นหลัก ขยายขนาดตาม Evolution Level |
+| **Small Prey** | `fish_small_1` | `fish_red.png`, `fish_green.png`, `fish_pink.png` | +10 - +15 pts | ปลาขนาดเล็ก เหยื่อระดับแรก |
+| **Medium Prey** | `fish_med_1` | `fish_orange.png`, `fish_brown.png`, `fish_blue.png` | +20 - +25 pts | ปลาขนาดกลาง กินได้เมื่อผู้เล่นอยู่ Level 2+ |
+| **Big Prey** | `fish_large_1` | `fish_grey.png` | +40 pts | ปลาใหญ่ ได้แต้มสูงเมื่อผู้เล่นมีขนาดใหญ่พอ |
+| **Big Predator** | `fish_predator` | `fish_grey_long_a.png`, `fish_grey_long_b.png` | -1 Life | ปลาผู้ล่าขนาดใหญ่ สัตว์ดุร้ายที่ต้องหลบหลีก |
+| **Hazard** | `jellyfish` | `fish_pink.png` (Purple Tint) | Slow Down 3s | แมงกะพรุนพิษ ทำให้ผู้เล่นช้าลง |
+| **Power-up** | `bubble_item` | `bubble_c.png` (Gold Tint) | Speed Boost 5s | ทุ่นฟองอากาศเพิ่มความเร็ว 5 วินาที |
 
 ---
 

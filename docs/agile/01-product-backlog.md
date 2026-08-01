@@ -1,6 +1,6 @@
 # Product Backlog — webJS Game Portfolio
 
-**Last Updated:** 2026-07-29 | **Version:** 1.22.0
+**Last Updated:** 2026-08-01 | **Version:** 1.23.0
 
 ---
 
@@ -14,6 +14,14 @@
 | [US-02-01](./user-stories/archive/US-02-01-emoji-match.md) | ในฐานะผู้เล่น ฉันต้องการเล่นเกม Emoji Match เพื่อทดสอบความจำ | จับคู่การ์ดที่เหมือนกัน บันทึกคะแนน และแสดงผลแพ้/ชนะ | L | ✅ Done |
 | [US-02-02](./user-stories/archive/US-02-02-2048-cubes.md) | ในฐานะผู้เล่น ฉันต้องการเล่นเกม 2048 Cubes รวมตัวเลขฟิสิกส์ | ยิง Cube รวมตัวเลข 2048 ได้ถูกต้องตามกฎฟิสิกส์ | L | ✅ Done |
 | [US-02-03](./user-stories/archive/US-02-03-tile-match.md) | ในฐานะผู้เล่น ฉันต้องการเล่นเกม Tile Match จับคู่ไพ่ 3 ใบ | เลือกไทล์ลงถาด 7 ช่อง และจับคู่ 3 ใบหายไป | L | ✅ Done |
+
+---
+
+## 🐠 Epic 09 — Ocean Frenzy (G009)
+
+| ID | User Story | Acceptance Criteria | Estimate | Status |
+|----|-----------|---------------------|----------|--------|
+| [US-09-01](./user-stories/archive/US-09-01-ocean-frenzy.md) | ควบคุมปลาว่ายน้ำ งับกินเหยื่อ เติบโต 9 Level หลบฉลาม/แมงกะพรุน เก็บไอเทมสปีด | เคลื่อนที่ลื่นไหล ระบบงับตามขนาดตัว แมงกะพรุนช็อตสโลว์ ฟองอากาศสปีด เสียงสังเคราะห์ Web Audio | L | ✅ Done |
 
 ---
 

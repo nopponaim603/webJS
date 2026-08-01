@@ -70,6 +70,8 @@ class AudioManager {
                     osc.start(t); osc.stop(t + 0.3);
                 }); break;
             case 'hit':       tone(200, 50, 0.25, 'sawtooth', 0.2); break;
+            case 'sting':     tone(220, 110, 0.25, 'sawtooth', 0.2); break;
+            case 'boost':     tone(400, 1200, 0.2, 'sine', 0.18); break;
             case 'gameover':  tone(300, 50, 0.6, 'sawtooth', 0.18); break;
         }
     }
@@ -156,6 +158,10 @@ class MainScene extends Phaser.Scene {
         this.isGameOver = false;
         this.moveSpeed = 200;
         this.moveTarget = { x: 0, y: 0 };
+        this.isSlowed = false;
+        this.isBoosted = false;
+        this.slowTimer = null;
+        this.boostTimer = null;
 
         // Background
         this.bg = this.add.graphics();
@@ -201,6 +207,8 @@ class MainScene extends Phaser.Scene {
         // Groups
         this.preyGroup = this.physics.add.group({ maxSize: 18 });
         this.predatorGroup = this.physics.add.group({ maxSize: 5 });
+        this.jellyfishGroup = this.physics.add.group({ maxSize: 3 });
+        this.powerupGroup = this.physics.add.group({ maxSize: 3 });
 
         // HUD
         this.createHUD();
@@ -208,11 +216,15 @@ class MainScene extends Phaser.Scene {
 
         // Spawners
         this.time.addEvent({ delay: 800, callback: this.spawnPrey, callbackScope: this, repeat: -1 });
-        this.time.addEvent({ delay: 2500, callback: this.spawnPredator, callbackScope: this, repeat: -1, delayStart: 6000 });
+        this.time.addEvent({ delay: 2500, callback: this.spawnPredator, callbackScope: this, repeat: -1, delayStart: 5000 });
+        this.time.addEvent({ delay: 6000, callback: this.spawnJellyfish, callbackScope: this, repeat: -1, delayStart: 4000 });
+        this.time.addEvent({ delay: 9000, callback: this.spawnPowerup, callbackScope: this, repeat: -1, delayStart: 7000 });
 
         // Collisions
         this.physics.add.overlap(this.player, this.preyGroup, this.handleEat, null, this);
         this.physics.add.overlap(this.player, this.predatorGroup, this.handleHit, null, this);
+        this.physics.add.overlap(this.player, this.jellyfishGroup, this.handleJellyfishSting, null, this);
+        this.physics.add.overlap(this.player, this.powerupGroup, this.handlePowerup, null, this);
 
         // Movement target
         this.input.on('pointerdown', (ptr) => {
@@ -372,6 +384,43 @@ class MainScene extends Phaser.Scene {
         fish.flipX = fish.body.velocity.x < 0;
     }
 
+    spawnJellyfish() {
+        if (this.isGameOver) return;
+        const x = Phaser.Math.Between(40, this.scale.width - 40);
+        const y = Phaser.Math.Between(40, this.scale.height - 40);
+        const jelly = this.jellyfishGroup.create(x, y, BASE + 'fish_pink.png');
+        if (!jelly) return;
+        jelly.setScale(0.8);
+        jelly.setTint(0xc084fc);
+        jelly.setDepth(17);
+        jelly.body.setVelocity(
+            Phaser.Math.Between(-40, 40),
+            Phaser.Math.Between(-40, 40)
+        );
+        this.tweens.add({
+            targets: jelly,
+            scaleX: 0.95, scaleY: 0.7,
+            duration: 800, yoyo: true, repeat: -1, ease: 'Sine.easeInOut'
+        });
+    }
+
+    spawnPowerup() {
+        if (this.isGameOver) return;
+        const x = Phaser.Math.Between(40, this.scale.width - 40);
+        const y = Phaser.Math.Between(40, this.scale.height - 40);
+        const item = this.powerupGroup.create(x, y, BASE + 'bubble_c.png');
+        if (!item) return;
+        item.setScale(0.7);
+        item.setTint(0xfbbf24);
+        item.setDepth(18);
+        item.body.setVelocity(0, -25);
+        this.tweens.add({
+            targets: item,
+            alpha: 0.7,
+            duration: 600, yoyo: true, repeat: -1
+        });
+    }
+
     // ═══════════════════════════════════════════════
     // Collision Handlers
     // ═══════════════════════════════════════════════
@@ -410,6 +459,41 @@ class MainScene extends Phaser.Scene {
         audio.play('hit');
 
         if (this.lives <= 0) this.endGame();
+    }
+
+    handleJellyfishSting(player, jellyfish) {
+        if (this.isGameOver) return;
+        jellyfish.destroy();
+
+        this.isSlowed = true;
+        player.setTint(0xc084fc);
+        this.cameras.main.shake(150, 0.008);
+        this.createBurst(player.x, player.y, 0xc084fc, 12);
+        this.createFloatingText(player.x, player.y - 30, '🪼 STUNG! (Slow 3s)', '#c084fc');
+        audio.play('sting');
+
+        if (this.slowTimer) this.slowTimer.remove();
+        this.slowTimer = this.time.delayedCall(3000, () => {
+            this.isSlowed = false;
+            if (!this.isBoosted) player.clearTint();
+        });
+    }
+
+    handlePowerup(player, item) {
+        if (this.isGameOver) return;
+        item.destroy();
+
+        this.isBoosted = true;
+        player.setTint(0x38bdf8);
+        this.createBurst(player.x, player.y, 0xfbbf24, 14);
+        this.createFloatingText(player.x, player.y - 30, '🚀 SPEED BOOST! (5s)', '#38bdf8');
+        audio.play('boost');
+
+        if (this.boostTimer) this.boostTimer.remove();
+        this.boostTimer = this.time.delayedCall(5000, () => {
+            this.isBoosted = false;
+            if (!this.isSlowed) player.clearTint();
+        });
     }
 
     checkLevelUp() {
@@ -541,7 +625,10 @@ class MainScene extends Phaser.Scene {
         );
 
         if (dist > 8) {
-            const speed = Math.min(dist * 3, this.moveSpeed * (1 + (this.level - 1) * 0.08));
+            let speedMult = 1.0;
+            if (this.isSlowed) speedMult *= 0.5;
+            if (this.isBoosted) speedMult *= 1.5;
+            const speed = Math.min(dist * 3, this.moveSpeed * (1 + (this.level - 1) * 0.08) * speedMult);
             this.player.setVelocity(Math.cos(angle) * speed, Math.sin(angle) * speed);
             this.player.flipX = Math.abs(angle) > Math.PI / 2;
         } else {

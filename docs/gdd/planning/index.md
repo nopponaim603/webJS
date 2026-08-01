@@ -18,7 +18,7 @@
 
 | Game ID | Code Name | Title | Proposed Engine | Status | Spec Location |
 |:---:|---|---|---|:---:|---|
-| **G009** | `ocean-frenzy` | Ocean Frenzy (เกมปลาใหญ่กินปลาเล็ก) | Phaser 3 Arcade | ⏳ Proposed | [spec.md](./ocean-frenzy/spec.md) |
+| **G009** | `ocean-frenzy` | Ocean Frenzy (เกมปลาใหญ่กินปลาเล็ก) | Phaser 3 Arcade | 🟢 Released | [spec.md](../games/ocean-frenzy/spec.md) |
 | **G010** | `dice-quest` | Dice Quest (เกมกระดานทอยลูกเต๋า) | Vanilla JS / Phaser | ⏳ Proposed | [spec.md](./dice-quest/spec.md) |
 | **G011** | `pico-tower-climber` | Pico Tower Climber (เกมพิกเซลไต่หอคอย) | Phaser 3 Tilemap | ⏳ Proposed | [spec.md](./pico-tower-climber/spec.md) |
 | **G012** | `pixel-bullet-hell` | Pixel Bullet Hell (เกมยานยิงหลบกระสุน) | Phaser 3 Shmup | ⏳ Proposed | [spec.md](./pixel-bullet-hell/spec.md) |
