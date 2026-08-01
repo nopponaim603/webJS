@@ -84,6 +84,14 @@ const initialGames = [
     gradient: "linear-gradient(135deg, #00F2FE 0%, #3B82F6 100%)"
   },
   {
+    id: "warfront",
+    title: "WarFront.io (RTS Strategy)",
+    category: "กระดาน / วางกลยุทธ์",
+    url: "/games/warfront/index.html",
+    image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&h=400&fit=crop",
+    gradient: "linear-gradient(135deg, #1E293B 0%, #3B82F6 100%)"
+  },
+  {
     id: "tile-swap",
     title: "Tile Swap",
     category: "ปริศนา / สลับไทล์",
