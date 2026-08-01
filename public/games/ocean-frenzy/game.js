@@ -20,8 +20,7 @@ const PREY_CONFIG = [
 ];
 
 const PREDATOR_CONFIG = [
-    { texture: 'fish_grey_long_a.png', scale: 1.5, speed: 50 },
-    { texture: 'fish_grey_long_b.png', scale: 1.5, speed: 55 },
+    { texture: 'fish_shark_scary.png', scale: 1.3, speed: 75 },
 ];
 
 // Score thresholds per level
@@ -324,6 +323,10 @@ class MainScene extends Phaser.Scene {
     }
 
     updateHUD() {
+        this.score = Number(this.score) || 0;
+        this.level = Math.max(1, Number(this.level) || 1);
+        this.lives = Math.max(0, Number(this.lives) || 0);
+
         this.scoreText.setText('⭐ ' + this.score);
         const lvlName = this.level <= MAX_LEVEL ? LEVEL_NAMES[this.level - 1] : 'KING';
         this.levelText.setText('🐟 Lvl ' + this.level + ' ' + lvlName);
@@ -333,9 +336,10 @@ class MainScene extends Phaser.Scene {
         const barY = this.scale.height - 50;
         const barW = this.scale.width - 60;
         if (this.level < MAX_LEVEL) {
-            const prev = LEVEL_THRESHOLDS[this.level - 1];
-            const target = LEVEL_THRESHOLDS[this.level];
-            const progress = Math.min((this.score - prev) / (target - prev), 1);
+            const prev = LEVEL_THRESHOLDS[this.level - 1] || 0;
+            const target = LEVEL_THRESHOLDS[this.level] || 100;
+            const range = Math.max(1, target - prev);
+            const progress = Math.max(0, Math.min((this.score - prev) / range, 1)) || 0;
             this.growBarFill.fillStyle(0x64ffda, 0.8);
             this.growBarFill.fillRoundedRect(30, barY, barW * progress, 14, 7);
             this.growBarFill.lineStyle(1, 0x1e3a5f, 0.3);
@@ -347,41 +351,47 @@ class MainScene extends Phaser.Scene {
     }
 
     // ═══════════════════════════════════════════════
-    // Spawning
+    // Spawning (Left/Right Screen Edges)
     // ═══════════════════════════════════════════════
 
     spawnPrey() {
         if (this.isGameOver) return;
-        const type = Phaser.Math.pick(PREY_CONFIG);
-        const x = Phaser.Math.Between(30, this.scale.width - 30);
-        const y = Phaser.Math.Between(30, this.scale.height - 30);
+        const type = Phaser.Utils.Array.GetRandom(PREY_CONFIG);
+        const spawnFromLeft = Math.random() < 0.5;
+        const x = spawnFromLeft ? -40 : this.scale.width + 40;
+        const y = Phaser.Math.Between(60, this.scale.height - 80);
         const fish = this.preyGroup.create(x, y, BASE + type.texture);
         if (!fish) return;
+
+        const moveSpeed = Phaser.Math.Between(type.speed * 0.7, type.speed * 1.3);
+        const vx = spawnFromLeft ? moveSpeed : -moveSpeed;
+        const vy = Phaser.Math.Between(-25, 25);
+
         fish.setScale(Phaser.Math.FloatBetween(type.minScale, type.maxScale));
         fish.setDepth(15);
         fish.setData('size', Phaser.Math.FloatBetween(type.minScale, type.maxScale));
         fish.setData('score', type.score);
-        fish.body.setVelocity(
-            Phaser.Math.Between(-type.speed, type.speed),
-            Phaser.Math.Between(-type.speed, type.speed)
-        );
-        fish.flipX = fish.body.velocity.x < 0;
+        fish.body.setVelocity(vx, vy);
+        fish.flipX = spawnFromLeft; // Swim facing direction
     }
 
     spawnPredator() {
         if (this.isGameOver) return;
-        const type = Phaser.Math.pick(PREDATOR_CONFIG);
-        const x = Phaser.Math.Between(30, this.scale.width - 30);
-        const y = Phaser.Math.Between(30, this.scale.height - 30);
+        const type = Phaser.Utils.Array.GetRandom(PREDATOR_CONFIG);
+        const spawnFromLeft = Math.random() < 0.5;
+        const x = spawnFromLeft ? -50 : this.scale.width + 50;
+        const y = Phaser.Math.Between(60, this.scale.height - 80);
         const fish = this.predatorGroup.create(x, y, BASE + type.texture);
         if (!fish) return;
+
+        const moveSpeed = Phaser.Math.Between(type.speed * 0.8, type.speed * 1.2);
+        const vx = spawnFromLeft ? moveSpeed : -moveSpeed;
+        const vy = Phaser.Math.Between(-15, 15);
+
         fish.setScale(type.scale);
         fish.setDepth(16);
-        fish.body.setVelocity(
-            Phaser.Math.Between(-type.speed, type.speed),
-            Phaser.Math.Between(-type.speed, type.speed)
-        );
-        fish.flipX = fish.body.velocity.x < 0;
+        fish.body.setVelocity(vx, vy);
+        fish.flipX = spawnFromLeft; // Swim facing direction
     }
 
     spawnJellyfish() {
@@ -426,15 +436,17 @@ class MainScene extends Phaser.Scene {
     // ═══════════════════════════════════════════════
 
     handleEat(player, prey) {
-        if (this.isGameOver) return;
+        if (this.isGameOver || !prey || !prey.active) return;
         const preyW = prey.displayWidth;
         const playerW = player.displayWidth;
         if (playerW < preyW * 0.7) return; // Player too small
 
+        const baseScore = Number(prey.getData('score')) || 10;
         prey.destroy();
-        const baseScore = prey.getData('score');
-        const points = Math.round(baseScore * (1 + (this.level - 1) * 0.2));
-        this.score += points;
+
+        const currentLvl = Number(this.level) || 1;
+        const points = Math.max(1, Math.round(baseScore * (1 + (currentLvl - 1) * 0.2)));
+        this.score = (Number(this.score) || 0) + points;
 
         this.createBurst(prey.x, prey.y, 0xfbbf24, 8);
         this.createFloatingText(prey.x, prey.y - 20, '+' + points, '#fbbf24');
@@ -580,13 +592,15 @@ class MainScene extends Phaser.Scene {
         card.strokeRoundedRect(cx - 160, cy - 120, 320, 240, 20);
         card.setDepth(51);
 
+        const finalScore = Number(this.score) || 0;
+        const finalLevel = Number(this.level) || 1;
         this.add.text(cx, cy - 85, '🐟 Game Over', {
             font: 'bold 28px Inter', fill: '#ef4444'
         }).setOrigin(0.5).setDepth(52);
-        this.add.text(cx, cy - 40, 'SCORE: ' + this.score, {
+        this.add.text(cx, cy - 40, 'SCORE: ' + finalScore, {
             font: 'bold 22px Inter', fill: '#fbbf24'
         }).setOrigin(0.5).setDepth(52);
-        this.add.text(cx, cy - 5, 'LEVEL: ' + this.level + '  |  EATEN: ' + Math.floor(this.score / 15), {
+        this.add.text(cx, cy - 5, 'LEVEL: ' + finalLevel + '  |  EATEN: ' + Math.floor(finalScore / 15), {
             font: '14px Inter', fill: '#94a3b8'
         }).setOrigin(0.5).setDepth(52);
 
@@ -602,9 +616,10 @@ class MainScene extends Phaser.Scene {
 
         try {
             const key = 'ocean_frenzy_highscore';
-            const prev = parseInt(localStorage.getItem(key) || '0', 10);
-            if (this.score > prev) {
-                localStorage.setItem(key, '' + this.score);
+            const prevVal = parseInt(localStorage.getItem(key) || '0', 10);
+            const prev = isNaN(prevVal) ? 0 : prevVal;
+            if (finalScore > prev) {
+                localStorage.setItem(key, '' + finalScore);
                 this.createFloatingText(cx, cy + 100, '🏆 NEW HIGH SCORE!', '#fbbf24');
             }
         } catch (e) { /* localStorage blocked */ }
@@ -638,6 +653,18 @@ class MainScene extends Phaser.Scene {
         const m = 10;
         this.player.x = Phaser.Math.Clamp(this.player.x, m, this.scale.width - m);
         this.player.y = Phaser.Math.Clamp(this.player.y, m, this.scale.height - m);
+
+        // Cleanup offscreen fish so spawners continuously feed new fish into the screen
+        this.preyGroup.getChildren().forEach(fish => {
+            if (fish && (fish.x < -100 || fish.x > this.scale.width + 100 || fish.y < -100 || fish.y > this.scale.height + 100)) {
+                fish.destroy();
+            }
+        });
+        this.predatorGroup.getChildren().forEach(fish => {
+            if (fish && (fish.x < -120 || fish.x > this.scale.width + 120 || fish.y < -100 || fish.y > this.scale.height + 100)) {
+                fish.destroy();
+            }
+        });
     }
 }
 

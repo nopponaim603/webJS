@@ -44,6 +44,14 @@ const initialGames = [
 
   // 2. กลุ่ม Phaser 2D Engine
   {
+    id: "ocean-frenzy",
+    title: "Ocean Frenzy",
+    category: "Phaser 2D Engine",
+    url: "/games/ocean-frenzy/index.html",
+    image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=400&fit=crop",
+    gradient: "linear-gradient(135deg, #0A1628 0%, #00F2FE 100%)"
+  },
+  {
     id: "tiny-dungeon-roguelike",
     title: "Tiny Dungeon Survivor",
     category: "Phaser 2D Engine",
