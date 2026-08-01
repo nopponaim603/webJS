@@ -1,4 +1,4 @@
-/* FrontWars - Real-Time Strategy & Territory Domination Engine */
+/* State.IO - Real-Time Strategy & Territory Domination Engine (Offline Mode) */
 
 class SoundEngine {
   constructor() {
@@ -10,6 +10,9 @@ class SoundEngine {
     if (!this.ctx) {
       const AudioCtx = window.AudioContext || window.webkitAudioContext;
       if (AudioCtx) this.ctx = new AudioCtx();
+    }
+    if (this.ctx && this.ctx.state === 'suspended') {
+      this.ctx.resume();
     }
   }
 
@@ -50,6 +53,10 @@ class SoundEngine {
     this.playTone(600, 'square', 0.08, 0.06);
     setTimeout(() => this.playTone(800, 'square', 0.12, 0.06), 60);
   }
+  playStrike() {
+    this.playTone(150, 'sawtooth', 0.3, 0.2);
+    setTimeout(() => this.playTone(90, 'square', 0.4, 0.25), 80);
+  }
 }
 
 class FrontWarsGame {
@@ -58,14 +65,21 @@ class FrontWarsGame {
     this.ctx = this.canvas.getContext('2d');
     this.sound = new SoundEngine();
 
-    // Game state
+    // Game configuration
     this.attackRatio = 0.50;
     this.gameSpeed = 2; // 1x, 2x, 4x
     this.isPaused = false;
+    this.mapPreset = 'continental'; // continental, archipelago, duel, ring
+    this.difficulty = 'normal'; // easy, normal, hard
+
+    // Selection & Drag state
     this.selectedProvince = null;
     this.hoveredProvince = null;
+    this.isDragging = false;
+    this.dragStartProvince = null;
     this.mouseX = 0;
     this.mouseY = 0;
+    this.dpr = window.devicePixelRatio || 1;
 
     this.provinces = [];
     this.connections = [];
@@ -92,8 +106,29 @@ class FrontWarsGame {
 
   initCanvasSize() {
     const wrapper = this.canvas.parentElement;
-    this.canvas.width = wrapper.clientWidth;
-    this.canvas.height = wrapper.clientHeight;
+    const w = wrapper.clientWidth;
+    const h = wrapper.clientHeight;
+    this.dpr = window.devicePixelRatio || 1;
+
+    this.canvas.width = w * this.dpr;
+    this.canvas.height = h * this.dpr;
+    this.canvas.style.width = `${w}px`;
+    this.canvas.style.height = `${h}px`;
+
+    // Recalculate pixel coordinates based on normalized ratios
+    if (this.provinces && this.provinces.length > 0) {
+      const paddingX = 60;
+      const paddingY = 50;
+      const drawW = w - paddingX * 2;
+      const drawH = h - paddingY * 2;
+
+      this.provinces.forEach(p => {
+        if (p.nx !== undefined && p.ny !== undefined) {
+          p.x = paddingX + p.nx * drawW;
+          p.y = paddingY + p.ny * drawH;
+        }
+      });
+    }
   }
 
   setupEventListeners() {
@@ -102,46 +137,101 @@ class FrontWarsGame {
       this.render();
     });
 
-    this.canvas.addEventListener('click', (e) => this.handleCanvasClick(e));
-
-    this.canvas.addEventListener('mousemove', (e) => {
+    // Mouse / Touch Event Handlers
+    const getPos = (e) => {
       const rect = this.canvas.getBoundingClientRect();
-      this.mouseX = e.clientX - rect.left;
-      this.mouseY = e.clientY - rect.top;
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return {
+        x: clientX - rect.left,
+        y: clientY - rect.top
+      };
+    };
 
-      this.hoveredProvince = this.provinces.find(p => 
-        Math.hypot(p.x - this.mouseX, p.y - this.mouseY) <= p.radius + 4
-      );
-    });
+    const handlePointerDown = (e) => {
+      this.sound.init();
+      if (this.gameOver || this.isPaused) return;
+      const pos = getPos(e);
+      this.mouseX = pos.x;
+      this.mouseY = pos.y;
+
+      const clicked = this.findProvinceAt(pos.x, pos.y);
+      if (clicked && clicked.owner === 'player') {
+        this.isDragging = true;
+        this.dragStartProvince = clicked;
+        this.selectedProvince = clicked;
+        this.openCard(clicked);
+        this.sound.playSelect();
+      }
+    };
+
+    const handlePointerMove = (e) => {
+      const pos = getPos(e);
+      this.mouseX = pos.x;
+      this.mouseY = pos.y;
+      this.hoveredProvince = this.findProvinceAt(pos.x, pos.y);
+    };
+
+    const handlePointerUp = (e) => {
+      if (this.isDragging && this.dragStartProvince) {
+        const target = this.hoveredProvince;
+        if (target && target.id !== this.dragStartProvince.id) {
+          if (this.canAttack(this.dragStartProvince, target)) {
+            this.dispatchTroops(this.dragStartProvince, target);
+          }
+        }
+      } else if (!this.isDragging && !e.touches) {
+        const clicked = this.findProvinceAt(this.mouseX, this.mouseY);
+        this.handleCanvasClick(clicked);
+      }
+      this.isDragging = false;
+      this.dragStartProvince = null;
+    };
+
+    this.canvas.addEventListener('mousedown', handlePointerDown);
+    this.canvas.addEventListener('mousemove', handlePointerMove);
+    window.addEventListener('mouseup', handlePointerUp);
+
+    this.canvas.addEventListener('touchstart', (e) => { handlePointerDown(e); e.preventDefault(); }, { passive: false });
+    this.canvas.addEventListener('touchmove', (e) => { handlePointerMove(e); e.preventDefault(); }, { passive: false });
+    window.addEventListener('touchend', handlePointerUp);
 
     // Sidebar Toggle
     const sidebar = document.getElementById('tactical-sidebar');
-    document.getElementById('btn-sidebar-toggle').addEventListener('click', () => {
-      sidebar.classList.toggle('collapsed');
-      setTimeout(() => {
-        this.initCanvasSize();
-        this.render();
-      }, 320);
-      this.sound.playSelect();
-    });
+    const toggleBtn = document.getElementById('btn-sidebar-toggle');
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('collapsed');
+        setTimeout(() => {
+          this.initCanvasSize();
+          this.render();
+        }, 320);
+        this.sound.playSelect();
+      });
+    }
 
-    // Ratio UI
+    // Ratio Controls
     document.querySelectorAll('.ratio-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
+      btn.addEventListener('click', () => {
         document.querySelectorAll('.ratio-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         this.attackRatio = parseFloat(btn.dataset.ratio);
-        document.getElementById('ratio-slider').value = this.attackRatio * 100;
-        document.getElementById('ratio-display').innerText = `${Math.round(this.attackRatio * 100)}%`;
+        const slider = document.getElementById('ratio-slider');
+        if (slider) slider.value = this.attackRatio * 100;
+        const display = document.getElementById('ratio-display');
+        if (display) display.innerText = `${Math.round(this.attackRatio * 100)}%`;
         this.sound.playSelect();
       });
     });
 
     const ratioSlider = document.getElementById('ratio-slider');
-    ratioSlider.addEventListener('input', (e) => {
-      this.attackRatio = parseInt(e.target.value) / 100;
-      document.getElementById('ratio-display').innerText = `${e.target.value}%`;
-    });
+    if (ratioSlider) {
+      ratioSlider.addEventListener('input', (e) => {
+        this.attackRatio = parseInt(e.target.value) / 100;
+        const display = document.getElementById('ratio-display');
+        if (display) display.innerText = `${e.target.value}%`;
+      });
+    }
 
     // Speed Controls
     document.querySelectorAll('.speed-btn').forEach(btn => {
@@ -150,34 +240,64 @@ class FrontWarsGame {
         btn.classList.add('active');
         this.gameSpeed = parseInt(btn.dataset.speed);
         this.isPaused = false;
-        document.getElementById('btn-pause').classList.remove('active');
+        const pauseBtn = document.getElementById('btn-pause');
+        if (pauseBtn) pauseBtn.classList.remove('active');
         this.sound.playSelect();
       });
     });
 
-    document.getElementById('btn-pause').addEventListener('click', () => {
-      this.isPaused = !this.isPaused;
-      document.getElementById('btn-pause').classList.toggle('active', this.isPaused);
-      this.sound.playSelect();
-    });
+    const pauseBtn = document.getElementById('btn-pause');
+    if (pauseBtn) {
+      pauseBtn.addEventListener('click', () => {
+        this.isPaused = !this.isPaused;
+        pauseBtn.classList.toggle('active', this.isPaused);
+        this.sound.playSelect();
+      });
+    }
 
-    document.getElementById('btn-sound').addEventListener('click', (e) => {
-      this.sound.enabled = !this.sound.enabled;
-      e.currentTarget.querySelector('i').className = this.sound.enabled ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark';
-    });
+    const soundBtn = document.getElementById('btn-sound');
+    if (soundBtn) {
+      soundBtn.addEventListener('click', (e) => {
+        this.sound.enabled = !this.sound.enabled;
+        e.currentTarget.querySelector('i').className = this.sound.enabled ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark';
+      });
+    }
 
     // Modals
     const helpModal = document.getElementById('modal-help');
-    document.getElementById('btn-help').addEventListener('click', () => helpModal.classList.remove('hidden'));
-    helpModal.querySelector('.modal-close').addEventListener('click', () => helpModal.classList.add('hidden'));
+    const helpBtn = document.getElementById('btn-help');
+    if (helpBtn && helpModal) {
+      helpBtn.addEventListener('click', () => helpModal.classList.remove('hidden'));
+      const closeBtn = helpModal.querySelector('.modal-close');
+      if (closeBtn) closeBtn.addEventListener('click', () => helpModal.classList.add('hidden'));
+    }
 
-    document.getElementById('btn-new-game').addEventListener('click', () => this.startNewGame());
-    document.getElementById('btn-restart').addEventListener('click', () => {
-      document.getElementById('modal-gameover').classList.add('hidden');
-      this.startNewGame();
-    });
+    const newGameBtn = document.getElementById('btn-new-game');
+    if (newGameBtn) newGameBtn.addEventListener('click', () => this.startNewGame());
 
-    document.getElementById('card-close').addEventListener('click', () => this.closeCard());
+    const restartBtn = document.getElementById('btn-restart');
+    if (restartBtn) {
+      restartBtn.addEventListener('click', () => {
+        const gameoverModal = document.getElementById('modal-gameover');
+        if (gameoverModal) gameoverModal.classList.add('hidden');
+        this.startNewGame();
+      });
+    }
+
+    const cardClose = document.getElementById('card-close');
+    if (cardClose) cardClose.addEventListener('click', () => this.closeCard());
+  }
+
+  findProvinceAt(x, y) {
+    return this.provinces.find(p => Math.hypot(p.x - x, p.y - y) <= p.radius + 6);
+  }
+
+  canAttack(source, target) {
+    if (!source || !target || source.id === target.id) return false;
+    if (this.isConnected(source.id, target.id)) return true;
+    if (source.building === 'port' || target.building === 'port') return true;
+    if (source.building === 'airbase') return true; // Airbase can attack any node
+    return false;
   }
 
   startNewGame() {
@@ -188,7 +308,7 @@ class FrontWarsGame {
     this.closeCard();
 
     this.generateMap();
-    this.logEvent('เริ่มสงครามยึดครองครั้งใหม่! เลือกยูนิตของคุณเพื่อเริ่มบุกยึด', 'sys');
+    this.logEvent('ยุทธการเริ่มแล้ว! ลากเส้นจากฐานของคุณ หรือคลิกเป้าหมายเพื่อยึดครองดินแดน', 'sys');
     this.sound.playSelect();
   }
 
@@ -196,19 +316,16 @@ class FrontWarsGame {
     this.provinces = [];
     this.connections = [];
 
-    const width = this.canvas.width;
-    const height = this.canvas.height;
+    const wrapper = this.canvas.parentElement;
+    const w = wrapper.clientWidth;
+    const h = wrapper.clientHeight;
+    const paddingX = 60;
+    const paddingY = 50;
+    const drawW = w - paddingX * 2;
+    const drawH = h - paddingY * 2;
 
-    const paddingX = 70;
-    const paddingY = 40;
-    const availableW = width - paddingX * 2;
-    const availableH = height - paddingY * 2;
-
-    const cols = Math.max(3, Math.floor(availableW / 120));
-    const rows = Math.max(3, Math.floor(availableH / 110));
-
-    const startX = paddingX + (availableW - cols * 110) / 2 + 40;
-    const startY = paddingY + (availableH - rows * 95) / 2 + 40;
+    const cols = Math.max(4, Math.floor(drawW / 115));
+    const rows = Math.max(4, Math.floor(drawH / 100));
 
     let idCounter = 0;
     const gridMap = [];
@@ -216,29 +333,36 @@ class FrontWarsGame {
     for (let r = 0; r < rows; r++) {
       gridMap[r] = [];
       for (let c = 0; c < cols; c++) {
-        const jitterX = (Math.random() - 0.5) * 16;
-        const jitterY = (Math.random() - 0.5) * 16;
-        const x = startX + c * 110 + (r % 2 === 1 ? 55 : 0) + jitterX;
-        const y = startY + r * 90 + jitterY;
+        const jitterX = (Math.random() - 0.5) * 0.05;
+        const jitterY = (Math.random() - 0.5) * 0.05;
+
+        let baseNx = (c + 0.5 + (r % 2 === 1 ? 0.35 : 0)) / cols + jitterX;
+        let baseNy = (r + 0.5) / rows + jitterY;
+
+        baseNx = Math.max(0.05, Math.min(0.95, baseNx));
+        baseNy = Math.max(0.05, Math.min(0.95, baseNy));
 
         let terrain = 'plains';
         const isBorder = r === 0 || r === rows - 1 || c === 0 || c === cols - 1;
         const rand = Math.random();
 
-        if (isBorder && rand > 0.45) {
+        if (isBorder && rand > 0.40) {
           terrain = 'water';
-        } else if (rand > 0.85) {
+        } else if (rand > 0.82) {
           terrain = 'mountain';
         }
 
         const province = {
           id: idCounter++,
           name: `ยุทธบริเวณ #${idCounter}`,
-          x, y,
-          radius: 34,
+          nx: baseNx,
+          ny: baseNy,
+          x: paddingX + baseNx * drawW,
+          y: paddingY + baseNy * drawH,
+          radius: 32,
           terrain,
           owner: 'neutral',
-          troops: terrain === 'water' ? 0 : Math.floor(Math.random() * 15) + 5,
+          troops: terrain === 'water' ? 0 : Math.floor(Math.random() * 12) + 6,
           building: null,
           pulse: 0
         };
@@ -248,6 +372,7 @@ class FrontWarsGame {
       }
     }
 
+    // Connect Neighboring Nodes
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++) {
         const current = gridMap[r][c];
@@ -261,7 +386,7 @@ class FrontWarsGame {
           if (nr >= 0 && nr < rows && nc >= 0 && nc < cols) {
             const neighbor = gridMap[nr][nc];
             const dist = Math.hypot(current.x - neighbor.x, current.y - neighbor.y);
-            if (dist < 155) {
+            if (dist < 160) {
               this.connections.push({ from: current.id, to: neighbor.id });
             }
           }
@@ -281,7 +406,7 @@ class FrontWarsGame {
     const p4 = landProvinces[landProvinces.length - 1];
 
     const assigns = [
-      { p: p1, owner: 'player', name: 'กองบัญชาการใหญ่ (Player)' },
+      { p: p1, owner: 'player', name: 'กองบัญชาการบลู (Player)' },
       { p: p2, owner: 'red', name: 'ฐานป้อมเรด' },
       { p: p3, owner: 'green', name: 'ศูนย์บัญชาการกรีน' },
       { p: p4, owner: 'yellow', name: 'ป้อมปราการเยลโลว์' }
@@ -295,14 +420,8 @@ class FrontWarsGame {
     });
   }
 
-  handleCanvasClick(e) {
+  handleCanvasClick(clicked) {
     if (this.gameOver || this.isPaused) return;
-
-    const rect = this.canvas.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
-    const clickY = e.clientY - rect.top;
-
-    const clicked = this.provinces.find(p => Math.hypot(p.x - clickX, p.y - clickY) <= p.radius + 5);
 
     if (clicked) {
       if (!this.selectedProvince) {
@@ -320,12 +439,8 @@ class FrontWarsGame {
           this.sound.playSelect();
           this.openCard(clicked);
         } else {
-          if (this.isConnected(this.selectedProvince.id, clicked.id)) {
+          if (this.canAttack(this.selectedProvince, clicked)) {
             this.dispatchTroops(this.selectedProvince, clicked);
-          } else {
-            if (this.selectedProvince.building === 'port' || clicked.building === 'port') {
-              this.dispatchTroops(this.selectedProvince, clicked);
-            }
           }
         }
       }
@@ -356,7 +471,7 @@ class FrontWarsGame {
       count: sendCount,
       owner: source.owner,
       progress: 0,
-      speed: 0.012 * this.gameSpeed
+      speed: 0.015 * this.gameSpeed
     });
 
     this.sound.playDispatch();
@@ -366,36 +481,61 @@ class FrontWarsGame {
     const defaultBar = document.getElementById('command-bar-default');
     const activeBar = document.getElementById('command-bar-active');
 
-    document.getElementById('card-title').innerText = province.name;
-    document.getElementById('card-troops').innerText = province.troops;
-    document.getElementById('card-owner').innerText = this.factions[province.owner].name;
-    document.getElementById('card-type').innerText = province.terrain === 'mountain' ? 'ภูเขาสูง' : (province.terrain === 'water' ? 'สมุทร' : 'ที่ราบ');
+    const cardTitle = document.getElementById('card-title');
+    const cardTroops = document.getElementById('card-troops');
+    const cardOwner = document.getElementById('card-owner');
+    const cardType = document.getElementById('card-type');
+
+    if (cardTitle) cardTitle.innerText = province.name;
+    if (cardTroops) cardTroops.innerText = province.troops;
+    if (cardOwner) cardOwner.innerText = this.factions[province.owner].name;
+    if (cardType) cardType.innerText = province.terrain === 'mountain' ? 'ภูเขาสูง' : (province.terrain === 'water' ? 'สมุทร' : 'ที่ราบ');
 
     const actionsContainer = document.getElementById('card-actions');
-    actionsContainer.innerHTML = '';
+    if (actionsContainer) {
+      actionsContainer.innerHTML = '';
 
-    if (province.owner === 'player') {
-      const cityBtn = document.createElement('button');
-      cityBtn.className = 'btn-build';
-      cityBtn.innerHTML = `<span><i class="fa-solid fa-city"></i> City</span> <strong>30🪖</strong>`;
-      cityBtn.disabled = province.troops < 30 || province.building === 'city';
-      cityBtn.onclick = () => this.buildStructure(province, 'city', 30);
+      if (province.owner === 'player') {
+        const cityBtn = document.createElement('button');
+        cityBtn.className = 'btn-build';
+        cityBtn.innerHTML = `<span><i class="fa-solid fa-city"></i> City (เมือง)</span> <strong>30🪖</strong>`;
+        cityBtn.disabled = province.troops < 30 || province.building === 'city';
+        cityBtn.onclick = () => this.buildStructure(province, 'city', 30);
 
-      const fortBtn = document.createElement('button');
-      fortBtn.className = 'btn-build';
-      fortBtn.innerHTML = `<span><i class="fa-solid fa-shield-halved"></i> Fortress</span> <strong>40🪖</strong>`;
-      fortBtn.disabled = province.troops < 40 || province.building === 'fortress';
-      fortBtn.onclick = () => this.buildStructure(province, 'fortress', 40);
+        const fortBtn = document.createElement('button');
+        fortBtn.className = 'btn-build';
+        fortBtn.innerHTML = `<span><i class="fa-solid fa-shield-halved"></i> Fortress (ป้อม)</span> <strong>40🪖</strong>`;
+        fortBtn.disabled = province.troops < 40 || province.building === 'fortress';
+        fortBtn.onclick = () => this.buildStructure(province, 'fortress', 40);
 
-      const portBtn = document.createElement('button');
-      portBtn.className = 'btn-build';
-      portBtn.innerHTML = `<span><i class="fa-solid fa-anchor"></i> Port</span> <strong>35🪖</strong>`;
-      portBtn.disabled = province.troops < 35 || province.building === 'port';
-      portBtn.onclick = () => this.buildStructure(province, 'port', 35);
+        const portBtn = document.createElement('button');
+        portBtn.className = 'btn-build';
+        portBtn.innerHTML = `<span><i class="fa-solid fa-anchor"></i> Port (ท่าเรือ)</span> <strong>35🪖</strong>`;
+        portBtn.disabled = province.troops < 35 || province.building === 'port';
+        portBtn.onclick = () => this.buildStructure(province, 'port', 35);
 
-      actionsContainer.appendChild(cityBtn);
-      actionsContainer.appendChild(fortBtn);
-      actionsContainer.appendChild(portBtn);
+        const airBtn = document.createElement('button');
+        airBtn.className = 'btn-build';
+        airBtn.innerHTML = `<span><i class="fa-solid fa-plane"></i> Airbase (ฐานบิน)</span> <strong>50🪖</strong>`;
+        airBtn.disabled = province.troops < 50 || province.building === 'airbase';
+        airBtn.onclick = () => this.buildStructure(province, 'airbase', 50);
+
+        const blitzBtn = document.createElement('button');
+        blitzBtn.className = 'btn-build tactical-skill';
+        blitzBtn.innerHTML = `<span><i class="fa-solid fa-bolt"></i> Blitz Recruit</span> <strong>+20🪖</strong>`;
+        blitzBtn.onclick = () => {
+          province.troops += 20;
+          this.sound.playBuild();
+          this.openCard(province);
+          this.logEvent(`ใช้ Blitz Recruit เพิ่มกำลังพล +20 ณ ${province.name}!`, 'sys');
+        };
+
+        actionsContainer.appendChild(cityBtn);
+        actionsContainer.appendChild(fortBtn);
+        actionsContainer.appendChild(portBtn);
+        actionsContainer.appendChild(airBtn);
+        actionsContainer.appendChild(blitzBtn);
+      }
     }
 
     if (defaultBar) defaultBar.classList.add('hidden');
@@ -430,23 +570,24 @@ class FrontWarsGame {
       this.provinces.forEach(p => {
         if (p.owner !== 'neutral' && p.terrain !== 'water') {
           let growth = 1;
-          if (p.building === 'city') growth += 2;
+          if (p.building === 'city') growth += 3;
           p.troops = Math.min(999, p.troops + growth);
         }
       });
     }
 
     this.aiTimer += dt * this.gameSpeed;
-    if (this.aiTimer >= 1.5) {
+    if (this.aiTimer >= 1.2) {
       this.aiTimer = 0;
       this.runAIEngine();
     }
 
+    // Framerate independent troop progress
     for (let i = this.marchingTroops.length - 1; i >= 0; i--) {
       const troop = this.marchingTroops[i];
-      troop.progress += troop.speed;
-      troop.x = troop.startX + (troop.targetX - troop.startX) * troop.progress;
-      troop.y = troop.startY + (troop.targetY - troop.startY) * troop.progress;
+      troop.progress += troop.speed * dt * 60;
+      troop.x = troop.startX + (troop.targetX - troop.startX) * Math.min(1.0, troop.progress);
+      troop.y = troop.startY + (troop.targetY - troop.startY) * Math.min(1.0, troop.progress);
 
       if (troop.progress >= 1.0) {
         this.resolveBattle(troop);
@@ -516,17 +657,17 @@ class FrontWarsGame {
       const ownedProvinces = this.provinces.filter(p => p.owner === fKey);
 
       ownedProvinces.forEach(source => {
-        if (source.troops > 20) {
+        if (source.troops > 18) {
           const neighbors = this.provinces.filter(p => 
-            p.owner !== fKey && this.isConnected(source.id, p.id)
+            p.owner !== fKey && this.canAttack(source, p)
           );
 
           if (neighbors.length > 0) {
             neighbors.sort((a, b) => a.troops - b.troops);
             const target = neighbors[0];
 
-            if (source.troops > target.troops * 1.3) {
-              const sendCount = Math.floor(source.troops * 0.6);
+            if (source.troops > target.troops * 1.2) {
+              const sendCount = Math.floor(source.troops * 0.65);
               source.troops -= sendCount;
 
               this.marchingTroops.push({
@@ -538,11 +679,11 @@ class FrontWarsGame {
                 count: sendCount,
                 owner: fKey,
                 progress: 0,
-                speed: 0.012 * this.gameSpeed
+                speed: 0.015 * this.gameSpeed
               });
             }
           } else {
-            if (source.troops > 50 && !source.building) {
+            if (source.troops > 45 && !source.building) {
               source.troops -= 30;
               source.building = Math.random() > 0.5 ? 'city' : 'fortress';
             }
@@ -553,7 +694,7 @@ class FrontWarsGame {
   }
 
   createParticleBurst(x, y, color) {
-    for (let i = 0; i < 16; i++) {
+    for (let i = 0; i < 18; i++) {
       const angle = Math.random() * Math.PI * 2;
       const speed = Math.random() * 4 + 1;
       this.particles.push({
@@ -570,12 +711,12 @@ class FrontWarsGame {
   checkVictoryCondition() {
     const totalLand = this.provinces.filter(p => p.terrain !== 'water').length;
     const playerLand = this.provinces.filter(p => p.owner === 'player').length;
-    const playerRatio = playerLand / totalLand;
+    const playerRatio = totalLand > 0 ? playerLand / totalLand : 0;
 
     if (playerRatio >= 0.70) {
       this.gameOver = true;
       this.showEndGameModal(true);
-    } else if (playerLand === 0) {
+    } else if (playerLand === 0 && this.provinces.length > 0) {
       this.gameOver = true;
       this.showEndGameModal(false);
     }
@@ -587,14 +728,14 @@ class FrontWarsGame {
     const msg = document.getElementById('end-message');
 
     if (isVictory) {
-      title.innerHTML = `<i class="fa-solid fa-trophy" style="color:#f59e0b"></i> ชัยชนะอย่างยิ่งใหญ่!`;
-      msg.innerText = `ยินดีด้วย! คุณยึดครองพื้นที่ได้สำเร็จและนำความสงบสุขมาสู่แผ่นดิน`;
+      if (title) title.innerHTML = `<i class="fa-solid fa-trophy" style="color:#f59e0b"></i> ชัยชนะอย่างยิ่งใหญ่!`;
+      if (msg) msg.innerText = `ยินดีด้วย! คุณยึดครองพื้นที่ได้สำเร็จและนำความสงบสุขมาสู่แผ่นดิน`;
     } else {
-      title.innerHTML = `<i class="fa-solid fa-skull" style="color:#ef4444"></i> พ่ายแพ้แก่ศึกสงคราม!`;
-      msg.innerText = `กองทัพของคุณถูกตีพ่ายแพ้ทั้งหมด วางแผนใหม่แล้วกลับมาเอาคืน!`;
+      if (title) title.innerHTML = `<i class="fa-solid fa-skull" style="color:#ef4444"></i> พ่ายแพ้แก่ศึกสงคราม!`;
+      if (msg) msg.innerText = `กองทัพของคุณถูกตีพ่ายแพ้ทั้งหมด วางแผนใหม่แล้วกลับมาเอาคืน!`;
     }
 
-    modal.classList.remove('hidden');
+    if (modal) modal.classList.remove('hidden');
   }
 
   updateStatsUI() {
@@ -611,25 +752,30 @@ class FrontWarsGame {
         if (stat) {
           stat.land += 1;
           stat.troops += p.troops;
-          stat.income += (p.building === 'city' ? 3 : 1);
+          stat.income += (p.building === 'city' ? 4 : 1);
           if (p.building === 'city') stat.cities += 1;
         }
       }
     });
 
     const playerStat = factionStats.player;
-    const landPct = Math.round((playerStat.land / totalProvinces) * 100);
+    const landPct = totalProvinces > 0 ? Math.round((playerStat.land / totalProvinces) * 100) : 0;
 
-    document.getElementById('stat-land').innerText = `${landPct}%`;
-    document.getElementById('stat-troops').innerText = playerStat.troops;
-    document.getElementById('stat-income').innerText = `+${playerStat.income}`;
-    document.getElementById('stat-cities').innerText = playerStat.cities;
+    const elLand = document.getElementById('stat-land');
+    const elTroops = document.getElementById('stat-troops');
+    const elIncome = document.getElementById('stat-income');
+    const elCities = document.getElementById('stat-cities');
+
+    if (elLand) elLand.innerText = `${landPct}%`;
+    if (elTroops) elTroops.innerText = playerStat.troops;
+    if (elIncome) elIncome.innerText = `+${playerStat.income}`;
+    if (elCities) elCities.innerText = playerStat.cities;
 
     const stackedBarEl = document.getElementById('territory-stacked-bar');
     const legendEl = document.getElementById('territory-legend');
 
-    stackedBarEl.innerHTML = '';
-    legendEl.innerHTML = '';
+    if (stackedBarEl) stackedBarEl.innerHTML = '';
+    if (legendEl) legendEl.innerHTML = '';
 
     const factionKeys = ['player', 'red', 'green', 'yellow', 'neutral'];
 
@@ -638,7 +784,7 @@ class FrontWarsGame {
       const stat = factionStats[fKey];
       const pct = totalProvinces > 0 ? Math.round((stat.land / totalProvinces) * 100) : 0;
 
-      if (pct > 0) {
+      if (pct > 0 && stackedBarEl && legendEl) {
         const seg = document.createElement('div');
         seg.className = 'bar-segment';
         seg.style.width = `${pct}%`;
@@ -662,6 +808,7 @@ class FrontWarsGame {
 
   logEvent(text, type = 'sys') {
     const logEl = document.getElementById('event-log');
+    if (!logEl) return;
     const entry = document.createElement('div');
     entry.className = `log-entry ${type}`;
     entry.innerText = text;
@@ -669,7 +816,12 @@ class FrontWarsGame {
   }
 
   render() {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.save();
+    this.ctx.scale(this.dpr, this.dpr);
+    const canvasW = this.canvas.width / this.dpr;
+    const canvasH = this.canvas.height / this.dpr;
+
+    this.ctx.clearRect(0, 0, canvasW, canvasH);
 
     // Draw Grid Connections
     this.ctx.lineWidth = 2;
@@ -678,13 +830,25 @@ class FrontWarsGame {
       const p2 = this.provinces.find(p => p.id === conn.to);
       if (p1 && p2) {
         const isPlayerLine = p1.owner === 'player' || p2.owner === 'player';
-        this.ctx.strokeStyle = isPlayerLine ? 'rgba(59, 130, 246, 0.25)' : 'rgba(255, 255, 255, 0.08)';
+        this.ctx.strokeStyle = isPlayerLine ? 'rgba(59, 130, 246, 0.28)' : 'rgba(255, 255, 255, 0.08)';
         this.ctx.beginPath();
         this.ctx.moveTo(p1.x, p1.y);
         this.ctx.lineTo(p2.x, p2.y);
         this.ctx.stroke();
       }
     });
+
+    // Draw Tactical Drag Line
+    if (this.isDragging && this.dragStartProvince) {
+      this.ctx.strokeStyle = '#00f2fe';
+      this.ctx.lineWidth = 3;
+      this.ctx.setLineDash([8, 6]);
+      this.ctx.beginPath();
+      this.ctx.moveTo(this.dragStartProvince.x, this.dragStartProvince.y);
+      this.ctx.lineTo(this.mouseX, this.mouseY);
+      this.ctx.stroke();
+      this.ctx.setLineDash([]);
+    }
 
     // Draw Provinces
     this.provinces.forEach(p => {
@@ -704,7 +868,7 @@ class FrontWarsGame {
 
       // Hovered Ring
       if (this.hoveredProvince && this.hoveredProvince.id === p.id && (!this.selectedProvince || this.selectedProvince.id !== p.id)) {
-        this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+        this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.7)';
         this.ctx.lineWidth = 2;
         this.ctx.beginPath();
         this.ctx.arc(p.x, p.y, p.radius + 4, 0, Math.PI * 2);
@@ -725,17 +889,18 @@ class FrontWarsGame {
       // Building Icons
       if (p.building) {
         this.ctx.fillStyle = '#ffffff';
-        this.ctx.font = '14px FontAwesome, sans-serif';
+        this.ctx.font = '14px sans-serif';
         this.ctx.textAlign = 'center';
         let icon = '🏛️';
         if (p.building === 'fortress') icon = '🛡️';
         if (p.building === 'port') icon = '⚓';
+        if (p.building === 'airbase') icon = '✈️';
         this.ctx.fillText(icon, p.x, p.y - 12);
       }
 
       // Troop Count Label
       this.ctx.fillStyle = '#ffffff';
-      this.ctx.font = 'bold 13px Orbitron, sans-serif';
+      this.ctx.font = 'bold 13px sans-serif';
       this.ctx.textAlign = 'center';
       this.ctx.textBaseline = 'middle';
       this.ctx.fillText(p.troops, p.x, p.y + (p.building ? 8 : 0));
@@ -754,7 +919,7 @@ class FrontWarsGame {
       this.ctx.stroke();
 
       this.ctx.fillStyle = '#ffffff';
-      this.ctx.font = 'bold 10px Orbitron, sans-serif';
+      this.ctx.font = 'bold 10px sans-serif';
       this.ctx.textAlign = 'center';
       this.ctx.textBaseline = 'middle';
       this.ctx.fillText(t.count, t.x, t.y);
@@ -777,14 +942,15 @@ class FrontWarsGame {
       const hFaction = this.factions[hp.owner];
       const tipText = `${hp.name} | ${hFaction.name} (${hp.troops}🪖)`;
 
-      this.ctx.font = '12px Prompt, sans-serif';
+      this.ctx.font = '12px sans-serif';
       const tw = this.ctx.measureText(tipText).width + 16;
-      const tx = Math.min(this.canvas.width - tw - 10, Math.max(10, this.mouseX + 12));
+      const tx = Math.min(canvasW - tw - 10, Math.max(10, this.mouseX + 12));
       const ty = Math.max(30, this.mouseY - 25);
 
       this.ctx.fillStyle = 'rgba(15, 23, 42, 0.9)';
       this.ctx.strokeStyle = hFaction.color;
       this.ctx.lineWidth = 1;
+      this.ctx.beginPath();
       if (this.ctx.roundRect) {
         this.ctx.roundRect(tx, ty, tw, 26, 6);
       } else {
@@ -798,6 +964,8 @@ class FrontWarsGame {
       this.ctx.textBaseline = 'middle';
       this.ctx.fillText(tipText, tx + 8, ty + 13);
     }
+
+    this.ctx.restore();
   }
 
   gameLoop(timestamp) {
