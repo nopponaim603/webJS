@@ -32,7 +32,7 @@ const TILE_CONFIG = [
     { type: TILE_TYPES.CHANCE, label: 'CHANCE', sub: '', price: 0, rent: 0, group: null, icon: '❓' },
     { type: TILE_TYPES.PROPERTY, label: 'Forest Road', sub: '$80', price: 80, rent: 12, group: 'Garden', icon: '🏡' },
     { type: TILE_TYPES.TAX, label: 'Income Tax', sub: '$100', price: 100, rent: 0, group: null, icon: '💰' },
-    { type: TILE_TYPES.PROPERTY, label: 'Seaside Place', sub: '$100', rent: 15, group: 'Seaside', icon: '🏡' },
+    { type: TILE_TYPES.PROPERTY, label: 'Seaside Place', sub: '$100', price: 100, rent: 15, group: 'Seaside', icon: '🏡' },
     { type: TILE_TYPES.CORNER, label: 'VISIT', sub: 'JAIL', price: 0, rent: 0, group: null, icon: '⛓️' },
     { type: TILE_TYPES.PROPERTY, label: 'Mountain Lane', sub: '$120', price: 120, rent: 18, group: 'Mountain', icon: '🏡' },
     { type: TILE_TYPES.PROPERTY, label: 'Ocean Breeze', sub: '$140', price: 140, rent: 20, group: 'Seaside', icon: '🏡' },
@@ -403,7 +403,7 @@ function rollDice() {
         state.rolled = true;
         state.phase = 'moving';
 
-        processTurn(v1, v2);
+        processTurn(v1 + v2, v1, v2);
     }, 800);
 }
 
@@ -511,10 +511,10 @@ function processTileEffect(player, tile, roll) {
                     // Pay rent
                     const owner = state.players[ownerId];
                     if (owner && owner !== player) {
-                        const rent = tile.rent * owner.multiplier;
+                        const rent = tile.rent * (owner.multiplier || 1);
                         player.money -= rent;
                         owner.money += rent;
-                        addLog(`💸 Pay rent $${rent} to ${owner.name}`);
+                        addLog(`💸 ${player.name} paid rent $${rent} to ${owner.name}`);
                         audioManager.play('bad');
                     }
                 } else {
@@ -522,11 +522,11 @@ function processTileEffect(player, tile, roll) {
                     if (player.money >= tile.price) {
                         player.money -= tile.price;
                         tile.owner = state.currentPlayer;
-                        player.properties.push(state.players[state.currentPlayer].properties.length);
-                        addLog(`✅ Bought ${tile.label} for $${tile.price}`);
+                        player.properties.push(player.position);
+                        addLog(`✅ ${player.name} bought ${tile.label} for $${tile.price}`);
                         audioManager.play('buy');
                     } else {
-                        addLog(`❌ Can't afford ${tile.label} ($${tile.price})`);
+                        addLog(`❌ ${player.name} can't afford ${tile.label} ($${tile.price})`);
                     }
                 }
             }
@@ -560,6 +560,9 @@ function checkBankruptcy(player) {
         const board = document.getElementById('board');
         const tiles = board.querySelectorAll('.tile');
         player.properties.forEach(idx => {
+            if (TILE_CONFIG[idx]) {
+                TILE_CONFIG[idx].owner = undefined;
+            }
             if (tiles[idx]) {
                 tiles[idx].classList.remove('owned');
             }
