@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FrontWars - Real-Time Tactical Territory Domination</title>
+  <meta name="description" content="FrontWars - เกมยึดดินแดนสงครามเรียลไทม์ วางแผน ยึดครองเมือง สร้างป้อมปราการ และเอาชนะกองทัพศัตรู">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Prompt:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div id="game-container">
+    <!-- Top Header Bar -->
+    <header class="tactical-header">
+      <div class="brand">
+        <a href="../../" class="back-btn" title="กลับหน้าหลัก"><i class="fa-solid fa-chevron-left"></i></a>
+        <div class="logo">
+          <i class="fa-solid fa-shield-halved logo-icon"></i>
+          <span>FRONT<b>WARS</b></span>
+        </div>
+      </div>
+
+      <!-- Stats Bar for Player -->
+      <div class="stats-bar">
+        <div class="stat-box" title="สัดส่วนดินแดนที่ครอบครอง">
+          <i class="fa-solid fa-map-location-dot"></i>
+          <div class="stat-info">
+            <span class="stat-label">ดินแดน</span>
+            <span class="stat-value" id="stat-land">0%</span>
+          </div>
+        </div>
+        <div class="stat-box" title="กำลังพลทั้งหมด">
+          <i class="fa-solid fa-users"></i>
+          <div class="stat-info">
+            <span class="stat-label">กองทัพรวม</span>
+            <span class="stat-value" id="stat-troops">0</span>
+          </div>
+        </div>
+        <div class="stat-box" title="อัตราการผลิตกำลังพลต่อวินาที">
+          <i class="fa-solid fa-bolt"></i>
+          <div class="stat-info">
+            <span class="stat-label">ผลิต/วินาที</span>
+            <span class="stat-value" id="stat-income">+0</span>
+          </div>
+        </div>
+        <div class="stat-box" title="จำนวนเมืองที่ครอบครอง">
+          <i class="fa-solid fa-city"></i>
+          <div class="stat-info">
+            <span class="stat-label">เมือง</span>
+            <span class="stat-value" id="stat-cities">0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Speed, Sound & View Controls -->
+      <div class="control-group">
+        <div class="speed-selector">
+          <button class="speed-btn" data-speed="1" title="ความเร็วปกติ 1x">1x</button>
+          <button class="speed-btn active" data-speed="2" title="ความเร็วเร่ง 2x">2x</button>
+          <button class="speed-btn" data-speed="4" title="ความเร็วเร่ง 4x">4x</button>
+          <button class="pause-btn" id="btn-pause" title="หยุดเกม/เล่นต่อ"><i class="fa-solid fa-pause"></i></button>
+        </div>
+        <button class="icon-btn" id="btn-sound" title="เปิด/ปิด เสียง"><i class="fa-solid fa-volume-high"></i></button>
+        <button class="icon-btn" id="btn-new-game" title="เริ่มเกมใหม่"><i class="fa-solid fa-rotate-right"></i></button>
+        <button class="icon-btn" id="btn-sidebar-toggle" title="ย่อ/ขยายเมนูด้านข้าง"><i class="fa-solid fa-sidebar"></i></button>
+        <button class="icon-btn" id="btn-help" title="คู่มือการเล่น"><i class="fa-solid fa-circle-question"></i></button>
+      </div>
+    </header>
+
+    <!-- Unified 100% Territory Domination Bar at the Top -->
+    <div class="top-territory-bar-wrapper">
+      <div class="territory-header-info">
+        <span class="territory-title"><i class="fa-solid fa-chart-pie"></i> สัดส่วนการยึดครองแผ่นดินโลก (Territory Domination)</span>
+        <span class="territory-win-target"><i class="fa-solid fa-trophy"></i> เป้าหมายชัยชนะ: <strong>70%</strong></span>
+      </div>
+      <div id="territory-stacked-bar" class="territory-stacked-bar">
+        <!-- Dynamic Faction segments -->
+      </div>
+      <div id="territory-legend" class="territory-legend-chips">
+        <!-- Dynamic Legend Chips -->
+      </div>
+    </div>
+
+    <!-- Main Game Workspace -->
+    <main class="game-workspace">
+      <!-- Game Canvas -->
+      <div class="canvas-wrapper">
+        <canvas id="game-canvas"></canvas>
+      </div>
+
+      <!-- Side Overlay Panel (Attack Ratio, Command Center & Log) -->
+      <aside id="tactical-sidebar" class="tactical-sidebar">
+        <!-- Attack Ratio Control -->
+        <div class="sidebar-section ratio-section">
+          <h3><i class="fa-solid fa-crosshairs"></i> อัตราการบุก (Attack Ratio)</h3>
+          <div class="ratio-buttons">
+            <button class="ratio-btn" data-ratio="0.25">25%</button>
+            <button class="ratio-btn active" data-ratio="0.50">50%</button>
+            <button class="ratio-btn" data-ratio="0.75">75%</button>
+            <button class="ratio-btn" data-ratio="1.00">100%</button>
+          </div>
+          <div class="ratio-slider-container">
+            <input type="range" id="ratio-slider" min="10" max="100" value="50" step="5">
+            <span id="ratio-display">50%</span>
+          </div>
+        </div>
+
+        <!-- Node Command Center (Inserted in Sidebar right next to Attack Ratio) -->
+        <div class="sidebar-section province-section">
+          <h3><i class="fa-solid fa-location-crosshairs"></i> ศูนย์บัญชาการยุทธบริเวณ</h3>
+
+          <!-- Default prompt when no node is selected -->
+          <div id="command-bar-default" class="province-empty">
+            <i class="fa-solid fa-hand-pointer empty-icon"></i>
+            <span>คลิกเลือกยุทธบริเวณของคุณเพื่อสั่งการสร้างเมือง ป้อมปราการ ท่าเรือ</span>
+          </div>
+
+          <!-- Active Node details when selected -->
+          <div id="command-bar-active" class="province-details hidden">
+            <div class="details-header">
+              <span id="card-title" class="card-title">ชื่อยุทธบริเวณ</span>
+              <button id="card-close" class="card-close-btn" title="ยกเลิกการเลือก">&times;</button>
+            </div>
+            <div class="card-stats-column">
+              <div class="card-stat-pill"><i class="fa-solid fa-user-ninja"></i> กองกำลัง: <strong id="card-troops">0</strong></div>
+              <div class="card-stat-pill"><i class="fa-solid fa-mountain-city"></i> พื้นที่: <span id="card-type">ราบ</span></div>
+              <div class="card-stat-pill"><i class="fa-solid fa-flag"></i> ฝ่าย: <span id="card-owner">เป็นกลาง</span></div>
+            </div>
+            <div id="card-actions" class="card-actions-sidebar">
+              <!-- Building Buttons generated dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Tips / Log -->
+        <div class="sidebar-section log-section">
+          <h3><i class="fa-solid fa-scroll"></i> บันทึกเหตุการณ์</h3>
+          <div id="event-log" class="event-log">
+            <div class="log-entry sys">ยินดีต้อนรับสู่ FrontWars! ยึดครองพื้นที่ 70% เพื่อได้รับชัยชนะ</div>
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <!-- Help / Instructions Modal -->
+  <div id="modal-help" class="modal-overlay hidden">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2><i class="fa-solid fa-book-bookmark"></i> วิธีการเล่น FrontWars</h2>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="help-grid">
+          <div class="help-card">
+            <i class="fa-solid fa-hand-pointer help-icon"></i>
+            <h4>1. เลือกและส่งกำลังบุก</h4>
+            <p>คลิกเลือกไทล์ของคุณ แล้วคลิกไทล์เป้าหมายข้างเคียงเพื่อส่งทหารออกไปบุกยึด</p>
+          </div>
+          <div class="help-card">
+            <i class="fa-solid fa-percent help-icon"></i>
+            <h4>2. ปรับสัดส่วนกำลังรบ</h4>
+            <p>เลือก Attack Ratio (25%-100%) เพื่อกำหนดปริมาณทหารที่จะส่งไปบุกในแต่ละครั้ง</p>
+          </div>
+          <div class="help-card">
+            <i class="fa-solid fa-building-columns help-icon"></i>
+            <h4>3. สร้างและอัปเกรดสิ่งปลูกสร้าง</h4>
+            <p><strong>City:</strong> เพิ่มอัตราปั๊มทหาร<br><strong>Fortress:</strong> เพิ่มเกราะป้องกัน<br><strong>Port:</strong> ส่งทหารเดินเรือข้ามสมุทร</p>
+          </div>
+          <div class="help-card">
+            <i class="fa-solid fa-sidebar help-icon"></i>
+            <h4>4. แผงควบคุมศูนย์บัญชาการ</h4>
+            <p>จัดการสร้างสิ่งปลูกสร้างผ่านแผงศูนย์บัญชาการข้างอัตราการบุกในเมนูด้านข้าง</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game Over / Victory Modal -->
+  <div id="modal-gameover" class="modal-overlay hidden">
+    <div class="modal-box victory-box">
+      <div class="modal-header">
+        <h2 id="end-title"><i class="fa-solid fa-trophy"></i> ชัยชนะอย่างยิ่งใหญ่!</h2>
+      </div>
+      <div class="modal-body text-center">
+        <p id="end-message">คุณสามารถยึดครองดินแดนส่วนใหญ่ของโลกสำเร็จ!</p>
+        <div class="end-stats" id="end-stats">
+          <!-- Stats breakdown -->
+        </div>
+        <button id="btn-restart" class="btn-action primary btn-lg"><i class="fa-solid fa-play"></i> เล่นอีกครั้ง</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

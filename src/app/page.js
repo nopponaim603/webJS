@@ -76,6 +76,14 @@ const initialGames = [
     gradient: "linear-gradient(135deg, #6366F1 0%, #A855F7 100%)"
   },
   {
+    id: "front-wars",
+    title: "FrontWars (RTS Domination)",
+    category: "กระดาน / วางกลยุทธ์",
+    url: "/games/front-wars/index.html",
+    image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&h=400&fit=crop",
+    gradient: "linear-gradient(135deg, #00F2FE 0%, #3B82F6 100%)"
+  },
+  {
     id: "tile-swap",
     title: "Tile Swap",
     category: "ปริศนา / สลับไทล์",
