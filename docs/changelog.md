@@ -6,6 +6,8 @@
 ## [1.27.0] - 2026-08-01
 
 ### Added & Completed
+- **FrontWars RTS Territory Domination Game (G019)**:
+  - จัดทำเอกสารฉบับเต็ม [gdd.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/front-wars/gdd.md) ครอบคลุมระบบการเล่น Core Loop, Faction Balance, Terrain Multipliers, Battle Formula, Building Upgrades (City/Fortress/Port), Web Audio Synthesizer, และ UI Architecture
 - **Dice Quest Monopoly Board Game (G010)**:
   - พัฒนาและแก้ไขตัวเกมกระดานวางกลยุทธ์ทอยลูกเต๋า **Dice Quest (G010)** ใน `public/games/dice-quest/` (Vanilla JS + HTML5 + CSS Grid)
   - เพิ่มสไตล์ visual design system `styles.css` ในรูปแบบ Modern Dark Glassmorphism
