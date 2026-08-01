@@ -3,6 +3,16 @@
 **Project:** Game Portfolio (`webJS`)  
 **Maintained by:** Antigravity AI & Dev Team  
 
+## [1.27.0] - 2026-08-01
+
+### Added & Completed
+- **Dice Quest Monopoly Board Game (G010)**:
+  - พัฒนาและแก้ไขตัวเกมกระดานวางกลยุทธ์ทอยลูกเต๋า **Dice Quest (G010)** ใน `public/games/dice-quest/` (Vanilla JS + HTML5 + CSS Grid)
+  - เพิ่มสไตล์ visual design system `styles.css` ในรูปแบบ Modern Dark Glassmorphism
+  - แก้ไขเส้นทางอ้างอิงภาพลูกเต๋าและการตรวจสอบสินทรัพย์เป็น `/assets/kenney_boardgame-pack/PNG/Dice/dieRed1.png`
+  - เชื่อมต่อตัวเกมขึ้นบนหน้าหลัก Hub UI (`src/app/page.js`) ในหมวดหมู่ *"กระดาน / วางกลยุทธ์"*
+  - สร้างเอกสาร [US-G010-dice-quest.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/agile/user-stories/US-G010-dice-quest.md), ย้าย GDD spec เป็น [docs/gdd/games/dice-quest/spec.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/dice-quest/spec.md) และจัดทำรายงานสรุปประจำสัปดาห์ [weekly-2026-W31.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/reports/weekly/weekly-2026-W31.md)
+
 ## [1.22.0] - 2026-07-29
 
 ### Chore & Version Bump

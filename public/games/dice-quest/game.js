@@ -190,18 +190,20 @@ const CHANCE_CARDS = [
 
 function renderBoard() {
     const board = document.getElementById('board');
-    board.innerHTML = '';
+    // Remove existing tile elements only to preserve #board-center
+    const existingTiles = board.querySelectorAll('.tile');
+    existingTiles.forEach(el => el.remove());
 
-    // Create 28 tiles in a ring (CSS Grid approach)
-    // Use absolute positioning for circular layout
-    const centerX = 250;
-    const centerY = 250;
-    const radius = 180;
+    const boardSize = board.clientWidth || 500;
+    const centerX = boardSize / 2;
+    const centerY = boardSize / 2;
+    const radius = boardSize * 0.36;
+    const tileSize = boardSize < 400 ? 21 : 28;
 
     for (let i = 0; i < TILE_COUNT; i++) {
         const angle = (i / TILE_COUNT) * 2 * Math.PI - Math.PI / 2;
-        const x = centerX + radius * Math.cos(angle) - 30;
-        const y = centerY + radius * Math.sin(angle) - 30;
+        const x = centerX + radius * Math.cos(angle) - tileSize;
+        const y = centerY + radius * Math.sin(angle) - tileSize;
         const tile = TILE_CONFIG[i];
 
         const tileEl = document.createElement('div');
@@ -226,13 +228,6 @@ function renderBoard() {
         `;
         board.appendChild(tileEl);
     }
-
-    // Center text
-    const centerEl = document.createElement('div');
-    centerEl.className = 'board-center';
-    centerEl.textContent = '🎲 Dice Quest';
-    centerEl.style.cssText = `position:absolute;top:calc(50% - 40px);left:calc(50% - 60px);text-align:center;`;
-    board.appendChild(centerEl);
 }
 
 // ═══════════════════════════════════════════════
@@ -246,16 +241,19 @@ function renderPawns() {
     pawnEls.forEach(el => el.remove());
     pawnEls.length = 0;
 
+    const boardSize = board.clientWidth || 500;
+    const centerX = boardSize / 2;
+    const centerY = boardSize / 2;
+    const radius = boardSize * 0.36;
+    const pawnSize = boardSize < 400 ? 9 : 12;
+
     state.players.forEach((p, idx) => {
         if (p.money <= 0) return;
 
         const angle = (p.position / TILE_COUNT) * 2 * Math.PI - Math.PI / 2;
-        const centerX = 250;
-        const centerY = 250;
-        const radius = 180;
-        const offsetX = (idx - 1.5) * 8;
-        const x = centerX + radius * Math.cos(angle) + offsetX - 12;
-        const y = centerY + radius * Math.sin(angle) - 12;
+        const offsetX = (idx - 1.5) * (boardSize < 400 ? 6 : 8);
+        const x = centerX + radius * Math.cos(angle) + offsetX - pawnSize;
+        const y = centerY + radius * Math.sin(angle) - pawnSize;
 
         const pawnEl = document.createElement('div');
         pawnEl.className = 'pawn';
@@ -310,8 +308,8 @@ function renderDice(value1, value2) {
     const die1 = document.getElementById('die1');
     const die2 = document.getElementById('die2');
 
-    die1.src = `assets/kenney_boardgame-pack/PNG/Dice/dieRed${value1}.png`;
-    die2.src = `assets/kenney_boardgame-pack/PNG/Dice/dieRed${value2}.png`;
+    die1.src = `/assets/kenney_boardgame-pack/PNG/Dice/dieRed${value1}.png`;
+    die2.src = `/assets/kenney_boardgame-pack/PNG/Dice/dieRed${value2}.png`;
 
     dice.classList.add('active');
 }
@@ -605,6 +603,35 @@ function endTurn() {
         showModal('🎯 Game Over!', '500 rolls reached. No winner!', [
             { text: '🔄 Play Again', type: 'primary', callback: resetGame }
         ]);
+        return;
+    }
+
+    // Check current player status
+    const p = state.players[state.currentPlayer];
+    if (p.money <= 0) {
+        // Skip bankrupt player
+        endTurn();
+        return;
+    }
+
+    const btnRoll = document.getElementById('btn-roll');
+    if (state.currentPlayer === 0) {
+        setStatus('ถึงตาคุณแล้ว! กดปุ่มทอยลูกเต๋า');
+        if (btnRoll) {
+            btnRoll.disabled = false;
+            btnRoll.innerHTML = '🎲 ทอยลูกเต๋า';
+        }
+    } else {
+        setStatus(`ถึงตาของ ${p.name}...`);
+        if (btnRoll) {
+            btnRoll.disabled = true;
+            btnRoll.innerHTML = `⏳ ${p.name}...`;
+        }
+        setTimeout(() => {
+            if (state.phase === 'waiting' && state.currentPlayer !== 0) {
+                rollDice();
+            }
+        }, 900);
     }
 }
 
@@ -651,11 +678,11 @@ function init() {
     // Preload dice images
     for (let i = 1; i <= 6; i++) {
         const img = new Image();
-        img.src = `assets/kenney_boardgame-pack/PNG/Dice/dice${i}.png`;
+        img.src = `/assets/kenney_boardgame-pack/PNG/Dice/dieRed${i}.png`;
     }
 
     // Check asset path
-    fetch('assets/kenney_boardgame-pack/PNG/Dice/dice1.png')
+    fetch('/assets/kenney_boardgame-pack/PNG/Dice/dieRed1.png')
         .then(r => r.ok ? 'ok' : 'fail')
         .catch(() => 'fail')
         .then(status => {

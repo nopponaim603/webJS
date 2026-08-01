@@ -68,6 +68,14 @@ const initialGames = [
     gradient: "linear-gradient(135deg, #00F2FE 0%, #4FACFE 100%)"
   },
   {
+    id: "dice-quest",
+    title: "Dice Quest (G010)",
+    category: "กระดาน / วางกลยุทธ์",
+    url: "/games/dice-quest/index.html",
+    image: "https://images.unsplash.com/photo-1611996575749-79a3a250f948?w=400&h=400&fit=crop",
+    gradient: "linear-gradient(135deg, #6366F1 0%, #A855F7 100%)"
+  },
+  {
     id: "tile-swap",
     title: "Tile Swap",
     category: "ปริศนา / สลับไทล์",
@@ -103,7 +111,7 @@ const initialGames = [
   }
 ];
 
-const categories = ["ทั้งหมด", "ปริศนา", "Phaser 2D", "Babylon 3D"];
+const categories = ["ทั้งหมด", "ปริศนา", "กระดาน", "Phaser 2D", "Babylon 3D"];
 
 export default function Home() {
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -179,7 +187,7 @@ export default function Home() {
                   🧩 กลุ่มเกมปริศนา (Puzzle Games)
                 </h2>
                 <span style={{ fontSize: '0.8rem', background: 'rgba(16, 185, 129, 0.15)', border: '1px solid rgba(16, 185, 129, 0.3)', color: '#34d399', padding: '0.2rem 0.75rem', borderRadius: '9999px', fontWeight: '700' }}>
-                  5 เกม
+                  {initialGames.filter(g => g.category.includes('ปริศนา')).length} เกม
                 </span>
               </div>
               <div style={{
@@ -193,14 +201,35 @@ export default function Home() {
               </div>
             </section>
 
-            {/* Section 2: กลุ่ม Phaser 2D Engine */}
+            {/* Section 2: กลุ่มเกมกระดาน & วางกลยุทธ์ */}
+            <section>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
+                <h2 style={{ fontSize: '1.4rem', fontWeight: '800', color: '#f8fafc', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  🎲 กลุ่มเกมกระดาน & วางกลยุทธ์ (Board & Strategy)
+                </h2>
+                <span style={{ fontSize: '0.8rem', background: 'rgba(99, 102, 241, 0.15)', border: '1px solid rgba(99, 102, 241, 0.3)', color: '#818cf8', padding: '0.2rem 0.75rem', borderRadius: '9999px', fontWeight: '700' }}>
+                  {initialGames.filter(g => g.category.includes('กระดาน') || g.category.includes('วางกลยุทธ์')).length} เกม
+                </span>
+              </div>
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(270px, 1fr))',
+                gap: '1.5rem'
+              }}>
+                {initialGames.filter(g => g.category.includes('กระดาน') || g.category.includes('วางกลยุทธ์')).map(game => (
+                  <GameCard key={game.id} game={game} onPlay={setActiveGame} />
+                ))}
+              </div>
+            </section>
+
+            {/* Section 3: กลุ่ม Phaser 2D Engine */}
             <section>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
                 <h2 style={{ fontSize: '1.4rem', fontWeight: '800', color: '#f8fafc', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   ⚡ Phaser 2D Engine
                 </h2>
                 <span style={{ fontSize: '0.8rem', background: 'rgba(59, 130, 246, 0.15)', border: '1px solid rgba(59, 130, 246, 0.3)', color: '#60a5fa', padding: '0.2rem 0.75rem', borderRadius: '9999px', fontWeight: '700' }}>
-                  2 เกม
+                  {initialGames.filter(g => g.category.includes('Phaser')).length} เกม
                 </span>
               </div>
               <div style={{
@@ -214,14 +243,14 @@ export default function Home() {
               </div>
             </section>
 
-            {/* Section 3: กลุ่ม Babylon 3D Engine */}
+            {/* Section 4: กลุ่ม Babylon 3D Engine */}
             <section>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
                 <h2 style={{ fontSize: '1.4rem', fontWeight: '800', color: '#f8fafc', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   🪐 Babylon 3D Engine
                 </h2>
                 <span style={{ fontSize: '0.8rem', background: 'rgba(168, 85, 247, 0.15)', border: '1px solid rgba(168, 85, 247, 0.3)', color: '#c084fc', padding: '0.2rem 0.75rem', borderRadius: '9999px', fontWeight: '700' }}>
-                  3 เกม
+                  {initialGames.filter(g => g.category.includes('Babylon')).length} เกม
                 </span>
               </div>
               <div style={{

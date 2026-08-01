@@ -38,6 +38,7 @@
 | G018 | `hole-io` | Hole.io 3D | Babylon.js 7.50 / 8 | `public/games/hole-io/` |
 
 ### 🎮 Active Released Game Specifications (`docs/gdd/games/`)
+- [Dice Quest (เกมกระดานทอยลูกเต๋า G010)](./gdd/games/dice-quest/spec.md)
 - [Ocean Frenzy (เกมปลาใหญ่กินปลาเล็ก)](./gdd/games/ocean-frenzy/spec.md)
 - [Card Memory Match](./gdd/games/card-memory/spec.md)
 - [Goosl Glass Marbles](./gdd/games/goosl-marbles/spec.md)
@@ -52,7 +53,6 @@
 - [Cyber Sphere 3D](./gdd/games/cyber-sphere-3d/spec.md)
 
 ### 📋 Planned Game Specifications Roadmap (`docs/gdd/planning/`) — [Full Index](./gdd/planning/index.md)
-- [Dice Quest (เกมกระดานทอยลูกเต๋า)](./gdd/planning/dice-quest/spec.md)
 - [Pico Tower Climber (เกมพิกเซลไต่หอคอย)](./gdd/planning/pico-tower-climber/spec.md)
 - [Pixel Bullet Hell (เกมยานยิงหลบกระสุน)](./gdd/planning/pixel-bullet-hell/spec.md)
 - [Block Collapse (เกมทุบบล็อกจับคู่)](./gdd/planning/block-collapse/spec.md)

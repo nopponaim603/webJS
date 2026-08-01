@@ -57,60 +57,51 @@
 
 ---
 
-## User Stories — Pico-8 Platformer (G010)
+## User Stories — Dice Quest Board Game (G010)
 
-### Story 1 — Basic Mechanics (Priority: P0)
-- **As** a player, I want to move my character with keyboard (WASD/arrows) and jump.
-- **As** a player, I want to run, jump, and land on platforms.
+### Story 1 — Core Monopoly Board & Pawns (Priority: P0)
+- **As** a player, I want to see a 28-tile circular Monopoly-style board and pawns for 4 players (1 Player + 3 AI).
 - **Acceptance Criteria:**
-  - Keyboard controls (WASD/arrows)
-  - Jump with Space or Up arrow
-  - Character animation (idle, run, jump)
-  - Gravity applied correctly
-  - Land on platforms, not through them
+  - 28 tiles placed in circular math layout
+  - 4 colored pawns placed on tile positions
+  - HUD header displaying player money and properties count
 
-### Story 2 — World Design (Priority: P0)
-- **As** a player, I want to see a 20×20 block world with platforms, blocks, and obstacles.
-- **As** a player, I want to collect coins and avoid enemies.
+### Story 2 — Dice Rolling & Movement (Priority: P0)
+- **As** a player, I want to roll a pair of red dice with animation and Web Audio SFX to move around the board.
 - **Acceptance Criteria:**
-  - 20×20 grid-based world
-  - Blocks as walls/platforms
-  - Coins scattered for collection (score +10 each)
-  - Enemies patrol on platforms (game over if touched)
-  - Obstacles (spikes, pits) that cause game over
+  - 3D red dice roll animation with audio feedback
+  - Player pawn advances step by step along board tiles
+  - Pass GO money bonus (+$200) applied on completing a full lap
 
-### Story 3 — Win/Lose (Priority: P0)
-- **As** a player, I want to see a result screen when I win or lose.
+### Story 3 — Tile Rules, Rent & Chance Cards (Priority: P0)
+- **As** a player, I want tile events for buying properties, paying rent to opponents, chancing cards, paying taxes, and visiting Jail / Free Parking.
 - **Acceptance Criteria:**
-  - **Win:** Collect all coins (or reach exit) → Victory modal with score
-  - **Lose:** Touch enemy/spike/fall off → Game Over modal
-  - Show final score in modal
-  - Option to replay
+  - Buy unowned properties / Pay rent to owner
+  - Random chance card events (bonus money, penalty, warp)
+  - Income / Luxury Tax collection & Free Parking pot pool
+  - Jail sentence logic (3 turns lock)
 
-### Story 4 — UI & Controls (Priority: P1)
-- **As** a player, I want a clear UI with score and level progress.
+### Story 4 — Win/Lose & UI (Priority: P1)
+- **As** a player, I want to see victory / game over modals and live log box.
 - **Acceptance Criteria:**
-  - Score counter (top-left)
-  - Coin counter (top-right)
-  - Level progress bar (bottom)
-  - Pause button (P key)
-  - Responsive design
+  - Bankruptcy tracking when player funds drop below zero
+  - Victory modal when all AI opponents go bankrupt or target funds achieved
+  - Replay button resets board state
+  - Glassmorphism HUD & log tracking box
 
 ---
 
 ## Acceptance Criteria (All Stories)
 
-| # | Criteria | Verification |
-|---|----------|-------------|
-| 1 | Pixel Shmup: Move + shoot + dodge | Functional |
-| 2 | Pixel Shmup: 3 enemy types | Visual check |
-| 3 | Pixel Shmup: Wave progression | Functional |
-| 4 | Pixel Shmup: Win/Lose modal | Visual check |
-| 5 | Pico Platformer: Move + jump + run | Functional |
-| 6 | Pico Platformer: Collect coins | Functional |
-| 7 | Pico Platformer: Win/Lose modal | Visual check |
-| 8 | Both games on Vercel | URL check |
-| 9 | Code names + build numbers | Code review |
+| # | Criteria | Verification | Status |
+|---|----------|-------------|:---:|
+| 1 | Pixel Shmup / Ocean Frenzy: Move + shoot + dodge | Functional | 🟢 DONE |
+| 2 | Pixel Shmup / Ocean Frenzy: 3 enemy types & Wave progression | Functional | 🟢 DONE |
+| 3 | Dice Quest: Circular board layout & 4 pawns | Visual check | 🟢 DONE |
+| 4 | Dice Quest: Roll 3D red dice with sound FX | Functional | 🟢 DONE |
+| 5 | Dice Quest: Property buying, rent & chance cards | Functional | 🟢 DONE |
+| 6 | Dice Quest: Victory / Game Over modal & reset | Functional | 🟢 DONE |
+| 7 | WebJS Hub Integration | URL check | 🟢 DONE |
 
 ---
 
