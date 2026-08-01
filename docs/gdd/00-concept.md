@@ -42,6 +42,7 @@
 | G007 | `3d-platformer` | Kenney 3D Platformer | `3d-platformer/` | Babylon.js 8 | ✅ Released |
 | G008 | `card-memory` | Card Memory Match | `public/games/card-memory/` | Vanilla JS | ✅ Released ([US-08-01](../agile/user-stories/US-08-01-card-grid.md)) |
 | G016 | `goosl-marbles` | Goosl Glass Marbles | `public/games/goosl-marbles/` | WebGL 2 / Shader | ✅ Released ([GDD Spec](./games/goosl-marbles/spec.md)) |
+| G017 | `warfront` | WarFront.io (FrontWars) | `public/games/warfront/` | WebGL / TypeScript | ✅ Released ([GDD Spec](./games/warfront/gdd.md)) |
 
 ---
 

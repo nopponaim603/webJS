@@ -37,9 +37,11 @@
 | G017 | `tiny-dungeon-roguelike` | Tiny Dungeon Survivor | Phaser 2D / Roguelike | `public/games/tiny-dungeon-roguelike/` |
 | G018 | `hole-io` | Hole.io 3D | Babylon.js 7.50 / 8 | `public/games/hole-io/` |
 | G019 | `stateIO` | State.IO | Canvas 2D / Web Audio | `public/games/stateIO/` |
+| G020 | `warfront` | WarFront.io (FrontWars) | WebGL / TypeScript | `public/games/warfront/` |
 
 ### 🎮 Active Released Game Specifications (`docs/gdd/games/`)
 - [State.IO (Territory Domination G019)](./gdd/games/stateIO/gdd.md)
+- [WarFront.io & FrontWars Strategy (G020)](./gdd/games/warfront/gdd.md)
 - [Dice Quest (เกมกระดานทอยลูกเต๋า G010)](./gdd/games/dice-quest/spec.md)
 - [Ocean Frenzy (เกมปลาใหญ่กินปลาเล็ก)](./gdd/games/ocean-frenzy/spec.md)
 - [Card Memory Match](./gdd/games/card-memory/spec.md)

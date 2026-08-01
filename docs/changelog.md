@@ -5,7 +5,9 @@
 
 ## [1.27.0] - 2026-08-01
 
-### Added & Completed
+- **WarFront.io & FrontWars Strategy Game (G020)**:
+  - บันทึกเอกสารงานออกแบบ (GDD Spec) ที่ [docs/gdd/games/warfront/gdd.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/warfront/gdd.md) โดยอ้างอิงจากงานออกแบบและซอร์สโค้ดของ [Elitis/FrontWars](https://github.com/Elitis/FrontWars) และ [WarFrontIO/client](https://github.com/WarFrontIO/client)
+  - พอร์ตและรวบรวม Standalone Production Web Bundle ลงใน `public/games/warfront/index.html` พร้อมเชื่อมต่อกับเกมฮับบน `src/app/page.js`
 - **OpenFront.io Offline Strategy RTS Game (G020)**:
   - พอร์ตและพัฒนาตัวเกมวางแผนยึดครองโลกจาก [openfrontio/OpenFrontIO](https://github.com/openfrontio/OpenFrontIO) ให้อยู่ในรูปแบบ **Offline Single-Player Mode 100%** ใน `public/games/openfront/`
   - รองรับระบบสลับแผนที่ (World, Europe, Asia, Pangaea, Archipelago), สู้กับ 5 AI Factions, ระบบการทูต (Diplomacy Alliances), และอาวุธ Silo Missiles
