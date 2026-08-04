@@ -3,6 +3,17 @@
 **Project:** Game Portfolio (`webJS`)  
 **Maintained by:** Antigravity AI & Dev Team  
 
+## [1.28.0] - 2026-08-04
+
+- **Tiny Dungeon Squad — SNKRX Edition (G021)**:
+  - แยกสร้างเป็น **เกมใหม่แยกต่างหาก (G021)** โดยคงเกมเดิม `tiny-dungeon-roguelike` (G017) ไว้ในรูปแบบเดิม 100%
+  - นำระบบเกมจาก [SNKRX by a327ex](https://github.com/a327ex/SNKRX) มาพัฒนาเป็น **2D Top-Down Snake Squad Auto-Battler Roguelite** ในโฟลเดอร์ `public/games/tiny-dungeon-squad/`
+  - บังคับขบวนแถวฮีโร่ (Snake Squad Formation) เคลื่อนที่หลบมอนสเตอร์ พร้อมระบบสมาชิกทีมโจมตีอัตโนมัติ (Auto-Battler)
+  - ระบบ **8 Hero Classes** (Knight, Wizard, Rogue, Priest, Ranger, Paladin, Necromancer, Bard) พร้อม **Auto-Chess Class Synergies** (2/4 ตัวเปิดบัฟสายอาชีพ)
+  - ระบบ **Auto-Merge Tier System** (ผสมฮีโร่ 3 ตัวเป็น ★★ และ ★★★)
+  - ระบบ **Post-Wave Shop Phase** (ซื้อ/ขายฮีโร่, Reroll, ล็อกร้านค้า, อัปเกรดขยายขนาดทีม, สะสมเงินรับดอกเบี้ย Interest)
+  - จัดทำเอกสาร GDD ใน [docs/gdd/games/tiny-dungeon-squad/](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/tiny-dungeon-squad/) และเปิดให้เข้าเล่นบนหน้าหลัก `src/app/page.js`
+
 ## [1.27.0] - 2026-08-01
 
 - **WarFront.io & FrontWars Strategy Game (G020)**:

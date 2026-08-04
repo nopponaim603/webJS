@@ -60,6 +60,14 @@ const initialGames = [
     gradient: "linear-gradient(135deg, #00F2FE 0%, #7F00FF 100%)"
   },
   {
+    id: "tiny-dungeon-squad",
+    title: "Tiny Dungeon Squad (SNKRX)",
+    category: "Phaser 2D Engine",
+    url: "/games/tiny-dungeon-squad/index.html",
+    image: "https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?w=400&h=400&fit=crop",
+    gradient: "linear-gradient(135deg, #8B5CF6 0%, #00F2FE 100%)"
+  },
+  {
     id: "space-shooter",
     title: "Space Shooter",
     category: "Phaser 2D Engine",

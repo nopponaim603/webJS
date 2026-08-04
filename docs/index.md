@@ -38,8 +38,10 @@
 | G018 | `hole-io` | Hole.io 3D | Babylon.js 7.50 / 8 | `public/games/hole-io/` |
 | G019 | `stateIO` | State.IO | Canvas 2D / Web Audio | `public/games/stateIO/` |
 | G020 | `warfront` | WarFront.io (FrontWars) | WebGL / TypeScript | `public/games/warfront/` |
+| G021 | `tiny-dungeon-squad` | Tiny Dungeon Squad (SNKRX Edition) | Phaser 2D / Auto-Battler | `public/games/tiny-dungeon-squad/` |
 
 ### 🎮 Active Released Game Specifications (`docs/gdd/games/`)
+- [Tiny Dungeon Squad (SNKRX Edition G021)](./gdd/games/tiny-dungeon-squad/spec.md)
 - [State.IO (Territory Domination G019)](./gdd/games/stateIO/gdd.md)
 - [WarFront.io & FrontWars Strategy (G020)](./gdd/games/warfront/gdd.md)
 - [Dice Quest (เกมกระดานทอยลูกเต๋า G010)](./gdd/games/dice-quest/spec.md)
@@ -50,7 +52,7 @@
 - [Mahjong Tile Match (ไพ่นกกระจอก)](./gdd/games/mahjong-tile-match/spec.md)
 - [Tile Swap (Phaser 2D)](./gdd/games/tile-swap/spec.md)
 - [Emoji Match](./gdd/games/emoji-match/spec.md)
-- [Tiny Dungeon Survivor (Action Roguelike)](./gdd/games/tiny-dungeon-roguelike/spec.md)
+- [Tiny Dungeon Survivor (Action Roguelike G017)](./gdd/games/tiny-dungeon-roguelike/spec.md)
 - [Space Shooter (Phaser 2D)](./gdd/games/space-shooter/spec.md)
 - [Kenney 3D Platformer (Babylon.js)](./gdd/games/3d-platformer/spec.md)
 - [Hole.io 3D (Babylon.js)](./gdd/games/hole-io/spec.md)
