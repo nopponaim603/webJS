@@ -5,6 +5,17 @@
 
 ## [1.30.0] - 2026-08-12
 
+- **WarFront.io RTS Strategy Granular GDD Suite (G020)**:
+  - แตกเอกสารงานออกแบบลงรายละเอียดเชิงลึกแยกเป็นส่วนๆ ใน [docs/gdd/games/warfront/](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/warfront/) เพื่อความสะดวกในการปรับแต่งระบบ Gameplay:
+    - **[spec.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/warfront/spec.md)**: Technical Specification & Modular Index
+    - **[00-concept.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/warfront/00-concept.md)**: Vision, World Maps (World/Europe), และ Faction Lore (Blue, Red, Green, Gold)
+    - **[01-mechanics.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/warfront/01-mechanics.md)**: Core Mechanics, State Machine Loop, Combat Formulas, Casualty Loss & Isolation Penalty Equations
+    - **[02-economy-and-buildings.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/warfront/02-economy-and-buildings.md)**: Population Growth Model & Strategic Building Upgrade Tree (Fortress, Barracks, Naval Port, Watchtower)
+    - **[03-terrain-and-naval.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/warfront/03-terrain-and-naval.md)**: Terrain Modifiers, Naval Transport Logistics State Machine, และ Line of Sight Fog of War System
+    - **[04-ai-and-balancing.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/warfront/04-ai-and-balancing.md)**: AI Utility Decision Matrix, 4 Personality Types (Blitzkrieg, Expansionist, Turtle, Naval) และ 4 Difficulty Tiers
+    - **[05-controls-and-ux.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/warfront/05-controls-and-ux.md)**: Input Mapping (Mouse/Touch), Keyboard Hotkeys (Space, A, D, F, P, 1-9, Tab) และ Overlay Layout
+    - **[gdd.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/warfront/gdd.md)**: Master Hub Document เชื่อมโยงเอกสารทุกหมวดหมู่
+
 - **BOBA PEARL DROP: 100% SUGAR Game (G023)**:
   - จัดทำชุดเอกสาร GDD ฉบับสมบูรณ์สำหรับเกม 3D Marble Runner สไตล์ *Super Monkey Ball* ด้วย **BabylonJS** ได้รับแรงบันดาลใจจากคลิปทดลองของ Kevin Ngo (`@kevin_t_ngo`)
   - **Game Specification & Concept ([docs/gdd/games/boba-pearl-drop/spec.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/boba-pearl-drop/spec.md), [00-concept.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/boba-pearl-drop/00-concept.md))**: ออกแบบระบบการเล่นเม็ดไข่มุกกลิ้งทรงตัวฝ่าลู่ 3D ลอยฟ้า

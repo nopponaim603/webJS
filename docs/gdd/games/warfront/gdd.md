@@ -1,80 +1,76 @@
-# Game Design Document (GDD) — WarFront.io & FrontWars Strategy
+# ⚔️ Master Game Design Document (GDD) — WarFront.io & FrontWars Strategy
 
 ## Real-Time Tactical Territory Domination Game
 
 **ชื่อโครงการ (Project Title):** WarFront.io & FrontWars Strategy  
 **ประเภทเกม (Genre):** Real-Time Strategy (RTS) / Territory Domination / Browser IO Strategy  
 **แพลตฟอร์ม (Platform):** Web Browser (HTML5 WebGL/Canvas + TypeScript / JavaScript Standalone Bundle)  
-**เวอร์ชัน (Version):** 1.0.0  
+**เวอร์ชัน (Version):** 1.2.0  
 **เจ้าของเอกสาร (Document Owner):** Antigravity Gamedev Team  
 
 ---
 
-## 1. บทนำ แหล่งอ้างอิง และวิสัยทัศน์เกม (Introduction, References & Vision)
+## 📘 Detailed Document Suite Index
 
-### 1.1 แหล่งอ้างอิงงานออกแบบหลัก (Design & Reference Repositories)
-เอกสารงานออกแบบและสถาปัตยกรรมซอฟต์แวร์ของเกมนี้ถูกบันทึกและพัฒนาขึ้นโดยอ้างอิงจาก Repository หลักดังต่อไปนี้:
+เอกสารงานออกแบบฉบับเต็มถูกแบ่งออกเป็น 6 หมวดหมู่หลักในโฟลเดอร์นี้เพื่อความสะดวกในการจูนค่า Gameplay:
 
-1. **FrontWars Repository (Primary Concept & Gameplay Reference):**  
-   [https://github.com/Elitis/FrontWars](https://github.com/Elitis/FrontWars)  
-   *ต้นแบบแนวคิดระบบเกมการยึดดินแดนแบบเรียลไทม์ การจัดการกองทัพ และโหมดต่อสู้ Strategic RTS*
-
-2. **WarFront.io Client Repository (Production Engine & Implementation Reference):**  
-   [https://github.com/WarFrontIO/client](https://github.com/WarFrontIO/client)  
-   *ซอร์สโค้ดฝั่ง Client, WebGL/Canvas Renderer Engine, MapCodec Binary Map Encoder/Decoder, UI System และ AI Bot System*
-
-3. **OpenFrontIO / FrontWars Open-Source Evolution:**  
-   [https://github.com/openfrontio/OpenFrontIO](https://github.com/openfrontio/OpenFrontIO)  
-   *แหล่งอ้างอิงเพิ่มเติมสำหรับการพัฒนาและต่อยอดระบบในอนาคต*
+| หมวดหมู่เอกสาร | ลิงก์เอกสาร | รายละเอียดและจุดเน้นการปรับจูน |
+| :--- | :--- | :--- |
+| **00. Concept & World Lore** | [00-concept.md](./00-concept.md) | คอนเซปต์ ธีมสงคราม การแบ่งฝ่าย Factions (Blue, Red, Green, Gold) และแผนที่โลก |
+| **01. Core Mechanics & Combat** | [01-mechanics.md](./01-mechanics.md) | สูตรคำนวณการรบ อัตราความสูญเสีย ขวัญกำลังใจ และสายส่งกำลังบำรุง |
+| **02. Economy & Buildings** | [02-economy-and-buildings.md](./02-economy-and-buildings.md) | สูตรการผลิตกำลังพล การอัปเกรดป้อมปราการ ท่าเรือ และค่ายทหาร |
+| **03. Terrain & Naval Logistics** | [03-terrain-and-naval.md](./03-terrain-and-naval.md) | ตัวคูณพื้นที่ (ป่า, ภูเขา, แม่น้ำ), หมอกควันสงคราม และการขนส่งทางเรือ |
+| **04. AI Behavior & Balancing** | [04-ai-and-balancing.md](./04-ai-and-balancing.md) | ตารางการตัดสินใจบอท บุคลิกภาพ AI 4 สาย และระดับความยาก 4 ระดับ |
+| **05. Controls & UI/UX** | [05-controls-and-ux.md](./05-controls-and-ux.md) | ระบบการควบคุมเมาส์ Drag-Select, คีย์ลัดแป้นพิมพ์ และเลย์เอาต์ HUD |
+| **Technical Specification** | [spec.md](./spec.md) | ดรรชนีรวมเอกสาร สแตกรันไทม์ และซอร์สอ้างอิง |
 
 ---
 
-### 1.2 Elevator Pitch
-**WarFront.io & FrontWars** คือเกม RTS วางแผนยึดครองโลกแบบเรียลไทม์บนเว็บเบราว์เซอร์ ผู้เล่นสั่งการขยายดินแดน ส่งกองกำลังรบ สร้างเส้นทางลำเลียงเรือ (Boat Routes) และวางยุทธศาสตร์ขับเคี่ยวกับ AI Bots บนแผนที่โลกทวีปต่างๆ (เช่น แผนที่ยุโรป Europe และแผนที่โลก World) โดยตัวเกมทำงานแบบ Standalone 100% ผ่านเบราว์เซอร์ ไม่ต้องลงทะเบียนหรือพึ่งพาเซิร์ฟเวอร์ภายนอกสำหรับการเล่นคนเดียว
+## 1. Executive Summary & Core Gameplay Loop
 
----
-
-## 2. สถาปัตยกรรมเทคนิค (Technical Architecture)
-
-| Component | Technology | Notes |
-|:---|:---|:---|
-| **Core Client** | TypeScript, Webpack | รวมเอารันไทม์และสคริปต์เข้าเป็น Bundled Output Single HTML |
-| **Renderer Engine** | Custom WebGL & Canvas 2D Shader Engine | การเรนเดอร์ขอบเขตดินแดน (Borders), กองทัพ, เส้นทางเรือ และ UI แผนที่ |
-| **Binary Map Codec** | `MapCodec` Submodule (`src/map/codec`) | โหลดและเข้ารหัส/ถอดรหัสไฟล์แผนที่ความละเอียดสูง |
-| **Game Ticker & AI** | Singleplayer Local Simulation (`GameTicker.ts`, `bot/`) | ประมวลผลยูนิต บอท และการขยายเขตแดนแบบเรียลไทม์ 60 FPS |
-
----
-
-## 3. ระบบการเล่นหลัก (Core Gameplay Loop)
+**WarFront.io & FrontWars** คือเกมวางแผนยึดครองโลกแบบเรียลไทม์ (Real-Time Strategy) บนเว็บเบราว์เซอร์ ที่มุ่งเน้นการตัดสินใจระดับมหภาค (Macro RTS):
+- การบริหารขอบเขตดินแดน (Border Control)
+- การสร้างลู่ลำเลียงกำลังบำรุง (Supply Lines)
+- การจัดสรรกำลังพลระหว่างแนวหน้า (Frontline) กับแนวหลัง (Rear Guard)
 
 ```mermaid
 flowchart TD
-    A["ผู้เล่นเลือก Singleplayer"] --> B["เลือกแผนที่ (Europe / World) และใส่ชื่อผู้เล่น"]
-    B --> C["สุ่มตำแหน่งเริ่มต้น (Spawn Points) ของผู้เล่นและ AI Bots"]
-    C --> D["รอบประมวลผล GameTicker (60 FPS)"]
-    D --> E{"การตัดสินใจทางยุทธวิธี"}
-    E -->|"คลิกยึดพื้นที่ติดกัน"| F["ขยายดินแดน (Territory Expansion)"]
-    E -->|"คลิกส่งกองทัพบุก"| G["เดินทัพ/แล่นเรือ (Boat Transport) ไปยังเป้าหมาย"]
-    F --> H["คำนวณกำลังพลและขอบเขตดินแดน BorderManager"]
-    G --> H
-    H --> I{"ตรวจสอบเงื่อนไขชัยชนะ"}
-    I -->|"ครอบครองพื้นที่ทั้งหมด/เกินกำหนด"| J["🏆 ชัยชนะ (Victory)"]
-    I -->|"สูญเสียดินแดนทั้งหมด"| K["💀 พ่ายแพ้ (Defeat)"]
-    I -->|"เกมยังดำเนินอยู่"| D
+    Start([เริ่มเกม Singleplayer / Map Select]) --> Spawn[สุ่มสปอว์นจุดเริ่มต้น Capital Region]
+    Spawn --> Ticker[Game Ticker Engine Loop 60 FPS]
+    
+    Ticker --> Income[คำนวณกำลังพล Manpower ตามขนาดดินแดน]
+    Ticker --> AI[ประมวลผล AI Utility Matrix]
+    Ticker --> Input[รับคำสั่งจากผู้เล่น Player Inputs]
+    
+    Input --> Action{ประเภทคำสั่งยุทธการ}
+    Action -->|"Expand / Attack"| Combat[คำนวณสูตรการรบ]
+    Action -->|"Build Fort / Port"| Build[อัปเกรดสิ่งปลูกสร้าง]
+    Action -->|"Boat Transport"| Sea[ลำเลียงกองทัพข้ามทะเล]
+    
+    Combat --> BorderCheck[คำนวณขอบเขตดินแดน BorderManager]
+    Build --> BorderCheck
+    Sea --> BorderCheck
+    
+    BorderCheck --> Supply[ตรวจสอบความสมบูรณ์ของสายส่งกำลังบำรุง]
+    Supply --> CheckVictory{ตรวจสอบเงื่อนไขจบเกม}
+    
+    CheckVictory -- "ยึดครองดินแดนทั้งหมด / เกิน 80%" --> Win[🏆 ชัยชนะ Victory]
+    CheckVictory -- "สูญเสียดินแดนทั้งหมด" --> Lose[💀 พ่ายแพ้ Defeat]
+    CheckVictory -- "เกมยังไม่จบ" --> Ticker
 ```
 
 ---
 
-## 4. โครงสร้างไฟล์และจุดเชื่อมต่อ (File Locations & Links)
+## 2. Technical Architecture & File Locations
 
-- **GDD Document:** [docs/gdd/games/warfront/gdd.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/warfront/gdd.md)
+- **GDD Document Suite:** [docs/gdd/games/warfront/](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/warfront/)
 - **Standalone Game Bundle:** [public/games/warfront/index.html](file:///c:/Users/noppon/source/06-WEB/webJS/public/games/warfront/index.html)
-- **Web Hub Integration:** [src/app/page.js](file:///c:/Users/noppon/source/06-WEB/webJS/src/app/page.js#L86-L93)
+- **Web Hub Integration:** [src/app/page.js](file:///c:/Users/noppon/source/06-WEB/webJS/src/app/page.js#L95-L101)
 
 ---
 
-## 5. เอกสารอ้างอิงที่เกี่ยวข้อง (Related Documents)
-- [Project Concept & Architecture](../../00-concept.md)
-- [System Design Overview](../../../software/01-system-design.md)
-- [Product Backlog](../../../agile/01-product-backlog.md)
-- [Document Index](../../../index.md)
+## 🔗 Reference Repositories
+
+1. **FrontWars Concept Reference:** [https://github.com/Elitis/FrontWars](https://github.com/Elitis/FrontWars)
+2. **WarFront.io Production Client:** [https://github.com/WarFrontIO/client](https://github.com/WarFrontIO/client)
+3. **OpenFrontIO Strategic Expansion:** [https://github.com/openfrontio/OpenFrontIO](https://github.com/openfrontio/OpenFrontIO)
