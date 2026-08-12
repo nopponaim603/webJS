@@ -145,8 +145,11 @@ export class BotAI {
       const cooldown = this.cooldowns.get(bot.id);
 
       if (cooldown.canAttack(currentTick)) {
-        const allOtherOwnerIds = Array.from(this.gameState.players.keys()).filter((id) => id !== bot.id);
-        const targetId = this.attackStrategy.selectTarget(bot, this.gameState, allOtherOwnerIds);
+        // Only owners actually touching the bot's border are valid targets -
+        // this replaces an earlier bug where every other player was treated
+        // as "adjacent" regardless of real map contact.
+        const adjacentOwnerIds = Array.from(this.gameState.getAdjacentOwners(bot.id));
+        const targetId = this.attackStrategy.selectTarget(bot, this.gameState, adjacentOwnerIds);
         if (targetId !== null && onLaunchAttack) {
           onLaunchAttack(bot.id, targetId);
         }

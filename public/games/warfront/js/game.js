@@ -5,13 +5,19 @@
  */
 
 import { TileMap, DEFAULT_TILE_TYPES } from "./core/TileMap.js";
-import { ZoneBuilder } from "./core/ZoneBuilder.js";
+import { MapGenerator } from "./core/MapGenerator.js";
 import { GameStateManager, Player } from "./engine/GameState.js";
+import { AttackExecutionManager } from "./engine/AttackExecution.js";
 import { BotAI } from "./engine/BotAI.js";
 import { GameRenderer } from "./renderers/GameRenderer.js";
 import { InputManager } from "./ui/InputManager.js";
 import { MainMenu } from "./ui/MainMenu.js";
 import { UIManager } from "./ui/UIManager.js";
+
+/** Minimum troops a player must hold before an attack can be launched. */
+const MIN_TROOPS_TO_ATTACK = 10;
+/** Fraction of troops a bot commits per attack order. */
+const BOT_ATTACK_COMMIT_RATIO = 0.35;
 
 /**
  * Main WarFront Game Application Orchestrator
@@ -21,7 +27,9 @@ class WarFrontApp {
     this.width = 64;
     this.height = 64;
     this.tileMap = null;
+    this.spawnPoints = [];
     this.gameState = null;
+    this.attackManager = null;
     this.botAI = null;
     this.gameRenderer = null;
     this.inputManager = null;
@@ -37,25 +45,11 @@ class WarFrontApp {
   init() {
     console.log("[WarFront.io] Initializing clean modular game engine...");
 
-    // 1. Generate Procedural Map Grid (64x64)
-    const totalTiles = this.width * this.height;
-    const tilesData = new Uint8Array(totalTiles);
-
-    for (let y = 0; y < this.height; y++) {
-      for (let x = 0; x < this.width; x++) {
-        const index = y * this.width + x;
-        // Border coast water
-        if (x === 0 || x === this.width - 1 || y === 0 || y === this.height - 1) {
-          tilesData[index] = 0; // Deep Water
-        } else if (x === 1 || x === this.width - 2 || y === 1 || y === this.height - 2) {
-          tilesData[index] = 1; // Coastal Water
-        } else {
-          tilesData[index] = 2; // Plains / Land
-        }
-      }
-    }
-
-    this.tileMap = new TileMap(this.width, this.height, tilesData, DEFAULT_TILE_TYPES);
+    // 1. Generate a procedural island map with 4 symmetric spawn points.
+    const generated = MapGenerator.generate(this.width, this.height);
+    this.spawnPoints = generated.spawnPoints;
+    this.tileMap = new TileMap(this.width, this.height, generated.tiles, DEFAULT_TILE_TYPES);
+    console.log(`[WarFront.io] Map generated (seed=${generated.seed}).`);
 
     // 2. Initialize Game State Manager
     this.gameState = new GameStateManager();
@@ -96,13 +90,16 @@ class WarFrontApp {
 
     const players = [humanPlayer, bot1, bot2, bot3];
 
-    this.gameState.init(this.tileMap.totalTiles, players);
+    this.gameState.init(this.tileMap, players);
+    this.attackManager = new AttackExecutionManager(this.gameState, this.tileMap);
+    this.gameRenderer.setAttackManager(this.attackManager);
 
-    // Assign initial spawn capital territories
-    this.assignSpawnTerritory(humanPlayer, 10, 10);
-    this.assignSpawnTerritory(bot1, 50, 10);
-    this.assignSpawnTerritory(bot2, 10, 50);
-    this.assignSpawnTerritory(bot3, 50, 50);
+    // Assign starting territory at each generated spawn point.
+    const [spawn0, spawn1, spawn2, spawn3] = this.spawnPoints;
+    this.assignSpawnTerritory(humanPlayer, spawn0.x, spawn0.y);
+    this.assignSpawnTerritory(bot1, spawn1.x, spawn1.y);
+    this.assignSpawnTerritory(bot2, spawn2.x, spawn2.y);
+    this.assignSpawnTerritory(bot3, spawn3.x, spawn3.y);
 
     // Bind tile click callback for human player expansion
     this.inputManager.onTileClickCallback = (tileX, tileY) => {
@@ -122,64 +119,50 @@ class WarFrontApp {
   }
 
   /**
-   * Handle tile click to conquer/expand territory into adjacent tiles.
+   * Handle a tile click by launching (or reinforcing) a gradual attack against
+   * whichever owner currently holds that tile, provided the human player's
+   * territory actually borders them. Capture plays out over several ticks
+   * instead of instantly flipping tiles.
    */
   handleTileClick(tileX, tileY, humanPlayer) {
-    if (!this.tileMap || !this.gameState || !humanPlayer || !humanPlayer.isAlive()) return;
+    if (!this.tileMap || !this.gameState || !this.attackManager || !humanPlayer || !humanPlayer.isAlive()) return;
     if (!this.tileMap.inBounds(tileX, tileY)) return;
 
     const targetIndex = this.tileMap.xyToIndex(tileX, tileY);
     const tileType = this.tileMap.getTileType(targetIndex);
-
-    // Cannot conquer non-conquerable terrain (deep water/mountains)
     if (!tileType || !tileType.conquerable) return;
 
-    const currentOwner = this.gameState.getOwner(targetIndex);
-    if (currentOwner === humanPlayer.id) return; // Already owned
+    const targetOwnerId = this.gameState.getOwner(targetIndex);
+    if (targetOwnerId === humanPlayer.id) return; // already ours
 
-    // Check if target tile is adjacent to human territory
-    let isAdjacent = false;
-    this.tileMap.onNeighbors(targetIndex, (nIndex) => {
-      if (this.gameState.getOwner(nIndex) === humanPlayer.id) {
-        isAdjacent = true;
-      }
-    });
+    // Require actual territorial contact with the clicked tile's owner.
+    const adjacentOwners = this.gameState.getAdjacentOwners(humanPlayer.id);
+    if (!adjacentOwners.has(targetOwnerId)) return;
 
-    if (isAdjacent) {
-      const availableTroops = humanPlayer.getTroops();
-      if (availableTroops <= 5) return;
+    const availableTroops = humanPlayer.getTroops();
+    if (availableTroops <= MIN_TROOPS_TO_ATTACK) return;
 
-      const pct = (this.uiManager ? this.uiManager.attackPercentage : 50) / 100.0;
-      const troopCost = Math.max(5, Math.floor(availableTroops * pct * 0.1));
+    const pct = (this.uiManager ? this.uiManager.attackPercentage : 50) / 100.0;
+    const troopsToCommit = Math.max(5, Math.floor(availableTroops * pct));
 
-      humanPlayer.removeTroops(troopCost);
-      this.gameState.conquerTile(targetIndex, humanPlayer.id);
-
-      // Auto-expand into adjacent neutral land tiles for smooth RTS expansion feedback
-      this.tileMap.onNeighbors(targetIndex, (nIndex) => {
-        if (
-          this.gameState.getOwner(nIndex) === 0 &&
-          this.tileMap.getTileType(nIndex)?.conquerable &&
-          humanPlayer.getTroops() > 5
-        ) {
-          humanPlayer.removeTroops(2);
-          this.gameState.conquerTile(nIndex, humanPlayer.id);
-        }
-      });
-    }
+    humanPlayer.removeTroops(troopsToCommit);
+    this.attackManager.launchAttack(humanPlayer.id, targetOwnerId, troopsToCommit);
   }
 
   /**
-   * Assign starting land square around spawn point.
+   * Assign starting land tiles around a spawn point and mark it as the player's capital.
    */
   assignSpawnTerritory(player, centerX, centerY) {
+    player.capitalIndex = this.tileMap.xyToIndex(centerX, centerY);
+
     for (let dy = -2; dy <= 2; dy++) {
       for (let dx = -2; dx <= 2; dx++) {
         const x = centerX + dx;
         const y = centerY + dy;
         if (this.tileMap.inBounds(x, y)) {
           const index = this.tileMap.xyToIndex(x, y);
-          if (this.tileMap.getTileId(index) === 2) { // Land tile
+          const tileType = this.tileMap.getTileType(index);
+          if (tileType && tileType.conquerable) {
             this.gameState.conquerTile(index, player.id);
           }
         }
@@ -193,27 +176,24 @@ class WarFrontApp {
   updateGameLoop(humanPlayer) {
     this.gameState.tick();
 
-    // Bot AI update loop
+    // Bot AI decisions: launch gradual attacks against real adjacent targets.
     if (this.botAI) {
-      this.botAI.update((fromBotId) => {
+      this.botAI.update((fromBotId, toOwnerId) => {
         const botPlayer = this.gameState.getPlayer(fromBotId);
-        if (botPlayer && botPlayer.getTroops() > 20) {
-          // Find an unowned or enemy tile adjacent to bot territory
-          for (let index = 0; index < this.tileMap.totalTiles; index++) {
-            if (this.gameState.getOwner(index) === fromBotId) {
-              const neighbors = this.tileMap.getNeighbors(index);
-              for (const nIndex of neighbors) {
-                const owner = this.gameState.getOwner(nIndex);
-                if (owner !== fromBotId && this.tileMap.getTileType(nIndex)?.conquerable) {
-                  botPlayer.removeTroops(5);
-                  this.gameState.conquerTile(nIndex, fromBotId);
-                  return;
-                }
-              }
-            }
-          }
-        }
+        if (!botPlayer || !botPlayer.isAlive()) return;
+
+        const availableTroops = botPlayer.getTroops();
+        if (availableTroops <= MIN_TROOPS_TO_ATTACK) return;
+
+        const troopsToCommit = Math.max(10, Math.floor(availableTroops * BOT_ATTACK_COMMIT_RATIO));
+        botPlayer.removeTroops(troopsToCommit);
+        this.attackManager.launchAttack(fromBotId, toOwnerId, troopsToCommit);
       });
+    }
+
+    // Advance all in-flight attacks (human + bots) by one tick.
+    if (this.attackManager) {
+      this.attackManager.tick();
     }
 
     this.uiManager.update(humanPlayer);

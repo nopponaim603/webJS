@@ -1,8 +1,10 @@
 /**
  * @file UnitRenderer.js
- * @description Naval Vessel Boats & Territory Troop Count Badge Renderer.
+ * @description Naval Vessel Boats, Territory Troop Count Badges, & Active Attack Line Renderer.
  * @module renderers/UnitRenderer
  */
+
+import { TILE_SIZE } from "./MapRenderer.js";
 
 /**
  * Naval Boat Vessel Entity Data
@@ -26,17 +28,21 @@ export class BoatEntity {
 }
 
 /**
- * Troop Badges & Boat Animation Canvas Renderer
+ * Troop Badges, Boat Animation, & Attack Line Canvas Renderer
  */
 export class UnitRenderer {
   /**
    * @param {HTMLCanvasElement} canvas
    * @param {import('../engine/GameState.js').GameStateManager} gameState
+   * @param {import('../core/TileMap.js').TileMap} [tileMap]
    */
-  constructor(canvas, gameState) {
+  constructor(canvas, gameState, tileMap = null) {
     this.canvas = canvas;
     this.ctx = canvas ? canvas.getContext("2d") : null;
     this.gameState = gameState;
+    this.tileMap = tileMap;
+    /** @type {import('../engine/AttackExecution.js').AttackExecutionManager|null} */
+    this.attackManager = null;
     /** @type {BoatEntity[]} */
     this.activeBoats = [];
 
@@ -53,6 +59,46 @@ export class UnitRenderer {
   }
 
   /**
+   * Wire in the attack manager so in-flight attacks can be drawn as front lines.
+   * @param {import('../engine/AttackExecution.js').AttackExecutionManager} attackManager
+   */
+  setAttackManager(attackManager) {
+    this.attackManager = attackManager;
+  }
+
+  /**
+   * Convert a tile index into world pixel coordinates at the tile's center.
+   * @param {number} tileIndex
+   * @returns {{x: number, y: number}}
+   */
+  tileToWorldPoint(tileIndex) {
+    const width = this.tileMap ? this.tileMap.width : 1;
+    const x = tileIndex % width;
+    const y = Math.floor(tileIndex / width);
+    return { x: x * TILE_SIZE + TILE_SIZE / 2, y: y * TILE_SIZE + TILE_SIZE / 2 };
+  }
+
+  /**
+   * Pick a stable anchor point for a player's troop label: their capital tile if
+   * still owned, otherwise any tile currently on their border, otherwise none.
+   * @param {import('../engine/GameState.js').Player} player
+   * @returns {{x: number, y: number}|null}
+   */
+  getPlayerAnchor(player) {
+    if (!this.tileMap || !this.gameState) return null;
+
+    if (player.capitalIndex >= 0 && this.gameState.getOwner(player.capitalIndex) === player.id) {
+      return this.tileToWorldPoint(player.capitalIndex);
+    }
+
+    const border = this.gameState.getBorderTiles(player.id);
+    for (const tileIndex of border) {
+      return this.tileToWorldPoint(tileIndex);
+    }
+    return null;
+  }
+
+  /**
    * Format large troop numbers for clean HUD overlay (e.g., 1.5K, 2.3M)
    * @param {number} num
    * @returns {string}
@@ -64,7 +110,7 @@ export class UnitRenderer {
   }
 
   /**
-   * Render troop count labels and naval boats.
+   * Render troop count labels, naval boats, and active attack front lines.
    */
   render() {
     if (!this.ctx || !this.gameState) return;
@@ -75,6 +121,8 @@ export class UnitRenderer {
     // Apply camera transformation
     ctx.translate(this.offsetX, this.offsetY);
     ctx.scale(this.zoom, this.zoom);
+
+    this.renderActiveAttacks(ctx);
 
     // Draw active naval boats
     for (const boat of this.activeBoats) {
@@ -87,24 +135,71 @@ export class UnitRenderer {
       ctx.stroke();
     }
 
-    // Draw Troop Labels for active players
+    this.renderTroopLabels(ctx);
+
+    ctx.restore();
+  }
+
+  /**
+   * Draw a dashed front-line from each attacker's capital toward the tiles they're
+   * currently capturing, so a gradual attack is visible while it plays out.
+   * @param {CanvasRenderingContext2D} ctx
+   */
+  renderActiveAttacks(ctx) {
+    if (!this.attackManager || !this.tileMap) return;
+
+    for (const attack of this.attackManager.getActiveAttacks()) {
+      const attacker = this.gameState.getPlayer(attack.attackerId);
+      if (!attacker) continue;
+
+      const from = this.getPlayerAnchor(attacker);
+      if (!from || attack.frontier.length === 0) continue;
+
+      // Average a handful of frontier tiles for a stable-ish front-line point.
+      const sampleCount = Math.min(5, attack.frontier.length);
+      let sumX = 0, sumY = 0;
+      for (let i = 0; i < sampleCount; i++) {
+        const point = this.tileToWorldPoint(attack.frontier[attack.frontier.length - 1 - i]);
+        sumX += point.x;
+        sumY += point.y;
+      }
+      const to = { x: sumX / sampleCount, y: sumY / sampleCount };
+
+      ctx.save();
+      ctx.strokeStyle = attacker.baseColor || "#ffffff";
+      ctx.globalAlpha = 0.6;
+      ctx.lineWidth = 2;
+      ctx.setLineDash([6, 4]);
+      ctx.beginPath();
+      ctx.moveTo(from.x, from.y);
+      ctx.lineTo(to.x, to.y);
+      ctx.stroke();
+      ctx.restore();
+
+      ctx.fillStyle = attacker.baseColor || "#ffffff";
+      ctx.font = "bold 11px system-ui, sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(UnitRenderer.formatTroopCount(attack.troops), to.x, to.y - 10);
+    }
+  }
+
+  /**
+   * Draw the name/troop-count badge for each alive player above their capital
+   * (or their current frontier if the capital has been lost).
+   * @param {CanvasRenderingContext2D} ctx
+   */
+  renderTroopLabels(ctx) {
     const players = this.gameState.getPlayers().filter((p) => p.isAlive() && p.getTerritorySize() > 0);
     ctx.font = "bold 14px system-ui, sans-serif";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
 
-    // Dynamic position per player ID based on spawn quadrants
-    const spawnCoords = {
-      1: { x: 168, y: 140 }, // Player (Top Left)
-      2: { x: 808, y: 140 }, // Bot 1 (Top Right)
-      3: { x: 168, y: 780 }, // Bot 2 (Bottom Left)
-      4: { x: 808, y: 780 }  // Bot 3 (Bottom Right)
-    };
-
     for (const player of players) {
-      const pos = spawnCoords[player.id] || { x: 100 + player.id * 100, y: 100 };
-      const posX = pos.x;
-      const posY = pos.y;
+      const anchor = this.getPlayerAnchor(player);
+      if (!anchor) continue;
+      const posX = anchor.x;
+      const posY = anchor.y - 20; // hover the badge just above the capital tile
 
       // Draw shadow badge background
       ctx.fillStyle = "rgba(0, 0, 0, 0.75)";
@@ -116,7 +211,5 @@ export class UnitRenderer {
       ctx.fillStyle = player.baseColor || "#ffffff";
       ctx.fillText(`${player.name}: ${UnitRenderer.formatTroopCount(player.getTroops())}`, posX, posY);
     }
-
-    ctx.restore();
   }
 }

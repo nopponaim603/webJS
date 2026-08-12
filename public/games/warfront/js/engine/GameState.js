@@ -21,6 +21,8 @@ export class Player {
     this.territorySize = 0;
     this.alive = true;
     this.isBot = false;
+    /** @type {number} Tile index of this player's spawn/capital, or -1 if unset. */
+    this.capitalIndex = -1;
   }
 
   /**
@@ -81,12 +83,19 @@ export class Player {
 export class GameStateManager {
   static OWNER_NONE = 0;
   static OWNER_WATER = -1;
+  static EMPTY_SET = new Set();
 
   constructor() {
     /** @type {Map<number, Player>} */
     this.players = new Map();
     /** @type {Int16Array|null} Array of tile owner player IDs */
     this.tileOwners = null;
+    /** @type {import('../core/TileMap.js').TileMap|null} */
+    this.tileMap = null;
+    /** @type {Map<number, Set<number>>} playerId -> tile indices bordering foreign territory */
+    this.borderTiles = new Map();
+    /** @type {Set<number>} Tile indices whose owner changed since the last render consumed them */
+    this.dirtyTiles = new Set();
     /** @type {number} Game tick count */
     this.ticks = 0;
     /** @type {number} Total elapsed seconds */
@@ -96,14 +105,17 @@ export class GameStateManager {
   }
 
   /**
-   * Initialize game state with map dimensions and players.
-   * @param {number} totalTiles
+   * Initialize game state with a map and players.
+   * @param {import('../core/TileMap.js').TileMap} tileMap
    * @param {Player[]} playerList
    */
-  init(totalTiles, playerList) {
-    this.tileOwners = new Int16Array(totalTiles);
+  init(tileMap, playerList) {
+    this.tileMap = tileMap;
+    this.tileOwners = new Int16Array(tileMap.totalTiles);
     this.tileOwners.fill(GameStateManager.OWNER_NONE);
     this.players.clear();
+    this.borderTiles.clear();
+    this.dirtyTiles.clear();
 
     playerList.forEach((player) => {
       this.players.set(player.id, player);
@@ -167,6 +179,83 @@ export class GameStateManager {
     this.tileOwners[tileIndex] = newOwnerId;
     const newPlayer = this.getPlayer(newOwnerId);
     if (newPlayer) newPlayer.addTile(tileIndex);
+
+    this.dirtyTiles.add(tileIndex);
+
+    // Border status of this tile and every neighbor may have just changed.
+    this.refreshBorderStatus(tileIndex);
+    if (this.tileMap) {
+      this.tileMap.onNeighbors(tileIndex, (nIndex) => this.refreshBorderStatus(nIndex));
+    }
+  }
+
+  /**
+   * Recompute whether a tile is a "border" tile (owned tile touching foreign
+   * territory) and keep the owner's border set up to date. Border sets are
+   * what let attacks and bot AI find contested frontiers without scanning
+   * the whole map every tick.
+   * @param {number} tileIndex
+   */
+  refreshBorderStatus(tileIndex) {
+    if (!this.tileMap) return;
+    const owner = this.tileOwners[tileIndex];
+    if (owner <= GameStateManager.OWNER_NONE) return;
+
+    let isBorder = false;
+    this.tileMap.onNeighbors(tileIndex, (nIndex) => {
+      if (this.tileOwners[nIndex] !== owner) isBorder = true;
+    });
+
+    let set = this.borderTiles.get(owner);
+    if (!set) {
+      set = new Set();
+      this.borderTiles.set(owner, set);
+    }
+    if (isBorder) {
+      set.add(tileIndex);
+    } else {
+      set.delete(tileIndex);
+    }
+  }
+
+  /**
+   * Get a player's current frontier tile set (owned tiles touching foreign territory).
+   * @param {number} playerId
+   * @returns {Set<number>}
+   */
+  getBorderTiles(playerId) {
+    return this.borderTiles.get(playerId) || GameStateManager.EMPTY_SET;
+  }
+
+  /**
+   * Collect the set of owner IDs (other players, or 0 for unclaimed land)
+   * whose conquerable territory currently touches this player's border.
+   * @param {number} playerId
+   * @returns {Set<number>}
+   */
+  getAdjacentOwners(playerId) {
+    const owners = new Set();
+    if (!this.tileMap) return owners;
+    this.getBorderTiles(playerId).forEach((tileIndex) => {
+      this.tileMap.onNeighbors(tileIndex, (nIndex) => {
+        const owner = this.tileOwners[nIndex];
+        if (owner === playerId) return;
+        const tileType = this.tileMap.getTileType(nIndex);
+        if (tileType && tileType.conquerable) owners.add(owner);
+      });
+    });
+    return owners;
+  }
+
+  /**
+   * Drain and return the set of tile indices whose owner changed since the
+   * last call. Intended for renderers to redraw only what actually moved.
+   * @returns {Set<number>}
+   */
+  consumeDirtyTiles() {
+    const dirty = this.dirtyTiles;
+    this.dirtyTiles = new Set();
+    return dirty;
   }
 
   /**

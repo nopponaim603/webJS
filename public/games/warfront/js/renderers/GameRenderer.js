@@ -31,7 +31,7 @@ export class GameRenderer {
     this.gameState = gameState;
 
     this.mapRenderer = new MapRenderer(this.canvas, tileMap, gameState);
-    this.unitRenderer = new UnitRenderer(this.canvas, gameState);
+    this.unitRenderer = new UnitRenderer(this.canvas, gameState, tileMap);
 
     this.isRendering = false;
     this.animationFrameId = null;
@@ -48,6 +48,14 @@ export class GameRenderer {
       containerElement.appendChild(this.canvas);
     }
     this.resize();
+  }
+
+  /**
+   * Wire the active-attacks manager into the unit layer so in-flight attacks render.
+   * @param {import('../engine/AttackExecution.js').AttackExecutionManager} attackManager
+   */
+  setAttackManager(attackManager) {
+    this.unitRenderer.setAttackManager(attackManager);
   }
 
   /**

@@ -4,6 +4,8 @@
  * @module ui/InputManager
  */
 
+import { TILE_SIZE } from "../renderers/MapRenderer.js";
+
 /**
  * Camera Viewport & Mouse Pointer Input Manager
  */
@@ -85,7 +87,7 @@ export class InputManager {
     if (moveDist < 8 && this.onTileClickCallback) {
       const worldX = (e.clientX - this.cameraX) / this.zoom;
       const worldY = (e.clientY - this.cameraY) / this.zoom;
-      const tileSize = 16;
+      const tileSize = TILE_SIZE;
       const tileX = Math.floor(worldX / tileSize);
       const tileY = Math.floor(worldY / tileSize);
       this.onTileClickCallback(tileX, tileY);
@@ -135,7 +137,7 @@ export class InputManager {
       if (moveDist < 10 && this.onTileClickCallback) {
         const worldX = (touch.clientX - this.cameraX) / this.zoom;
         const worldY = (touch.clientY - this.cameraY) / this.zoom;
-        const tileSize = 16;
+        const tileSize = TILE_SIZE;
         const tileX = Math.floor(worldX / tileSize);
         const tileY = Math.floor(worldY / tileSize);
         this.onTileClickCallback(tileX, tileY);
