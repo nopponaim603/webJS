@@ -1,106 +1,79 @@
-/** * Bresenham Line-of-Sight & Boat Route Calculation * WarFront.io System Module */ export const SystemModule_Pathfinding = {
-  8348:(A, t, e)=> {
-    "use strict";
-    function r(A, t, e, r, s) {
-      if (A===e&&t===r)return !0;
-      const a=e-A, n=r-t, o=Math.max(Math.abs(a), Math.abs(n)), q=a/o, V=n/o;
-      let d=A+.5, h=t+.5;
-      if (-1===s.getDistance(A+t*s.width)&&!i(d, h, q, V, s))return !1;
-      if (-1===s.getDistance(e+r*s.width)&&!i(e+.5, r+.5, -q, -V, s))return !1;
-      for (let A=1;
-      A<o;
-      A++) {
-        d+=q, h+=V;
-        const A=s.getDistance(Math.floor(d)+Math.floor(h)*s.width);
-        if (A>=0)return !1;
-        if (-1===A) {
-          if (0===a||0===n)continue;
-          if (!i(d, h, q, V, s)||!i(d, h, -q, -V, s))return !1
-        }
-      }
-      return !0
-    }
-    function i(A, t, e, r, i) {
-      if (Math.abs(e)>Math.abs(r)) {
-        if (i.getDistance(Math.floor(A)+Math.floor(t+r-.49)*i.width)>=0)return !1;
-        if (i.getDistance(Math.floor(A)+Math.floor(t+r+.49)*i.width)>=0)return !1
-      }
-      else {
-        if (i.getDistance(Math.floor(A+e-.49)+Math.floor(t)*i.width)>=0)return !1;
-        if (i.getDistance(Math.floor(A+e+.49)+Math.floor(t)*i.width)>=0)return !1
-      }
-      return !0
-    }
-    e.d(t, {
-      P:()=>r
-    }
-    )
+/**
+ * @file Pathfinding.js
+ * @description Bresenham Line-of-Sight & Boat Navigation / Raycasting Engine.
+ * @module engine/Pathfinding
+ */
+
+/**
+ * Check sub-pixel corner collision when performing diagonal raycasts.
+ * @param {number} currentX - Subpixel X position
+ * @param {number} currentY - Subpixel Y position
+ * @param {number} dirX - Normalized X direction step
+ * @param {number} dirY - Normalized Y direction step
+ * @param {object} map - Map object providing `getDistance(index)` and `width`
+ * @returns {boolean} True if path is clear around corners
+ */
+export function checkSubpixelObstacle(currentX, currentY, dirX, dirY, map) {
+  if (Math.abs(dirX) > Math.abs(dirY)) {
+    const tile1 = Math.floor(currentX) + Math.floor(currentY + dirY - 0.49) * map.width;
+    const tile2 = Math.floor(currentX) + Math.floor(currentY + dirY + 0.49) * map.width;
+    if (map.getDistance(tile1) >= 0 || map.getDistance(tile2) >= 0) return false;
+  } else {
+    const tile1 = Math.floor(currentX + dirX - 0.49) + Math.floor(currentY) * map.width;
+    const tile2 = Math.floor(currentX + dirX + 0.49) + Math.floor(currentY) * map.width;
+    if (map.getDistance(tile1) >= 0 || map.getDistance(tile2) >= 0) return false;
   }
-  , 1151:(A, t, e)=> {
-    "use strict";
-    e.d(t, {
-      J:()=>o, l:()=>q
-    }
-    );
-    var r=e(5156), i=e(4830), s=e(7798), a=e(8621);
-    let n;
-    class o extends r.a {
-      constructor(A, t, e) {
-        super(A, t, e), n=new Uint16Array(i.ey.preprocessMap())
-      }
-      addTile(A) {
-        super.addTile(A), a.hf.onNeighbors(A, (A=> {
-          s.Q.isWater(A)&&n[i.ey.areaIndex[A]]++
-        }
-        ))
-      }
-      removeTile(A) {
-        super.removeTile(A), a.hf.onNeighbors(A, (A=> {
-          s.Q.isWater(A)&&n[i.ey.areaIndex[A]]--
-        }
-        ))
-      }
-    }
-    function q(A) {
-      return n[A]>0
-    }
-  }
-  , 5156:(A, t, e)=> {
-    "use strict";
-    e.d(t, {
-      a:()=>i
-    }
-    );
-    var r=e(8621);
-    class i {
-      constructor(A, t, e) {
-        this.troops=1e3, this.territorySize=0, this.alive=!0, this.id=A, this.name=t, this.baseColor=r.ot.processPlayerColor(A, e)
-      }
-      addTile(A) {
-        this.territorySize++
-      }
-      removeTile(A) {
-        this.territorySize--, 0!==this.territorySize||r.ot.keepAlive(this)||(this.alive=!1)
-      }
-      income() {
-        this.addTroops(Math.max(1, Math.floor(this.territorySize/10)+Math.floor(Math.pow(.6, 1-Math.log(this.troops+1)/Math.LN2))))
-      }
-      getTroops() {
-        return this.troops
-      }
-      addTroops(A) {
-        this.troops=Math.min(100*this.territorySize, this.troops+A)
-      }
-      removeTroops(A) {
-        this.troops=Math.max(0, this.troops-A)
-      }
-      getTerritorySize() {
-        return this.territorySize
-      }
-      isAlive() {
-        return this.alive
-      }
-    }
-  }
+  return true;
 }
-;
+
+/**
+ * Perform Bresenham line-of-sight check between two grid tile coordinates.
+ * @param {number} startX - Origin tile X grid coordinate
+ * @param {number} startY - Origin tile Y grid coordinate
+ * @param {number} endX - Target tile X grid coordinate
+ * @param {number} endY - Target tile Y grid coordinate
+ * @param {object} distanceMap - Distance field map providing `getDistance(index)` and `width`
+ * @returns {boolean} True if direct line of sight exists without hitting land obstacles
+ */
+export function hasLineOfSight(startX, startY, endX, endY, distanceMap) {
+  if (startX === endX && startY === endY) return true;
+
+  const dx = endX - startX;
+  const dy = endY - startY;
+  const steps = Math.max(Math.abs(dx), Math.abs(dy));
+  const stepX = dx / steps;
+  const stepY = dy / steps;
+
+  let currentX = startX + 0.5;
+  let currentY = startY + 0.5;
+
+  // Check start & end points
+  const startTile = startX + startY * distanceMap.width;
+  if (distanceMap.getDistance(startTile) === -1 && !checkSubpixelObstacle(currentX, currentY, stepX, stepY, distanceMap)) {
+    return false;
+  }
+
+  const endTile = endX + endY * distanceMap.width;
+  if (distanceMap.getDistance(endTile) === -1 && !checkSubpixelObstacle(endX + 0.5, endY + 0.5, -stepX, -stepY, distanceMap)) {
+    return false;
+  }
+
+  // Step through intermediate tiles
+  for (let i = 1; i < steps; i++) {
+    currentX += stepX;
+    currentY += stepY;
+    const tileIndex = Math.floor(currentX) + Math.floor(currentY) * distanceMap.width;
+    const dist = distanceMap.getDistance(tileIndex);
+
+    if (dist >= 0) return false; // Blocked by solid land
+    if (dist === -1) {
+      if (dx === 0 || dy === 0) continue;
+      if (!checkSubpixelObstacle(currentX, currentY, stepX, stepY, distanceMap) ||
+          !checkSubpixelObstacle(currentX, currentY, -stepX, -stepY, distanceMap)) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}

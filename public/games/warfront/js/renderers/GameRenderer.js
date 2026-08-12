@@ -1,79 +1,113 @@
-/** * GameRenderer Canvas WebGL/2D Master Pipeline * WarFront.io System Module */ export const SystemModule_GameRenderer = {
-  9676:(A, t, e)=> {
-    "use strict";
-    e.r(t), e.d(t, {
-      GameRenderer:()=>o, gameRenderer:()=>V, rendererContextGameplay:()=>q, renderingContextInit:()=>d
-    }
-    );
-    var r=e(6359), i=e(1733), s=e(504), a=e(5510);
-    class n {
-      constructor() {
-        this.array=[], this.priority=[]
-      }
-      add(A, t) {
-        const e=this.priority.findIndex((A=>A>t));
-        -1===e?(this.array.push(A), this.priority.push(t)):(this.array.splice(e, 0, A), this.priority.splice(e, 0, t))
-      }
-      clear() {
-        this.array.length=0, this.priority.length=0
-      }
-      forEach(A) {
-        this.array.forEach(A)
-      }
-    }
-    class o {
-      constructor() {
-        this.layers=new n, this.canvas=document.createElement("canvas"), this.canvas.id="gameCanvas", this.canvas.style.position="absolute", this.canvas.style.left="0", this.canvas.style.top="0", this.canvas.style.zIndex="-1", this.context=new a.p(this.canvas.getContext("webgl2", {
-          premultipliedAlpha:!1
-        }
-        )), this.context.startBlendNatural(), this.doRenderTick(), document.body.appendChild(this.canvas)
-      }
-      switchContext(A) {
-        this.layers.clear(), d.broadcast(A, this.context)
-      }
-      registerLayer(A, t) {
-        try {
-          A.init(this.context), this.layers.add(A, t)
-        }
-        catch(A) {
-          console.error(A)
-        }
-      }
-      doRenderTick() {
-        this.layers.forEach((A=> {
-          A.render(this.context)
-        }
-        )), requestAnimationFrame((()=>this.doRenderTick()))
-      }
-      resize(A, t) {
-        V.canvas.width=Math.ceil(A/window.devicePixelRatio), V.canvas.height=Math.ceil(t/window.devicePixelRatio), V.context.viewport()
-      }
-    }
-    const q=1, V=new o, d=new s.I;
-    r.X.register(V.resize), i.om.register((()=>V.switchContext(q)))
+/**
+ * @file GameRenderer.js
+ * @description Master Rendering Orchestration Pipeline & Canvas Animation Loop.
+ * @module renderers/GameRenderer
+ */
+
+import { MapRenderer } from "./MapRenderer.js";
+import { UnitRenderer } from "./UnitRenderer.js";
+
+/**
+ * Master Game Renderer class managing canvas creation, layer composition, and animation loop.
+ */
+export class GameRenderer {
+  /**
+   * @param {import('../core/TileMap.js').TileMap} tileMap
+   * @param {import('../engine/GameState.js').GameStateManager} gameState
+   */
+  constructor(tileMap, gameState) {
+    /** @type {HTMLCanvasElement} */
+    this.canvas = document.createElement("canvas");
+    this.canvas.id = "gameCanvas";
+    this.canvas.style.position = "absolute";
+    this.canvas.style.left = "0";
+    this.canvas.style.top = "0";
+    this.canvas.style.width = "100%";
+    this.canvas.style.height = "100%";
+    this.canvas.style.zIndex = "0";
+    this.canvas.style.pointerEvents = "none";
+
+    this.tileMap = tileMap;
+    this.gameState = gameState;
+
+    this.mapRenderer = new MapRenderer(this.canvas, tileMap, gameState);
+    this.unitRenderer = new UnitRenderer(this.canvas, gameState);
+
+    this.isRendering = false;
+    this.animationFrameId = null;
+
+    this.setupResizeListener();
   }
-  , 7233:(A, t, e)=> {
-    "use strict";
-    e.r(t), e.d(t, {
-      backgroundLayer:()=>s
+
+  /**
+   * Attach master canvas element to DOM.
+   * @param {HTMLElement} containerElement
+   */
+  attachToDOM(containerElement = document.body) {
+    if (!document.getElementById("gameCanvas")) {
+      containerElement.appendChild(this.canvas);
     }
-    );
-    var r=e(9983), i=e(9676);
-    const s=new class {
-      init(A) {
-        this.context=A, this.updateTheme((0, r.PL)("theme"))
-      }
-      updateTheme(A) {
-        if (!this.context)return;
-        const t=A.getBackgroundColor().toRGB();
-        this.context.raw.clearColor(t.r/255, t.g/255, t.b/255, t.a)
-      }
-      render(A) {
-        A.raw.clear(A.raw.COLOR_BUFFER_BIT)
-      }
+    this.resize();
+  }
+
+  /**
+   * Update viewport pan offsets and zoom level across all render layers.
+   * @param {number} x
+   * @param {number} y
+   * @param {number} zoom
+   */
+  setViewport(x, y, zoom) {
+    this.mapRenderer.setViewport(x, y, zoom);
+    this.unitRenderer.setViewport(x, y, zoom);
+  }
+
+  /**
+   * Handle window resize event.
+   */
+  resize() {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    this.canvas.width = width;
+    this.canvas.height = height;
+    this.mapRenderer.setSize(width, height);
+  }
+
+  setupResizeListener() {
+    window.addEventListener("resize", () => this.resize());
+  }
+
+  /**
+   * Start rendering animation loop.
+   */
+  start() {
+    if (this.isRendering) return;
+    this.isRendering = true;
+
+    const renderLoop = () => {
+      if (!this.isRendering) return;
+      this.renderFrame();
+      this.animationFrameId = requestAnimationFrame(renderLoop);
+    };
+
+    renderLoop();
+  }
+
+  /**
+   * Stop rendering loop.
+   */
+  stop() {
+    this.isRendering = false;
+    if (this.animationFrameId !== null) {
+      cancelAnimationFrame(this.animationFrameId);
+      this.animationFrameId = null;
     }
-    ;
-    (0, r.kV)("theme", s.updateTheme.bind(s)), i.renderingContextInit.register((A=>A===i.rendererContextGameplay&&i.gameRenderer.registerLayer(s, 0)))
+  }
+
+  /**
+   * Render single animation frame.
+   */
+  renderFrame() {
+    this.mapRenderer.render();
+    this.unitRenderer.render();
   }
 }
-;

@@ -1,114 +1,156 @@
-/** * Bot AI Attack Strategies & Decision Triggers * WarFront.io System Module */ export const SystemModule_BotAI = {
-  3272:(A, t, e)=> {
-    "use strict";
-    e.r(t), e.d(t, {
-      SimpleAttackStrategy:()=>V
+/**
+ * @file BotAI.js
+ * @description Singleplayer AI Bot Decision Engine, Attack Strategies, & Naval Assault Logic.
+ * @module engine/BotAI
+ */
+
+/**
+ * Simple Ground Expansion & Target Selection Strategy
+ */
+export class SimpleAttackStrategy {
+  /**
+   * @param {number} dropAttackChance - Chance (0-100) to pass turn without attacking
+   * @param {number} targetSmallChance - Chance (0-100) to prioritize small targets (<10% bot size)
+   * @param {number} targetNonPlayerChance - Chance (0-100) to prioritize AI targets over human player
+   * @param {number} densityChoiceChance - Chance (0-100) to target lowest troop density player
+   */
+  constructor(
+    dropAttackChance = 10,
+    targetSmallChance = 50,
+    targetNonPlayerChance = 30,
+    densityChoiceChance = 20
+  ) {
+    this.dropAttackChance = dropAttackChance;
+    this.targetSmallChance = targetSmallChance;
+    this.targetNonPlayerChance = targetNonPlayerChance;
+    this.densityChoiceChance = densityChoiceChance;
+  }
+
+  /**
+   * Select best attack target for the bot player.
+   * @param {import('./GameState.js').Player} botPlayer
+   * @param {import('./GameState.js').GameStateManager} gameState
+   * @param {number[]} adjacentOwnerIds - List of adjacent tile owner IDs
+   * @returns {number|null} Target player/owner ID to attack
+   */
+  selectTarget(botPlayer, gameState, adjacentOwnerIds) {
+    if (adjacentOwnerIds.length === 0) return null;
+
+    // 1. If unowned neutral land exists, capture it first
+    if (adjacentOwnerIds.includes(0)) return 0;
+
+    // 2. Random chance to withhold attack
+    if (Math.random() * 100 < this.dropAttackChance) return null;
+
+    let targetCandidates = [...adjacentOwnerIds];
+
+    // 3. Prioritize small opponents
+    if (Math.random() * 100 < this.targetSmallChance) {
+      const smallTargets = targetCandidates.filter((ownerId) => {
+        const targetPlayer = gameState.getPlayer(ownerId);
+        return targetPlayer && targetPlayer.getTerritorySize() < 0.1 * botPlayer.getTerritorySize();
+      });
+      if (smallTargets.length > 0) targetCandidates = smallTargets;
     }
-    );
-    var r=e(1961), i=e(3434), s=e(8621), a=e(7798), n=e(448), o=e(5765), q=e(1744);
-    class V {
-      constructor(A, t, e, r) {
-        this.dropAttackChance=A, this.targetSmallChance=t, this.targetNonPlayerChance=e, this.densityChoiceChance=r
-      }
-      execute(A) {
-        const t=this.getTarget(A);
-        return null!==t&&((0, q.C)(A, t, 100), !0)
-      }
-      getTarget(A) {
-        let t=[];
-        for (const e of i.g.getBorderTiles(A.id))s.hf.onNeighbors(e, (e=> {
-          const r=a.Q.getOwner(e);
-          r===A.id||t.includes(r)||t.push(r)
-        }
-        ));
-        if (t=t.filter((t=>s.ot.canAttack(A.id, t))), t.length<1)return null;
-        if (t.includes(a.Q.OWNER_NONE))return a.Q.OWNER_NONE;
-        if (n.y.nextInt(100)<this.dropAttackChance)return null;
-        if (n.y.nextInt(100)<this.targetSmallChance) {
-          const e=t.filter((t=>o.b.getPlayer(t).getTerritorySize()<.1*A.getTerritorySize()));
-          e.length>0&&(t=e)
-        }
-        if (n.y.nextInt(100)<this.targetNonPlayerChance) {
-          const A=t.filter((A=>o.b.isBot(A)));
-          A.length>0&&(t=A)
-        }
-        if (n.y.nextInt(100)<this.densityChoiceChance) {
-          let A=1/0, e=null;
-          for (const r of t) {
-            const t=o.b.getPlayer(r), i=t.getTroops()/t.getTerritorySize();
-            i<A&&(A=i, e=r)
+
+    // 4. Density choice (weakest defended target)
+    if (Math.random() * 100 < this.densityChoiceChance) {
+      let lowestDensity = Infinity;
+      let selectedTarget = null;
+      for (const ownerId of targetCandidates) {
+        const player = gameState.getPlayer(ownerId);
+        if (player) {
+          const density = player.getTroops() / Math.max(1, player.getTerritorySize());
+          if (density < lowestDensity) {
+            lowestDensity = density;
+            selectedTarget = ownerId;
           }
-          return e
         }
-        return t[n.y.nextInt(t.length)]
       }
+      if (selectedTarget !== null) return selectedTarget;
     }
-    (0, r.UX)((A=>A.push(new V(5+n.y.nextInt(10), n.y.nextInt(100), n.y.nextInt(100), n.y.nextInt(20)))))
-  }
-  , 6232:(A, t, e)=> {
-    "use strict";
-    e.r(t), e.d(t, {
-      BoatAttackStrategy:()=>q
-    }
-    );
-    var r=e(1961), i=e(3434), s=e(448), a=e(8621), n=e(7798), o=e(5388);
-    class q {
-      execute(A) {
-        if (0===A.waterTiles)return !1;
-        if (s.y.nextInt(100)>=30)return !1;
-        const t=Array.from(i.g.getBorderTiles(A.id)), e=t[s.y.nextInt(t.length)], r=a.hf.boatTargets.get(e);
-        if (void 0===r)return !1;
-        const q=r[s.y.nextInt(r.length)];
-        return !!a.ot.canAttack(A.id, n.Q.getOwner(q.tile))&&(o.G.addBoatInternal(A, q.path, 100), !0)
-      }
-    }
-    (0, r.UX)((A=>A.push(new q)))
-  }
-  , 7032:(A, t, e)=> {
-    "use strict";
-    e.r(t), e.d(t, {
-      CooldownBotConstraints:()=>a
-    }
-    );
-    var r=e(1961), i=e(6139), s=e(448);
-    class a {
-      constructor(A) {
-        this.cooldown=A, this.lastAttack=-A
-      }
-      allowAttack() {
-        return !(i.p.getTickCount()-this.lastAttack<this.cooldown||(this.lastAttack=i.p.getTickCount(), 0))
-      }
-    }
-    (0, r.K7)((A=>A.push(new a(s.y.nextInt(20)))))
-  }
-  , 9116:(A, t, e)=> {
-    "use strict";
-    e.r(t), e.d(t, {
-      IntervalBotTrigger:()=>n, RandomBotTrigger:()=>a
-    }
-    );
-    var r=e(1961), i=e(448), s=e(6139);
-    class a {
-      constructor(A) {
-        this.chance=A
-      }
-      trigger() {
-        return i.y.nextInt(100)<this.chance
-      }
-    }
-    class n {
-      constructor(A, t=0) {
-        this.interval=A, this.lastTrigger=t-A
-      }
-      trigger() {
-        return !(s.p.getTickCount()-this.lastTrigger<this.interval||(this.lastTrigger=s.p.getTickCount(), 0))
-      }
-    }
-    (0, r.FZ)((A=> {
-      const t=i.y.nextInt(100);
-      t<3?A.push(new n(5, i.y.nextInt(5))):t<10?A.push(new a(t)):A.push(new a(t%10), new n(t+10, i.y.nextInt(t)))
-    }
-    ))
+
+    // Random choice from available candidates
+    return targetCandidates[Math.floor(Math.random() * targetCandidates.length)];
   }
 }
-;
+
+/**
+ * Naval Boat Attack Strategy across water bodies
+ */
+export class BoatAttackStrategy {
+  /**
+   * Evaluate whether bot should launch naval boat attack.
+   * @param {import('./GameState.js').Player} botPlayer
+   * @returns {boolean} True if boat attack triggered
+   */
+  shouldLaunchBoatAttack(botPlayer) {
+    if (!botPlayer.isAlive() || botPlayer.troops < 50) return false;
+    return Math.random() * 100 < 25; // 25% chance per attempt
+  }
+}
+
+/**
+ * Cooldown Constraint for Bot Actions
+ */
+export class CooldownBotConstraints {
+  /**
+   * @param {number} cooldownTicks - Minimum ticks between attacks
+   */
+  constructor(cooldownTicks = 15) {
+    this.cooldownTicks = cooldownTicks;
+    this.lastAttackTick = -cooldownTicks;
+  }
+
+  /**
+   * Check if cooldown has elapsed.
+   * @param {number} currentTick
+   * @returns {boolean}
+   */
+  canAttack(currentTick) {
+    if (currentTick - this.lastAttackTick >= this.cooldownTicks) {
+      this.lastAttackTick = currentTick;
+      return true;
+    }
+    return false;
+  }
+}
+
+/**
+ * High Level Bot AI Orchestrator Controller
+ */
+export class BotAI {
+  /**
+   * @param {import('./GameState.js').GameStateManager} gameState
+   */
+  constructor(gameState) {
+    this.gameState = gameState;
+    this.attackStrategy = new SimpleAttackStrategy();
+    this.boatStrategy = new BoatAttackStrategy();
+    this.cooldowns = new Map();
+  }
+
+  /**
+   * Update AI decisions for all active bots.
+   * @param {function(number, number): void} onLaunchAttack Callback to send troop attack (fromPlayerId, toOwnerId)
+   */
+  update(onLaunchAttack) {
+    const currentTick = this.gameState.ticks;
+    const botPlayers = this.gameState.getPlayers().filter((p) => p.isBot && p.isAlive());
+
+    for (const bot of botPlayers) {
+      if (!this.cooldowns.has(bot.id)) {
+        this.cooldowns.set(bot.id, new CooldownBotConstraints(10 + Math.floor(Math.random() * 15)));
+      }
+      const cooldown = this.cooldowns.get(bot.id);
+
+      if (cooldown.canAttack(currentTick)) {
+        const allOtherOwnerIds = Array.from(this.gameState.players.keys()).filter((id) => id !== bot.id);
+        const targetId = this.attackStrategy.selectTarget(bot, this.gameState, allOtherOwnerIds);
+        if (targetId !== null && onLaunchAttack) {
+          onLaunchAttack(bot.id, targetId);
+        }
+      }
+    }
+  }
+}
