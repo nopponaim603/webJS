@@ -3,6 +3,12 @@
 **Project:** Game Portfolio (`webJS`)  
 **Maintained by:** Antigravity AI & Dev Team  
 
+## [1.29.0] - 2026-08-12
+
+- **Royal Cascade: Juicy Card Dealer Game (G022)**:
+  - จัดทำเอกสาร GDD ฉบับสมบูรณ์สำหรับเกมไพ่ที่เน้นระบบ **Card Dealing Animation & Layout Polish** ที่ [docs/gdd/games/animated-card-game/gdd.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/animated-card-game/gdd.md)
+  - ออกแบบระบบ **Staggered Bézier Arc Card Dealing**, **Adaptive Hand Fan Layout**, **Haptic & Visual Interaction States**, **Juicy Victory Celebration (Confetti & Coin Cascade)**, และระบบ **In-Game Economy / Card Shop** อ้างอิงจากเทรนด์งานพัฒนาเกมไพ่ยุคใหม่ (Flutter/Gamedev showcase)
+
 ## [1.28.0] - 2026-08-04
 
 - **Tiny Dungeon Squad — SNKRX Edition (G021)**:
