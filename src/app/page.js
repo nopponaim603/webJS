@@ -100,6 +100,14 @@ const initialGames = [
     gradient: "linear-gradient(135deg, #1E293B 0%, #3B82F6 100%)"
   },
   {
+    id: "animated-card-game",
+    title: "FOOL THE GAME (G022)",
+    category: "กระดาน / วางกลยุทธ์",
+    url: "/games/animated-card-game/index.html",
+    image: "https://images.unsplash.com/photo-1541278107931-e006523892df?w=400&h=400&fit=crop",
+    gradient: "linear-gradient(135deg, #581C87 0%, #3B82F6 100%)"
+  },
+  {
     id: "tile-swap",
     title: "Tile Swap",
     category: "ปริศนา / สลับไทล์",
