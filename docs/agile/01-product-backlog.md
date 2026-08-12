@@ -4,6 +4,18 @@
 
 ---
 
+## 🃏 Epic 22 — FOOL THE GAME (G022)
+
+| ID | User Story | Acceptance Criteria | Estimate | Status |
+|----|-----------|---------------------|----------|--------|
+| [US-G022-01](./user-stories/US-G022-01.md) | Title Screen & Main Navigation | โลโก้ FOOL THE GAME, พัดไพ่ 5 ใบแบบ Arc Fan, ปุ่ม PLAY (ฟ้า), ปุ่ม QUIT (แดง) | S | 🔵 In Progress |
+| [US-G022-02](./user-stories/US-G022-02.md) | Staggered Arc Card Deal & Adaptive Fan Engine | แจกไพ่โค้ง Bézier Path แบบ Staggered, พลิก 3D, ปรับพัดไพ่อัตโนมัติ | M | 🔵 In Progress |
+| [US-G022-03](./user-stories/US-G022-03.md) | In-Game Battle Zone & Action Bar | 3 Play Slots ตรงกลาง, แถบปุ่ม PLAY (ฟ้า), TAKE (แดง), DISCARD (เหลือง) | M | 🔵 In Progress |
+| [US-G022-04](./user-stories/US-G022-04.md) | Purple Shop Panel & Card Draft System | พาเนลร้านค้าม่วง slide-up, การ์ด 3 ใบ ($1, $2, $3), ปุ่ม NEXT (แดง) & RE-ROLL (เขียว) | M | 🔵 In Progress |
+| [US-G022-05](./user-stories/US-G022-05.md) | Haptics, Sound SFX & Victory FX | สั่น Haptics 4 ระดับ, เสียง Web Audio API, Confetti & Coin Ticker เมื่อชนะ | S | 🔵 In Progress |
+
+---
+
 ## 🎯 Must Have (MVP Core)
 
 | ID | User Story | Acceptance Criteria | Estimate | Status |
