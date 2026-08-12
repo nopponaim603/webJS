@@ -3,6 +3,17 @@
 **Project:** Game Portfolio (`webJS`)  
 **Maintained by:** Antigravity AI & Dev Team  
 
+## [1.30.0] - 2026-08-12
+
+- **BOBA PEARL DROP: 100% SUGAR Game (G023)**:
+  - จัดทำชุดเอกสาร GDD ฉบับสมบูรณ์สำหรับเกม 3D Marble Runner สไตล์ *Super Monkey Ball* ด้วย **BabylonJS** ได้รับแรงบันดาลใจจากคลิปทดลองของ Kevin Ngo (`@kevin_t_ngo`)
+  - **Game Specification & Concept ([docs/gdd/games/boba-pearl-drop/spec.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/boba-pearl-drop/spec.md), [00-concept.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/boba-pearl-drop/00-concept.md))**: ออกแบบระบบการเล่นเม็ดไข่มุกกลิ้งทรงตัวฝ่าลู่ 3D ลอยฟ้า
+  - **Core Mechanics ([01-mechanics.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/boba-pearl-drop/01-mechanics.md))**: ควบคุมทิศทางเม็ดไข่มุกตามกล้อง, กระโดด Bounce, เทอร์โบ Dash, และระบบสะสม % น้ำตาล (Sugar Level Bar 0-100%)
+  - **Level Design ([02-level-design.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/boba-pearl-drop/02-level-design.md))**: ดีไซน์ 3 ด่าน 3 ธีมเครื่องดื่ม ได้แก่ Milk Tea Meadow (ชานมสด), Taro Heights (ยอดเขาเผือก), และ Matcha Gardens (สวนชาเขียว)
+  - **Art Direction ([03-art-direction.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/games/boba-pearl-drop/03-art-direction.md))**: กำหนดโทนสีพาสเทลชานมสดใส, PBR Glossy Boba Material, Glow Layer, และ Glassmorphism UI
+  - **Software System Design ([docs/software/games/boba-pearl-drop/01-system-design.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/software/games/boba-pearl-drop/01-system-design.md))**: ออกแบบสถาปัตยกรรม BabylonJS Scene, Camera, Player Sphere Physics Controller, และ Asset Generator
+  - **Product Backlog ([docs/agile/games/boba-pearl-drop/01-product-backlog.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/agile/games/boba-pearl-drop/01-product-backlog.md))**: จัดลำดับความสำคัญของ User Stories สำหรับขั้นตอนการลงมือพัฒนาตัวเกมจริง
+
 ## [1.29.0] - 2026-08-12
 
 - **Royal Cascade: Juicy Card Dealer Game (G022)**:

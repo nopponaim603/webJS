@@ -40,8 +40,10 @@
 | G020 | `warfront` | WarFront.io (FrontWars) | WebGL / TypeScript | `public/games/warfront/` |
 | G021 | `tiny-dungeon-squad` | Tiny Dungeon Squad (SNKRX Edition) | Phaser 2D / Auto-Battler | `public/games/tiny-dungeon-squad/` |
 | G022 | `animated-card-game` | Royal Cascade (Juicy Card Dealer) | Phaser 3 / GSAP | `public/games/animated-card-game/` |
+| G023 | `boba-pearl-drop` | BOBA PEARL DROP: 100% SUGAR | Babylon.js 3D | `public/games/boba-pearl-drop/` |
 
 ### 🎮 Active Released Game Specifications (`docs/gdd/games/`)
+- [BOBA PEARL DROP: 100% SUGAR (Super Monkey Ball Style Boba 3D G023)](./gdd/games/boba-pearl-drop/spec.md)
 - [Royal Cascade: Juicy Card Dealer (G022)](./gdd/games/animated-card-game/gdd.md)
 - [Tiny Dungeon Squad (SNKRX Edition G021)](./gdd/games/tiny-dungeon-squad/spec.md)
 - [State.IO (Territory Domination G019)](./gdd/games/stateIO/gdd.md)
