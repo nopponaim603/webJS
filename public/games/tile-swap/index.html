@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Tile Swap - Endless Matching</title>
+    <title>Tile Swap - Sweet Match & Town Decorator</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            background: #0f172a; 
+        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; -webkit-user-select: none; }
+        body, html { 
+            background: #090d16; 
             color: #fff; 
-            font-family: 'Inter', system-ui, -apple-system, sans-serif; 
+            font-family: 'Fredoka', 'Outfit', sans-serif; 
             overflow: hidden; 
             display: flex; 
             justify-content: center; 
@@ -27,16 +32,18 @@
             display: flex; 
             justify-content: center; 
             align-items: center; 
-            box-shadow: 0 20px 50px rgba(249, 115, 22, 0.25);
-            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(249, 115, 22, 0.35);
+            border-radius: 20px;
             overflow: hidden;
-            border: 1px solid rgba(249, 115, 22, 0.2);
+            border: 1px solid rgba(249, 115, 22, 0.3);
             background: #0f172a;
+            position: relative;
         }
         canvas {
             width: 100% !important;
             height: 100% !important;
             object-fit: contain;
+            display: block;
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>

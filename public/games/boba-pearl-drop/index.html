@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BOBA PEARL DROP: 100% SUGAR (BabylonJS 3D)</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Babylon.js CDN 7.50.0 -->
+    <script src="https://cdn.jsdelivr.net/npm/babylonjs@7.50.0/babylon.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/babylonjs-loaders@7.50.0/babylonjs.loaders.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/babylonjs-gui@7.50.0/babylon.gui.min.js"></script>
+    
+    <style>
+        :root {
+            --primary: #c68b59;
+            --accent-gold: #fbbf24;
+            --taro-purple: #a855f7;
+            --matcha-green: #10b981;
+            --bg-glass: rgba(20, 15, 25, 0.75);
+            --border-glass: rgba(255, 255, 255, 0.2);
+            --text-glow: 0 0 12px rgba(251, 191, 36, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: none;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #120c18;
+            font-family: 'Fredoka', 'Outfit', sans-serif;
+            color: #ffffff;
+        }
+
+        #renderCanvas {
+            width: 100%;
+            height: 100%;
+            touch-action: none;
+            outline: none;
+            display: block;
+        }
+
+        /* Glassmorphic Container Overlays */
+        .glass-panel {
+            background: var(--bg-glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        /* Top HUD Bar */
+        #hud {
+            position: absolute;
+            top: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 92%;
+            max-width: 800px;
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .hud-stat {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* Sugar Progress Bar */
+        .sugar-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .sugar-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            text-shadow: var(--text-glow);
+        }
+
+        .sugar-bar-bg {
+            width: 100%;
+            height: 14px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+
+        .sugar-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #f59e0b, #fbbf24, #fef08a);
+            border-radius: 10px;
+            transition: width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 0 12px rgba(251, 191, 36, 0.8);
+        }
+
+        .sugar-bar-fill.overload {
+            animation: pulseGlow 0.6s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            from { box-shadow: 0 0 10px #fbbf24; filter: brightness(1); }
+            to { box-shadow: 0 0 25px #fef08a; filter: brightness(1.4); }
+        }
+
+        /* Speedometer & Timer */
+        .hud-badge {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 6px 14px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Buttons on Top Right */
+        .top-btn-group {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            display: flex;
+            gap: 8px;
+            z-index: 12;
+        }
+
+        .icon-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            color: #fff;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            backdrop-filter: blur(12px);
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .icon-btn:hover {
+            transform: scale(1.08);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Virtual Joystick & Action Buttons for Touch / Mobile */
+        #touchControls {
+            position: absolute;
+            bottom: 24px;
+            left: 0;
+            width: 100%;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            z-index: 15;
+            pointer-events: none;
+        }
+
+        #joystickZone {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            position: relative;
+            pointer-events: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #joystickKnob {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.6);
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            transition: transform 0.05s ease-out;
+        }
+
+        .touch-action-btns {
+            display: flex;
+            gap: 12px;
+            pointer-events: auto;
+        }
+
+        .action-btn {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #a855f7, #7c3aed);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            color: #fff;
+            font-weight: 800;
+            font-size: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(168, 85, 247, 0.5);
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+        .action-btn:active {
+            transform: scale(0.92);
+        }
+
+        .action-btn.dash-btn {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.5);
+        }
+
+        /* Modals & Screens */
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 6, 18, 0.82);
+            backdrop-filter: blur(16px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 30;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            width: 90%;
+            max-width: 480px;
+            padding: 32px 28px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            transform: translateY(20px);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: translateY(0);
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fef08a, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 20px rgba(251, 191, 36, 0.4);
+        }
+
+        .modal-desc {
+            font-size: 1rem;
+            color: #d1d5db;
+            line-height: 1.5;
+        }
+
+        /* Primary Styled Buttons */
+        .btn-primary {
+            width: 100%;
+            padding: 14px 24px;
+            border-radius: 16px;
+            border: none;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: #1c1917;
+            font-weight: 800;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.6);
+        }
+
+        .btn-secondary {
+            width: 100%;
+            padding: 12px 24px;
+            border-radius: 16px;
+            border: 1px solid var(--border-glass);
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.18);
+        }
+
+        /* Level Cards Selection Grid */
+        .level-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .level-card {
+            padding: 16px 20px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: background 0.2s, border 0.2s, transform 0.2s;
+        }
+
+        .level-card:hover {
+            background: rgba(255, 255, 255, 0.14);
+            border-color: var(--accent-gold);
+            transform: translateX(4px);
+        }
+
+        .level-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+        }
+
+        .level-name {
+            font-size: 1.1rem;
+            font-weight: 800;
+        }
+
+        .level-tag {
+            font-size: 0.8rem;
+            color: #a1a1aa;
+        }
+
+        /* Stars Display */
+        .stars-container {
+            font-size: 2.2rem;
+            letter-spacing: 6px;
+            color: #fbbf24;
+            filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.6));
+        }
+
+        /* Notification Banner */
+        #noticeBanner {
+            position: absolute;
+            top: 90px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            padding: 10px 24px;
+            border-radius: 30px;
+            background: rgba(251, 191, 36, 0.95);
+            color: #18181b;
+            font-weight: 800;
+            font-size: 1rem;
+            box-shadow: 0 8px 25px rgba(251, 191, 36, 0.6);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.3s, opacity 0.3s;
+            z-index: 25;
+        }
+
+        #noticeBanner.active {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Responsive Tweaks */
+        @media (max-width: 640px) {
+            #hud { padding: 10px 16px; }
+            .hud-stat { font-size: 0.95rem; }
+            .modal-title { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Babylon.js Canvas -->
+    <canvas id="renderCanvas"></canvas>
+
+    <!-- Top Action Buttons -->
+    <div class="top-btn-group">
+        <button class="icon-btn" id="btnSound" title="Mute/Unmute Audio">🔊</button>
+        <button class="icon-btn" id="btnPause" title="Pause Game">⏸️</button>
+    </div>
+
+    <!-- Notification Toast Banner -->
+    <div id="noticeBanner">100% SUGAR OVERLOAD! SPEED BOOST! ⚡</div>
+
+    <!-- HUD Overlay -->
+    <div id="hud" class="glass-panel">
+        <div class="hud-stat">
+            <span>⏱️</span>
+            <span id="timerText">00:00</span>
+        </div>
+
+        <div class="sugar-container">
+            <div class="sugar-header">
+                <span>SUGAR LEVEL</span>
+                <span id="sugarPercentText">0%</span>
+            </div>
+            <div class="sugar-bar-bg">
+                <div class="sugar-bar-fill" id="sugarBarFill"></div>
+            </div>
+        </div>
+
+        <div class="hud-stat">
+            <span>⭐</span>
+            <span id="scoreText">0</span>
+        </div>
+    </div>
+
+    <!-- Touch / Mobile On-Screen Controls -->
+    <div id="touchControls">
+        <div id="joystickZone">
+            <div id="joystickKnob"></div>
+        </div>
+        <div class="touch-action-btns">
+            <div class="action-btn dash-btn" id="btnTouchDash">
+                <span>⚡</span>
+                <span style="font-size: 0.75rem;">DASH</span>
+            </div>
+            <div class="action-btn" id="btnTouchJump">
+                <span>🦘</span>
+                <span style="font-size: 0.75rem;">JUMP</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Title / Main Menu Screen Modal -->
+    <div class="modal-overlay active" id="modalStart">
+        <div class="modal-card glass-panel">
+            <h1 class="modal-title">🧋 BOBA PEARL DROP</h1>
+            <p style="font-weight: 700; color: #fbbf24; font-size: 1.2rem; margin-top: -10px;">100% SUGAR EDITION</p>
+            <p class="modal-desc">
+                บังคับเม็ดไข่มุกชาไข่มุก 3D กลิ้ง ทรงตัว และเด้งผ่านลู่ลอยฟ้า! เก็บก้อนน้ำตาลให้ครบ <strong>100% Sugar</strong> แล้วพุ่งลงถ้วยชาไข่มุกยักษ์เพื่อชนะด่าน!
+            </p>
+            
+            <div class="level-grid">
+                <div class="level-card" onclick="selectLevel(0)">
+                    <div class="level-info">
+                        <span class="level-name">🥛 Level 1: Milk Tea Meadow</span>
+                        <span class="level-tag">สนามชานมสด • ทางลาดคาราเมล & หลอดชา</span>
+                    </div>
+                    <span>➡️</span>
+                </div>
+                <div class="level-card" onclick="selectLevel(1)">
+                    <div class="level-info">
+                        <span class="level-name">🍠 Level 2: Taro Heights</span>
+                        <span class="level-tag">ยอดเขาเผือก • แท่นเลื่อน & สะพานลอยฟ้า</span>
+                    </div>
+                    <span>➡️</span>
+                </div>
+                <div class="level-card" onclick="selectLevel(2)">
+                    <div class="level-info">
+                        <span class="level-name">🍵 Level 3: Matcha Gardens</span>
+                        <span class="level-tag">สวนชาเขียว • ไม้คนชาหมุน & สโลปดรอป</span>
+                    </div>
+                    <span>➡️</span>
+                </div>
+            </div>
+
+            <button class="btn-primary" onclick="startGame()">
+                ▶️ เริ่มเล่นเกม (PLAY)
+            </button>
+        </div>
+    </div>
+
+    <!-- Pause Menu Modal -->
+    <div class="modal-overlay" id="modalPause">
+        <div class="modal-card glass-panel">
+            <h2 class="modal-title">⏸️ GAME PAUSED</h2>
+            <p class="modal-desc">พักเกมชั่วคราว • กดปุ่มด้านล่างเพื่อเล่นต่อหรือเลือกด่านใหม่</p>
+            <button class="btn-primary" onclick="resumeGame()">
+                ▶️ เล่นต่อ (RESUME)
+            </button>
+            <button class="btn-secondary" onclick="openMenu()">
+                🏠 กลับหน้าเลือกด่าน (MAIN MENU)
+            </button>
+        </div>
+    </div>
+
+    <!-- Victory Screen Modal -->
+    <div class="modal-overlay" id="modalVictory">
+        <div class="modal-card glass-panel">
+            <h2 class="modal-title" style="color: #4ade80;">🎉 VICTORY! 🧋</h2>
+            <p class="modal-desc" id="victoryLevelName">ลงถ้วยชาไข่มุกสำเร็จแล้ว!</p>
+            
+            <div class="stars-container" id="victoryStars">⭐⭐⭐</div>
+
+            <div style="width: 100%; display: flex; justify-content: space-around; background: rgba(255,255,255,0.08); padding: 12px; border-radius: 14px; font-weight: 700;">
+                <div>
+                    <div style="font-size: 0.8rem; color: #a1a1aa;">SUGAR RATING</div>
+                    <div style="font-size: 1.2rem; color: #fbbf24;" id="victorySugar">100%</div>
+                </div>
+                <div>
+                    <div style="font-size: 0.8rem; color: #a1a1aa;">TIME</div>
+                    <div style="font-size: 1.2rem;" id="victoryTime">00:45</div>
+                </div>
+                <div>
+                    <div style="font-size: 0.8rem; color: #a1a1aa;">SCORE</div>
+                    <div style="font-size: 1.2rem; color: #60a5fa;" id="victoryScore">1500</div>
+                </div>
+            </div>
+
+            <button class="btn-primary" id="btnNextLevel" onclick="nextLevel()">
+                ⏩ ด่านถัดไป (NEXT LEVEL)
+            </button>
+            <button class="btn-secondary" onclick="replayLevel()">
+                🔄 เล่นด่านนี้อีกครั้ง (REPLAY)
+            </button>
+        </div>
+    </div>
+
+    <!-- Game Script Import -->
+    <script src="game.js"></script>
+</body>
+</html>

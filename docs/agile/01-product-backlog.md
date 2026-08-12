@@ -1,6 +1,18 @@
 # Product Backlog — webJS Game Portfolio
 
-**Last Updated:** 2026-08-01 | **Version:** 1.23.0
+**Last Updated:** 2026-08-12 | **Version:** 1.30.0
+
+---
+
+## 🧋 Epic 23 — BOBA PEARL DROP: 100% SUGAR (G023)
+
+| ID | User Story | Acceptance Criteria | Estimate | Status |
+|----|-----------|---------------------|----------|--------|
+| [US-G023-01](./user-stories/archive/US-G023-01.md) | BabylonJS Scene Setup, Lighting & Boba Pearl Mesh | BabylonJS Canvas 3D, Glossy ClearCoat Boba Pearl, ArcRotate Camera 360°, Glow Layer | S | ✅ Done |
+| [US-G023-02](./user-stories/archive/US-G023-02.md) | Sphere Physics Rolling & Controls | WASD/Camera relative vectors, Space Jump Bounce, Shift Turbo Dash, Mobile Touch Joystick | M | ✅ Done |
+| [US-G023-03](./user-stories/archive/US-G023-03.md) | Sugar Cubes Collectibles & Glassmorphism HUD | Sugar Cubes 🧊 3D, Particle Explosion, Sugar Bar 0-100%, 100% Sugar Overload Speed Boost | M | ✅ Done |
+| [US-G023-04](./user-stories/archive/US-G023-04.md) | Level Construction, Hazards & Finish Cup Mechanics | 3 Drink Levels (Milk Tea, Taro, Matcha), Straw Tunnel, Moving Platforms, Stirrers, Finish Boba Cup | L | ✅ Done |
+| [US-G023-05](./user-stories/archive/US-G023-05.md) | Audio Synthesizer, Victory Modal & Game Hub Integration | Web Audio API SFX synthesizer, Victory Modal ⭐⭐⭐, Next.js Game Hub integration | S | ✅ Done |
 
 ---
 
@@ -8,11 +20,11 @@
 
 | ID | User Story | Acceptance Criteria | Estimate | Status |
 |----|-----------|---------------------|----------|--------|
-| [US-G022-01](./user-stories/US-G022-01.md) | Title Screen & Main Navigation | โลโก้ FOOL THE GAME, พัดไพ่ 5 ใบแบบ Arc Fan, ปุ่ม PLAY (ฟ้า), ปุ่ม QUIT (แดง) | S | ✅ Done |
-| [US-G022-02](./user-stories/US-G022-02.md) | Staggered Arc Card Deal & Adaptive Fan Engine | แจกไพ่โค้ง Bézier Path แบบ Staggered, พลิก 3D, ปรับพัดไพ่อัตโนมัติ | M | ✅ Done |
-| [US-G022-03](./user-stories/US-G022-03.md) | In-Game Battle Zone & Action Bar | 3 Play Slots ตรงกลาง, แถบปุ่ม PLAY (ฟ้า), TAKE (แดง), DISCARD (เหลือง) | M | ✅ Done |
-| [US-G022-04](./user-stories/US-G022-04.md) | Purple Shop Panel & Card Draft System | พาเนลร้านค้าม่วง slide-up, การ์ด 3 ใบ ($1, $2, $3), ปุ่ม NEXT (แดง) & RE-ROLL (เขียว) | M | ✅ Done |
-| [US-G022-05](./user-stories/US-G022-05.md) | Haptics, Sound SFX & Victory FX | สั่น Haptics 4 ระดับ, เสียง Web Audio API, Confetti & Coin Ticker เมื่อชนะ | S | ✅ Done |
+| [US-G022-01](./user-stories/archive/US-G022-01.md) | Title Screen & Main Navigation | โลโก้ FOOL THE GAME, พัดไพ่ 5 ใบแบบ Arc Fan, ปุ่ม PLAY (ฟ้า), ปุ่ม QUIT (แดง) | S | ✅ Done |
+| [US-G022-02](./user-stories/archive/US-G022-02.md) | Staggered Arc Card Deal & Adaptive Fan Engine | แจกไพ่โค้ง Bézier Path แบบ Staggered, พลิก 3D, ปรับพัดไพ่อัตโนมัติ | M | ✅ Done |
+| [US-G022-03](./user-stories/archive/US-G022-03.md) | In-Game Battle Zone & Action Bar | 3 Play Slots ตรงกลาง, แถบปุ่ม PLAY (ฟ้า), TAKE (แดง), DISCARD (เหลือง) | M | ✅ Done |
+| [US-G022-04](./user-stories/archive/US-G022-04.md) | Purple Shop Panel & Card Draft System | พาเนลร้านค้าม่วง slide-up, การ์ด 3 ใบ ($1, $2, $3), ปุ่ม NEXT (แดง) & RE-ROLL (เขียว) | M | ✅ Done |
+| [US-G022-05](./user-stories/archive/US-G022-05.md) | Haptics, Sound SFX & Victory FX | สั่น Haptics 4 ระดับ, เสียง Web Audio API, Confetti & Coin Ticker เมื่อชนะ | S | ✅ Done |
 
 ---
 

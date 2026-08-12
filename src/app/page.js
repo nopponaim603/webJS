@@ -118,6 +118,14 @@ const initialGames = [
 
   // 3. กลุ่ม Babylon 3D Engine
   {
+    id: "boba-pearl-drop",
+    title: "BOBA PEARL DROP: 100% SUGAR",
+    category: "Babylon 3D Engine",
+    url: "/games/boba-pearl-drop/index.html",
+    image: "https://images.unsplash.com/photo-1558857563-b371033873b8?w=400&h=400&fit=crop",
+    gradient: "linear-gradient(135deg, #F59E0B 0%, #A855F7 100%)"
+  },
+  {
     id: "3d-platformer",
     title: "Kenney 3D Platformer",
     category: "Babylon 3D Engine",
