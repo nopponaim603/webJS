@@ -25,7 +25,7 @@ export class GameRenderer {
     this.canvas.style.width = "100%";
     this.canvas.style.height = "100%";
     this.canvas.style.zIndex = "0";
-    this.canvas.style.pointerEvents = "none";
+    this.canvas.style.pointerEvents = "auto";
 
     this.tileMap = tileMap;
     this.gameState = gameState;

@@ -34,26 +34,36 @@ const mimeTypes = {
 const server = http.createServer((req, res) => {
     console.log(`${new Date().toLocaleTimeString()} - ${req.method} ${req.url}`);
 
-    // Get file path inside src directory
+    // Get file path inside public/games/warfront directory
     const requestUrl = req.url.split('?')[0];
-    let filePath = path.join(__dirname, 'src', requestUrl === '/' ? 'index.html' : requestUrl);
+    let cleanUrl = requestUrl === '/' ? 'index.html' : requestUrl;
+    if (cleanUrl.startsWith('/')) cleanUrl = cleanUrl.slice(1);
+
+    let filePath = path.join(__dirname, 'public', 'games', 'warfront', cleanUrl);
 
     // Get file extension
     const extname = String(path.extname(filePath)).toLowerCase();
     const contentType = mimeTypes[extname] || 'application/octet-stream';
 
-    // Read and serve file
+    // Read and serve file (check src directory first, fallback to public)
     fs.readFile(filePath, (error, content) => {
         if (error) {
             if (error.code === 'ENOENT') {
-                // File not found
-                fs.readFile('./404.html', (err, content404) => {
-                    if (err) {
-                        res.writeHead(404, { 'Content-Type': 'text/html' });
-                        res.end('<h1>404 - Page Not Found</h1>', 'utf-8');
+                const publicFilePath = path.join(__dirname, 'public', requestUrl === '/' ? 'games/warfront/index.html' : requestUrl);
+                fs.readFile(publicFilePath, (errPublic, contentPublic) => {
+                    if (errPublic) {
+                        fs.readFile('./404.html', (err404, content404) => {
+                            if (err404) {
+                                res.writeHead(404, { 'Content-Type': 'text/html' });
+                                res.end('<h1>404 - Page Not Found</h1>', 'utf-8');
+                            } else {
+                                res.writeHead(404, { 'Content-Type': 'text/html' });
+                                res.end(content404, 'utf-8');
+                            }
+                        });
                     } else {
-                        res.writeHead(404, { 'Content-Type': 'text/html' });
-                        res.end(content404, 'utf-8');
+                        res.writeHead(200, { 'Content-Type': contentType });
+                        res.end(contentPublic, 'utf-8');
                     }
                 });
             } else {

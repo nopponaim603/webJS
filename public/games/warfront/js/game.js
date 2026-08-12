@@ -104,6 +104,11 @@ class WarFrontApp {
     this.assignSpawnTerritory(bot2, 10, 50);
     this.assignSpawnTerritory(bot3, 50, 50);
 
+    // Bind tile click callback for human player expansion
+    this.inputManager.onTileClickCallback = (tileX, tileY) => {
+      this.handleTileClick(tileX, tileY, humanPlayer);
+    };
+
     // Initialize Bot AI
     this.botAI = new BotAI(this.gameState);
 
@@ -114,6 +119,54 @@ class WarFrontApp {
     // Start 100ms Game Loop (10 ticks per second)
     if (this.gameLoopInterval) clearInterval(this.gameLoopInterval);
     this.gameLoopInterval = setInterval(() => this.updateGameLoop(humanPlayer), 100);
+  }
+
+  /**
+   * Handle tile click to conquer/expand territory into adjacent tiles.
+   */
+  handleTileClick(tileX, tileY, humanPlayer) {
+    if (!this.tileMap || !this.gameState || !humanPlayer || !humanPlayer.isAlive()) return;
+    if (!this.tileMap.inBounds(tileX, tileY)) return;
+
+    const targetIndex = this.tileMap.xyToIndex(tileX, tileY);
+    const tileType = this.tileMap.getTileType(targetIndex);
+
+    // Cannot conquer non-conquerable terrain (deep water/mountains)
+    if (!tileType || !tileType.conquerable) return;
+
+    const currentOwner = this.gameState.getOwner(targetIndex);
+    if (currentOwner === humanPlayer.id) return; // Already owned
+
+    // Check if target tile is adjacent to human territory
+    let isAdjacent = false;
+    this.tileMap.onNeighbors(targetIndex, (nIndex) => {
+      if (this.gameState.getOwner(nIndex) === humanPlayer.id) {
+        isAdjacent = true;
+      }
+    });
+
+    if (isAdjacent) {
+      const availableTroops = humanPlayer.getTroops();
+      if (availableTroops <= 5) return;
+
+      const pct = (this.uiManager ? this.uiManager.attackPercentage : 50) / 100.0;
+      const troopCost = Math.max(5, Math.floor(availableTroops * pct * 0.1));
+
+      humanPlayer.removeTroops(troopCost);
+      this.gameState.conquerTile(targetIndex, humanPlayer.id);
+
+      // Auto-expand into adjacent neutral land tiles for smooth RTS expansion feedback
+      this.tileMap.onNeighbors(targetIndex, (nIndex) => {
+        if (
+          this.gameState.getOwner(nIndex) === 0 &&
+          this.tileMap.getTileType(nIndex)?.conquerable &&
+          humanPlayer.getTroops() > 5
+        ) {
+          humanPlayer.removeTroops(2);
+          this.gameState.conquerTile(nIndex, humanPlayer.id);
+        }
+      });
+    }
   }
 
   /**
@@ -139,15 +192,30 @@ class WarFrontApp {
    */
   updateGameLoop(humanPlayer) {
     this.gameState.tick();
+
+    // Bot AI update loop
     if (this.botAI) {
-      this.botAI.update((fromBotId, targetOwnerId) => {
-        // Expand bot territory into neighboring unowned land
+      this.botAI.update((fromBotId) => {
         const botPlayer = this.gameState.getPlayer(fromBotId);
-        if (botPlayer) {
-          botPlayer.removeTroops(10);
+        if (botPlayer && botPlayer.getTroops() > 20) {
+          // Find an unowned or enemy tile adjacent to bot territory
+          for (let index = 0; index < this.tileMap.totalTiles; index++) {
+            if (this.gameState.getOwner(index) === fromBotId) {
+              const neighbors = this.tileMap.getNeighbors(index);
+              for (const nIndex of neighbors) {
+                const owner = this.gameState.getOwner(nIndex);
+                if (owner !== fromBotId && this.tileMap.getTileType(nIndex)?.conquerable) {
+                  botPlayer.removeTroops(5);
+                  this.gameState.conquerTile(nIndex, fromBotId);
+                  return;
+                }
+              }
+            }
+          }
         }
       });
     }
+
     this.uiManager.update(humanPlayer);
 
     const winner = this.gameState.checkWinner();
