@@ -4,6 +4,20 @@
 
 ---
 
+## ⚔️ Epic 12 — WarFront.io Strategy Overhaul (G020)
+
+| ID | User Story | Acceptance Criteria | Estimate | Status |
+|----|-----------|---------------------|----------|--------|
+| [US-12-01](./user-stories/archive/US-12-01.md) | Core Engine & 60 FPS Ticker Integration | Singleplayer Ticker Engine 60 FPS, MapCodec Binary Decoder, Region Grid Render | S | ✅ Done |
+| [US-12-02](./user-stories/archive/US-12-02.md) | Combat Physics, Morale & Casualty Formulas | สมการพลังโจมตี/ตั้งรับ, ขวัญกำลังใจ Morale (0-100), อัตราความสูญเสีย Casualty Rate, Conquest Flip | M | ✅ Done |
+| [US-12-03](./user-stories/archive/US-12-03.md) | Supply Line Connectivity & Isolation Penalties | ตรวจสอบเส้นทาง Capital/Port, โทษการตัดสายส่งกำลัง -60% Manpower & Morale Decay | M | ✅ Done |
+| [US-12-04](./user-stories/archive/US-12-04.md) | Strategic Buildings & Upgrade System | Fortress L1/L2 (+80%/+160% Def), Barracks L1/L2, Naval Port L1/L2, Watchtower L1/L2 | M | ✅ Done |
+| [US-12-05](./user-stories/archive/US-12-05.md) | Terrain Modifiers & Maritime Boat Transport | ตัวคูณภูมิประเทศ (Plains, Forest, Mountain, River), การแล่นเรือลำเลียงข้ามทะเล | M | ✅ Done |
+| [US-12-06](./user-stories/archive/US-12-06.md) | AI Bot Utility Matrix & 4 Personalities | บอท AI คำนวณ Utility Score, 4 บุคลิกภาพ (Blitzkrieg, Expansionist, Turtle, Naval), 4 ความยาก | L | ✅ Done |
+| [US-12-07](./user-stories/archive/US-12-07.md) | UI/UX, Hotkeys & Fog of War System | Drag-Select, Hotkeys (`Space`, `A`, `D`, `F`, `P`, `1-9`, `Tab`), Glassmorphism HUD, Fog of War | S | ✅ Done |
+
+---
+
 ## 🧋 Epic 23 — BOBA PEARL DROP: 100% SUGAR (G023)
 
 | ID | User Story | Acceptance Criteria | Estimate | Status |
