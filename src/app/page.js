@@ -18,6 +18,14 @@ const initialGames = [
     gradient: "linear-gradient(135deg, #10B981 0%, #3B82F6 100%)"
   },
   {
+    id: "emoji-match",
+    title: "Emoji Memory Match",
+    category: "ปริศนา / ฝึกสมอง",
+    url: "/games/emoji-match/index.html",
+    image: "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=400&h=400&fit=crop",
+    gradient: "linear-gradient(135deg, #EC4899 0%, #8B5CF6 100%)"
+  },
+  {
     id: "goosl-marbles",
     title: "Goosl Glass Marbles",
     category: "ปริศนา / ฟิสิกส์",
@@ -134,24 +142,34 @@ const initialGames = [
     gradient: "linear-gradient(135deg, #10b981 0%, #059669 100%)"
   },
   {
-    id: "hole-io",
-    title: "Hole.io 3D",
-    category: "Babylon 3D Engine",
-    url: "/games/hole-io/index.html",
-    image: "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=400&h=400&fit=crop",
-    gradient: "linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)"
-  },
-  {
     id: "cyber-sphere",
     title: "Cyber Sphere 3D",
     category: "Babylon 3D Engine",
     url: "/games/babylon-demo/index.html",
     image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&h=400&fit=crop",
     gradient: "linear-gradient(135deg, #7F00FF 0%, #E100FF 100%)"
+  },
+
+  // 4. กลุ่ม Three.js / WebGPU 3D Engine
+  {
+    id: "hole-io",
+    title: "Hungry Manhole (Hole.io City)",
+    category: "Three.js 3D Engine",
+    url: "/games/hole-io/index.html",
+    image: "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=400&h=400&fit=crop",
+    gradient: "linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)"
+  },
+  {
+    id: "skate-dog",
+    title: "Skate Dog (3D Procedural)",
+    category: "Three.js 3D Engine",
+    url: "/games/skate-dog/index.html",
+    image: "/games/skate-dog/og.webp",
+    gradient: "linear-gradient(135deg, #F472B6 0%, #FB923C 100%)"
   }
 ];
 
-const categories = ["ทั้งหมด", "ปริศนา", "กระดาน", "Phaser 2D", "Babylon 3D"];
+const categories = ["ทั้งหมด", "ปริศนา", "กระดาน", "Phaser 2D", "Babylon 3D", "Three.js 3D"];
 
 export default function Home() {
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -182,7 +200,7 @@ export default function Home() {
             🎮 HTML5 & Multi-Engine <span className="gradient-text">GameDevJS Hub</span>
           </h1>
           <p style={{ color: '#cbd5e1', fontSize: '1.05rem', maxWidth: '700px', lineHeight: '1.6', marginBottom: '1.25rem' }}>
-            ศูนย์รวมเกม HTML5, Phaser 2D และ Babylon.js 3D บนสถาปัตยกรรม Next.js App Router พร้อมรองรับ PWA ออฟไลน์ และการแสดงผลระดับพรีเมียม
+            ศูนย์รวมเกม HTML5, Phaser 2D, Babylon.js 3D และ Three.js / WebGPU บนสถาปัตยกรรม Next.js App Router พร้อมรองรับ PWA ออฟไลน์ และการแสดงผลระดับพรีเมียม
           </p>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
             <PWAInstallButton variant="hero" />
@@ -299,6 +317,27 @@ export default function Home() {
                 gap: '1.5rem'
               }}>
                 {initialGames.filter(g => g.category.includes('Babylon')).map(game => (
+                  <GameCard key={game.id} game={game} onPlay={setActiveGame} />
+                ))}
+              </div>
+            </section>
+
+            {/* Section 5: กลุ่ม Three.js 3D Engine */}
+            <section>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
+                <h2 style={{ fontSize: '1.4rem', fontWeight: '800', color: '#f8fafc', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  🌌 Three.js & WebGPU 3D Engine
+                </h2>
+                <span style={{ fontSize: '0.8rem', background: 'rgba(236, 72, 153, 0.15)', border: '1px solid rgba(236, 72, 153, 0.3)', color: '#f472b6', padding: '0.2rem 0.75rem', borderRadius: '9999px', fontWeight: '700' }}>
+                  {initialGames.filter(g => g.category.includes('Three.js')).length} เกม
+                </span>
+              </div>
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(270px, 1fr))',
+                gap: '1.5rem'
+              }}>
+                {initialGames.filter(g => g.category.includes('Three.js')).map(game => (
                   <GameCard key={game.id} game={game} onPlay={setActiveGame} />
                 ))}
               </div>

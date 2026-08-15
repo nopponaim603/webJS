@@ -1,481 +1,268 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Hole.io 3D - Kenney Assets Showcase</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Babylon.js CDN 7.50.0 -->
-    <script src="https://cdn.jsdelivr.net/npm/babylonjs@7.50.0/babylon.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/babylonjs-loaders@7.50.0/babylonjs.loaders.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/babylonjs-gui@7.50.0/babylon.gui.min.js"></script>
-    
-    <style>
-        :root {
-            --primary: #8b5cf6;
-            --accent: #f59e0b;
-            --success: #10b981;
-            --danger: #ef4444;
-            --bg-dark: rgba(15, 23, 42, 0.85);
-            --border-glass: rgba(255, 255, 255, 0.18);
-        }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Hungry Manhole 3D (Hole.io City Scene)</title>
+  <meta name="description" content="A Three.js WebGPU city absorption game with living pedestrians, vehicle traffic, and procedural physics.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            user-select: none;
-            -webkit-user-select: none;
-        }
+  <script>
+    window.UPLOADED_3D_MODELS = [
+      {
+        "name": "a_classic_closed_wooden_shipping_crate_of_warm_brown_planks_with_diagonal_cross-bracing_on_each_side_and_lighter_corner_posts.glb",
+        "dataUrl": "./assets/a_classic_closed_wooden_shipping_crate_of_warm_brown_planks_with_diagonal_cross-bracing_on_each_side_and_lighter_corner_posts.glb",
+        "type": "model/gltf-binary"
+      },
+      {
+        "name": "A_construction_worker_in_a_yellow_hard_hat_and_reflective_vest_standing_upright.glb",
+        "dataUrl": "./assets/A_construction_worker_in_a_yellow_hard_hat_and_reflective_vest_standing_upright.glb",
+        "type": "model/gltf-binary"
+      },
+      {
+        "name": "A_fire_hydrant_squat_with_two_side_outlets.glb",
+        "dataUrl": "./assets/A_fire_hydrant_squat_with_two_side_outlets.glb",
+        "type": "model/gltf-binary"
+      },
+      {
+        "name": "A_folded_cardboard_box_bundle_tied_with_string.glb",
+        "dataUrl": "./assets/A_folded_cardboard_box_bundle_tied_with_string.glb",
+        "type": "model/gltf-binary"
+      },
+      {
+        "name": "A_garbage_truck_with_a_rear_compactor_in_municipal_green.glb",
+        "dataUrl": "./assets/A_garbage_truck_with_a_rear_compactor_in_municipal_green.glb",
+        "type": "model/gltf-binary"
+      },
+      {
+        "name": "a_Hong_Kong_businesswoman_in_a_charcoal_skirt_suit_with_a_black_bob_haircut.glb",
+        "dataUrl": "./assets/a_Hong_Kong_businesswoman_in_a_charcoal_skirt_suit_with_a_black_bob_haircut.glb",
+        "type": "model/gltf-binary"
+      },
+      {
+        "name": "A_Hong_Kong_office_worker_in_a_short-sleeve_shirt.glb",
+        "dataUrl": "./assets/A_Hong_Kong_office_worker_in_a_short-sleeve_shirt.glb",
+        "type": "model/gltf-binary"
+      },
+      {
+        "name": "A_leafy_street_tree_with_a_slim_trunk_in_a_square_sidewalk_grate.glb",
+        "dataUrl": "./assets/A_leafy_street_tree_with_a_slim_trunk_in_a_square_sidewalk_grate.glb",
+        "type": "model/gltf-binary"
+      },
+      {
+        "name": "A_public_bench_with_green_metal_slats_and_cast-iron_legs.glb",
+        "dataUrl": "./assets/A_public_bench_with_green_metal_slats_and_cast-iron_legs.glb",
+        "type": "model/gltf-binary"
+      },
+      {
+        "name": "A_red_Hong_Kong_taxi_boxy_90s_sedan_shape_with_a_rooftop_taxi_sign.glb",
+        "dataUrl": "./assets/A_red_Hong_Kong_taxi_boxy_90s_sedan_shape_with_a_rooftop_taxi_sign.glb",
+        "type": "model/gltf-binary"
+      },
+      {
+        "name": "A_round_cast-iron_Hong_Kong_manhole_cover_with_a_simple_geometric_grid_pattern.glb",
+        "dataUrl": "./assets/A_round_cast-iron_Hong_Kong_manhole_cover_with_a_simple_geometric_grid_pattern.glb",
+        "type": "model/gltf-binary"
+      },
+      {
+        "name": "A_schoolkid_in_a_white_uniform_with_a_backpack_standing_upright.glb",
+        "dataUrl": "./assets/A_schoolkid_in_a_white_uniform_with_a_backpack_standing_upright.glb",
+        "type": "model/gltf-binary"
+      },
+      {
+        "name": "A_street_vendor_woman_in_an_apron_with_rolled_sleeves_standing_upright.glb",
+        "dataUrl": "./assets/A_street_vendor_woman_in_an_apron_with_rolled_sleeves_standing_upright.glb",
+        "type": "model/gltf-binary"
+      },
+      {
+        "name": "A_tall_pencil-slim_glass_office_tower_with_a_blue_curtain-wall_grid_and_a_small_rooftop_mechanical_box.glb",
+        "dataUrl": "./assets/A_tall_pencil-slim_glass_office_tower_with_a_blue_curtain-wall_grid_and_a_small_rooftop_mechanical_box.glb",
+        "type": "model/gltf-binary"
+      },
+      {
+        "name": "A_tall_skinny_mixed-use_tower_plastered_floor-to-roof_with_overlapping_shop_signs_banners_and_stacked_horizontal_neon_boxes.glb",
+        "dataUrl": "./assets/A_tall_skinny_mixed-use_tower_plastered_floor-to-roof_with_overlapping_shop_signs_banners_and_stacked_horizontal_neon_boxes.glb",
+        "type": "model/gltf-binary"
+      },
+      {
+        "name": "A_tall_slim_commercial_tower_of_roll-up_shutter_shopfronts_at_the_base_and_narrow_tiled_floors_rising_above.glb",
+        "dataUrl": "./assets/A_tall_slim_commercial_tower_of_roll-up_shutter_shopfronts_at_the_base_and_narrow_tiled_floors_rising_above.glb",
+        "type": "model/gltf-binary"
+      },
+      {
+        "name": "A_white_delivery_van.glb",
+        "dataUrl": "./assets/A_white_delivery_van.glb",
+        "type": "model/gltf-binary"
+      },
+      {
+        "name": "A_wooden_fruit_crate_half-filled_with_oranges.glb",
+        "dataUrl": "./assets/A_wooden_fruit_crate_half-filled_with_oranges.glb",
+        "type": "model/gltf-binary"
+      },
+      {
+        "name": "An_hong_kong_red_double-decker_bus.glb",
+        "dataUrl": "./assets/An_hong_kong_red_double-decker_bus.glb",
+        "type": "model/gltf-binary"
+      }
+    ];
 
-        body, html {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background-color: #0b0f19;
-            font-family: 'Outfit', 'Inter', sans-serif;
-            color: #ffffff;
-        }
+    window.UPLOADED_IMAGES = [
+      {
+        "name": "A_short_soft_digital_click_with_a_light_percussive_tap_a_crisp_attack_and_almost_no_sustain_Clean_subtle_and_tactile_like_a_smartphone_keyboard_keypress.mp3",
+        "dataUrl": "./assets/click.mp3",
+        "type": "audio/mpeg"
+      },
+      {
+        "name": "A_short_over-the-top_victory_trumpet_fanfare_for_completing_a_game_level_Bright_brass_trumpets_play_a_simple_triumphant_melody_with_a_slightly_cheesy_comedic_arcade-game_feel_Strong_opening_blast_punchy_rhythm_playful_rising_notes_and_a_clear_final_flourish_Energetic_celebratory_and_deliberately_exaggerated_with_a_retro_browser-game_sound_and_a_quick_satisfying_ending.mp3",
+        "dataUrl": "./assets/victory.mp3",
+        "type": "audio/mpeg"
+      }
+    ];
 
-        #renderCanvas {
-            width: 100vw;
-            height: 100vh;
-            display: block;
-            touch-action: none;
-            outline: none;
-        }
+    (function() {
+      var models = window.UPLOADED_3D_MODELS || [];
+      var imgs = window.UPLOADED_IMAGES || [];
+      var lookup = {};
 
-        /* Loading Screen Overlay */
-        #loader-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #0f172a 0%, #31103f 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
-            transition: opacity 0.5s ease, visibility 0.5s;
-        }
+      models.forEach(function(item) {
+        lookup['assets/' + item.name] = item.dataUrl;
+        lookup[item.name] = item.dataUrl;
+        lookup['./' + 'assets/' + item.name] = item.dataUrl;
+        lookup['./' + item.name] = item.dataUrl;
+      });
 
-        #loader-overlay.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
+      imgs.forEach(function(img) {
+        lookup['assets/' + img.name] = img.dataUrl;
+        lookup[img.name] = img.dataUrl;
+        lookup['./' + 'assets/' + img.name] = img.dataUrl;
+        lookup['./' + img.name] = img.dataUrl;
+      });
 
-        .loader-card {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid var(--border-glass);
-            backdrop-filter: blur(16px);
-            border-radius: 24px;
-            padding: 2.5rem 3rem;
-            text-align: center;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-            max-width: 440px;
-            width: 90%;
-        }
+      function resolveAsset(url) {
+        if (typeof url !== 'string') return null;
+        var clean = url.replace(/^\.?\//, '');
+        return lookup[clean] || lookup[url] || null;
+      }
 
-        .loader-card h1 {
-            font-size: 2.2rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, #c084fc 0%, #f472b6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.5px;
-        }
+      var _origFetch = window.fetch;
+      window.fetch = function(url, opts) {
+        var resolved = resolveAsset(typeof url === 'string' ? url : (url && url.url) || '');
+        if (resolved) return _origFetch.call(window, resolved, opts);
+        return _origFetch.apply(this, arguments);
+      };
 
-        .loader-card p {
-            color: #cbd5e1;
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-        }
+      var _origXHROpen = XMLHttpRequest.prototype.open;
+      XMLHttpRequest.prototype.open = function(method, url) {
+        var resolved = resolveAsset(url);
+        if (resolved) arguments[1] = resolved;
+        return _origXHROpen.apply(this, arguments);
+      };
 
-        .progress-bar-container {
-            width: 100%;
-            height: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 999px;
-            overflow: hidden;
-            margin-bottom: 1rem;
-        }
+      var imgSrcDesc = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, 'src');
+      if (imgSrcDesc && imgSrcDesc.set) {
+        Object.defineProperty(HTMLImageElement.prototype, 'src', {
+          set: function(val) {
+            var resolved = resolveAsset(val);
+            imgSrcDesc.set.call(this, resolved || val);
+          },
+          get: imgSrcDesc.get,
+          configurable: true
+        });
+      }
+    })();
+  </script>
 
-        .progress-bar-fill {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #a855f7, #ec4899);
-            border-radius: 999px;
-            transition: width 0.3s ease;
-        }
+  <script type="importmap">
+  {
+    "imports": {
+      "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.webgpu.js",
+      "three/tsl": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.tsl.js",
+      "lil-gui": "https://cdn.jsdelivr.net/npm/lil-gui@0.21.0/dist/lil-gui.esm.js",
+      "lil-gui/": "https://esm.sh/lil-gui/",
+      "stats-gl": "https://cdn.jsdelivr.net/npm/stats-gl@4.0.2/dist/main.js",
+      "stats-gl/": "https://esm.sh/stats-gl/",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.185.1/examples/jsm/",
+      "navcat": "https://cdn.jsdelivr.net/npm/navcat@0.4.1/dist/index.js",
+      "navcat/": "https://esm.sh/navcat/",
+      "navcat/blocks": "https://cdn.jsdelivr.net/npm/navcat@0.4.1/dist/blocks.js",
+      "box3d.js-bundled": "https://cdn.jsdelivr.net/npm/box3d.js-bundled@0.0.5/dist/box3d.inline.mjs",
+      "box3d.js-bundled/": "https://esm.sh/box3d.js-bundled/",
+      "meshoptimizer": "https://cdn.jsdelivr.net/npm/meshoptimizer@1.2.0/index.js",
+      "meshoptimizer/": "https://esm.sh/meshoptimizer/",
+      "three": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js",
+      "mathcat": "https://cdn.jsdelivr.net/npm/mathcat@0.0.12/dist/index.js"
+    }
+  }
+  </script>
 
-        #loading-text {
-            font-size: 0.85rem;
-            color: #94a3b8;
-            font-weight: 600;
-        }
-
-        /* HUD Overlay */
-        #hud {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 10;
-            padding: 1.2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .hud-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-        }
-
-        .hud-stats-group {
-            display: flex;
-            gap: 0.75rem;
-        }
-
-        .hud-badge {
-            background: var(--bg-dark);
-            border: 1px solid var(--border-glass);
-            backdrop-filter: blur(12px);
-            padding: 0.55rem 1.1rem;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 700;
-            font-size: 1.05rem;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .hud-badge-icon {
-            font-size: 1.25rem;
-        }
-
-        .hud-badge.hole-level {
-            color: #c084fc;
-        }
-
-        .hud-badge.score {
-            color: #fbbf24;
-        }
-
-        .hud-badge.timer {
-            color: #38bdf8;
-        }
-
-        /* Growth Bar HUD Center */
-        .growth-container {
-            position: absolute;
-            top: 1.2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 260px;
-            background: var(--bg-dark);
-            border: 1px solid var(--border-glass);
-            backdrop-filter: blur(12px);
-            padding: 0.6rem 1rem;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-        }
-
-        .growth-title {
-            font-size: 0.78rem;
-            font-weight: 800;
-            color: #cbd5e1;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            margin-bottom: 0.35rem;
-        }
-
-        .growth-bar-bg {
-            width: 100%;
-            height: 12px;
-            background: rgba(255, 255, 255, 0.12);
-            border-radius: 999px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .growth-bar-fill {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #818cf8, #c084fc, #f472b6);
-            border-radius: 999px;
-            transition: width 0.25s ease;
-        }
-
-        /* Controls Hint Footer */
-        .controls-hint {
-            position: absolute;
-            bottom: 1.2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--bg-dark);
-            border: 1px solid var(--border-glass);
-            backdrop-filter: blur(12px);
-            padding: 0.5rem 1.2rem;
-            border-radius: 999px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #cbd5e1;
-            display: flex;
-            gap: 1.2rem;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-        }
-
-        .key-cap {
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            padding: 0.15rem 0.45rem;
-            border-radius: 6px;
-            font-weight: 800;
-            color: #ffffff;
-            font-size: 0.75rem;
-            margin-right: 0.3rem;
-        }
-
-        /* Virtual Touch Joystick */
-        #mobile-controls {
-            position: absolute;
-            bottom: 2rem;
-            left: 2rem;
-            width: 120px;
-            height: 120px;
-            pointer-events: auto;
-            touch-action: none;
-            display: block;
-        }
-
-        .dpad-container {
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.08);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            border-radius: 50%;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-        }
-
-        .dpad-stick {
-            width: 46px;
-            height: 46px;
-            background: linear-gradient(135deg, #a855f7 0%, #6366f1 100%);
-            border-radius: 50%;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-            transition: transform 0.05s ease-out;
-        }
-
-        /* Modal Overlay */
-        .modal-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(11, 15, 25, 0.85);
-            backdrop-filter: blur(16px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 200;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.4s ease, visibility 0.4s;
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal-card {
-            background: rgba(30, 41, 59, 0.85);
-            border: 1.5px solid var(--border-glass);
-            border-radius: 28px;
-            padding: 2.5rem 3rem;
-            text-align: center;
-            max-width: 440px;
-            width: 90%;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
-            transform: scale(0.9);
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .modal-overlay.active .modal-card {
-            transform: scale(1);
-        }
-
-        .modal-icon {
-            font-size: 3.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .modal-title {
-            font-size: 2rem;
-            font-weight: 900;
-            margin-bottom: 0.5rem;
-        }
-
-        .modal-title.victory {
-            background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .modal-stats {
-            background: rgba(15, 23, 42, 0.6);
-            border-radius: 18px;
-            padding: 1.2rem;
-            margin: 1.5rem 0;
-            display: flex;
-            justify-content: space-around;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-label {
-            font-size: 0.8rem;
-            color: #94a3b8;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .stat-value {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: #ffffff;
-            margin-top: 0.2rem;
-        }
-
-        .btn {
-            background: linear-gradient(135deg, #a855f7 0%, #6366f1 100%);
-            color: #ffffff;
-            border: none;
-            padding: 0.85rem 2rem;
-            border-radius: 999px;
-            font-size: 1.05rem;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 10px 25px rgba(168, 85, 247, 0.4);
-            transition: transform 0.2s, box-shadow 0.2s;
-            font-family: inherit;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 14px 30px rgba(168, 85, 247, 0.6);
-        }
-
-        @media (max-width: 640px) {
-            .controls-hint { display: none; }
-            .growth-container { width: 180px; }
-        }
-    </style>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      outline: none !important;
+      box-sizing: border-box;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #0b0f19;
+      font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    #root {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+    canvas {
+      display: block;
+      width: 100% !important;
+      height: 100% !important;
+      outline: none !important;
+      touch-action: none;
+    }
+    /* Hub Back Button */
+    .hub-back-btn {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      backdrop-filter: blur(10px);
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    .hub-back-btn:hover {
+      background: rgba(139, 92, 246, 0.8);
+      border-color: rgba(255, 255, 255, 0.4);
+      transform: translateY(-1px);
+    }
+  </style>
 </head>
 <body>
+  <div id="root"></div>
+  <a href="/" class="hub-back-btn">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    <span>Game Hub</span>
+  </a>
 
-    <!-- 3D Canvas -->
-    <canvas id="renderCanvas"></canvas>
-
-    <!-- Loading Overlay -->
-    <div id="loader-overlay">
-        <div class="loader-card">
-            <h1>Hole.io 3D</h1>
-            <p>ควบคุมหลุมดำกลืนสิ่งของเพื่อขยายขนาด!</p>
-            <div class="progress-bar-container">
-                <div id="progress-fill" class="progress-bar-fill"></div>
-            </div>
-            <div id="loading-text">กำลังโหลด 3D Models...</div>
-        </div>
-    </div>
-
-    <!-- HUD Overlay -->
-    <div id="hud">
-        <div class="hud-top">
-            <div class="hud-stats-group">
-                <div class="hud-badge hole-level">
-                    <span class="hud-badge-icon">🕳️</span>
-                    <span id="level-val">LVL 1</span>
-                </div>
-                <div class="hud-badge score">
-                    <span class="hud-badge-icon">⭐</span>
-                    <span id="score-val">0</span>
-                </div>
-            </div>
-
-            <!-- Hole Growth Bar -->
-            <div class="growth-container">
-                <div class="growth-title" id="growth-label">ขนาดหลุม (Level 1)</div>
-                <div class="growth-bar-bg">
-                    <div id="growth-fill" class="growth-bar-fill"></div>
-                </div>
-            </div>
-
-            <div class="hud-badge timer">
-                <span class="hud-badge-icon">⏱️</span>
-                <span id="timer-val">01:00</span>
-            </div>
-        </div>
-
-        <!-- Desktop Keyboard Controls Hint -->
-        <div class="controls-hint">
-            <span><span class="key-cap">W</span><span class="key-cap">A</span><span class="key-cap">S</span><span class="key-cap">D</span> เคลื่อนที่หลุมดำ</span>
-            <span><span class="key-cap">Goal</span> กลืนสิ่งของเพื่อขยายขนาด!</span>
-        </div>
-
-        <!-- Mobile Touch Joystick -->
-        <div id="mobile-controls">
-            <div class="dpad-container" id="dpad-area">
-                <div class="dpad-stick" id="dpad-stick"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Game Over / Time Up Modal -->
-    <div class="modal-overlay" id="gameover-modal">
-        <div class="modal-card">
-            <div class="modal-icon">🏆</div>
-            <div class="modal-title victory">หมดเวลาแล้ว!</div>
-            <p style="color: #94a3b8; font-size: 0.95rem;">สรุปผลงานการกลืนวัตถุของหลุมดำ</p>
-
-            <div class="modal-stats">
-                <div class="stat-item">
-                    <div class="stat-label">วัตถุที่กลืนได้</div>
-                    <div class="stat-value" id="swallowed-val">0</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-label">คะแนนรวม</div>
-                    <div class="stat-value" id="final-score-val">0</div>
-                </div>
-            </div>
-
-            <button class="btn" onclick="restartGame()">เล่นอีกครั้ง 🔄</button>
-        </div>
-    </div>
-
-    <!-- Main Game Script -->
-    <script src="game.js"></script>
+  <script type="module" src="./bundle.js"></script>
 </body>
 </html>
