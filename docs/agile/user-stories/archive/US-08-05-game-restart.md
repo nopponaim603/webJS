@@ -1,3 +1,14 @@
+---
+title: "User Story: US-08-05 — Game Restart and New Game Button"
+version: "1.0.0"
+last_updated: "2026-07-28"
+owner: "Dev Team"
+status: "Completed"
+tags:
+  - agile
+  - user-story
+---
+
 # User Story: US-08-05 — Game Restart and New Game Button
 
 **Status:** ✅ Done  

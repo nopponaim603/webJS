@@ -1,3 +1,14 @@
+---
+title: "🃏 Card Memory Match — Game Design Document & Dev Specs"
+version: "1.0.0"
+last_updated: "2026-07-27"
+owner: "Noppon / Dev Team"
+status: "Design"
+tags:
+  - gdd
+  - card-memory
+---
+
 # 🃏 Card Memory Match — Game Design Document & Dev Specs
 
 **Code Name:** `card-memory` (G008)  

@@ -1,3 +1,14 @@
+---
+title: "🧋 BOBA PEARL DROP: 100% SUGAR — Concept & Vision"
+version: "1.0.0"
+last_updated: "2026-08-12"
+owner: "Game Design Team"
+status: "Active"
+tags:
+  - gdd
+  - boba-pearl-drop
+---
+
 # 🧋 BOBA PEARL DROP: 100% SUGAR — Concept & Vision
 
 **Version:** 1.0.0 | **Last Updated:** 2026-08-12  

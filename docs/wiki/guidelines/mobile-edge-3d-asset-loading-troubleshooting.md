@@ -1,3 +1,14 @@
+---
+title: "📱 3D Asset Loading & Mobile Edge Troubleshooting Guide"
+version: "1.22.0"
+last_updated: "2026-07-29"
+owner: "Antigravity AI & Dev Team"
+status: "Active"
+tags:
+  - wiki
+  - guidelines
+---
+
 # 📱 3D Asset Loading & Mobile Edge Troubleshooting Guide
 
 **Document ID:** `GUIDE-3D-ASSET-01`  

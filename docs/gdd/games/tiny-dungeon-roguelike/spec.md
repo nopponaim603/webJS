@@ -1,3 +1,14 @@
+---
+title: "🗡️ Tiny Dungeon Survivor (Action Roguelike) — Game Design Document & Asset Specs"
+version: "1.0.0"
+last_updated: "2026-07-28"
+owner: "Noppon / Dev Team"
+status: "Completed"
+tags:
+  - gdd
+  - tiny-dungeon-roguelike
+---
+
 # 🗡️ Tiny Dungeon Survivor (Action Roguelike) — Game Design Document & Asset Specs
 
 **Code Name:** `tiny-dungeon-roguelike` (G017)  

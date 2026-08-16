@@ -1,3 +1,14 @@
+---
+title: "User Story: US-08-06 — Mobile-Responsive Touch Support"
+version: "1.0.0"
+last_updated: "2026-07-29"
+owner: "Dev Team"
+status: "Completed"
+tags:
+  - agile
+  - user-story
+---
+
 # User Story: US-08-06 — Mobile-Responsive Touch Support
 
 # User Story: US-08-06 — Mobile-Responsive Touch Support

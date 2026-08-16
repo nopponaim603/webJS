@@ -1,3 +1,14 @@
+---
+title: "User Story: US-01-01 — Game Portfolio Cards & Grid View"
+version: "1.0.0"
+last_updated: "2026-08-16"
+owner: "Dev Team & AI Agent"
+status: "Completed"
+tags:
+  - agile
+  - user-story
+---
+
 # User Story: US-01-01 — Game Portfolio Cards & Grid View
 
 **Status:** ✅ Done (Archived)  

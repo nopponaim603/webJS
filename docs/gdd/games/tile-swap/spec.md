@@ -1,3 +1,14 @@
+---
+title: "🧩 Tile Swap (Phaser 2D) — Game Design Document & Dev Specs"
+version: "1.1.0"
+last_updated: "2026-07-29"
+owner: "Noppon / Dev Team"
+status: "Completed"
+tags:
+  - gdd
+  - tile-swap
+---
+
 # 🧩 Tile Swap (Phaser 2D) — Game Design Document & Dev Specs
 
 **Code Name:** `tile-swap` (G006)  

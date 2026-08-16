@@ -1,3 +1,14 @@
+---
+title: "🧋 BOBA PEARL DROP: 100% SUGAR — Game Specification"
+version: "1.0.0"
+last_updated: "2026-08-12"
+owner: "Noppon / Dev Team"
+status: "Design"
+tags:
+  - gdd
+  - boba-pearl-drop
+---
+
 # 🧋 BOBA PEARL DROP: 100% SUGAR — Game Specification
 
 **Code Name:** `boba-pearl-drop`  

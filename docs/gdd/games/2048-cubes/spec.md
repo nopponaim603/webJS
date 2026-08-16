@@ -1,3 +1,14 @@
+---
+title: "🎲 2048 Cubes — Game Design Document & Dev Specs"
+version: "1.0.0"
+last_updated: "2026-07-26"
+owner: "Noppon / Dev Team"
+status: "Completed"
+tags:
+  - gdd
+  - 2048-cubes
+---
+
 # 🎲 2048 Cubes — Game Design Document & Dev Specs
 
 **Code Name:** `2048-cubes` (G002)

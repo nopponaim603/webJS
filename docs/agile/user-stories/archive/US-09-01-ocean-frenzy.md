@@ -1,3 +1,14 @@
+---
+title: "[US-09-01] Ocean Frenzy — Complete Feeding Frenzy Game Mechanics"
+version: "1.0.0"
+last_updated: "2026-08-16"
+owner: "Noppon / Dev Team"
+status: "🟢"
+tags:
+  - agile
+  - user-story
+---
+
 # [US-09-01] Ocean Frenzy — Complete Feeding Frenzy Game Mechanics
 
 **System Group / Module:** Game Mechanics / Phaser 3 Arcade  

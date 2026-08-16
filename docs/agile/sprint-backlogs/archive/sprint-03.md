@@ -1,3 +1,14 @@
+---
+title: "Sprint 03: Tiny Dungeon Survivor (Action Roguelike)"
+version: "1.0.0"
+last_updated: "2026-08-16"
+owner: "Noppon / Dev Team"
+status: "Completed"
+tags:
+  - agile
+  - sprint
+---
+
 # Sprint 03: Tiny Dungeon Survivor (Action Roguelike)
 
 **Goal:** พัฒนาและเปิดตัวเกมแนว **2D Top-Down Action Roguelike (Tiny Dungeon Survivor)** โดยใช้ Phaser 3 และชุดกราฟิก Kenney Tiny Dungeon บน Next.js Game Hub  

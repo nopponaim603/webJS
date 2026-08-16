@@ -1,3 +1,14 @@
+---
+title: "Development & Final Resolution Report — G009 Ocean Frenzy"
+version: "1.0.0"
+last_updated: "2026-08-16"
+owner: "Noppon / Dev Team"
+status: "Completed"
+tags:
+  - agile
+  - report
+---
+
 # Development & Final Resolution Report — G009 Ocean Frenzy
 
 **Date:** 2026-08-01  

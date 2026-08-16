@@ -1,3 +1,14 @@
+---
+title: "🍦 Sprint 08: Ice Cream Town — Core Match-3 Engine"
+version: "1.0.0"
+last_updated: "2026-08-16"
+owner: "Noppon / Dev Team"
+status: "Planning"
+tags:
+  - agile
+  - sprint
+---
+
 # 🍦 Sprint 08: Ice Cream Town — Core Match-3 Engine
 
 **Sprint Name:** Ice Cream Town — Core Match-3 Mechanics

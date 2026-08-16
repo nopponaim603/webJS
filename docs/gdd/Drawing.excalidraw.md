@@ -3,7 +3,12 @@
 excalidraw-plugin: raw
 tags: [excalidraw]
 
----
+
+title: "Excalidraw Visual Mindmap"
+version: "1.31.0"
+last_updated: "2026-08-16"
+owner: "Noppon / Dev Team"
+status: "Active"---
 ==⚠  Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠==
 
 # Excalidraw Data

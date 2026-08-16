@@ -1,3 +1,14 @@
+---
+title: "⚔️ WarFront.io & FrontWars Strategy — Document Index & Technical Specification"
+version: "1.2.0"
+last_updated: "2026-08-12"
+owner: "Noppon / Dev Team"
+status: "Deep"
+tags:
+  - gdd
+  - warfront
+---
+
 # ⚔️ WarFront.io & FrontWars Strategy — Document Index & Technical Specification
 
 **Code Name:** `warfront`  

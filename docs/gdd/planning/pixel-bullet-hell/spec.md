@@ -1,3 +1,14 @@
+---
+title: "🚀 Pixel Bullet Hell — Game Design Document & Dev Specs"
+version: "1.0.0"
+last_updated: "2026-07-28"
+owner: "Noppon / Dev Team"
+status: "Proposal"
+tags:
+  - gdd
+  - pixel-bullet-hell
+---
+
 # 🚀 Pixel Bullet Hell — Game Design Document & Dev Specs
 
 **Code Name:** `pixel-bullet-hell` (G012)  

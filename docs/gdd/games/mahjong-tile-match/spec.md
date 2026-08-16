@@ -1,3 +1,14 @@
+---
+title: "🀄 Mahjong Tile Match (ไพ่นกกระจอก) — Game Design Document & Dev Specs"
+version: "1.1.0"
+last_updated: "2026-07-29"
+owner: "Noppon / Dev Team"
+status: "Completed"
+tags:
+  - gdd
+  - mahjong-tile-match
+---
+
 # 🀄 Mahjong Tile Match (ไพ่นกกระจอก) — Game Design Document & Dev Specs
 
 **Code Name:** `tile-match` (G003)  

@@ -1,3 +1,13 @@
+---
+title: "🌐 webJS Game Portfolio — Knowledge Wiki"
+version: "1.0.0"
+last_updated: "2026-07-26"
+owner: "Antigravity AI & Dev Team"
+status: "Active"
+tags:
+  - wiki
+---
+
 # 🌐 webJS Game Portfolio — Knowledge Wiki
 
 **Last Updated:** 2026-07-26 | **Maintained by:** Antigravity AI & Dev Team

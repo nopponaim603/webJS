@@ -1,8 +1,13 @@
 ---
+title: "Kanban-board"
 
 kanban-plugin: board
 
----
+
+version: "1.0.0"
+last_updated: "2026-08-16"
+owner: "Noppon / Dev Team"
+status: "Active"---
 
 ## 📋 TO DO
 

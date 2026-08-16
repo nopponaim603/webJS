@@ -1,3 +1,13 @@
+---
+title: "HTML5 Game Portfolio — Audio Direction"
+version: "1.1.0"
+last_updated: "2026-07-28"
+owner: "Noppon / Dev Team"
+status: "Active"
+tags:
+  - gdd
+---
+
 # HTML5 Game Portfolio — Audio Direction
 
 **Version:** 1.1.0 | **Last Updated:** 2026-07-28

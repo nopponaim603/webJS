@@ -1,3 +1,14 @@
+---
+title: "Sprint 01: Portfolio UI & Game Suite Integration"
+version: "1.0.0"
+last_updated: "2026-08-16"
+owner: "Noppon / Dev Team"
+status: "Completed"
+tags:
+  - agile
+  - sprint
+---
+
 # Sprint 01: Portfolio UI & Game Suite Integration
 
 **Goal:** พัฒนาโครงสร้างเว็บไซต์ Portfolio หลัก นำเสนอ 3 มินิเกม HTML5 พร้อมปรับแต่ง Node.js Server และจัดทำเอกสารกำกับโปรเจคด้วย `game-doc-manager`  

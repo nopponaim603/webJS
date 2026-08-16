@@ -1,3 +1,14 @@
+---
+title: "📈 Level Design: Character Growth, Shop Draft & Synergy Mechanics"
+version: "1.0.0"
+last_updated: "2026-08-04"
+owner: "Noppon / Dev Team"
+status: "Active"
+tags:
+  - gdd
+  - tiny-dungeon-squad
+---
+
 # 📈 Level Design: Character Growth, Shop Draft & Synergy Mechanics
 
 **Game:** Tiny Dungeon Squad — SNKRX Edition (`tiny-dungeon-squad`)  

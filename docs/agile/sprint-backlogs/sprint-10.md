@@ -1,3 +1,14 @@
+---
+title: "🍦 Sprint 10: การสำรวจเมือง (Town Exploration)"
+version: "1.0.0"
+last_updated: "2026-08-16"
+owner: "Noppon / Dev Team"
+status: "Planning"
+tags:
+  - agile
+  - sprint
+---
+
 # 🍦 Sprint 10: การสำรวจเมือง (Town Exploration)
 
 **Sprint Name:** Town Exploration

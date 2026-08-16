@@ -1,3 +1,14 @@
+---
+title: "🔮 Cyber Sphere 3D — Game Design Document & Dev Specs"
+version: "1.0.0"
+last_updated: "2026-07-26"
+owner: "Noppon / Dev Team"
+status: "Completed"
+tags:
+  - gdd
+  - cyber-sphere-3d
+---
+
 # 🔮 Cyber Sphere 3D — Game Design Document & Dev Specs
 
 **Code Name:** `cyber-sphere` (G005)

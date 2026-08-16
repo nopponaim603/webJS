@@ -1,3 +1,13 @@
+---
+title: "Product Backlog — webJS Game Portfolio"
+version: "1.30.0"
+last_updated: "2026-08-12"
+owner: "Noppon / Dev Team"
+status: "Active"
+tags:
+  - agile
+---
+
 # Product Backlog — webJS Game Portfolio
 
 **Last Updated:** 2026-08-12 | **Version:** 1.30.0

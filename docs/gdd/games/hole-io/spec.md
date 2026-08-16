@@ -1,3 +1,14 @@
+---
+title: "🕳️ Hole.io 3D (Babylon.js 7.50 / 8) — Game Design Document & Dev Specs"
+version: "1.0.0"
+last_updated: "2026-07-29"
+owner: "Noppon / Dev Team"
+status: "Completed"
+tags:
+  - gdd
+  - hole-io
+---
+
 # 🕳️ Hole.io 3D (Babylon.js 7.50 / 8) — Game Design Document & Dev Specs
 
 **Code Name:** `hole-io` (G018)  

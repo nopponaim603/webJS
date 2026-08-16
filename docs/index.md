@@ -1,3 +1,13 @@
+---
+title: "🎮 GameDevJS Hub (webJS) — Project Index"
+version: "1.0.0"
+last_updated: "2026-07-26"
+owner: "Noppon / Dev Team"
+status: "Active"
+tags:
+  - documentation
+---
+
 # 🎮 GameDevJS Hub (webJS) — Project Index
 
 **Project:** GameDevJS Hub — HTML5 Games Showcase & Portfolio  

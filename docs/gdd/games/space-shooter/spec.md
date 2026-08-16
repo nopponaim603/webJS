@@ -1,3 +1,14 @@
+---
+title: "🚀 Space Shooter (Phaser 2D) — Game Design Document & Asset Specs"
+version: "1.1.0"
+last_updated: "2026-07-26"
+owner: "Noppon / Dev Team"
+status: "Completed"
+tags:
+  - gdd
+  - space-shooter
+---
+
 # 🚀 Space Shooter (Phaser 2D) — Game Design Document & Asset Specs
 
 **Code Name:** `space-shooter` (G004)

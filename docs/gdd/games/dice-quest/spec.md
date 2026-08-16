@@ -1,3 +1,14 @@
+---
+title: "🎲 Dice Quest — Game Design Document & Dev Specs"
+version: "1.0.0"
+last_updated: "2026-08-01"
+owner: "Noppon / Dev Team"
+status: "Completed"
+tags:
+  - gdd
+  - dice-quest
+---
+
 # 🎲 Dice Quest — Game Design Document & Dev Specs
 
 **Code Name:** `dice-quest` (G010)  

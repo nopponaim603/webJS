@@ -1,3 +1,13 @@
+---
+title: "Sprint Planning & Roadmap"
+version: "1.0"
+last_updated: "2026-07-27"
+owner: "Noppon / Dev Team"
+status: "Draft"
+tags:
+  - agile
+---
+
 # Sprint Planning & Roadmap
 
 **Last Updated:** 2026-07-27 | **Version:** 1.0

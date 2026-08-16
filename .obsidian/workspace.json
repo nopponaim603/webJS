@@ -11,12 +11,14 @@
             "id": "7078f206382bf3eb",
             "type": "leaf",
             "state": {
-              "type": "excalidraw",
+              "type": "markdown",
               "state": {
-                "file": "docs/gdd/Drawing.excalidraw.md"
+                "file": "docs/gdd/00-concept.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "excalidraw-icon",
-              "title": "Drawing.excalidraw"
+              "icon": "lucide-file",
+              "title": "00-concept"
             }
           }
         ]
@@ -205,8 +207,15 @@
   },
   "active": "7078f206382bf3eb",
   "lastOpenFiles": [
-    "docs/gdd/mindmap-idea.canvas",
+    "docs/gdd/01-mechanics.md",
+    "docs/gdd/03-art-direction.md",
+    "docs/gdd/04-audio-direction.md",
+    "docs/gdd/05-asset-game-proposals.md",
+    "docs/add_frontmatter_util.js",
     "docs/gdd/Drawing.excalidraw.md",
+    "docs/gdd/mindmap-idea.canvas",
+    "docs/gdd/00-concept.md",
+    "docs/gdd/02-narrative.md",
     "docs/scratch_excalidraw.js",
     "docs/agile/Kanban-board.md",
     "docs/sprint-plan.md",

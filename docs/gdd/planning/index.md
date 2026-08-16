@@ -1,3 +1,14 @@
+---
+title: "📋 Planned Game Specifications — Roadmap & Proposals"
+version: "1.0.0"
+last_updated: "2026-07-29"
+owner: "Noppon / Dev Team"
+status: "In"
+tags:
+  - gdd
+  - index.md
+---
+
 # 📋 Planned Game Specifications — Roadmap & Proposals
 
 **Location:** `docs/gdd/planning/`  

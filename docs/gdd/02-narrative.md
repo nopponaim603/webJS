@@ -1,3 +1,13 @@
+---
+title: "HTML5 Game Portfolio — Narrative & Experience Design"
+version: "1.0.0"
+last_updated: "2026-07-26"
+owner: "Noppon / Dev Team"
+status: "Active"
+tags:
+  - gdd
+---
+
 # HTML5 Game Portfolio — Narrative & Experience Design
 
 **Version:** 1.0.0 | **Last Updated:** 2026-07-26

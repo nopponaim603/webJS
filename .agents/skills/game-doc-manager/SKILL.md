@@ -131,9 +131,19 @@ Steps:
 
 ### GDD — Game Concept & Architecture (`docs/gdd/00-concept.md`)
 ```markdown
-# [Game Title] — Game Concept & Architecture
+---
+title: "[Game Title] — Game Concept & Architecture"
+version: "1.0.0"
+last_updated: "YYYY-MM-DD"
+owner: "[Name / Role]"
+status: "Draft"
+tags:
+  - gdd
+  - concept
+  - architecture
+---
 
-**Version:** 1.0 | **Last Updated:** YYYY-MM-DD | **Owner:** [Name]
+# [Game Title] — Game Concept & Architecture
 
 ## 1. Introduction
 ### Elevator Pitch
@@ -169,9 +179,18 @@ Steps:
 
 ### GDD — Core Mechanics (`docs/gdd/01-mechanics.md`)
 ```markdown
-# [Game Title] — Core Mechanics
+---
+title: "[Game Title] — Core Mechanics"
+version: "1.0.0"
+last_updated: "YYYY-MM-DD"
+owner: "[Name / Role]"
+status: "Draft"
+tags:
+  - gdd
+  - mechanics
+---
 
-**Version:** 1.0 | **Last Updated:** YYYY-MM-DD
+# [Game Title] — Core Mechanics
 
 ## Core Loop
 [Describe the primary gameplay loop in 3–5 steps.]
@@ -192,11 +211,43 @@ Steps:
 - **Lose:** [Condition]
 ```
 
+### Software — System Design (`docs/software/01-system-design.md`)
+```markdown
+---
+title: "[Game Title] — Software System Design"
+version: "1.0.0"
+last_updated: "YYYY-MM-DD"
+owner: "[Name / Role]"
+status: "Draft"
+tags:
+  - software
+  - architecture
+  - system-design
+---
+
+# [Game Title] — Software System Design
+
+## 1. System Architecture Overview
+[Overview of architecture, layers, and components]
+
+## 2. Subsystem Breakdown
+[Details of each core subsystem]
+```
+
 ### Agile — Product Backlog (`docs/agile/01-product-backlog.md`)
 ```markdown
-# [Game Title] — Product Backlog
+---
+title: "[Game Title] — Product Backlog"
+version: "1.0.0"
+last_updated: "YYYY-MM-DD"
+owner: "[Name / Role]"
+status: "Active"
+tags:
+  - agile
+  - backlog
+---
 
-**Last Updated:** YYYY-MM-DD | **Version:** 1.0
+# [Game Title] — Product Backlog
 
 ## Must Have (MVP)
 | ID | User Story | Acceptance Criteria | Estimate | Status |
@@ -209,9 +260,19 @@ Steps:
 
 ### Agile — Sprint Planning (`docs/agile/02-sprint-planning.md`)
 ```markdown
-# Sprint Planning & Roadmap
+---
+title: "Sprint Planning & Roadmap"
+version: "1.0.0"
+last_updated: "YYYY-MM-DD"
+owner: "[Name / Role]"
+status: "Active"
+tags:
+  - agile
+  - sprint-planning
+  - roadmap
+---
 
-**Last Updated:** YYYY-MM-DD | **Version:** 1.0
+# Sprint Planning & Roadmap
 
 ## 📅 Sprint Schedule Overview
 | Sprint | Timeline | Focus Area | Status |
@@ -224,6 +285,17 @@ Steps:
 
 ### Agile — Sprint Plan (`docs/agile/sprint-backlogs/sprint-XX.md`)
 ```markdown
+---
+title: "Sprint [XX]: [Title]"
+version: "1.0.0"
+last_updated: "YYYY-MM-DD"
+owner: "[Name / Role]"
+status: "Active"
+tags:
+  - agile
+  - sprint
+---
+
 # Sprint [XX]: [Title]
 
 **Goal:** [Goal]
@@ -250,11 +322,20 @@ gantt
 
 ### Agile — User Story (`docs/agile/user-stories/US-XX-XX.md`)
 ```markdown
+---
+title: "User Story: US-[Epic]-[Number] - [Title]"
+version: "1.0.0"
+last_updated: "YYYY-MM-DD"
+owner: "[Name / Role]"
+status: "In Progress"
+tags:
+  - agile
+  - user-story
+---
+
 # User Story: US-[Epic]-[Number] - [Title]
 
-**Status:** [✅ Done / 🔵 In Progress / 🏗 In-Progress]
 **Epic:** [Epic Title](../01-product-backlog.md)
-**Owner:** [Name]
 
 ---
 
@@ -284,15 +365,24 @@ gantt
 
 ### Knowledge Hub — Wiki Home (`docs/wiki/wiki.md`)
 ```markdown
-# 🌐 [Game Title] — Knowledge Wiki
+---
+title: "Knowledge Wiki"
+version: "1.0.0"
+last_updated: "YYYY-MM-DD"
+owner: "[Name / Role]"
+status: "Active"
+tags:
+  - wiki
+  - knowledge-hub
+---
 
-**Last Updated:** YYYY-MM-DD | **Maintained by:** [Name/Role]
+# 🌐 [Game Title] — Knowledge Wiki
 
 ## 🎯 Quick Access
 - **[Concept & Architecture]**: [Concept](../gdd/00-concept.md)
 - **[Core Mechanics]**: [Mechanics](../gdd/01-mechanics.md)
 - **[Current Sprint]**: [Sprint Planning](../agile/02-sprint-planning.md)
-```
+
 ---
 
 ## 🧠 Knowledge Base (Wiki)
@@ -308,11 +398,22 @@ gantt
 
 ### Project Index (`docs/index.md`)
 ```markdown
+---
+title: "Project Index"
+version: "1.0.0"
+last_updated: "YYYY-MM-DD"
+owner: "[Name / Role]"
+status: "Active"
+tags:
+  - index
+  - hub
+---
+
 # 🎮 [Game Title] — Project Index
 
 **Project:** [Title]
 **Status:** [Active/Draft] | **Current Sprint:** [Sprint N]
-**Last Updated:** YYYY-MM-DD | **Knowledge Hub:** [Project Wiki](./wiki/wiki.md)
+**Knowledge Hub:** [Project Wiki](./wiki/wiki.md)
 
 ---
 
@@ -345,7 +446,26 @@ gantt
 ## Output Format Rules
 
 - **Format:** Markdown (`.md`) — suitable for Git repos, Obsidian, GitHub Wiki, and VS Code.
-- Always include `**Version:**` and `**Last Updated:**` fields in every document header.
+- **YAML Frontmatter (Mandatory):** Every document MUST start with a standard YAML Frontmatter block at the top of the file containing:
+  ```yaml
+  ---
+  title: "[Document Title]"
+  version: "X.Y.Z"
+  last_updated: "YYYY-MM-DD"
+  owner: "[Name / Role]"
+  status: "[Draft / In Progress / Active / Completed / Released]"
+  tags:
+    - [tag1]
+    - [tag2]
+  ---
+  ```
+- **Frontmatter Standard Fields:**
+  - `title`: Short and clear document title.
+  - `version`: SemVer string (e.g. `"1.0.0"`, `"1.31.0"`).
+  - `last_updated`: ISO Date format (`"YYYY-MM-DD"`).
+  - `owner`: Owner name or team role (e.g. `"Noppon / Dev Team"`, `"Antigravity AI"`).
+  - `status`: Lifecycle status (`"Draft"`, `"In Progress"`, `"Active"`, `"Completed"`, `"Released"`).
+  - `tags`: Array of category tags for Obsidian/Wiki indexing.
 - Use relative links (`[Label](./path/to/file.md)`) for internal cross-references to ensure compatibility with VS Code and standard Markdown viewers.
 
 ---
@@ -354,10 +474,10 @@ gantt
 
 | User says | Action |
 |-----------|--------|
-| `"create GDD"` | Generate full GDD suite (concept + mechanics stubs) |
+| `"create GDD"` | Generate full GDD suite (concept + mechanics stubs with YAML frontmatter) |
 | `"create sprint [N]"` | Generate sprint plan from backlog |
 | `"sprint from GDD"` | Auto-derive backlog + sprint from GDD content |
-| `"update [doc name]"` | Edit existing doc, propagate changes |
+| `"update [doc name]"` | Edit existing doc, update YAML frontmatter `last_updated`, propagate changes |
 | `"check consistency"` | Cross-check all docs for conflicts/gaps |
 | `"retro sprint [N]"` | Generate retrospective template |
 | `"status"` | Show `docs/index.md` — what exists, what's missing |

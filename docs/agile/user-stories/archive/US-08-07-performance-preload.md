@@ -1,3 +1,14 @@
+---
+title: "User Story: US-08-07 — Performance Optimization & Asset Loading"
+version: "1.0.0"
+last_updated: "2026-07-29"
+owner: "Dev Team"
+status: "Completed"
+tags:
+  - agile
+  - user-story
+---
+
 # User Story: US-08-07 — Performance Optimization & Asset Loading
 
 # User Story: US-08-07 — Performance Optimization & Asset Loading

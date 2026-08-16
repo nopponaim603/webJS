@@ -1,3 +1,13 @@
+---
+title: "HTML5 Game Portfolio — Core Mechanics"
+version: "1.1.0"
+last_updated: "2026-07-28"
+owner: "Noppon / Dev Team"
+status: "Active"
+tags:
+  - gdd
+---
+
 # HTML5 Game Portfolio — Core Mechanics
 
 **Version:** 1.1.0 | **Last Updated:** 2026-07-28

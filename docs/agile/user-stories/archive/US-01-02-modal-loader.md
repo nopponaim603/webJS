@@ -1,3 +1,14 @@
+---
+title: "User Story: US-01-02 — Modal Iframe Game Launcher & Shortcuts"
+version: "1.0.0"
+last_updated: "2026-08-16"
+owner: "Dev Team & AI Agent"
+status: "Completed"
+tags:
+  - agile
+  - user-story
+---
+
 # User Story: US-01-02 — Modal Iframe Game Launcher & Shortcuts
 
 **Status:** ✅ Done (Archived)  

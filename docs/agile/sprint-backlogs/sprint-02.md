@@ -1,3 +1,14 @@
+---
+title: "Sprint 02 — Pixel Shmup + Pico-8 Platformer (G009 + G010)"
+version: "1.0.0"
+last_updated: "2026-08-16"
+owner: "Noppon / Dev Team"
+status: "In Progress"
+tags:
+  - agile
+  - sprint
+---
+
 # Sprint 02 — Pixel Shmup + Pico-8 Platformer (G009 + G010)
 
 **Sprint Duration:** 2026-07-31 → 2026-08-07 (7 working days)  

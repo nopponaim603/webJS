@@ -1,3 +1,14 @@
+---
+title: "User Story: US-02-01 — Emoji Match Mini Game"
+version: "1.0.0"
+last_updated: "2026-08-16"
+owner: "Dev Team"
+status: "Completed"
+tags:
+  - agile
+  - user-story
+---
+
 # User Story: US-02-01 — Emoji Match Mini Game
 
 **Status:** ✅ Done (Archived)  

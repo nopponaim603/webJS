@@ -1,3 +1,13 @@
+---
+title: "🎨 Game Assets Guide & Game Ideas (public/assets)"
+version: "1.0.0"
+last_updated: "2026-07-26"
+owner: "Antigravity AI & Dev Team"
+status: "Active"
+tags:
+  - wiki
+---
+
 # 🎨 Game Assets Guide & Game Ideas (`public/assets`)
 
 **Version:** 1.0.0 | **Last Updated:** 2026-07-26  

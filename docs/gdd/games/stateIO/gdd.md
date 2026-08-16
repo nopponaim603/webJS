@@ -1,3 +1,14 @@
+---
+title: "Game Design Document (GDD) — State.IO"
+version: "1.0.0"
+last_updated: "2026-08-16"
+owner: "Noppon / Dev Team"
+status: "Active"
+tags:
+  - gdd
+  - stateIO
+---
+
 # Game Design Document (GDD) — State.IO
 ## Real-Time Tactical Territory Domination Game
 

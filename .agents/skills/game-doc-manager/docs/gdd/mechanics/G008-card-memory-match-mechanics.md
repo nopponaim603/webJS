@@ -1,3 +1,13 @@
+---
+title: "G008: Card Memory Match — Core Mechanics"
+version: "1.0"
+last_updated: "2026-07-27"
+owner: "Noppon / Dev Team"
+status: "Active"
+tags:
+  - gdd
+---
+
 # G008: Card Memory Match — Core Mechanics
 
 **Version:** 1.0 | **Last Updated:** 2026-07-27

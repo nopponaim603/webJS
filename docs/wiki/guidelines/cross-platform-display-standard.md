@@ -1,3 +1,14 @@
+---
+title: "📱💻 มาตรฐานการพัฒนาเกม: การรองรับ PC และ Mobile แนวตั้ง (Cross-Platform Responsive & Portrait Standard)"
+version: "1.0.0"
+last_updated: "2026-07-28"
+owner: "Web Game Architecture & UX Team"
+status: "Approved"
+tags:
+  - wiki
+  - guidelines
+---
+
 # 📱💻 มาตรฐานการพัฒนาเกม: การรองรับ PC และ Mobile แนวตั้ง (Cross-Platform Responsive & Portrait Standard)
 
 **Version:** 1.0.0 | **Last Updated:** 2026-07-28 | **Owner:** Web Game Architecture & UX Team  

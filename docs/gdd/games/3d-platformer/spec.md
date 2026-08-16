@@ -1,3 +1,14 @@
+---
+title: "🏃‍♂️ Kenney 3D Platformer (Babylon.js 8) — Game Design Document & Dev Specs"
+version: "1.0.0"
+last_updated: "2026-07-26"
+owner: "Noppon / Dev Team"
+status: "Completed"
+tags:
+  - gdd
+  - 3d-platformer
+---
+
 # 🏃‍♂️ Kenney 3D Platformer (Babylon.js 8) — Game Design Document & Dev Specs
 
 **Code Name:** `3d-platformer` (G007)

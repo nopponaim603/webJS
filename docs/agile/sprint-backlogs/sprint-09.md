@@ -1,3 +1,14 @@
+---
+title: "🍦 Sprint 09: ระบบร้านค้าและเศรษฐกิจ (Shop & Economy)"
+version: "1.0.0"
+last_updated: "2026-08-16"
+owner: "Noppon / Dev Team"
+status: "Planning"
+tags:
+  - agile
+  - sprint
+---
+
 # 🍦 Sprint 09: ระบบร้านค้าและเศรษฐกิจ (Shop & Economy)
 
 **Sprint Name:** Shop & Economy

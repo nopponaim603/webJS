@@ -1,3 +1,14 @@
+---
+title: "🍦 Sprint 11: Polish & Launch (ปรับปรุงและเปิดตัว)"
+version: "1.0.0"
+last_updated: "2026-08-16"
+owner: "Noppon / Dev Team"
+status: "Planning"
+tags:
+  - agile
+  - sprint
+---
+
 # 🍦 Sprint 11: Polish & Launch (ปรับปรุงและเปิดตัว)
 
 **Sprint Name:** Polish & Launch

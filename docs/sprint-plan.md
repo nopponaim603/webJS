@@ -1,3 +1,13 @@
+---
+title: "📋 Sprint Planning & User Stories — Card Memory Match (G008)"
+version: "1.0.0"
+last_updated: "2026-08-16"
+owner: "Noppon / Dev Team"
+status: "In Progress"
+tags:
+  - documentation
+---
+
 # 📋 Sprint Planning & User Stories — Card Memory Match (G008)
 
 **Sprint Duration:** 2026-07-28 → 2026-08-04 (4 working days)  

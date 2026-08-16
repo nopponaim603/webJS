@@ -1,3 +1,14 @@
+---
+title: "👾 Level Design: Monster Spawning & Difficulty Pacing"
+version: "1.0.0"
+last_updated: "2026-07-28"
+owner: "Noppon / Dev Team"
+status: "Active"
+tags:
+  - gdd
+  - tiny-dungeon-roguelike
+---
+
 # 👾 Level Design: Monster Spawning & Difficulty Pacing
 
 **Game:** Tiny Dungeon Survivor (`tiny-dungeon-roguelike`)

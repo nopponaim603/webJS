@@ -1,9 +1,24 @@
+---
+title: "📜 Documentation Changelog — webJS"
+version: "1.0.0"
+last_updated: "2026-08-16"
+owner: "Antigravity AI & Dev Team"
+status: "Active"
+tags:
+  - documentation
+---
+
 # 📜 Documentation Changelog — webJS
 
 **Project:** Game Portfolio (`webJS`)  
 **Maintained by:** Antigravity AI & Dev Team  
 
 ## [1.31.0] - 2026-08-16
+
+- **YAML Frontmatter Standardization & Skill Update ([.agents/skills/game-doc-manager/SKILL.md](file:///c:/Users/noppon/source/06-WEB/webJS/.agents/skills/game-doc-manager/SKILL.md))**:
+  - กำหนดมาตรฐาน **YAML Frontmatter** สำหรับเอกสารทุกฉบับ (`title`, `version`, `last_updated`, `owner`, `status`, `tags`)
+  - อัปเดตเทมเพลตทั้งหมดใน skill `game-doc-manager` (GDD Concept, Mechanics, System Design, Product Backlog, Sprint Planning, User Stories, Wiki, Project Index)
+  - ประยุกต์ใช้ YAML Frontmatter ให้กับเอกสาร Markdown ทุกไฟล์ในโฟลเดอร์ `docs/` (จำนวน 170+ ไฟล์) ครอบคลุมทั้ง GDD, Software, Agile, Reports และ Wiki
 
 - **Ecosystem Mindmaps (Canvas & Excalidraw)**:
   - **Obsidian Canvas ([docs/gdd/mindmap-idea.canvas](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/mindmap-idea.canvas))**: แผนผังความคิดแบบละเอียดครอบคลุมทั้งระบบของ **GameDevJS Hub (`webJS`)**

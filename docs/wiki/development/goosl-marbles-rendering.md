@@ -1,3 +1,13 @@
+---
+title: "🔮 Goosl Glass Marbles — WebGL 2 Shader & Physics Rendering Knowledge Base"
+version: "1.0.0"
+last_updated: "2026-07-29"
+owner: "Antigravity AI & Dev Team"
+status: "Active"
+tags:
+  - wiki
+---
+
 # 🔮 Goosl Glass Marbles — WebGL 2 Shader & Physics Rendering Knowledge Base
 
 **Game Code:** `goosl-marbles` (G016)  

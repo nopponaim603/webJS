@@ -1,3 +1,13 @@
+---
+title: "🎮 Web Game Dev Hub — Project Index"
+version: "1.0.0"
+last_updated: "2026-07-27"
+owner: "Noppon / Dev Team"
+status: "Active"
+tags:
+  - documentation
+---
+
 # 🎮 Web Game Dev Hub — Project Index
 
 **Project:** Web Game Dev Hub  

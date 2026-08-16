@@ -1,3 +1,14 @@
+---
+title: "🔮 Goosl Glass Marbles (구슬치기) — Game Design Document & Dev Specs"
+version: "1.0.0"
+last_updated: "2026-07-28"
+owner: "Noppon / Dev Team"
+status: "Completed"
+tags:
+  - gdd
+  - goosl-marbles
+---
+
 # 🔮 Goosl Glass Marbles (구슬치기) — Game Design Document & Dev Specs
 
 **Code Name:** `goosl-marbles` (G016)  

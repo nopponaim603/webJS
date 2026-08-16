@@ -1,3 +1,14 @@
+---
+title: "User Story: US-08-04 — Match Results Screen with Stats"
+version: "1.0.0"
+last_updated: "2026-07-28"
+owner: "Dev Team"
+status: "Completed"
+tags:
+  - agile
+  - user-story
+---
+
 # User Story: US-08-04 — Match Results Screen with Stats
 
 **Status:** ✅ Done  

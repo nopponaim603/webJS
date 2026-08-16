@@ -1,3 +1,14 @@
+---
+title: "User Story: US-08-03 — Move Counter and Timer Display"
+version: "1.0.0"
+last_updated: "2026-07-28"
+owner: "Dev Team"
+status: "Completed"
+tags:
+  - agile
+  - user-story
+---
+
 # User Story: US-08-03 — Move Counter and Timer Display
 
 **Status:** ✅ Done  

@@ -1,3 +1,14 @@
+---
+title: "User Story: US-01-03 — Real-Time Search & Category Filter"
+version: "1.0.0"
+last_updated: "2026-08-16"
+owner: "Dev Team & AI Agent"
+status: "Completed"
+tags:
+  - agile
+  - user-story
+---
+
 # User Story: US-01-03 — Real-Time Search & Category Filter
 
 **Status:** ✅ Done (Archived)  

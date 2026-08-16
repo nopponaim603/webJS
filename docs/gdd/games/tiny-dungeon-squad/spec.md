@@ -1,3 +1,14 @@
+---
+title: "🗡️ Tiny Dungeon Squad (SNKRX Edition) — Game Design Document & Asset Specs"
+version: "1.0.0"
+last_updated: "2026-08-04"
+owner: "Noppon / Dev Team"
+status: "Active"
+tags:
+  - gdd
+  - tiny-dungeon-squad
+---
+
 # 🗡️ Tiny Dungeon Squad (SNKRX Edition) — Game Design Document & Asset Specs
 
 **Code Name:** `tiny-dungeon-squad` (G021)  
