@@ -1,5 +1,6 @@
 ---
 title: "📋 Product Backlog — WarFront.io & FrontWars Strategy (G020)"
+project: "WarFront.io & FrontWars Strategy"
 version: "1.0.0"
 last_updated: "2026-08-16"
 owner: "Noppon / Dev Team"
@@ -8,14 +9,11 @@ tags:
   - agile
   - warfront
 ---
-
 # 📋 Product Backlog — WarFront.io & FrontWars Strategy (G020)
 
-**Project:** WarFront.io & FrontWars Strategy  
 **Epic:** Epic 12 (WarFront.io Strategy Overhaul)  
 **Created:** 2026-08-12  
 **Target Release:** Sprint 12  
-**Status:** ✅ Completed / Sprint Closed  
 
 ---
 

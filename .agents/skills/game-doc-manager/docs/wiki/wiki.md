@@ -1,5 +1,6 @@
 ---
 title: "🌐 Web Game Dev Hub — Knowledge Wiki"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-07-27"
 owner: "Game Dev Team"
@@ -7,10 +8,8 @@ status: "Active"
 tags:
   - wiki
 ---
-
 # 🌐 Web Game Dev Hub — Knowledge Wiki
 
-**Last Updated:** 2026-07-27 | **Maintained by:** Game Dev Team
 
 ## 🎯 Quick Access
 - **[Game Concepts](./../gdd/concept/)**: Game Design Documents

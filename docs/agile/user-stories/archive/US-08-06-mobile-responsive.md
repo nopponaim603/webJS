@@ -1,5 +1,6 @@
 ---
 title: "User Story: US-08-06 — Mobile-Responsive Touch Support"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-07-29"
 owner: "Dev Team"
@@ -8,16 +9,12 @@ tags:
   - agile
   - user-story
 ---
-
 # User Story: US-08-06 — Mobile-Responsive Touch Support
 
 # User Story: US-08-06 — Mobile-Responsive Touch Support
 
-**Status:** 🟢 Done  
 **Epic:** Epic 08 — Card Memory Match (`card-memory`)  
-**Owner:** Dev Team  
 **Created:** 2026-07-27  
-**Last Updated:** 2026-07-29  
 **Priority:** P1 — Should Have  
 **Estimate:** 3 hours  
 

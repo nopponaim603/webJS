@@ -1,5 +1,6 @@
 ---
 title: "Software System Design — webJS Game Portfolio"
+project: "GameDevJS Hub (webJS)"
 version: "1.1.0"
 last_updated: "2026-07-28"
 owner: "Noppon / Dev Team"
@@ -7,10 +8,8 @@ status: "Active"
 tags:
   - software
 ---
-
 # Software System Design — webJS Game Portfolio
 
-**Version:** 1.1.0 | **Last Updated:** 2026-07-28
 
 ---
 

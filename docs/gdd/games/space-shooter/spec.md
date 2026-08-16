@@ -1,5 +1,6 @@
 ---
 title: "🚀 Space Shooter (Phaser 2D) — Game Design Document & Asset Specs"
+project: "GameDevJS Hub (webJS)"
 version: "1.1.0"
 last_updated: "2026-07-26"
 owner: "Noppon / Dev Team"
@@ -8,15 +9,12 @@ tags:
   - gdd
   - space-shooter
 ---
-
 # 🚀 Space Shooter (Phaser 2D) — Game Design Document & Asset Specs
 
 **Code Name:** `space-shooter` (G004)
 **Game ID:** `space-shooter` (`phaser-demo`)  
 **Engine:** Phaser 3 (v3.80.1) — Arcade Physics  
 **Assets Pack:** Kenney Simple Space (CC0 Public Domain License)  
-**Version:** 1.1.0 | **Last Updated:** 2026-07-26  
-**Status:** Released / Active  
 
 ---
 

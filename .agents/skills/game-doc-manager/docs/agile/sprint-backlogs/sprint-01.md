@@ -1,5 +1,6 @@
 ---
 title: "Sprint 01: Card Memory Match (G008)"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-08-16"
 owner: "Noppon / Dev Team"
@@ -8,7 +9,6 @@ tags:
   - agile
   - sprint
 ---
-
 # Sprint 01: Card Memory Match (G008)
 
 **Goal:** Deliver a playable Card Memory Match game with core matching mechanics, basic UI, and score tracking.

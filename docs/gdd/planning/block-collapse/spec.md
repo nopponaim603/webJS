@@ -1,5 +1,6 @@
 ---
 title: "🧩 Block Collapse — Game Design Document & Dev Specs"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-07-28"
 owner: "Noppon / Dev Team"
@@ -8,15 +9,12 @@ tags:
   - gdd
   - block-collapse
 ---
-
 # 🧩 Block Collapse — Game Design Document & Dev Specs
 
 **Code Name:** `block-collapse` (G013)  
 **Game ID:** `block-collapse`  
 **Engine / Tech:** HTML5 Canvas API / Vanilla JS  
 **Asset Pack:** Kenney Puzzle Pack 2 (`public/assets/kenney_puzzle-pack-2/`)  
-**Version:** 1.0.0 | **Last Updated:** 2026-07-28  
-**Status:** Proposal / Design Phase | **Priority:** Medium (Sprint 03)  
 
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: "👾 Level Design: Monster Spawning & Difficulty Pacing"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-07-28"
 owner: "Noppon / Dev Team"
@@ -8,14 +9,12 @@ tags:
   - gdd
   - tiny-dungeon-roguelike
 ---
-
 # 👾 Level Design: Monster Spawning & Difficulty Pacing
 
 **Game:** Tiny Dungeon Survivor (`tiny-dungeon-roguelike`)
 **File:** [`public/games/tiny-dungeon-roguelike/game.js`](../../../../public/games/tiny-dungeon-roguelike/game.js)
 **Functions:** `MainGameScene.spawnEnemyWave()`, `.spawnSingleEnemy()`, `.spawnSwarmWave()`
 **Spawn Tick:** every `1200ms` (`this.time.addEvent({ delay: 1200, callback: this.spawnEnemyWave, ... })`)
-**Last Updated:** 2026-07-28
 
 ---
 

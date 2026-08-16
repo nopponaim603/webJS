@@ -1,5 +1,6 @@
 ---
 title: "🎲 2048 Cubes — Game Design Document & Dev Specs"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-07-26"
 owner: "Noppon / Dev Team"
@@ -8,14 +9,11 @@ tags:
   - gdd
   - 2048-cubes
 ---
-
 # 🎲 2048 Cubes — Game Design Document & Dev Specs
 
 **Code Name:** `2048-cubes` (G002)
 **Game ID:** `2048-cubes`  
 **Engine / Tech:** HTML5 Canvas, Physics Engine, Vanilla JavaScript  
-**Version:** 1.0.0 | **Last Updated:** 2026-07-26  
-**Status:** Released / Active  
 
 ---
 

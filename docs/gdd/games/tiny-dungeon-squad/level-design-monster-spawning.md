@@ -1,5 +1,6 @@
 ---
 title: "👾 Level Design: Monster Spawning & Wave Arena Pacing"
+project: "Tiny Dungeon Squad"
 version: "1.0.0"
 last_updated: "2026-08-04"
 owner: "Noppon / Dev Team"
@@ -8,12 +9,10 @@ tags:
   - gdd
   - tiny-dungeon-squad
 ---
-
 # 👾 Level Design: Monster Spawning & Wave Arena Pacing
 
 **Game:** Tiny Dungeon Squad — SNKRX Edition (`tiny-dungeon-squad`)  
 **File:** [`public/games/tiny-dungeon-squad/game.js`](../../../../public/games/tiny-dungeon-squad/game.js)  
-**Last Updated:** 2026-08-04  
 
 ---
 

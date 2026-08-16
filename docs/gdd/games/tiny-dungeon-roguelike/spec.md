@@ -1,5 +1,6 @@
 ---
 title: "🗡️ Tiny Dungeon Survivor (Action Roguelike) — Game Design Document & Asset Specs"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-07-28"
 owner: "Noppon / Dev Team"
@@ -8,15 +9,12 @@ tags:
   - gdd
   - tiny-dungeon-roguelike
 ---
-
 # 🗡️ Tiny Dungeon Survivor (Action Roguelike) — Game Design Document & Asset Specs
 
 **Code Name:** `tiny-dungeon-roguelike` (G017)  
 **Game ID:** `tiny-dungeon-roguelike`  
 **Engine:** Phaser 3 (v3.80.1) — Arcade Physics  
 **Assets Pack:** Kenney Tiny Dungeon (CC0 Public Domain License)  
-**Version:** 1.0.0 | **Last Updated:** 2026-07-28  
-**Status:** Released / Active  
 
 ---
 

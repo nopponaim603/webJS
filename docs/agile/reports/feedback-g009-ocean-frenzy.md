@@ -1,5 +1,6 @@
 ---
 title: "Development & Final Resolution Report — G009 Ocean Frenzy"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-08-16"
 owner: "Noppon / Dev Team"
@@ -8,13 +9,11 @@ tags:
   - agile
   - report
 ---
-
 # Development & Final Resolution Report — G009 Ocean Frenzy
 
 **Date:** 2026-08-01  
 **Target Component:** `public/games/ocean-frenzy/` (G009: Ocean Frenzy)  
 **Related Documents:** [spec.md](../../gdd/games/ocean-frenzy/spec.md), [01-product-backlog.md](../01-product-backlog.md), [AGENT.md](../../AGENT.md)  
-**Status:** 🟢 Completed & Fully Verified (100% Released)
 
 ---
 

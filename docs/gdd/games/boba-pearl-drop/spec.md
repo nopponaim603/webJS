@@ -1,5 +1,6 @@
 ---
 title: "🧋 BOBA PEARL DROP: 100% SUGAR — Game Specification"
+project: "BOBA PEARL DROP: 100% SUGAR"
 version: "1.0.0"
 last_updated: "2026-08-12"
 owner: "Noppon / Dev Team"
@@ -8,14 +9,11 @@ tags:
   - gdd
   - boba-pearl-drop
 ---
-
 # 🧋 BOBA PEARL DROP: 100% SUGAR — Game Specification
 
 **Code Name:** `boba-pearl-drop`  
 **Game ID:** `boba-pearl-drop-3d` (`babylon-boba`)  
 **Engine / Tech Stack:** Babylon.js 3D Engine, WebGL, PBR Shader System, Custom Sphere Physics, Particle Systems, Web Audio API  
-**Version:** 1.0.0 | **Last Updated:** 2026-08-12  
-**Status:** Design Phase / GDD Ready  
 **Inspiration:** Kevin Ngo's Super Monkey Ball style 3D Boba Game Experiment  
 
 ---

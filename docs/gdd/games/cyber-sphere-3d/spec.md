@@ -1,5 +1,6 @@
 ---
 title: "🔮 Cyber Sphere 3D — Game Design Document & Dev Specs"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-07-26"
 owner: "Noppon / Dev Team"
@@ -8,14 +9,11 @@ tags:
   - gdd
   - cyber-sphere-3d
 ---
-
 # 🔮 Cyber Sphere 3D — Game Design Document & Dev Specs
 
 **Code Name:** `cyber-sphere` (G005)
 **Game ID:** `cyber-sphere-3d` (`babylon-demo`)  
 **Engine / Tech:** Babylon.js 3D Engine, WebGL, Modern Shader System  
-**Version:** 1.0.0 | **Last Updated:** 2026-07-26  
-**Status:** Released / Active  
 
 ---
 

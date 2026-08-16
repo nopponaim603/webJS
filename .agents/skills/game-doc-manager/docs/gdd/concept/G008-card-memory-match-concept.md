@@ -1,5 +1,6 @@
 ---
 title: "G008: Card Memory Match — Game Concept & Architecture"
+project: "GameDevJS Hub (webJS)"
 version: "1.0"
 last_updated: "2026-07-27"
 owner: "Game Dev Team"
@@ -7,10 +8,8 @@ status: "Active"
 tags:
   - gdd
 ---
-
 # G008: Card Memory Match — Game Concept & Architecture
 
-**Version:** 1.0 | **Last Updated:** 2026-07-27 | **Owner:** Game Dev Team
 
 ## 1. Introduction
 

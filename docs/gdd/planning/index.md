@@ -1,5 +1,6 @@
 ---
 title: "📋 Planned Game Specifications — Roadmap & Proposals"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-07-29"
 owner: "Noppon / Dev Team"
@@ -8,12 +9,8 @@ tags:
   - gdd
   - index.md
 ---
-
 # 📋 Planned Game Specifications — Roadmap & Proposals
 
-**Location:** `docs/gdd/planning/`  
-**Last Updated:** 2026-07-29  
-**Status:** In Planning / Proposal Phase (Not Yet Implemented in `public/games/`)  
 
 ---
 

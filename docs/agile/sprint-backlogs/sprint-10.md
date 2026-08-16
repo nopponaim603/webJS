@@ -1,5 +1,6 @@
 ---
 title: "🍦 Sprint 10: การสำรวจเมือง (Town Exploration)"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-08-16"
 owner: "Noppon / Dev Team"
@@ -8,14 +9,12 @@ tags:
   - agile
   - sprint
 ---
-
 # 🍦 Sprint 10: การสำรวจเมือง (Town Exploration)
 
 **Sprint Name:** Town Exploration
 **Sprint ID:** sprint-10
 **Start Date:** 2026-08-28
 **End Date:** 2026-09-11 (2 สัปดาห์)
-**Status:** Planning
 
 ---
 

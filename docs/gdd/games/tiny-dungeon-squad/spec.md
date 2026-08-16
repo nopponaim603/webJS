@@ -1,5 +1,6 @@
 ---
 title: "🗡️ Tiny Dungeon Squad (SNKRX Edition) — Game Design Document & Asset Specs"
+project: "Tiny Dungeon Squad"
 version: "1.0.0"
 last_updated: "2026-08-04"
 owner: "Noppon / Dev Team"
@@ -8,15 +9,12 @@ tags:
   - gdd
   - tiny-dungeon-squad
 ---
-
 # 🗡️ Tiny Dungeon Squad (SNKRX Edition) — Game Design Document & Asset Specs
 
 **Code Name:** `tiny-dungeon-squad` (G021)  
 **Game ID:** `tiny-dungeon-squad`  
 **Engine:** Phaser 3 (v3.80.1) — Arcade Physics  
 **Assets Pack:** Kenney Tiny Dungeon (CC0 Public Domain License)  
-**Version:** 1.0.0 (SNKRX Engine) | **Last Updated:** 2026-08-04  
-**Status:** Active  
 
 ---
 

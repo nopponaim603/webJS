@@ -1,5 +1,6 @@
 ---
 title: "Sprint Planning & Roadmap — webJS Game Portfolio"
+project: "GameDevJS Hub (webJS)"
 version: "1.2.0"
 last_updated: "2026-08-01"
 owner: "Noppon / Dev Team"
@@ -7,10 +8,8 @@ status: "Draft"
 tags:
   - agile
 ---
-
 # Sprint Planning & Roadmap — webJS Game Portfolio
 
-**Last Updated:** 2026-08-01 | **Version:** 1.2.0
 
 ---
 

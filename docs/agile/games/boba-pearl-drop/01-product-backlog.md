@@ -1,5 +1,6 @@
 ---
 title: "🚀 BOBA PEARL DROP: 100% SUGAR — Product Backlog & Sprint Roadmap"
+project: "BOBA PEARL DROP: 100% SUGAR"
 version: "1.0.0"
 last_updated: "2026-08-12"
 owner: "Noppon / Dev Team"
@@ -8,10 +9,8 @@ tags:
   - agile
   - boba-pearl-drop
 ---
-
 # 🚀 BOBA PEARL DROP: 100% SUGAR — Product Backlog & Sprint Roadmap
 
-**Version:** 1.0.0 | **Last Updated:** 2026-08-12  
 
 ---
 

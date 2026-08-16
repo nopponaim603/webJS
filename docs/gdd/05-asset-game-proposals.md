@@ -1,5 +1,6 @@
 ---
 title: "🎨 Game Proposals & Asset Expansion Roadmap — GDD"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-07-28"
 owner: "Antigravity AI & Dev Team"
@@ -7,12 +8,8 @@ status: "Active"
 tags:
   - gdd
 ---
-
 # 🎨 Game Proposals & Asset Expansion Roadmap — GDD
 
-**Version:** 1.0.0 | **Last Updated:** 2026-07-28  
-**Author:** Antigravity AI & Dev Team  
-**Location:** `docs/gdd/05-asset-game-proposals.md`
 
 ---
 

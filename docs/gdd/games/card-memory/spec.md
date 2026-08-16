@@ -1,5 +1,6 @@
 ---
 title: "🃏 Card Memory Match — Game Design Document & Dev Specs"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-07-27"
 owner: "Noppon / Dev Team"
@@ -8,15 +9,12 @@ tags:
   - gdd
   - card-memory
 ---
-
 # 🃏 Card Memory Match — Game Design Document & Dev Specs
 
 **Code Name:** `card-memory` (G008)  
 **Game ID:** `card-memory`  
 **Engine:** Phaser 2D  
 **Assets:** Kenney Playing Cards Pack  
-**Version:** 1.0.0 | **Last Updated:** 2026-07-27  
-**Status:** Design Phase | **Priority:** High  
 
 ---
 

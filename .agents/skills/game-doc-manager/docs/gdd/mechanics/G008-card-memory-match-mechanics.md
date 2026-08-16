@@ -1,5 +1,6 @@
 ---
 title: "G008: Card Memory Match — Core Mechanics"
+project: "GameDevJS Hub (webJS)"
 version: "1.0"
 last_updated: "2026-07-27"
 owner: "Noppon / Dev Team"
@@ -7,10 +8,8 @@ status: "Active"
 tags:
   - gdd
 ---
-
 # G008: Card Memory Match — Core Mechanics
 
-**Version:** 1.0 | **Last Updated:** 2026-07-27
 
 ## Core Loop
 1. **Start Game** — Cards are shuffled face-down on a grid

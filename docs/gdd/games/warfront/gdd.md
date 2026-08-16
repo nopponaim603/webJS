@@ -1,5 +1,6 @@
 ---
 title: "⚔️ Master Game Design Document (GDD) — WarFront.io & FrontWars Strategy"
+project: "WarFront.io (FrontWars)"
 version: "1.0.0"
 last_updated: "2026-08-16"
 owner: "Noppon / Dev Team"
@@ -8,7 +9,6 @@ tags:
   - gdd
   - warfront
 ---
-
 # ⚔️ Master Game Design Document (GDD) — WarFront.io & FrontWars Strategy
 
 ## Real-Time Tactical Territory Domination Game

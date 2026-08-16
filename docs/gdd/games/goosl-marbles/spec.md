@@ -1,5 +1,6 @@
 ---
 title: "🔮 Goosl Glass Marbles (구슬치기) — Game Design Document & Dev Specs"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-07-28"
 owner: "Noppon / Dev Team"
@@ -8,15 +9,12 @@ tags:
   - gdd
   - goosl-marbles
 ---
-
 # 🔮 Goosl Glass Marbles (구슬치기) — Game Design Document & Dev Specs
 
 **Code Name:** `goosl-marbles` (G016)  
 **Game ID:** `goosl-marbles`  
 **Engine:** WebGL 2 (Custom 2D/3D Glass Shader & Physics)  
 **Audio:** Web Audio API (Procedural Synthesized Sound Design)  
-**Version:** 1.0.0 | **Last Updated:** 2026-07-28  
-**Status:** Released | **Priority:** High  
 
 ---
 

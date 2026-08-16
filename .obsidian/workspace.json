@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/gdd/00-concept.md",
+                "file": "docs/agile/sprint-backlogs/sprint-02.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "00-concept"
+              "title": "sprint-02"
             }
           }
         ]
@@ -207,6 +207,16 @@
   },
   "active": "7078f206382bf3eb",
   "lastOpenFiles": [
+    "docs/agile/sprint-backlogs/archive/sprint-01.md",
+    "docs/agile/sprint-backlogs/archive/sprint-03.md",
+    "docs/agile/01-product-backlog.md",
+    "docs/agile/02-sprint-planning.md",
+    "docs/agile/03-meeting-backlogs.md",
+    "docs/agile/04-retrospectives-backlog.md",
+    "docs/agile/05-report-backlog.md",
+    "docs/agile/Kanban-board.md",
+    "docs/migrate_metadata_util.js",
+    "docs/gdd/00-concept.md",
     "docs/gdd/01-mechanics.md",
     "docs/gdd/03-art-direction.md",
     "docs/gdd/04-audio-direction.md",
@@ -214,10 +224,8 @@
     "docs/add_frontmatter_util.js",
     "docs/gdd/Drawing.excalidraw.md",
     "docs/gdd/mindmap-idea.canvas",
-    "docs/gdd/00-concept.md",
     "docs/gdd/02-narrative.md",
     "docs/scratch_excalidraw.js",
-    "docs/agile/Kanban-board.md",
     "docs/sprint-plan.md",
     "docs/index.md",
     "docs/changelog.md",
@@ -230,9 +238,6 @@
     "docs/agile/user-stories/archive/US-02-01-emoji-match.md",
     "docs/agile/user-stories/archive/US-01-03-search-filter.md",
     "docs/agile/user-stories/archive/US-01-02-modal-loader.md",
-    "docs/agile/user-stories/archive/US-01-01-portfolio-cards.md",
-    "docs/agile/user-stories/archive",
-    "docs/agile/kanban.md",
-    "2026-07-28.md"
+    "docs/agile/user-stories/archive"
   ]
 }

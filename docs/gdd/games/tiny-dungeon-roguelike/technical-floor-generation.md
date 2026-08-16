@@ -1,5 +1,6 @@
 ---
 title: "🧱 Technical Note: Dungeon Floor Generation"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-07-28"
 owner: "Noppon / Dev Team"
@@ -8,13 +9,11 @@ tags:
   - gdd
   - tiny-dungeon-roguelike
 ---
-
 # 🧱 Technical Note: Dungeon Floor Generation
 
 **Game:** Tiny Dungeon Survivor (`tiny-dungeon-roguelike`)
 **File:** [`public/games/tiny-dungeon-roguelike/game.js`](../../../../public/games/tiny-dungeon-roguelike/game.js)
 **Function:** `MainGameScene.createDungeonArena(mapW, mapH)`
-**Last Updated:** 2026-07-28
 
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: "📱💻 มาตรฐานการพัฒนาเกม: การรองรับ PC และ Mobile แนวตั้ง (Cross-Platform Responsive & Portrait Standard)"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-07-28"
 owner: "Web Game Architecture & UX Team"
@@ -8,11 +9,8 @@ tags:
   - wiki
   - guidelines
 ---
-
 # 📱💻 มาตรฐานการพัฒนาเกม: การรองรับ PC และ Mobile แนวตั้ง (Cross-Platform Responsive & Portrait Standard)
 
-**Version:** 1.0.0 | **Last Updated:** 2026-07-28 | **Owner:** Web Game Architecture & UX Team  
-**Status:** Approved Standard | **Scope:** HTML5 / Phaser 3 / Canvas 2D / Babylon.js Web Games
 
 ---
 

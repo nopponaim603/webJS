@@ -1,5 +1,6 @@
 ---
 title: "⌨️ WarFront.io — 05. Controls, Hotkeys & UI/UX Design"
+project: "WarFront.io (FrontWars)"
 version: "1.2.0"
 last_updated: "2026-08-12"
 owner: "Noppon / Dev Team"
@@ -8,10 +9,8 @@ tags:
   - gdd
   - warfront
 ---
-
 # ⌨️ WarFront.io — 05. Controls, Hotkeys & UI/UX Design
 
-**Version:** 1.2.0 | **Last Updated:** 2026-08-12  
 
 ---
 

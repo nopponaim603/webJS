@@ -1,5 +1,6 @@
 ---
 title: "🧩 Tile Swap (Phaser 2D) — Game Design Document & Dev Specs"
+project: "GameDevJS Hub (webJS)"
 version: "1.1.0"
 last_updated: "2026-07-29"
 owner: "Noppon / Dev Team"
@@ -8,15 +9,12 @@ tags:
   - gdd
   - tile-swap
 ---
-
 # 🧩 Tile Swap (Phaser 2D) — Game Design Document & Dev Specs
 
 **Code Name:** `tile-swap` (G006)  
 **Game ID:** `tile-swap`  
 **Engine:** Phaser 3 (v3.80.1)  
 **Assets Pack:** Kenney Starter-Kit-Match-3 & Puzzle Pack 2 (CC0 Public Domain License)  
-**Version:** 1.1.0 | **Last Updated:** 2026-07-29  
-**Status:** Released / Active  
 
 ---
 

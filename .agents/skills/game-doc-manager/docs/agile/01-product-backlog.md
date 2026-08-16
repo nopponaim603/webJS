@@ -1,5 +1,6 @@
 ---
 title: "Product Backlog — Web Game Dev Hub"
+project: "GameDevJS Hub (webJS)"
 version: "1.0"
 last_updated: "2026-07-27"
 owner: "Noppon / Dev Team"
@@ -7,10 +8,8 @@ status: "Active"
 tags:
   - agile
 ---
-
 # Product Backlog — Web Game Dev Hub
 
-**Last Updated:** 2026-07-27 | **Version:** 1.0
 
 ## Must Have (MVP)
 

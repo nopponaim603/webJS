@@ -1,5 +1,6 @@
 ---
 title: "🚜 Tiny Farm Tycoon — Game Design Document & Dev Specs"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-07-28"
 owner: "Noppon / Dev Team"
@@ -8,15 +9,12 @@ tags:
   - gdd
   - tiny-farm-tycoon
 ---
-
 # 🚜 Tiny Farm Tycoon — Game Design Document & Dev Specs
 
 **Code Name:** `tiny-farm-tycoon` (G014)  
 **Game ID:** `tiny-farm-tycoon`  
 **Engine / Tech:** Phaser 3 (Top-down Tilemap & Merge System)  
 **Asset Pack:** Kenney Tiny Farm (`public/assets/kenney_tiny-farm/`)  
-**Version:** 1.0.0 | **Last Updated:** 2026-07-28  
-**Status:** Proposal / Design Phase | **Priority:** Medium (Sprint 05)  
 
 ---
 

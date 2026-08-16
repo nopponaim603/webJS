@@ -1,5 +1,6 @@
 ---
 title: "Documentation Changelog"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-07-28"
 owner: "Game Dev Team (via game-doc-manager skill)"
@@ -7,10 +8,8 @@ status: "Active"
 tags:
   - documentation
 ---
-
 # Documentation Changelog
 
-**Last Updated:** 2026-07-28
 
 ---
 

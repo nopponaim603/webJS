@@ -1,5 +1,6 @@
 ---
 title: "👾 Pico Tower Climber — Game Design Document & Dev Specs"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-07-28"
 owner: "Noppon / Dev Team"
@@ -8,15 +9,12 @@ tags:
   - gdd
   - pico-tower-climber
 ---
-
 # 👾 Pico Tower Climber — Game Design Document & Dev Specs
 
 **Code Name:** `pico-tower-climber` (G011)  
 **Game ID:** `pico-tower-climber`  
 **Engine / Tech:** Phaser 3 (2D Arcade Physics & Tilemap)  
 **Asset Pack:** Kenney Pico-8 Platformer (`public/assets/kenney_pico-8-platformer/`)  
-**Version:** 1.0.0 | **Last Updated:** 2026-07-28  
-**Status:** Proposal / Design Phase | **Priority:** High (Sprint 04)  
 
 ---
 

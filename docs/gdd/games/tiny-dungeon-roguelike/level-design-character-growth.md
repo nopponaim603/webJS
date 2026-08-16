@@ -1,5 +1,6 @@
 ---
 title: "📈 Level Design: Player Character Growth per Class"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-07-28"
 owner: "Noppon / Dev Team"
@@ -8,13 +9,11 @@ tags:
   - gdd
   - tiny-dungeon-roguelike
 ---
-
 # 📈 Level Design: Player Character Growth per Class
 
 **Game:** Tiny Dungeon Survivor (`tiny-dungeon-roguelike`)
 **File:** [`public/games/tiny-dungeon-roguelike/game.js`](../../../../public/games/tiny-dungeon-roguelike/game.js)
 **Key sections:** `HERO_CLASSES`, `UPGRADE_POOL`, `MainGameScene.levelUp()`, `.fireMeleeWeapon()`, `.fireFireballWeapon()`, `.fireDartsWeapon()`, `.fireLightningWeapon()`, `.fireKnifeWeapon()`, `.performMeleeAttack()`, `.updateOrbitBlades()`, `.damageEnemy()`, `.dealSplashDamage()`
-**Last Updated:** 2026-07-28
 
 ---
 

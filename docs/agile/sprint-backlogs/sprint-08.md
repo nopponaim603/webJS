@@ -1,5 +1,6 @@
 ---
 title: "🍦 Sprint 08: Ice Cream Town — Core Match-3 Engine"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-08-16"
 owner: "Noppon / Dev Team"
@@ -8,14 +9,12 @@ tags:
   - agile
   - sprint
 ---
-
 # 🍦 Sprint 08: Ice Cream Town — Core Match-3 Engine
 
 **Sprint Name:** Ice Cream Town — Core Match-3 Mechanics
 **Sprint ID:** sprint-08
 **Start Date:** 2026-07-29
 **End Date:** 2026-08-12 (2 weeks)
-**Status:** Planning
 
 ---
 

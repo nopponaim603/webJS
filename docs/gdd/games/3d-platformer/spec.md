@@ -1,5 +1,6 @@
 ---
 title: "🏃‍♂️ Kenney 3D Platformer (Babylon.js 8) — Game Design Document & Dev Specs"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-07-26"
 owner: "Noppon / Dev Team"
@@ -8,15 +9,12 @@ tags:
   - gdd
   - 3d-platformer
 ---
-
 # 🏃‍♂️ Kenney 3D Platformer (Babylon.js 8) — Game Design Document & Dev Specs
 
 **Code Name:** `3d-platformer` (G007)
 **Game ID:** `3d-platformer`  
 **Engine:** Babylon.js 8 (WebGL2 / WebGPU)  
 **Assets Pack:** Kenney Starter-Kit-3D-Platformer (CC0 Public Domain License)  
-**Version:** 1.0.0 | **Last Updated:** 2026-07-26  
-**Status:** Released / Active  
 
 ---
 

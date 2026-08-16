@@ -1,5 +1,6 @@
 ---
 title: "User Story: US-08-03 — Move Counter and Timer Display"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-07-28"
 owner: "Dev Team"
@@ -8,14 +9,10 @@ tags:
   - agile
   - user-story
 ---
-
 # User Story: US-08-03 — Move Counter and Timer Display
 
-**Status:** ✅ Done  
 **Epic:** Epic 08 — Card Memory Match (`card-memory`)  
-**Owner:** Dev Team  
 **Created:** 2026-07-27  
-**Last Updated:** 2026-07-28  
 **Priority:** P0 — Must Have  
 **Estimate:** 2 hours  
 

@@ -1,5 +1,6 @@
 ---
 title: "Sprint Planning & Roadmap"
+project: "GameDevJS Hub (webJS)"
 version: "1.0"
 last_updated: "2026-07-27"
 owner: "Noppon / Dev Team"
@@ -7,10 +8,8 @@ status: "Draft"
 tags:
   - agile
 ---
-
 # Sprint Planning & Roadmap
 
-**Last Updated:** 2026-07-27 | **Version:** 1.0
 
 ## 📅 Sprint Schedule Overview
 

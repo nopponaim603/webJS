@@ -1,5 +1,6 @@
 ---
 title: "System Test Guideline — webJS Game Portfolio"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-07-26"
 owner: "Noppon / Dev Team"
@@ -8,10 +9,8 @@ tags:
   - wiki
   - guidelines
 ---
-
 # System Test Guideline — webJS Game Portfolio
 
-**Last Updated:** 2026-07-26 | **Version:** 1.0.0
 
 ---
 

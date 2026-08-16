@@ -1,5 +1,6 @@
 ---
 title: "[US-09-01] Ocean Frenzy — Complete Feeding Frenzy Game Mechanics"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-08-16"
 owner: "Noppon / Dev Team"
@@ -8,11 +9,9 @@ tags:
   - agile
   - user-story
 ---
-
 # [US-09-01] Ocean Frenzy — Complete Feeding Frenzy Game Mechanics
 
 **System Group / Module:** Game Mechanics / Phaser 3 Arcade  
-**Status:** 🟢 DONE  
 **Related Code Files:** `public/games/ocean-frenzy/index.html`, `public/games/ocean-frenzy/game.js`
 
 ### 1. User Story Statement

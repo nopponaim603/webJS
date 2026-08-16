@@ -1,5 +1,6 @@
 ---
 title: "🕳️ Hole.io 3D (Babylon.js 7.50 / 8) — Game Design Document & Dev Specs"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-07-29"
 owner: "Noppon / Dev Team"
@@ -8,15 +9,12 @@ tags:
   - gdd
   - hole-io
 ---
-
 # 🕳️ Hole.io 3D (Babylon.js 7.50 / 8) — Game Design Document & Dev Specs
 
 **Code Name:** `hole-io` (G018)  
 **Game ID:** `hole-io`  
 **Engine:** Babylon.js 7.50 / 8 (WebGL2 / WebGPU)  
 **Assets Pack:** Kenney Starter-Kit-3D-Platformer Models & Sounds (CC0 Public Domain License)  
-**Version:** 1.0.0 | **Last Updated:** 2026-07-29  
-**Status:** Released / Active  
 
 ---
 

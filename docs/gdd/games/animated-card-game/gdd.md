@@ -1,5 +1,6 @@
 ---
 title: "🃏 FOOL THE GAME — Game Design & UI Layout Document (GDD)"
+project: "Royal Cascade"
 version: "1.1.0"
 last_updated: "2026-08-12"
 owner: "Noppon / Dev Team"
@@ -8,10 +9,8 @@ tags:
   - gdd
   - animated-card-game
 ---
-
 # 🃏 FOOL THE GAME — Game Design & UI Layout Document (GDD)
 
-**Version:** 1.1.0 | **Last Updated:** 2026-08-12  
 **Game Title:** FOOL THE GAME (Royal Cascade Edition)  
 **Author / Lead Designer:** AI Game Architecture Team  
 **Reference Visuals:** User UI Wireframe Specification & [@Bo80337023 Card Deal Animation Showcase](https://x.com/Bo80337023/status/2087435483613962588)  

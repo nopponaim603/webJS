@@ -1,5 +1,6 @@
 ---
 title: "🍦 Sprint 11: Polish & Launch (ปรับปรุงและเปิดตัว)"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-08-16"
 owner: "Noppon / Dev Team"
@@ -8,14 +9,12 @@ tags:
   - agile
   - sprint
 ---
-
 # 🍦 Sprint 11: Polish & Launch (ปรับปรุงและเปิดตัว)
 
 **Sprint Name:** Polish & Launch
 **Sprint ID:** sprint-11
 **Start Date:** 2026-09-12
 **End Date:** 2026-09-26 (2 สัปดาห์)
-**Status:** Planning
 
 ---
 

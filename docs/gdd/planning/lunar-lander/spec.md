@@ -1,5 +1,6 @@
 ---
 title: "🛸 Lunar Lander Gravity — Game Design Document & Dev Specs"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-07-28"
 owner: "Noppon / Dev Team"
@@ -8,15 +9,12 @@ tags:
   - gdd
   - lunar-lander
 ---
-
 # 🛸 Lunar Lander Gravity — Game Design Document & Dev Specs
 
 **Code Name:** `lunar-lander` (G015)  
 **Game ID:** `lunar-lander`  
 **Engine / Tech:** Phaser 3 Physics (Arcade / Gravity Physics)  
 **Asset Pack:** Kenney Simple Space (`public/assets/kenney_simple-space/`)  
-**Version:** 1.0.0 | **Last Updated:** 2026-07-28  
-**Status:** Proposal / Design Phase | **Priority:** Medium (Sprint 04)  
 
 ---
 

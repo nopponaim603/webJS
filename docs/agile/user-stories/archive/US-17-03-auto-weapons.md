@@ -1,5 +1,6 @@
 ---
 title: "User Story: US-17-03 - Auto-Attacks & Weapons Engine"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-08-16"
 owner: "GameDev Team"
@@ -8,12 +9,9 @@ tags:
   - agile
   - user-story
 ---
-
 # User Story: US-17-03 - Auto-Attacks & Weapons Engine
 
-**Status:** ✅ Done  
 **Epic:** [Epic 17 — Tiny Dungeon Survivor](../01-product-backlog.md)  
-**Owner:** GameDev Team  
 
 ---
 

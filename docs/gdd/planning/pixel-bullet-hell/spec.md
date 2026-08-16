@@ -1,5 +1,6 @@
 ---
 title: "🚀 Pixel Bullet Hell — Game Design Document & Dev Specs"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-07-28"
 owner: "Noppon / Dev Team"
@@ -8,15 +9,12 @@ tags:
   - gdd
   - pixel-bullet-hell
 ---
-
 # 🚀 Pixel Bullet Hell — Game Design Document & Dev Specs
 
 **Code Name:** `pixel-bullet-hell` (G012)  
 **Game ID:** `pixel-bullet-hell`  
 **Engine / Tech:** Phaser 3 (Arcade Physics / Bullet Emitter)  
 **Asset Pack:** Kenney Pixel Shmup (`public/assets/kenney_pixel-shmup/`)  
-**Version:** 1.0.0 | **Last Updated:** 2026-07-28  
-**Status:** Proposal / Design Phase | **Priority:** Medium (Sprint 04)  
 
 ---
 

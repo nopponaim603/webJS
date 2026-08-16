@@ -1,5 +1,6 @@
 ---
 title: "🎲 Dice Quest — Game Design Document & Dev Specs"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-08-01"
 owner: "Noppon / Dev Team"
@@ -8,15 +9,12 @@ tags:
   - gdd
   - dice-quest
 ---
-
 # 🎲 Dice Quest — Game Design Document & Dev Specs
 
 **Code Name:** `dice-quest` (G010)  
 **Game ID:** `dice-quest`  
 **Engine / Tech:** Vanilla JS / HTML5 CSS Grid & Circular Math / Web Audio  
 **Asset Pack:** Kenney Boardgame Pack (`public/assets/kenney_boardgame-pack/`)  
-**Version:** 1.0.0 | **Last Updated:** 2026-08-01  
-**Status:** Released / Completed (🟢 DONE) | **Priority:** High (Sprint 02)  
 
 ---
 

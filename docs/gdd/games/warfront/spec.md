@@ -1,5 +1,6 @@
 ---
 title: "⚔️ WarFront.io & FrontWars Strategy — Document Index & Technical Specification"
+project: "WarFront.io (FrontWars)"
 version: "1.2.0"
 last_updated: "2026-08-12"
 owner: "Noppon / Dev Team"
@@ -8,14 +9,11 @@ tags:
   - gdd
   - warfront
 ---
-
 # ⚔️ WarFront.io & FrontWars Strategy — Document Index & Technical Specification
 
 **Code Name:** `warfront`  
 **Game ID:** `warfront-rts` (`G020`)  
 **Engine / Tech Stack:** WebGL / Canvas 2D Shader System, TypeScript, MapCodec Binary Decoder, Local Singleplayer Ticker Engine  
-**Version:** 1.2.0 | **Last Updated:** 2026-08-12  
-**Status:** Deep Design Phase / Modular GDD Ready  
 
 ---
 

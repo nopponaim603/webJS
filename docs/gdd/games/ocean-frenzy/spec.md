@@ -1,5 +1,6 @@
 ---
 title: "🐠 Ocean Frenzy — Game Design Document & Dev Specs"
+project: "GameDevJS Hub (webJS)"
 version: "1.1.0"
 last_updated: "2026-08-01"
 owner: "Noppon / Dev Team"
@@ -8,15 +9,12 @@ tags:
   - gdd
   - ocean-frenzy
 ---
-
 # 🐠 Ocean Frenzy — Game Design Document & Dev Specs
 
 **Code Name:** `ocean-frenzy` (G009)
 **Game ID:** `ocean-frenzy`
 **Engine / Tech:** Phaser 3 (2D Arcade Physics)
 **Asset Pack:** Kenney Fish Pack 2 (`public/assets/kenney_fish-pack_2/`)
-**Version:** 1.1.0 | **Last Updated:** 2026-08-01
-**Status:** 🟢 Released / Active | **Priority:** Completed
 
 ---
 

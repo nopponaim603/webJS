@@ -1,5 +1,6 @@
 ---
 title: "🍦 Sprint 09: ระบบร้านค้าและเศรษฐกิจ (Shop & Economy)"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-08-16"
 owner: "Noppon / Dev Team"
@@ -8,14 +9,12 @@ tags:
   - agile
   - sprint
 ---
-
 # 🍦 Sprint 09: ระบบร้านค้าและเศรษฐกิจ (Shop & Economy)
 
 **Sprint Name:** Shop & Economy
 **Sprint ID:** sprint-09
 **Start Date:** 2026-08-13
 **End Date:** 2026-08-27 (2 สัปดาห์)
-**Status:** Planning
 
 ---
 

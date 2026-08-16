@@ -1,5 +1,6 @@
 ---
 title: "Sprint 02 — Pixel Shmup + Pico-8 Platformer (G009 + G010)"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-08-16"
 owner: "Noppon / Dev Team"
@@ -8,13 +9,11 @@ tags:
   - agile
   - sprint
 ---
-
 # Sprint 02 — Pixel Shmup + Pico-8 Platformer (G009 + G010)
 
 **Sprint Duration:** 2026-07-31 → 2026-08-07 (7 working days)  
 **Games:** Pixel Shmup (`pixel-shmup`) + Pico-8 Platformer (`pico-platformer`)  
 **Engines:** Phaser 3 (Pixel Shmup) / Phaser 3 (Pico Platformer)  
-**Status:** In Progress  
 
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: "🔮 Goosl Glass Marbles — WebGL 2 Shader & Physics Rendering Knowledge Base"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-07-29"
 owner: "Antigravity AI & Dev Team"
@@ -7,14 +8,11 @@ status: "Active"
 tags:
   - wiki
 ---
-
 # 🔮 Goosl Glass Marbles — WebGL 2 Shader & Physics Rendering Knowledge Base
 
 **Game Code:** `goosl-marbles` (G016)  
 **Primary Source File:** [public/games/goosl-marbles/app.js](file:///c:/Users/noppon/source/06-WEB/webJS/public/games/goosl-marbles/app.js)  
 **Tech Stack:** WebGL 2, Custom GLSL ES 3.0 Shaders, Web Audio API, Fixed 120Hz Sub-stepping Physics  
-**Last Updated:** 2026-07-29  
-**Author:** Antigravity AI & Dev Team  
 
 ---
 

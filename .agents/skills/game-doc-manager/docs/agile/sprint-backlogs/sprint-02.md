@@ -1,5 +1,6 @@
 ---
 title: "Sprint 02: Pixel Shmup (G009) + Pico-8 Platformer (G010)"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-08-16"
 owner: "Noppon / Dev Team"
@@ -8,7 +9,6 @@ tags:
   - agile
   - sprint
 ---
-
 # Sprint 02: Pixel Shmup (G009) + Pico-8 Platformer (G010)
 
 **Goal:** Deliver two complete arcade games — a side-scrolling shooter (G009) and a platformer with Pico-8 style (G010) — both using Phaser 3 and Kenney assets.

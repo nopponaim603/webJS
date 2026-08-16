@@ -1,5 +1,6 @@
 ---
 title: "[US-G010] Dice Quest Monopoly Board Game"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-08-16"
 owner: "Noppon / Dev Team"
@@ -8,7 +9,6 @@ tags:
   - agile
   - user-story
 ---
-
 # [US-G010] Dice Quest Monopoly Board Game
 
 **System Group / Module**: Board Game System (G010)  

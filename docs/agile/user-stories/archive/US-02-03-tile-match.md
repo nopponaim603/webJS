@@ -1,5 +1,6 @@
 ---
 title: "User Story: US-02-03 — Tile Match Triple Tile Mini Game"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-08-16"
 owner: "Dev Team"
@@ -8,13 +9,10 @@ tags:
   - agile
   - user-story
 ---
-
 # User Story: US-02-03 — Tile Match Triple Tile Mini Game
 
-**Status:** ✅ Done (Archived)  
 **Epic:** [Product Backlog](../../01-product-backlog.md)  
 **Sprint:** [Sprint 01](../../sprint-backlogs/sprint-01.md)  
-**Owner:** Dev Team  
 
 ---
 

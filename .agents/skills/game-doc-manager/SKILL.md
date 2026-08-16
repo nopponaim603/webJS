@@ -450,6 +450,7 @@ tags:
   ```yaml
   ---
   title: "[Document Title]"
+  project: "[Project Name / GameDevJS Hub]"
   version: "X.Y.Z"
   last_updated: "YYYY-MM-DD"
   owner: "[Name / Role]"
@@ -461,11 +462,17 @@ tags:
   ```
 - **Frontmatter Standard Fields:**
   - `title`: Short and clear document title.
+  - `project`: Project / Game name (e.g. `"Game Portfolio (webJS)"`, `"GameDevJS Hub"`, `"WarFront.io"`).
   - `version`: SemVer string (e.g. `"1.0.0"`, `"1.31.0"`).
   - `last_updated`: ISO Date format (`"YYYY-MM-DD"`).
-  - `owner`: Owner name or team role (e.g. `"Noppon / Dev Team"`, `"Antigravity AI"`).
+  - `owner`: Owner name or team role (e.g. `"Noppon / Dev Team"`, `"Antigravity AI & Dev Team"`).
   - `status`: Lifecycle status (`"Draft"`, `"In Progress"`, `"Active"`, `"Completed"`, `"Released"`).
   - `tags`: Array of category tags for Obsidian/Wiki indexing.
+- **No Duplicate Inline Metadata in Body:** Do NOT include redundant metadata lines (e.g. `**Project:** ...`, `**Version:** ...`, `**Last Updated:** ...`, `**Owner:** ...`, `**Maintained by:** ...`) in the markdown body below the `# Title` heading. All metadata belongs in the YAML Frontmatter block.
+- **ข้อยกเว้นสำหรับเอกสาร Kanban และ Plugin พิเศษ (Plugin Exemption Rule):**
+  - เอกสารที่มีการกำหนด `%% kanban:settings ... {"kanban-plugin":"board",...} %%` (เช่น [Kanban-board.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/agile/Kanban-board.md)) **ไม่ต้องใส่ standard YAML frontmatter** ให้คงเฉพาะ `kanban-plugin: board` ไว้เท่านั้น
+  - เอกสารภาพวาด [Drawing.excalidraw.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/Drawing.excalidraw.md) ให้คงเฉพาะ `excalidraw-plugin: raw`
+  - เพื่อไม่ให้กระทบต่อการ parse และการแสดงผล UI ของปลั๊กอินใน Obsidian
 - Use relative links (`[Label](./path/to/file.md)`) for internal cross-references to ensure compatibility with VS Code and standard Markdown viewers.
 
 ---

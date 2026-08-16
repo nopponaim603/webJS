@@ -1,5 +1,6 @@
 ---
 title: "📋 Sprint Planning & User Stories — Card Memory Match (G008)"
+project: "GameDevJS Hub (webJS)"
 version: "1.0.0"
 last_updated: "2026-08-16"
 owner: "Noppon / Dev Team"
@@ -7,13 +8,11 @@ status: "In Progress"
 tags:
   - documentation
 ---
-
 # 📋 Sprint Planning & User Stories — Card Memory Match (G008)
 
 **Sprint Duration:** 2026-07-28 → 2026-08-04 (4 working days)  
 **Game:** Card Memory Match (`card-memory`)  
 **Engine:** Phaser 2D  
-**Status:** In Progress  
 
 ---
 

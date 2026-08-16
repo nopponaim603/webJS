@@ -1,5 +1,6 @@
 ---
 title: "📜 Documentation Changelog — webJS"
+project: "Game Portfolio (webJS)"
 version: "1.0.0"
 last_updated: "2026-08-16"
 owner: "Antigravity AI & Dev Team"
@@ -7,11 +8,8 @@ status: "Active"
 tags:
   - documentation
 ---
-
 # 📜 Documentation Changelog — webJS
 
-**Project:** Game Portfolio (`webJS`)  
-**Maintained by:** Antigravity AI & Dev Team  
 
 ## [1.31.0] - 2026-08-16
 
