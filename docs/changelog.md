@@ -3,6 +3,18 @@
 **Project:** Game Portfolio (`webJS`)  
 **Maintained by:** Antigravity AI & Dev Team  
 
+## [1.31.0] - 2026-08-16
+
+- **Ecosystem Mindmaps (Canvas & Excalidraw)**:
+  - **Obsidian Canvas ([docs/gdd/mindmap-idea.canvas](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/mindmap-idea.canvas))**: แผนผังความคิดแบบละเอียดครอบคลุมทั้งระบบของ **GameDevJS Hub (`webJS`)**
+  - **Excalidraw Visual Mindmap ([docs/gdd/Drawing.excalidraw.md](file:///c:/Users/noppon/source/06-WEB/webJS/docs/gdd/Drawing.excalidraw.md))**: วาดแผนผังภาพ Excalidraw ในสไตล์มินิมอล กระชับ ชัดเจน เข้าใจง่าย พร้อมรองรับเปิดมุมมอง Excalidraw View ใน Obsidian
+  - จัดระเบียบ 5 กลุ่มหลัก:
+    1. **🏛️ Core Platform Architecture**: UI Glassmorphism, Modal Sandbox, HighScore Bridge, Web Audio Synth, Native Server.
+    2. **🕹️ 2D Games Collection (Phaser & Canvas)**: G001–G004, G006, G008, G017, G019, G020, G021 (SNKRX), G022 (Cards).
+    3. **🌐 3D & Shader Games (Babylon.js & WebGL)**: G005, G007, G016, G018 (Hole.io), G023 (Boba Pearl Drop).
+    4. **💡 Game Ideas Roadmap**: G009 (Ocean Frenzy), G010 (Dice Quest), G011 (Pico Tower), G012 (Bullet Hell), G013–G015.
+    5. **🚀 Future Platform Evolution**: Leaderboard, Achievements, WebRTC Multiplayer, Level Editor, Offline PWA.
+
 ## [1.30.0] - 2026-08-12
 
 - **WarFront.io RTS Strategy Granular GDD Suite (G020)**:

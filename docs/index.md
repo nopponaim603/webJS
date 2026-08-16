@@ -13,34 +13,36 @@
 - [03-art-direction.md — Visual Style & UI/UX Guidelines](./gdd/03-art-direction.md)
 - [04-audio-direction.md — Music & Sound Effects Specs](./gdd/04-audio-direction.md)
 - [05-asset-game-proposals.md — Asset Expansion Game Proposals](./gdd/05-asset-game-proposals.md)
+- [mindmap-idea.canvas — Obsidian Ecosystem Mindmap Canvas](./gdd/mindmap-idea.canvas)
+- [Drawing.excalidraw.md — Excalidraw Visual Mindmap](./gdd/Drawing.excalidraw.md)
 
 ### 🎮 Game Index Code Names
 
-| # | Code Name | Game Title | Engine | Folder |
-|---|-----------|------------|--------|--------|
-| G001 | `emoji-match` | Emoji Match | Vanilla JS | `emoji-match/` |
-| G002 | `2048-cubes` | 2048 Cubes | Canvas 2D | `2048-cubes/` |
-| G003 | `mahjong-tile-match` | Mahjong Tile Match | Vanilla JS | `public/games/mahjong-tile-match/` |
-| G004 | `space-shooter` | Space Shooter | Phaser 2D | `phaser-demo/` |
-| G005 | `cyber-sphere` | Cyber Sphere 3D | Babylon.js 3D | `babylon-demo/` |
-| G006 | `tile-swap` | Tile Swap | Phaser 2D | `public/games/tile-swap/` |
-| G007 | `3d-platformer` | Kenney 3D Platformer | Babylon.js 8 | `3d-platformer/` |
-| G008 | `card-memory` | Card Memory Match | Vanilla JS | `public/games/card-memory/` |
-| G009 | `ocean-frenzy` | Ocean Frenzy | Phaser 3 | `public/games/ocean-frenzy/` |
-| G010 | `dice-quest` | Dice Quest | Vanilla JS / Phaser | `public/games/dice-quest/` |
-| G011 | `pico-tower-climber` | Pico Tower Climber | Phaser 3 Tilemap | `public/games/pico-tower-climber/` |
-| G012 | `pixel-bullet-hell` | Pixel Bullet Hell | Phaser 3 | `public/games/pixel-bullet-hell/` |
-| G013 | `block-collapse` | Block Collapse | Canvas 2D | `public/games/block-collapse/` |
-| G014 | `tiny-farm-tycoon` | Tiny Farm Tycoon | Phaser 3 | `public/games/tiny-farm-tycoon/` |
-| G015 | `lunar-lander` | Lunar Lander Gravity | Phaser Physics | `public/games/lunar-lander/` |
-| G016 | `goosl-marbles` | Goosl Glass Marbles | WebGL 2 / Shader | `public/games/goosl-marbles/` |
-| G017 | `tiny-dungeon-roguelike` | Tiny Dungeon Survivor | Phaser 2D / Roguelike | `public/games/tiny-dungeon-roguelike/` |
-| G018 | `hole-io` | Hole.io 3D | Babylon.js 7.50 / 8 | `public/games/hole-io/` |
-| G019 | `stateIO` | State.IO | Canvas 2D / Web Audio | `public/games/stateIO/` |
-| G020 | `warfront` | WarFront.io (FrontWars) | WebGL / TypeScript | `public/games/warfront/` |
-| G021 | `tiny-dungeon-squad` | Tiny Dungeon Squad (SNKRX Edition) | Phaser 2D / Auto-Battler | `public/games/tiny-dungeon-squad/` |
-| G022 | `animated-card-game` | Royal Cascade (Juicy Card Dealer) | Phaser 3 / GSAP | `public/games/animated-card-game/` |
-| G023 | `boba-pearl-drop` | BOBA PEARL DROP: 100% SUGAR | Babylon.js 3D | `public/games/boba-pearl-drop/` |
+| #    | Code Name                | Game Title                         | Engine                   | Folder                                 |
+| ---- | ------------------------ | ---------------------------------- | ------------------------ | -------------------------------------- |
+| G001 | `emoji-match`            | Emoji Match                        | Vanilla JS               | `emoji-match/`                         |
+| G002 | `2048-cubes`             | 2048 Cubes                         | Canvas 2D                | `2048-cubes/`                          |
+| G003 | `mahjong-tile-match`     | Mahjong Tile Match                 | Vanilla JS               | `public/games/mahjong-tile-match/`     |
+| G004 | `space-shooter`          | Space Shooter                      | Phaser 2D                | `phaser-demo/`                         |
+| G005 | `cyber-sphere`           | Cyber Sphere 3D                    | Babylon.js 3D            | `babylon-demo/`                        |
+| G006 | `tile-swap`              | Tile Swap                          | Phaser 2D                | `public/games/tile-swap/`              |
+| G007 | `3d-platformer`          | Kenney 3D Platformer               | Babylon.js 8             | `3d-platformer/`                       |
+| G008 | `card-memory`            | Card Memory Match                  | Vanilla JS               | `public/games/card-memory/`            |
+| G009 | `ocean-frenzy`           | Ocean Frenzy                       | Phaser 3                 | `public/games/ocean-frenzy/`           |
+| G010 | `dice-quest`             | Dice Quest                         | Vanilla JS / Phaser      | `public/games/dice-quest/`             |
+| G011 | `pico-tower-climber`     | Pico Tower Climber                 | Phaser 3 Tilemap         | `public/games/pico-tower-climber/`     |
+| G012 | `pixel-bullet-hell`      | Pixel Bullet Hell                  | Phaser 3                 | `public/games/pixel-bullet-hell/`      |
+| G013 | `block-collapse`         | Block Collapse                     | Canvas 2D                | `public/games/block-collapse/`         |
+| G014 | `tiny-farm-tycoon`       | Tiny Farm Tycoon                   | Phaser 3                 | `public/games/tiny-farm-tycoon/`       |
+| G015 | `lunar-lander`           | Lunar Lander Gravity               | Phaser Physics           | `public/games/lunar-lander/`           |
+| G016 | `goosl-marbles`          | Goosl Glass Marbles                | WebGL 2 / Shader         | `public/games/goosl-marbles/`          |
+| G017 | `tiny-dungeon-roguelike` | Tiny Dungeon Survivor              | Phaser 2D / Roguelike    | `public/games/tiny-dungeon-roguelike/` |
+| G018 | `hole-io`                | Hole.io 3D                         | Babylon.js 7.50 / 8      | `public/games/hole-io/`                |
+| G019 | `stateIO`                | State.IO                           | Canvas 2D / Web Audio    | `public/games/stateIO/`                |
+| G020 | `warfront`               | WarFront.io (FrontWars)            | WebGL / TypeScript       | `public/games/warfront/`               |
+| G021 | `tiny-dungeon-squad`     | Tiny Dungeon Squad (SNKRX Edition) | Phaser 2D / Auto-Battler | `public/games/tiny-dungeon-squad/`     |
+| G022 | `animated-card-game`     | Royal Cascade (Juicy Card Dealer)  | Phaser 3 / GSAP          | `public/games/animated-card-game/`     |
+| G023 | `boba-pearl-drop`        | BOBA PEARL DROP: 100% SUGAR        | Babylon.js 3D            | `public/games/boba-pearl-drop/`        |
 
 ### 🎮 Active Released Game Specifications (`docs/gdd/games/`)
 - [BOBA PEARL DROP: 100% SUGAR (Super Monkey Ball Style Boba 3D G023)](./gdd/games/boba-pearl-drop/spec.md)

@@ -11,20 +11,12 @@
             "id": "7078f206382bf3eb",
             "type": "leaf",
             "state": {
-              "type": "kanban",
+              "type": "excalidraw",
               "state": {
-                "file": "docs/agile/Kanban-board.md",
-                "kanbanViewState": {
-                  "kanban-plugin": "board",
-                  "list-collapse": [
-                    false,
-                    false,
-                    false
-                  ]
-                }
+                "file": "docs/gdd/Drawing.excalidraw.md"
               },
-              "icon": "lucide-ghost",
-              "title": "kanban"
+              "icon": "excalidraw-icon",
+              "title": "Drawing.excalidraw"
             }
           }
         ]
@@ -39,7 +31,7 @@
       {
         "id": "0e595d9b84c3fd72",
         "type": "tabs",
-        "dimension": 71.62962962962963,
+        "dimension": 74.12898443291327,
         "children": [
           {
             "id": "528b36bbe731f8ce",
@@ -88,7 +80,7 @@
       {
         "id": "4439ca3cbb4b0dc4",
         "type": "tabs",
-        "dimension": 28.370370370370367,
+        "dimension": 25.87101556708673,
         "children": [
           {
             "id": "00565ab91a0842df",
@@ -96,8 +88,8 @@
             "state": {
               "type": "calendar",
               "state": {},
-              "icon": "lucide-ghost",
-              "title": "calendar"
+              "icon": "calendar-with-checkmark",
+              "title": "Calendar"
             }
           }
         ]
@@ -204,11 +196,26 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "bases:Create new base": false
+      "bases:Create new base": false,
+      "obsidian-kanban:Create new board": false,
+      "obsidian-excalidraw-plugin:New drawing": false,
+      "templater-obsidian:Templater": false,
+      "obsidian-git:Open Git source control": false
     }
   },
-  "active": "528b36bbe731f8ce",
+  "active": "7078f206382bf3eb",
   "lastOpenFiles": [
+    "docs/gdd/mindmap-idea.canvas",
+    "docs/gdd/Drawing.excalidraw.md",
+    "docs/scratch_excalidraw.js",
+    "docs/agile/Kanban-board.md",
+    "docs/sprint-plan.md",
+    "docs/index.md",
+    "docs/changelog.md",
+    "docs/software/01-system-design.md",
+    "docs/reports/weekly/weekly-2026-W31.md",
+    "Excalidraw/Drawing 2026-08-16 10.01.08.excalidraw.md",
+    "Excalidraw",
     "docs/agile/user-stories/archive/US-02-03-tile-match.md",
     "docs/agile/user-stories/archive/US-02-02-2048-cubes.md",
     "docs/agile/user-stories/archive/US-02-01-emoji-match.md",
@@ -217,7 +224,6 @@
     "docs/agile/user-stories/archive/US-01-01-portfolio-cards.md",
     "docs/agile/user-stories/archive",
     "docs/agile/kanban.md",
-    "docs/agile/Kanban-board.md",
     "2026-07-28.md"
   ]
 }
