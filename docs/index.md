@@ -52,8 +52,10 @@ tags:
 | G023 | `boba-pearl-drop`        | BOBA PEARL DROP: 100% SUGAR        | Babylon.js 3D            | `public/games/boba-pearl-drop/`        |
 | G024 | `eggplant-wiggle`        | 🍆 Wiggle Eggplant 3D               | Three.js / Wiggle Physics | `public/games/eggplant-wiggle/`        |
 | G025 | `pretext-breaker`        | Pretext Breaker (Typography Arkanoid) | Canvas 2D / Text Engine   | `public/games/pretext-breaker/`        |
+| G026 | `starter-kit-racing`     | 🏎️ Starter Kit Racing 3D            | Three.js / Crashcat Phys  | `public/games/starter-kit-racing/`     |
 
 ### 🎮 Active Released Game Specifications (`docs/gdd/games/`)
+- [🏎️ Starter Kit Racing 3D (Three.js & Crashcat G026)](./gdd/games/starter-kit-racing/spec.md)
 - [Pretext Breaker (Typography Block Breaker G025)](./gdd/games/pretext-breaker/spec.md)
 - [🍆 Wiggle Eggplant 3D (Three.js & Wiggle Physics G024)](./gdd/games/eggplant-wiggle/spec.md)
 - [BOBA PEARL DROP: 100% SUGAR (Super Monkey Ball Style Boba 3D G023)](./gdd/games/boba-pearl-drop/spec.md)

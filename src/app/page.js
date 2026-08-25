@@ -182,6 +182,14 @@ const initialGames = [
     url: "/games/pretext-breaker/index.html",
     image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&h=400&fit=crop",
     gradient: "linear-gradient(135deg, #0EA5E9 0%, #F59E0B 100%)"
+  },
+  {
+    id: "starter-kit-racing",
+    title: "🏎️ Starter Kit Racing 3D",
+    category: "Three.js 3D Engine",
+    url: "/games/starter-kit-racing/index.html",
+    image: "/games/starter-kit-racing/screenshot.png",
+    gradient: "linear-gradient(135deg, #EF4444 0%, #F59E0B 100%)"
   }
 ];
 

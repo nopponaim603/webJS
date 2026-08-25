@@ -13,6 +13,17 @@ tags:
 
 ## [1.32.0] - 2026-08-25
 
+- **🏎️ Starter Kit Racing 3D Integration & GDD Suite (G026)**:
+  - นำเข้าตัวอย่างเกมแข่งรถ 3 มิติจาก `https://github.com/mrdoob/Starter-Kit-Racing` (ผลงานโดย mrdoob ผู้สร้าง Three.js) มาติดตั้งใน [`public/games/starter-kit-racing/`](./../public/games/starter-kit-racing/)
+  - จัดทำเอกสาร **Game Design Document & Dev Specs Suite** ฉบับสมบูรณ์ใน [`docs/gdd/games/starter-kit-racing/`](./gdd/games/starter-kit-racing/) ครอบคลุม:
+    - Three.js WebGL/WebGPU Architecture, Scene Graph, และ Kenney 3D Racing Assets
+    - ระบบฟิสิกส์ Crashcat Rigid Body Dynamics, การเลี้ยว ดริฟต์ และกล้อง Dynamic Follow Camera
+    - ระบบเสียงสังเคราะห์เครื่องยนต์ 4-stroke แบบ Procedural DSP ด้วย AudioWorklet (`EngineWorklet.js`)
+    - ระบบสร้างสนามแข่ง In-Browser Track Editor (`editor.html`) พร้อมการแชร์ URL Map
+    - ระบบจับเวลาต่อรอบ Lap Timer & Checkpoints
+  - เชื่อมโยงเข้ากับระบบแสดงผล Hub หน้าแรกใน [`src/app/page.js`](./../src/app/page.js) ภายใต้หมวดหมู่ `Three.js 3D Engine`
+  - อัปเดตรายการสารบัญโครงการใน [`docs/index.md`](./index.md)
+
 - **🧱 Pretext Breaker Integration & GDD Specification (G025)**:
   - นำเข้าตัวอย่างเกม Typography Block Breaker จากเว็บไซต์ `https://pretext-breaker.netlify.app/` มาติดตั้งใน [`public/games/pretext-breaker/`](./../public/games/pretext-breaker/)
   - จัดทำเอกสาร **Game Design Document & Dev Specs** ฉบับสมบูรณ์ใน [`docs/gdd/games/pretext-breaker/spec.md`](./gdd/games/pretext-breaker/spec.md) ครอบคลุม:
