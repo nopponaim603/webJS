@@ -174,6 +174,14 @@ const initialGames = [
     url: "/games/eggplant-wiggle/index.html",
     image: "https://images.unsplash.com/photo-1590868309235-ea34bed7bd7f?w=400&h=400&fit=crop",
     gradient: "linear-gradient(135deg, #610085 0%, #A855F7 100%)"
+  },
+  {
+    id: "pretext-breaker",
+    title: "Pretext Breaker (Typography Arkanoid)",
+    category: "ปริศนา / อาเขต",
+    url: "/games/pretext-breaker/index.html",
+    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&h=400&fit=crop",
+    gradient: "linear-gradient(135deg, #0EA5E9 0%, #F59E0B 100%)"
   }
 ];
 

@@ -13,6 +13,17 @@ tags:
 
 ## [1.32.0] - 2026-08-25
 
+- **🧱 Pretext Breaker Integration & GDD Specification (G025)**:
+  - นำเข้าตัวอย่างเกม Typography Block Breaker จากเว็บไซต์ `https://pretext-breaker.netlify.app/` มาติดตั้งใน [`public/games/pretext-breaker/`](./../public/games/pretext-breaker/)
+  - จัดทำเอกสาร **Game Design Document & Dev Specs** ฉบับสมบูรณ์ใน [`docs/gdd/games/pretext-breaker/spec.md`](./gdd/games/pretext-breaker/spec.md) ครอบคลุม:
+    - HTML5 Canvas 2D Rendering & Pretext Monospace Typography Layout Engine
+    - ระบบฟิสิกส์การกระดอนของลูกบอล (Angle Reflection), แป้นพาย (Paddle Tracking), และระบบทำลายบล็อกตัวอักษร
+    - ไอเทม Power-up (Multi-ball, Laser Cannon, Expand Paddle, Extra Lives)
+    - ระบบสังเคราะห์เสียง Procedural Web Audio API Synthesizer (OscillatorNode)
+    - ดีไซน์ UI สไตล์ Glassmorphism Container พร้อมฟอนต์ IBM Plex Mono คมชัด
+  - เชื่อมโยงเข้ากับระบบแสดงผล Hub หน้าแรกใน [`src/app/page.js`](./../src/app/page.js)
+  - อัปเดตรายการสารบัญโครงการใน [`docs/index.md`](./index.md)
+
 - **🍆 Wiggle Eggplant 3D Integration & GDD Specification (G024)**:
   - นำเข้าตัวอย่างระบบ Interactive 3D Physics Web Toy จากเว็บไซต์ `https://xn--gi8h42h.ws/` มาติดตั้งใน [`public/games/eggplant-wiggle/`](./../public/games/eggplant-wiggle/)
   - จัดทำเอกสาร **Game Design Document & Dev Specs** ฉบับสมบูรณ์ใน [`docs/gdd/games/eggplant-wiggle/spec.md`](./gdd/games/eggplant-wiggle/spec.md) ครอบคลุม:
