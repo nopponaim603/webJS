@@ -166,6 +166,14 @@ const initialGames = [
     url: "/games/skate-dog/index.html",
     image: "/games/skate-dog/og.webp",
     gradient: "linear-gradient(135deg, #F472B6 0%, #FB923C 100%)"
+  },
+  {
+    id: "eggplant-wiggle",
+    title: "🍆 Wiggle Eggplant 3D",
+    category: "Three.js 3D Engine",
+    url: "/games/eggplant-wiggle/index.html",
+    image: "https://images.unsplash.com/photo-1590868309235-ea34bed7bd7f?w=400&h=400&fit=crop",
+    gradient: "linear-gradient(135deg, #610085 0%, #A855F7 100%)"
   }
 ];
 
