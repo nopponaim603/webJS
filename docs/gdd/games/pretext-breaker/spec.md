@@ -119,6 +119,14 @@ public/games/pretext-breaker/
 
 ---
 
+## 6. Granular GDD Documents Suite
+- 📄 **[00-concept.md — Concept & Vision](./00-concept.md)**
+- 🕹️ **[01-mechanics.md — Core Mechanics, Ball/Paddle Physics & Power-ups](./01-mechanics.md)**
+- 📐 **[02-level-design.md — Text-to-Brick Parsing & Word Wall Patterns](./02-level-design.md)**
+- 🎨 **[03-art-direction.md — Monospace Typography & Web Audio Synth Specs](./03-art-direction.md)**
+
+---
+
 ## Related Documents
 - [Documentation Inventory](../../index.md)
 - [GDD Collection Hub](../00-concept.md)
