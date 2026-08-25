@@ -11,6 +11,18 @@ tags:
 # 📜 Documentation Changelog — webJS
 
 
+## [1.32.0] - 2026-08-25
+
+- **🍆 Wiggle Eggplant 3D Integration & GDD Specification (G024)**:
+  - นำเข้าตัวอย่างระบบ Interactive 3D Physics Web Toy จากเว็บไซต์ `https://xn--gi8h42h.ws/` มาติดตั้งใน [`public/games/eggplant-wiggle/`](./../public/games/eggplant-wiggle/)
+  - จัดทำเอกสาร **Game Design Document & Dev Specs** ฉบับสมบูรณ์ใน [`docs/gdd/games/eggplant-wiggle/spec.md`](./gdd/games/eggplant-wiggle/spec.md) ครอบคลุม:
+    - Three.js WebGL Architecture, PBR Material, Multi-point Studio Lighting และ HDRI Environment Reflection
+    - โครงสร้างกระดูก Skinned Mesh (`Bone`, `Bone001` - `Bone004`) พร้อมระบบฟิสิกส์ Wiggle Spring-Damper Dynamics (Stiffness & Damping)
+    - ระบบวัดความเร็ว Pointer Velocity & Raycasting บน Virtual Plane สำหรับ Trigger การ Burst ละอองหยดน้ำ 3 มิติ (`droplet.25fdcda7.obj`)
+    - Custom GLSL Fragment Shader พื้นหลังแบบ Radial Gradient ปรับตาม Aspect Ratio
+  - เชื่อมโยงเข้ากับระบบแสดงผล Hub หน้าแรกใน [`src/app/page.js`](./../src/app/page.js) ภายใต้หมวดหมู่ `Three.js 3D Engine`
+  - อัปเดตรายการสารบัญโครงการใน [`docs/index.md`](./index.md)
+
 ## [1.31.0] - 2026-08-16
 
 - **YAML Frontmatter Standardization & Skill Update ([.agents/skills/game-doc-manager/SKILL.md](file:///c:/Users/noppon/source/06-WEB/webJS/.agents/skills/game-doc-manager/SKILL.md))**:
