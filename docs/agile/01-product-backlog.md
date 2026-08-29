@@ -19,9 +19,9 @@ tags:
 | ID | User Story | Acceptance Criteria | Estimate | Status |
 |----|-----------|---------------------|----------|--------|
 | [US-G028-00](./user-stories/archive/US-G028-00.md) | Game Design Document & Architecture Spec | จัดทำ [GDD Spec](../gdd/games/godawful/spec.md) ครอบคลุม Concept, God Powers, Town Physics & Porting Plan | S | ✅ Done |
-| [US-G028-01](./user-stories/archive/US-G028-01.md) | Asset & Vite Bundle Scraping | สแครป Assets, Three.js modules, 3D GLTF meshes, Shaders, SFX และจัดโครงสร้างลง `public/games/godawful/` | M | 🏗 Pending |
-| [US-G028-02](./user-stories/archive/US-G028-02.md) | God Controls & Town Simulation Loop | ควบคุมก้อนเมฆเทพเจ้า (Cloud God), พลังสายฟ้า/ฝน/พายุ, ฟิสิกส์การพังทลายของเมือง และ AI ชาวเมือง | L | 🏗 Pending |
-| [US-G028-03](./user-stories/archive/US-G028-03.md) | UI Overlay, Audio FX & Game Hub Integration | แสดงผล 2D UI Overlay, Web Audio SFX, Card ในหน้าแรก และเล่นผ่าน iFrame Modal ได้สมบูรณ์ | S | 🏗 Pending |
+| [US-G028-01](./user-stories/US-G028-01.md) | Asset & Vite Bundle Scraping | สแครป Assets, Three.js modules, 3D GLTF meshes, Shaders, SFX และจัดโครงสร้างลง `public/games/godawful/` | M | 🏗 Pending |
+| [US-G028-02](./user-stories/US-G028-02.md) | God Controls & Town Simulation Loop | ควบคุมก้อนเมฆเทพเจ้า (Cloud God), พลังสายฟ้า/ฝน/พายุ, ฟิสิกส์การพังทลายของเมือง และ AI ชาวเมือง | L | 🏗 Pending |
+| [US-G028-03](./user-stories/US-G028-03.md) | UI Overlay, Audio FX & Game Hub Integration | แสดงผล 2D UI Overlay, Web Audio SFX, Card ในหน้าแรก และเล่นผ่าน iFrame Modal ได้สมบูรณ์ | S | 🏗 Pending |
 
 ---
 
@@ -31,9 +31,9 @@ tags:
 | ID | User Story | Acceptance Criteria | Estimate | Status |
 |----|-----------|---------------------|----------|--------|
 | [US-G029-00](./user-stories/archive/US-G029-00.md) | Game Design Document & 10-Wave Extraction Spec | จัดทำ [GDD Spec](../gdd/games/survive-10-waves/spec.md) วิเคราะห์ Combat Loop, Drone, SVG Upgrade Tree & Saves | S | ✅ Done |
-| [US-G029-01](./user-stories/archive/US-G029-01.md) | Asset, Three.js Vendor & Audio Scraping | ดึงโมเดล 3D ทหาร/เอเลี่ยน, ES Modules, CSS HUD, Audio playlist (`tracks.js`), SVG Upgrades | M | 🏗 Pending |
-| [US-G029-02](./user-stories/archive/US-G029-02.md) | 10-Wave Combat, Sentinel Drone & Arena Collapse | ระบบทหารยิงต่อสู้ 360°, สลับปืนใน Weapon Rack, โดรนช่วยยิง, วงบีบ Arena Collapse, แท่น Extraction | L | 🏗 Pending |
-| [US-G029-03](./user-stories/archive/US-G029-03.md) | Weapon Rack, SVG Tree Upgrades & Persistence | ผังอัปเกรดแบบ Interactive SVG Tree, สรุปเหรียญ & ค่าซ่อมโดรน, LocalStorage Save, Hub Integration | M | 🏗 Pending |
+| [US-G029-01](./user-stories/US-G029-01.md) | Asset, Three.js Vendor & Audio Scraping | ดึงโมเดล 3D ทหาร/เอเลี่ยน, ES Modules, CSS HUD, Audio playlist (`tracks.js`), SVG Upgrades | M | 🏗 Pending |
+| [US-G029-02](./user-stories/US-G029-02.md) | 10-Wave Combat, Sentinel Drone & Arena Collapse | ระบบทหารยิงต่อสู้ 360°, สลับปืนใน Weapon Rack, โดรนช่วยยิง, วงบีบ Arena Collapse, แท่น Extraction | L | 🏗 Pending |
+| [US-G029-03](./user-stories/US-G029-03.md) | Weapon Rack, SVG Tree Upgrades & Persistence | ผังอัปเกรดแบบ Interactive SVG Tree, สรุปเหรียญ & ค่าซ่อมโดรน, LocalStorage Save, Hub Integration | M | 🏗 Pending |
 
 ---
 
@@ -43,9 +43,9 @@ tags:
 | ID | User Story | Acceptance Criteria | Estimate | Status |
 |----|-----------|---------------------|----------|--------|
 | [US-G030-00](./user-stories/archive/US-G030-00.md) | Game Design Document & Trials Physics Spec | จัดทำ [GDD Spec](../gdd/games/dirtline/spec.md) วิเคราะห์ 72kg Spring-Mass Dynamics, Telemetry & Ghost Replay | S | ✅ Done |
-| [US-G030-01](./user-stories/archive/US-G030-01.md) | Engine & Canyon Asset Scraping | สกัด Three.js + GLTFLoader r128 bundle, 3D Canyon track & Bike mesh, Sound SFX สู่ `public/games/dirtline/` | M | 🏗 Pending |
-| [US-G030-02](./user-stories/archive/US-G030-02.md) | 2.5D Spring-Mass Rider Dynamics & Trials Physics | มวลคนขับ 72 kg บนสปริง, คันเร่ง/เบรกหน้า-หลัง, ถ่ายน้ำหนักหน้า-หลัง (A/D), คุมสมดุลกลางอากาศ | L | 🏗 Pending |
-| [US-G030-03](./user-stories/archive/US-G030-03.md) | Checkpoints, Telemetry HUD, Ghost Replay & Hub Integration | HUD นาฬิกา Millisecond + Faults Counter, แถบ Track Rail, Telemetry Matrix, Ghost Replay, Game Hub Card | M | 🏗 Pending |
+| [US-G030-01](./user-stories/US-G030-01.md) | Engine & Canyon Asset Scraping | สกัด Three.js + GLTFLoader r128 bundle, 3D Canyon track & Bike mesh, Sound SFX สู่ `public/games/dirtline/` | M | 🏗 Pending |
+| [US-G030-02](./user-stories/US-G030-02.md) | 2.5D Spring-Mass Rider Dynamics & Trials Physics | มวลคนขับ 72 kg บนสปริง, คันเร่ง/เบรกหน้า-หลัง, ถ่ายน้ำหนักหน้า-หลัง (A/D), คุมสมดุลกลางอากาศ | L | 🏗 Pending |
+| [US-G030-03](./user-stories/US-G030-03.md) | Checkpoints, Telemetry HUD, Ghost Replay & Hub Integration | HUD นาฬิกา Millisecond + Faults Counter, แถบ Track Rail, Telemetry Matrix, Ghost Replay, Game Hub Card | M | 🏗 Pending |
 
 ---
 
