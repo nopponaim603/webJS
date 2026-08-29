@@ -59,6 +59,9 @@ tags:
 | G030 | `dirtline`               | 🏍️ DIRT LINE (Trials Dirt Bike 3D)  | Three.js / Spring Physics | `public/games/dirtline/`               |
 
 ### 🎮 Active Released Game Specifications (`docs/gdd/games/`)
+- [⚡ GODAWFUL (Cute Town God Sim G028)](./gdd/games/godawful/spec.md)
+- [🛡️ SURVIVE 10 WAVES (3D Extraction Survival G029)](./gdd/games/survive-10-waves/spec.md)
+- [🏍️ DIRT LINE (Trials Dirt Bike 3D G030)](./gdd/games/dirtline/spec.md)
 - [🎮 XO Multiplayer (WebRTC P2P G027)](./gdd/games/webrtc-xo/spec.md)
 - [🏎️ Starter Kit Racing 3D (Three.js & Crashcat G026)](./gdd/games/starter-kit-racing/spec.md)
 - [Pretext Breaker (Typography Block Breaker G025)](./gdd/games/pretext-breaker/spec.md)

@@ -26,6 +26,9 @@ kanban-plugin: board
 
 ## ✅ DONE
 
+- [x] [US-G028-00](./user-stories/archive/US-G028-00.md): GODAWFUL — Game Design Document & Architecture Spec (G028)
+- [x] [US-G029-00](./user-stories/archive/US-G029-00.md): SURVIVE 10 WAVES — Game Design Document & 10-Wave Extraction Spec (G029)
+- [x] [US-G030-00](./user-stories/archive/US-G030-00.md): DIRT LINE — Game Design Document & Trials Physics Spec (G030)
 - [x] [US-01-01](./user-stories/archive/US-01-01-portfolio-cards.md): Glassmorphic UI Cards Rendering
 - [x] [US-01-02](./user-stories/archive/US-01-02-modal-loader.md): Modal Iframe Loader
 - [x] [US-01-03](./user-stories/archive/US-01-03-search-filter.md): Real-Time Search & Category Filter
