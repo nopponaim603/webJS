@@ -67,8 +67,7 @@ class FrontWarsGame {
 
     // Game configuration
     this.attackRatio = 0.50;
-    this.gameSpeed = 2; // 1x, 2x, 4x
-    this.isPaused = false;
+    this.gameSpeed = 1; // 1x, 2x, 4x (Default 1x for fair human reaction)
     this.mapPreset = 'continental'; // continental, archipelago, duel, ring
     this.difficulty = 'normal'; // easy, normal, hard
 
@@ -600,7 +599,7 @@ class FrontWarsGame {
     }
 
     this.aiTimer += dt * this.gameSpeed;
-    if (this.aiTimer >= 2.8) {
+    if (this.aiTimer >= 4.5) {
       this.aiTimer = 0;
       this.runAIEngine();
     }
@@ -679,23 +678,39 @@ class FrontWarsGame {
       const faction = this.factions[fKey];
       if (!faction.isAI) return;
 
+      // 40% chance to skip this cycle so all AIs don't act on the exact same beat
+      if (Math.random() < 0.40) return;
+
       const ownedProvinces = this.provinces.filter(p => p.owner === fKey);
+      if (ownedProvinces.length === 0) return;
 
-      ownedProvinces.forEach(source => {
-        // Reduced frequency per node so AI doesn't dispatch all nodes at once
-        if (Math.random() > 0.50) return;
+      // Limit each faction to at most 1 action per evaluation cycle
+      let actionTaken = false;
 
-        if (source.troops > 22) {
+      // Shuffle owned provinces so AI doesn't always start from the same node
+      const shuffledSources = [...ownedProvinces].sort(() => Math.random() - 0.5);
+
+      for (const source of shuffledSources) {
+        if (actionTaken) break;
+
+        // AI requires a safe reserve before attacking (at least 30 troops)
+        if (source.troops >= 30) {
           const enemyNeighbors = this.provinces.filter(p => 
             p.owner !== fKey && this.isConnected(source.id, p.id)
           );
 
           if (enemyNeighbors.length > 0) {
+            // Sort by lowest troop count (prefer weaker targets / neutral nodes first)
             enemyNeighbors.sort((a, b) => a.troops - b.troops);
             const target = enemyNeighbors[0];
 
-            if (source.troops > target.troops * 1.1) {
+            let requiredAdvantage = target.owner === 'neutral' ? 1.2 : 1.35;
+            if (target.building === 'fortress') requiredAdvantage = 1.8;
+
+            if (source.troops > target.troops * requiredAdvantage) {
               this.dispatchTroops(source, target);
+              actionTaken = true;
+              break;
             }
           } else {
             // AI Rear Node Reinforcement: Send troops to reinforce front-line friendly nodes!
@@ -706,16 +721,20 @@ class FrontWarsGame {
             if (friendlyFrontLines.length > 0) {
               friendlyFrontLines.sort((a, b) => a.troops - b.troops);
               const target = friendlyFrontLines[0];
-              if (source.troops > 20) {
+              if (source.troops > 28) {
                 this.dispatchTroops(source, target);
+                actionTaken = true;
+                break;
               }
-            } else if (source.troops > 40 && !source.building) {
+            } else if (source.troops > 45 && !source.building) {
               source.troops -= 30;
               source.building = Math.random() > 0.5 ? 'city' : 'fortress';
+              actionTaken = true;
+              break;
             }
           }
         }
-      });
+      }
     });
   }
 
