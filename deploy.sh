@@ -4,23 +4,28 @@
 # ===================================================
 
 echo "=================================================="
-echo " 🚀 กำลังเตรียม Deploy Next.js ไปยัง Vercel..."
+echo " 🚀 ระบบจัดการการ Deploy Next.js ไปยัง Vercel"
 echo "=================================================="
 
-if [ "$1" == "--prod" ] || [ "$1" == "-p" ]; then
+if [ "$1" == "--login" ] || [ "$1" == "-l" ]; then
+    echo "🔐 กำลังเข้าสู่ระบบ Vercel CLI..."
+    npx vercel login
+    exit 0
+elif [ "$1" == "--prod" ] || [ "$1" == "-p" ]; then
     echo "📌 โหมด: Production (--prod)"
     npx vercel --prod
 elif [ "$1" == "--preview" ]; then
     echo "📌 โหมด: Preview (Development)"
     npx vercel
 else
-    echo "กรุณาเลือกประเภทการ Deploy:"
+    echo "กรุณาเลือกการทำงาน:"
     echo " [1] Preview (สำหรับทดสอบ)"
     echo " [2] Production (นำขึ้นจริง)"
+    echo " [L] Login (เข้าสู่ระบบ / รีเฟรช Token Vercel)"
     echo " [Q] ยกเลิก"
-    read -p "เลือกตัวเลือก (1/2/Q): " choice
+    read -p "เลือกตัวเลือก (1/2/L/Q): " choice
 
-    case "$choice" in
+    case "${choice^^}" in
         1)
             echo "🚀 กำลัง Deploy ไปยัง Preview Environment..."
             npx vercel
@@ -29,8 +34,12 @@ else
             echo "🚀 กำลัง Deploy ไปยัง Production Environment..."
             npx vercel --prod
             ;;
+        L)
+            echo "🔐 กำลังเข้าสู่ระบบ Vercel CLI..."
+            npx vercel login
+            ;;
         *)
-            echo "❌ ยกเลิกการ Deploy"
+            echo "❌ ยกเลิกการทำงาน"
             exit 0
             ;;
     esac
@@ -39,9 +48,9 @@ fi
 if [ $? -eq 0 ]; then
     echo ""
     echo "=================================================="
-    echo " 🎉 Deploy สำเร็จเรียบร้อย!"
+    echo " 🎉 ดำเนินการสำเร็จเรียบร้อย!"
     echo "=================================================="
 else
     echo ""
-    echo "❌ เกิดข้อผิดพลาดในการ Deploy"
+    echo "❌ เกิดข้อผิดพลาด"
 fi

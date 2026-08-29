@@ -11,6 +11,19 @@ tags:
 # 📜 Documentation Changelog — webJS
 
 
+## [1.33.0] - 2026-08-29
+
+- **🎮 XO Multiplayer (WebRTC P2P) Integration & GDD Suite (G027)**:
+  - นำเข้าระบบเกมมัลติเพลเยอร์ Peer-to-Peer จากโฟลเดอร์ภายนอก `webRTC_XOMultiplayer` มาติดตั้งใน [`public/games/webrtc-xo/`](./../public/games/webrtc-xo/)
+  - ปรับแต่ง Fallback Clipboard API และสิทธิ์ Iframe ใน [`src/components/GameModal.jsx`](./../src/components/GameModal.jsx) เพื่อรองรับการคัดลอก Peer ID อย่างเสถียร
+  - ลงทะเบียนการแสดงผลใน Hub หน้าแรก [`src/app/page.js`](./../src/app/page.js) ในหมวดหมู่ `กระดาน / มัลติเพลเยอร์`
+  - จัดทำเอกสาร **Game Design Document & Technical Specification Suite** ฉบับสมบูรณ์ใน [`docs/gdd/games/webrtc-xo/spec.md`](./gdd/games/webrtc-xo/spec.md) ครอบคลุม:
+    - สถาปัตยกรรม WebRTC P2P DataChannel ผ่าน PeerJS และ PeerJS Cloud Signaling
+    - โครงสร้าง JSON Packet Protocol (`MOVE`, `RESTART`)
+    - ระบบ Lobby Handshake, การสร้าง Peer ID, QR Code Generation และ Direct Join URL
+    - UI Glassmorphism Neon 3x3 Grid และสถานะการเล่น Real-time Turn Progression
+  - อัปเดตรายการสารบัญโครงการใน [`docs/index.md`](./index.md)
+
 ## [1.32.0] - 2026-08-25
 
 - **🏎️ Starter Kit Racing 3D Integration & GDD Suite (G026)**:

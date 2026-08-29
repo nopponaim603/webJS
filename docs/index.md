@@ -53,8 +53,10 @@ tags:
 | G024 | `eggplant-wiggle`        | 🍆 Wiggle Eggplant 3D               | Three.js / Wiggle Physics | `public/games/eggplant-wiggle/`        |
 | G025 | `pretext-breaker`        | Pretext Breaker (Typography Arkanoid) | Canvas 2D / Text Engine   | `public/games/pretext-breaker/`        |
 | G026 | `starter-kit-racing`     | 🏎️ Starter Kit Racing 3D            | Three.js / Crashcat Phys  | `public/games/starter-kit-racing/`     |
+| G027 | `webrtc-xo`              | 🎮 XO Multiplayer (WebRTC P2P)     | WebRTC / PeerJS           | `public/games/webrtc-xo/`              |
 
 ### 🎮 Active Released Game Specifications (`docs/gdd/games/`)
+- [🎮 XO Multiplayer (WebRTC P2P G027)](./gdd/games/webrtc-xo/spec.md)
 - [🏎️ Starter Kit Racing 3D (Three.js & Crashcat G026)](./gdd/games/starter-kit-racing/spec.md)
 - [Pretext Breaker (Typography Block Breaker G025)](./gdd/games/pretext-breaker/spec.md)
 - [🍆 Wiggle Eggplant 3D (Three.js & Wiggle Physics G024)](./gdd/games/eggplant-wiggle/spec.md)

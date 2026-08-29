@@ -47,3 +47,6 @@ engines_backup/
 # Coverage
 coverage/
 .nyc_output/
+
+.vercel
+.env*
