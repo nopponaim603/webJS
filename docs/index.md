@@ -54,6 +54,9 @@ tags:
 | G025 | `pretext-breaker`        | Pretext Breaker (Typography Arkanoid) | Canvas 2D / Text Engine   | `public/games/pretext-breaker/`        |
 | G026 | `starter-kit-racing`     | 🏎️ Starter Kit Racing 3D            | Three.js / Crashcat Phys  | `public/games/starter-kit-racing/`     |
 | G027 | `webrtc-xo`              | 🎮 XO Multiplayer (WebRTC P2P)     | WebRTC / PeerJS           | `public/games/webrtc-xo/`              |
+| G028 | `godawful`               | ⚡ GODAWFUL (Cute Town God Sim)     | Three.js / PostFX         | `public/games/godawful/`               |
+| G029 | `survive-10-waves`       | 🛡️ SURVIVE 10 WAVES (Extraction 3D)| Three.js / ES Modules     | `public/games/survive-10-waves/`       |
+| G030 | `dirtline`               | 🏍️ DIRT LINE (Trials Dirt Bike 3D)  | Three.js / Spring Physics | `public/games/dirtline/`               |
 
 ### 🎮 Active Released Game Specifications (`docs/gdd/games/`)
 - [🎮 XO Multiplayer (WebRTC P2P G027)](./gdd/games/webrtc-xo/spec.md)

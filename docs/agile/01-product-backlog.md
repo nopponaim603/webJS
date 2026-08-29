@@ -13,6 +13,39 @@ tags:
 
 ---
 
+## ⚡ Epic 28 — GODAWFUL Scraping & Reverse Engineering (G028)
+> **Source:** [https://godawful.vercel.app/](https://godawful.vercel.app/)
+
+| ID | User Story | Acceptance Criteria | Estimate | Status |
+|----|-----------|---------------------|----------|--------|
+| [US-G028-01](./user-stories/archive/US-G028-01.md) | Asset & Vite Bundle Scraping | สแครป Assets, Three.js modules, 3D GLTF meshes, Shaders, SFX และจัดโครงสร้างลง `public/games/godawful/` | M | 🏗 Pending |
+| [US-G028-02](./user-stories/archive/US-G028-02.md) | God Controls & Town Simulation Loop | ควบคุมก้อนเมฆเทพเจ้า (Cloud God), พลังสายฟ้า/ฝน/พายุ, ฟิสิกส์การพังทลายของเมือง และ AI ชาวเมือง | L | 🏗 Pending |
+| [US-G028-03](./user-stories/archive/US-G028-03.md) | UI Overlay, Audio FX & Game Hub Integration | แสดงผล 2D UI Overlay, Web Audio SFX, Card ในหน้าแรก และเล่นผ่าน iFrame Modal ได้สมบูรณ์ | S | 🏗 Pending |
+
+---
+
+## 🛡️ Epic 29 — SURVIVE 10 WAVES Scraping & Porting (G029)
+> **Source:** [https://www.survive10waves.com/](https://www.survive10waves.com/)
+
+| ID | User Story | Acceptance Criteria | Estimate | Status |
+|----|-----------|---------------------|----------|--------|
+| [US-G029-01](./user-stories/archive/US-G029-01.md) | Asset, Three.js Vendor & Audio Scraping | ดึงโมเดล 3D ทหาร/เอเลี่ยน, ES Modules, CSS HUD, Audio playlist (`tracks.js`), SVG Upgrades | M | 🏗 Pending |
+| [US-G029-02](./user-stories/archive/US-G029-02.md) | 10-Wave Combat, Sentinel Drone & Arena Collapse | ระบบทหารยิงต่อสู้ 360°, สลับปืนใน Weapon Rack, โดรนช่วยยิง, วงบีบ Arena Collapse, แท่น Extraction | L | 🏗 Pending |
+| [US-G029-03](./user-stories/archive/US-G029-03.md) | Weapon Rack, SVG Tree Upgrades & Persistence | ผังอัปเกรดแบบ Interactive SVG Tree, สรุปเหรียญ & ค่าซ่อมโดรน, LocalStorage Save, Hub Integration | M | 🏗 Pending |
+
+---
+
+## 🏍️ Epic 30 — DIRT LINE Scraping & Trials Physics Porting (G030)
+> **Source:** [https://dirtline.pages.dev/](https://dirtline.pages.dev/)
+
+| ID | User Story | Acceptance Criteria | Estimate | Status |
+|----|-----------|---------------------|----------|--------|
+| [US-G030-01](./user-stories/archive/US-G030-01.md) | Engine & Canyon Asset Scraping | สกัด Three.js + GLTFLoader r128 bundle, 3D Canyon track & Bike mesh, Sound SFX สู่ `public/games/dirtline/` | M | 🏗 Pending |
+| [US-G030-02](./user-stories/archive/US-G030-02.md) | 2.5D Spring-Mass Rider Dynamics & Trials Physics | มวลคนขับ 72 kg บนสปริง, คันเร่ง/เบรกหน้า-หลัง, ถ่ายน้ำหนักหน้า-หลัง (A/D), คุมสมดุลกลางอากาศ | L | 🏗 Pending |
+| [US-G030-03](./user-stories/archive/US-G030-03.md) | Checkpoints, Telemetry HUD, Ghost Replay & Hub Integration | HUD นาฬิกา Millisecond + Faults Counter, แถบ Track Rail, Telemetry Matrix, Ghost Replay, Game Hub Card | M | 🏗 Pending |
+
+---
+
 ## ⚔️ Epic 12 — WarFront.io Strategy Overhaul (G020)
 
 | ID | User Story | Acceptance Criteria | Estimate | Status |

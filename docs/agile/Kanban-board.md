@@ -6,6 +6,15 @@ kanban-plugin: board
 
 ## 📋 TO DO
 
+- [ ] [US-G028-01](./user-stories/archive/US-G028-01.md): GODAWFUL — Asset & Vite Bundle Scraping (G028)
+- [ ] [US-G028-02](./user-stories/archive/US-G028-02.md): GODAWFUL — God Controls & Town Simulation Loop (G028)
+- [ ] [US-G028-03](./user-stories/archive/US-G028-03.md): GODAWFUL — UI Overlay, Audio FX & Hub Integration (G028)
+- [ ] [US-G029-01](./user-stories/archive/US-G029-01.md): SURVIVE 10 WAVES — Asset, 3D Models & Audio Scraping (G029)
+- [ ] [US-G029-02](./user-stories/archive/US-G029-02.md): SURVIVE 10 WAVES — 10-Wave Combat & Arena Collapse (G029)
+- [ ] [US-G029-03](./user-stories/archive/US-G029-03.md): SURVIVE 10 WAVES — Weapon Rack, SVG Tree & Saves (G029)
+- [ ] [US-G030-01](./user-stories/archive/US-G030-01.md): DIRT LINE — Engine & Canyon Asset Scraping (G030)
+- [ ] [US-G030-02](./user-stories/archive/US-G030-02.md): DIRT LINE — 2.5D Spring-Mass Rider Dynamics & Trials Physics (G030)
+- [ ] [US-G030-03](./user-stories/archive/US-G030-03.md): DIRT LINE — Checkpoints, Telemetry HUD & Ghost Replay (G030)
 - [ ] US-04-01: Light/Dark Theme Toggle
 - [ ] US-04-02: Leaderboard UI
 
