@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebRTC Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>🎮 XO Multiplayer</h1>
+            <p class="subtitle">Peer-to-Peer Game via WebRTC</p>
+        </header>
+
+        <!-- Lobby Section -->
+        <section id="lobby" class="lobby">
+            <div class="card">
+                <h2>📡 Connection</h2>
+
+                <div class="id-section">
+                    <label>Your Peer ID:</label>
+                    <div class="id-display">
+                        <input type="text" id="myPeerId" readonly placeholder="Generating...">
+                        <button id="copyBtn" class="btn btn-secondary" title="Copy ID">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                        <button id="qrBtn" class="btn btn-secondary" title="Show QR Code">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                                <path d="M7 7h.01M17 7h.01M17 17h.01M7 17h.01"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="qrContainer" class="qr-container hidden">
+                        <canvas id="qrCanvas"></canvas>
+                        <p class="qr-text">Scan to join the game</p>
+                    </div>
+                </div>
+
+                <div class="connect-section">
+                    <label>Friend's Peer ID:</label>
+                    <div class="connect-input">
+                        <input type="text" id="friendId" placeholder="Enter friend's ID">
+                        <button id="connectBtn" class="btn btn-primary">Connect</button>
+                    </div>
+                </div>
+
+                <div class="status-section">
+                    <div id="connectionStatus" class="status-indicator">
+                        <span class="status-dot"></span>
+                        <span class="status-text">Waiting for connection...</span>
+                        <button id="cancelBtn" class="btn btn-danger btn-sm hidden">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Game Section -->
+        <section id="gameSection" class="game-section hidden">
+            <div class="card">
+                <div class="game-header">
+                    <div class="player-info">
+                        <span id="playerRole" class="player-role">You are: <strong>X</strong></span>
+                    </div>
+                    <div id="gameStatus" class="game-status">Your Turn</div>
+                </div>
+
+                <div id="board" class="board">
+                    <div class="cell" data-index="0"></div>
+                    <div class="cell" data-index="1"></div>
+                    <div class="cell" data-index="2"></div>
+                    <div class="cell" data-index="3"></div>
+                    <div class="cell" data-index="4"></div>
+                    <div class="cell" data-index="5"></div>
+                    <div class="cell" data-index="6"></div>
+                    <div class="cell" data-index="7"></div>
+                    <div class="cell" data-index="8"></div>
+                </div>
+
+                <div class="game-controls">
+                    <button id="rematchBtn" class="btn btn-primary">🔄 Rematch</button>
+                    <button id="leaveBtn" class="btn btn-danger">🚪 Leave Game</button>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Built with PeerJS & WebRTC</p>
+        </footer>
+    </div>
+
+    <!-- PeerJS & QR Code CDN -->
+    <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+    <script src="game.js"></script>
+</body>
+
+</html>

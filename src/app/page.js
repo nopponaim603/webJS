@@ -116,6 +116,14 @@ const initialGames = [
     gradient: "linear-gradient(135deg, #581C87 0%, #3B82F6 100%)"
   },
   {
+    id: "webrtc-xo",
+    title: "XO Multiplayer (WebRTC P2P)",
+    category: "กระดาน / มัลติเพลเยอร์",
+    url: "/games/webrtc-xo/index.html",
+    image: "https://images.unsplash.com/photo-1668554245893-2430d0077217?w=400&h=400&fit=crop",
+    gradient: "linear-gradient(135deg, #6366F1 0%, #EC4899 100%)"
+  },
+  {
     id: "tile-swap",
     title: "Tile Swap",
     category: "ปริศนา / สลับไทล์",
