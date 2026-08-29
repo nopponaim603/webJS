@@ -1,0 +1,7444 @@
+{
+  "generatedAt": "2026-08-16T20:01:44.258Z",
+  "units": "meters (glTF default), Y-up, right-handed",
+  "count": 235,
+  "kits": {
+    "animals": {
+      "count": 6,
+      "recommendedScale": 0.3,
+      "scaleBasis": "Quaternius cow 4.59 tall / 8.07 long -> 1.38 m / 2.42 m",
+      "modalFootprint": "2.5x8",
+      "modalFootprintCount": 2,
+      "modalFootprintShare": 33,
+      "heightMin": 1.239,
+      "heightMedian": 2.695,
+      "heightMax": 4.587,
+      "originAtGround": 4,
+      "animated": 6,
+      "triangles": 19760,
+      "textures": [
+        "Atlas.png:image/png:5978:embedded"
+      ]
+    },
+    "characters": {
+      "count": 26,
+      "recommendedScale": 2.25,
+      "scaleBasis": "0.776 tall -> 1.75 m adult",
+      "modalFootprint": "1x0.5",
+      "modalFootprintCount": 12,
+      "modalFootprintShare": 46,
+      "heightMin": 0.096,
+      "heightMedian": 0.625,
+      "heightMax": 0.793,
+      "originAtGround": 25,
+      "animated": 12,
+      "triangles": 13153,
+      "textures": [
+        "colormap:image/png:8706:embedded"
+      ]
+    },
+    "city": {
+      "count": 57,
+      "recommendedScale": 7,
+      "scaleBasis": "shares the roads 1x1 lot grid; 1.3-wide house -> ~9 m",
+      "modalFootprint": "1x1",
+      "modalFootprintCount": 13,
+      "modalFootprintShare": 23,
+      "heightMin": 0.01,
+      "heightMedian": 1.034,
+      "heightMax": 4.48,
+      "originAtGround": 57,
+      "animated": 0,
+      "triangles": 67659,
+      "textures": [
+        "colormap:image/png:11002:embedded",
+        "colormap:image/png:11784:embedded"
+      ]
+    },
+    "furniture": {
+      "count": 10,
+      "recommendedScale": 2,
+      "scaleBasis": "kitchenFridge 0.92 -> 1.84 m",
+      "modalFootprint": "0x0",
+      "modalFootprintCount": 4,
+      "modalFootprintShare": 40,
+      "heightMin": 0.327,
+      "heightMedian": 0.47,
+      "heightMax": 0.92,
+      "originAtGround": 10,
+      "animated": 0,
+      "triangles": 1378,
+      "textures": []
+    },
+    "graveyard": {
+      "count": 21,
+      "recommendedScale": 1,
+      "scaleBasis": "already ~metres: gravestone 0.92 m, iron-fence 1.0 m span",
+      "modalFootprint": "0.5x0.5",
+      "modalFootprintCount": 5,
+      "modalFootprintShare": 24,
+      "heightMin": 0.341,
+      "heightMedian": 0.879,
+      "heightMax": 2.302,
+      "originAtGround": 19,
+      "animated": 1,
+      "triangles": 6515,
+      "textures": [
+        "colormap:image/png:10965:embedded"
+      ]
+    },
+    "nature": {
+      "count": 59,
+      "recommendedScale": 7,
+      "scaleBasis": "shares the 1x1 ground-tile grid; tree_tall 1.69 -> ~11.8 m",
+      "modalFootprint": "0.5x0.5",
+      "modalFootprintCount": 30,
+      "modalFootprintShare": 51,
+      "heightMin": 0,
+      "heightMedian": 0.26,
+      "heightMax": 1.708,
+      "originAtGround": 0,
+      "animated": 0,
+      "triangles": 7065,
+      "textures": []
+    },
+    "roads": {
+      "count": 28,
+      "recommendedScale": 7,
+      "scaleBasis": "1x1 tile -> 7 m road (two 3.5 m lanes)",
+      "modalFootprint": "1x1",
+      "modalFootprintCount": 15,
+      "modalFootprintShare": 54,
+      "heightMin": 0.02,
+      "heightMedian": 0.02,
+      "heightMax": 0.675,
+      "originAtGround": 28,
+      "animated": 0,
+      "triangles": 6102,
+      "textures": [
+        "colormap:image/png:8658:embedded"
+      ]
+    },
+    "vehicles": {
+      "count": 28,
+      "recommendedScale": 1,
+      "scaleBasis": "already ~metres: sedan 2.55 m long, 1.5 m wide",
+      "modalFootprint": "1.5x3",
+      "modalFootprintCount": 8,
+      "modalFootprintShare": 29,
+      "heightMin": 0.3,
+      "heightMedian": 1.3,
+      "heightMax": 1.8,
+      "originAtGround": 22,
+      "animated": 0,
+      "triangles": 42899,
+      "textures": [
+        "colormap:image/png:12371:embedded"
+      ]
+    }
+  },
+  "models": [
+    {
+      "path": "models/animals/bull_quaternius.glb",
+      "kit": "animals",
+      "name": "bull_quaternius",
+      "size": {
+        "x": 2.513,
+        "y": 4.587,
+        "z": 8.067
+      },
+      "min": {
+        "x": -1.257,
+        "y": -0.056,
+        "z": -2.98
+      },
+      "max": {
+        "x": 1.257,
+        "y": 4.531,
+        "z": 5.087
+      },
+      "originAtGround": false,
+      "triangles": 2418,
+      "hasSkin": true,
+      "animations": [
+        "Attack_Headbutt",
+        "Attack_Kick",
+        "Death",
+        "Eating",
+        "Gallop",
+        "Gallop_Jump",
+        "Idle_HitReact_Left",
+        "Idle_HitReact_Right",
+        "Jump_toIdle",
+        "Walk",
+        "Idle_Headlow",
+        "Idle_2",
+        "Idle",
+        "AnimalArmature|Attack_Headbutt",
+        "AnimalArmature|Attack_Kick",
+        "AnimalArmature|Death",
+        "AnimalArmature|Eating",
+        "AnimalArmature|Gallop",
+        "AnimalArmature|Gallop_Jump",
+        "AnimalArmature|Idle",
+        "AnimalArmature|Idle_2",
+        "AnimalArmature|Idle_Headlow",
+        "AnimalArmature|Idle_HitReact_Left",
+        "AnimalArmature|Jump_toIdle",
+        "AnimalArmature|Walk"
+      ],
+      "footprintUnits": {
+        "x": 2.5,
+        "z": 8
+      },
+      "recommendedScale": 0.3
+    },
+    {
+      "path": "models/animals/chicken_b_quaternius.glb",
+      "kit": "animals",
+      "name": "chicken_b_quaternius",
+      "size": {
+        "x": 0.613,
+        "y": 1.239,
+        "z": 0.823
+      },
+      "min": {
+        "x": -0.306,
+        "y": 0.002,
+        "z": -0.336
+      },
+      "max": {
+        "x": 0.306,
+        "y": 1.242,
+        "z": 0.487
+      },
+      "originAtGround": true,
+      "triangles": 2140,
+      "hasSkin": true,
+      "animations": [
+        "AnimalArmature|AnimalArmature|AnimalArmature|Attack",
+        "AnimalArmature|AnimalArmature|AnimalArmature|Death",
+        "AnimalArmature|AnimalArmature|AnimalArmature|Idle",
+        "AnimalArmature|AnimalArmature|AnimalArmature|Idle_Peck",
+        "AnimalArmature|AnimalArmature|AnimalArmature|Run"
+      ],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 1
+      },
+      "recommendedScale": 0.3
+    },
+    {
+      "path": "models/animals/cow_b_quaternius.glb",
+      "kit": "animals",
+      "name": "cow_b_quaternius",
+      "size": {
+        "x": 2.312,
+        "y": 4.587,
+        "z": 8.067
+      },
+      "min": {
+        "x": -1.156,
+        "y": -0.056,
+        "z": -2.98
+      },
+      "max": {
+        "x": 1.156,
+        "y": 4.531,
+        "z": 5.087
+      },
+      "originAtGround": false,
+      "triangles": 2450,
+      "hasSkin": true,
+      "animations": [
+        "Attack_Headbutt",
+        "Attack_Kick",
+        "Death",
+        "Eating",
+        "Gallop",
+        "Gallop_Jump",
+        "Idle_HitReact_Left",
+        "Idle_HitReact_Right",
+        "Jump_toIdle",
+        "Walk",
+        "Idle_Headlow",
+        "Idle_2",
+        "Idle",
+        "AnimalArmature|Attack_Headbutt",
+        "AnimalArmature|Attack_Kick",
+        "AnimalArmature|Death",
+        "AnimalArmature|Eating",
+        "AnimalArmature|Gallop",
+        "AnimalArmature|Gallop_Jump",
+        "AnimalArmature|Idle",
+        "AnimalArmature|Idle_2",
+        "AnimalArmature|Idle_Headlow",
+        "AnimalArmature|Idle_HitReact_Left",
+        "AnimalArmature|Jump_toIdle",
+        "AnimalArmature|Walk"
+      ],
+      "footprintUnits": {
+        "x": 2.5,
+        "z": 8
+      },
+      "recommendedScale": 0.3
+    },
+    {
+      "path": "models/animals/frog_a_quaternius.glb",
+      "kit": "animals",
+      "name": "frog_a_quaternius",
+      "size": {
+        "x": 3.502,
+        "y": 1.501,
+        "z": 3.212
+      },
+      "min": {
+        "x": -1.762,
+        "y": -0.015,
+        "z": -1.49
+      },
+      "max": {
+        "x": 1.739,
+        "y": 1.486,
+        "z": 1.721
+      },
+      "originAtGround": true,
+      "triangles": 4920,
+      "hasSkin": true,
+      "animations": [
+        "FrogArmature|Frog_Attack",
+        "FrogArmature|Frog_Death",
+        "FrogArmature|Frog_Idle",
+        "FrogArmature|Frog_Jump"
+      ],
+      "footprintUnits": {
+        "x": 3.5,
+        "z": 3
+      },
+      "recommendedScale": 0.3
+    },
+    {
+      "path": "models/animals/frog_b_quaternius.glb",
+      "kit": "animals",
+      "name": "frog_b_quaternius",
+      "size": {
+        "x": 4.649,
+        "y": 2.695,
+        "z": 1.556
+      },
+      "min": {
+        "x": -2.325,
+        "y": -0.015,
+        "z": -0.582
+      },
+      "max": {
+        "x": 2.325,
+        "y": 2.681,
+        "z": 0.974
+      },
+      "originAtGround": true,
+      "triangles": 5016,
+      "hasSkin": true,
+      "animations": [
+        "CharacterArmature|Death",
+        "CharacterArmature|Duck",
+        "CharacterArmature|HitReact",
+        "CharacterArmature|Idle",
+        "CharacterArmature|Jump",
+        "CharacterArmature|Jump_Idle",
+        "CharacterArmature|Jump_Land",
+        "CharacterArmature|No",
+        "CharacterArmature|Punch",
+        "CharacterArmature|Run",
+        "CharacterArmature|Walk",
+        "CharacterArmature|Wave",
+        "CharacterArmature|Weapon",
+        "CharacterArmature|Yes"
+      ],
+      "footprintUnits": {
+        "x": 4.5,
+        "z": 1.5
+      },
+      "recommendedScale": 0.3
+    },
+    {
+      "path": "models/animals/pig_b_quaternius.glb",
+      "kit": "animals",
+      "name": "pig_b_quaternius",
+      "size": {
+        "x": 0.838,
+        "y": 1.603,
+        "z": 2.032
+      },
+      "min": {
+        "x": -0.419,
+        "y": 0.007,
+        "z": -0.96
+      },
+      "max": {
+        "x": 0.419,
+        "y": 1.61,
+        "z": 1.072
+      },
+      "originAtGround": true,
+      "triangles": 2816,
+      "hasSkin": true,
+      "animations": [
+        "AnimalArmature|AnimalArmature|AnimalArmature|Death",
+        "AnimalArmature|AnimalArmature|AnimalArmature|Headbutt",
+        "AnimalArmature|AnimalArmature|AnimalArmature|Idle",
+        "AnimalArmature|AnimalArmature|AnimalArmature|Idle_Eating",
+        "AnimalArmature|AnimalArmature|AnimalArmature|Jump_Loop",
+        "AnimalArmature|AnimalArmature|AnimalArmature|Jump_Start",
+        "AnimalArmature|AnimalArmature|AnimalArmature|Run",
+        "AnimalArmature|AnimalArmature|AnimalArmature|Walk"
+      ],
+      "footprintUnits": {
+        "x": 1,
+        "z": 2
+      },
+      "recommendedScale": 0.3
+    },
+    {
+      "path": "models/characters/aid-cane-blind.glb",
+      "kit": "characters",
+      "name": "aid-cane-blind",
+      "size": {
+        "x": 0.096,
+        "y": 0.31,
+        "z": 0.096
+      },
+      "min": {
+        "x": -0.048,
+        "y": 0,
+        "z": -0.048
+      },
+      "max": {
+        "x": 0.048,
+        "y": 0.31,
+        "z": 0.048
+      },
+      "originAtGround": true,
+      "triangles": 64,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0
+      },
+      "recommendedScale": 2.25
+    },
+    {
+      "path": "models/characters/aid-cane-low-vision.glb",
+      "kit": "characters",
+      "name": "aid-cane-low-vision",
+      "size": {
+        "x": 0.096,
+        "y": 0.31,
+        "z": 0.096
+      },
+      "min": {
+        "x": -0.048,
+        "y": 0,
+        "z": -0.048
+      },
+      "max": {
+        "x": 0.048,
+        "y": 0.31,
+        "z": 0.048
+      },
+      "originAtGround": true,
+      "triangles": 64,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0
+      },
+      "recommendedScale": 2.25
+    },
+    {
+      "path": "models/characters/aid-cane.glb",
+      "kit": "characters",
+      "name": "aid-cane",
+      "size": {
+        "x": 0.096,
+        "y": 0.315,
+        "z": 0.23
+      },
+      "min": {
+        "x": -0.048,
+        "y": 0,
+        "z": -0.182
+      },
+      "max": {
+        "x": 0.048,
+        "y": 0.315,
+        "z": 0.048
+      },
+      "originAtGround": true,
+      "triangles": 80,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0
+      },
+      "recommendedScale": 2.25
+    },
+    {
+      "path": "models/characters/aid-crutch.glb",
+      "kit": "characters",
+      "name": "aid-crutch",
+      "size": {
+        "x": 0.196,
+        "y": 0.31,
+        "z": 0.187
+      },
+      "min": {
+        "x": -0.098,
+        "y": 0,
+        "z": -0.048
+      },
+      "max": {
+        "x": 0.098,
+        "y": 0.31,
+        "z": 0.139
+      },
+      "originAtGround": true,
+      "triangles": 144,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0
+      },
+      "recommendedScale": 2.25
+    },
+    {
+      "path": "models/characters/aid-defibrillator-green.glb",
+      "kit": "characters",
+      "name": "aid-defibrillator-green",
+      "size": {
+        "x": 0.225,
+        "y": 0.29,
+        "z": 0.14
+      },
+      "min": {
+        "x": -0.113,
+        "y": 0,
+        "z": -0.07
+      },
+      "max": {
+        "x": 0.113,
+        "y": 0.29,
+        "z": 0.07
+      },
+      "originAtGround": true,
+      "triangles": 86,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0
+      },
+      "recommendedScale": 2.25
+    },
+    {
+      "path": "models/characters/aid-defibrillator-red.glb",
+      "kit": "characters",
+      "name": "aid-defibrillator-red",
+      "size": {
+        "x": 0.225,
+        "y": 0.29,
+        "z": 0.14
+      },
+      "min": {
+        "x": -0.113,
+        "y": 0,
+        "z": -0.07
+      },
+      "max": {
+        "x": 0.113,
+        "y": 0.29,
+        "z": 0.07
+      },
+      "originAtGround": true,
+      "triangles": 86,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0
+      },
+      "recommendedScale": 2.25
+    },
+    {
+      "path": "models/characters/aid-glasses.glb",
+      "kit": "characters",
+      "name": "aid-glasses",
+      "size": {
+        "x": 0.33,
+        "y": 0.096,
+        "z": 0.184
+      },
+      "min": {
+        "x": -0.165,
+        "y": 0,
+        "z": -0.092
+      },
+      "max": {
+        "x": 0.165,
+        "y": 0.096,
+        "z": 0.092
+      },
+      "originAtGround": true,
+      "triangles": 52,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0
+      },
+      "recommendedScale": 2.25
+    },
+    {
+      "path": "models/characters/aid-mask.glb",
+      "kit": "characters",
+      "name": "aid-mask",
+      "size": {
+        "x": 0.336,
+        "y": 0.203,
+        "z": 0.21
+      },
+      "min": {
+        "x": -0.166,
+        "y": -0.05,
+        "z": 0.023
+      },
+      "max": {
+        "x": 0.169,
+        "y": 0.153,
+        "z": 0.233
+      },
+      "originAtGround": false,
+      "triangles": 176,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0
+      },
+      "recommendedScale": 2.25
+    },
+    {
+      "path": "models/characters/aid-sunglasses.glb",
+      "kit": "characters",
+      "name": "aid-sunglasses",
+      "size": {
+        "x": 0.33,
+        "y": 0.096,
+        "z": 0.184
+      },
+      "min": {
+        "x": -0.165,
+        "y": 0,
+        "z": -0.092
+      },
+      "max": {
+        "x": 0.165,
+        "y": 0.096,
+        "z": 0.092
+      },
+      "originAtGround": true,
+      "triangles": 62,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0
+      },
+      "recommendedScale": 2.25
+    },
+    {
+      "path": "models/characters/aid_hearing.glb",
+      "kit": "characters",
+      "name": "aid_hearing",
+      "size": {
+        "x": 0.05,
+        "y": 0.124,
+        "z": 0.157
+      },
+      "min": {
+        "x": -0.025,
+        "y": 0,
+        "z": -0.078
+      },
+      "max": {
+        "x": 0.025,
+        "y": 0.124,
+        "z": 0.078
+      },
+      "originAtGround": true,
+      "triangles": 48,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0
+      },
+      "recommendedScale": 2.25
+    },
+    {
+      "path": "models/characters/character-female-a.glb",
+      "kit": "characters",
+      "name": "character-female-a",
+      "size": {
+        "x": 1.099,
+        "y": 0.776,
+        "z": 0.5
+      },
+      "min": {
+        "x": -0.549,
+        "y": 0,
+        "z": -0.292
+      },
+      "max": {
+        "x": 0.549,
+        "y": 0.776,
+        "z": 0.208
+      },
+      "originAtGround": true,
+      "triangles": 876,
+      "hasSkin": true,
+      "animations": [
+        "static",
+        "idle",
+        "walk",
+        "sprint",
+        "jump",
+        "fall",
+        "crouch",
+        "sit",
+        "drive",
+        "die",
+        "pick-up",
+        "emote-yes",
+        "emote-no",
+        "holding-right",
+        "holding-left",
+        "holding-both",
+        "holding-right-shoot",
+        "holding-left-shoot",
+        "holding-both-shoot",
+        "attack-melee-right",
+        "attack-melee-left",
+        "attack-kick-right",
+        "attack-kick-left",
+        "interact-right",
+        "interact-left",
+        "wheelchair-sit",
+        "wheelchair-look-left",
+        "wheelchair-look-right",
+        "wheelchair-move-forward",
+        "wheelchair-move-back",
+        "wheelchair-move-left",
+        "wheelchair-move-right"
+      ],
+      "footprintUnits": {
+        "x": 1,
+        "z": 0.5
+      },
+      "recommendedScale": 2.25
+    },
+    {
+      "path": "models/characters/character-female-b.glb",
+      "kit": "characters",
+      "name": "character-female-b",
+      "size": {
+        "x": 0.767,
+        "y": 0.723,
+        "z": 0.419
+      },
+      "min": {
+        "x": -0.384,
+        "y": 0,
+        "z": -0.211
+      },
+      "max": {
+        "x": 0.384,
+        "y": 0.723,
+        "z": 0.208
+      },
+      "originAtGround": true,
+      "triangles": 742,
+      "hasSkin": true,
+      "animations": [
+        "static",
+        "idle",
+        "walk",
+        "sprint",
+        "jump",
+        "fall",
+        "crouch",
+        "sit",
+        "drive",
+        "die",
+        "pick-up",
+        "emote-yes",
+        "emote-no",
+        "holding-right",
+        "holding-left",
+        "holding-both",
+        "holding-right-shoot",
+        "holding-left-shoot",
+        "holding-both-shoot",
+        "attack-melee-right",
+        "attack-melee-left",
+        "attack-kick-right",
+        "attack-kick-left",
+        "interact-right",
+        "interact-left",
+        "wheelchair-sit",
+        "wheelchair-look-left",
+        "wheelchair-look-right",
+        "wheelchair-move-forward",
+        "wheelchair-move-back",
+        "wheelchair-move-left",
+        "wheelchair-move-right"
+      ],
+      "footprintUnits": {
+        "x": 1,
+        "z": 0.5
+      },
+      "recommendedScale": 2.25
+    },
+    {
+      "path": "models/characters/character-female-c.glb",
+      "kit": "characters",
+      "name": "character-female-c",
+      "size": {
+        "x": 0.767,
+        "y": 0.776,
+        "z": 0.5
+      },
+      "min": {
+        "x": -0.384,
+        "y": 0,
+        "z": -0.292
+      },
+      "max": {
+        "x": 0.384,
+        "y": 0.776,
+        "z": 0.208
+      },
+      "originAtGround": true,
+      "triangles": 732,
+      "hasSkin": true,
+      "animations": [
+        "static",
+        "idle",
+        "walk",
+        "sprint",
+        "jump",
+        "fall",
+        "crouch",
+        "sit",
+        "drive",
+        "die",
+        "pick-up",
+        "emote-yes",
+        "emote-no",
+        "holding-right",
+        "holding-left",
+        "holding-both",
+        "holding-right-shoot",
+        "holding-left-shoot",
+        "holding-both-shoot",
+        "attack-melee-right",
+        "attack-melee-left",
+        "attack-kick-right",
+        "attack-kick-left",
+        "interact-right",
+        "interact-left",
+        "wheelchair-sit",
+        "wheelchair-look-left",
+        "wheelchair-look-right",
+        "wheelchair-move-forward",
+        "wheelchair-move-back",
+        "wheelchair-move-left",
+        "wheelchair-move-right"
+      ],
+      "footprintUnits": {
+        "x": 1,
+        "z": 0.5
+      },
+      "recommendedScale": 2.25
+    },
+    {
+      "path": "models/characters/character-female-d.glb",
+      "kit": "characters",
+      "name": "character-female-d",
+      "size": {
+        "x": 0.767,
+        "y": 0.776,
+        "z": 0.5
+      },
+      "min": {
+        "x": -0.384,
+        "y": 0,
+        "z": -0.292
+      },
+      "max": {
+        "x": 0.384,
+        "y": 0.776,
+        "z": 0.208
+      },
+      "originAtGround": true,
+      "triangles": 797,
+      "hasSkin": true,
+      "animations": [
+        "static",
+        "idle",
+        "walk",
+        "sprint",
+        "jump",
+        "fall",
+        "crouch",
+        "sit",
+        "drive",
+        "die",
+        "pick-up",
+        "emote-yes",
+        "emote-no",
+        "holding-right",
+        "holding-left",
+        "holding-both",
+        "holding-right-shoot",
+        "holding-left-shoot",
+        "holding-both-shoot",
+        "attack-melee-right",
+        "attack-melee-left",
+        "attack-kick-right",
+        "attack-kick-left",
+        "interact-right",
+        "interact-left",
+        "wheelchair-sit",
+        "wheelchair-look-left",
+        "wheelchair-look-right",
+        "wheelchair-move-forward",
+        "wheelchair-move-back",
+        "wheelchair-move-left",
+        "wheelchair-move-right"
+      ],
+      "footprintUnits": {
+        "x": 1,
+        "z": 0.5
+      },
+      "recommendedScale": 2.25
+    },
+    {
+      "path": "models/characters/character-female-e.glb",
+      "kit": "characters",
+      "name": "character-female-e",
+      "size": {
+        "x": 0.767,
+        "y": 0.716,
+        "z": 0.527
+      },
+      "min": {
+        "x": -0.384,
+        "y": 0,
+        "z": -0.319
+      },
+      "max": {
+        "x": 0.384,
+        "y": 0.716,
+        "z": 0.208
+      },
+      "originAtGround": true,
+      "triangles": 756,
+      "hasSkin": true,
+      "animations": [
+        "static",
+        "idle",
+        "walk",
+        "sprint",
+        "jump",
+        "fall",
+        "crouch",
+        "sit",
+        "drive",
+        "die",
+        "pick-up",
+        "emote-yes",
+        "emote-no",
+        "holding-right",
+        "holding-left",
+        "holding-both",
+        "holding-right-shoot",
+        "holding-left-shoot",
+        "holding-both-shoot",
+        "attack-melee-right",
+        "attack-melee-left",
+        "attack-kick-right",
+        "attack-kick-left",
+        "interact-right",
+        "interact-left",
+        "wheelchair-sit",
+        "wheelchair-look-left",
+        "wheelchair-look-right",
+        "wheelchair-move-forward",
+        "wheelchair-move-back",
+        "wheelchair-move-left",
+        "wheelchair-move-right"
+      ],
+      "footprintUnits": {
+        "x": 1,
+        "z": 0.5
+      },
+      "recommendedScale": 2.25
+    },
+    {
+      "path": "models/characters/character-female-f.glb",
+      "kit": "characters",
+      "name": "character-female-f",
+      "size": {
+        "x": 0.767,
+        "y": 0.671,
+        "z": 0.441
+      },
+      "min": {
+        "x": -0.384,
+        "y": 0,
+        "z": -0.233
+      },
+      "max": {
+        "x": 0.384,
+        "y": 0.671,
+        "z": 0.208
+      },
+      "originAtGround": true,
+      "triangles": 788,
+      "hasSkin": true,
+      "animations": [
+        "static",
+        "idle",
+        "walk",
+        "sprint",
+        "jump",
+        "fall",
+        "crouch",
+        "sit",
+        "drive",
+        "die",
+        "pick-up",
+        "emote-yes",
+        "emote-no",
+        "holding-right",
+        "holding-left",
+        "holding-both",
+        "holding-right-shoot",
+        "holding-left-shoot",
+        "holding-both-shoot",
+        "attack-melee-right",
+        "attack-melee-left",
+        "attack-kick-right",
+        "attack-kick-left",
+        "interact-right",
+        "interact-left",
+        "wheelchair-sit",
+        "wheelchair-look-left",
+        "wheelchair-look-right",
+        "wheelchair-move-forward",
+        "wheelchair-move-back",
+        "wheelchair-move-left",
+        "wheelchair-move-right"
+      ],
+      "footprintUnits": {
+        "x": 1,
+        "z": 0.5
+      },
+      "recommendedScale": 2.25
+    },
+    {
+      "path": "models/characters/character-male-a.glb",
+      "kit": "characters",
+      "name": "character-male-a",
+      "size": {
+        "x": 0.767,
+        "y": 0.671,
+        "z": 0.34
+      },
+      "min": {
+        "x": -0.384,
+        "y": 0,
+        "z": -0.172
+      },
+      "max": {
+        "x": 0.384,
+        "y": 0.671,
+        "z": 0.168
+      },
+      "originAtGround": true,
+      "triangles": 723,
+      "hasSkin": true,
+      "animations": [
+        "static",
+        "idle",
+        "walk",
+        "sprint",
+        "jump",
+        "fall",
+        "crouch",
+        "sit",
+        "drive",
+        "die",
+        "pick-up",
+        "emote-yes",
+        "emote-no",
+        "holding-right",
+        "holding-left",
+        "holding-both",
+        "holding-right-shoot",
+        "holding-left-shoot",
+        "holding-both-shoot",
+        "attack-melee-right",
+        "attack-melee-left",
+        "attack-kick-right",
+        "attack-kick-left",
+        "interact-right",
+        "interact-left",
+        "wheelchair-sit",
+        "wheelchair-look-left",
+        "wheelchair-look-right",
+        "wheelchair-move-forward",
+        "wheelchair-move-back",
+        "wheelchair-move-left",
+        "wheelchair-move-right"
+      ],
+      "footprintUnits": {
+        "x": 1,
+        "z": 0.5
+      },
+      "recommendedScale": 2.25
+    },
+    {
+      "path": "models/characters/character-male-b.glb",
+      "kit": "characters",
+      "name": "character-male-b",
+      "size": {
+        "x": 0.767,
+        "y": 0.661,
+        "z": 0.389
+      },
+      "min": {
+        "x": -0.384,
+        "y": 0,
+        "z": -0.163
+      },
+      "max": {
+        "x": 0.384,
+        "y": 0.661,
+        "z": 0.227
+      },
+      "originAtGround": true,
+      "triangles": 690,
+      "hasSkin": true,
+      "animations": [
+        "static",
+        "idle",
+        "walk",
+        "sprint",
+        "jump",
+        "fall",
+        "crouch",
+        "sit",
+        "drive",
+        "die",
+        "pick-up",
+        "emote-yes",
+        "emote-no",
+        "holding-right",
+        "holding-left",
+        "holding-both",
+        "holding-right-shoot",
+        "holding-left-shoot",
+        "holding-both-shoot",
+        "attack-melee-right",
+        "attack-melee-left",
+        "attack-kick-right",
+        "attack-kick-left",
+        "interact-right",
+        "interact-left",
+        "wheelchair-sit",
+        "wheelchair-look-left",
+        "wheelchair-look-right",
+        "wheelchair-move-forward",
+        "wheelchair-move-back",
+        "wheelchair-move-left",
+        "wheelchair-move-right"
+      ],
+      "footprintUnits": {
+        "x": 1,
+        "z": 0.5
+      },
+      "recommendedScale": 2.25
+    },
+    {
+      "path": "models/characters/character-male-c.glb",
+      "kit": "characters",
+      "name": "character-male-c",
+      "size": {
+        "x": 0.767,
+        "y": 0.793,
+        "z": 0.461
+      },
+      "min": {
+        "x": -0.384,
+        "y": 0,
+        "z": -0.188
+      },
+      "max": {
+        "x": 0.384,
+        "y": 0.793,
+        "z": 0.273
+      },
+      "originAtGround": true,
+      "triangles": 793,
+      "hasSkin": true,
+      "animations": [
+        "static",
+        "idle",
+        "walk",
+        "sprint",
+        "jump",
+        "fall",
+        "crouch",
+        "sit",
+        "drive",
+        "die",
+        "pick-up",
+        "emote-yes",
+        "emote-no",
+        "holding-right",
+        "holding-left",
+        "holding-both",
+        "holding-right-shoot",
+        "holding-left-shoot",
+        "holding-both-shoot",
+        "attack-melee-right",
+        "attack-melee-left",
+        "attack-kick-right",
+        "attack-kick-left",
+        "interact-right",
+        "interact-left",
+        "wheelchair-sit",
+        "wheelchair-look-left",
+        "wheelchair-look-right",
+        "wheelchair-move-forward",
+        "wheelchair-move-back",
+        "wheelchair-move-left",
+        "wheelchair-move-right"
+      ],
+      "footprintUnits": {
+        "x": 1,
+        "z": 0.5
+      },
+      "recommendedScale": 2.25
+    },
+    {
+      "path": "models/characters/character-male-d.glb",
+      "kit": "characters",
+      "name": "character-male-d",
+      "size": {
+        "x": 0.767,
+        "y": 0.722,
+        "z": 0.34
+      },
+      "min": {
+        "x": -0.384,
+        "y": 0,
+        "z": -0.172
+      },
+      "max": {
+        "x": 0.384,
+        "y": 0.722,
+        "z": 0.168
+      },
+      "originAtGround": true,
+      "triangles": 711,
+      "hasSkin": true,
+      "animations": [
+        "static",
+        "idle",
+        "walk",
+        "sprint",
+        "jump",
+        "fall",
+        "crouch",
+        "sit",
+        "drive",
+        "die",
+        "pick-up",
+        "emote-yes",
+        "emote-no",
+        "holding-right",
+        "holding-left",
+        "holding-both",
+        "holding-right-shoot",
+        "holding-left-shoot",
+        "holding-both-shoot",
+        "attack-melee-right",
+        "attack-melee-left",
+        "attack-kick-right",
+        "attack-kick-left",
+        "interact-right",
+        "interact-left",
+        "wheelchair-sit",
+        "wheelchair-look-left",
+        "wheelchair-look-right",
+        "wheelchair-move-forward",
+        "wheelchair-move-back",
+        "wheelchair-move-left",
+        "wheelchair-move-right"
+      ],
+      "footprintUnits": {
+        "x": 1,
+        "z": 0.5
+      },
+      "recommendedScale": 2.25
+    },
+    {
+      "path": "models/characters/character-male-e.glb",
+      "kit": "characters",
+      "name": "character-male-e",
+      "size": {
+        "x": 0.767,
+        "y": 0.676,
+        "z": 0.342
+      },
+      "min": {
+        "x": -0.384,
+        "y": 0,
+        "z": -0.172
+      },
+      "max": {
+        "x": 0.384,
+        "y": 0.676,
+        "z": 0.17
+      },
+      "originAtGround": true,
+      "triangles": 710,
+      "hasSkin": true,
+      "animations": [
+        "static",
+        "idle",
+        "walk",
+        "sprint",
+        "jump",
+        "fall",
+        "crouch",
+        "sit",
+        "drive",
+        "die",
+        "pick-up",
+        "emote-yes",
+        "emote-no",
+        "holding-right",
+        "holding-left",
+        "holding-both",
+        "holding-right-shoot",
+        "holding-left-shoot",
+        "holding-both-shoot",
+        "attack-melee-right",
+        "attack-melee-left",
+        "attack-kick-right",
+        "attack-kick-left",
+        "interact-right",
+        "interact-left",
+        "wheelchair-sit",
+        "wheelchair-look-left",
+        "wheelchair-look-right",
+        "wheelchair-move-forward",
+        "wheelchair-move-back",
+        "wheelchair-move-left",
+        "wheelchair-move-right"
+      ],
+      "footprintUnits": {
+        "x": 1,
+        "z": 0.5
+      },
+      "recommendedScale": 2.25
+    },
+    {
+      "path": "models/characters/character-male-f.glb",
+      "kit": "characters",
+      "name": "character-male-f",
+      "size": {
+        "x": 0.767,
+        "y": 0.671,
+        "z": 0.34
+      },
+      "min": {
+        "x": -0.384,
+        "y": 0,
+        "z": -0.172
+      },
+      "max": {
+        "x": 0.384,
+        "y": 0.671,
+        "z": 0.168
+      },
+      "originAtGround": true,
+      "triangles": 701,
+      "hasSkin": true,
+      "animations": [
+        "static",
+        "idle",
+        "walk",
+        "sprint",
+        "jump",
+        "fall",
+        "crouch",
+        "sit",
+        "drive",
+        "die",
+        "pick-up",
+        "emote-yes",
+        "emote-no",
+        "holding-right",
+        "holding-left",
+        "holding-both",
+        "holding-right-shoot",
+        "holding-left-shoot",
+        "holding-both-shoot",
+        "attack-melee-right",
+        "attack-melee-left",
+        "attack-kick-right",
+        "attack-kick-left",
+        "interact-right",
+        "interact-left",
+        "wheelchair-sit",
+        "wheelchair-look-left",
+        "wheelchair-look-right",
+        "wheelchair-move-forward",
+        "wheelchair-move-back",
+        "wheelchair-move-left",
+        "wheelchair-move-right"
+      ],
+      "footprintUnits": {
+        "x": 1,
+        "z": 0.5
+      },
+      "recommendedScale": 2.25
+    },
+    {
+      "path": "models/characters/wheelchair-deluxe.glb",
+      "kit": "characters",
+      "name": "wheelchair-deluxe",
+      "size": {
+        "x": 0.579,
+        "y": 0.495,
+        "z": 0.592
+      },
+      "min": {
+        "x": -0.289,
+        "y": 0,
+        "z": -0.375
+      },
+      "max": {
+        "x": 0.29,
+        "y": 0.495,
+        "z": 0.218
+      },
+      "originAtGround": true,
+      "triangles": 696,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 2.25
+    },
+    {
+      "path": "models/characters/wheelchair-power-deluxe.glb",
+      "kit": "characters",
+      "name": "wheelchair-power-deluxe",
+      "size": {
+        "x": 0.48,
+        "y": 0.625,
+        "z": 0.511
+      },
+      "min": {
+        "x": -0.24,
+        "y": 0,
+        "z": -0.252
+      },
+      "max": {
+        "x": 0.24,
+        "y": 0.625,
+        "z": 0.259
+      },
+      "originAtGround": true,
+      "triangles": 1040,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 2.25
+    },
+    {
+      "path": "models/characters/wheelchair-power.glb",
+      "kit": "characters",
+      "name": "wheelchair-power",
+      "size": {
+        "x": 0.48,
+        "y": 0.572,
+        "z": 0.511
+      },
+      "min": {
+        "x": -0.24,
+        "y": 0,
+        "z": -0.252
+      },
+      "max": {
+        "x": 0.24,
+        "y": 0.572,
+        "z": 0.259
+      },
+      "originAtGround": true,
+      "triangles": 880,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 2.25
+    },
+    {
+      "path": "models/characters/wheelchair.glb",
+      "kit": "characters",
+      "name": "wheelchair",
+      "size": {
+        "x": 0.5,
+        "y": 0.495,
+        "z": 0.582
+      },
+      "min": {
+        "x": -0.25,
+        "y": 0,
+        "z": -0.365
+      },
+      "max": {
+        "x": 0.25,
+        "y": 0.495,
+        "z": 0.218
+      },
+      "originAtGround": true,
+      "triangles": 656,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 2.25
+    },
+    {
+      "path": "models/city/building-a.glb",
+      "kit": "city",
+      "name": "building-a",
+      "size": {
+        "x": 0.884,
+        "y": 1.293,
+        "z": 0.94
+      },
+      "min": {
+        "x": -0.442,
+        "y": 0,
+        "z": -0.47
+      },
+      "max": {
+        "x": 0.442,
+        "y": 1.293,
+        "z": 0.47
+      },
+      "originAtGround": true,
+      "triangles": 1252,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-b.glb",
+      "kit": "city",
+      "name": "building-b",
+      "size": {
+        "x": 0.97,
+        "y": 1.293,
+        "z": 0.94
+      },
+      "min": {
+        "x": -0.485,
+        "y": 0,
+        "z": -0.47
+      },
+      "max": {
+        "x": 0.485,
+        "y": 1.293,
+        "z": 0.47
+      },
+      "originAtGround": true,
+      "triangles": 1276,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-c.glb",
+      "kit": "city",
+      "name": "building-c",
+      "size": {
+        "x": 0.884,
+        "y": 0.893,
+        "z": 1.09
+      },
+      "min": {
+        "x": -0.442,
+        "y": 0,
+        "z": -0.545
+      },
+      "max": {
+        "x": 0.442,
+        "y": 0.893,
+        "z": 0.545
+      },
+      "originAtGround": true,
+      "triangles": 1195,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-d.glb",
+      "kit": "city",
+      "name": "building-d",
+      "size": {
+        "x": 0.84,
+        "y": 1.293,
+        "z": 0.9
+      },
+      "min": {
+        "x": -0.42,
+        "y": 0,
+        "z": -0.45
+      },
+      "max": {
+        "x": 0.42,
+        "y": 1.293,
+        "z": 0.45
+      },
+      "originAtGround": true,
+      "triangles": 1100,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-e.glb",
+      "kit": "city",
+      "name": "building-e",
+      "size": {
+        "x": 1.64,
+        "y": 0.893,
+        "z": 1.008
+      },
+      "min": {
+        "x": -0.82,
+        "y": 0,
+        "z": -0.504
+      },
+      "max": {
+        "x": 0.82,
+        "y": 0.893,
+        "z": 0.504
+      },
+      "originAtGround": true,
+      "triangles": 1509,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-f.glb",
+      "kit": "city",
+      "name": "building-f",
+      "size": {
+        "x": 0.84,
+        "y": 1.693,
+        "z": 1.03
+      },
+      "min": {
+        "x": -0.42,
+        "y": 0,
+        "z": -0.515
+      },
+      "max": {
+        "x": 0.42,
+        "y": 1.693,
+        "z": 0.515
+      },
+      "originAtGround": true,
+      "triangles": 1794,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-g.glb",
+      "kit": "city",
+      "name": "building-g",
+      "size": {
+        "x": 0.97,
+        "y": 1.693,
+        "z": 0.922
+      },
+      "min": {
+        "x": -0.485,
+        "y": 0,
+        "z": -0.461
+      },
+      "max": {
+        "x": 0.485,
+        "y": 1.693,
+        "z": 0.461
+      },
+      "originAtGround": true,
+      "triangles": 2006,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-h.glb",
+      "kit": "city",
+      "name": "building-h",
+      "size": {
+        "x": 0.884,
+        "y": 1.293,
+        "z": 1.008
+      },
+      "min": {
+        "x": -0.442,
+        "y": 0,
+        "z": -0.504
+      },
+      "max": {
+        "x": 0.442,
+        "y": 1.293,
+        "z": 0.504
+      },
+      "originAtGround": true,
+      "triangles": 1512,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-i.glb",
+      "kit": "city",
+      "name": "building-i",
+      "size": {
+        "x": 1.24,
+        "y": 1.68,
+        "z": 1.302
+      },
+      "min": {
+        "x": -0.62,
+        "y": 0,
+        "z": -0.651
+      },
+      "max": {
+        "x": 0.62,
+        "y": 1.68,
+        "z": 0.651
+      },
+      "originAtGround": true,
+      "triangles": 2544,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-j.glb",
+      "kit": "city",
+      "name": "building-j",
+      "size": {
+        "x": 2.084,
+        "y": 1.693,
+        "z": 1.34
+      },
+      "min": {
+        "x": -1.042,
+        "y": 0,
+        "z": -0.67
+      },
+      "max": {
+        "x": 1.042,
+        "y": 1.693,
+        "z": 0.67
+      },
+      "originAtGround": true,
+      "triangles": 5246,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 2,
+        "z": 1.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-k.glb",
+      "kit": "city",
+      "name": "building-k",
+      "size": {
+        "x": 2.084,
+        "y": 1.47,
+        "z": 0.942
+      },
+      "min": {
+        "x": -1.042,
+        "y": 0,
+        "z": -0.471
+      },
+      "max": {
+        "x": 1.042,
+        "y": 1.47,
+        "z": 0.471
+      },
+      "originAtGround": true,
+      "triangles": 2960,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 2,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-l.glb",
+      "kit": "city",
+      "name": "building-l",
+      "size": {
+        "x": 1.37,
+        "y": 2.27,
+        "z": 1.402
+      },
+      "min": {
+        "x": -0.685,
+        "y": 0,
+        "z": -0.701
+      },
+      "max": {
+        "x": 0.685,
+        "y": 2.27,
+        "z": 0.701
+      },
+      "originAtGround": true,
+      "triangles": 3512,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 1.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-m.glb",
+      "kit": "city",
+      "name": "building-m",
+      "size": {
+        "x": 1.24,
+        "y": 3.15,
+        "z": 1.242
+      },
+      "min": {
+        "x": -0.62,
+        "y": 0,
+        "z": -0.621
+      },
+      "max": {
+        "x": 0.62,
+        "y": 3.15,
+        "z": 0.621
+      },
+      "originAtGround": true,
+      "triangles": 3740,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-n.glb",
+      "kit": "city",
+      "name": "building-n",
+      "size": {
+        "x": 2.32,
+        "y": 2.48,
+        "z": 1.82
+      },
+      "min": {
+        "x": -1.16,
+        "y": 0,
+        "z": -0.91
+      },
+      "max": {
+        "x": 1.16,
+        "y": 2.48,
+        "z": 0.91
+      },
+      "originAtGround": true,
+      "triangles": 4350,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 2.5,
+        "z": 2
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-skyscraper-a.glb",
+      "kit": "city",
+      "name": "building-skyscraper-a",
+      "size": {
+        "x": 1.36,
+        "y": 2.88,
+        "z": 1.36
+      },
+      "min": {
+        "x": -0.68,
+        "y": 0,
+        "z": -0.68
+      },
+      "max": {
+        "x": 0.68,
+        "y": 2.88,
+        "z": 0.68
+      },
+      "originAtGround": true,
+      "triangles": 1292,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 1.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-skyscraper-b.glb",
+      "kit": "city",
+      "name": "building-skyscraper-b",
+      "size": {
+        "x": 1.36,
+        "y": 4.48,
+        "z": 1.36
+      },
+      "min": {
+        "x": -0.68,
+        "y": 0,
+        "z": -0.68
+      },
+      "max": {
+        "x": 0.68,
+        "y": 4.48,
+        "z": 0.68
+      },
+      "originAtGround": true,
+      "triangles": 1592,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 1.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-skyscraper-c.glb",
+      "kit": "city",
+      "name": "building-skyscraper-c",
+      "size": {
+        "x": 1.28,
+        "y": 4.08,
+        "z": 1.388
+      },
+      "min": {
+        "x": -0.64,
+        "y": 0,
+        "z": -0.694
+      },
+      "max": {
+        "x": 0.64,
+        "y": 4.08,
+        "z": 0.694
+      },
+      "originAtGround": true,
+      "triangles": 1704,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 1.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-type-a.glb",
+      "kit": "city",
+      "name": "building-type-a",
+      "size": {
+        "x": 1.3,
+        "y": 0.834,
+        "z": 1.028
+      },
+      "min": {
+        "x": -0.65,
+        "y": 0,
+        "z": -0.514
+      },
+      "max": {
+        "x": 0.65,
+        "y": 0.834,
+        "z": 0.514
+      },
+      "originAtGround": true,
+      "triangles": 1174,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-type-b.glb",
+      "kit": "city",
+      "name": "building-type-b",
+      "size": {
+        "x": 1.828,
+        "y": 1.138,
+        "z": 1.14
+      },
+      "min": {
+        "x": -0.914,
+        "y": 0,
+        "z": -0.57
+      },
+      "max": {
+        "x": 0.914,
+        "y": 1.138,
+        "z": 0.57
+      },
+      "originAtGround": true,
+      "triangles": 1748,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 2,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-type-c.glb",
+      "kit": "city",
+      "name": "building-type-c",
+      "size": {
+        "x": 1.286,
+        "y": 1.034,
+        "z": 1.028
+      },
+      "min": {
+        "x": -0.643,
+        "y": 0,
+        "z": -0.514
+      },
+      "max": {
+        "x": 0.643,
+        "y": 1.034,
+        "z": 0.514
+      },
+      "originAtGround": true,
+      "triangles": 1196,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-type-d.glb",
+      "kit": "city",
+      "name": "building-type-d",
+      "size": {
+        "x": 1.756,
+        "y": 1.238,
+        "z": 1.028
+      },
+      "min": {
+        "x": -0.878,
+        "y": 0,
+        "z": -0.514
+      },
+      "max": {
+        "x": 0.878,
+        "y": 1.238,
+        "z": 0.514
+      },
+      "originAtGround": true,
+      "triangles": 1757,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 2,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-type-e.glb",
+      "kit": "city",
+      "name": "building-type-e",
+      "size": {
+        "x": 1.3,
+        "y": 1.138,
+        "z": 1.028
+      },
+      "min": {
+        "x": -0.65,
+        "y": 0,
+        "z": -0.514
+      },
+      "max": {
+        "x": 0.65,
+        "y": 1.138,
+        "z": 0.514
+      },
+      "originAtGround": true,
+      "triangles": 1731,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-type-f.glb",
+      "kit": "city",
+      "name": "building-type-f",
+      "size": {
+        "x": 1.428,
+        "y": 1.138,
+        "z": 1.406
+      },
+      "min": {
+        "x": -0.714,
+        "y": 0,
+        "z": -0.703
+      },
+      "max": {
+        "x": 0.714,
+        "y": 1.138,
+        "z": 0.703
+      },
+      "originAtGround": true,
+      "triangles": 1616,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 1.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-type-g.glb",
+      "kit": "city",
+      "name": "building-type-g",
+      "size": {
+        "x": 1.45,
+        "y": 0.768,
+        "z": 1.178
+      },
+      "min": {
+        "x": -0.725,
+        "y": 0,
+        "z": -0.589
+      },
+      "max": {
+        "x": 0.725,
+        "y": 0.768,
+        "z": 0.589
+      },
+      "originAtGround": true,
+      "triangles": 1067,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-type-h.glb",
+      "kit": "city",
+      "name": "building-type-h",
+      "size": {
+        "x": 1.3,
+        "y": 0.737,
+        "z": 0.916
+      },
+      "min": {
+        "x": -0.65,
+        "y": 0,
+        "z": -0.458
+      },
+      "max": {
+        "x": 0.65,
+        "y": 0.737,
+        "z": 0.458
+      },
+      "originAtGround": true,
+      "triangles": 770,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-type-i.glb",
+      "kit": "city",
+      "name": "building-type-i",
+      "size": {
+        "x": 1.286,
+        "y": 0.737,
+        "z": 1.028
+      },
+      "min": {
+        "x": -0.643,
+        "y": 0,
+        "z": -0.514
+      },
+      "max": {
+        "x": 0.643,
+        "y": 0.737,
+        "z": 0.514
+      },
+      "originAtGround": true,
+      "triangles": 800,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-type-j.glb",
+      "kit": "city",
+      "name": "building-type-j",
+      "size": {
+        "x": 1.37,
+        "y": 1.038,
+        "z": 0.916
+      },
+      "min": {
+        "x": -0.685,
+        "y": 0,
+        "z": -0.458
+      },
+      "max": {
+        "x": 0.685,
+        "y": 1.038,
+        "z": 0.458
+      },
+      "originAtGround": true,
+      "triangles": 1210,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-type-k.glb",
+      "kit": "city",
+      "name": "building-type-k",
+      "size": {
+        "x": 0.921,
+        "y": 1.15,
+        "z": 1.02
+      },
+      "min": {
+        "x": -0.46,
+        "y": 0,
+        "z": -0.51
+      },
+      "max": {
+        "x": 0.46,
+        "y": 1.15,
+        "z": 0.51
+      },
+      "originAtGround": true,
+      "triangles": 1024,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-type-l.glb",
+      "kit": "city",
+      "name": "building-type-l",
+      "size": {
+        "x": 1.034,
+        "y": 1.049,
+        "z": 1.02
+      },
+      "min": {
+        "x": -0.517,
+        "y": 0,
+        "z": -0.51
+      },
+      "max": {
+        "x": 0.517,
+        "y": 1.049,
+        "z": 0.51
+      },
+      "originAtGround": true,
+      "triangles": 1310,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-type-m.glb",
+      "kit": "city",
+      "name": "building-type-m",
+      "size": {
+        "x": 1.428,
+        "y": 0.737,
+        "z": 1.428
+      },
+      "min": {
+        "x": -0.714,
+        "y": 0,
+        "z": -0.714
+      },
+      "max": {
+        "x": 0.714,
+        "y": 0.737,
+        "z": 0.714
+      },
+      "originAtGround": true,
+      "triangles": 1112,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 1.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-type-n.glb",
+      "kit": "city",
+      "name": "building-type-n",
+      "size": {
+        "x": 1.784,
+        "y": 1.138,
+        "z": 1.378
+      },
+      "min": {
+        "x": -0.892,
+        "y": 0,
+        "z": -0.689
+      },
+      "max": {
+        "x": 0.892,
+        "y": 1.138,
+        "z": 0.689
+      },
+      "originAtGround": true,
+      "triangles": 1612,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 2,
+        "z": 1.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-type-o.glb",
+      "kit": "city",
+      "name": "building-type-o",
+      "size": {
+        "x": 1.27,
+        "y": 1.138,
+        "z": 1.028
+      },
+      "min": {
+        "x": -0.635,
+        "y": 0,
+        "z": -0.514
+      },
+      "max": {
+        "x": 0.635,
+        "y": 1.138,
+        "z": 0.514
+      },
+      "originAtGround": true,
+      "triangles": 1326,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-type-p.glb",
+      "kit": "city",
+      "name": "building-type-p",
+      "size": {
+        "x": 1.24,
+        "y": 0.918,
+        "z": 0.99
+      },
+      "min": {
+        "x": -0.62,
+        "y": 0,
+        "z": -0.495
+      },
+      "max": {
+        "x": 0.62,
+        "y": 0.918,
+        "z": 0.495
+      },
+      "originAtGround": true,
+      "triangles": 1282,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-type-q.glb",
+      "kit": "city",
+      "name": "building-type-q",
+      "size": {
+        "x": 1.24,
+        "y": 0.918,
+        "z": 0.886
+      },
+      "min": {
+        "x": -0.62,
+        "y": 0,
+        "z": -0.422
+      },
+      "max": {
+        "x": 0.62,
+        "y": 0.918,
+        "z": 0.464
+      },
+      "originAtGround": true,
+      "triangles": 1140,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-type-r.glb",
+      "kit": "city",
+      "name": "building-type-r",
+      "size": {
+        "x": 1.028,
+        "y": 1.141,
+        "z": 1.02
+      },
+      "min": {
+        "x": -0.514,
+        "y": 0,
+        "z": -0.51
+      },
+      "max": {
+        "x": 0.514,
+        "y": 1.141,
+        "z": 0.51
+      },
+      "originAtGround": true,
+      "triangles": 1030,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-type-s.glb",
+      "kit": "city",
+      "name": "building-type-s",
+      "size": {
+        "x": 1.406,
+        "y": 1.138,
+        "z": 1.086
+      },
+      "min": {
+        "x": -0.703,
+        "y": 0,
+        "z": -0.543
+      },
+      "max": {
+        "x": 0.703,
+        "y": 1.138,
+        "z": 0.543
+      },
+      "originAtGround": true,
+      "triangles": 1212,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-type-t.glb",
+      "kit": "city",
+      "name": "building-type-t",
+      "size": {
+        "x": 1.314,
+        "y": 1.156,
+        "z": 1.406
+      },
+      "min": {
+        "x": -0.664,
+        "y": 0,
+        "z": -0.703
+      },
+      "max": {
+        "x": 0.65,
+        "y": 1.156,
+        "z": 0.703
+      },
+      "originAtGround": true,
+      "triangles": 2062,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 1.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/building-type-u.glb",
+      "kit": "city",
+      "name": "building-type-u",
+      "size": {
+        "x": 1.428,
+        "y": 1.138,
+        "z": 1.087
+      },
+      "min": {
+        "x": -0.714,
+        "y": 0,
+        "z": -0.543
+      },
+      "max": {
+        "x": 0.714,
+        "y": 1.138,
+        "z": 0.543
+      },
+      "originAtGround": true,
+      "triangles": 1332,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/detail-awning-wide.glb",
+      "kit": "city",
+      "name": "detail-awning-wide",
+      "size": {
+        "x": 0.8,
+        "y": 0.4,
+        "z": 0.148
+      },
+      "min": {
+        "x": -0.4,
+        "y": 0,
+        "z": 0.1
+      },
+      "max": {
+        "x": 0.4,
+        "y": 0.4,
+        "z": 0.248
+      },
+      "originAtGround": true,
+      "triangles": 40,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 0
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/detail-awning.glb",
+      "kit": "city",
+      "name": "detail-awning",
+      "size": {
+        "x": 0.4,
+        "y": 0.4,
+        "z": 0.148
+      },
+      "min": {
+        "x": -0.2,
+        "y": 0,
+        "z": 0.1
+      },
+      "max": {
+        "x": 0.2,
+        "y": 0.4,
+        "z": 0.248
+      },
+      "originAtGround": true,
+      "triangles": 40,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/detail-overhang.glb",
+      "kit": "city",
+      "name": "detail-overhang",
+      "size": {
+        "x": 0.5,
+        "y": 0.4,
+        "z": 0.2
+      },
+      "min": {
+        "x": -0.25,
+        "y": 0,
+        "z": 0.05
+      },
+      "max": {
+        "x": 0.25,
+        "y": 0.4,
+        "z": 0.25
+      },
+      "originAtGround": true,
+      "triangles": 64,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/detail-parasol-a.glb",
+      "kit": "city",
+      "name": "detail-parasol-a",
+      "size": {
+        "x": 0.346,
+        "y": 0.45,
+        "z": 0.4
+      },
+      "min": {
+        "x": -0.173,
+        "y": 0,
+        "z": -0.2
+      },
+      "max": {
+        "x": 0.173,
+        "y": 0.45,
+        "z": 0.2
+      },
+      "originAtGround": true,
+      "triangles": 96,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/driveway-long.glb",
+      "kit": "city",
+      "name": "driveway-long",
+      "size": {
+        "x": 0.36,
+        "y": 0.01,
+        "z": 0.4
+      },
+      "min": {
+        "x": -0.18,
+        "y": 0,
+        "z": -0.2
+      },
+      "max": {
+        "x": 0.18,
+        "y": 0.01,
+        "z": 0.2
+      },
+      "originAtGround": true,
+      "triangles": 12,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/driveway-short.glb",
+      "kit": "city",
+      "name": "driveway-short",
+      "size": {
+        "x": 0.36,
+        "y": 0.01,
+        "z": 0.2
+      },
+      "min": {
+        "x": -0.18,
+        "y": 0,
+        "z": -0.1
+      },
+      "max": {
+        "x": 0.18,
+        "y": 0.01,
+        "z": 0.1
+      },
+      "originAtGround": true,
+      "triangles": 12,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/fence-1x2.glb",
+      "kit": "city",
+      "name": "fence-1x2",
+      "size": {
+        "x": 0.875,
+        "y": 0.27,
+        "z": 0.438
+      },
+      "min": {
+        "x": -0.437,
+        "y": 0,
+        "z": -0.2
+      },
+      "max": {
+        "x": 0.438,
+        "y": 0.27,
+        "z": 0.238
+      },
+      "originAtGround": true,
+      "triangles": 156,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/fence-1x3.glb",
+      "kit": "city",
+      "name": "fence-1x3",
+      "size": {
+        "x": 1.275,
+        "y": 0.27,
+        "z": 0.438
+      },
+      "min": {
+        "x": -0.638,
+        "y": 0,
+        "z": -0.2
+      },
+      "max": {
+        "x": 0.638,
+        "y": 0.27,
+        "z": 0.238
+      },
+      "originAtGround": true,
+      "triangles": 204,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/fence-1x4.glb",
+      "kit": "city",
+      "name": "fence-1x4",
+      "size": {
+        "x": 1.675,
+        "y": 0.27,
+        "z": 0.438
+      },
+      "min": {
+        "x": -0.838,
+        "y": 0,
+        "z": -0.2
+      },
+      "max": {
+        "x": 0.838,
+        "y": 0.27,
+        "z": 0.238
+      },
+      "originAtGround": true,
+      "triangles": 252,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/fence-low.glb",
+      "kit": "city",
+      "name": "fence-low",
+      "size": {
+        "x": 1.275,
+        "y": 0.17,
+        "z": 0.837
+      },
+      "min": {
+        "x": -0.638,
+        "y": 0,
+        "z": -0.437
+      },
+      "max": {
+        "x": 0.638,
+        "y": 0.17,
+        "z": 0.4
+      },
+      "originAtGround": true,
+      "triangles": 180,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/fence.glb",
+      "kit": "city",
+      "name": "fence",
+      "size": {
+        "x": 0.475,
+        "y": 0.27,
+        "z": 0.075
+      },
+      "min": {
+        "x": -0.238,
+        "y": 0,
+        "z": -0.038
+      },
+      "max": {
+        "x": 0.238,
+        "y": 0.27,
+        "z": 0.038
+      },
+      "originAtGround": true,
+      "triangles": 88,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/path-long.glb",
+      "kit": "city",
+      "name": "path-long",
+      "size": {
+        "x": 0.2,
+        "y": 0.01,
+        "z": 0.4
+      },
+      "min": {
+        "x": -0.1,
+        "y": 0,
+        "z": -0.2
+      },
+      "max": {
+        "x": 0.1,
+        "y": 0.01,
+        "z": 0.2
+      },
+      "originAtGround": true,
+      "triangles": 12,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/path-short.glb",
+      "kit": "city",
+      "name": "path-short",
+      "size": {
+        "x": 0.2,
+        "y": 0.01,
+        "z": 0.2
+      },
+      "min": {
+        "x": -0.1,
+        "y": 0,
+        "z": -0.1
+      },
+      "max": {
+        "x": 0.1,
+        "y": 0.01,
+        "z": 0.1
+      },
+      "originAtGround": true,
+      "triangles": 12,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/path-stones-long.glb",
+      "kit": "city",
+      "name": "path-stones-long",
+      "size": {
+        "x": 0.14,
+        "y": 0.01,
+        "z": 0.4
+      },
+      "min": {
+        "x": -0.07,
+        "y": 0,
+        "z": -0.2
+      },
+      "max": {
+        "x": 0.07,
+        "y": 0.01,
+        "z": 0.2
+      },
+      "originAtGround": true,
+      "triangles": 48,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/path-stones-messy.glb",
+      "kit": "city",
+      "name": "path-stones-messy",
+      "size": {
+        "x": 0.156,
+        "y": 0.01,
+        "z": 0.361
+      },
+      "min": {
+        "x": -0.078,
+        "y": 0,
+        "z": -0.181
+      },
+      "max": {
+        "x": 0.078,
+        "y": 0.01,
+        "z": 0.181
+      },
+      "originAtGround": true,
+      "triangles": 36,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/path-stones-short.glb",
+      "kit": "city",
+      "name": "path-stones-short",
+      "size": {
+        "x": 0.14,
+        "y": 0.01,
+        "z": 0.2
+      },
+      "min": {
+        "x": -0.07,
+        "y": 0,
+        "z": -0.1
+      },
+      "max": {
+        "x": 0.07,
+        "y": 0.01,
+        "z": 0.1
+      },
+      "originAtGround": true,
+      "triangles": 24,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/planter.glb",
+      "kit": "city",
+      "name": "planter",
+      "size": {
+        "x": 0.4,
+        "y": 0.177,
+        "z": 0.3
+      },
+      "min": {
+        "x": -0.2,
+        "y": 0,
+        "z": -0.151
+      },
+      "max": {
+        "x": 0.2,
+        "y": 0.177,
+        "z": 0.149
+      },
+      "originAtGround": true,
+      "triangles": 204,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/tree-large.glb",
+      "kit": "city",
+      "name": "tree-large",
+      "size": {
+        "x": 0.21,
+        "y": 0.767,
+        "z": 0.243
+      },
+      "min": {
+        "x": -0.105,
+        "y": 0,
+        "z": -0.121
+      },
+      "max": {
+        "x": 0.105,
+        "y": 0.767,
+        "z": 0.121
+      },
+      "originAtGround": true,
+      "triangles": 42,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/city/tree-small.glb",
+      "kit": "city",
+      "name": "tree-small",
+      "size": {
+        "x": 0.21,
+        "y": 0.567,
+        "z": 0.243
+      },
+      "min": {
+        "x": -0.105,
+        "y": 0,
+        "z": -0.121
+      },
+      "max": {
+        "x": 0.105,
+        "y": 0.567,
+        "z": 0.121
+      },
+      "originAtGround": true,
+      "triangles": 42,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/furniture/bedDouble.glb",
+      "kit": "furniture",
+      "name": "bedDouble",
+      "size": {
+        "x": 0.956,
+        "y": 0.375,
+        "z": 1.125
+      },
+      "min": {
+        "x": 0,
+        "y": 0,
+        "z": -1.125
+      },
+      "max": {
+        "x": 0.956,
+        "y": 0.375,
+        "z": 0
+      },
+      "originAtGround": true,
+      "triangles": 264,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 2
+    },
+    {
+      "path": "models/furniture/bench.glb",
+      "kit": "furniture",
+      "name": "bench",
+      "size": {
+        "x": 0.4,
+        "y": 0.47,
+        "z": 0.2
+      },
+      "min": {
+        "x": 0,
+        "y": 0,
+        "z": -0.2
+      },
+      "max": {
+        "x": 0.4,
+        "y": 0.47,
+        "z": 0
+      },
+      "originAtGround": true,
+      "triangles": 170,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0
+      },
+      "recommendedScale": 2
+    },
+    {
+      "path": "models/furniture/chair.glb",
+      "kit": "furniture",
+      "name": "chair",
+      "size": {
+        "x": 0.2,
+        "y": 0.47,
+        "z": 0.2
+      },
+      "min": {
+        "x": 0,
+        "y": 0,
+        "z": -0.2
+      },
+      "max": {
+        "x": 0.2,
+        "y": 0.47,
+        "z": 0
+      },
+      "originAtGround": true,
+      "triangles": 170,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0
+      },
+      "recommendedScale": 2
+    },
+    {
+      "path": "models/furniture/kitchenFridge.glb",
+      "kit": "furniture",
+      "name": "kitchenFridge",
+      "size": {
+        "x": 0.43,
+        "y": 0.92,
+        "z": 0.292
+      },
+      "min": {
+        "x": 0,
+        "y": 0,
+        "z": -0.282
+      },
+      "max": {
+        "x": 0.43,
+        "y": 0.92,
+        "z": 0.01
+      },
+      "originAtGround": true,
+      "triangles": 250,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 2
+    },
+    {
+      "path": "models/furniture/lampRoundFloor.glb",
+      "kit": "furniture",
+      "name": "lampRoundFloor",
+      "size": {
+        "x": 0.152,
+        "y": 0.86,
+        "z": 0.176
+      },
+      "min": {
+        "x": -0.016,
+        "y": 0,
+        "z": -0.148
+      },
+      "max": {
+        "x": 0.136,
+        "y": 0.86,
+        "z": 0.028
+      },
+      "originAtGround": true,
+      "triangles": 76,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0
+      },
+      "recommendedScale": 2
+    },
+    {
+      "path": "models/furniture/loungeSofa.glb",
+      "kit": "furniture",
+      "name": "loungeSofa",
+      "size": {
+        "x": 0.98,
+        "y": 0.46,
+        "z": 0.41
+      },
+      "min": {
+        "x": 0,
+        "y": 0,
+        "z": -0.41
+      },
+      "max": {
+        "x": 0.98,
+        "y": 0.46,
+        "z": 0
+      },
+      "originAtGround": true,
+      "triangles": 128,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 0.5
+      },
+      "recommendedScale": 2
+    },
+    {
+      "path": "models/furniture/pottedPlant.glb",
+      "kit": "furniture",
+      "name": "pottedPlant",
+      "size": {
+        "x": 0.212,
+        "y": 0.654,
+        "z": 0.241
+      },
+      "min": {
+        "x": -0.106,
+        "y": 0,
+        "z": -0.121
+      },
+      "max": {
+        "x": 0.106,
+        "y": 0.654,
+        "z": 0.121
+      },
+      "originAtGround": true,
+      "triangles": 60,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0
+      },
+      "recommendedScale": 2
+    },
+    {
+      "path": "models/furniture/table.glb",
+      "kit": "furniture",
+      "name": "table",
+      "size": {
+        "x": 0.841,
+        "y": 0.327,
+        "z": 0.447
+      },
+      "min": {
+        "x": 0,
+        "y": 0,
+        "z": -0.447
+      },
+      "max": {
+        "x": 0.841,
+        "y": 0.327,
+        "z": 0
+      },
+      "originAtGround": true,
+      "triangles": 120,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 0.5
+      },
+      "recommendedScale": 2
+    },
+    {
+      "path": "models/furniture/televisionModern.glb",
+      "kit": "furniture",
+      "name": "televisionModern",
+      "size": {
+        "x": 0.685,
+        "y": 0.455,
+        "z": 0.128
+      },
+      "min": {
+        "x": -0.342,
+        "y": 0,
+        "z": -0.064
+      },
+      "max": {
+        "x": 0.342,
+        "y": 0.455,
+        "z": 0.064
+      },
+      "originAtGround": true,
+      "triangles": 72,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0
+      },
+      "recommendedScale": 2
+    },
+    {
+      "path": "models/furniture/trashcan.glb",
+      "kit": "furniture",
+      "name": "trashcan",
+      "size": {
+        "x": 0.208,
+        "y": 0.428,
+        "z": 0.234
+      },
+      "min": {
+        "x": -0.104,
+        "y": 0,
+        "z": -0.112
+      },
+      "max": {
+        "x": 0.104,
+        "y": 0.428,
+        "z": 0.122
+      },
+      "originAtGround": true,
+      "triangles": 68,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0
+      },
+      "recommendedScale": 2
+    },
+    {
+      "path": "models/graveyard/bench.glb",
+      "kit": "graveyard",
+      "name": "bench",
+      "size": {
+        "x": 0.807,
+        "y": 0.526,
+        "z": 0.455
+      },
+      "min": {
+        "x": -0.404,
+        "y": 0,
+        "z": -0.228
+      },
+      "max": {
+        "x": 0.404,
+        "y": 0.526,
+        "z": 0.228
+      },
+      "originAtGround": true,
+      "triangles": 160,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 0.5
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/graveyard/cross-column.glb",
+      "kit": "graveyard",
+      "name": "cross-column",
+      "size": {
+        "x": 0.45,
+        "y": 1.447,
+        "z": 0.45
+      },
+      "min": {
+        "x": -0.225,
+        "y": 0,
+        "z": -0.225
+      },
+      "max": {
+        "x": 0.225,
+        "y": 1.447,
+        "z": 0.225
+      },
+      "originAtGround": true,
+      "triangles": 200,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/graveyard/crypt-large-door.glb",
+      "kit": "graveyard",
+      "name": "crypt-large-door",
+      "size": {
+        "x": 0.63,
+        "y": 0.739,
+        "z": 0.135
+      },
+      "min": {
+        "x": -0.315,
+        "y": 0,
+        "z": -0.067
+      },
+      "max": {
+        "x": 0.315,
+        "y": 0.739,
+        "z": 0.067
+      },
+      "originAtGround": true,
+      "triangles": 200,
+      "hasSkin": false,
+      "animations": [
+        "open",
+        "close",
+        "open-and-close"
+      ],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/graveyard/crypt-large-roof.glb",
+      "kit": "graveyard",
+      "name": "crypt-large-roof",
+      "size": {
+        "x": 1.977,
+        "y": 0.759,
+        "z": 2.438
+      },
+      "min": {
+        "x": -0.988,
+        "y": 0,
+        "z": -1.219
+      },
+      "max": {
+        "x": 0.988,
+        "y": 0.759,
+        "z": 1.219
+      },
+      "originAtGround": true,
+      "triangles": 406,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 2,
+        "z": 2.5
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/graveyard/crypt-large.glb",
+      "kit": "graveyard",
+      "name": "crypt-large",
+      "size": {
+        "x": 1.85,
+        "y": 1,
+        "z": 2.4
+      },
+      "min": {
+        "x": -0.925,
+        "y": 0,
+        "z": -1.2
+      },
+      "max": {
+        "x": 0.925,
+        "y": 1,
+        "z": 1.2
+      },
+      "originAtGround": true,
+      "triangles": 626,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 2,
+        "z": 2.5
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/graveyard/crypt-small-roof.glb",
+      "kit": "graveyard",
+      "name": "crypt-small-roof",
+      "size": {
+        "x": 1.502,
+        "y": 0.74,
+        "z": 1.438
+      },
+      "min": {
+        "x": -0.751,
+        "y": 0,
+        "z": -0.719
+      },
+      "max": {
+        "x": 0.751,
+        "y": 0.74,
+        "z": 0.719
+      },
+      "originAtGround": true,
+      "triangles": 275,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 1.5
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/graveyard/crypt-small.glb",
+      "kit": "graveyard",
+      "name": "crypt-small",
+      "size": {
+        "x": 1.35,
+        "y": 1,
+        "z": 1.4
+      },
+      "min": {
+        "x": -0.675,
+        "y": 0,
+        "z": -0.7
+      },
+      "max": {
+        "x": 0.675,
+        "y": 1,
+        "z": 0.7
+      },
+      "originAtGround": true,
+      "triangles": 414,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 1.5
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/graveyard/gravestone-bevel.glb",
+      "kit": "graveyard",
+      "name": "gravestone-bevel",
+      "size": {
+        "x": 0.45,
+        "y": 0.529,
+        "z": 0.25
+      },
+      "min": {
+        "x": -0.225,
+        "y": 0,
+        "z": -0.125
+      },
+      "max": {
+        "x": 0.225,
+        "y": 0.529,
+        "z": 0.125
+      },
+      "originAtGround": true,
+      "triangles": 174,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/graveyard/gravestone-broken.glb",
+      "kit": "graveyard",
+      "name": "gravestone-broken",
+      "size": {
+        "x": 0.509,
+        "y": 0.341,
+        "z": 0.392
+      },
+      "min": {
+        "x": -0.225,
+        "y": 0,
+        "z": -0.125
+      },
+      "max": {
+        "x": 0.284,
+        "y": 0.341,
+        "z": 0.267
+      },
+      "originAtGround": true,
+      "triangles": 134,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/graveyard/gravestone-cross.glb",
+      "kit": "graveyard",
+      "name": "gravestone-cross",
+      "size": {
+        "x": 0.45,
+        "y": 0.915,
+        "z": 0.33
+      },
+      "min": {
+        "x": -0.225,
+        "y": 0,
+        "z": -0.165
+      },
+      "max": {
+        "x": 0.225,
+        "y": 0.915,
+        "z": 0.165
+      },
+      "originAtGround": true,
+      "triangles": 222,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/graveyard/gravestone-round.glb",
+      "kit": "graveyard",
+      "name": "gravestone-round",
+      "size": {
+        "x": 0.45,
+        "y": 0.575,
+        "z": 0.25
+      },
+      "min": {
+        "x": -0.225,
+        "y": 0,
+        "z": -0.125
+      },
+      "max": {
+        "x": 0.225,
+        "y": 0.575,
+        "z": 0.125
+      },
+      "originAtGround": true,
+      "triangles": 178,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/graveyard/gravestone-wide.glb",
+      "kit": "graveyard",
+      "name": "gravestone-wide",
+      "size": {
+        "x": 0.85,
+        "y": 0.57,
+        "z": 0.3
+      },
+      "min": {
+        "x": -0.425,
+        "y": 0,
+        "z": -0.15
+      },
+      "max": {
+        "x": 0.425,
+        "y": 0.57,
+        "z": 0.15
+      },
+      "originAtGround": true,
+      "triangles": 266,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 0.5
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/graveyard/iron-fence-border-gate.glb",
+      "kit": "graveyard",
+      "name": "iron-fence-border-gate",
+      "size": {
+        "x": 1,
+        "y": 0.76,
+        "z": 0.222
+      },
+      "min": {
+        "x": -0.5,
+        "y": 0,
+        "z": -0.436
+      },
+      "max": {
+        "x": 0.5,
+        "y": 0.76,
+        "z": -0.214
+      },
+      "originAtGround": true,
+      "triangles": 256,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 0
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/graveyard/iron-fence-curve.glb",
+      "kit": "graveyard",
+      "name": "iron-fence-curve",
+      "size": {
+        "x": 0.88,
+        "y": 0.879,
+        "z": 0.88
+      },
+      "min": {
+        "x": -0.38,
+        "y": 0,
+        "z": -0.38
+      },
+      "max": {
+        "x": 0.5,
+        "y": 0.879,
+        "z": 0.5
+      },
+      "originAtGround": true,
+      "triangles": 472,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/graveyard/iron-fence-damaged.glb",
+      "kit": "graveyard",
+      "name": "iron-fence-damaged",
+      "size": {
+        "x": 1,
+        "y": 0.88,
+        "z": 0.325
+      },
+      "min": {
+        "x": -0.5,
+        "y": -0.001,
+        "z": -0.38
+      },
+      "max": {
+        "x": 0.5,
+        "y": 0.879,
+        "z": -0.055
+      },
+      "originAtGround": true,
+      "triangles": 336,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 0.5
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/graveyard/iron-fence.glb",
+      "kit": "graveyard",
+      "name": "iron-fence",
+      "size": {
+        "x": 1,
+        "y": 0.879,
+        "z": 0.11
+      },
+      "min": {
+        "x": -0.5,
+        "y": 0,
+        "z": -0.38
+      },
+      "max": {
+        "x": 0.5,
+        "y": 0.879,
+        "z": -0.27
+      },
+      "originAtGround": true,
+      "triangles": 376,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 0
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/graveyard/lantern-candle.glb",
+      "kit": "graveyard",
+      "name": "lantern-candle",
+      "size": {
+        "x": 0.24,
+        "y": 0.388,
+        "z": 0.24
+      },
+      "min": {
+        "x": -0.12,
+        "y": 0,
+        "z": -0.12
+      },
+      "max": {
+        "x": 0.12,
+        "y": 0.388,
+        "z": 0.12
+      },
+      "originAtGround": true,
+      "triangles": 224,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/graveyard/lightpost-double.glb",
+      "kit": "graveyard",
+      "name": "lightpost-double",
+      "size": {
+        "x": 0.209,
+        "y": 1.267,
+        "z": 0.727
+      },
+      "min": {
+        "x": -0.104,
+        "y": 0,
+        "z": -0.363
+      },
+      "max": {
+        "x": 0.104,
+        "y": 1.267,
+        "z": 0.363
+      },
+      "originAtGround": true,
+      "triangles": 572,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0.5
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/graveyard/lightpost-single.glb",
+      "kit": "graveyard",
+      "name": "lightpost-single",
+      "size": {
+        "x": 0.209,
+        "y": 1.267,
+        "z": 0.465
+      },
+      "min": {
+        "x": -0.104,
+        "y": 0,
+        "z": -0.102
+      },
+      "max": {
+        "x": 0.104,
+        "y": 1.267,
+        "z": 0.363
+      },
+      "originAtGround": true,
+      "triangles": 352,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0.5
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/graveyard/pine-crooked.glb",
+      "kit": "graveyard",
+      "name": "pine-crooked",
+      "size": {
+        "x": 1.178,
+        "y": 2.108,
+        "z": 1.335
+      },
+      "min": {
+        "x": -0.571,
+        "y": -0.1,
+        "z": -0.667
+      },
+      "max": {
+        "x": 0.607,
+        "y": 2.008,
+        "z": 0.667
+      },
+      "originAtGround": false,
+      "triangles": 336,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1.5
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/graveyard/pine.glb",
+      "kit": "graveyard",
+      "name": "pine",
+      "size": {
+        "x": 1.178,
+        "y": 2.302,
+        "z": 1.335
+      },
+      "min": {
+        "x": -0.589,
+        "y": -0.1,
+        "z": -0.667
+      },
+      "max": {
+        "x": 0.589,
+        "y": 2.202,
+        "z": 0.667
+      },
+      "originAtGround": false,
+      "triangles": 336,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1.5
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/nature/campfire_logs.glb",
+      "kit": "nature",
+      "name": "campfire_logs",
+      "size": {
+        "x": 0.292,
+        "y": 0.063,
+        "z": 0.292
+      },
+      "min": {
+        "x": -0.146,
+        "y": -0.05,
+        "z": -0.146
+      },
+      "max": {
+        "x": 0.146,
+        "y": 0.013,
+        "z": 0.146
+      },
+      "originAtGround": false,
+      "triangles": 112,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/campfire_stones.glb",
+      "kit": "nature",
+      "name": "campfire_stones",
+      "size": {
+        "x": 0.541,
+        "y": 0.078,
+        "z": 0.516
+      },
+      "min": {
+        "x": -0.25,
+        "y": -0.05,
+        "z": -0.258
+      },
+      "max": {
+        "x": 0.291,
+        "y": 0.028,
+        "z": 0.258
+      },
+      "originAtGround": false,
+      "triangles": 264,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/crop_carrot.glb",
+      "kit": "nature",
+      "name": "crop_carrot",
+      "size": {
+        "x": 0.343,
+        "y": 0.619,
+        "z": 0.343
+      },
+      "min": {
+        "x": -0.172,
+        "y": -0.05,
+        "z": -0.172
+      },
+      "max": {
+        "x": 0.172,
+        "y": 0.569,
+        "z": 0.172
+      },
+      "originAtGround": false,
+      "triangles": 148,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/crop_pumpkin.glb",
+      "kit": "nature",
+      "name": "crop_pumpkin",
+      "size": {
+        "x": 0.441,
+        "y": 0.334,
+        "z": 0.452
+      },
+      "min": {
+        "x": -0.221,
+        "y": -0.05,
+        "z": -0.226
+      },
+      "max": {
+        "x": 0.221,
+        "y": 0.284,
+        "z": 0.226
+      },
+      "originAtGround": false,
+      "triangles": 120,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/crops_cornStageD.glb",
+      "kit": "nature",
+      "name": "crops_cornStageD",
+      "size": {
+        "x": 0.442,
+        "y": 1.25,
+        "z": 0.442
+      },
+      "min": {
+        "x": -0.221,
+        "y": -0.05,
+        "z": -0.221
+      },
+      "max": {
+        "x": 0.221,
+        "y": 1.2,
+        "z": 0.221
+      },
+      "originAtGround": false,
+      "triangles": 300,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/crops_dirtDoubleRow.glb",
+      "kit": "nature",
+      "name": "crops_dirtDoubleRow",
+      "size": {
+        "x": 1,
+        "y": 0.05,
+        "z": 0.938
+      },
+      "min": {
+        "x": -0.5,
+        "y": -0.05,
+        "z": -0.438
+      },
+      "max": {
+        "x": 0.5,
+        "y": 0,
+        "z": 0.5
+      },
+      "originAtGround": false,
+      "triangles": 88,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/crops_dirtRow.glb",
+      "kit": "nature",
+      "name": "crops_dirtRow",
+      "size": {
+        "x": 1,
+        "y": 0.05,
+        "z": 0.62
+      },
+      "min": {
+        "x": -0.5,
+        "y": -0.05,
+        "z": -0.279
+      },
+      "max": {
+        "x": 0.5,
+        "y": 0,
+        "z": 0.341
+      },
+      "originAtGround": false,
+      "triangles": 44,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/crops_wheatStageB.glb",
+      "kit": "nature",
+      "name": "crops_wheatStageB",
+      "size": {
+        "x": 0.54,
+        "y": 0.535,
+        "z": 0.447
+      },
+      "min": {
+        "x": -0.27,
+        "y": -0.05,
+        "z": -0.223
+      },
+      "max": {
+        "x": 0.27,
+        "y": 0.485,
+        "z": 0.223
+      },
+      "originAtGround": false,
+      "triangles": 360,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/fence_gate.glb",
+      "kit": "nature",
+      "name": "fence_gate",
+      "size": {
+        "x": 1,
+        "y": 0.345,
+        "z": 0.07
+      },
+      "min": {
+        "x": -0.5,
+        "y": -0.05,
+        "z": -0.5
+      },
+      "max": {
+        "x": 0.5,
+        "y": 0.295,
+        "z": -0.43
+      },
+      "originAtGround": false,
+      "triangles": 524,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 0
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/fence_planks.glb",
+      "kit": "nature",
+      "name": "fence_planks",
+      "size": {
+        "x": 1,
+        "y": 0.345,
+        "z": 0.096
+      },
+      "min": {
+        "x": -0.5,
+        "y": -0.05,
+        "z": -0.526
+      },
+      "max": {
+        "x": 0.5,
+        "y": 0.295,
+        "z": -0.43
+      },
+      "originAtGround": false,
+      "triangles": 96,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 0
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/fence_simple.glb",
+      "kit": "nature",
+      "name": "fence_simple",
+      "size": {
+        "x": 1,
+        "y": 0.345,
+        "z": 0.07
+      },
+      "min": {
+        "x": -0.5,
+        "y": -0.05,
+        "z": -0.5
+      },
+      "max": {
+        "x": 0.5,
+        "y": 0.295,
+        "z": -0.43
+      },
+      "originAtGround": false,
+      "triangles": 64,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 0
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/flower_purpleA.glb",
+      "kit": "nature",
+      "name": "flower_purpleA",
+      "size": {
+        "x": 0.159,
+        "y": 0.242,
+        "z": 0.181
+      },
+      "min": {
+        "x": -0.105,
+        "y": -0.05,
+        "z": -0.091
+      },
+      "max": {
+        "x": 0.055,
+        "y": 0.192,
+        "z": 0.091
+      },
+      "originAtGround": false,
+      "triangles": 76,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/flower_redA.glb",
+      "kit": "nature",
+      "name": "flower_redA",
+      "size": {
+        "x": 0.159,
+        "y": 0.292,
+        "z": 0.181
+      },
+      "min": {
+        "x": -0.105,
+        "y": -0.05,
+        "z": -0.091
+      },
+      "max": {
+        "x": 0.055,
+        "y": 0.242,
+        "z": 0.091
+      },
+      "originAtGround": false,
+      "triangles": 76,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/flower_yellowA.glb",
+      "kit": "nature",
+      "name": "flower_yellowA",
+      "size": {
+        "x": 0.159,
+        "y": 0.192,
+        "z": 0.181
+      },
+      "min": {
+        "x": -0.105,
+        "y": -0.05,
+        "z": -0.091
+      },
+      "max": {
+        "x": 0.055,
+        "y": 0.142,
+        "z": 0.091
+      },
+      "originAtGround": false,
+      "triangles": 76,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/grass.glb",
+      "kit": "nature",
+      "name": "grass",
+      "size": {
+        "x": 0.381,
+        "y": 0.254,
+        "z": 0.392
+      },
+      "min": {
+        "x": -0.199,
+        "y": -0.05,
+        "z": -0.239
+      },
+      "max": {
+        "x": 0.182,
+        "y": 0.204,
+        "z": 0.153
+      },
+      "originAtGround": false,
+      "triangles": 132,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/grass_large.glb",
+      "kit": "nature",
+      "name": "grass_large",
+      "size": {
+        "x": 0.409,
+        "y": 0.254,
+        "z": 0.408
+      },
+      "min": {
+        "x": -0.199,
+        "y": -0.05,
+        "z": -0.212
+      },
+      "max": {
+        "x": 0.21,
+        "y": 0.204,
+        "z": 0.196
+      },
+      "originAtGround": false,
+      "triangles": 224,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/grass_leafs.glb",
+      "kit": "nature",
+      "name": "grass_leafs",
+      "size": {
+        "x": 0.234,
+        "y": 0.142,
+        "z": 0.257
+      },
+      "min": {
+        "x": -0.123,
+        "y": -0.05,
+        "z": -0.133
+      },
+      "max": {
+        "x": 0.111,
+        "y": 0.092,
+        "z": 0.124
+      },
+      "originAtGround": false,
+      "triangles": 36,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/ground_grass.glb",
+      "kit": "nature",
+      "name": "ground_grass",
+      "size": {
+        "x": 1,
+        "y": 0,
+        "z": 1
+      },
+      "min": {
+        "x": -0.5,
+        "y": -0.05,
+        "z": -0.5
+      },
+      "max": {
+        "x": 0.5,
+        "y": -0.05,
+        "z": 0.5
+      },
+      "originAtGround": false,
+      "triangles": 2,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/ground_pathBend.glb",
+      "kit": "nature",
+      "name": "ground_pathBend",
+      "size": {
+        "x": 1,
+        "y": 0.05,
+        "z": 1
+      },
+      "min": {
+        "x": -0.5,
+        "y": -0.1,
+        "z": -0.5
+      },
+      "max": {
+        "x": 0.5,
+        "y": -0.05,
+        "z": 0.5
+      },
+      "originAtGround": false,
+      "triangles": 32,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/ground_pathCross.glb",
+      "kit": "nature",
+      "name": "ground_pathCross",
+      "size": {
+        "x": 1,
+        "y": 0.05,
+        "z": 1
+      },
+      "min": {
+        "x": -0.5,
+        "y": -0.1,
+        "z": -0.5
+      },
+      "max": {
+        "x": 0.5,
+        "y": -0.05,
+        "z": 0.5
+      },
+      "originAtGround": false,
+      "triangles": 74,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/ground_pathEnd.glb",
+      "kit": "nature",
+      "name": "ground_pathEnd",
+      "size": {
+        "x": 1,
+        "y": 0.05,
+        "z": 1
+      },
+      "min": {
+        "x": -0.5,
+        "y": -0.1,
+        "z": -0.5
+      },
+      "max": {
+        "x": 0.5,
+        "y": -0.05,
+        "z": 0.5
+      },
+      "originAtGround": false,
+      "triangles": 52,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/ground_pathStraight.glb",
+      "kit": "nature",
+      "name": "ground_pathStraight",
+      "size": {
+        "x": 1,
+        "y": 0.05,
+        "z": 1
+      },
+      "min": {
+        "x": -0.5,
+        "y": -0.1,
+        "z": -0.5
+      },
+      "max": {
+        "x": 0.5,
+        "y": -0.05,
+        "z": 0.5
+      },
+      "originAtGround": false,
+      "triangles": 62,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/ground_riverBend.glb",
+      "kit": "nature",
+      "name": "ground_riverBend",
+      "size": {
+        "x": 1,
+        "y": 0.05,
+        "z": 1
+      },
+      "min": {
+        "x": -0.5,
+        "y": -0.1,
+        "z": -0.5
+      },
+      "max": {
+        "x": 0.5,
+        "y": -0.05,
+        "z": 0.5
+      },
+      "originAtGround": false,
+      "triangles": 54,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/ground_riverStraight.glb",
+      "kit": "nature",
+      "name": "ground_riverStraight",
+      "size": {
+        "x": 1,
+        "y": 0.05,
+        "z": 1
+      },
+      "min": {
+        "x": -0.5,
+        "y": -0.1,
+        "z": -0.5
+      },
+      "max": {
+        "x": 0.5,
+        "y": -0.05,
+        "z": 0.5
+      },
+      "originAtGround": false,
+      "triangles": 62,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/lily_large.glb",
+      "kit": "nature",
+      "name": "lily_large",
+      "size": {
+        "x": 0.272,
+        "y": 0.098,
+        "z": 0.314
+      },
+      "min": {
+        "x": -0.136,
+        "y": -0.05,
+        "z": -0.157
+      },
+      "max": {
+        "x": 0.136,
+        "y": 0.048,
+        "z": 0.157
+      },
+      "originAtGround": false,
+      "triangles": 86,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/lily_small.glb",
+      "kit": "nature",
+      "name": "lily_small",
+      "size": {
+        "x": 0.189,
+        "y": 0.04,
+        "z": 0.218
+      },
+      "min": {
+        "x": -0.094,
+        "y": -0.05,
+        "z": -0.109
+      },
+      "max": {
+        "x": 0.094,
+        "y": -0.01,
+        "z": 0.109
+      },
+      "originAtGround": false,
+      "triangles": 52,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/log.glb",
+      "kit": "nature",
+      "name": "log",
+      "size": {
+        "x": 0.234,
+        "y": 0.173,
+        "z": 0.71
+      },
+      "min": {
+        "x": -0.109,
+        "y": -0.05,
+        "z": -0.355
+      },
+      "max": {
+        "x": 0.125,
+        "y": 0.123,
+        "z": 0.355
+      },
+      "originAtGround": false,
+      "triangles": 200,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/log_large.glb",
+      "kit": "nature",
+      "name": "log_large",
+      "size": {
+        "x": 1,
+        "y": 0.417,
+        "z": 0.549
+      },
+      "min": {
+        "x": -0.5,
+        "y": -0.05,
+        "z": -0.253
+      },
+      "max": {
+        "x": 0.5,
+        "y": 0.367,
+        "z": 0.297
+      },
+      "originAtGround": false,
+      "triangles": 96,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/log_stack.glb",
+      "kit": "nature",
+      "name": "log_stack",
+      "size": {
+        "x": 0.425,
+        "y": 0.346,
+        "z": 0.71
+      },
+      "min": {
+        "x": -0.225,
+        "y": -0.05,
+        "z": -0.355
+      },
+      "max": {
+        "x": 0.2,
+        "y": 0.296,
+        "z": 0.355
+      },
+      "originAtGround": false,
+      "triangles": 184,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/mushroom_red.glb",
+      "kit": "nature",
+      "name": "mushroom_red",
+      "size": {
+        "x": 0.174,
+        "y": 0.203,
+        "z": 0.201
+      },
+      "min": {
+        "x": -0.086,
+        "y": -0.05,
+        "z": -0.095
+      },
+      "max": {
+        "x": 0.088,
+        "y": 0.153,
+        "z": 0.105
+      },
+      "originAtGround": false,
+      "triangles": 48,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/path_stone.glb",
+      "kit": "nature",
+      "name": "path_stone",
+      "size": {
+        "x": 1,
+        "y": 0.05,
+        "z": 0.577
+      },
+      "min": {
+        "x": -0.5,
+        "y": -0.05,
+        "z": -0.299
+      },
+      "max": {
+        "x": 0.5,
+        "y": 0,
+        "z": 0.278
+      },
+      "originAtGround": false,
+      "triangles": 136,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/path_stoneCircle.glb",
+      "kit": "nature",
+      "name": "path_stoneCircle",
+      "size": {
+        "x": 0.932,
+        "y": 0.05,
+        "z": 0.877
+      },
+      "min": {
+        "x": -0.466,
+        "y": -0.05,
+        "z": -0.438
+      },
+      "max": {
+        "x": 0.466,
+        "y": 0,
+        "z": 0.438
+      },
+      "originAtGround": false,
+      "triangles": 164,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/plant_bush.glb",
+      "kit": "nature",
+      "name": "plant_bush",
+      "size": {
+        "x": 0.396,
+        "y": 0.244,
+        "z": 0.396
+      },
+      "min": {
+        "x": -0.198,
+        "y": -0.05,
+        "z": -0.198
+      },
+      "max": {
+        "x": 0.198,
+        "y": 0.194,
+        "z": 0.198
+      },
+      "originAtGround": false,
+      "triangles": 32,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/plant_bushDetailed.glb",
+      "kit": "nature",
+      "name": "plant_bushDetailed",
+      "size": {
+        "x": 0.603,
+        "y": 0.36,
+        "z": 0.603
+      },
+      "min": {
+        "x": -0.301,
+        "y": -0.05,
+        "z": -0.301
+      },
+      "max": {
+        "x": 0.301,
+        "y": 0.31,
+        "z": 0.301
+      },
+      "originAtGround": false,
+      "triangles": 104,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/plant_bushLarge.glb",
+      "kit": "nature",
+      "name": "plant_bushLarge",
+      "size": {
+        "x": 0.374,
+        "y": 0.243,
+        "z": 0.336
+      },
+      "min": {
+        "x": -0.187,
+        "y": -0.05,
+        "z": -0.168
+      },
+      "max": {
+        "x": 0.187,
+        "y": 0.193,
+        "z": 0.168
+      },
+      "originAtGround": false,
+      "triangles": 60,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/plant_bushSmall.glb",
+      "kit": "nature",
+      "name": "plant_bushSmall",
+      "size": {
+        "x": 0.383,
+        "y": 0.207,
+        "z": 0.336
+      },
+      "min": {
+        "x": -0.191,
+        "y": -0.05,
+        "z": -0.168
+      },
+      "max": {
+        "x": 0.191,
+        "y": 0.157,
+        "z": 0.168
+      },
+      "originAtGround": false,
+      "triangles": 16,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/plant_bushTriangle.glb",
+      "kit": "nature",
+      "name": "plant_bushTriangle",
+      "size": {
+        "x": 0.364,
+        "y": 0.296,
+        "z": 0.414
+      },
+      "min": {
+        "x": -0.239,
+        "y": -0.05,
+        "z": -0.207
+      },
+      "max": {
+        "x": 0.126,
+        "y": 0.246,
+        "z": 0.207
+      },
+      "originAtGround": false,
+      "triangles": 30,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/pot_large.glb",
+      "kit": "nature",
+      "name": "pot_large",
+      "size": {
+        "x": 0.564,
+        "y": 0.2,
+        "z": 0.488
+      },
+      "min": {
+        "x": -0.282,
+        "y": -0.05,
+        "z": -0.244
+      },
+      "max": {
+        "x": 0.282,
+        "y": 0.15,
+        "z": 0.244
+      },
+      "originAtGround": false,
+      "triangles": 68,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/pot_small.glb",
+      "kit": "nature",
+      "name": "pot_small",
+      "size": {
+        "x": 0.323,
+        "y": 0.268,
+        "z": 0.28
+      },
+      "min": {
+        "x": -0.162,
+        "y": -0.05,
+        "z": -0.14
+      },
+      "max": {
+        "x": 0.162,
+        "y": 0.218,
+        "z": 0.14
+      },
+      "originAtGround": false,
+      "triangles": 72,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/rock_largeA.glb",
+      "kit": "nature",
+      "name": "rock_largeA",
+      "size": {
+        "x": 0.785,
+        "y": 0.26,
+        "z": 1.015
+      },
+      "min": {
+        "x": -0.392,
+        "y": -0.05,
+        "z": -0.508
+      },
+      "max": {
+        "x": 0.392,
+        "y": 0.21,
+        "z": 0.508
+      },
+      "originAtGround": false,
+      "triangles": 80,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/rock_largeB.glb",
+      "kit": "nature",
+      "name": "rock_largeB",
+      "size": {
+        "x": 0.767,
+        "y": 0.43,
+        "z": 1.015
+      },
+      "min": {
+        "x": -0.383,
+        "y": -0.05,
+        "z": -0.508
+      },
+      "max": {
+        "x": 0.383,
+        "y": 0.38,
+        "z": 0.508
+      },
+      "originAtGround": false,
+      "triangles": 85,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/rock_smallA.glb",
+      "kit": "nature",
+      "name": "rock_smallA",
+      "size": {
+        "x": 0.361,
+        "y": 0.191,
+        "z": 0.361
+      },
+      "min": {
+        "x": -0.18,
+        "y": -0.05,
+        "z": -0.18
+      },
+      "max": {
+        "x": 0.18,
+        "y": 0.141,
+        "z": 0.18
+      },
+      "originAtGround": false,
+      "triangles": 16,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/rock_smallB.glb",
+      "kit": "nature",
+      "name": "rock_smallB",
+      "size": {
+        "x": 0.361,
+        "y": 0.177,
+        "z": 0.361
+      },
+      "min": {
+        "x": -0.18,
+        "y": -0.05,
+        "z": -0.18
+      },
+      "max": {
+        "x": 0.18,
+        "y": 0.127,
+        "z": 0.18
+      },
+      "originAtGround": false,
+      "triangles": 24,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/rock_tallA.glb",
+      "kit": "nature",
+      "name": "rock_tallA",
+      "size": {
+        "x": 0.983,
+        "y": 0.996,
+        "z": 0.683
+      },
+      "min": {
+        "x": -0.492,
+        "y": -0.05,
+        "z": -0.342
+      },
+      "max": {
+        "x": 0.492,
+        "y": 0.946,
+        "z": 0.342
+      },
+      "originAtGround": false,
+      "triangles": 136,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/stump_old.glb",
+      "kit": "nature",
+      "name": "stump_old",
+      "size": {
+        "x": 0.357,
+        "y": 0.266,
+        "z": 0.371
+      },
+      "min": {
+        "x": -0.161,
+        "y": -0.05,
+        "z": -0.185
+      },
+      "max": {
+        "x": 0.196,
+        "y": 0.216,
+        "z": 0.185
+      },
+      "originAtGround": false,
+      "triangles": 120,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/stump_round.glb",
+      "kit": "nature",
+      "name": "stump_round",
+      "size": {
+        "x": 0.321,
+        "y": 0.206,
+        "z": 0.371
+      },
+      "min": {
+        "x": -0.161,
+        "y": -0.05,
+        "z": -0.185
+      },
+      "max": {
+        "x": 0.161,
+        "y": 0.156,
+        "z": 0.185
+      },
+      "originAtGround": false,
+      "triangles": 56,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/tree_default.glb",
+      "kit": "nature",
+      "name": "tree_default",
+      "size": {
+        "x": 0.755,
+        "y": 1.708,
+        "z": 0.654
+      },
+      "min": {
+        "x": -0.378,
+        "y": -0.05,
+        "z": -0.327
+      },
+      "max": {
+        "x": 0.378,
+        "y": 1.658,
+        "z": 0.327
+      },
+      "originAtGround": false,
+      "triangles": 114,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/tree_default_fall.glb",
+      "kit": "nature",
+      "name": "tree_default_fall",
+      "size": {
+        "x": 0.755,
+        "y": 1.708,
+        "z": 0.654
+      },
+      "min": {
+        "x": -0.378,
+        "y": -0.05,
+        "z": -0.327
+      },
+      "max": {
+        "x": 0.378,
+        "y": 1.658,
+        "z": 0.327
+      },
+      "originAtGround": false,
+      "triangles": 228,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/tree_detailed.glb",
+      "kit": "nature",
+      "name": "tree_detailed",
+      "size": {
+        "x": 0.847,
+        "y": 1.332,
+        "z": 0.762
+      },
+      "min": {
+        "x": -0.432,
+        "y": -0.05,
+        "z": -0.372
+      },
+      "max": {
+        "x": 0.415,
+        "y": 1.282,
+        "z": 0.389
+      },
+      "originAtGround": false,
+      "triangles": 402,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/tree_fat.glb",
+      "kit": "nature",
+      "name": "tree_fat",
+      "size": {
+        "x": 0.755,
+        "y": 1.15,
+        "z": 0.654
+      },
+      "min": {
+        "x": -0.378,
+        "y": -0.05,
+        "z": -0.327
+      },
+      "max": {
+        "x": 0.378,
+        "y": 1.1,
+        "z": 0.327
+      },
+      "originAtGround": false,
+      "triangles": 50,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/tree_oak.glb",
+      "kit": "nature",
+      "name": "tree_oak",
+      "size": {
+        "x": 0.641,
+        "y": 1.226,
+        "z": 0.74
+      },
+      "min": {
+        "x": -0.32,
+        "y": -0.05,
+        "z": -0.37
+      },
+      "max": {
+        "x": 0.32,
+        "y": 1.176,
+        "z": 0.37
+      },
+      "originAtGround": false,
+      "triangles": 196,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/tree_oak_fall.glb",
+      "kit": "nature",
+      "name": "tree_oak_fall",
+      "size": {
+        "x": 0.641,
+        "y": 1.226,
+        "z": 0.74
+      },
+      "min": {
+        "x": -0.32,
+        "y": -0.05,
+        "z": -0.37
+      },
+      "max": {
+        "x": 0.32,
+        "y": 1.176,
+        "z": 0.37
+      },
+      "originAtGround": false,
+      "triangles": 196,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/tree_pineDefaultA.glb",
+      "kit": "nature",
+      "name": "tree_pineDefaultA",
+      "size": {
+        "x": 0.532,
+        "y": 1.546,
+        "z": 0.532
+      },
+      "min": {
+        "x": -0.266,
+        "y": -0.05,
+        "z": -0.266
+      },
+      "max": {
+        "x": 0.266,
+        "y": 1.496,
+        "z": 0.266
+      },
+      "originAtGround": false,
+      "triangles": 230,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/tree_pineRoundA.glb",
+      "kit": "nature",
+      "name": "tree_pineRoundA",
+      "size": {
+        "x": 0.617,
+        "y": 1.366,
+        "z": 0.712
+      },
+      "min": {
+        "x": -0.309,
+        "y": -0.05,
+        "z": -0.356
+      },
+      "max": {
+        "x": 0.309,
+        "y": 1.316,
+        "z": 0.356
+      },
+      "originAtGround": false,
+      "triangles": 204,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/tree_pineTallA.glb",
+      "kit": "nature",
+      "name": "tree_pineTallA",
+      "size": {
+        "x": 0.386,
+        "y": 1.53,
+        "z": 0.392
+      },
+      "min": {
+        "x": -0.179,
+        "y": -0.05,
+        "z": -0.194
+      },
+      "max": {
+        "x": 0.207,
+        "y": 1.48,
+        "z": 0.198
+      },
+      "originAtGround": false,
+      "triangles": 78,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/tree_simple.glb",
+      "kit": "nature",
+      "name": "tree_simple",
+      "size": {
+        "x": 0.355,
+        "y": 1.519,
+        "z": 0.409
+      },
+      "min": {
+        "x": -0.177,
+        "y": -0.05,
+        "z": -0.205
+      },
+      "max": {
+        "x": 0.177,
+        "y": 1.469,
+        "z": 0.205
+      },
+      "originAtGround": false,
+      "triangles": 62,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/tree_small.glb",
+      "kit": "nature",
+      "name": "tree_small",
+      "size": {
+        "x": 0.355,
+        "y": 1.11,
+        "z": 0.409
+      },
+      "min": {
+        "x": -0.177,
+        "y": -0.05,
+        "z": -0.205
+      },
+      "max": {
+        "x": 0.177,
+        "y": 1.06,
+        "z": 0.205
+      },
+      "originAtGround": false,
+      "triangles": 62,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/tree_tall.glb",
+      "kit": "nature",
+      "name": "tree_tall",
+      "size": {
+        "x": 0.4,
+        "y": 1.688,
+        "z": 0.461
+      },
+      "min": {
+        "x": -0.2,
+        "y": -0.05,
+        "z": -0.231
+      },
+      "max": {
+        "x": 0.2,
+        "y": 1.638,
+        "z": 0.231
+      },
+      "originAtGround": false,
+      "triangles": 72,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/nature/tree_thin.glb",
+      "kit": "nature",
+      "name": "tree_thin",
+      "size": {
+        "x": 0.68,
+        "y": 1.49,
+        "z": 0.617
+      },
+      "min": {
+        "x": -0.257,
+        "y": -0.05,
+        "z": -0.251
+      },
+      "max": {
+        "x": 0.423,
+        "y": 1.44,
+        "z": 0.365
+      },
+      "originAtGround": false,
+      "triangles": 228,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/roads/construction-barrier.glb",
+      "kit": "roads",
+      "name": "construction-barrier",
+      "size": {
+        "x": 0.105,
+        "y": 0.119,
+        "z": 0.225
+      },
+      "min": {
+        "x": -0.052,
+        "y": 0,
+        "z": -0.112
+      },
+      "max": {
+        "x": 0.052,
+        "y": 0.119,
+        "z": 0.112
+      },
+      "originAtGround": true,
+      "triangles": 60,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/roads/construction-cone.glb",
+      "kit": "roads",
+      "name": "construction-cone",
+      "size": {
+        "x": 0.075,
+        "y": 0.094,
+        "z": 0.075
+      },
+      "min": {
+        "x": -0.038,
+        "y": 0,
+        "z": -0.038
+      },
+      "max": {
+        "x": 0.038,
+        "y": 0.094,
+        "z": 0.038
+      },
+      "originAtGround": true,
+      "triangles": 66,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/roads/construction-light.glb",
+      "kit": "roads",
+      "name": "construction-light",
+      "size": {
+        "x": 0.075,
+        "y": 0.234,
+        "z": 0.075
+      },
+      "min": {
+        "x": -0.038,
+        "y": 0,
+        "z": -0.038
+      },
+      "max": {
+        "x": 0.038,
+        "y": 0.234,
+        "z": 0.038
+      },
+      "originAtGround": true,
+      "triangles": 100,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/roads/light-curved.glb",
+      "kit": "roads",
+      "name": "light-curved",
+      "size": {
+        "x": 0.05,
+        "y": 0.675,
+        "z": 0.225
+      },
+      "min": {
+        "x": -0.025,
+        "y": 0,
+        "z": -0.2
+      },
+      "max": {
+        "x": 0.025,
+        "y": 0.675,
+        "z": 0.025
+      },
+      "originAtGround": true,
+      "triangles": 92,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/roads/light-square.glb",
+      "kit": "roads",
+      "name": "light-square",
+      "size": {
+        "x": 0.05,
+        "y": 0.6,
+        "z": 0.237
+      },
+      "min": {
+        "x": -0.025,
+        "y": 0,
+        "z": -0.212
+      },
+      "max": {
+        "x": 0.025,
+        "y": 0.6,
+        "z": 0.025
+      },
+      "originAtGround": true,
+      "triangles": 60,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 0
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/roads/road-bend-sidewalk.glb",
+      "kit": "roads",
+      "name": "road-bend-sidewalk",
+      "size": {
+        "x": 1,
+        "y": 0.02,
+        "z": 1
+      },
+      "min": {
+        "x": -0.5,
+        "y": 0,
+        "z": -0.5
+      },
+      "max": {
+        "x": 0.5,
+        "y": 0.02,
+        "z": 0.5
+      },
+      "originAtGround": true,
+      "triangles": 220,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/roads/road-bend.glb",
+      "kit": "roads",
+      "name": "road-bend",
+      "size": {
+        "x": 1,
+        "y": 0.02,
+        "z": 1
+      },
+      "min": {
+        "x": -0.5,
+        "y": 0,
+        "z": -0.5
+      },
+      "max": {
+        "x": 0.5,
+        "y": 0.02,
+        "z": 0.5
+      },
+      "originAtGround": true,
+      "triangles": 260,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/roads/road-crossing.glb",
+      "kit": "roads",
+      "name": "road-crossing",
+      "size": {
+        "x": 1,
+        "y": 0.02,
+        "z": 1
+      },
+      "min": {
+        "x": -0.5,
+        "y": 0,
+        "z": -0.5
+      },
+      "max": {
+        "x": 0.5,
+        "y": 0.02,
+        "z": 0.5
+      },
+      "originAtGround": true,
+      "triangles": 104,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/roads/road-crossroad-line.glb",
+      "kit": "roads",
+      "name": "road-crossroad-line",
+      "size": {
+        "x": 1,
+        "y": 0.02,
+        "z": 1
+      },
+      "min": {
+        "x": -0.5,
+        "y": 0,
+        "z": -0.5
+      },
+      "max": {
+        "x": 0.5,
+        "y": 0.02,
+        "z": 0.5
+      },
+      "originAtGround": true,
+      "triangles": 108,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/roads/road-crossroad-path.glb",
+      "kit": "roads",
+      "name": "road-crossroad-path",
+      "size": {
+        "x": 1,
+        "y": 0.02,
+        "z": 1
+      },
+      "min": {
+        "x": -0.5,
+        "y": 0,
+        "z": -0.5
+      },
+      "max": {
+        "x": 0.5,
+        "y": 0.02,
+        "z": 0.5
+      },
+      "originAtGround": true,
+      "triangles": 276,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/roads/road-crossroad.glb",
+      "kit": "roads",
+      "name": "road-crossroad",
+      "size": {
+        "x": 1,
+        "y": 0.02,
+        "z": 1
+      },
+      "min": {
+        "x": -0.5,
+        "y": 0,
+        "z": -0.5
+      },
+      "max": {
+        "x": 0.5,
+        "y": 0.02,
+        "z": 0.5
+      },
+      "originAtGround": true,
+      "triangles": 116,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/roads/road-curve-intersection.glb",
+      "kit": "roads",
+      "name": "road-curve-intersection",
+      "size": {
+        "x": 2,
+        "y": 0.02,
+        "z": 2
+      },
+      "min": {
+        "x": -1,
+        "y": 0,
+        "z": -1
+      },
+      "max": {
+        "x": 1,
+        "y": 0.02,
+        "z": 1
+      },
+      "originAtGround": true,
+      "triangles": 298,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 2,
+        "z": 2
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/roads/road-curve.glb",
+      "kit": "roads",
+      "name": "road-curve",
+      "size": {
+        "x": 2,
+        "y": 0.02,
+        "z": 2
+      },
+      "min": {
+        "x": -1,
+        "y": 0,
+        "z": -1
+      },
+      "max": {
+        "x": 1,
+        "y": 0.02,
+        "z": 1
+      },
+      "originAtGround": true,
+      "triangles": 308,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 2,
+        "z": 2
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/roads/road-driveway-double.glb",
+      "kit": "roads",
+      "name": "road-driveway-double",
+      "size": {
+        "x": 1,
+        "y": 0.02,
+        "z": 1
+      },
+      "min": {
+        "x": -0.5,
+        "y": 0,
+        "z": -0.5
+      },
+      "max": {
+        "x": 0.5,
+        "y": 0.02,
+        "z": 0.5
+      },
+      "originAtGround": true,
+      "triangles": 72,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/roads/road-driveway-single.glb",
+      "kit": "roads",
+      "name": "road-driveway-single",
+      "size": {
+        "x": 1,
+        "y": 0.02,
+        "z": 1
+      },
+      "min": {
+        "x": -0.5,
+        "y": 0,
+        "z": -0.5
+      },
+      "max": {
+        "x": 0.5,
+        "y": 0.02,
+        "z": 0.5
+      },
+      "originAtGround": true,
+      "triangles": 60,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/roads/road-end-round.glb",
+      "kit": "roads",
+      "name": "road-end-round",
+      "size": {
+        "x": 1,
+        "y": 0.02,
+        "z": 1
+      },
+      "min": {
+        "x": -0.5,
+        "y": 0,
+        "z": -0.5
+      },
+      "max": {
+        "x": 0.5,
+        "y": 0.02,
+        "z": 0.5
+      },
+      "originAtGround": true,
+      "triangles": 218,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/roads/road-end.glb",
+      "kit": "roads",
+      "name": "road-end",
+      "size": {
+        "x": 1,
+        "y": 0.02,
+        "z": 1
+      },
+      "min": {
+        "x": -0.5,
+        "y": 0,
+        "z": -0.5
+      },
+      "max": {
+        "x": 0.5,
+        "y": 0.02,
+        "z": 0.5
+      },
+      "originAtGround": true,
+      "triangles": 42,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/roads/road-intersection-line.glb",
+      "kit": "roads",
+      "name": "road-intersection-line",
+      "size": {
+        "x": 1,
+        "y": 0.02,
+        "z": 1
+      },
+      "min": {
+        "x": -0.5,
+        "y": 0,
+        "z": -0.5
+      },
+      "max": {
+        "x": 0.5,
+        "y": 0.02,
+        "z": 0.5
+      },
+      "originAtGround": true,
+      "triangles": 76,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/roads/road-intersection-path.glb",
+      "kit": "roads",
+      "name": "road-intersection-path",
+      "size": {
+        "x": 1,
+        "y": 0.02,
+        "z": 1
+      },
+      "min": {
+        "x": -0.5,
+        "y": 0,
+        "z": -0.5
+      },
+      "max": {
+        "x": 0.5,
+        "y": 0.02,
+        "z": 0.5
+      },
+      "originAtGround": true,
+      "triangles": 204,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/roads/road-intersection.glb",
+      "kit": "roads",
+      "name": "road-intersection",
+      "size": {
+        "x": 1,
+        "y": 0.02,
+        "z": 1
+      },
+      "min": {
+        "x": -0.5,
+        "y": 0,
+        "z": -0.5
+      },
+      "max": {
+        "x": 0.5,
+        "y": 0.02,
+        "z": 0.5
+      },
+      "originAtGround": true,
+      "triangles": 84,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/roads/road-roundabout.glb",
+      "kit": "roads",
+      "name": "road-roundabout",
+      "size": {
+        "x": 3,
+        "y": 0.02,
+        "z": 3
+      },
+      "min": {
+        "x": -1.5,
+        "y": 0,
+        "z": -1.5
+      },
+      "max": {
+        "x": 1.5,
+        "y": 0.02,
+        "z": 1.5
+      },
+      "originAtGround": true,
+      "triangles": 1636,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 3,
+        "z": 3
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/roads/road-side-entry.glb",
+      "kit": "roads",
+      "name": "road-side-entry",
+      "size": {
+        "x": 1,
+        "y": 0.02,
+        "z": 1.31
+      },
+      "min": {
+        "x": -0.5,
+        "y": 0,
+        "z": -0.81
+      },
+      "max": {
+        "x": 0.5,
+        "y": 0.02,
+        "z": 0.5
+      },
+      "originAtGround": true,
+      "triangles": 306,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/roads/road-side-exit.glb",
+      "kit": "roads",
+      "name": "road-side-exit",
+      "size": {
+        "x": 1,
+        "y": 0.02,
+        "z": 1.31
+      },
+      "min": {
+        "x": -0.5,
+        "y": 0,
+        "z": -0.81
+      },
+      "max": {
+        "x": 0.5,
+        "y": 0.02,
+        "z": 0.5
+      },
+      "originAtGround": true,
+      "triangles": 306,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/roads/road-side.glb",
+      "kit": "roads",
+      "name": "road-side",
+      "size": {
+        "x": 1,
+        "y": 0.02,
+        "z": 1.31
+      },
+      "min": {
+        "x": -0.5,
+        "y": 0,
+        "z": -0.81
+      },
+      "max": {
+        "x": 0.5,
+        "y": 0.02,
+        "z": 0.5
+      },
+      "originAtGround": true,
+      "triangles": 44,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1.5
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/roads/road-split.glb",
+      "kit": "roads",
+      "name": "road-split",
+      "size": {
+        "x": 1,
+        "y": 0.02,
+        "z": 2
+      },
+      "min": {
+        "x": -0.5,
+        "y": 0,
+        "z": -1
+      },
+      "max": {
+        "x": 0.5,
+        "y": 0.02,
+        "z": 1
+      },
+      "originAtGround": true,
+      "triangles": 862,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 2
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/roads/road-square.glb",
+      "kit": "roads",
+      "name": "road-square",
+      "size": {
+        "x": 1,
+        "y": 0.02,
+        "z": 1
+      },
+      "min": {
+        "x": -0.5,
+        "y": 0,
+        "z": -0.5
+      },
+      "max": {
+        "x": 0.5,
+        "y": 0.02,
+        "z": 0.5
+      },
+      "originAtGround": true,
+      "triangles": 36,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/roads/road-straight-half.glb",
+      "kit": "roads",
+      "name": "road-straight-half",
+      "size": {
+        "x": 0.5,
+        "y": 0.02,
+        "z": 1
+      },
+      "min": {
+        "x": -0.25,
+        "y": 0,
+        "z": -0.5
+      },
+      "max": {
+        "x": 0.25,
+        "y": 0.02,
+        "z": 0.5
+      },
+      "originAtGround": true,
+      "triangles": 44,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/roads/road-straight.glb",
+      "kit": "roads",
+      "name": "road-straight",
+      "size": {
+        "x": 1,
+        "y": 0.02,
+        "z": 1
+      },
+      "min": {
+        "x": -0.5,
+        "y": 0,
+        "z": -0.5
+      },
+      "max": {
+        "x": 0.5,
+        "y": 0.02,
+        "z": 0.5
+      },
+      "originAtGround": true,
+      "triangles": 44,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 1
+      },
+      "recommendedScale": 7
+    },
+    {
+      "path": "models/vehicles/ambulance.glb",
+      "kit": "vehicles",
+      "name": "ambulance",
+      "size": {
+        "x": 1.5,
+        "y": 1.8,
+        "z": 3.25
+      },
+      "min": {
+        "x": -0.75,
+        "y": 0,
+        "z": -1.65
+      },
+      "max": {
+        "x": 0.75,
+        "y": 1.8,
+        "z": 1.6
+      },
+      "originAtGround": true,
+      "triangles": 2804,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 3
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/vehicles/box.glb",
+      "kit": "vehicles",
+      "name": "box",
+      "size": {
+        "x": 0.715,
+        "y": 0.715,
+        "z": 0.715
+      },
+      "min": {
+        "x": -0.357,
+        "y": 0,
+        "z": -0.357
+      },
+      "max": {
+        "x": 0.357,
+        "y": 0.715,
+        "z": 0.357
+      },
+      "originAtGround": true,
+      "triangles": 124,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/vehicles/cone.glb",
+      "kit": "vehicles",
+      "name": "cone",
+      "size": {
+        "x": 0.476,
+        "y": 0.595,
+        "z": 0.476
+      },
+      "min": {
+        "x": -0.238,
+        "y": 0,
+        "z": -0.238
+      },
+      "max": {
+        "x": 0.238,
+        "y": 0.595,
+        "z": 0.238
+      },
+      "originAtGround": true,
+      "triangles": 172,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/vehicles/debris-bumper.glb",
+      "kit": "vehicles",
+      "name": "debris-bumper",
+      "size": {
+        "x": 1.3,
+        "y": 0.4,
+        "z": 0.45
+      },
+      "min": {
+        "x": -0.65,
+        "y": 0,
+        "z": -0.225
+      },
+      "max": {
+        "x": 0.65,
+        "y": 0.4,
+        "z": 0.225
+      },
+      "originAtGround": true,
+      "triangles": 116,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 0.5
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/vehicles/debris-door.glb",
+      "kit": "vehicles",
+      "name": "debris-door",
+      "size": {
+        "x": 0.188,
+        "y": 0.9,
+        "z": 0.8
+      },
+      "min": {
+        "x": -0.094,
+        "y": 0,
+        "z": -0.4
+      },
+      "max": {
+        "x": 0.094,
+        "y": 0.9,
+        "z": 0.4
+      },
+      "originAtGround": true,
+      "triangles": 68,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0,
+        "z": 1
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/vehicles/debris-spoiler-a.glb",
+      "kit": "vehicles",
+      "name": "debris-spoiler-a",
+      "size": {
+        "x": 1.1,
+        "y": 0.3,
+        "z": 0.237
+      },
+      "min": {
+        "x": -0.55,
+        "y": 0,
+        "z": -0.119
+      },
+      "max": {
+        "x": 0.55,
+        "y": 0.3,
+        "z": 0.119
+      },
+      "originAtGround": true,
+      "triangles": 48,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1,
+        "z": 0
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/vehicles/debris-tire.glb",
+      "kit": "vehicles",
+      "name": "debris-tire",
+      "size": {
+        "x": 0.35,
+        "y": 0.6,
+        "z": 0.6
+      },
+      "min": {
+        "x": -0.175,
+        "y": -0.3,
+        "z": -0.3
+      },
+      "max": {
+        "x": 0.175,
+        "y": 0.3,
+        "z": 0.3
+      },
+      "originAtGround": false,
+      "triangles": 288,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/vehicles/delivery-flat.glb",
+      "kit": "vehicles",
+      "name": "delivery-flat",
+      "size": {
+        "x": 1.5,
+        "y": 1.35,
+        "z": 3.25
+      },
+      "min": {
+        "x": -0.75,
+        "y": 0,
+        "z": -1.65
+      },
+      "max": {
+        "x": 0.75,
+        "y": 1.35,
+        "z": 1.6
+      },
+      "originAtGround": true,
+      "triangles": 2574,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 3
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/vehicles/delivery.glb",
+      "kit": "vehicles",
+      "name": "delivery",
+      "size": {
+        "x": 1.5,
+        "y": 1.65,
+        "z": 3.25
+      },
+      "min": {
+        "x": -0.75,
+        "y": 0,
+        "z": -1.65
+      },
+      "max": {
+        "x": 0.75,
+        "y": 1.65,
+        "z": 1.6
+      },
+      "originAtGround": true,
+      "triangles": 2476,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 3
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/vehicles/firetruck.glb",
+      "kit": "vehicles",
+      "name": "firetruck",
+      "size": {
+        "x": 1.5,
+        "y": 1.7,
+        "z": 3.4
+      },
+      "min": {
+        "x": -0.75,
+        "y": 0,
+        "z": -1.7
+      },
+      "max": {
+        "x": 0.75,
+        "y": 1.7,
+        "z": 1.7
+      },
+      "originAtGround": true,
+      "triangles": 2767,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 3.5
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/vehicles/garbage-truck.glb",
+      "kit": "vehicles",
+      "name": "garbage-truck",
+      "size": {
+        "x": 1.6,
+        "y": 1.6,
+        "z": 3.45
+      },
+      "min": {
+        "x": -0.8,
+        "y": 0,
+        "z": -1.7
+      },
+      "max": {
+        "x": 0.8,
+        "y": 1.6,
+        "z": 1.75
+      },
+      "originAtGround": true,
+      "triangles": 3124,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 3.5
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/vehicles/hatchback-sports.glb",
+      "kit": "vehicles",
+      "name": "hatchback-sports",
+      "size": {
+        "x": 1.3,
+        "y": 1.1,
+        "z": 2.85
+      },
+      "min": {
+        "x": -0.65,
+        "y": 0,
+        "z": -1.45
+      },
+      "max": {
+        "x": 0.65,
+        "y": 1.1,
+        "z": 1.4
+      },
+      "originAtGround": true,
+      "triangles": 2088,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 3
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/vehicles/police.glb",
+      "kit": "vehicles",
+      "name": "police",
+      "size": {
+        "x": 1.5,
+        "y": 1.3,
+        "z": 3.1
+      },
+      "min": {
+        "x": -0.75,
+        "y": 0,
+        "z": -1.55
+      },
+      "max": {
+        "x": 0.75,
+        "y": 1.3,
+        "z": 1.55
+      },
+      "originAtGround": true,
+      "triangles": 2304,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 3
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/vehicles/sedan-sports.glb",
+      "kit": "vehicles",
+      "name": "sedan-sports",
+      "size": {
+        "x": 1.3,
+        "y": 1.1,
+        "z": 2.55
+      },
+      "min": {
+        "x": -0.65,
+        "y": 0,
+        "z": -1.3
+      },
+      "max": {
+        "x": 0.65,
+        "y": 1.1,
+        "z": 1.25
+      },
+      "originAtGround": true,
+      "triangles": 2088,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 2.5
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/vehicles/sedan.glb",
+      "kit": "vehicles",
+      "name": "sedan",
+      "size": {
+        "x": 1.5,
+        "y": 1.3,
+        "z": 2.55
+      },
+      "min": {
+        "x": -0.75,
+        "y": 0,
+        "z": -1.3
+      },
+      "max": {
+        "x": 0.75,
+        "y": 1.3,
+        "z": 1.25
+      },
+      "originAtGround": true,
+      "triangles": 2032,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 2.5
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/vehicles/suv-luxury.glb",
+      "kit": "vehicles",
+      "name": "suv-luxury",
+      "size": {
+        "x": 1.5,
+        "y": 1.3,
+        "z": 2.85
+      },
+      "min": {
+        "x": -0.75,
+        "y": 0,
+        "z": -1.4
+      },
+      "max": {
+        "x": 0.75,
+        "y": 1.3,
+        "z": 1.45
+      },
+      "originAtGround": true,
+      "triangles": 2086,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 3
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/vehicles/suv.glb",
+      "kit": "vehicles",
+      "name": "suv",
+      "size": {
+        "x": 1.5,
+        "y": 1.3,
+        "z": 2.7
+      },
+      "min": {
+        "x": -0.75,
+        "y": 0,
+        "z": -1.35
+      },
+      "max": {
+        "x": 0.75,
+        "y": 1.3,
+        "z": 1.35
+      },
+      "originAtGround": true,
+      "triangles": 2474,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 2.5
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/vehicles/taxi.glb",
+      "kit": "vehicles",
+      "name": "taxi",
+      "size": {
+        "x": 1.5,
+        "y": 1.5,
+        "z": 2.75
+      },
+      "min": {
+        "x": -0.75,
+        "y": 0,
+        "z": -1.4
+      },
+      "max": {
+        "x": 0.75,
+        "y": 1.5,
+        "z": 1.35
+      },
+      "originAtGround": true,
+      "triangles": 2072,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 2.5
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/vehicles/tractor-shovel.glb",
+      "kit": "vehicles",
+      "name": "tractor-shovel",
+      "size": {
+        "x": 1.661,
+        "y": 1.512,
+        "z": 2.47
+      },
+      "min": {
+        "x": -0.83,
+        "y": 0,
+        "z": -1.235
+      },
+      "max": {
+        "x": 0.83,
+        "y": 1.512,
+        "z": 1.235
+      },
+      "originAtGround": true,
+      "triangles": 2646,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 2.5
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/vehicles/tractor.glb",
+      "kit": "vehicles",
+      "name": "tractor",
+      "size": {
+        "x": 1.342,
+        "y": 1.602,
+        "z": 2.202
+      },
+      "min": {
+        "x": -0.671,
+        "y": 0,
+        "z": -1.101
+      },
+      "max": {
+        "x": 0.671,
+        "y": 1.602,
+        "z": 1.101
+      },
+      "originAtGround": true,
+      "triangles": 2044,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 2
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/vehicles/truck-flat.glb",
+      "kit": "vehicles",
+      "name": "truck-flat",
+      "size": {
+        "x": 1.5,
+        "y": 1.3,
+        "z": 2.745
+      },
+      "min": {
+        "x": -0.75,
+        "y": 0,
+        "z": -1.373
+      },
+      "max": {
+        "x": 0.75,
+        "y": 1.3,
+        "z": 1.373
+      },
+      "originAtGround": true,
+      "triangles": 2488,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 2.5
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/vehicles/truck.glb",
+      "kit": "vehicles",
+      "name": "truck",
+      "size": {
+        "x": 1.5,
+        "y": 1.3,
+        "z": 2.95
+      },
+      "min": {
+        "x": -0.75,
+        "y": 0,
+        "z": -1.5
+      },
+      "max": {
+        "x": 0.75,
+        "y": 1.3,
+        "z": 1.45
+      },
+      "originAtGround": true,
+      "triangles": 2082,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 3
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/vehicles/van.glb",
+      "kit": "vehicles",
+      "name": "van",
+      "size": {
+        "x": 1.5,
+        "y": 1.35,
+        "z": 2.75
+      },
+      "min": {
+        "x": -0.75,
+        "y": 0,
+        "z": -1.4
+      },
+      "max": {
+        "x": 0.75,
+        "y": 1.35,
+        "z": 1.35
+      },
+      "originAtGround": true,
+      "triangles": 2082,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 1.5,
+        "z": 3
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/vehicles/wheel-dark.glb",
+      "kit": "vehicles",
+      "name": "wheel-dark",
+      "size": {
+        "x": 0.4,
+        "y": 0.6,
+        "z": 0.6
+      },
+      "min": {
+        "x": -0.2,
+        "y": -0.3,
+        "z": -0.3
+      },
+      "max": {
+        "x": 0.2,
+        "y": 0.3,
+        "z": 0.3
+      },
+      "originAtGround": false,
+      "triangles": 332,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/vehicles/wheel-default.glb",
+      "kit": "vehicles",
+      "name": "wheel-default",
+      "size": {
+        "x": 0.4,
+        "y": 0.6,
+        "z": 0.6
+      },
+      "min": {
+        "x": -0.2,
+        "y": -0.3,
+        "z": -0.3
+      },
+      "max": {
+        "x": 0.2,
+        "y": 0.3,
+        "z": 0.3
+      },
+      "originAtGround": false,
+      "triangles": 332,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/vehicles/wheel-tractor-back.glb",
+      "kit": "vehicles",
+      "name": "wheel-tractor-back",
+      "size": {
+        "x": 0.538,
+        "y": 0.875,
+        "z": 0.875
+      },
+      "min": {
+        "x": -0.269,
+        "y": -0.438,
+        "z": -0.438
+      },
+      "max": {
+        "x": 0.269,
+        "y": 0.438,
+        "z": 0.438
+      },
+      "originAtGround": false,
+      "triangles": 428,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 1
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/vehicles/wheel-tractor-front.glb",
+      "kit": "vehicles",
+      "name": "wheel-tractor-front",
+      "size": {
+        "x": 0.369,
+        "y": 0.539,
+        "z": 0.539
+      },
+      "min": {
+        "x": -0.185,
+        "y": -0.269,
+        "z": -0.269
+      },
+      "max": {
+        "x": 0.185,
+        "y": 0.269,
+        "z": 0.269
+      },
+      "originAtGround": false,
+      "triangles": 332,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 1
+    },
+    {
+      "path": "models/vehicles/wheel-truck.glb",
+      "kit": "vehicles",
+      "name": "wheel-truck",
+      "size": {
+        "x": 0.35,
+        "y": 0.6,
+        "z": 0.6
+      },
+      "min": {
+        "x": -0.175,
+        "y": -0.3,
+        "z": -0.3
+      },
+      "max": {
+        "x": 0.175,
+        "y": 0.3,
+        "z": 0.3
+      },
+      "originAtGround": false,
+      "triangles": 428,
+      "hasSkin": false,
+      "animations": [],
+      "footprintUnits": {
+        "x": 0.5,
+        "z": 0.5
+      },
+      "recommendedScale": 1
+    }
+  ]
+}

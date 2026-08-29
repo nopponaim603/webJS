@@ -1,0 +1,278 @@
+{
+  "al": {
+    "h": 128,
+    "src": "ui/portraits/al.png",
+    "src2x": "ui/portraits/al@2x.png",
+    "w": 128
+  },
+  "aldente": {
+    "h": 128,
+    "src": "ui/portraits/aldente.png",
+    "src2x": "ui/portraits/aldente@2x.png",
+    "w": 128
+  },
+  "anita": {
+    "h": 128,
+    "src": "ui/portraits/anita.png",
+    "src2x": "ui/portraits/anita@2x.png",
+    "w": 128
+  },
+  "ann": {
+    "h": 128,
+    "src": "ui/portraits/ann.png",
+    "src2x": "ui/portraits/ann@2x.png",
+    "w": 128
+  },
+  "barb": {
+    "h": 128,
+    "src": "ui/portraits/barb.png",
+    "src2x": "ui/portraits/barb@2x.png",
+    "w": 128
+  },
+  "barbwire": {
+    "h": 128,
+    "src": "ui/portraits/barbwire.png",
+    "src2x": "ui/portraits/barbwire@2x.png",
+    "w": 128
+  },
+  "bernie": {
+    "h": 128,
+    "src": "ui/portraits/bernie.png",
+    "src2x": "ui/portraits/bernie@2x.png",
+    "w": 128
+  },
+  "bill": {
+    "h": 128,
+    "src": "ui/portraits/bill.png",
+    "src2x": "ui/portraits/bill@2x.png",
+    "w": 128
+  },
+  "chuck": {
+    "h": 128,
+    "src": "ui/portraits/chuck.png",
+    "src2x": "ui/portraits/chuck@2x.png",
+    "w": 128
+  },
+  "cliff": {
+    "h": 128,
+    "src": "ui/portraits/cliff.png",
+    "src2x": "ui/portraits/cliff@2x.png",
+    "w": 128
+  },
+  "cole": {
+    "h": 128,
+    "src": "ui/portraits/cole.png",
+    "src2x": "ui/portraits/cole@2x.png",
+    "w": 128
+  },
+  "constance": {
+    "h": 128,
+    "src": "ui/portraits/constance.png",
+    "src2x": "ui/portraits/constance@2x.png",
+    "w": 128
+  },
+  "dinah": {
+    "h": 128,
+    "src": "ui/portraits/dinah.png",
+    "src2x": "ui/portraits/dinah@2x.png",
+    "w": 128
+  },
+  "doug": {
+    "h": 128,
+    "src": "ui/portraits/doug.png",
+    "src2x": "ui/portraits/doug@2x.png",
+    "w": 128
+  },
+  "ella": {
+    "h": 128,
+    "src": "ui/portraits/ella.png",
+    "src2x": "ui/portraits/ella@2x.png",
+    "w": 128
+  },
+  "faith": {
+    "h": 128,
+    "src": "ui/portraits/faith.png",
+    "src2x": "ui/portraits/faith@2x.png",
+    "w": 128
+  },
+  "faye": {
+    "h": 128,
+    "src": "ui/portraits/faye.png",
+    "src2x": "ui/portraits/faye@2x.png",
+    "w": 128
+  },
+  "gary": {
+    "h": 128,
+    "src": "ui/portraits/gary.png",
+    "src2x": "ui/portraits/gary@2x.png",
+    "w": 128
+  },
+  "gene": {
+    "h": 128,
+    "src": "ui/portraits/gene.png",
+    "src2x": "ui/portraits/gene@2x.png",
+    "w": 128
+  },
+  "grace": {
+    "h": 128,
+    "src": "ui/portraits/grace.png",
+    "src2x": "ui/portraits/grace@2x.png",
+    "w": 128
+  },
+  "grease": {
+    "h": 128,
+    "src": "ui/portraits/grease.png",
+    "src2x": "ui/portraits/grease@2x.png",
+    "w": 128
+  },
+  "harry": {
+    "h": 128,
+    "src": "ui/portraits/harry.png",
+    "src2x": "ui/portraits/harry@2x.png",
+    "w": 128
+  },
+  "holly": {
+    "h": 128,
+    "src": "ui/portraits/holly.png",
+    "src2x": "ui/portraits/holly@2x.png",
+    "w": 128
+  },
+  "hugh": {
+    "h": 128,
+    "src": "ui/portraits/hugh.png",
+    "src2x": "ui/portraits/hugh@2x.png",
+    "w": 128
+  },
+  "imahogg": {
+    "h": 128,
+    "src": "ui/portraits/imahogg.png",
+    "src2x": "ui/portraits/imahogg@2x.png",
+    "w": 128
+  },
+  "ivan": {
+    "h": 128,
+    "src": "ui/portraits/ivan.png",
+    "src2x": "ui/portraits/ivan@2x.png",
+    "w": 128
+  },
+  "justin": {
+    "h": 128,
+    "src": "ui/portraits/justin.png",
+    "src2x": "ui/portraits/justin@2x.png",
+    "w": 128
+  },
+  "les": {
+    "h": 128,
+    "src": "ui/portraits/les.png",
+    "src2x": "ui/portraits/les@2x.png",
+    "w": 128
+  },
+  "marsha": {
+    "h": 128,
+    "src": "ui/portraits/marsha.png",
+    "src2x": "ui/portraits/marsha@2x.png",
+    "w": 128
+  },
+  "miles": {
+    "h": 128,
+    "src": "ui/portraits/miles.png",
+    "src2x": "ui/portraits/miles@2x.png",
+    "w": 128
+  },
+  "millard": {
+    "h": 128,
+    "src": "ui/portraits/millard.png",
+    "src2x": "ui/portraits/millard@2x.png",
+    "w": 128
+  },
+  "noah": {
+    "h": 128,
+    "src": "ui/portraits/noah.png",
+    "src2x": "ui/portraits/noah@2x.png",
+    "w": 128
+  },
+  "paige": {
+    "h": 128,
+    "src": "ui/portraits/paige.png",
+    "src2x": "ui/portraits/paige@2x.png",
+    "w": 128
+  },
+  "pat": {
+    "h": 128,
+    "src": "ui/portraits/pat.png",
+    "src2x": "ui/portraits/pat@2x.png",
+    "w": 128
+  },
+  "perry": {
+    "h": 128,
+    "src": "ui/portraits/perry.png",
+    "src2x": "ui/portraits/perry@2x.png",
+    "w": 128
+  },
+  "phil": {
+    "h": 128,
+    "src": "ui/portraits/phil.png",
+    "src2x": "ui/portraits/phil@2x.png",
+    "w": 128
+  },
+  "ray": {
+    "h": 128,
+    "src": "ui/portraits/ray.png",
+    "src2x": "ui/portraits/ray@2x.png",
+    "w": 128
+  },
+  "rick": {
+    "h": 128,
+    "src": "ui/portraits/rick.png",
+    "src2x": "ui/portraits/rick@2x.png",
+    "w": 128
+  },
+  "rob": {
+    "h": 128,
+    "src": "ui/portraits/rob.png",
+    "src2x": "ui/portraits/rob@2x.png",
+    "w": 128
+  },
+  "rusty": {
+    "h": 128,
+    "src": "ui/portraits/rusty.png",
+    "src2x": "ui/portraits/rusty@2x.png",
+    "w": 128
+  },
+  "sal": {
+    "h": 128,
+    "src": "ui/portraits/sal.png",
+    "src2x": "ui/portraits/sal@2x.png",
+    "w": 128
+  },
+  "sandy": {
+    "h": 128,
+    "src": "ui/portraits/sandy.png",
+    "src2x": "ui/portraits/sandy@2x.png",
+    "w": 128
+  },
+  "sue": {
+    "h": 128,
+    "src": "ui/portraits/sue.png",
+    "src2x": "ui/portraits/sue@2x.png",
+    "w": 128
+  },
+  "terry": {
+    "h": 128,
+    "src": "ui/portraits/terry.png",
+    "src2x": "ui/portraits/terry@2x.png",
+    "w": 128
+  },
+  "wanda": {
+    "h": 128,
+    "src": "ui/portraits/wanda.png",
+    "src2x": "ui/portraits/wanda@2x.png",
+    "w": 128
+  },
+  "warren": {
+    "h": 128,
+    "src": "ui/portraits/warren.png",
+    "src2x": "ui/portraits/warren@2x.png",
+    "w": 128
+  }
+}
