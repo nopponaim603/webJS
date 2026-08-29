@@ -1,0 +1,574 @@
+/* Opaque, and the blur goes with it: the upgrade screen is a place of its own,
+   not a pane over the fight. The scene behind it is not drawn at all. */
+#modules { background: #04070a; backdrop-filter: none; }
+
+.mod-panel { width: 100%; height: 100%; display: flex; flex-direction: column;
+             padding: 20px 26px 18px; }
+.mod-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
+.mod-head .title { font-size: 26px; letter-spacing: 6px; }
+.mod-titles { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+/* The overlay centres its text; this line reads as a note under the title and
+   wants the title's left edge, not its centre line. */
+#mod-saved { font-size: 11px; letter-spacing: 3px; color: #7ee0a1; text-align: left; }
+.mod-take { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+.mod-purse-row { display: flex; align-items: center; gap: 14px; }
+/* Under the purse, because they are the two halves of the same decision: what
+   there is to spend, and what will be carried into the next wave. */
+.mod-rack { display: flex; align-items: center; gap: 10px; }
+.rack-legend { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; }
+.rack-label { font-size: 9.5px; letter-spacing: 2.5px; color: #5f7a88; }
+#modrack { --slot: 38px; gap: 6px; }
+.mod-purse { position: relative; display: flex; align-items: center; gap: 8px; font-size: 22px;
+             color: #ffd970; letter-spacing: 1px; }
+#mod-coins { display: inline-block; min-width: 2ch; text-align: right; }
+
+#mod-flight { position: fixed; inset: 0; pointer-events: none; z-index: 8; }
+.coinfly {
+  position: absolute; left: 0; top: 0; width: 14px; height: 14px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffe9a0, #ffc63d 55%, #b8801a);
+  box-shadow: 0 0 12px rgba(255,190,60,.55);
+  will-change: transform, opacity;
+}
+
+/* The two columns take what the header and the buttons leave, rather than being
+   told a height in viewport units and hoping it matches the padding above them.
+   min-height:0 is what lets the stats list scroll instead of stretching. */
+.mod-body { display: flex; gap: 14px; align-items: stretch; flex: 1; min-height: 0; }
+
+#mod-stats { flex: 0 0 260px; min-height: 0; margin: 12px 0;
+             display: flex; flex-direction: column; font-size: 12px; }
+.s-list { flex: 1; overflow-y: auto; padding: 4px 12px 10px 2px; }
+.s-head { font-size: 10px; letter-spacing: 2.5px; color: #5f7a88; margin: 14px 0 6px; }
+.s-head:first-child { margin-top: 2px; }
+.s-row { display: flex; justify-content: space-between; align-items: baseline;
+         padding: 3px 0; border-bottom: 1px solid #141f26; }
+.s-row span { color: #6d8592; letter-spacing: 1px; font-size: 11px; }
+.s-row b { color: #cfe3ec; font-weight: 400; }
+
+.s-fold { margin-top: 14px; }
+.s-fold summary { margin: 0 0 6px; cursor: pointer; list-style: none;
+                  display: flex; align-items: center; gap: 6px; }
+.s-fold summary::-webkit-details-marker { display: none; }
+.s-fold summary::before { content: '\25B8'; font-size: 9px; transition: transform .15s ease; }
+.s-fold[open] summary::before { transform: rotate(90deg); }
+.s-fold summary:hover { color: #8fb0c0; }
+
+.s-dead { margin: 10px 12px 0 2px; padding-top: 12px; border-top: 1px solid #26323a;
+          text-align: center; }
+.s-dead-n { font-size: 46px; line-height: 1; color: #ff8f7e;
+            text-shadow: 0 0 24px rgba(255,90,70,.35); }
+.s-dead-label { font-size: 10px; letter-spacing: 3px; color: #5f7a88; margin: 7px 0 0; }
+/* What a wave cost, beside how long it took: the two things a past wave is. */
+.s-dead-mark { font-style: normal; font-weight: 700; color: #ff8f7e; margin-left: 9px; }
+/* Under the count it belongs with, and lined up with the list above rather than
+   centred on it: it is a figure to read, not the headline. */
+.s-foot { margin: 12px 12px 0 2px; }
+.s-foot .s-row { border-bottom: 0; }
+
+#tree-view {
+  position: relative; flex: 1; min-height: 0; margin: 12px 0;
+  border: 1px solid #1c2a33; border-radius: 8px; overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(125,211,252,.06), transparent 58%),
+    #080d11;
+  cursor: grab; touch-action: none;
+}
+#tree-view.dragging { cursor: grabbing; }
+
+#tree-pan { position: absolute; left: 0; top: 0; width: 0; height: 0;
+            transform-origin: 0 0; }
+
+/* The rings run to the far corners of the layer; the mask is what makes them a
+   glow around the hub rather than graph paper. */
+#tree-grid {
+  position: absolute; left: -1200px; top: -1200px; pointer-events: none;
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 0 8%, rgba(0,0,0,.5) 26%, transparent 50%);
+          mask-image: radial-gradient(circle at 50% 50%, #000 0 8%, rgba(0,0,0,.5) 26%, transparent 50%);
+}
+#tree-grid circle { fill: none; stroke: rgba(125,211,252,.13); stroke-width: 1; }
+#tree-grid line { stroke: rgba(125,211,252,.09); stroke-width: 1; }
+
+#tree-edges { position: absolute; left: -1200px; top: -1200px; pointer-events: none; }
+#tree-edges .edge { fill: none; stroke: #2b3f4b; stroke-width: 2.5; }
+#tree-edges .edge.open { stroke: #3d6473; }
+#tree-edges .edge.done { stroke: #58a6c4; }
+#tree-edges .stub { fill: none; stroke-width: 2.5; stroke-linecap: round; }
+#tree-edges .gone { display: none; }
+
+.tnode {
+  position: absolute; width: 22px; height: 22px; margin: -11px 0 0 -11px;
+  display: grid; place-items: center;
+  border-radius: 50%; border: 1px solid #47616f; background: #17242c;
+  color: #86a0ae; cursor: pointer; padding: 0;
+  transition: transform .12s ease, border-color .12s, color .12s, background .12s;
+}
+.tnode.hub { width: 30px; height: 30px; margin: -15px 0 0 -15px; }
+.tnode.gone { display: none; }
+/* The node whose card is open — the pointer says which on a desktop, a tap says
+   it on a phone, and only the second of those needs telling. */
+.tnode.picked { box-shadow: 0 0 0 2px rgba(125,211,252,.5); z-index: 4; }
+.tico { width: 20px; height: 20px; fill: none; stroke: currentColor;
+        stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+
+.tnode.owned { color: #06171f; border-color: #7fd8f5; background: #4fbbdf; }
+.tnode.owned.hub .tico { stroke-width: 2; }
+
+.tnode.afford { color: #ffd970; border-color: #ffd970; background: #2a2110;
+                box-shadow: 0 0 0 1px rgba(255,217,112,.3), 0 0 18px rgba(255,217,112,.3); }
+@keyframes nodeReady { 0%, 100% { box-shadow: 0 0 0 1px rgba(255,217,112,.3), 0 0 18px rgba(255,217,112,.3); }
+                       50% { box-shadow: 0 0 0 1px rgba(255,217,112,.45), 0 0 26px rgba(255,217,112,.5); } }
+/* The idle pulse yields to anything transient, or it outranks the buy and the
+   refusal on their own nodes and neither is ever seen. */
+.tnode.afford.hub:not(.bought):not(.deny) { animation: nodeReady 2.2s ease-in-out infinite; }
+
+.tnode.short { color: #c9a64e; border-color: #d8b757; background: #241f12;
+               border-style: dashed; }
+.tnode.locked { color: #63808f; border-color: #3f5867; background: #142027; }
+@media (hover: hover) {
+  .tnode:hover { transform: scale(1.25); z-index: 3; }
+  .tnode.locked:hover { transform: scale(1.15); }
+}
+@keyframes nodeBought { 0% { transform: scale(1); } 45% { transform: scale(1.3); } 100% { transform: scale(1); } }
+.tnode.bought { animation: nodeBought .26s ease-out; }
+
+/* The socket taking the part: a ring thrown off the node it seated in. Drawn on
+   ::after so it is not clipped by the node's own round border, and pointer-inert
+   so the ring never eats the click that follows it. */
+@keyframes nodeRing {
+  from { opacity: .85; transform: scale(.6); border-width: 3px; }
+  to   { opacity: 0;   transform: scale(4.2); border-width: 1px; }
+}
+.tnode.bought::after {
+  content: ''; position: absolute; inset: -2px; border-radius: 50%;
+  border: 3px solid #7fd8f5; pointer-events: none;
+  animation: nodeRing .5s cubic-bezier(.2,.7,.3,1) both;
+}
+
+/* The refusal: the mechanism catching rather than turning. The red lives inside
+   the keyframes and is handed back at the end — held on the rule instead, it
+   outlives the shake and the node stays ringed. */
+@keyframes nodeDeny {
+  0%   { transform: translateX(0);    border-color: #d8574a; }
+  20%  { transform: translateX(-3px); border-color: #d8574a; }
+  45%  { transform: translateX(3px);  border-color: #d8574a; }
+  70%  { transform: translateX(-2px); border-color: #d8574a; }
+  100% { transform: translateX(0); }
+}
+.tnode.deny { animation: nodeDeny .22s ease-out; }
+
+/* Power reaching the node it just unlocked: the wire lights along its length
+   rather than simply changing colour. */
+@keyframes edgeCharge {
+  from { stroke-dashoffset: var(--len, 120); opacity: 1; }
+  to   { stroke-dashoffset: 0; opacity: .25; }
+}
+#tree-edges .edge.charged {
+  stroke: #bdf0ff; stroke-width: 3.5;
+  stroke-dasharray: var(--len, 120);
+  animation: edgeCharge .45s ease-out both;
+}
+
+
+/* `stage-*` gates what is on screen, `.reveal` gates the animations: a skip
+   keeps the stages and drops the class to land on the final state. */
+#modules:not(.stage-stats) .mod-panel { pointer-events: none; }
+#modules:not(.stage-tally) #mod-tally { visibility: hidden; }
+#modules:not(.stage-tree) #tree-view,
+#modules:not(.stage-tree) #mod-sectors,
+#modules:not(.stage-tree) .mod-rack,
+#modules:not(.stage-stats) #mod-stats,
+#modules:not(.stage-stats) .mod-actions { opacity: 0; }
+
+@keyframes modWash { from { opacity: 0; } to { opacity: 1; } }
+#modules.reveal { animation: modWash .2s ease-out; }
+
+/* Centred with `translate` so `transform` is free for the flight and the pops. */
+#mod-tally {
+  position: fixed; left: 50%; top: 50%; translate: -50% -50%;
+  display: flex; align-items: center; gap: 20px; z-index: 9; pointer-events: none;
+  font-size: 78px; letter-spacing: 4px; color: #ffd970;
+  text-shadow: 0 0 44px rgba(255,190,60,.5);
+  will-change: transform, opacity;
+}
+#mod-tally .coin-dot { width: 46px; height: 46px; box-shadow: 0 0 22px rgba(255,190,60,.5); }
+
+/* Rides inside the tally, so it flies to the purse and fades with the count it
+   belongs to instead of being left behind on the floor of the screen. */
+@keyframes tallyIn { from { opacity: 0; } to { opacity: 1; } }
+#modules.reveal.stage-tally #mod-tally { animation: tallyIn .22s ease-out; }
+
+/* Under the count and centred on the screen rather than on the count, which is
+   a coin wide before its first digit and would carry the books off centre. */
+#mod-payout {
+  position: fixed; left: 50%; top: 50%; translate: -50% 0; margin-top: 76px;
+  display: flex; flex-direction: column; align-items: center; gap: 26px;
+  z-index: 9; pointer-events: none;
+}
+
+#mod-repair {
+  display: grid; gap: 7px 0; white-space: nowrap;
+  font-size: 13px; letter-spacing: 4px; color: #9fb0bd;
+}
+#mod-repair .repair-row {
+  display: grid; grid-template-columns: 190px 128px; align-items: baseline;
+  gap: 22px;
+}
+#mod-repair .repair-row span { text-align: right; }
+#mod-repair b {
+  font-size: 16px; font-weight: 700; letter-spacing: 2px; color: #e8eef3;
+  text-align: right; font-variant-numeric: tabular-nums;
+}
+#mod-repair .cost { color: #ff8f7a; }
+#mod-repair .cost b { color: #ff6a4a; }
+#mod-repair .net { color: #ffd970; margin-top: 5px;
+  border-top: 1px solid rgba(255,217,112,.25); padding-top: 9px; }
+#mod-repair .net b { font-size: 21px; color: #ffd970; }
+#mod-repair.hidden { display: none; }
+#modules:not(.stage-repair) #mod-payout { visibility: hidden; }
+@keyframes repairIn {
+  from { opacity: 0; transform: translateY(14px) scale(.86); }
+  to   { opacity: 1; transform: none; }
+}
+#modules.reveal.stage-repair #mod-repair { animation: repairIn .34s cubic-bezier(.16,.9,.24,1); }
+
+/* Banking takes the books away and leaves the one figure being paid, which is
+   the thing that flies to the purse: its own label goes with the rest, or it is
+   left standing over ground the number has already left. */
+#mod-repair.paying .repair-row:not(.net) { opacity: 0; }
+#mod-repair.paying .net span { opacity: 0; }
+#mod-repair.paying .net { border-top-color: transparent; }
+#mod-repair .repair-row, #mod-repair .net span {
+  transition: opacity .28s ease, border-color .28s ease;
+}
+#mod-repair.paying .net b { will-change: transform, opacity; }
+
+/* Once the board is coming up the payout is over, whatever is left of it. */
+#modules.stage-tree #mod-payout { display: none; }
+
+#btn-payout-go { white-space: nowrap; pointer-events: auto; }
+#modules:not(.stage-held) #btn-payout-go { display: none; }
+#modules.stage-held #btn-payout-go { animation: repairIn .28s cubic-bezier(.16,.9,.24,1); }
+
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(28px) scale(.96); }
+  to   { opacity: 1; transform: none; }
+}
+#modules.reveal .mod-panel { animation: panelIn .44s cubic-bezier(.16,.9,.24,1); }
+
+@keyframes titleIn {
+  from { opacity: 0; letter-spacing: 22px; filter: blur(7px); }
+  to   { opacity: 1; letter-spacing: 6px; filter: none; }
+}
+@keyframes titleFlare {
+  0%   { text-shadow: none; }
+  30%  { text-shadow: 0 0 26px rgba(125,211,252,.9); }
+  100% { text-shadow: none; }
+}
+@keyframes titleFail {
+  0%   { text-shadow: none; color: #ff8f7e; }
+  30%  { text-shadow: 0 0 26px rgba(255,90,70,.8); color: #ff8f7e; }
+  100% { text-shadow: none; }
+}
+#modules.reveal .mod-head .title {
+  animation: titleIn .5s cubic-bezier(.16,.9,.24,1) .04s backwards, titleFail 1s ease-out .1s;
+}
+#modules.reveal.cleared .mod-head .title {
+  animation: titleIn .5s cubic-bezier(.16,.9,.24,1) .04s backwards, titleFlare 1s ease-out .1s;
+}
+
+@keyframes takeIn { from { opacity: 0; } to { opacity: 1; } }
+#modules.reveal .mod-take { animation: takeIn .4s ease-out .14s backwards; }
+#modules.reveal #mod-saved { animation: takeIn .4s ease-out .3s backwards; }
+
+@keyframes edgesIn { from { opacity: 0; } to { opacity: 1; } }
+#modules.reveal.stage-tree #tree-edges { animation: edgesIn .5s ease-out .1s backwards; }
+/* The rack is the tree's other half — what the tree buys is carried in it — so
+   the two of them come up together rather than the rack sitting there through
+   the count. */
+#modules.reveal.stage-tree #mod-sectors,
+#modules.reveal.stage-tree .mod-rack { animation: edgesIn .5s ease-out .1s backwards; }
+
+@keyframes nodeIn { from { opacity: 0; transform: scale(.2); } to { opacity: 1; transform: scale(1); } }
+#modules.reveal.stage-tree .tnode:not(.bought) {
+  animation: nodeIn .36s cubic-bezier(.2,1.5,.4,1) backwards;
+  animation-delay: calc(var(--i, 0) * 30ms);
+}
+
+@keyframes treeWash { from { opacity: .9; transform: scale(.35); } to { opacity: 0; transform: scale(1.2); } }
+#modules.reveal.stage-tree #tree-view::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, rgba(125,211,252,.22), transparent 62%);
+  animation: treeWash .8s ease-out both;
+}
+
+@keyframes rowIn { from { opacity: 0; transform: translateX(-16px); } to { opacity: 1; transform: none; } }
+#modules.reveal.stage-stats .s-head,
+#modules.reveal.stage-stats .s-row,
+#modules.reveal.stage-stats .s-dead {
+  animation: rowIn .32s ease-out backwards;
+  animation-delay: calc(var(--i, 0) * 24ms);
+}
+
+@keyframes actionIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+/* An animated opacity outranks the declaration it lands on, so a button that is
+   off would rise to full and only drop to .3 once the entrance ended. It gets
+   its own end state instead of borrowing the live one. */
+@keyframes actionInOff { from { opacity: 0; transform: translateY(12px); } to { opacity: .3; transform: none; } }
+#modules.reveal.stage-stats .mod-actions .btn { animation: actionIn .34s ease-out backwards; }
+#modules.reveal.stage-stats .mod-actions .btn.locked,
+#modules.reveal.stage-stats .mod-actions .btn:disabled { animation-name: actionInOff; }
+#modules.reveal.stage-stats #btn-mod-quit { animation-delay: .04s; }
+#modules.reveal.stage-stats #btn-select { animation-delay: .1s; }
+#modules.reveal.stage-stats #btn-retry { animation-delay: .16s; }
+#modules.reveal.stage-stats #btn-next { animation-delay: .24s; }
+
+.mod-actions { display: flex; gap: 10px; justify-content: flex-end; }
+.mod-actions .btn { margin: 0; }
+/* Held away from the pair that carries the run on, so leaving is never the
+   button next to the one you meant to press. The margin is on quit itself and
+   not on the button after it, which is not always there to hold the gap. */
+#btn-mod-quit { margin-right: auto; }
+#btn-select { position: relative; }
+.sel-face { display: inline-flex; align-items: center; gap: 9px; }
+#btn-select .ico { width: 14px; height: 14px; color: #ffd970; }
+/* Nothing has been earned yet, so the mark on it is not a key. */
+#btn-select.locked .ico { color: inherit; }
+#btn-select-new {
+  position: absolute; top: -9px; right: -10px; padding: 1px 5px;
+  font-style: normal; font-size: 9px; letter-spacing: 1px;
+  color: #12181c; background: #7ee0a1;
+}
+#btn-select-new.hidden { display: none; }
+
+/* The board itself, over the tree it was opened from. */
+#wavepick {
+  position: absolute; inset: 0; z-index: 12; display: flex;
+  align-items: center; justify-content: center; background: rgba(4,8,11,.72);
+}
+#wavepick.hidden { display: none; }
+.wp-panel {
+  width: min(560px, 92vw); padding: 22px 24px;
+  border: 1px solid rgba(125,211,252,.35); background: #0b1116;
+  box-shadow: 0 24px 70px rgba(0,0,0,.6);
+  /* A phone held sideways is shorter than the board is tall. */
+  max-height: 90vh; overflow-y: auto;
+}
+.wp-head { font-size: 15px; letter-spacing: 4px; color: var(--accent); }
+/* The one rule a player cannot work out by looking at the board: what a sector
+   change costs them, said where the change is made. */
+.wp-sub {
+  margin-top: 7px;
+  font-size: 10.5px; line-height: 1.55; letter-spacing: .5px; opacity: .45;
+}
+/* The tabs live at the top of the bench, above the title: which ground you are
+   standing on is the first thing the screen answers. */
+#mod-sectors { display: flex; align-self: stretch; gap: 6px; margin-bottom: 8px; }
+#mod-sectors.hidden { display: none; }
+
+/* A card wearing its own ground rather than a tab: which sector you are picking
+   is a place, and the place is the thing worth showing. */
+.mod-sector {
+  position: relative; overflow: hidden;
+  width: 104px; height: 60px; padding: 0;
+  display: flex; align-items: flex-end; justify-content: center;
+  border: 1px solid rgba(125,211,252,.3);
+  background: #0e161d; color: #dff1fb;
+  font-family: inherit; cursor: pointer;
+}
+.ms-face { position: absolute; inset: 0; background-size: cover; background-position: center; }
+/* The dark layer the name is read over, weighted to the bottom where it sits. */
+.mod-sector::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(4,8,11,.5) 0%,
+                                      rgba(4,8,11,.5) 40%,
+                                      rgba(4,8,11,.86) 100%);
+}
+.ms-name { position: relative; z-index: 1; padding: 0 4px 5px; text-align: center; }
+.ms-name b { display: block; font-weight: 500; font-size: 9.5px; letter-spacing: 2px; }
+.ms-name i {
+  display: block; margin-top: 2px; font-style: normal;
+  font-size: 7.5px; letter-spacing: .8px; opacity: .68;
+}
+@media (hover: hover) {
+  .mod-sector:not(.locked):not(.sealed):hover { border-color: rgba(125,211,252,.7); }
+  .mod-sector:not(.locked):not(.sealed):hover::after { background: rgba(4,8,11,.34); }
+}
+.mod-sector.on { border-color: var(--accent); }
+.mod-sector.on .ms-name b { color: var(--accent); }
+/* Locked keeps its ground covered: seeing it is part of what opening one pays. */
+.mod-sector.locked { cursor: not-allowed; }
+.mod-sector.locked .ms-face { display: none; }
+.mod-sector.locked .ms-name { opacity: .34; }
+.mod-sector.locked .ms-name i { display: none; }
+.mod-sector .ico { display: none; width: 11px; height: 11px; }
+.mod-sector.locked .ico, .mod-sector.sealed .ico, .mod-sector.opening .ico {
+  display: block; position: absolute; z-index: 1;
+  top: 42%; left: 50%; transform: translate(-50%, -50%); opacity: .5;
+}
+/* Sighted but shut: the ground is shown as it is, so the place you cannot stand
+   on yet is worth wanting. The lock over it is what says it is closed. */
+.mod-sector.sealed { cursor: not-allowed; border-color: rgba(125,211,252,.16); }
+.mod-sector.sealed .ms-name { opacity: .55; }
+
+@keyframes noteShake {
+  0%   { transform: translateX(0); }
+  20%  { transform: translateX(-4px); }
+  45%  { transform: translateX(4px); }
+  70%  { transform: translateX(-2px); }
+  100% { transform: translateX(0); }
+}
+#mod-sector-note {
+  align-self: flex-start; padding: 4px 7px;
+  border-left: 2px solid #d8574a;
+  background: rgba(216,87,74,.1); color: #f0a79d;
+  font-size: 9.5px; line-height: 1.4; letter-spacing: 1px; text-align: left;
+}
+#mod-sector-note.hidden { display: none; }
+#mod-sector-note.shake { animation: noteShake .22s ease-out; }
+
+#wp-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 10px 0 18px;
+}
+.wp-wave {
+  position: relative; padding: 14px 0; border: 1px solid rgba(125,211,252,.3);
+  background: rgba(125,211,252,.07); color: #dff1fb;
+  font-family: inherit; font-size: 18px; letter-spacing: 2px; cursor: pointer;
+}
+.wp-wave b { font-weight: 500; }
+@media (hover: hover) {
+  .wp-wave:not(.locked):hover { border-color: var(--accent); background: rgba(125,211,252,.18); }
+}
+/* A wave with a boss on it wears the mark on its whole edge; the wave you are
+   standing on still outranks it. */
+.wp-wave.boss { border-color: #ffd970; }
+.wp-wave.now { border-color: #7ee0a1; color: #7ee0a1; }
+.wp-wave.locked { opacity: .32; cursor: not-allowed; }
+/* A wave can be locked and already keyed — the key was taken but the pad never
+   reached — so the key is what shows. */
+.wp-wave .wp-lock, .wp-wave .wp-key { position: absolute; top: 3px; right: 4px; display: none; }
+.wp-wave.locked .wp-lock { display: block; }
+.wp-wave.keyed .wp-lock { display: none; }
+.wp-wave.keyed .wp-key { display: block; color: #ffd970; }
+.wp-wave .wp-mark { position: absolute; bottom: 4px; left: 5px; }
+.wp-wave .wp-mark .ico { width: 17px; height: 17px; }
+.wp-wave .wp-mark.key { color: #ffd970; }
+.wp-wave .wp-mark.drone { color: var(--accent); }
+.wp-wave .ico { display: block; width: 11px; height: 11px; }
+.wp-foot { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+.wp-foot .btn { margin: 0; }
+
+/* The one destructive thing on the bench, so it is kept quiet until it is asked
+   for and states what it takes before it takes it. */
+.wp-reset-open { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; }
+#btn-wp-reset { padding: 9px 16px; font-size: 11px; }
+@media (hover: hover) {
+  .btn.warn:not(:disabled):hover { background: rgba(255,143,126,.2); }
+}
+#wp-reset-why { font-size: 9px; line-height: 1.4; letter-spacing: .5px; color: #5f7a88; }
+#wp-reset-why:empty { display: none; }
+
+#wp-reset {
+  margin-bottom: 16px; padding: 14px 16px;
+  border: 1px solid rgba(255,143,126,.4); background: rgba(255,143,126,.06);
+  text-align: left;
+}
+#wp-reset.hidden { display: none; }
+.wp-reset-head { font-size: 13px; letter-spacing: 3px; color: #ff8f7e; }
+.wp-reset-say { margin-top: 9px; font-size: 10.5px; line-height: 1.6; letter-spacing: .5px;
+                color: #cfe0ea; opacity: .8; }
+.wp-reset-say b { color: #ff8f7e; }
+.wp-reset-say i { display: block; margin-top: 7px; font-style: normal; opacity: .7; }
+.wp-reset-keep {
+  margin-top: 11px; padding-top: 10px; border-top: 1px solid rgba(255,143,126,.2);
+  font-size: 10px; letter-spacing: 1px; color: #ff8f7e;
+}
+.wp-reset-keep::before {
+  content: attr(data-label) '  '; letter-spacing: 3px; opacity: .55; color: #cfe0ea;
+}
+.wp-reset-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 14px; }
+.wp-reset-actions .btn { margin: 0; padding: 10px 18px; font-size: 12px; }
+
+/* Past the last mission wave the board has no fixed length: the way in is one
+   card, and every wave the run has taken out there stands beside it. */
+#wp-deep { margin-bottom: 18px; }
+#wp-deep.hidden { display: none; }
+.wp-deep-card {
+  width: 100%; padding: 13px 0;
+  border: 1px solid rgba(255,217,112,.45); background: rgba(255,217,112,.08);
+  color: #ffd970; font-family: inherit; cursor: pointer;
+}
+.wp-deep-card b { display: block; font-size: 15px; font-weight: 500; letter-spacing: 5px; }
+.wp-deep-card i {
+  display: block; margin-top: 4px; font-style: normal;
+  font-size: 9.5px; letter-spacing: 2px; opacity: .6;
+}
+@media (hover: hover) {
+  .wp-deep-card:hover { border-color: #ffd970; background: rgba(255,217,112,.18); }
+}
+#wp-deep-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+#wp-deep-grid:not(:empty) { margin-top: 10px; }
+.wp-wave.deep:not(.now) {
+  border-color: rgba(255,217,112,.3); background: rgba(255,217,112,.06); color: #ffd970;
+}
+@media (hover: hover) {
+  .wp-wave.deep:hover { border-color: #ffd970; background: rgba(255,217,112,.16); }
+}
+
+@media (max-height: 620px) {
+  .wp-panel { padding: 14px 18px; }
+  .mod-sector { width: 88px; height: 42px; }
+  .ms-name i { display: none; }
+  #wp-grid { gap: 7px; margin: 8px 0 12px; }
+  .wp-wave { padding: 9px 0; font-size: 16px; }
+  #wp-deep { margin-bottom: 12px; }
+  #wp-deep-grid { gap: 7px; }
+  .wp-deep-card { padding: 9px 0; }
+  .wp-deep-card b { font-size: 13px; }
+  .mod-panel { padding: 12px 16px 12px; }
+  .mod-head .title { font-size: 19px; letter-spacing: 4px; }
+  #modrack { --slot: 30px; }
+  .rack-label { display: none; }
+  #mod-stats, #tree-view { margin: 8px 0; }
+  #mod-stats { flex-basis: 220px; }
+  #mod-tally { font-size: 48px; }
+  #mod-tally .coin-dot { width: 30px; height: 30px; }
+  #mod-payout { margin-top: 54px; gap: 18px; }
+  #mod-repair { font-size: 11px; letter-spacing: 3px; gap: 5px 0; }
+  #mod-repair .repair-row { grid-template-columns: 156px 104px; gap: 16px; }
+  #mod-repair b { font-size: 13px; }
+  #mod-repair .net b { font-size: 17px; }
+  .s-dead-n { font-size: 32px; }
+}
+
+/* Two columns of header do not fit a phone held upright — side by side the rack
+   runs off the right edge — so the head becomes rows: where you are, what the
+   wave was, then what there is to spend and to carry. */
+@media (max-width: 560px) {
+  .mod-head { flex-direction: column; align-items: stretch; gap: 10px; }
+  .mod-take { align-items: stretch; }
+  .mod-purse-row { justify-content: space-between; }
+  #mod-sectors { gap: 5px; }
+  .ms-name { padding: 0 3px 5px; }
+  .ms-name i { display: none; }
+}
+
+/* The take is counted up in the middle of the screen, and on a narrow one the
+   count and the books under it are wider than the screen is. */
+@media (max-width: 480px) {
+  #mod-tally { font-size: 52px; gap: 14px; }
+  #mod-tally .coin-dot { width: 32px; height: 32px; }
+  #mod-payout { margin-top: 62px; }
+  #mod-repair { font-size: 10px; letter-spacing: 2px; }
+  #mod-repair .repair-row { grid-template-columns: 148px 96px; gap: 12px; }
+  #mod-repair b { font-size: 12px; letter-spacing: 1px; }
+  #mod-repair .net b { font-size: 16px; }
+}
+
+/* The purse, read backwards: what the sector has already gone on. Hung off the
+   purse itself so it lands under the figure it explains. */
+.mod-spent {
+  position: absolute; left: auto; right: 0; top: calc(100% + 10px); z-index: 12;
+  font-size: 12px; letter-spacing: 0; color: #cfe0e8; white-space: nowrap;
+}
+.mod-spent .s-coin { display: flex; align-items: center; gap: 6px; color: #ffd970; }
+.mod-spent .sp-total { margin-top: 8px; padding-top: 7px; border-top: 1px solid #1b2a33; }

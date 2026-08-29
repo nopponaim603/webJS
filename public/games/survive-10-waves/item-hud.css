@@ -1,0 +1,50 @@
+/* What an item is doing to you, while it does it. Sat two thirds down the
+   screen: under the fight and over the touch controls, where it can be read
+   without looking away from what is biting you. */
+#effects {
+  position: absolute; top: 66%; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; gap: 7px;
+  align-items: center; pointer-events: none;
+}
+.fx-row {
+  --fx: #7ee0a1;
+  /* Wide enough for the longest line the catalog can print on one row. */
+  width: min(376px, 80vw);
+  display: flex; flex-direction: column; gap: 4px;
+  animation: fxIn .22s ease-out;
+}
+/* Name and effect on one line: what it is and what it is doing are one fact,
+   and stacking them made the reader take two looks to get it. */
+.fx-head {
+  display: flex; align-items: baseline; justify-content: center; gap: 9px;
+  white-space: nowrap;
+  text-shadow: 0 0 10px rgba(0,0,0,.9), 0 1px 2px rgba(0,0,0,.95);
+}
+/* One size for both — the colour is what separates the name from what it does,
+   so nothing is gained by making one of them smaller as well. */
+.fx-name, .fx-hint { display: block; font-size: 13px; }
+.fx-name { letter-spacing: 2px; color: var(--fx); }
+.fx-hint { letter-spacing: 1px; color: rgba(255,255,255,.8); }
+.fx-bar {
+  display: block; height: 5px; padding: 1px;
+  border: 1px solid rgba(255,255,255,.28); background: rgba(0,0,0,.5);
+}
+.fx-bar > b {
+  display: block; height: 100%; width: 100%;
+  background: var(--fx); box-shadow: 0 0 8px var(--fx);
+  transition: width .12s linear;
+}
+@keyframes fxIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* A phone held sideways has the pad where this sits, so it tucks up and in. */
+@media (max-height: 520px) {
+  #effects { top: 58%; gap: 5px; }
+  .fx-row { width: min(304px, 70vw); gap: 3px; }
+  .fx-head { gap: 7px; }
+  .fx-name, .fx-hint { font-size: 11px; }
+  .fx-name { letter-spacing: 1.5px; }
+  .fx-hint { letter-spacing: .5px; }
+}

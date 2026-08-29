@@ -1,0 +1,42 @@
+/* The scrollbar is the one piece of chrome the game does not draw itself, so it
+   is redressed to match the rest: square, thin, and the same cold blue the
+   buttons and the sliders wear. The fallback colour is here because the tool
+   pages carry their own palette and never define --accent. */
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+
+::-webkit-scrollbar-track { background: rgba(255, 255, 255, .04); }
+
+::-webkit-scrollbar-thumb {
+  background: rgba(125, 211, 252, .18);
+  border: 1px solid rgba(125, 211, 252, .42);
+}
+
+@media (hover: hover) {
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(125, 211, 252, .34);
+    border-color: var(--accent, #7dd3fc);
+  }
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: rgba(125, 211, 252, .46);
+  border-color: var(--accent, #7dd3fc);
+}
+
+/* The stepper arrows are drawn by the platform and cannot be restyled, so they
+   go rather than sit there in the system theme. */
+::-webkit-scrollbar-button { display: none; }
+::-webkit-scrollbar-corner { background: transparent; }
+
+/* Firefox has no scrollbar pseudo-elements and takes these two properties
+   instead. They are kept out of the engines that do have them: Chromium drops
+   the pseudo-elements entirely for any element that carries a scrollbar-width
+   or scrollbar-color of its own, which would trade the drawing above for a
+   tinted system bar. */
+@supports not selector(::-webkit-scrollbar) {
+  :root {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(125, 211, 252, .38) rgba(255, 255, 255, .05);
+  }
+}

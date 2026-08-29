@@ -1,0 +1,47 @@
+/* The pause screen's music and sound levels, drawn as a strip to sit under the
+   control list without competing with it. */
+#pause-audio {
+  display: flex; gap: 30px; flex-wrap: wrap; justify-content: center;
+  padding: 12px 22px;
+  border: 1px solid rgba(255,255,255,.08); background: rgba(6,10,14,.5);
+}
+
+.vol-row { display: flex; align-items: center; gap: 10px; }
+
+.vol-name {
+  font-size: 9px; letter-spacing: 3px; color: var(--accent); opacity: .75;
+  min-width: 46px; text-align: left;
+}
+
+.vol-val {
+  font-size: 10px; letter-spacing: 1.6px; color: #8ea3ae;
+  min-width: 34px; text-align: right;
+}
+
+.vol-row input[type=range] {
+  -webkit-appearance: none; appearance: none;
+  width: 150px; height: 3px; margin: 0;
+  background: rgba(255,255,255,.14);
+  cursor: pointer; touch-action: none;
+}
+
+.vol-row input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 11px; height: 17px;
+  border: 1px solid var(--accent); background: #0b1420;
+  box-shadow: 0 0 6px rgba(125,211,252,.35);
+}
+
+.vol-row input[type=range]::-moz-range-thumb {
+  width: 9px; height: 15px; border-radius: 0;
+  border: 1px solid var(--accent); background: #0b1420;
+  box-shadow: 0 0 6px rgba(125,211,252,.35);
+}
+
+@media (max-width: 760px), (max-height: 700px) {
+  #pause-audio { gap: 14px; padding: 10px 14px; }
+  .vol-row { gap: 8px; }
+  .vol-row input[type=range] { width: 128px; height: 4px; }
+  .vol-row input[type=range]::-webkit-slider-thumb { width: 14px; height: 22px; }
+  .vol-row input[type=range]::-moz-range-thumb { width: 12px; height: 20px; }
+}

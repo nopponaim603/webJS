@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<!--
+  ==========================================================================
+   ⚠  SPOILER ALERT  ⚠
+
+   You have reached for the universe's power. That's okay, but know this:
+
+   This game is designed for ~2 hours of entertainment. Play it straight
+   and enjoy the pleasant surprises.
+
+   See you at extraction. — survive10waves.com
+  ==========================================================================
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="apple-touch-icon" sizes="57x57" href="/assets/favicons/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/assets/favicons/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/assets/favicons/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/assets/favicons/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/assets/favicons/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/assets/favicons/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/assets/favicons/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/assets/favicons/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/assets/favicons/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/assets/favicons/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicons/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/assets/favicons/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover" />
+<title>SURVIVE 10 WAVES</title>
+<meta name="description" content="Ten waves. One arena that closes in on you. Hold the ground, spend what you earn, and get out.">
+
+<!-- The welcome screen is two pictures and a strip of quotes, and the game is a
+     hundred megabytes behind them. Asked for above the stylesheets and ahead of
+     everything the game wants, so the screen is furnished while the rest lands.
+     The sheet is a CSS background, which is otherwise not discovered until the
+     strip has been built. -->
+<link rel="preload" as="image" href="assets/logo/wordmark.png" fetchpriority="high">
+<link rel="preload" as="image" href="assets/testimonials/sheet.webp" fetchpriority="high">
+<!-- Ahead of the modulepreloads below: a browser rejects an import map once any
+     module load or preload has started. -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "./vendor/three/three.module.js",
+    "three/addons/": "./vendor/three/addons/"
+  }
+}
+</script>
+
+<link rel="modulepreload" href="src/ui/testimonials.js">
+<link rel="modulepreload" href="src/config/testimonials.js">
+<link rel="modulepreload" href="src/config/avatars.js">
+
+<!-- The card a link to the game unfurls into. The image is a real frame of the
+     game with the wordmark on it; absolute URLs because a crawler resolves these
+     against nothing. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Survive 10 Waves">
+<meta property="og:title" content="SURVIVE 10 WAVES">
+<meta property="og:description" content="Ten waves. One arena that closes in on you. Hold the ground, spend what you earn, and get out.">
+<meta property="og:url" content="https://www.survive10waves.com/">
+<meta property="og:image" content="https://www.survive10waves.com/assets/og-image.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A soldier holding an extraction pad against a swarm of alien creatures, under the SURVIVE 10 WAVES logo">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SURVIVE 10 WAVES">
+<meta name="twitter:description" content="Ten waves. One arena that closes in on you. Hold the ground, spend what you earn, and get out.">
+<meta name="twitter:image" content="https://www.survive10waves.com/assets/og-image.jpg">
+<link rel="stylesheet" href="mod-tip.css">
+<link rel="stylesheet" href="mod-screen.css">
+<link rel="stylesheet" href="stale.css">
+<link rel="stylesheet" href="rack.css">
+<link rel="stylesheet" href="controls.css">
+<link rel="stylesheet" href="volume.css">
+<link rel="stylesheet" href="scrollbar.css">
+<link rel="stylesheet" href="travel.css">
+<link rel="stylesheet" href="menu.css">
+<link rel="stylesheet" href="testimonials.css">
+<link rel="stylesheet" href="story.css">
+<link rel="stylesheet" href="credits.css">
+<link rel="stylesheet" href="item-hud.css">
+<link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="touch.css">
+<!-- 100% privacy-first analytics, and only on the live host: a copy served
+     from anywhere else sends nothing at all. The stub queues events fired
+     before the script has landed, which at boot is most of them; if it never
+     lands, or is never asked for, the queue is thrown away and the stub goes
+     quiet, since the game must play with nothing but this folder. -->
+<script>
+window.sa_event=window.sa_event||function(){var a=[].slice.call(arguments);window.sa_event.q?window.sa_event.q.push(a):window.sa_event.q=[a]};
+if (location.hostname === 'www.survive10waves.com') {
+  var sa = document.createElement('script');
+  sa.async = true;
+  sa.src = 'https://scripts.simpleanalyticscdn.com/latest.js';
+  sa.onerror = function () { window.sa_event = function () {}; };
+  document.head.appendChild(sa);
+} else {
+  window.sa_event = function () {};
+}
+</script>
+</head>
+<body data-mode="menu">
+
+<div id="ui">
+  <div id="blackout"></div>
+  <div id="hud-left">
+    <div class="label" id="hp-label">
+      <span>HEALTH</span>
+      <span id="hpnum" class="hidden"></span>
+      <span id="shieldnum" class="hidden"></span>
+    </div>
+    <div id="hpbar"><div id="hpfill"></div></div>
+    <div id="gunlist"></div>
+    <div id="gunswap-tip" class="hidden"></div>
+  </div>
+
+  <div id="gun-tip"></div>
+
+  <div id="minimap" class="hidden"><canvas id="mm-canvas"></canvas></div>
+
+  <div id="hud-right">
+    <div id="hud-wave"><div id="substats">WAVE 1</div><div id="wave-clock"></div></div>
+    <div id="dronehp" class="hidden"></div>
+  </div>
+
+  <div id="wave-banner"></div>
+  <div id="collapse-alert" class="hidden"><b>ARENA COLLAPSING</b></div>
+  <div id="hurt"></div>
+  <div id="grazeveil"></div>
+  <div id="extract" class="hidden">
+    <div class="ex-label">STAND ON THE PAD TO EXTRACT</div>
+    <div class="ex-bar"><div id="ex-fill"></div></div>
+  </div>
+  <div id="movetip" class="hidden"></div>
+  <div id="note" class="hidden"></div>
+  <div id="bubble" class="hidden"></div>
+  <div id="floaters"></div>
+  <svg id="en-arc" viewBox="0 0 100 100">
+    <path class="track" d="M 10.1 37 A 42 42 0 0 1 89.9 37" />
+    <path class="fill"  d="M 10.1 37 A 42 42 0 0 1 89.9 37" />
+  </svg>
+  <svg id="ch-arc" viewBox="0 0 100 100">
+    <path class="track" d="M 10.1 63 A 42 42 0 0 0 89.9 63" />
+    <path class="fill"  d="M 10.1 63 A 42 42 0 0 0 89.9 63" />
+  </svg>
+  <div id="ch-note"></div>
+  <div id="crosshair" data-sym="cross">
+    <span class="sym cross"></span>
+    <span class="sym circle"></span>
+    <span class="sym spread"></span>
+    <span class="sym lance"></span>
+  </div>
+  <div id="nowplaying"></div>
+  <div class="hint">Q / RIGHT CLICK swap gun &nbsp;·&nbsp; ESC / P pause &nbsp;·&nbsp; <span id="mute-ind">M mute music</span></div>
+
+  <div id="terrain-load" class="overlay hidden">
+    <div class="tl-label" id="tl-label">LOADING TERRAIN</div>
+    <div class="tl-bar"><i id="tl-fill"></i></div>
+  </div>
+
+  <div id="modules" class="overlay hidden">
+    <div class="mod-panel">
+      <div class="mod-head">
+        <div class="mod-titles">
+          <div id="mod-sectors"></div>
+          <div id="mod-sector-note" class="hidden"></div>
+          <div class="title" id="mod-title">WAVE CLEARED</div>
+          <div id="mod-saved" class="hidden">PROGRESS SAVED</div>
+        </div>
+        <div class="mod-take">
+          <div class="mod-purse-row">
+            <button id="mod-stats-tab">RUN STATS</button>
+            <div class="mod-purse"><span class="coin-dot"></span><span id="mod-coins">0</span>
+              <div id="mod-spent" class="mod-tip mod-spent hidden"></div>
+            </div>
+          </div>
+          <div class="mod-rack">
+            <div class="rack-legend">
+              <span class="rack-label">WEAPON RACK</span>
+              <div class="rack-keys rack-desk">
+                <span>
+                  <i data-btn="left"></i>REARRANGE
+                </span>
+                <span>
+                  <i data-btn="right"></i>REMOVE
+                </span>
+              </div>
+              <div class="rack-keys rack-touch"><span>TAP A SLOT, TAP ANOTHER TO SWAP</span></div>
+            </div>
+            <div id="modrack" class="rack"></div>
+          </div>
+        </div>
+      </div>
+      <div class="mod-body">
+        <div id="mod-stats"></div>
+        <div id="tree-view">
+        <div id="tree-pan">
+          <!-- Big and centred on the layer's origin. A zero-sized SVG draws
+               nothing however far `overflow: visible` is pushed, and the tree's
+               coordinates run negative in both axes from that origin. -->
+          <svg id="tree-grid" viewBox="-1200 -1200 2400 2400" width="2400" height="2400"></svg>
+          <svg id="tree-edges" viewBox="-1200 -1200 2400 2400" width="2400" height="2400"></svg>
+        </div>
+        </div>
+      </div>
+      <div class="mod-actions">
+        <button class="btn ghost" id="btn-mod-quit">QUIT TO MENU</button>
+        <button class="btn ghost" id="btn-select"><span class="sel-face"></span><i id="btn-select-new">NEW</i></button>
+        <button class="btn" id="btn-retry">RETRY WAVE</button>
+        <button class="btn" id="btn-next">NEXT WAVE</button>
+      </div>
+    </div>
+    <div id="wavepick" class="hidden">
+      <div class="wp-panel">
+        <div class="wp-head">SELECT WAVE</div>
+        <div class="wp-sub">Each sector keeps its own coins and upgrades.</div>
+        <div id="wp-grid"></div>
+        <div id="wp-deep" class="hidden">
+          <button class="wp-deep-card" id="btn-wp-deep"></button>
+          <div id="wp-deep-grid"></div>
+        </div>
+        <div id="wp-reset" class="hidden">
+          <div class="wp-reset-head" id="wp-reset-head"></div>
+          <div class="wp-reset-say" id="wp-reset-say"></div>
+          <div class="wp-reset-keep" data-label="YOU LOSE"><span id="wp-reset-kept"></span></div>
+          <div class="wp-reset-actions">
+            <button class="btn ghost" id="btn-wp-keep">KEEP MY PROGRESS</button>
+            <button class="btn warn" id="btn-wp-go"></button>
+          </div>
+        </div>
+        <div class="wp-foot">
+          <div class="wp-reset-open">
+            <button class="btn ghost warn" id="btn-wp-reset">RESET SECTOR</button>
+            <span id="wp-reset-why"></span>
+          </div>
+          <button class="btn ghost" id="btn-wp-close">CLOSE</button>
+        </div>
+      </div>
+    </div>
+    <div id="stale" class="hidden">
+      <div class="stale-panel">
+        <div class="stale-head">SAVE NOT COMPATIBLE</div>
+        <div class="stale-say">The game has been updated since this run was saved,
+          and the old save cannot be carried into the new version.
+          Start a new game to play all the new content.</div>
+        <div class="stale-actions">
+          <button class="btn ghost" id="btn-stale-keep">KEEP PLAYING ANYWAY</button>
+          <button class="btn" id="btn-stale-new">START A NEW GAME</button>
+        </div>
+      </div>
+    </div>
+    <div id="mod-tally"><span class="coin-dot"></span><span id="mod-tally-n">+0</span></div>
+    <div id="mod-payout">
+      <div id="mod-repair">
+        <div class="repair-row"><span>COINS COLLECTED</span><b id="mod-repair-took">0</b></div>
+        <div class="repair-row"><span>DRONES LOST</span><b id="mod-repair-lost">0</b></div>
+        <div class="repair-row"><span>DRONE DAMAGE</span><b id="mod-repair-dealt">0</b></div>
+        <div class="repair-row cost"><span>REPAIR COST</span><b id="mod-repair-n">-0</b></div>
+        <div class="repair-row net"><span>COINS EARNED</span><b id="mod-repair-net">0</b></div>
+      </div>
+      <button class="btn" id="btn-payout-go">CONTINUE</button>
+    </div>
+    <div id="travel-veil"></div>
+    <div id="mod-flight"></div>
+    <div id="rack-coach" class="hidden"></div>
+    <div id="mod-tip" class="mod-tip hidden"></div>
+  </div>
+
+  <div id="menu" class="overlay">
+    <div class="menu-shot">
+      <div id="shot-load">
+        <div class="sl-ring"><i></i><i></i><b></b></div>
+        <div class="sl-label">BOOTING SENTINEL</div>
+      </div>
+      <div id="testimonials" aria-label="What players say"></div>
+    </div>
+
+    <div class="menu-panel">
+      <div class="menu-mark">
+        <div class="title">
+          <img class="menu-logo" src="assets/logo/wordmark.png" alt="SURVIVE 10 WAVES"
+               width="768" height="530" fetchpriority="high">
+          <span class="sub">VERSION 1.1</span>
+        </div>
+      </div>
+
+      <div class="menu-slot">
+        <div id="run-card" class="hidden">
+          <div class="label">RUN IN PROGRESS</div>
+          <div id="run-stats"></div>
+          <div id="run-deep" class="hidden"></div>
+        </div>
+      </div>
+
+      <div class="menu-swap">
+        <div id="menu-actions">
+          <button class="btn" id="btn-continue">CONTINUE</button>
+          <button class="btn ghost" id="btn-new">NEW GAME</button>
+        </div>
+        <div id="loading">
+          <div id="loading-label">LOADING</div>
+          <div id="loading-bar"><i></i></div>
+        </div>
+      </div>
+
+      <div class="menu-foot">
+        <div class="demo-note"><b>DEMO MODE</b> &mdash; the full game is on desktop</div>
+        <div class="foot-actions">
+          <button class="btn-fullscreen">FULLSCREEN</button>
+          <button id="btn-credits">CREDITS</button>
+          <button id="btn-refresh">CLEAR CACHE &amp; RELOAD</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="credits" class="overlay hidden">
+    <div class="credits-panel">
+      <div class="credits-head"><b>CREDITS</b>SURVIVE 10 WAVES</div>
+      <div id="credits-body"></div>
+      <div class="credits-foot">
+        <span id="credits-version"></span>
+        <button class="btn" id="btn-credits-close">CLOSE</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- What is running on the player right now, one row an effect. -->
+  <div id="effects"></div>
+
+  <div id="story" class="overlay hidden">
+    <div class="story-panel">
+      <div class="story-head">INCOMING TRANSMISSION</div>
+      <div id="story-body"></div>
+      <div class="story-buttons">
+        <button class="btn" id="btn-story">CONTINUE</button>
+        <button class="btn ghost hidden" id="btn-story-alt"></button>
+      </div>
+    </div>
+  </div>
+
+  <div id="pause" class="overlay hidden">
+    <div class="title">PAUSED</div>
+    <div class="rack-panel">
+      <div class="label">WEAPON RACK</div>
+      <div id="gunrack" class="rack"></div>
+      <div class="rack-keys rack-desk">
+        <span>
+          <i data-btn="left"></i>REARRANGE
+        </span>
+        <span>
+          <i data-btn="right"></i>REMOVE
+        </span>
+      </div>
+      <div class="rack-help rack-touch">
+        TAP A SLOT TO PICK IT UP, TAP ANOTHER TO SWAP<br>
+        THE ORDER IS THE ORDER <b>SWAP</b> WALKS
+      </div>
+    </div>
+    <div id="controls" class="ctl-panel rack-desk"></div>
+    <div id="pause-audio">
+      <div class="vol-row">
+        <span class="vol-name">MUSIC</span>
+        <input id="vol-music" type="range" min="0" max="1" step="0.01">
+        <span class="vol-val"></span>
+      </div>
+      <div class="vol-row">
+        <span class="vol-name">SOUND</span>
+        <input id="vol-sfx" type="range" min="0" max="1" step="0.01">
+        <span class="vol-val"></span>
+      </div>
+    </div>
+    <div id="pause-actions">
+      <button class="btn" id="btn-resume">RESUME</button>
+      <button class="btn ghost" id="btn-music">MUSIC ON</button>
+      <button class="btn ghost btn-fullscreen">FULLSCREEN</button>
+      <button class="btn ghost" id="btn-quit">QUIT TO MENU</button>
+    </div>
+    <div id="pause-track"></div>
+  </div>
+</div>
+
+<!-- Background music. One element, src swapped per track. preload="none" and no
+     `loop`: nothing is fetched until played.
+     The playlist itself is src/config/tracks.js, generated by tools/sync_tracks.py. -->
+<audio id="bgm" preload="none"></audio>
+
+<!-- Ahead of main.js and off its module graph: both are deferred and run in
+     document order, so the strip is built and painted before the game starts
+     pulling three.js and the models down. -->
+<script type="module">
+  import { init } from './src/ui/testimonials.js';
+  init();
+</script>
+
+<script type="module" src="src/main.js"></script>
+
+</body>
+</html>

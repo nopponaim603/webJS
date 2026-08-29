@@ -198,6 +198,30 @@ const initialGames = [
     url: "/games/starter-kit-racing/index.html",
     image: "/games/starter-kit-racing/screenshot.png",
     gradient: "linear-gradient(135deg, #EF4444 0%, #F59E0B 100%)"
+  },
+  {
+    id: "godawful",
+    title: "⚡ GODAWFUL (Cute Town God Sim)",
+    category: "Three.js 3D Engine",
+    url: "/games/godawful/index.html",
+    image: "/games/godawful/og.png",
+    gradient: "linear-gradient(135deg, #1E1B4B 0%, #4F46E5 100%)"
+  },
+  {
+    id: "survive-10-waves",
+    title: "🛡️ SURVIVE 10 WAVES (Extraction 3D)",
+    category: "Three.js 3D Engine",
+    url: "/games/survive-10-waves/index.html",
+    image: "/games/survive-10-waves/assets/og-image.jpg",
+    gradient: "linear-gradient(135deg, #0F172A 0%, #06B6D4 100%)"
+  },
+  {
+    id: "dirtline",
+    title: "🏍️ DIRT LINE (Trials Dirt Bike 3D)",
+    category: "Three.js 3D Engine",
+    url: "/games/dirtline/index.html",
+    image: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=400&h=400&fit=crop",
+    gradient: "linear-gradient(135deg, #78350F 0%, #F59E0B 100%)"
   }
 ];
 

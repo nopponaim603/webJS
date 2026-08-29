@@ -1,0 +1,48 @@
+/* The module tooltip, shared by the game and the tree editor so what you
+   tweak in one is what you read in the other. */
+:root { --accent: #9fd6f0; }
+.coin-dot { width: 13px; height: 13px; border-radius: 50%;
+            background: radial-gradient(circle at 35% 30%, #ffe9a0, #ffc63d 55%, #b8801a);
+            box-shadow: 0 0 6px rgba(255,190,60,.45); }
+.mod-tip {
+  position: fixed; left: 0; top: 0; z-index: 9; pointer-events: none;
+  min-width: 170px; padding: 9px 12px 10px; text-align: left;
+  border: 1px solid #2c4653; border-radius: 5px; background: rgba(6,10,14,.97);
+  font-size: 12px; line-height: 1.5;
+}
+.mod-tip.hidden { display: none; }
+.mod-tip .t-head { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; }
+.mod-tip .t-name { font-size: 12px; letter-spacing: 2px; color: var(--accent); }
+.mod-tip .t-lv { font-size: 11px; opacity: .45; }
+.mod-tip .t-blurb { margin-top: 5px; color: #8fa3ae; font-size: 11px; line-height: 1.45;
+                    max-width: 30ch; }
+.mod-tip .t-stat { display: flex; align-items: baseline; gap: 6px; margin-top: 6px; }
+.mod-tip .t-blurb + .t-stat { margin-top: 9px; }
+.mod-tip .s-label { opacity: .5; font-size: 11px; letter-spacing: 1px; margin-right: auto; }
+/* A row with nothing to compare against is a sentence, not a pair of columns. */
+.mod-tip .t-one .s-label { margin-right: 6px; }
+.mod-tip .s-from { opacity: .55; }
+.mod-tip .s-arrow { opacity: .4; }
+.mod-tip .s-to { color: #7ee0a1; font-weight: 700; }
+.mod-tip .t-cost { display: flex; align-items: center; gap: 6px; margin-top: 7px;
+                   color: #ffd970; font-size: 13px; }
+.mod-tip .t-cost.short { color: #ff8f7e; }
+.mod-tip .t-owned { margin-top: 7px; color: #7ee0a1; font-size: 11px; letter-spacing: 2px; }
+.mod-tip .t-lock { margin-top: 7px; color: #7f8b93; font-size: 11px; letter-spacing: 1px; }
+/* What the card says the pointer can do: on a mouse the right button buys the
+   whole climb. A finger gets a button instead — the card is where the decision
+   is read, so it is where the decision is made. */
+.mod-tip .t-again {
+  margin-top: 8px; padding-top: 7px; border-top: 1px solid #1b2a33;
+  color: var(--accent); font-size: 10px; letter-spacing: 2px; opacity: .8;
+}
+/* The one part of the card a finger can reach: the rest stays transparent to
+   touch so the nodes it covers are still tappable through it. */
+.mod-tip .t-buy {
+  pointer-events: auto;
+  display: block; width: 100%; margin-top: 10px; padding: 14px 0;
+  border: 1px solid var(--accent); border-radius: 4px;
+  background: rgba(159,214,240,.14); color: var(--accent);
+  font-family: inherit; font-size: 12px; letter-spacing: 3px;
+}
+.mod-tip .t-buy:active { background: rgba(159,214,240,.3); }

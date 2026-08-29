@@ -1,0 +1,115 @@
+/* Replies from players, rolling along the head of the welcome shot. It sits in
+   the band the camera already leaves empty, under the wash `.menu-shot::before`
+   lays down, so it never crowds the figure or the panel beside it. */
+#testimonials {
+  position: absolute; z-index: 1;
+  left: 0; right: 0; top: clamp(16px, 3.4vh, 40px);
+  display: flex; flex-direction: column; gap: 10px;
+  pointer-events: none;
+}
+
+.tm-head {
+  display: flex; align-items: center; gap: 12px;
+  padding: 0 clamp(18px, 3.4vw, 48px);
+  font-size: 10px; letter-spacing: 3px; color: #5f7a88;
+}
+.tm-head::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, rgba(125,211,252,.4), rgba(125,211,252,0) 80%);
+}
+
+.tm-rail {
+  overflow: hidden;
+  padding: 2px clamp(18px, 3.4vw, 48px);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 88%, transparent);
+}
+
+.tm-track {
+  display: flex; width: max-content; will-change: transform;
+  animation: tm-roll var(--tm-dur, 120s) linear infinite;
+}
+.tm-set { display: flex; }
+/* Each card carries its own trailing gap. A flex `gap` would leave the two runs
+   half a gap out of step and the loop would jump at the seam. */
+.tm-card { margin-right: 12px; }
+
+@keyframes tm-roll {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+.tm-card {
+  flex: 0 0 auto;
+  display: flex; align-items: center; gap: 11px;
+  padding: 10px 14px 10px 11px;
+  text-align: left;
+  border: 1px solid #1d2a33; border-radius: 4px;
+  background: linear-gradient(155deg, rgba(15,25,31,.86), rgba(6,10,14,.7));
+  transition: border-color .18s ease, background-color .18s ease;
+}
+
+/* One column of square tiles, built by tools/testimonial_sheet.py: the row a
+   handle sits on is `--tm-i`, and `--tm-n` is how many rows there are. */
+.tm-face {
+  flex: 0 0 auto; width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid #2b3f4b; background-color: #0d161b;
+  background-image: url(assets/testimonials/sheet.webp);
+  background-repeat: no-repeat;
+  background-size: 100% calc(var(--tm-n) * 100%);
+  background-position: 0 calc(var(--tm-i) * 100% / (var(--tm-n) - 1));
+}
+.tm-face.blank { background-image: none; }
+
+.tm-body { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.tm-who { display: flex; align-items: baseline; gap: 7px; }
+.tm-who b {
+  font-size: 11px; font-weight: 700; letter-spacing: 1px; color: #cfe4ee;
+  white-space: nowrap;
+}
+.tm-who i {
+  font-style: normal; font-size: 10px; letter-spacing: 1px; color: #46606d;
+  white-space: nowrap;
+}
+.tm-say {
+  max-width: 38ch; font-size: 12px; line-height: 1.35; letter-spacing: .3px;
+  color: #9fb6c2;
+}
+
+
+/* Stacked layout: the shot is a wide band above the panel and has less height
+   to give, so the cards lose a line's worth of padding rather than the strip. */
+@media (max-aspect-ratio: 11/10) {
+  #testimonials { top: 12px; gap: 8px; }
+  .tm-say { max-width: 30ch; font-size: 11px; }
+  .tm-card { padding: 8px 12px 8px 9px; }
+  .tm-face { width: 30px; height: 30px; }
+}
+
+/* Short screens, matching the panel's own ladder in menu.css: give height back
+   to the figure before giving up the strip. */
+@media (max-height: 720px) {
+  #testimonials { top: 10px; gap: 7px; }
+  .tm-head { font-size: 9px; letter-spacing: 2px; }
+  .tm-card { padding: 7px 12px 7px 9px; gap: 9px; }
+  .tm-face { width: 28px; height: 28px; }
+  .tm-who b { font-size: 10px; }
+  .tm-say { font-size: 11px; }
+}
+
+/* Below this the shot is a letterbox and the figure needs all of it: a laptop
+   with half its screen eaten by browser chrome, or a phone held sideways. */
+@media (max-height: 560px) {
+  #testimonials { display: none; }
+}
+
+/* A phone stood up: the panel takes most of the screen and what is left of the
+   shot is barely taller than a card. */
+@media (max-aspect-ratio: 11/10) and (max-width: 620px) {
+  #testimonials { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tm-rail { overflow-x: auto; }
+  .tm-track { animation: none; }
+}

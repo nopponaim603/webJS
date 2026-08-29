@@ -1,0 +1,37 @@
+/* The pause screen's control list. Three groups across rather than one long
+   column: the whole of it has to be read at a glance, without scrolling. */
+.ctl-panel {
+  display: flex; gap: 30px; flex-wrap: wrap; justify-content: center;
+  padding: 14px 22px; margin-top: 4px;
+  border: 1px solid rgba(255,255,255,.08); background: rgba(6,10,14,.5);
+}
+
+.ctl-group { display: flex; flex-direction: column; gap: 7px; min-width: 190px; }
+
+.ctl-head {
+  font-size: 9px; letter-spacing: 3px; color: var(--accent); opacity: .75;
+  text-align: left; padding-bottom: 5px;
+  border-bottom: 1px solid rgba(255,255,255,.09);
+}
+
+.ctl-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  font-size: 10px; letter-spacing: 1.6px; color: #8ea3ae;
+}
+.ctl-keys { display: flex; align-items: center; gap: 4px; }
+.ctl-or { font-size: 8px; letter-spacing: 1px; opacity: .4; margin: 0 1px; }
+
+kbd {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 20px; height: 19px; padding: 0 5px;
+  border: 1px solid rgba(255,255,255,.2); border-bottom-color: rgba(255,255,255,.34);
+  background: rgba(255,255,255,.06); color: #dbe7ee;
+  font-family: inherit; font-size: 9px; letter-spacing: 1px;
+}
+
+@media (max-width: 760px), (max-height: 700px) {
+  .ctl-panel { gap: 18px; padding: 10px 14px; }
+  .ctl-group { min-width: 152px; gap: 5px; }
+  .ctl-row { font-size: 9px; letter-spacing: 1.2px; gap: 10px; }
+  kbd { min-width: 17px; height: 16px; padding: 0 4px; font-size: 8px; }
+}

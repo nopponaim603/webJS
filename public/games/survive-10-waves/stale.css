@@ -1,0 +1,18 @@
+/* Said over the bench, because the bench is where the missing board shows. */
+#stale {
+  position: absolute; inset: 0; z-index: 14; display: flex;
+  align-items: center; justify-content: center; background: rgba(4,8,11,.82);
+}
+#stale.hidden { display: none; }
+.stale-panel {
+  width: min(480px, 92vw); padding: 22px 24px;
+  border: 1px solid rgba(216,87,74,.45); background: #0b1116;
+  box-shadow: 0 24px 70px rgba(0,0,0,.6);
+}
+.stale-head { font-size: 15px; letter-spacing: 4px; color: #f0a79d; }
+.stale-say {
+  margin: 12px 0 20px;
+  font-size: 11px; line-height: 1.7; letter-spacing: .5px; color: #b9cdd8;
+}
+.stale-actions { display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
+.stale-actions .btn { margin: 0; }

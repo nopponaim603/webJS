@@ -1,0 +1,55 @@
+/* The transmission screen: mission briefings and after-action reports, typed out
+   by ui/story.js rather than written into the markup. */
+#story .story-panel {
+  position: relative;
+  width: min(760px, 92vw); padding: 34px 40px 30px;
+  border: 1px solid #24333d; border-left: 3px solid var(--accent);
+  border-radius: 4px; background: rgba(6,10,14,.93);
+  text-align: left;
+}
+#story .story-head {
+  font-size: 10px; letter-spacing: 5px; color: #5f7a88;
+  padding-bottom: 14px; margin-bottom: 20px; border-bottom: 1px solid #16222a;
+}
+#story .story-head::before {
+  content: ''; display: inline-block; width: 7px; height: 7px; margin-right: 10px;
+  border-radius: 50%; background: var(--accent);
+  animation: liveDot 1.6s ease-in-out infinite;
+}
+@keyframes liveDot { 0%, 100% { opacity: .25; } 50% { opacity: 1; } }
+
+#story-body { min-height: 96px; }
+.story-line { font-size: 17px; line-height: 1.9; letter-spacing: 1.5px; }
+.story-line .hot {
+  color: #ff8f7e; font-weight: 700; letter-spacing: 2px;
+  text-shadow: 0 0 18px rgba(255,90,70,.45);
+}
+.story-line b {
+  color: var(--accent); font-weight: 700; letter-spacing: 3px; margin-right: 0;
+}
+/* The colon arrives with the last letter of the label, not before it. */
+.story-line b.on::after { content: ':'; margin-right: 9px; }
+/* Only the line being typed carries the caret. */
+.story-line.typing::after {
+  content: '▋'; color: var(--accent); margin-left: 2px;
+  animation: caret .9s steps(1) infinite;
+}
+@keyframes caret { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+
+.story-buttons { display: flex; flex-wrap: wrap; gap: 12px; }
+#btn-story, #btn-story-alt {
+  margin-top: 26px; padding: 13px 30px; width: auto;
+  opacity: 0; pointer-events: none; transition: opacity .3s ease;
+}
+#story.read #btn-story, #story.read #btn-story-alt { opacity: 1; pointer-events: auto; }
+#btn-story-alt.hidden { display: none; }
+
+/* A briefing is several lines of typed text and a button, and a phone held
+   sideways has about half the room a laptop does. */
+@media (max-height: 520px) {
+  #story .story-panel { padding: 16px 22px 14px; }
+  #story .story-head { padding-bottom: 8px; margin-bottom: 10px; letter-spacing: 4px; }
+  #story-body { min-height: 54px; }
+  .story-line { font-size: 13px; line-height: 1.65; letter-spacing: 1px; }
+  #btn-story, #btn-story-alt { margin-top: 12px; padding: 10px 22px; font-size: 13px; }
+}

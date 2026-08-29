@@ -1,0 +1,268 @@
+/* The welcome screen: the character and a bug hold the left of the frame, the
+   panel takes the right. Nothing here darkens the left — `menuscene.js` aims the
+   camera to leave it, and the wash below only deepens under the panel. */
+#menu {
+  flex-direction: row; align-items: stretch; justify-content: flex-end;
+  gap: 0; padding: 0; text-align: left;
+  background: none; backdrop-filter: none;
+}
+#menu::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(120% 90% at 22% 60%, transparent 38%, rgba(3,6,10,.72) 100%),
+    linear-gradient(90deg, rgba(3,6,10,.15) 0%, rgba(3,6,10,.1) 34%, rgba(3,6,10,.86) 62%, rgba(3,6,10,.97) 100%);
+}
+
+.menu-shot { flex: 1; position: relative; }
+.menu-shot::after {
+  content: ''; position: absolute; inset: auto 0 0 0; height: 34%;
+  background: linear-gradient(transparent, rgba(3,6,10,.9));
+  pointer-events: none;
+}
+.menu-shot::before {
+  content: ''; position: absolute; inset: 0 0 auto 0; height: 34%;
+  background: linear-gradient(rgba(3,6,10,.82), transparent);
+  pointer-events: none;
+}
+
+/* The shot is an empty black frame until the meshes land — menuscene.js holds
+   both figures back rather than show their stand-ins. This stands in the middle
+   of it so a slow network reads as loading rather than as broken. */
+#shot-load {
+  position: absolute; z-index: 1; left: 0; right: 0; top: 50%;
+  display: flex; flex-direction: column; align-items: center; gap: 18px;
+  transform: translateY(-50%); pointer-events: none;
+  animation: sl-in .4s ease .6s both;
+}
+/* Hidden, not just clear: the rings would otherwise spin behind the shot for as
+   long as the welcome screen is up. */
+#menu.ready #shot-load {
+  animation: none; opacity: 0; visibility: hidden;
+  transition: opacity .5s ease, visibility 0s linear .5s;
+}
+@keyframes sl-in { from { opacity: 0; } to { opacity: 1; } }
+
+.sl-ring { position: relative; width: 92px; height: 92px; }
+.sl-ring i, .sl-ring b {
+  position: absolute; border-radius: 50%; border: 1px solid transparent;
+}
+.sl-ring i {
+  inset: 0;
+  border-top-color: var(--accent); border-right-color: rgba(125,211,252,.25);
+  animation: sl-spin 1.9s linear infinite;
+}
+.sl-ring i + i {
+  inset: 15px; border-top-color: transparent; border-bottom-color: rgba(125,211,252,.55);
+  animation-duration: 1.3s; animation-direction: reverse;
+}
+.sl-ring b {
+  inset: 34px; border-color: rgba(125,211,252,.3);
+  background: radial-gradient(rgba(125,211,252,.45), transparent 70%);
+  animation: sl-core 1.9s ease-in-out infinite;
+}
+
+@keyframes sl-spin { to { transform: rotate(360deg); } }
+@keyframes sl-core { 50% { transform: scale(.72); opacity: .5; } }
+
+.sl-label { font-size: 10px; letter-spacing: 4px; color: #5f7a88; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sl-ring i, .sl-ring i + i { animation-duration: 4s; }
+  .sl-ring b { animation: none; }
+}
+
+/* The shot is a shallow band above the panel, and the strip already sits in it. */
+@media (max-height: 560px), (max-aspect-ratio: 11/10) and (max-width: 620px) {
+  .sl-ring { width: 64px; height: 64px; }
+  .sl-ring i + i { inset: 11px; }
+  .sl-ring b { inset: 24px; }
+  #shot-load { gap: 12px; }
+}
+
+.menu-panel {
+  position: relative; z-index: 1;
+  flex: 0 0 clamp(400px, 38vw, 560px);
+  display: flex; flex-direction: column; justify-content: center; gap: 26px;
+  padding: 48px clamp(36px, 4vw, 64px);
+  border-left: 1px solid #1d2a33;
+  background: linear-gradient(90deg, rgba(6,10,14,.55), rgba(6,10,14,.9) 22%);
+  backdrop-filter: blur(6px);
+}
+/* Corner ticks: the panel reads as an instrument rather than a box. */
+.menu-panel::before, .menu-panel::after {
+  content: ''; position: absolute; left: -1px; width: 14px; height: 1px;
+  background: var(--accent); opacity: .55;
+}
+.menu-panel::before { top: 40px; }
+.menu-panel::after { bottom: 40px; }
+
+.menu-mark { position: relative; padding-left: 18px; }
+.menu-mark::before {
+  content: ''; position: absolute; left: 0; top: 6px; bottom: 18px; width: 3px;
+  background: linear-gradient(var(--accent), rgba(125,211,252,0));
+}
+.menu-panel .title {
+  font-size: clamp(28px, 2.8vw, 44px); font-weight: 800; letter-spacing: 6px; line-height: 1.1;
+  text-wrap: balance;
+  text-shadow: 0 0 34px rgba(125,211,252,.28);
+}
+.menu-panel .title .menu-logo {
+  display: block; width: clamp(212px, 21vw, 320px); height: auto;
+  filter: drop-shadow(0 0 30px rgba(125,211,252,.24));
+}
+.menu-panel .title .sub {
+  display: block; margin-top: 12px; font-size: 11px; font-weight: 400;
+  letter-spacing: 6px; color: #5f7a88; text-shadow: none;
+}
+.menu-mark::after {
+  content: ''; display: block; margin-top: 18px; height: 1px;
+  background: linear-gradient(90deg, rgba(125,211,252,.5), rgba(125,211,252,0) 70%);
+}
+
+#run-card {
+  position: relative; padding: 12px 0 12px 16px;
+  border-left: 2px solid var(--accent);
+  background: linear-gradient(90deg, rgba(125,211,252,.09), transparent 80%);
+}
+#run-card.hidden { display: none; }
+#run-card .label { margin: 0 0 6px; font-size: 10px; letter-spacing: 3px; opacity: .5; }
+#run-stats { font-size: 15px; letter-spacing: 2px; }
+#run-stats b { color: var(--accent); font-weight: 500; }
+#run-stats span { opacity: .35; margin: 0 7px; }
+#run-deep { margin-top: 5px; font-size: 11px; letter-spacing: 3px; color: #ffd970; }
+#run-deep.hidden { display: none; }
+
+/* The run card and the loading bar both come and go once the panel is already
+   up. Their boxes are reserved, and the actions share a cell with the loading
+   bar, so nothing on the panel moves when any of it swaps. */
+.menu-slot { min-height: 62px; display: flex; align-items: center; }
+.menu-swap { display: grid; min-height: 106px; align-content: center; }
+.menu-swap > * { grid-area: 1 / 1; align-self: center; }
+
+#menu-actions { display: flex; flex-direction: column; gap: 10px; }
+#menu:not(.ready) #menu-actions { display: none; }
+
+.menu-panel .btn {
+  position: relative; overflow: hidden;
+  margin: 0; width: 100%; padding: 15px 20px;
+  text-align: left; font-size: 14px; letter-spacing: 4px;
+  border: 1px solid rgba(125,211,252,.45); border-radius: 3px;
+  background: rgba(125,211,252,.05);
+  transition: color .18s ease, border-color .18s ease, transform .18s ease;
+}
+/* The sweep is a pseudo-element rather than a background transition so it wipes
+   across instead of fading in place. Behind the label, since hud.js writes the
+   button text as a text node and nothing may wrap it. */
+.menu-panel .btn::before {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  transform: scaleX(0); transform-origin: left;
+  background: linear-gradient(90deg, rgba(125,211,252,.26), rgba(125,211,252,.05));
+  transition: transform .22s cubic-bezier(.16,.9,.24,1);
+}
+.menu-panel .btn::after {
+  content: '›'; position: absolute; right: 18px; top: 50%; translate: 0 -50%;
+  font-size: 18px; opacity: .5; transition: transform .22s ease, opacity .18s ease;
+}
+.menu-panel .btn.ghost {
+  border-color: rgba(255,255,255,.16); color: rgba(232,242,236,.62); background: rgba(255,255,255,.03);
+}
+.menu-panel .btn.ghost::before { background: linear-gradient(90deg, rgba(255,255,255,.12), rgba(255,255,255,.02)); }
+.menu-panel .btn.warn { border-color: #ff8f7e; color: #ff8f7e; }
+.menu-panel .btn.warn::before { background: linear-gradient(90deg, rgba(255,143,126,.22), rgba(255,143,126,.04)); }
+
+/* A support action, not a way to play: quiet enough that it never competes with
+   the buttons above it. */
+.menu-foot { margin-top: 4px; }
+.foot-actions { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
+.menu-foot button {
+  padding: 0; border: 0; background: none; cursor: pointer;
+  font-family: inherit; font-size: 10px; letter-spacing: 3px; color: #46606d;
+  border-bottom: 1px solid transparent; transition: color .18s ease, border-color .18s ease;
+}
+.menu-foot button:disabled { color: #46606d; cursor: default; border-bottom-color: transparent; }
+
+/* A tap leaves :hover behind on a touch screen, so every rule that grows or
+   moves something under the pointer is asked for a pointer first. */
+@media (hover: hover) {
+  .menu-panel .btn:hover { border-color: var(--accent); transform: translateX(3px); }
+  .menu-panel .btn:hover::before { transform: scaleX(1); }
+  .menu-panel .btn:hover::after { transform: translateX(4px); opacity: 1; }
+  .menu-panel .btn.ghost:hover { border-color: rgba(255,255,255,.42); color: #fff; }
+  .menu-foot button:hover { color: var(--accent); border-bottom-color: rgba(125,211,252,.4); }
+}
+
+#loading { display: flex; flex-direction: column; gap: 8px; }
+#menu.ready #loading { display: none; }
+#loading-label { font-size: 10px; letter-spacing: 4px; color: #5f7a88; }
+#loading-bar { width: 100%; height: 2px; background: rgba(255,255,255,.1); overflow: hidden; }
+#loading-bar i { display: block; height: 100%; width: 0; background: var(--accent);
+                 box-shadow: 0 0 12px rgba(125,211,252,.7); transition: width .25s ease-out; }
+
+/* Short screens: the panel is a fixed stack of rows, so it runs out of room long
+   before the browser does — and centred content with nowhere to go is cut off at
+   BOTH ends. Tighten every row, then let it scroll from the top rather than
+   centre something it cannot fit. */
+@media (max-height: 720px) {
+  .menu-panel {
+    justify-content: flex-start; overflow-y: auto;
+    gap: 14px; padding: 22px clamp(28px, 3.4vw, 48px) 20px;
+  }
+  .menu-panel .title { font-size: clamp(24px, 2.4vw, 34px); letter-spacing: 5px; }
+  .menu-panel .title .menu-logo { width: clamp(178px, 18vw, 256px); }
+  .menu-panel .title .sub { margin-top: 8px; font-size: 10px; letter-spacing: 4px; }
+  .menu-mark::after { margin-top: 10px; }
+  .menu-slot { min-height: 50px; }
+  .menu-swap { min-height: 86px; }
+  #menu-actions { gap: 8px; }
+  .menu-panel .btn { padding: 11px 18px; }
+  .menu-panel::before { top: 22px; }
+  .menu-panel::after { bottom: 22px; }
+}
+
+/* Shorter still — a laptop with the browser chrome eating half the screen. */
+@media (max-height: 560px) {
+  .menu-panel { gap: 10px; padding: 14px clamp(24px, 3vw, 40px) 12px; }
+  .menu-panel .title { font-size: clamp(21px, 2vw, 28px); letter-spacing: 4px; line-height: 1.15; }
+  .menu-panel .title .menu-logo { width: clamp(146px, 15vw, 200px); }
+  .menu-panel .title .sub { margin-top: 6px; letter-spacing: 3px; }
+  .menu-mark { padding-left: 14px; }
+  .menu-mark::after { margin-top: 8px; }
+  .menu-slot { min-height: 44px; }
+  .menu-swap { min-height: 76px; }
+  .menu-panel .btn { padding: 9px 16px; font-size: 13px; }
+  .menu-panel::before, .menu-panel::after { display: none; }
+}
+
+/* A phone held sideways. Every reserved row gives up what it can rather than
+   the panel scrolling for the last twenty pixels of it. */
+@media (max-height: 440px) {
+  .menu-panel { gap: 8px; padding: 10px clamp(20px, 3vw, 34px) 10px; }
+  .menu-panel .title { font-size: 19px; letter-spacing: 3px; }
+  .menu-panel .title .menu-logo { width: 124px; }
+  .menu-panel .title .sub { margin-top: 4px; font-size: 9px; letter-spacing: 3px; }
+  .menu-mark { padding-left: 12px; }
+  .menu-mark::after { margin-top: 6px; }
+  .menu-slot { min-height: 36px; }
+  .menu-swap { min-height: 62px; }
+  .menu-panel .btn { padding: 8px 14px; font-size: 12px; }
+  #run-stats { font-size: 13px; }
+}
+
+/* Narrow or tall: the shot cannot hold a figure beside a column, so it takes
+   the top and the panel drops below it. Matches `CFG.menu.wideAt`, which is
+   where menuscene.js stops pushing the pair off-centre. */
+@media (max-aspect-ratio: 11/10) {
+  #menu { flex-direction: column; justify-content: flex-end; }
+  #menu::before {
+    background:
+      radial-gradient(120% 60% at 50% 30%, transparent 40%, rgba(3,6,10,.7) 100%),
+      linear-gradient(rgba(3,6,10,.1) 0%, rgba(3,6,10,.1) 30%, rgba(3,6,10,.95) 58%);
+  }
+  .menu-shot { flex: 1 1 auto; }
+  .menu-panel {
+    flex: 0 0 auto; gap: 20px; padding: 28px clamp(20px, 6vw, 48px) 34px;
+    border-left: none; border-top: 1px solid #1d2a33;
+    background: linear-gradient(rgba(6,10,14,.6), rgba(6,10,14,.92) 18%);
+  }
+  .menu-panel::before, .menu-panel::after { display: none; }
+}
