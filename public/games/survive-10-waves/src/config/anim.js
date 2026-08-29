@@ -1,0 +1,62 @@
+export const ANIM = {
+  strideScale: 1.025,
+  maxCycleRate: 2.8,
+  blendSpeed: 6,
+  blendEase: 9,
+  turnEase: 10,
+  legYawMax: 1.5,
+  aimTwistMax: 0.8,
+  aimDeadzone: 0.14,
+  turnRelax: 1.9,
+  turnRateMax: 2.6,
+  aimTwistHard: 1.45,
+  turnStride: 0.85,
+  turnBlendRate: 2.6,
+  turnBlendMax: 0.22,
+  hipMid: 0.0, hipSwing: 0.75,
+  stanceFraction: 0.5,
+  kneeMax: 0.98, kneePhase: -3.14159,
+  footMid: 0.18, footSwing: 0.36, footPhase: -2.0,
+  spineTwist: 0.3,
+  twistRate: 1.0,
+  twistPhase: 1.5708,
+  bob: -0.18,
+  elbowSignL: 1,
+  elbowSignR: -1,
+  foreRollL: 0.0,
+  foreRollR: 0.489,
+  handRotL: [0, 0, 0],
+  handRotR: [0, 0, -0.035],
+  claviclePull: 0.36,
+  shoulderPushL: 0.785,
+  shoulderPushR: 0.262,
+  torsoYaw: -0.279,
+  elbowPoleR: 1.35,
+  elbowPoleL: -2.15,
+  legTuck: -0.12,
+  idleCrouch: 0.12,
+  idleRate: 1.5, idleBreath: 0.05,
+  // Hanging under the jetpack: the thigh trails, the knee gives, and the toes
+  // fall away from the shin. Added on top of the walk, which is standing still
+  // by the time any of this is worth anything.
+  hover: { leg: 0.12, knee: 0.08, foot: 0.22, kneeLag: 0.5, footLag: 0.35 },
+};
+
+export const ARM_POSE = {
+  LeftShoulder:  [0.213414, 0.031517, 0.352639, 0.910553],
+  LeftArm:       [-0.147568, 0.372384, 0.267799, 0.876264],
+  LeftForeArm:   [0.177471, -0.782256, 0.40396, 0.439767],
+  LeftHand:      [-0.016347, -0.350154, 0.006112, 0.93653],
+  RightShoulder: [0.340571, 0.15851, 0.022464, 0.926489],
+  RightArm:      [-0.236721, -0.160316, -0.177035, 0.941765],
+  RightForeArm:  [0.616632, 0.333464, -0.452702, 0.551023],
+  RightHand:     [0, 0, 0, 1],
+};
+
+export const BONE_NAMES = [
+  'Hips', 'Spine', 'Spine01', 'Spine02', 'neck', 'Head',
+  'LeftUpLeg', 'LeftLeg', 'LeftFoot', 'LeftToeBase',
+  'RightUpLeg', 'RightLeg', 'RightFoot', 'RightToeBase',
+  'LeftShoulder', 'LeftArm', 'LeftForeArm', 'LeftHand',
+  'RightShoulder', 'RightArm', 'RightForeArm', 'RightHand',
+];
