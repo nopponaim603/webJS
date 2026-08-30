@@ -8,7 +8,15 @@ import PWAInstallButton from '@/components/PWAInstallButton';
 import buildInfo from '../../public/build.json';
 
 const initialGames = [
-  // 1. กลุ่มปริศนา (Puzzle)
+  // 1. กลุ่มปริศนา (Puzzle) & ซิมูเลชัน
+  {
+    id: "pong-wars",
+    title: "⚔️ Dynamic Pong Wars (Day vs Night)",
+    category: "ปริศนา / ฟิสิกส์",
+    url: "/games/pong-wars/index.html",
+    image: "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=400&h=400&fit=crop",
+    gradient: "linear-gradient(135deg, #0F172A 0%, #38BDF8 100%)"
+  },
   {
     id: "card-memory",
     title: "Card Memory Match",

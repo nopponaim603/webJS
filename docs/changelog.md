@@ -11,6 +11,20 @@ tags:
 # 📜 Documentation Changelog — webJS
 
 
+## [1.36.0] - 2026-08-30
+
+- **⚔️ Dynamic Pong Wars (Day vs Night Simulation) Integration (G035)**:
+  - พัฒนาและติดตั้งเกมจำลองฟิสิกส์ลูกบอลแย่งชิงอาณาเขตกลางวัน vs กลางคืน (อิงตามโปรเจกต์ของ Marko Denic & Koen van Gilst) ไว้ที่ [`public/games/pong-wars/index.html`](./../public/games/pong-wars/index.html)
+  - **ฟีเจอร์เด่น**:
+    - ฟิสิกส์การกระดอนแบบสมดุล พร้อมระบบ Anti-looping random angle perturbation
+    - สวิตช์ควบคุม Play / Pause, Reset, และ Config Drawer
+    - ตัวเลือกจานสีและธีมสำเร็จรูป (Classic Day/Night, Cyberpunk, Sunset, Sakura, Solar, Yin Yang)
+    - ระบบเสียงดนตรีสังเคราะห์ Web Audio Pentatonic Chimes ตามจังหวะกระทบ
+    - โหมด Multi-ball (1v1, 2v2, 4v4) และปรับความละเอียดตาราง Grid (16x16, 24x24, 32x32)
+    - รองรับการวาดระบายสี / พลิกสลับบล็อกด้วยการคลิกหรือสัมผัสหน้าจอ
+  - ลงทะเบียนแสดงผลในหน้าแรก [`src/app/page.js`](./../src/app/page.js) ในหมวดหมู่ `ปริศนา / ฟิสิกส์`
+  - อัปเดต Version ระบบใน [`public/build.json`](./../public/build.json) เป็น **1.36.0**
+
 ## [1.35.0] - 2026-08-30
 
 - **🎮 New 3D WebGL / Three.js Games Suite Integration (G032 - G034)**:

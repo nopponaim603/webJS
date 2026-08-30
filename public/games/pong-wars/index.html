@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Dynamic Pong Wars — Day vs Night Simulation</title>
+  <meta name="description" content="Dynamic Pong Wars – a playable, color-customizable twist on Pong Wars where balls conquer opposing territory.">
+  <meta name="author" content="Marko Denic (Adapted for GameDevJS Hub)">
+  <meta name="theme-color" content="#000000">
+
+  <style>
+    :root {
+      --day-color: #FFFFFF;
+      --night-color: #0F172A;
+      --accent: #38BDF8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, monospace;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(135deg, var(--night-color) 0%, var(--day-color) 100%);
+      transition: background 0.3s ease;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    header {
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 100;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+    }
+
+    .brand span {
+      background: linear-gradient(90deg, #38BDF8, #818CF8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .top-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon-btn {
+      width: 42px;
+      height: 42px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      color: #fff;
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    .icon-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-1px);
+    }
+
+    .icon-btn:active {
+      transform: scale(0.94);
+    }
+
+    .icon-btn svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      position: relative;
+    }
+
+    .arena-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      max-width: 580px;
+      width: 100%;
+    }
+
+    canvas {
+      width: 100%;
+      max-width: 540px;
+      aspect-ratio: 1 / 1;
+      border-radius: 14px 14px 0 0;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1);
+      display: block;
+      cursor: crosshair;
+    }
+
+    .score-bar {
+      width: 100%;
+      max-width: 540px;
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(8px);
+      padding: 12px 18px;
+      border-radius: 0 0 14px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: none;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .score-stats {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .day-stat {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #F8FAFC;
+    }
+
+    .night-stat {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #94A3B8;
+    }
+
+    .stat-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .tug-bar-wrap {
+      height: 8px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+    }
+
+    .tug-day {
+      height: 100%;
+      background: var(--day-color);
+      transition: width 0.1s linear;
+    }
+
+    .tug-night {
+      height: 100%;
+      background: var(--night-color);
+      transition: width 0.1s linear;
+    }
+
+    /* Side Config Drawer */
+    #configPanel {
+      position: fixed;
+      top: 0;
+      right: -320px;
+      width: 300px;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.6);
+      padding: 70px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      z-index: 90;
+      transition: right 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow-y: auto;
+    }
+
+    #configPanel.visible {
+      right: 0;
+    }
+
+    .panel-section-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #64748B;
+      margin-bottom: -6px;
+    }
+
+    .config-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .config-row label {
+      font-size: 0.85rem;
+      color: #CBD5E1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .color-input-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .color-picker {
+      appearance: none;
+      -webkit-appearance: none;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      cursor: pointer;
+      background: transparent;
+      padding: 0;
+    }
+
+    .color-picker::-webkit-color-swatch-wrapper {
+      padding: 0;
+    }
+    .color-picker::-webkit-color-swatch {
+      border: none;
+      border-radius: 7px;
+    }
+
+    .theme-presets {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .theme-btn {
+      padding: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      color: #E2E8F0;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .theme-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .preset-preview {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      display: inline-block;
+    }
+
+    .slider-row input[type=range] {
+      width: 100%;
+      accent-color: #38BDF8;
+      cursor: pointer;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 6px;
+    }
+
+    .btn-group button {
+      flex: 1;
+      padding: 6px 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 6px;
+      color: #fff;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-group button.active {
+      background: #38BDF8;
+      color: #0F172A;
+      font-weight: 700;
+      border-color: #38BDF8;
+    }
+
+    footer {
+      padding: 10px 20px;
+      background: rgba(0, 0, 0, 0.5);
+      font-size: 0.8rem;
+      text-align: center;
+      color: #94A3B8;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      z-index: 10;
+    }
+
+    footer a {
+      color: #38BDF8;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      canvas {
+        max-width: 94vw;
+      }
+      .score-bar {
+        max-width: 94vw;
+      }
+      #configPanel {
+        width: 280px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <span>⚔️ Dynamic Pong Wars</span>
+  </div>
+  <div class="top-controls">
+    <button id="soundBtn" class="icon-btn" title="Toggle Sound (Mute/Unmute)" aria-label="Toggle Sound">
+      <svg id="soundIcon" viewBox="0 0 24 24">
+        <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+      </svg>
+    </button>
+    <button id="resetBtn" class="icon-btn" title="Reset Simulation" aria-label="Reset Simulation">
+      <svg viewBox="0 0 24 24">
+        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+        <path d="M3 3v5h5"/>
+      </svg>
+    </button>
+    <button id="playPauseBtn" class="icon-btn" title="Play / Pause" aria-label="Play / Pause">
+      <svg id="pauseIcon" viewBox="0 0 24 24">
+        <rect x="6" y="4" width="4" height="16"/>
+        <rect x="14" y="4" width="4" height="16"/>
+      </svg>
+      <svg id="playIcon" viewBox="0 0 24 24" style="display: none;">
+        <polygon points="5 3 19 12 5 21 5 3" fill="currentColor"/>
+      </svg>
+    </button>
+    <button id="configBtn" class="icon-btn" title="Settings & Themes" aria-label="Settings & Themes">
+      <svg viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<div id="configPanel">
+  <div class="panel-section-title">Color Palette</div>
+  
+  <div class="config-row">
+    <label>Day Side Color:
+      <div class="color-input-wrap">
+        <input type="color" id="dayColorInput" class="color-picker" value="#FFFFFF"/>
+      </div>
+    </label>
+  </div>
+
+  <div class="config-row">
+    <label>Night Side Color:
+      <div class="color-input-wrap">
+        <input type="color" id="nightColorInput" class="color-picker" value="#0F172A"/>
+      </div>
+    </label>
+  </div>
+
+  <div class="panel-section-title">Preset Themes</div>
+  <div class="theme-presets">
+    <button class="theme-btn" data-day="#FFFFFF" data-night="#0F172A">
+      <span class="preset-preview" style="background: linear-gradient(135deg, #0F172A 50%, #FFFFFF 50%)"></span> Classic
+    </button>
+    <button class="theme-btn" data-day="#06B6D4" data-night="#EC4899">
+      <span class="preset-preview" style="background: linear-gradient(135deg, #EC4899 50%, #06B6D4 50%)"></span> Cyberpunk
+    </button>
+    <button class="theme-btn" data-day="#F59E0B" data-night="#1E1B4B">
+      <span class="preset-preview" style="background: linear-gradient(135deg, #1E1B4B 50%, #F59E0B 50%)"></span> Sunset
+    </button>
+    <button class="theme-btn" data-day="#F472B6" data-night="#064E3B">
+      <span class="preset-preview" style="background: linear-gradient(135deg, #064E3B 50%, #F472B6 50%)"></span> Sakura
+    </button>
+    <button class="theme-btn" data-day="#FDE047" data-night="#18181B">
+      <span class="preset-preview" style="background: linear-gradient(135deg, #18181B 50%, #FDE047 50%)"></span> Solar
+    </button>
+    <button class="theme-btn" data-day="#E2E8F0" data-night="#000000">
+      <span class="preset-preview" style="background: linear-gradient(135deg, #000000 50%, #E2E8F0 50%)"></span> Yin Yang
+    </button>
+  </div>
+
+  <div class="panel-section-title">Simulation Speed</div>
+  <div class="config-row slider-row">
+    <label>Speed: <span id="speedVal">1x</span></label>
+    <input type="range" id="speedSlider" min="1" max="5" step="1" value="1"/>
+  </div>
+
+  <div class="panel-section-title">Balls Per Team</div>
+  <div class="btn-group" id="ballCountGroup">
+    <button class="active" data-balls="1">1 vs 1</button>
+    <button data-balls="2">2 vs 2</button>
+    <button data-balls="4">4 vs 4</button>
+  </div>
+
+  <div class="panel-section-title">Grid Resolution</div>
+  <div class="btn-group" id="gridSizeGroup">
+    <button data-size="16">16x16</button>
+    <button class="active" data-size="24">24x24</button>
+    <button data-size="32">32x32</button>
+  </div>
+</div>
+
+<main>
+  <div class="arena-container">
+    <canvas id="gameCanvas" width="600" height="600"></canvas>
+    
+    <div class="score-bar">
+      <div class="score-stats">
+        <div class="day-stat">
+          <span class="stat-dot" id="dayDot" style="background: var(--day-color);"></span>
+          <span>Day: <b id="dayScoreNum">0</b> (<span id="dayPct">50%</span>)</span>
+        </div>
+        <div class="night-stat">
+          <span>Night: <b id="nightScoreNum">0</b> (<span id="nightPct">50%</span>)</span>
+          <span class="stat-dot" id="nightDot" style="background: var(--night-color);"></span>
+        </div>
+      </div>
+      <div class="tug-bar-wrap">
+        <div class="tug-day" id="tugDay" style="width: 50%;"></div>
+        <div class="tug-night" id="tugNight" style="width: 50%;"></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  Original Concept by <a href="https://github.com/vnglst/pong-wars" target="_blank" rel="noopener">Koen van Gilst</a> & 
+  Enhanced by <a href="https://github.com/markodenic/dynamic-pong-wars" target="_blank" rel="noopener">Marko Denic</a>.
+</footer>
+
+<script>
+  const canvas = document.querySelector("#gameCanvas");
+  const ctx = canvas.getContext("2d");
+  
+  // UI Elements
+  const dayColorInput = document.querySelector("#dayColorInput");
+  const nightColorInput = document.querySelector("#nightColorInput");
+  const configBtn = document.querySelector("#configBtn");
+  const configPanel = document.querySelector("#configPanel");
+  const resetBtn = document.querySelector("#resetBtn");
+  const playPauseBtn = document.querySelector("#playPauseBtn");
+  const soundBtn = document.querySelector("#soundBtn");
+  const playIcon = document.querySelector("#playIcon");
+  const pauseIcon = document.querySelector("#pauseIcon");
+  const soundIcon = document.querySelector("#soundIcon");
+  const speedSlider = document.querySelector("#speedSlider");
+  const speedVal = document.querySelector("#speedVal");
+  
+  const dayScoreNum = document.querySelector("#dayScoreNum");
+  const nightScoreNum = document.querySelector("#nightScoreNum");
+  const dayPct = document.querySelector("#dayPct");
+  const nightPct = document.querySelector("#nightPct");
+  const tugDay = document.querySelector("#tugDay");
+  const tugNight = document.querySelector("#tugNight");
+  const dayDot = document.querySelector("#dayDot");
+  const nightDot = document.querySelector("#nightDot");
+
+  // State Variables
+  let GRID_COUNT = 24;
+  let TILE_SIZE = canvas.width / GRID_COUNT;
+  let MAX_SPEED = 9;
+  let MIN_SPEED = 5;
+  let ACCELERATION = 0.12;
+  let speedMultiplier = 1;
+  let ballsPerTeam = 1;
+
+  let dayColor = "#FFFFFF";
+  let nightColor = "#0F172A";
+  let isPlaying = true;
+  let isMuted = false;
+  let animationFrameId = null;
+
+  // Web Audio Synth
+  let audioCtx = null;
+  const dayNotes = [523.25, 587.33, 659.25, 783.99, 880.00, 1046.50]; // C5, D5, E5, G5, A5, C6
+  const nightNotes = [130.81, 164.81, 196.00, 220.00, 261.63, 293.66]; // C3, E3, G3, A3, C4, D4
+
+  function initAudio() {
+    if (!audioCtx) {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (AudioContext) audioCtx = new AudioContext();
+    }
+    if (audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+  }
+
+  function playChime(isDay) {
+    if (isMuted || !audioCtx) return;
+    try {
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      
+      const notes = isDay ? dayNotes : nightNotes;
+      const freq = notes[Math.floor(Math.random() * notes.length)];
+      
+      osc.type = isDay ? 'sine' : 'triangle';
+      osc.frequency.setValueAtTime(freq, now);
+      
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(0.04, now + 0.005);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + (isDay ? 0.25 : 0.4));
+      
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      
+      osc.start(now);
+      osc.stop(now + (isDay ? 0.26 : 0.41));
+    } catch (_) {}
+  }
+
+  // Grid & Balls
+  let ownership = [];
+  let balls = [];
+
+  function setupGrid() {
+    TILE_SIZE = canvas.width / GRID_COUNT;
+    ownership = new Array(GRID_COUNT * GRID_COUNT).fill(0).map((_, idx) => {
+      const col = idx % GRID_COUNT;
+      return col < GRID_COUNT / 2 ? 0 : 1; // 0 = Day territory, 1 = Night territory
+    });
+  }
+
+  function setupBalls() {
+    balls = [];
+    for (let i = 0; i < ballsPerTeam; i++) {
+      const offset = (i - (ballsPerTeam - 1) / 2) * 40;
+      // Day ball spawns in Day side, moves toward Night
+      balls.push({
+        team: 0, // Day team
+        x: canvas.width / 4,
+        y: canvas.height / 2 + offset,
+        vx: 6 + Math.random() * 2,
+        vy: (Math.random() > 0.5 ? 1 : -1) * (5 + Math.random() * 2),
+        radius: TILE_SIZE / 2.2
+      });
+
+      // Night ball spawns in Night side, moves toward Day
+      balls.push({
+        team: 1, // Night team
+        x: (canvas.width / 4) * 3,
+        y: canvas.height / 2 - offset,
+        vx: -(6 + Math.random() * 2),
+        vy: (Math.random() > 0.5 ? 1 : -1) * (5 + Math.random() * 2),
+        radius: TILE_SIZE / 2.2
+      });
+    }
+  }
+
+  function updateThemeColors() {
+    document.documentElement.style.setProperty('--day-color', dayColor);
+    document.documentElement.style.setProperty('--night-color', nightColor);
+    dayDot.style.background = dayColor;
+    nightDot.style.background = nightColor;
+    dayColorInput.value = dayColor;
+    nightColorInput.value = nightColor;
+    document.body.style.background = `linear-gradient(135deg, ${nightColor} 0%, ${dayColor} 100%)`;
+  }
+
+  function drawTile(col, row, team) {
+    ctx.fillStyle = team === 0 ? dayColor : nightColor;
+    ctx.fillRect(col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+  }
+
+  function drawBall(ball) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+    // Ball color is opposite of background it conquers
+    ctx.fillStyle = ball.team === 0 ? nightColor : dayColor;
+    ctx.shadowColor = ball.team === 0 ? 'rgba(0,0,0,0.5)' : 'rgba(255,255,255,0.7)';
+    ctx.shadowBlur = 8;
+    ctx.fill();
+    ctx.closePath();
+    ctx.restore();
+  }
+
+  function detectCollision(ball) {
+    const ballLeft = ball.x - ball.radius;
+    const ballRight = ball.x + ball.radius;
+    const ballTop = ball.y - ball.radius;
+    const ballBottom = ball.y + ball.radius;
+
+    // Check neighboring tiles only for high performance
+    const minCol = Math.max(0, Math.floor(ballLeft / TILE_SIZE));
+    const maxCol = Math.min(GRID_COUNT - 1, Math.floor(ballRight / TILE_SIZE));
+    const minRow = Math.max(0, Math.floor(ballTop / TILE_SIZE));
+    const maxRow = Math.min(GRID_COUNT - 1, Math.floor(ballBottom / TILE_SIZE));
+
+    for (let r = minRow; r <= maxRow; r++) {
+      for (let c = minCol; c <= maxCol; c++) {
+        const idx = r * GRID_COUNT + c;
+        const currentOwner = ownership[idx];
+        
+        // If ball hits opposing territory
+        if (currentOwner !== ball.team) {
+          // Flip tile to ball's team
+          ownership[idx] = ball.team;
+          playChime(ball.team === 0);
+
+          // Calculate bounce reflection vector
+          const tileCenterX = c * TILE_SIZE + TILE_SIZE / 2;
+          const tileCenterY = r * TILE_SIZE + TILE_SIZE / 2;
+          const dx = ball.x - tileCenterX;
+          const dy = ball.y - tileCenterY;
+
+          if (Math.abs(dx) > Math.abs(dy)) {
+            ball.vx = -ball.vx;
+          } else {
+            ball.vy = -ball.vy;
+          }
+          return;
+        }
+      }
+    }
+  }
+
+  function checkBoundaries(ball) {
+    if (ball.x - ball.radius < 0) {
+      ball.vx = Math.abs(ball.vx);
+      ball.x = ball.radius;
+    } else if (ball.x + ball.radius > canvas.width) {
+      ball.vx = -Math.abs(ball.vx);
+      ball.x = canvas.width - ball.radius;
+    }
+
+    if (ball.y - ball.radius < 0) {
+      ball.vy = Math.abs(ball.vy);
+      ball.y = ball.radius;
+    } else if (ball.y + ball.radius > canvas.height) {
+      ball.vy = -Math.abs(ball.vy);
+      ball.y = canvas.height - ball.radius;
+    }
+  }
+
+  function updateBall(ball) {
+    // Add subtle perturbation to avoid infinite repeating paths
+    ball.vx += (Math.random() - 0.5) * ACCELERATION;
+    ball.vy += (Math.random() - 0.5) * ACCELERATION;
+
+    const speed = Math.hypot(ball.vx, ball.vy);
+    if (speed > MAX_SPEED) {
+      const scale = MAX_SPEED / speed;
+      ball.vx *= scale;
+      ball.vy *= scale;
+    }
+    if (speed < MIN_SPEED) {
+      const scale = MIN_SPEED / speed;
+      ball.vx *= scale;
+      ball.vy *= scale;
+    }
+
+    ball.x += ball.vx * speedMultiplier;
+    ball.y += ball.vy * speedMultiplier;
+  }
+
+  function render() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    let dayCount = 0;
+    let nightCount = 0;
+
+    // Draw Grid
+    for (let r = 0; r < GRID_COUNT; r++) {
+      for (let c = 0; c < GRID_COUNT; c++) {
+        const idx = r * GRID_COUNT + c;
+        const owner = ownership[idx];
+        drawTile(c, r, owner);
+        if (owner === 0) dayCount++; else nightCount++;
+      }
+    }
+
+    // Update Scores
+    const totalTiles = GRID_COUNT * GRID_COUNT;
+    const dayPercentage = Math.round((dayCount / totalTiles) * 100);
+    const nightPercentage = 100 - dayPercentage;
+
+    dayScoreNum.textContent = dayCount;
+    nightScoreNum.textContent = nightCount;
+    dayPct.textContent = `${dayPercentage}%`;
+    nightPct.textContent = `${nightPercentage}%`;
+    tugDay.style.width = `${dayPercentage}%`;
+    tugNight.style.width = `${nightPercentage}%`;
+
+    // Process Balls
+    balls.forEach(ball => {
+      drawBall(ball);
+      detectCollision(ball);
+      checkBoundaries(ball);
+      updateBall(ball);
+    });
+
+    if (isPlaying) {
+      animationFrameId = requestAnimationFrame(render);
+    }
+  }
+
+  function resetGame() {
+    setupGrid();
+    setupBalls();
+    if (!isPlaying) togglePlayPause();
+  }
+
+  function togglePlayPause() {
+    initAudio();
+    isPlaying = !isPlaying;
+    playIcon.style.display = isPlaying ? "none" : "block";
+    pauseIcon.style.display = isPlaying ? "block" : "none";
+    if (isPlaying) {
+      animationFrameId = requestAnimationFrame(render);
+    } else {
+      cancelAnimationFrame(animationFrameId);
+    }
+  }
+
+  // Interactive Paint / Tile Flip on Canvas Click or Touch
+  function handleCanvasInteract(e) {
+    initAudio();
+    const rect = canvas.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    
+    const x = (clientX - rect.left) * scaleX;
+    const y = (clientY - rect.top) * scaleY;
+    
+    const col = Math.floor(x / TILE_SIZE);
+    const row = Math.floor(y / TILE_SIZE);
+
+    if (col >= 0 && col < GRID_COUNT && row >= 0 && row < GRID_COUNT) {
+      const idx = row * GRID_COUNT + col;
+      ownership[idx] = ownership[idx] === 0 ? 1 : 0;
+      playChime(ownership[idx] === 0);
+    }
+  }
+
+  let isPainting = false;
+  canvas.addEventListener('mousedown', (e) => { isPainting = true; handleCanvasInteract(e); });
+  canvas.addEventListener('mousemove', (e) => { if (isPainting) handleCanvasInteract(e); });
+  window.addEventListener('mouseup', () => { isPainting = false; });
+  
+  canvas.addEventListener('touchstart', (e) => { isPainting = true; handleCanvasInteract(e); }, { passive: true });
+  canvas.addEventListener('touchmove', (e) => { if (isPainting) handleCanvasInteract(e); }, { passive: true });
+  window.addEventListener('touchend', () => { isPainting = false; });
+
+  // Event Listeners
+  configBtn.addEventListener("click", () => configPanel.classList.toggle("visible"));
+  resetBtn.addEventListener("click", () => { initAudio(); resetGame(); });
+  playPauseBtn.addEventListener("click", togglePlayPause);
+  
+  soundBtn.addEventListener("click", () => {
+    initAudio();
+    isMuted = !isMuted;
+    soundBtn.style.opacity = isMuted ? "0.5" : "1";
+  });
+
+  dayColorInput.addEventListener("input", (e) => {
+    dayColor = e.target.value;
+    updateThemeColors();
+  });
+
+  nightColorInput.addEventListener("input", (e) => {
+    nightColor = e.target.value;
+    updateThemeColors();
+  });
+
+  // Preset Buttons
+  document.querySelectorAll(".theme-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      dayColor = btn.dataset.day;
+      nightColor = btn.dataset.night;
+      updateThemeColors();
+    });
+  });
+
+  // Speed Slider
+  speedSlider.addEventListener("input", (e) => {
+    speedMultiplier = parseFloat(e.target.value);
+    speedVal.textContent = `${speedMultiplier}x`;
+  });
+
+  // Ball Count Buttons
+  document.querySelectorAll("#ballCountGroup button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll("#ballCountGroup button").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      ballsPerTeam = parseInt(btn.dataset.balls, 10);
+      setupBalls();
+    });
+  });
+
+  // Grid Resolution Buttons
+  document.querySelectorAll("#gridSizeGroup button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll("#gridSizeGroup button").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      GRID_COUNT = parseInt(btn.dataset.size, 10);
+      resetGame();
+    });
+  });
+
+  // Initialize
+  setupGrid();
+  setupBalls();
+  updateThemeColors();
+  animationFrameId = requestAnimationFrame(render);
+</script>
+</body>
+</html>
