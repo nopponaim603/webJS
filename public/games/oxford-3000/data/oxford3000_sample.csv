@@ -1,0 +1,11 @@
+id,word,part_of_speech,cefr_level,phonetic_uk,phonetic_us,thai_meaning,example_sentence,example_translation,category,distractors,audio_key
+1,abandon,v.,B2,/əˈbændən/,/əˈbændən/,ละทิ้ง/ทอดทิ้ง,They had to abandon their car in the snow.,พวกเขาต้องละทิ้งรถไว้ในหิมะ,Action,ดูแล|สะสม|ก่อตั้ง,abandon
+2,ability,n.,A2,/əˈbɪləti/,/əˈbɪləti/,ความสามารถ/ทักษะ,She has the ability to solve hard puzzles.,เธอมีความสามารถในการไขปริศนายากๆ,Skills,ความเกียจคร้าน|ข้อผิดพลาด|ชื่อเสียง,ability
+3,able,adj.,A1,/ˈeɪbl/,/ˈeɪbl/,สามารถ,Will you be able to come tomorrow?,คุณจะสามารถมาพรุ่งนี้ได้ไหม?,Status,เหน็ดเหนื่อย|ยากจน|ล่าช้า,able
+4,about,prep.,A1,/əˈbaʊt/,/əˈbaʊt/,เกี่ยวกับ/ราวๆ,What is this book about?,หนังสือเล่มนี้เกี่ยวกับอะไร?,Grammar,เหนือกว่า|ก่อนหน้า|ระหว่าง,about
+5,above,prep.,A1,/əˈbʌv/,/əˈbʌv/,ข้างบน/เหนือ,The birds are flying above the trees.,นกกำลังบินอยู่เหนือต้นไม้,Position,ข้างใต้|ข้างหลัง|ตรงข้าม,above
+6,abroad,adv.,A2,/əˈbrɔːd/,/əˈbrɔːd/,ต่างประเทศ,He plans to study abroad next year.,เขาวางแผนที่จะไปเรียนต่อต่างประเทศในปีหน้า,Travel,ในเมือง|ในบ้าน|บนเขา,abroad
+7,absolute,adj.,B2,/ˈæbsəluːt/,/ˈæbsəluːt/,เด็ดขาด/แน่นอน,I have absolute confidence in her.,ฉันมีความมั่นใจในตัวเธออย่างแน่นอน,Quality,คลุมเครือ|ชั่วคราว|เล็กน้อย,absolute
+8,absorb,v.,B2,/əbˈzɔːb/,/əbˈzɔːrb/,ดูดซับ/ซึมซับ,Plants absorb nutrients from the soil.,พืชดูดซับสารอาหารจากดิน,Science,คายออก|กระจาย|ทำลาย,absorb
+9,academic,adj.,B1,/ˌækəˈdemɪk/,/ˌækəˈdemɪk/,เชิงวิชาการ,She has high academic standards.,เธอมีมาตรฐานทางวิชาการที่สูง,Education,บันเทิง|ธุรกิจ|กีฬา,academic
+10,accent,n.,A2,/ˈæksent/,/ˈæksent/,สำเนียง,He speaks with a slight French accent.,เขาพูดด้วยสำเนียงฝรั่งเศสเล็กน้อย,Language,ท่าทาง|สีหน้า|เครื่องแต่งกาย,accent

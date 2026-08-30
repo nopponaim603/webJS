@@ -1,0 +1,728 @@
+﻿id,word,part_of_speech,cefr_level,phonetic_uk,phonetic_us,thai_meaning,example_sentence,example_translation,category,distractors,audio_key,note,raw_entry
+2582,abandon,v.,B2,,,,,,General,,abandon,,abandon v.
+2583,absolute,adj.,B2,,,,,,General,,absolute,,absolute adj.
+2584,academic,n.,B2,,,,,,General,,academic,,academic n.
+2585,acceptable,adj.,B2,,,,,,General,,acceptable,,acceptable adj.
+2586,accompany,v.,B2,,,,,,General,,accompany,,accompany v.
+2587,account,v.,B2,,,,,,General,,account,,account v.
+2588,accurate,adj.,B2,,,,,,General,,accurate,,accurate adj.
+2589,accuse,v.,B2,,,,,,General,,accuse,,accuse v.
+2590,acknowledge,v.,B2,,,,,,General,,acknowledge,,acknowledge v.
+2591,acquire,v.,B2,,,,,,General,,acquire,,acquire v.
+2592,actual,adj.,B2,,,,,,General,,actual,,actual adj.
+2593,adapt,v.,B2,,,,,,General,,adapt,,adapt v.
+2594,additional,adj.,B2,,,,,,General,,additional,,additional adj.
+2595,address,v.,B2,,,,,,General,,address,,address v.
+2596,administration,n.,B2,,,,,,General,,administration,,administration n.
+2597,adopt,v.,B2,,,,,,General,,adopt,,adopt v.
+2598,advance,"n., v., adj.",B2,,,,,,General,,advance,,"advance n., v., adj."
+2599,affair,n.,B2,,,,,,General,,affair,,affair n.
+2600,afterwards,adv.,B2,,,,,,General,,afterwards,,afterwards adv.
+2601,agency,n.,B2,,,,,,General,,agency,,agency n.
+2602,agenda,n.,B2,,,,,,General,,agenda,,agenda n.
+2603,aggressive,adj.,B2,,,,,,General,,aggressive,,aggressive adj.
+2604,aid,"n., v.",B2,,,,,,General,,aid,,"aid n., v."
+2605,aircraft,n.,B2,,,,,,General,,aircraft,,aircraft n.
+2606,alarm,v.,B2,,,,,,General,,alarm,,alarm v.
+2607,alter,v.,B2,,,,,,General,,alter,,alter v.
+2608,amount,v.,B2,,,,,,General,,amount,,amount v.
+2609,anger,n.,B2,,,,,,General,,anger,,anger n.
+2610,angle,n.,B2,,,,,,General,,angle,,angle n.
+2611,anniversary,n.,B2,,,,,,General,,anniversary,,anniversary n.
+2612,annual,adj.,B2,,,,,,General,,annual,,annual adj.
+2613,anxious,adj.,B2,,,,,,General,,anxious,,anxious adj.
+2614,apparent,adj.,B2,,,,,,General,,apparent,,apparent adj.
+2615,apparently,adv.,B2,,,,,,General,,apparently,,apparently adv.
+2616,appeal,"n., v.",B2,,,,,,General,,appeal,,"appeal n., v."
+2617,approach,"n., v.",B2,,,,,,General,,approach,,"approach n., v."
+2618,appropriate,adj.,B2,,,,,,General,,appropriate,,appropriate adj.
+2619,approval,n.,B2,,,,,,General,,approval,,approval n.
+2620,approve,v.,B2,,,,,,General,,approve,,approve v.
+2621,arise,v.,B2,,,,,,General,,arise,,arise v.
+2622,armed,adj.,B2,,,,,,General,,armed,,armed adj.
+2623,arms,n.,B2,,,,,,General,,arms,,arms n.
+2624,artificial,adj.,B2,,,,,,General,,artificial,,artificial adj.
+2625,artistic,adj.,B2,,,,,,General,,artistic,,artistic adj.
+2626,ashamed,adj.,B2,,,,,,General,,ashamed,,ashamed adj.
+2627,aspect,n.,B2,,,,,,General,,aspect,,aspect n.
+2628,assess,v.,B2,,,,,,General,,assess,,assess v.
+2629,assessment,n.,B2,,,,,,General,,assessment,,assessment n.
+2630,associate,v.,B2,,,,,,General,,associate,,associate v.
+2631,associated,adj.,B2,,,,,,General,,associated,,associated adj.
+2632,association,n.,B2,,,,,,General,,association,,association n.
+2633,assume,v.,B2,,,,,,General,,assume,,assume v.
+2634,attempt,"n., v.",B2,,,,,,General,,attempt,,"attempt n., v."
+2635,back,v.,B2,,,,,,General,,back,,back v.
+2636,bacteria,n.,B2,,,,,,General,,bacteria,,bacteria n.
+2637,bar,v.,B2,,,,,,General,,bar,,bar v.
+2638,barrier,n.,B2,,,,,,General,,barrier,,barrier n.
+2639,basically,adv.,B2,,,,,,General,,basically,,basically adv.
+2640,battle,v.,B2,,,,,,General,,battle,,battle v.
+2641,bear,v.,B2,,,,,,General,,bear,deal with,bear (deal with) v.
+2642,beat,n.,B2,,,,,,General,,beat,,beat n.
+2643,beg,v.,B2,,,,,,General,,beg,,beg v.
+2644,being,n.,B2,,,,,,General,,being,,being n.
+2645,bent,adj.,B2,,,,,,General,,bent,,bent adj.
+2646,bet,"v., n.",B2,,,,,,General,,bet,,"bet v., n."
+2647,beyond,"prep., adv.",B2,,,,,,General,,beyond,,"beyond prep., adv."
+2648,bill,v.,B2,,,,,,General,,bill,,bill v.
+2649,bitter,adj.,B2,,,,,,General,,bitter,,bitter adj.
+2650,blame,"v., n.",B2,,,,,,General,,blame,,"blame v., n."
+2651,blind,adj.,B2,,,,,,General,,blind,,blind adj.
+2652,bond,n.,B2,,,,,,General,,bond,,bond n.
+2653,border,v.,B2,,,,,,General,,border,,border v.
+2654,breast,n.,B2,,,,,,General,,breast,,breast n.
+2655,brief,adj.,B2,,,,,,General,,brief,,brief adj.
+2656,broad,adj.,B2,,,,,,General,,broad,,broad adj.
+2657,broadcast,"v., n.",B2,,,,,,General,,broadcast,,"broadcast v., n."
+2658,budget,n.,B2,,,,,,General,,budget,,budget n.
+2659,bullet,n.,B2,,,,,,General,,bullet,,bullet n.
+2660,bunch,n.,B2,,,,,,General,,bunch,,bunch n.
+2661,burn,n.,B2,,,,,,General,,burn,,burn n.
+2662,bush,n.,B2,,,,,,General,,bush,,bush n.
+2663,but,prep.,B2,,,,,,General,,but,,but prep.
+2664,cable,n.,B2,,,,,,General,,cable,,cable n.
+2665,calculate,v.,B2,,,,,,General,,calculate,,calculate v.
+2666,cancel,v.,B2,,,,,,General,,cancel,,cancel v.
+2667,cancer,n.,B2,,,,,,General,,cancer,,cancer n.
+2668,capable,adj.,B2,,,,,,General,,capable,,capable adj.
+2669,capacity,n.,B2,,,,,,General,,capacity,,capacity n.
+2670,capture,"v., n.",B2,,,,,,General,,capture,,"capture v., n."
+2671,cast,"n., v.",B2,,,,,,General,,cast,,"cast n., v."
+2672,catch,n.,B2,,,,,,General,,catch,,catch n.
+2673,cell,n.,B2,,,,,,General,,cell,,cell n.
+2674,chain,v.,B2,,,,,,General,,chain,,chain v.
+2675,chair,v.,B2,,,,,,General,,chair,,chair v.
+2676,chairman,n.,B2,,,,,,General,,chairman,,chairman n.
+2677,challenge,v.,B2,,,,,,General,,challenge,,challenge v.
+2678,characteristic,"n., adj.",B2,,,,,,General,,characteristic,,"characteristic n., adj."
+2679,chart,v.,B2,,,,,,General,,chart,,chart v.
+2680,chief,"adj., n.",B2,,,,,,General,,chief,,"chief adj., n."
+2681,circumstance,n.,B2,,,,,,General,,circumstance,,circumstance n.
+2682,cite,v.,B2,,,,,,General,,cite,,cite v.
+2683,citizen,n.,B2,,,,,,General,,citizen,,citizen n.
+2684,civil,adj.,B2,,,,,,General,,civil,,civil adj.
+2685,classic,"adj., n.",B2,,,,,,General,,classic,,"classic adj., n."
+2686,close,n.,B2,,,,,,General,,close,sense 1,close1 n.
+2687,closely,adv.,B2,,,,,,General,,closely,,closely adv.
+2688,collapse,"v., n.",B2,,,,,,General,,collapse,,"collapse v., n."
+2689,combination,n.,B2,,,,,,General,,combination,,combination n.
+2690,comfort,"n., v.",B2,,,,,,General,,comfort,,"comfort n., v."
+2691,command,"n., v.",B2,,,,,,General,,command,,"command n., v."
+2692,commission,"n., v.",B2,,,,,,General,,commission,,"commission n., v."
+2693,commitment,n.,B2,,,,,,General,,commitment,,commitment n.
+2694,committee,n.,B2,,,,,,General,,committee,,committee n.
+2695,commonly,adv.,B2,,,,,,General,,commonly,,commonly adv.
+2696,complex,n.,B2,,,,,,General,,complex,,complex n.
+2697,complicated,adj.,B2,,,,,,General,,complicated,,complicated adj.
+2698,component,n.,B2,,,,,,General,,component,,component n.
+2699,concentration,n.,B2,,,,,,General,,concentration,,concentration n.
+2700,concept,n.,B2,,,,,,General,,concept,,concept n.
+2701,concern,"n., v.",B2,,,,,,General,,concern,,"concern n., v."
+2702,concerned,adj.,B2,,,,,,General,,concerned,,concerned adj.
+2703,conduct,"v., n.",B2,,,,,,General,,conduct,,"conduct v., n."
+2704,confidence,n.,B2,,,,,,General,,confidence,,confidence n.
+2705,conflict,"n., v.",B2,,,,,,General,,conflict,,"conflict n., v."
+2706,confusing,adj.,B2,,,,,,General,,confusing,,confusing adj.
+2707,conscious,adj.,B2,,,,,,General,,conscious,,conscious adj.
+2708,conservative,"adj., n.",B2,,,,,,General,,conservative,,"conservative adj., n."
+2709,consideration,n.,B2,,,,,,General,,consideration,,consideration n.
+2710,consistent,adj.,B2,,,,,,General,,consistent,,consistent adj.
+2711,constant,adj.,B2,,,,,,General,,constant,,constant adj.
+2712,constantly,adv.,B2,,,,,,General,,constantly,,constantly adv.
+2713,construct,v.,B2,,,,,,General,,construct,,construct v.
+2714,construction,n.,B2,,,,,,General,,construction,,construction n.
+2715,contemporary,adj.,B2,,,,,,General,,contemporary,,contemporary adj.
+2716,contest,"n., v.",B2,,,,,,General,,contest,,"contest n., v."
+2717,contract,"n., v.",B2,,,,,,General,,contract,,"contract n., v."
+2718,contribute,v.,B2,,,,,,General,,contribute,,contribute v.
+2719,contribution,n.,B2,,,,,,General,,contribution,,contribution n.
+2720,convert,v.,B2,,,,,,General,,convert,,convert v.
+2721,convinced,adj.,B2,,,,,,General,,convinced,,convinced adj.
+2722,core,"n., adj.",B2,,,,,,General,,core,,"core n., adj."
+2723,corporate,adj.,B2,,,,,,General,,corporate,,corporate adj.
+2724,council,n.,B2,,,,,,General,,council,,council n.
+2725,county,n.,B2,,,,,,General,,county,,county n.
+2726,courage,n.,B2,,,,,,General,,courage,,courage n.
+2727,crash,"n., v.",B2,,,,,,General,,crash,,"crash n., v."
+2728,creation,n.,B2,,,,,,General,,creation,,creation n.
+2729,creature,n.,B2,,,,,,General,,creature,,creature n.
+2730,credit,v.,B2,,,,,,General,,credit,,credit v.
+2731,crew,n.,B2,,,,,,General,,crew,,crew n.
+2732,crisis,n.,B2,,,,,,General,,crisis,,crisis n.
+2733,criterion,n.,B2,,,,,,General,,criterion,,criterion n.
+2734,critic,n.,B2,,,,,,General,,critic,,critic n.
+2735,critical,adj.,B2,,,,,,General,,critical,,critical adj.
+2736,criticism,n.,B2,,,,,,General,,criticism,,criticism n.
+2737,criticize,v.,B2,,,,,,General,,criticize,,criticize v.
+2738,crop,n.,B2,,,,,,General,,crop,,crop n.
+2739,crucial,adj.,B2,,,,,,General,,crucial,,crucial adj.
+2740,cry,n.,B2,,,,,,General,,cry,,cry n.
+2741,cure,"v., n.",B2,,,,,,General,,cure,,"cure v., n."
+2742,current,n.,B2,,,,,,General,,current,,current n.
+2743,curve,"n., v.",B2,,,,,,General,,curve,,"curve n., v."
+2744,curved,adj.,B2,,,,,,General,,curved,,curved adj.
+2745,date,v.,B2,,,,,,General,,date,,date v.
+2746,debate,"n., v.",B2,,,,,,General,,debate,,"debate n., v."
+2747,debt,n.,B2,,,,,,General,,debt,,debt n.
+2748,decent,adj.,B2,,,,,,General,,decent,,decent adj.
+2749,declare,v.,B2,,,,,,General,,declare,,declare v.
+2750,decline,"v., n.",B2,,,,,,General,,decline,,"decline v., n."
+2751,decoration,n.,B2,,,,,,General,,decoration,,decoration n.
+2752,decrease,"v., n.",B2,,,,,,General,,decrease,,"decrease v., n."
+2753,deeply,adv.,B2,,,,,,General,,deeply,,deeply adv.
+2754,defeat,"v., n.",B2,,,,,,General,,defeat,,"defeat v., n."
+2755,defence,n.,B2,,,,,,General,,defence,,defence n.
+2756,defend,v.,B2,,,,,,General,,defend,,defend v.
+2757,delay,"v., n.",B2,,,,,,General,,delay,,"delay v., n."
+2758,deliberate,adj.,B2,,,,,,General,,deliberate,,deliberate adj.
+2759,deliberately,adv.,B2,,,,,,General,,deliberately,,deliberately adv.
+2760,delight,"v., n.",B2,,,,,,General,,delight,,"delight v., n."
+2761,delighted,adj.,B2,,,,,,General,,delighted,,delighted adj.
+2762,delivery,n.,B2,,,,,,General,,delivery,,delivery n.
+2763,demand,"n., v.",B2,,,,,,General,,demand,,"demand n., v."
+2764,demonstrate,v.,B2,,,,,,General,,demonstrate,,demonstrate v.
+2765,deny,v.,B2,,,,,,General,,deny,,deny v.
+2766,depressed,adj.,B2,,,,,,General,,depressed,,depressed adj.
+2767,depressing,adj.,B2,,,,,,General,,depressing,,depressing adj.
+2768,depth,n.,B2,,,,,,General,,depth,,depth n.
+2769,desert,v.,B2,,,,,,General,,desert,,desert v.
+2770,deserve,v.,B2,,,,,,General,,deserve,,deserve v.
+2771,desire,"n., v.",B2,,,,,,General,,desire,,"desire n., v."
+2772,desperate,adj.,B2,,,,,,General,,desperate,,desperate adj.
+2773,detail,v.,B2,,,,,,General,,detail,,detail v.
+2774,detailed,adj.,B2,,,,,,General,,detailed,,detailed adj.
+2775,detect,v.,B2,,,,,,General,,detect,,detect v.
+2776,dig,v.,B2,,,,,,General,,dig,,dig v.
+2777,disc,n.,B2,,,,,,General,,disc,,disc n.
+2778,discipline,n.,B2,,,,,,General,,discipline,,discipline n.
+2779,discount,v.,B2,,,,,,General,,discount,,discount v.
+2780,dishonest,adj.,B2,,,,,,General,,dishonest,,dishonest adj.
+2781,dismiss,v.,B2,,,,,,General,,dismiss,,dismiss v.
+2782,display,"v., n.",B2,,,,,,General,,display,,"display v., n."
+2783,distribute,v.,B2,,,,,,General,,distribute,,distribute v.
+2784,distribution,n.,B2,,,,,,General,,distribution,,distribution n.
+2785,district,n.,B2,,,,,,General,,district,,district n.
+2786,divide,n.,B2,,,,,,General,,divide,,divide n.
+2787,division,n.,B2,,,,,,General,,division,,division n.
+2788,document,v.,B2,,,,,,General,,document,,document v.
+2789,domestic,adj.,B2,,,,,,General,,domestic,,domestic adj.
+2790,dominate,v.,B2,,,,,,General,,dominate,,dominate v.
+2791,downwards,adv.,B2,,,,,,General,,downwards,,downwards adv.
+2792,dozen,"n., det.",B2,,,,,,General,,dozen,,"dozen n., det."
+2793,draft,"n., v.",B2,,,,,,General,,draft,,"draft n., v."
+2794,drag,v.,B2,,,,,,General,,drag,,drag v.
+2795,dramatic,adj.,B2,,,,,,General,,dramatic,,dramatic adj.
+2796,edit,v.,B2,,,,,,General,,edit,,edit v.
+2797,edition,n.,B2,,,,,,General,,edition,,edition n.
+2798,efficient,adj.,B2,,,,,,General,,efficient,,efficient adj.
+2799,elderly,adj.,B2,,,,,,General,,elderly,,elderly adj.
+2800,elect,v.,B2,,,,,,General,,elect,,elect v.
+2801,elsewhere,adv.,B2,,,,,,General,,elsewhere,,elsewhere adv.
+2802,emerge,v.,B2,,,,,,General,,emerge,,emerge v.
+2803,emotional,adj.,B2,,,,,,General,,emotional,,emotional adj.
+2804,emphasis,n.,B2,,,,,,General,,emphasis,,emphasis n.
+2805,emphasize,v.,B2,,,,,,General,,emphasize,,emphasize v.
+2806,enable,v.,B2,,,,,,General,,enable,,enable v.
+2807,encounter,"v., n.",B2,,,,,,General,,encounter,,"encounter v., n."
+2808,engage,v.,B2,,,,,,General,,engage,,engage v.
+2809,enhance,v.,B2,,,,,,General,,enhance,,enhance v.
+2810,enquiry,n.,B2,,,,,,General,,enquiry,,enquiry n.
+2811,ensure,v.,B2,,,,,,General,,ensure,,ensure v.
+2812,enthusiasm,n.,B2,,,,,,General,,enthusiasm,,enthusiasm n.
+2813,enthusiastic,adj.,B2,,,,,,General,,enthusiastic,,enthusiastic adj.
+2814,entire,adj.,B2,,,,,,General,,entire,,entire adj.
+2815,entirely,adv.,B2,,,,,,General,,entirely,,entirely adv.
+2816,equal,n.,B2,,,,,,General,,equal,,equal n.
+2817,establish,v.,B2,,,,,,General,,establish,,establish v.
+2818,estate,n.,B2,,,,,,General,,estate,,estate n.
+2819,estimate,"v., n.",B2,,,,,,General,,estimate,,"estimate v., n."
+2820,ethical,adj.,B2,,,,,,General,,ethical,,ethical adj.
+2821,evaluate,v.,B2,,,,,,General,,evaluate,,evaluate v.
+2822,even,adj.,B2,,,,,,General,,even,,even adj.
+2823,evil,"adj., n.",B2,,,,,,General,,evil,,"evil adj., n."
+2824,examination,n.,B2,,,,,,General,,examination,,examination n.
+2825,excuse,"n., v.",B2,,,,,,General,,excuse,,"excuse n., v."
+2826,executive,"n., adj.",B2,,,,,,General,,executive,,"executive n., adj."
+2827,existence,n.,B2,,,,,,General,,existence,,existence n.
+2828,expectation,n.,B2,,,,,,General,,expectation,,expectation n.
+2829,expense,n.,B2,,,,,,General,,expense,,expense n.
+2830,exploration,n.,B2,,,,,,General,,exploration,,exploration n.
+2831,expose,v.,B2,,,,,,General,,expose,,expose v.
+2832,extend,v.,B2,,,,,,General,,extend,,extend v.
+2833,extent,n.,B2,,,,,,General,,extent,,extent n.
+2834,external,adj.,B2,,,,,,General,,external,,external adj.
+2835,extraordinary,adj.,B2,,,,,,General,,extraordinary,,extraordinary adj.
+2836,extreme,n.,B2,,,,,,General,,extreme,,extreme n.
+2837,facility,n.,B2,,,,,,General,,facility,,facility n.
+2838,failure,n.,B2,,,,,,General,,failure,,failure n.
+2839,faith,n.,B2,,,,,,General,,faith,,faith n.
+2840,fault,n.,B2,,,,,,General,,fault,,fault n.
+2841,favour,v.,B2,,,,,,General,,favour,,favour v.
+2842,feather,n.,B2,,,,,,General,,feather,,feather n.
+2843,fee,n.,B2,,,,,,General,,fee,,fee n.
+2844,feed,n.,B2,,,,,,General,,feed,,feed n.
+2845,feedback,n.,B2,,,,,,General,,feedback,,feedback n.
+2846,feel,n.,B2,,,,,,General,,feel,,feel n.
+2847,fellow,adj.,B2,,,,,,General,,fellow,,fellow adj.
+2848,figure,v.,B2,,,,,,General,,figure,,figure v.
+2849,file,v.,B2,,,,,,General,,file,,file v.
+2850,finance,"n., v.",B2,,,,,,General,,finance,,"finance n., v."
+2851,finding,n.,B2,,,,,,General,,finding,,finding n.
+2852,firm,n.,B2,,,,,,General,,firm,,firm n.
+2853,fix,n.,B2,,,,,,General,,fix,,fix n.
+2854,flame,n.,B2,,,,,,General,,flame,,flame n.
+2855,flash,"n., v.",B2,,,,,,General,,flash,,"flash n., v."
+2856,flexible,adj.,B2,,,,,,General,,flexible,,flexible adj.
+2857,float,v.,B2,,,,,,General,,float,,float v.
+2858,fold,n.,B2,,,,,,General,,fold,,fold n.
+2859,folding,adj.,B2,,,,,,General,,folding,,folding adj.
+2860,following,prep.,B2,,,,,,General,,following,,following prep.
+2861,forgive,v.,B2,,,,,,General,,forgive,,forgive v.
+2862,former,adj.,B2,,,,,,General,,former,,former adj.
+2863,fortune,n.,B2,,,,,,General,,fortune,,fortune n.
+2864,forward,adj.,B2,,,,,,General,,forward,,forward adj.
+2865,found,v.,B2,,,,,,General,,found,,found v.
+2866,free,v.,B2,,,,,,General,,free,,free v.
+2867,freedom,n.,B2,,,,,,General,,freedom,,freedom n.
+2868,frequency,n.,B2,,,,,,General,,frequency,,frequency n.
+2869,fuel,v.,B2,,,,,,General,,fuel,,fuel v.
+2870,fully,adv.,B2,,,,,,General,,fully,,fully adv.
+2871,function,v.,B2,,,,,,General,,function,,function v.
+2872,fund,"n., v.",B2,,,,,,General,,fund,,"fund n., v."
+2873,fundamental,adj.,B2,,,,,,General,,fundamental,,fundamental adj.
+2874,funding,n.,B2,,,,,,General,,funding,,funding n.
+2875,furthermore,adv.,B2,,,,,,General,,furthermore,,furthermore adv.
+2876,gain,"v., n.",B2,,,,,,General,,gain,,"gain v., n."
+2877,gang,n.,B2,,,,,,General,,gang,,gang n.
+2878,generate,v.,B2,,,,,,General,,generate,,generate v.
+2879,genre,n.,B2,,,,,,General,,genre,,genre n.
+2880,govern,v.,B2,,,,,,General,,govern,,govern v.
+2881,grab,v.,B2,,,,,,General,,grab,,grab v.
+2882,grade,v.,B2,,,,,,General,,grade,,grade v.
+2883,gradually,adv.,B2,,,,,,General,,gradually,,gradually adv.
+2884,grand,adj.,B2,,,,,,General,,grand,,grand adj.
+2885,grant,"v., n.",B2,,,,,,General,,grant,,"grant v., n."
+2886,guarantee,"v., n.",B2,,,,,,General,,guarantee,,"guarantee v., n."
+2887,handle,"v., n.",B2,,,,,,General,,handle,,"handle v., n."
+2888,harm,"n., v.",B2,,,,,,General,,harm,,"harm n., v."
+2889,harmful,adj.,B2,,,,,,General,,harmful,,harmful adj.
+2890,hearing,n.,B2,,,,,,General,,hearing,,hearing n.
+2891,heaven,n.,B2,,,,,,General,,heaven,,heaven n.
+2892,heel,n.,B2,,,,,,General,,heel,,heel n.
+2893,hell,n.,B2,,,,,,General,,hell,,hell n.
+2894,hesitate,v.,B2,,,,,,General,,hesitate,,hesitate v.
+2895,high,n.,B2,,,,,,General,,high,,high n.
+2896,hire,n.,B2,,,,,,General,,hire,,hire n.
+2897,hold,n.,B2,,,,,,General,,hold,,hold n.
+2898,hollow,adj.,B2,,,,,,General,,hollow,,hollow adj.
+2899,holy,adj.,B2,,,,,,General,,holy,,holy adj.
+2900,honour,"n., v.",B2,,,,,,General,,honour,,"honour n., v."
+2901,host,v.,B2,,,,,,General,,host,,host v.
+2902,house,v.,B2,,,,,,General,,house,,house v.
+2903,household,n.,B2,,,,,,General,,household,,household n.
+2904,housing,n.,B2,,,,,,General,,housing,,housing n.
+2905,humorous,adj.,B2,,,,,,General,,humorous,,humorous adj.
+2906,humour,n.,B2,,,,,,General,,humour,,humour n.
+2907,hunt,n.,B2,,,,,,General,,hunt,,hunt n.
+2908,hunting,n.,B2,,,,,,General,,hunting,,hunting n.
+2909,hurt,n.,B2,,,,,,General,,hurt,,hurt n.
+2910,ideal,n.,B2,,,,,,General,,ideal,,ideal n.
+2911,illustrate,v.,B2,,,,,,General,,illustrate,,illustrate v.
+2912,illustration,n.,B2,,,,,,General,,illustration,,illustration n.
+2913,imagination,n.,B2,,,,,,General,,imagination,,imagination n.
+2914,impatient,adj.,B2,,,,,,General,,impatient,,impatient adj.
+2915,imply,v.,B2,,,,,,General,,imply,,imply v.
+2916,impose,v.,B2,,,,,,General,,impose,,impose v.
+2917,impress,v.,B2,,,,,,General,,impress,,impress v.
+2918,impressed,adj.,B2,,,,,,General,,impressed,,impressed adj.
+2919,inch,n.,B2,,,,,,General,,inch,,inch n.
+2920,incident,n.,B2,,,,,,General,,incident,,incident n.
+2921,income,n.,B2,,,,,,General,,income,,income n.
+2922,increasingly,adv.,B2,,,,,,General,,increasingly,,increasingly adv.
+2923,industrial,adj.,B2,,,,,,General,,industrial,,industrial adj.
+2924,infection,n.,B2,,,,,,General,,infection,,infection n.
+2925,inform,v.,B2,,,,,,General,,inform,,inform v.
+2926,initial,adj.,B2,,,,,,General,,initial,,initial adj.
+2927,initially,adv.,B2,,,,,,General,,initially,,initially adv.
+2928,initiative,n.,B2,,,,,,General,,initiative,,initiative n.
+2929,inner,adj.,B2,,,,,,General,,inner,,inner adj.
+2930,insight,n.,B2,,,,,,General,,insight,,insight n.
+2931,insist,v.,B2,,,,,,General,,insist,,insist v.
+2932,inspire,v.,B2,,,,,,General,,inspire,,inspire v.
+2933,install,v.,B2,,,,,,General,,install,,install v.
+2934,instance,n.,B2,,,,,,General,,instance,,instance n.
+2935,institute,n.,B2,,,,,,General,,institute,,institute n.
+2936,institution,n.,B2,,,,,,General,,institution,,institution n.
+2937,insurance,n.,B2,,,,,,General,,insurance,,insurance n.
+2938,intended,adj.,B2,,,,,,General,,intended,,intended adj.
+2939,intense,adj.,B2,,,,,,General,,intense,,intense adj.
+2940,internal,adj.,B2,,,,,,General,,internal,,internal adj.
+2941,interpret,v.,B2,,,,,,General,,interpret,,interpret v.
+2942,interrupt,v.,B2,,,,,,General,,interrupt,,interrupt v.
+2943,investigation,n.,B2,,,,,,General,,investigation,,investigation n.
+2944,investment,n.,B2,,,,,,General,,investment,,investment n.
+2945,issue,v.,B2,,,,,,General,,issue,,issue v.
+2946,joy,n.,B2,,,,,,General,,joy,,joy n.
+2947,judgement,n.,B2,,,,,,General,,judgement,,judgement n.
+2948,junior,adj.,B2,,,,,,General,,junior,,junior adj.
+2949,justice,n.,B2,,,,,,General,,justice,,justice n.
+2950,justify,v.,B2,,,,,,General,,justify,,justify v.
+2951,labour,n.,B2,,,,,,General,,labour,,labour n.
+2952,landscape,n.,B2,,,,,,General,,landscape,,landscape n.
+2953,largely,adv.,B2,,,,,,General,,largely,,largely adv.
+2954,latest,n.,B2,,,,,,General,,latest,,latest n.
+2955,launch,"v., n.",B2,,,,,,General,,launch,,"launch v., n."
+2956,leadership,n.,B2,,,,,,General,,leadership,,leadership n.
+2957,league,n.,B2,,,,,,General,,league,,league n.
+2958,lean,v.,B2,,,,,,General,,lean,,lean v.
+2959,leave,n.,B2,,,,,,General,,leave,,leave n.
+2960,level,v.,B2,,,,,,General,,level,,level v.
+2961,licence,n.,B2,,,,,,General,,licence,,licence n.
+2962,limited,adj.,B2,,,,,,General,,limited,,limited adj.
+2963,line,v.,B2,,,,,,General,,line,,line v.
+2964,lively,adj.,B2,,,,,,General,,lively,,lively adj.
+2965,load,"n., v.",B2,,,,,,General,,load,,"load n., v."
+2966,loan,n.,B2,,,,,,General,,loan,,loan n.
+2967,logical,adj.,B2,,,,,,General,,logical,,logical adj.
+2968,long-term,"adj., adv.",B2,,,,,,General,,long_term,,"long-term adj., adv."
+2969,loose,adj.,B2,,,,,,General,,loose,,loose adj.
+2970,lord,n.,B2,,,,,,General,,lord,,lord n.
+2971,low,n.,B2,,,,,,General,,low,,low n.
+2972,lower,v.,B2,,,,,,General,,lower,,lower v.
+2973,lung,n.,B2,,,,,,General,,lung,,lung n.
+2974,maintain,v.,B2,,,,,,General,,maintain,,maintain v.
+2975,majority,n.,B2,,,,,,General,,majority,,majority n.
+2976,make,n.,B2,,,,,,General,,make,,make n.
+2977,map,v.,B2,,,,,,General,,map,,map v.
+2978,mass,"n., adj.",B2,,,,,,General,,mass,,"mass n., adj."
+2979,massive,adj.,B2,,,,,,General,,massive,,massive adj.
+2980,master,"n., v.",B2,,,,,,General,,master,,"master n., v."
+2981,matching,adj.,B2,,,,,,General,,matching,,matching adj.
+2982,material,adj.,B2,,,,,,General,,material,,material adj.
+2983,maximum,"adj., n.",B2,,,,,,General,,maximum,,"maximum adj., n."
+2984,means,n.,B2,,,,,,General,,means,,means n.
+2985,measurement,n.,B2,,,,,,General,,measurement,,measurement n.
+2986,medium,n.,B2,,,,,,General,,medium,,medium n.
+2987,melt,v.,B2,,,,,,General,,melt,,melt v.
+2988,military,"adj., n.",B2,,,,,,General,,military,,"military adj., n."
+2989,mineral,n.,B2,,,,,,General,,mineral,,mineral n.
+2990,minimum,"adj., n.",B2,,,,,,General,,minimum,,"minimum adj., n."
+2991,minister,n.,B2,,,,,,General,,minister,,minister n.
+2992,minor,adj.,B2,,,,,,General,,minor,,minor adj.
+2993,minority,n.,B2,,,,,,General,,minority,,minority n.
+2994,mission,n.,B2,,,,,,General,,mission,,mission n.
+2995,mistake,v.,B2,,,,,,General,,mistake,,mistake v.
+2996,mixed,adj.,B2,,,,,,General,,mixed,,mixed adj.
+2997,model,v.,B2,,,,,,General,,model,,model v.
+2998,modify,v.,B2,,,,,,General,,modify,,modify v.
+2999,monitor,"n., v.",B2,,,,,,General,,monitor,,"monitor n., v."
+3000,moral,"adj., n.",B2,,,,,,General,,moral,,"moral adj., n."
+3001,motor,"n., adj.",B2,,,,,,General,,motor,,"motor n., adj."
+3002,mount,v.,B2,,,,,,General,,mount,,mount v.
+3003,multiple,adj.,B2,,,,,,General,,multiple,,multiple adj.
+3004,multiply,v.,B2,,,,,,General,,multiply,,multiply v.
+3005,mysterious,adj.,B2,,,,,,General,,mysterious,,mysterious adj.
+3006,narrow,v.,B2,,,,,,General,,narrow,,narrow v.
+3007,national,n.,B2,,,,,,General,,national,,national n.
+3008,neat,adj.,B2,,,,,,General,,neat,,neat adj.
+3009,negative,n.,B2,,,,,,General,,negative,,negative n.
+3010,nerve,n.,B2,,,,,,General,,nerve,,nerve n.
+3011,nevertheless,adv.,B2,,,,,,General,,nevertheless,,nevertheless adv.
+3012,nightmare,n.,B2,,,,,,General,,nightmare,,nightmare n.
+3013,notion,n.,B2,,,,,,General,,notion,,notion n.
+3014,numerous,adj.,B2,,,,,,General,,numerous,,numerous adj.
+3015,obey,v.,B2,,,,,,General,,obey,,obey v.
+3016,object,v.,B2,,,,,,General,,object,,object v.
+3017,objective,"n., adj.",B2,,,,,,General,,objective,,"objective n., adj."
+3018,obligation,n.,B2,,,,,,General,,obligation,,obligation n.
+3019,observation,n.,B2,,,,,,General,,observation,,observation n.
+3020,observe,v.,B2,,,,,,General,,observe,,observe v.
+3021,obtain,v.,B2,,,,,,General,,obtain,,obtain v.
+3022,occasionally,adv.,B2,,,,,,General,,occasionally,,occasionally adv.
+3023,offence,n.,B2,,,,,,General,,offence,,offence n.
+3024,offend,v.,B2,,,,,,General,,offend,,offend v.
+3025,offensive,adj.,B2,,,,,,General,,offensive,,offensive adj.
+3026,official,n.,B2,,,,,,General,,official,,official n.
+3027,opening,n.,B2,,,,,,General,,opening,,opening n.
+3028,operate,v.,B2,,,,,,General,,operate,,operate v.
+3029,opponent,n.,B2,,,,,,General,,opponent,,opponent n.
+3030,oppose,v.,B2,,,,,,General,,oppose,,oppose v.
+3031,opposed,adj.,B2,,,,,,General,,opposed,,opposed adj.
+3032,opposition,n.,B2,,,,,,General,,opposition,,opposition n.
+3033,organ,n.,B2,,,,,,General,,organ,,organ n.
+3034,origin,n.,B2,,,,,,General,,origin,,origin n.
+3035,otherwise,adv.,B2,,,,,,General,,otherwise,,otherwise adv.
+3036,outcome,n.,B2,,,,,,General,,outcome,,outcome n.
+3037,outer,adj.,B2,,,,,,General,,outer,,outer adj.
+3038,outline,"n., v.",B2,,,,,,General,,outline,,"outline n., v."
+3039,overall,"adj., adv.",B2,,,,,,General,,overall,,"overall adj., adv."
+3040,owe,v.,B2,,,,,,General,,owe,,owe v.
+3041,pace,"n., v.",B2,,,,,,General,,pace,,"pace n., v."
+3042,package,v.,B2,,,,,,General,,package,,package v.
+3043,panel,n.,B2,,,,,,General,,panel,,panel n.
+3044,parliament,n.,B2,,,,,,General,,parliament,,parliament n.
+3045,participant,n.,B2,,,,,,General,,participant,,participant n.
+3046,partly,adv.,B2,,,,,,General,,partly,,partly adv.
+3047,passage,n.,B2,,,,,,General,,passage,,passage n.
+3048,patient,adj.,B2,,,,,,General,,patient,,patient adj.
+3049,pension,n.,B2,,,,,,General,,pension,sense 1,pension1 n.
+3050,permanent,adj.,B2,,,,,,General,,permanent,,permanent adj.
+3051,permit,"v., n.",B2,,,,,,General,,permit,,"permit v., n."
+3052,perspective,n.,B2,,,,,,General,,perspective,,perspective n.
+3053,phase,n.,B2,,,,,,General,,phase,,phase n.
+3054,phenomenon,n.,B2,,,,,,General,,phenomenon,,phenomenon n.
+3055,philosophy,n.,B2,,,,,,General,,philosophy,,philosophy n.
+3056,pick,n.,B2,,,,,,General,,pick,,pick n.
+3057,picture,v.,B2,,,,,,General,,picture,,picture v.
+3058,pile,"n., v.",B2,,,,,,General,,pile,,"pile n., v."
+3059,pitch,n.,B2,,,,,,General,,pitch,,pitch n.
+3060,plain,adj.,B2,,,,,,General,,plain,,plain adj.
+3061,plot,v.,B2,,,,,,General,,plot,,plot v.
+3062,plus,"adj. , n., conj.",B2,,,,,,General,,plus,sense 1,"plus1 adj. , n., conj."
+3063,pointed,adj.,B2,,,,,,General,,pointed,,pointed adj.
+3064,popularity,n.,B2,,,,,,General,,popularity,,popularity n.
+3065,pose,v.,B2,,,,,,General,,pose,,pose v.
+3066,position,v.,B2,,,,,,General,,position,,position v.
+3067,positive,n.,B2,,,,,,General,,positive,,positive n.
+3068,possess,v.,B2,,,,,,General,,possess,,possess v.
+3069,potential,"adj., n.",B2,,,,,,General,,potential,,"potential adj., n."
+3070,power,v.,B2,,,,,,General,,power,,power v.
+3071,praise,"n., v.",B2,,,,,,General,,praise,,"praise n., v."
+3072,pregnant,adj.,B2,,,,,,General,,pregnant,,pregnant adj.
+3073,preparation,n.,B2,,,,,,General,,preparation,,preparation n.
+3074,presence,n.,B2,,,,,,General,,presence,,presence n.
+3075,preserve,v.,B2,,,,,,General,,preserve,,preserve v.
+3076,price,v.,B2,,,,,,General,,price,,price v.
+3077,prime,adj.,B2,,,,,,General,,prime,,prime adj.
+3078,principle,n.,B2,,,,,,General,,principle,,principle n.
+3079,print,n.,B2,,,,,,General,,print,,print n.
+3080,priority,n.,B2,,,,,,General,,priority,,priority n.
+3081,privacy,n.,B2,,,,,,General,,privacy,,privacy n.
+3082,procedure,n.,B2,,,,,,General,,procedure,,procedure n.
+3083,process,v.,B2,,,,,,General,,process,,process v.
+3084,produce,n.,B2,,,,,,General,,produce,,produce n.
+3085,professional,n.,B2,,,,,,General,,professional,,professional n.
+3086,progress,v.,B2,,,,,,General,,progress,,progress v.
+3087,project,v.,B2,,,,,,General,,project,,project v.
+3088,proof,n.,B2,,,,,,General,,proof,,proof n.
+3089,proposal,n.,B2,,,,,,General,,proposal,,proposal n.
+3090,propose,v.,B2,,,,,,General,,propose,,propose v.
+3091,prospect,n.,B2,,,,,,General,,prospect,,prospect n.
+3092,protection,n.,B2,,,,,,General,,protection,,protection n.
+3093,psychologist,n.,B2,,,,,,General,,psychologist,,psychologist n.
+3094,psychology,n.,B2,,,,,,General,,psychology,,psychology n.
+3095,publication,n.,B2,,,,,,General,,publication,,publication n.
+3096,pupil,n.,B2,,,,,,General,,pupil,,pupil n.
+3097,purchase,"n., v.",B2,,,,,,General,,purchase,,"purchase n., v."
+3098,pure,adj.,B2,,,,,,General,,pure,,pure adj.
+3099,pursue,v.,B2,,,,,,General,,pursue,,pursue v.
+3100,range,v.,B2,,,,,,General,,range,,range v.
+3101,rank,"n., v.",B2,,,,,,General,,rank,,"rank n., v."
+3102,rapid,adj.,B2,,,,,,General,,rapid,,rapid adj.
+3103,rapidly,adv.,B2,,,,,,General,,rapidly,,rapidly adv.
+3104,rate,v.,B2,,,,,,General,,rate,,rate v.
+3105,raw,adj.,B2,,,,,,General,,raw,,raw adj.
+3106,reach,n.,B2,,,,,,General,,reach,,reach n.
+3107,realistic,adj.,B2,,,,,,General,,realistic,,realistic adj.
+3108,reasonable,adj.,B2,,,,,,General,,reasonable,,reasonable adj.
+3109,recall,v.,B2,,,,,,General,,recall,,recall v.
+3110,recover,v.,B2,,,,,,General,,recover,,recover v.
+3111,reduction,n.,B2,,,,,,General,,reduction,,reduction n.
+3112,regard,"v., n.",B2,,,,,,General,,regard,,"regard v., n."
+3113,regional,adj.,B2,,,,,,General,,regional,,regional adj.
+3114,register,"v., n.",B2,,,,,,General,,register,,"register v., n."
+3115,regret,"v., n.",B2,,,,,,General,,regret,,"regret v., n."
+3116,regulation,n.,B2,,,,,,General,,regulation,,regulation n.
+3117,relatively,adv.,B2,,,,,,General,,relatively,,relatively adv.
+3118,relevant,adj.,B2,,,,,,General,,relevant,,relevant adj.
+3119,relief,n.,B2,,,,,,General,,relief,,relief n.
+3120,rely,v.,B2,,,,,,General,,rely,,rely v.
+3121,remark,"n., v.",B2,,,,,,General,,remark,,"remark n., v."
+3122,representative,"n., adj.",B2,,,,,,General,,representative,,"representative n., adj."
+3123,reputation,n.,B2,,,,,,General,,reputation,,reputation n.
+3124,requirement,n.,B2,,,,,,General,,requirement,,requirement n.
+3125,rescue,"v., n.",B2,,,,,,General,,rescue,,"rescue v., n."
+3126,reserve,"n., v.",B2,,,,,,General,,reserve,,"reserve n., v."
+3127,resident,"n., adj.",B2,,,,,,General,,resident,,"resident n., adj."
+3128,resist,v.,B2,,,,,,General,,resist,,resist v.
+3129,resolve,v.,B2,,,,,,General,,resolve,,resolve v.
+3130,resort,n.,B2,,,,,,General,,resort,,resort n.
+3131,retain,v.,B2,,,,,,General,,retain,,retain v.
+3132,reveal,v.,B2,,,,,,General,,reveal,,reveal v.
+3133,revolution,n.,B2,,,,,,General,,revolution,,revolution n.
+3134,reward,"n., v.",B2,,,,,,General,,reward,,"reward n., v."
+3135,rhythm,n.,B2,,,,,,General,,rhythm,,rhythm n.
+3136,rid,v.,B2,,,,,,General,,rid,,rid v.
+3137,root,n.,B2,,,,,,General,,root,,root n.
+3138,round,n.,B2,,,,,,General,,round,,round n.
+3139,routine,adj.,B2,,,,,,General,,routine,,routine adj.
+3140,rub,v.,B2,,,,,,General,,rub,,rub v.
+3141,rubber,"n., adj.",B2,,,,,,General,,rubber,,"rubber n., adj."
+3142,rural,adj.,B2,,,,,,General,,rural,,rural adj.
+3143,rush,"v., n.",B2,,,,,,General,,rush,,"rush v., n."
+3144,sample,v.,B2,,,,,,General,,sample,,sample v.
+3145,satellite,n.,B2,,,,,,General,,satellite,,satellite n.
+3146,satisfied,adj.,B2,,,,,,General,,satisfied,,satisfied adj.
+3147,satisfy,v.,B2,,,,,,General,,satisfy,,satisfy v.
+3148,saving,n.,B2,,,,,,General,,saving,,saving n.
+3149,scale,n.,B2,,,,,,General,,scale,,scale n.
+3150,schedule,v.,B2,,,,,,General,,schedule,,schedule v.
+3151,scheme,n.,B2,,,,,,General,,scheme,,scheme n.
+3152,scream,"v., n.",B2,,,,,,General,,scream,,"scream v., n."
+3153,screen,v.,B2,,,,,,General,,screen,,screen v.
+3154,seat,v.,B2,,,,,,General,,seat,,seat v.
+3155,sector,n.,B2,,,,,,General,,sector,,sector n.
+3156,secure,"v., adj.",B2,,,,,,General,,secure,,"secure v., adj."
+3157,seek,v.,B2,,,,,,General,,seek,,seek v.
+3158,select,v.,B2,,,,,,General,,select,,select v.
+3159,selection,n.,B2,,,,,,General,,selection,,selection n.
+3160,self,n.,B2,,,,,,General,,self,,self n.
+3161,senior,adj.,B2,,,,,,General,,senior,,senior adj.
+3162,sense,v.,B2,,,,,,General,,sense,,sense v.
+3163,sensitive,adj.,B2,,,,,,General,,sensitive,,sensitive adj.
+3164,sentence,v.,B2,,,,,,General,,sentence,,sentence v.
+3165,sequence,n.,B2,,,,,,General,,sequence,,sequence n.
+3166,session,n.,B2,,,,,,General,,session,,session n.
+3167,settle,v.,B2,,,,,,General,,settle,,settle v.
+3168,severe,adj.,B2,,,,,,General,,severe,,severe adj.
+3169,shade,n.,B2,,,,,,General,,shade,,shade n.
+3170,shadow,n.,B2,,,,,,General,,shadow,,shadow n.
+3171,shallow,adj.,B2,,,,,,General,,shallow,,shallow adj.
+3172,shame,n.,B2,,,,,,General,,shame,,shame n.
+3173,shape,v.,B2,,,,,,General,,shape,,shape v.
+3174,shelter,"n., v.",B2,,,,,,General,,shelter,,"shelter n., v."
+3175,shift,v.,B2,,,,,,General,,shift,,shift v.
+3176,ship,v.,B2,,,,,,General,,ship,,ship v.
+3177,shock,"n., v.",B2,,,,,,General,,shock,,"shock n., v."
+3178,shocked,adj.,B2,,,,,,General,,shocked,,shocked adj.
+3179,shooting,n.,B2,,,,,,General,,shooting,,shooting n.
+3180,shot,n.,B2,,,,,,General,,shot,,shot n.
+3181,significant,adj.,B2,,,,,,General,,significant,,significant adj.
+3182,significantly,adv.,B2,,,,,,General,,significantly,,significantly adv.
+3183,silence,n.,B2,,,,,,General,,silence,,silence n.
+3184,silk,n.,B2,,,,,,General,,silk,,silk n.
+3185,sincere,adj.,B2,,,,,,General,,sincere,,sincere adj.
+3186,slave,n.,B2,,,,,,General,,slave,,slave n.
+3187,slide,"v., n.",B2,,,,,,General,,slide,,"slide v., n."
+3188,slight,adj.,B2,,,,,,General,,slight,,slight adj.
+3189,slip,v.,B2,,,,,,General,,slip,,slip v.
+3190,slope,"n., v.",B2,,,,,,General,,slope,,"slope n., v."
+3191,solar,adj.,B2,,,,,,General,,solar,,solar adj.
+3192,somewhat,adv.,B2,,,,,,General,,somewhat,,somewhat adv.
+3193,soul,n.,B2,,,,,,General,,soul,,soul n.
+3194,specialist,"n., adj.",B2,,,,,,General,,specialist,,"specialist n., adj."
+3195,species,n.,B2,,,,,,General,,species,,species n.
+3196,speed,v.,B2,,,,,,General,,speed,,speed v.
+3197,spiritual,adj.,B2,,,,,,General,,spiritual,,spiritual adj.
+3198,split,"v., n.",B2,,,,,,General,,split,,"split v., n."
+3199,sponsor,"v., n.",B2,,,,,,General,,sponsor,,"sponsor v., n."
+3200,spot,v.,B2,,,,,,General,,spot,,spot v.
+3201,spread,n.,B2,,,,,,General,,spread,,spread n.
+3202,stable,adj.,B2,,,,,,General,,stable,,stable adj.
+3203,stage,v.,B2,,,,,,General,,stage,,stage v.
+3204,stand,n.,B2,,,,,,General,,stand,,stand n.
+3205,stare,v.,B2,,,,,,General,,stare,,stare v.
+3206,status,n.,B2,,,,,,General,,status,,status n.
+3207,steady,adj.,B2,,,,,,General,,steady,,steady adj.
+3208,steel,n.,B2,,,,,,General,,steel,,steel n.
+3209,steep,adj.,B2,,,,,,General,,steep,,steep adj.
+3210,step,v.,B2,,,,,,General,,step,,step v.
+3211,sticky,adj.,B2,,,,,,General,,sticky,,sticky adj.
+3212,stiff,adj.,B2,,,,,,General,,stiff,,stiff adj.
+3213,stock,n.,B2,,,,,,General,,stock,,stock n.
+3214,stream,n.,B2,,,,,,General,,stream,,stream n.
+3215,stretch,"v., n.",B2,,,,,,General,,stretch,,"stretch v., n."
+3216,strict,adj.,B2,,,,,,General,,strict,,strict adj.
+3217,strike,"v., n.",B2,,,,,,General,,strike,,"strike v., n."
+3218,structure,v.,B2,,,,,,General,,structure,,structure v.
+3219,struggle,"v., n.",B2,,,,,,General,,struggle,,"struggle v., n."
+3220,stuff,v.,B2,,,,,,General,,stuff,,stuff v.
+3221,subject,adj.,B2,,,,,,General,,subject,,subject adj.
+3222,submit,v.,B2,,,,,,General,,submit,,submit v.
+3223,sum,"n., v.",B2,,,,,,General,,sum,,"sum n., v."
+3224,surgery,n.,B2,,,,,,General,,surgery,,surgery n.
+3225,surround,v.,B2,,,,,,General,,surround,,surround v.
+3226,surrounding,adj.,B2,,,,,,General,,surrounding,,surrounding adj.
+3227,survey,v.,B2,,,,,,General,,survey,,survey v.
+3228,suspect,"v., n.",B2,,,,,,General,,suspect,,"suspect v., n."
+3229,swear,v.,B2,,,,,,General,,swear,,swear v.
+3230,sweep,v.,B2,,,,,,General,,sweep,,sweep v.
+3231,switch,n.,B2,,,,,,General,,switch,,switch n.
+3232,sympathy,n.,B2,,,,,,General,,sympathy,,sympathy n.
+3233,tale,n.,B2,,,,,,General,,tale,,tale n.
+3234,tank,n.,B2,,,,,,General,,tank,,tank n.
+3235,target,v.,B2,,,,,,General,,target,,target v.
+3236,tear,"v. , n.",B2,,,,,,General,,tear,sense 1,"tear1 v. , n."
+3237,tear,n.,B2,,,,,,General,,tear,sense 2,tear2 n.
+3238,temporary,adj.,B2,,,,,,General,,temporary,,temporary adj.
+3239,term,v.,B2,,,,,,General,,term,,term v.
+3240,therapy,n.,B2,,,,,,General,,therapy,,therapy n.
+3241,threat,n.,B2,,,,,,General,,threat,,threat n.
+3242,threaten,v.,B2,,,,,,General,,threaten,,threaten v.
+3243,thus,adv.,B2,,,,,,General,,thus,,thus adv.
+3244,time,v.,B2,,,,,,General,,time,,time v.
+3245,title,v.,B2,,,,,,General,,title,,title v.
+3246,tone,n.,B2,,,,,,General,,tone,,tone n.
+3247,tough,adj.,B2,,,,,,General,,tough,,tough adj.
+3248,track,v.,B2,,,,,,General,,track,,track v.
+3249,transfer,"v., n.",B2,,,,,,General,,transfer,,"transfer v., n."
+3250,transform,v.,B2,,,,,,General,,transform,,transform v.
+3251,transition,n.,B2,,,,,,General,,transition,,transition n.
+3252,trial,n.,B2,,,,,,General,,trial,,trial n.
+3253,trip,v.,B2,,,,,,General,,trip,,trip v.
+3254,tropical,adj.,B2,,,,,,General,,tropical,,tropical adj.
+3255,trouble,v.,B2,,,,,,General,,trouble,,trouble v.
+3256,truly,adv.,B2,,,,,,General,,truly,,truly adv.
+3257,trust,"n., v.",B2,,,,,,General,,trust,,"trust n., v."
+3258,try,n.,B2,,,,,,General,,try,,try n.
+3259,tune,n.,B2,,,,,,General,,tune,,tune n.
+3260,tunnel,n.,B2,,,,,,General,,tunnel,,tunnel n.
+3261,ultimately,adv.,B2,,,,,,General,,ultimately,,ultimately adv.
+3262,unconscious,adj.,B2,,,,,,General,,unconscious,,unconscious adj.
+3263,unexpected,adj.,B2,,,,,,General,,unexpected,,unexpected adj.
+3264,unique,adj.,B2,,,,,,General,,unique,,unique adj.
+3265,universe,n.,B2,,,,,,General,,universe,,universe n.
+3266,unknown,adj.,B2,,,,,,General,,unknown,,unknown adj.
+3267,upper,adj.,B2,,,,,,General,,upper,,upper adj.
+3268,upwards,adv.,B2,,,,,,General,,upwards,,upwards adv.
+3269,urban,adj.,B2,,,,,,General,,urban,,urban adj.
+3270,urge,v.,B2,,,,,,General,,urge,,urge v.
+3271,value,v.,B2,,,,,,General,,value,,value v.
+3272,vary,v.,B2,,,,,,General,,vary,,vary v.
+3273,vast,adj.,B2,,,,,,General,,vast,,vast adj.
+3274,venue,n.,B2,,,,,,General,,venue,,venue n.
+3275,very,adj.,B2,,,,,,General,,very,,very adj.
+3276,via,prep.,B2,,,,,,General,,via,,via prep.
+3277,victory,n.,B2,,,,,,General,,victory,,victory n.
+3278,violence,n.,B2,,,,,,General,,violence,,violence n.
+3279,virtual,adj.,B2,,,,,,General,,virtual,,virtual adj.
+3280,vision,n.,B2,,,,,,General,,vision,,vision n.
+3281,visual,adj.,B2,,,,,,General,,visual,,visual adj.
+3282,vital,adj.,B2,,,,,,General,,vital,,vital adj.
+3283,vitamin,n.,B2,,,,,,General,,vitamin,,vitamin n.
+3284,volume,n.,B2,,,,,,General,,volume,,volume n.
+3285,wage,n.,B2,,,,,,General,,wage,,wage n.
+3286,way,adv.,B2,,,,,,General,,way,,way adv.
+3287,weakness,n.,B2,,,,,,General,,weakness,,weakness n.
+3288,wealth,n.,B2,,,,,,General,,wealth,,wealth n.
+3289,wealthy,adj.,B2,,,,,,General,,wealthy,,wealthy adj.
+3290,whereas,conj.,B2,,,,,,General,,whereas,,whereas conj.
+3291,wherever,conj.,B2,,,,,,General,,wherever,,wherever conj.
+3292,whisper,"v., n.",B2,,,,,,General,,whisper,,"whisper v., n."
+3293,whom,pron.,B2,,,,,,General,,whom,,whom pron.
+3294,widely,adv.,B2,,,,,,General,,widely,,widely adv.
+3295,wildlife,n.,B2,,,,,,General,,wildlife,,wildlife n.
+3296,willing,adj.,B2,,,,,,General,,willing,,willing adj.
+3297,wind,v.,B2,,,,,,General,,wind,sense 2,wind2 v.
+3298,wire,n.,B2,,,,,,General,,wire,,wire n.
+3299,wise,adj.,B2,,,,,,General,,wise,,wise adj.
+3300,witness,"n., v.",B2,,,,,,General,,witness,,"witness n., v."
+3301,worse,n.,B2,,,,,,General,,worse,,worse n.
+3302,worst,n.,B2,,,,,,General,,worst,,worst n.
+3303,worth,n.,B2,,,,,,General,,worth,,worth n.
+3304,wound,"n., v.",B2,,,,,,General,,wound,,"wound n., v."
+3305,wrap,v.,B2,,,,,,General,,wrap,,wrap v.
+3306,wrong,n.,B2,,,,,,General,,wrong,,wrong n.
+3307,yet,conj.,B2,,,,,,General,,yet,,yet conj.
+3308,zone,n.,B2,,,,,,General,,zone,,zone n.

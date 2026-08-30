@@ -57,8 +57,10 @@ tags:
 | G028 | `godawful`               | ⚡ GODAWFUL (Cute Town God Sim)     | Three.js / PostFX         | `public/games/godawful/`               |
 | G029 | `survive-10-waves`       | 🛡️ SURVIVE 10 WAVES (Extraction 3D)| Three.js / ES Modules     | `public/games/survive-10-waves/`       |
 | G030 | `dirtline`               | 🏍️ DIRT LINE (Trials Dirt Bike 3D)  | Three.js / Spring Physics | `public/games/dirtline/`               |
+| G031 | `oxford-3000`            | 📚 Oxford 3000 Vocab Master        | HTML5 / Canvas / TTS     | `public/games/oxford-3000/`            |
 
 ### 🎮 Active Released Game Specifications (`docs/gdd/games/`)
+- [📚 Oxford 3000 Vocab Master (EduGame G031)](./gdd/games/oxford-3000/spec.md)
 - [⚡ GODAWFUL (Cute Town God Sim G028)](./gdd/games/godawful/spec.md)
 - [🛡️ SURVIVE 10 WAVES (3D Extraction Survival G029)](./gdd/games/survive-10-waves/spec.md)
 - [🏍️ DIRT LINE (Trials Dirt Bike 3D G030)](./gdd/games/dirtline/spec.md)

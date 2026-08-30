@@ -11,6 +11,15 @@ tags:
 # 📜 Documentation Changelog — webJS
 
 
+## [1.34.0] - 2026-08-30
+
+- **📚 Oxford 3000 Vocab Master Game Design Document & CSV Pipeline (G031)**:
+  - ริเริ่มเอกสาร **GDD & Data Pipeline Specification** สำหรับเกมทบทวนคำศัพท์ [`docs/gdd/games/oxford-3000/spec.md`](./gdd/games/oxford-3000/spec.md)
+  - ประมวลผลและสกัดข้อมูลจากไฟล์อ้างอิง [`docs/gdd/games/oxford-3000/The_Oxford_3000_by_CEFR_level.pdf`](./gdd/games/oxford-3000/The_Oxford_3000_by_CEFR_level.pdf) สำเร็จ **3,308 คำศัพท์** (A1: 900, A2: 872, B1: 809, B2: 727)
+  - ส่งออกฐานข้อมูล `.csv` ฉบับ Master และแยกรายระดับ CEFR ไว้ที่ [`public/games/oxford-3000/data/`](./../public/games/oxford-3000/data/)
+  - กำหนดโหมดการเล่น 4 รูปแบบ: Flashcard SRS (SM-2 Algorithm), Speed Vocab Rush, RPG Boss Battle, และ Word Scramble
+  - อัปเดตรายการสารบัญโครงการใน [`docs/index.md`](./index.md)
+
 ## [1.33.0] - 2026-08-29
 
 - **🎮 XO Multiplayer (WebRTC P2P) Integration & GDD Suite (G027)**:

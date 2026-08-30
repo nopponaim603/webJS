@@ -1,0 +1,901 @@
+﻿id,word,part_of_speech,cefr_level,phonetic_uk,phonetic_us,thai_meaning,example_sentence,example_translation,category,distractors,audio_key,note,raw_entry
+1,"a, an",indefinite article,A1,,,,,,General,,a__an,,"a, an indefinite article"
+2,about,"prep., adv.",A1,,,,,,General,,about,,"about prep., adv."
+3,above,"prep., adv.",A1,,,,,,General,,above,,"above prep., adv."
+4,across,"prep., adv.",A1,,,,,,General,,across,,"across prep., adv."
+5,action,n.,A1,,,,,,General,,action,,action n.
+6,activity,n.,A1,,,,,,General,,activity,,activity n.
+7,actor,n.,A1,,,,,,General,,actor,,actor n.
+8,actress,n.,A1,,,,,,General,,actress,,actress n.
+9,add,v.,A1,,,,,,General,,add,,add v.
+10,address,n.,A1,,,,,,General,,address,,address n.
+11,adult,n.,A1,,,,,,General,,adult,,adult n.
+12,advice,n.,A1,,,,,,General,,advice,,advice n.
+13,afraid,adj.,A1,,,,,,General,,afraid,,afraid adj.
+14,after,prep.,A1,,,,,,General,,after,,after prep.
+15,afternoon,n.,A1,,,,,,General,,afternoon,,afternoon n.
+16,again,adv.,A1,,,,,,General,,again,,again adv.
+17,age,n.,A1,,,,,,General,,age,,age n.
+18,ago,adv.,A1,,,,,,General,,ago,,ago adv.
+19,agree,v.,A1,,,,,,General,,agree,,agree v.
+20,air,n.,A1,,,,,,General,,air,,air n.
+21,airport,n.,A1,,,,,,General,,airport,,airport n.
+22,all,"det., pron.",A1,,,,,,General,,all,,"all det., pron."
+23,also,adv.,A1,,,,,,General,,also,,also adv.
+24,always,adv.,A1,,,,,,General,,always,,always adv.
+25,amazing,adj.,A1,,,,,,General,,amazing,,amazing adj.
+26,and,conj.,A1,,,,,,General,,and,,and conj.
+27,angry,adj.,A1,,,,,,General,,angry,,angry adj.
+28,animal,n.,A1,,,,,,General,,animal,,animal n.
+29,another,det./pron.,A1,,,,,,General,,another,,another det./pron.
+30,answer,"n., v.",A1,,,,,,General,,answer,,"answer n., v."
+31,any,"det., pron.",A1,,,,,,General,,any,,"any det., pron."
+32,anyone,pron.,A1,,,,,,General,,anyone,,anyone pron.
+33,anything,pron.,A1,,,,,,General,,anything,,anything pron.
+34,apartment,n.,A1,,,,,,General,,apartment,,apartment n.
+35,apple,n.,A1,,,,,,General,,apple,,apple n.
+36,April,n.,A1,,,,,,General,,april,,April n.
+37,area,n.,A1,,,,,,General,,area,,area n.
+38,arm,n.,A1,,,,,,General,,arm,,arm n.
+39,around,"prep., adv.",A1,,,,,,General,,around,,"around prep., adv."
+40,arrive,v.,A1,,,,,,General,,arrive,,arrive v.
+41,art,n.,A1,,,,,,General,,art,,art n.
+42,article,n.,A1,,,,,,General,,article,,article n.
+43,artist,n.,A1,,,,,,General,,artist,,artist n.
+44,as,prep.,A1,,,,,,General,,as,,as prep.
+45,ask,v.,A1,,,,,,General,,ask,,ask v.
+46,at,prep.,A1,,,,,,General,,at,,at prep.
+47,August,n.,A1,,,,,,General,,august,,August n.
+48,aunt,n.,A1,,,,,,General,,aunt,,aunt n.
+49,autumn,n.,A1,,,,,,General,,autumn,,autumn n.
+50,away,adv.,A1,,,,,,General,,away,,away adv.
+51,baby,n.,A1,,,,,,General,,baby,,baby n.
+52,back,"n., adv.",A1,,,,,,General,,back,,"back n., adv."
+53,bad,adj.,A1,,,,,,General,,bad,,bad adj.
+54,bag,n.,A1,,,,,,General,,bag,,bag n.
+55,ball,n.,A1,,,,,,General,,ball,,ball n.
+56,banana,n.,A1,,,,,,General,,banana,,banana n.
+57,band,n.,A1,,,,,,General,,band,,band n.
+58,bank,n.,A1,,,,,,General,,bank,money,bank (money) n.
+59,bath,n.,A1,,,,,,General,,bath,,bath n.
+60,bathroom,n.,A1,,,,,,General,,bathroom,,bathroom n.
+61,be,"v., auxiliary v.",A1,,,,,,General,,be,,"be v., auxiliary v."
+62,beach,n.,A1,,,,,,General,,beach,,beach n.
+63,beautiful,adj.,A1,,,,,,General,,beautiful,,beautiful adj.
+64,because,conj.,A1,,,,,,General,,because,,because conj.
+65,become,v.,A1,,,,,,General,,become,,become v.
+66,bed,n.,A1,,,,,,General,,bed,,bed n.
+67,bedroom,n.,A1,,,,,,General,,bedroom,,bedroom n.
+68,beer,n.,A1,,,,,,General,,beer,,beer n.
+69,before,prep.,A1,,,,,,General,,before,,before prep.
+70,begin,v.,A1,,,,,,General,,begin,,begin v.
+71,beginning,n.,A1,,,,,,General,,beginning,,beginning n.
+72,behind,"prep., adv.",A1,,,,,,General,,behind,,"behind prep., adv."
+73,believe,v.,A1,,,,,,General,,believe,,believe v.
+74,below,"adv., prep.",A1,,,,,,General,,below,,"below adv., prep."
+75,best,adj.,A1,,,,,,General,,best,,best adj.
+76,better,adj.,A1,,,,,,General,,better,,better adj.
+77,between,prep.,A1,,,,,,General,,between,,between prep.
+78,bicycle,n.,A1,,,,,,General,,bicycle,,bicycle n.
+79,big,adj.,A1,,,,,,General,,big,,big adj.
+80,bike,n.,A1,,,,,,General,,bike,,bike n.
+81,bill,n.,A1,,,,,,General,,bill,,bill n.
+82,bird,n.,A1,,,,,,General,,bird,,bird n.
+83,birthday,n.,A1,,,,,,General,,birthday,,birthday n.
+84,black,"adj., n.",A1,,,,,,General,,black,,"black adj., n."
+85,blog,n.,A1,,,,,,General,,blog,,blog n.
+86,blonde,adj.,A1,,,,,,General,,blonde,,blonde adj.
+87,blue,"adj., n.",A1,,,,,,General,,blue,,"blue adj., n."
+88,boat,n.,A1,,,,,,General,,boat,,boat n.
+89,body,n.,A1,,,,,,General,,body,,body n.
+90,book,n.,A1,,,,,,General,,book,,book n.
+91,boot,n.,A1,,,,,,General,,boot,,boot n.
+92,bored,adj.,A1,,,,,,General,,bored,,bored adj.
+93,boring,adj.,A1,,,,,,General,,boring,,boring adj.
+94,born,v.,A1,,,,,,General,,born,,born v.
+95,both,det./pron.,A1,,,,,,General,,both,,both det./pron.
+96,bottle,n.,A1,,,,,,General,,bottle,,bottle n.
+97,box,n.,A1,,,,,,General,,box,,box n.
+98,boy,n.,A1,,,,,,General,,boy,,boy n.
+99,boyfriend,n.,A1,,,,,,General,,boyfriend,,boyfriend n.
+100,bread,n.,A1,,,,,,General,,bread,,bread n.
+101,break,"v., n.",A1,,,,,,General,,break,,"break v., n."
+102,breakfast,n.,A1,,,,,,General,,breakfast,,breakfast n.
+103,bring,v.,A1,,,,,,General,,bring,,bring v.
+104,brother,n.,A1,,,,,,General,,brother,,brother n.
+105,brown,"adj., n.",A1,,,,,,General,,brown,,"brown adj., n."
+106,build,v.,A1,,,,,,General,,build,,build v.
+107,building,n.,A1,,,,,,General,,building,,building n.
+108,bus,n.,A1,,,,,,General,,bus,,bus n.
+109,business,n.,A1,,,,,,General,,business,,business n.
+110,busy,adj.,A1,,,,,,General,,busy,,busy adj.
+111,but,conj.,A1,,,,,,General,,but,,but conj.
+112,butter,n.,A1,,,,,,General,,butter,,butter n.
+113,buy,v.,A1,,,,,,General,,buy,,buy v.
+114,by,prep.,A1,,,,,,General,,by,,by prep.
+115,bye,exclam.,A1,,,,,,General,,bye,,bye exclam.
+116,cafe,n.,A1,,,,,,General,,cafe,,cafe n.
+117,cake,n.,A1,,,,,,General,,cake,,cake n.
+118,call,"v., n.",A1,,,,,,General,,call,,"call v., n."
+119,camera,n.,A1,,,,,,General,,camera,,camera n.
+120,can,modal v.,A1,,,,,,General,,can,sense 1,can1 modal v.
+121,cannot,modal v.,A1,,,,,,General,,cannot,,cannot modal v.
+122,capital,"n., adj.",A1,,,,,,General,,capital,,"capital n., adj."
+123,car,n.,A1,,,,,,General,,car,,car n.
+124,card,n.,A1,,,,,,General,,card,,card n.
+125,career,n.,A1,,,,,,General,,career,,career n.
+126,carrot,n.,A1,,,,,,General,,carrot,,carrot n.
+127,carry,v.,A1,,,,,,General,,carry,,carry v.
+128,cat,n.,A1,,,,,,General,,cat,,cat n.
+129,CD,n.,A1,,,,,,General,,cd,,CD n.
+130,cent,n.,A1,,,,,,General,,cent,,cent n.
+131,centre,n.,A1,,,,,,General,,centre,,centre n.
+132,century,n.,A1,,,,,,General,,century,,century n.
+133,chair,n.,A1,,,,,,General,,chair,,chair n.
+134,change,"v., n.",A1,,,,,,General,,change,,"change v., n."
+135,chart,n.,A1,,,,,,General,,chart,,chart n.
+136,cheap,adj.,A1,,,,,,General,,cheap,,cheap adj.
+137,check,v.,A1,,,,,,General,,check,,check v.
+138,cheese,n.,A1,,,,,,General,,cheese,,cheese n.
+139,chicken,n.,A1,,,,,,General,,chicken,,chicken n.
+140,child,n.,A1,,,,,,General,,child,,child n.
+141,chocolate,n.,A1,,,,,,General,,chocolate,,chocolate n.
+142,choose,v.,A1,,,,,,General,,choose,,choose v.
+143,cinema,n.,A1,,,,,,General,,cinema,,cinema n.
+144,city,n.,A1,,,,,,General,,city,,city n.
+145,class,n.,A1,,,,,,General,,class,,class n.
+146,classroom,n.,A1,,,,,,General,,classroom,,classroom n.
+147,clean,"adj., v.",A1,,,,,,General,,clean,,"clean adj., v."
+148,climb,v.,A1,,,,,,General,,climb,,climb v.
+149,clock,n.,A1,,,,,,General,,clock,,clock n.
+150,close,v.,A1,,,,,,General,,close,sense 1,close1 v.
+151,clothes,n.,A1,,,,,,General,,clothes,,clothes n.
+152,club,n.,A1,,,,,,General,,club,,club n.
+153,coat,n.,A1,,,,,,General,,coat,,coat n.
+154,coffee,n.,A1,,,,,,General,,coffee,,coffee n.
+155,cold,"adj., n.",A1,,,,,,General,,cold,,"cold adj., n."
+156,college,n.,A1,,,,,,General,,college,,college n.
+157,colour,n.,A1,,,,,,General,,colour,,colour n.
+158,come,v.,A1,,,,,,General,,come,,come v.
+159,common,adj.,A1,,,,,,General,,common,,common adj.
+160,company,n.,A1,,,,,,General,,company,,company n.
+161,compare,v.,A1,,,,,,General,,compare,,compare v.
+162,complete,"adj., v.",A1,,,,,,General,,complete,,"complete adj., v."
+163,computer,n.,A1,,,,,,General,,computer,,computer n.
+164,concert,n.,A1,,,,,,General,,concert,,concert n.
+165,conversation,n.,A1,,,,,,General,,conversation,,conversation n.
+166,cook,v.,A1,,,,,,General,,cook,,cook v.
+167,cooking,n.,A1,,,,,,General,,cooking,,cooking n.
+168,cool,adj.,A1,,,,,,General,,cool,,cool adj.
+169,correct,"adj., v.",A1,,,,,,General,,correct,,"correct adj., v."
+170,cost,"n., v.",A1,,,,,,General,,cost,,"cost n., v."
+171,could,modal v.,A1,,,,,,General,,could,,could modal v.
+172,country,n.,A1,,,,,,General,,country,,country n.
+173,course,n.,A1,,,,,,General,,course,,course n.
+174,cousin,n.,A1,,,,,,General,,cousin,,cousin n.
+175,cow,n.,A1,,,,,,General,,cow,,cow n.
+176,cream,n.,A1,,,,,,General,,cream,,cream n.
+177,create,v.,A1,,,,,,General,,create,,create v.
+178,culture,n.,A1,,,,,,General,,culture,,culture n.
+179,cup,n.,A1,,,,,,General,,cup,,cup n.
+180,customer,n.,A1,,,,,,General,,customer,,customer n.
+181,cut,v.,A1,,,,,,General,,cut,,cut v.
+182,dad,n.,A1,,,,,,General,,dad,,dad n.
+183,dance,"n., v.",A1,,,,,,General,,dance,,"dance n., v."
+184,dancer,n.,A1,,,,,,General,,dancer,,dancer n.
+185,dancing,n.,A1,,,,,,General,,dancing,,dancing n.
+186,dangerous,adj.,A1,,,,,,General,,dangerous,,dangerous adj.
+187,dark,adj.,A1,,,,,,General,,dark,,dark adj.
+188,date,n.,A1,,,,,,General,,date,,date n.
+189,daughter,n.,A1,,,,,,General,,daughter,,daughter n.
+190,day,n.,A1,,,,,,General,,day,,day n.
+191,dear,adj.,A1,,,,,,General,,dear,,dear adj.
+192,December,n.,A1,,,,,,General,,december,,December n.
+193,decide,v.,A1,,,,,,General,,decide,,decide v.
+194,delicious,adj.,A1,,,,,,General,,delicious,,delicious adj.
+195,describe,v.,A1,,,,,,General,,describe,,describe v.
+196,description,n.,A1,,,,,,General,,description,,description n.
+197,design,"n., v.",A1,,,,,,General,,design,,"design n., v."
+198,desk,n.,A1,,,,,,General,,desk,,desk n.
+199,detail,n.,A1,,,,,,General,,detail,,detail n.
+200,dialogue,n.,A1,,,,,,General,,dialogue,,dialogue n.
+201,dictionary,n.,A1,,,,,,General,,dictionary,,dictionary n.
+202,die,v.,A1,,,,,,General,,die,,die v.
+203,diet,n.,A1,,,,,,General,,diet,,diet n.
+204,difference,n.,A1,,,,,,General,,difference,,difference n.
+205,different,adj.,A1,,,,,,General,,different,,different adj.
+206,difficult,adj.,A1,,,,,,General,,difficult,,difficult adj.
+207,dinner,n.,A1,,,,,,General,,dinner,,dinner n.
+208,dirty,adj.,A1,,,,,,General,,dirty,,dirty adj.
+209,discuss,v.,A1,,,,,,General,,discuss,,discuss v.
+210,dish,n.,A1,,,,,,General,,dish,,dish n.
+211,do,"v. , auxiliary v.",A1,,,,,,General,,do,sense 1,"do1 v. , auxiliary v."
+212,doctor,n.,A1,,,,,,General,,doctor,,doctor n.
+213,dog,n.,A1,,,,,,General,,dog,,dog n.
+214,dollar,n.,A1,,,,,,General,,dollar,,dollar n.
+215,door,n.,A1,,,,,,General,,door,,door n.
+216,down,"adv., prep.",A1,,,,,,General,,down,,"down adv., prep."
+217,downstairs,adv.,A1,,,,,,General,,downstairs,,downstairs adv.
+218,draw,v.,A1,,,,,,General,,draw,,draw v.
+219,dress,"n., v.",A1,,,,,,General,,dress,,"dress n., v."
+220,drink,"n., v.",A1,,,,,,General,,drink,,"drink n., v."
+221,drive,v.,A1,,,,,,General,,drive,,drive v.
+222,driver,n.,A1,,,,,,General,,driver,,driver n.
+223,during,prep.,A1,,,,,,General,,during,,during prep.
+224,DVD,n.,A1,,,,,,General,,dvd,,DVD n.
+225,each,det./pron./adv.,A1,,,,,,General,,each,,each det./pron./adv.
+226,ear,n.,A1,,,,,,General,,ear,,ear n.
+227,early,"adj., adv.",A1,,,,,,General,,early,,"early adj., adv."
+228,east,"n., adj., adv.",A1,,,,,,General,,east,,"east n., adj., adv."
+229,easy,adj.,A1,,,,,,General,,easy,,easy adj.
+230,eat,v.,A1,,,,,,General,,eat,,eat v.
+231,egg,n.,A1,,,,,,General,,egg,,egg n.
+232,eight,number,A1,,,,,,General,,eight,,eight number
+233,eighteen,number,A1,,,,,,General,,eighteen,,eighteen number
+234,eighty,number,A1,,,,,,General,,eighty,,eighty number
+235,elephant,n.,A1,,,,,,General,,elephant,,elephant n.
+236,eleven,number,A1,,,,,,General,,eleven,,eleven number
+237,else,adv.,A1,,,,,,General,,else,,else adv.
+238,email,"n., v.",A1,,,,,,General,,email,,"email n., v."
+239,end,"n., v.",A1,,,,,,General,,end,,"end n., v."
+240,enjoy,v.,A1,,,,,,General,,enjoy,,enjoy v.
+241,enough,"det., pron., adv.",A1,,,,,,General,,enough,,"enough det., pron., adv."
+242,euro,n.,A1,,,,,,General,,euro,,euro n.
+243,even,adv.,A1,,,,,,General,,even,,even adv.
+244,evening,n.,A1,,,,,,General,,evening,,evening n.
+245,event,n.,A1,,,,,,General,,event,,event n.
+246,ever,adv.,A1,,,,,,General,,ever,,ever adv.
+247,every,det.,A1,,,,,,General,,every,,every det.
+248,everybody,pron.,A1,,,,,,General,,everybody,,everybody pron.
+249,everyone,pron.,A1,,,,,,General,,everyone,,everyone pron.
+250,everything,pron.,A1,,,,,,General,,everything,,everything pron.
+251,exam,n.,A1,,,,,,General,,exam,,exam n.
+252,example,n.,A1,,,,,,General,,example,,example n.
+253,excited,adj.,A1,,,,,,General,,excited,,excited adj.
+254,exciting,adj.,A1,,,,,,General,,exciting,,exciting adj.
+255,exercise,"n., v.",A1,,,,,,General,,exercise,,"exercise n., v."
+256,expensive,adj.,A1,,,,,,General,,expensive,,expensive adj.
+257,explain,v.,A1,,,,,,General,,explain,,explain v.
+258,extra,adj.,A1,,,,,,General,,extra,,extra adj.
+259,eye,n.,A1,,,,,,General,,eye,,eye n.
+260,face,n.,A1,,,,,,General,,face,,face n.
+261,fact,n.,A1,,,,,,General,,fact,,fact n.
+262,fall,v.,A1,,,,,,General,,fall,,fall v.
+263,false,adj.,A1,,,,,,General,,false,,false adj.
+264,family,"n., adj.",A1,,,,,,General,,family,,"family n., adj."
+265,famous,adj.,A1,,,,,,General,,famous,,famous adj.
+266,fantastic,adj.,A1,,,,,,General,,fantastic,,fantastic adj.
+267,far,adv.,A1,,,,,,General,,far,,far adv.
+268,farm,n.,A1,,,,,,General,,farm,,farm n.
+269,farmer,n.,A1,,,,,,General,,farmer,,farmer n.
+270,fast,"adj., adv.",A1,,,,,,General,,fast,,"fast adj., adv."
+271,fat,adj.,A1,,,,,,General,,fat,,fat adj.
+272,father,n.,A1,,,,,,General,,father,,father n.
+273,favourite,"adj., n.",A1,,,,,,General,,favourite,,"favourite adj., n."
+274,February,n.,A1,,,,,,General,,february,,February n.
+275,feel,v.,A1,,,,,,General,,feel,,feel v.
+276,feeling,n.,A1,,,,,,General,,feeling,,feeling n.
+277,festival,n.,A1,,,,,,General,,festival,,festival n.
+278,few,"det./adj., pron.",A1,,,,,,General,,few,,"few det./adj., pron."
+279,fifteen,number,A1,,,,,,General,,fifteen,,fifteen number
+280,fifth,number,A1,,,,,,General,,fifth,,fifth number
+281,fifty,number,A1,,,,,,General,,fifty,,fifty number
+282,fill,v.,A1,,,,,,General,,fill,,fill v.
+283,film,n.,A1,,,,,,General,,film,,film n.
+284,final,adj.,A1,,,,,,General,,final,,final adj.
+285,find,v.,A1,,,,,,General,,find,,find v.
+286,fine,adj.,A1,,,,,,General,,fine,,fine adj.
+287,finish,v.,A1,,,,,,General,,finish,,finish v.
+288,fire,n.,A1,,,,,,General,,fire,,fire n.
+289,first,"det./number, adv.",A1,,,,,,General,,first,,"first det./number, adv."
+290,fish,n.,A1,,,,,,General,,fish,,fish n.
+291,five,number,A1,,,,,,General,,five,,five number
+292,flat,n.,A1,,,,,,General,,flat,,flat n.
+293,flight,n.,A1,,,,,,General,,flight,,flight n.
+294,floor,n.,A1,,,,,,General,,floor,,floor n.
+295,flower,n.,A1,,,,,,General,,flower,,flower n.
+296,fly,v.,A1,,,,,,General,,fly,,fly v.
+297,follow,v.,A1,,,,,,General,,follow,,follow v.
+298,food,n.,A1,,,,,,General,,food,,food n.
+299,foot,n.,A1,,,,,,General,,foot,,foot n.
+300,football,n.,A1,,,,,,General,,football,,football n.
+301,for,prep.,A1,,,,,,General,,for,,for prep.
+302,forget,v.,A1,,,,,,General,,forget,,forget v.
+303,form,"n., v.",A1,,,,,,General,,form,,"form n., v."
+304,forty,number,A1,,,,,,General,,forty,,forty number
+305,four,number,A1,,,,,,General,,four,,four number
+306,fourteen,number,A1,,,,,,General,,fourteen,,fourteen number
+307,fourth,number,A1,,,,,,General,,fourth,,fourth number
+308,free,adj.,A1,,,,,,General,,free,,free adj.
+309,Friday,n.,A1,,,,,,General,,friday,,Friday n.
+310,friend,n.,A1,,,,,,General,,friend,,friend n.
+311,friendly,adj.,A1,,,,,,General,,friendly,,friendly adj.
+312,from,prep.,A1,,,,,,General,,from,,from prep.
+313,front,"n., adj.",A1,,,,,,General,,front,,"front n., adj."
+314,fruit,n.,A1,,,,,,General,,fruit,,fruit n.
+315,full,adj.,A1,,,,,,General,,full,,full adj.
+316,fun,n.,A1,,,,,,General,,fun,,fun n.
+317,funny,adj.,A1,,,,,,General,,funny,,funny adj.
+318,future,n.,A1,,,,,,General,,future,,future n.
+319,game,n.,A1,,,,,,General,,game,,game n.
+320,garden,n.,A1,,,,,,General,,garden,,garden n.
+321,geography,n.,A1,,,,,,General,,geography,,geography n.
+322,get,v.,A1,,,,,,General,,get,,get v.
+323,girl,n.,A1,,,,,,General,,girl,,girl n.
+324,girlfriend,n.,A1,,,,,,General,,girlfriend,,girlfriend n.
+325,give,v.,A1,,,,,,General,,give,,give v.
+326,glass,n.,A1,,,,,,General,,glass,,glass n.
+327,go,v.,A1,,,,,,General,,go,,go v.
+328,good,adj.,A1,,,,,,General,,good,,good adj.
+329,goodbye,exclam./n.,A1,,,,,,General,,goodbye,,goodbye exclam./n.
+330,grandfather,n.,A1,,,,,,General,,grandfather,,grandfather n.
+331,grandmother,n.,A1,,,,,,General,,grandmother,,grandmother n.
+332,grandparent,n.,A1,,,,,,General,,grandparent,,grandparent n.
+333,great,adj.,A1,,,,,,General,,great,,great adj.
+334,green,"adj., n.",A1,,,,,,General,,green,,"green adj., n."
+335,grey,"adj., n.",A1,,,,,,General,,grey,,"grey adj., n."
+336,group,n.,A1,,,,,,General,,group,,group n.
+337,grow,v.,A1,,,,,,General,,grow,,grow v.
+338,guess,"v., n.",A1,,,,,,General,,guess,,"guess v., n."
+339,guitar,n.,A1,,,,,,General,,guitar,,guitar n.
+340,gym,n.,A1,,,,,,General,,gym,,gym n.
+341,hair,n.,A1,,,,,,General,,hair,,hair n.
+342,half,"n., det./pron.",A1,,,,,,General,,half,,"half n., det./pron."
+343,hand,n.,A1,,,,,,General,,hand,,hand n.
+344,happen,v.,A1,,,,,,General,,happen,,happen v.
+345,happy,adj.,A1,,,,,,General,,happy,,happy adj.
+346,hard,"adj., adv.",A1,,,,,,General,,hard,,"hard adj., adv."
+347,hat,n.,A1,,,,,,General,,hat,,hat n.
+348,hate,v.,A1,,,,,,General,,hate,,hate v.
+349,have,v.,A1,,,,,,General,,have,,have v.
+350,have to,modal v.,A1,,,,,,General,,have_to,,have to modal v.
+351,he,pron.,A1,,,,,,General,,he,,he pron.
+352,head,n.,A1,,,,,,General,,head,,head n.
+353,health,n.,A1,,,,,,General,,health,,health n.
+354,healthy,adj.,A1,,,,,,General,,healthy,,healthy adj.
+355,hear,v.,A1,,,,,,General,,hear,,hear v.
+356,hello,exclam./n.,A1,,,,,,General,,hello,,hello exclam./n.
+357,help,"v., n.",A1,,,,,,General,,help,,"help v., n."
+358,her,"pron., det.",A1,,,,,,General,,her,,"her pron., det."
+359,here,adv.,A1,,,,,,General,,here,,here adv.
+360,hey,exclam.,A1,,,,,,General,,hey,,hey exclam.
+361,hi,exclam.,A1,,,,,,General,,hi,,hi exclam.
+362,high,adj.,A1,,,,,,General,,high,,high adj.
+363,him,pron.,A1,,,,,,General,,him,,him pron.
+364,his,det.,A1,,,,,,General,,his,,his det.
+365,history,n.,A1,,,,,,General,,history,,history n.
+366,hobby,n.,A1,,,,,,General,,hobby,,hobby n.
+367,holiday,n.,A1,,,,,,General,,holiday,,holiday n.
+368,home,"n., adv.",A1,,,,,,General,,home,,"home n., adv."
+369,homework,n.,A1,,,,,,General,,homework,,homework n.
+370,hope,v.,A1,,,,,,General,,hope,,hope v.
+371,horse,n.,A1,,,,,,General,,horse,,horse n.
+372,hospital,n.,A1,,,,,,General,,hospital,,hospital n.
+373,hot,adj.,A1,,,,,,General,,hot,,hot adj.
+374,hotel,n.,A1,,,,,,General,,hotel,,hotel n.
+375,hour,n.,A1,,,,,,General,,hour,,hour n.
+376,house,n.,A1,,,,,,General,,house,,house n.
+377,how,adv.,A1,,,,,,General,,how,,how adv.
+378,however,adv.,A1,,,,,,General,,however,,however adv.
+379,hundred,number,A1,,,,,,General,,hundred,,hundred number
+380,hungry,adj.,A1,,,,,,General,,hungry,,hungry adj.
+381,husband,n.,A1,,,,,,General,,husband,,husband n.
+382,I,pron.,A1,,,,,,General,,i,,I pron.
+383,ice,n.,A1,,,,,,General,,ice,,ice n.
+384,ice cream,n.,A1,,,,,,General,,ice_cream,,ice cream n.
+385,idea,n.,A1,,,,,,General,,idea,,idea n.
+386,if,conj.,A1,,,,,,General,,if,,if conj.
+387,imagine,v.,A1,,,,,,General,,imagine,,imagine v.
+388,important,adj.,A1,,,,,,General,,important,,important adj.
+389,improve,v.,A1,,,,,,General,,improve,,improve v.
+390,in,"prep., adv.",A1,,,,,,General,,in,,"in prep., adv."
+391,include,v.,A1,,,,,,General,,include,,include v.
+392,information,n.,A1,,,,,,General,,information,,information n.
+393,interest,"n., v.",A1,,,,,,General,,interest,,"interest n., v."
+394,interested,adj.,A1,,,,,,General,,interested,,interested adj.
+395,interesting,adj.,A1,,,,,,General,,interesting,,interesting adj.
+396,internet,n.,A1,,,,,,General,,internet,,internet n.
+397,interview,"n., v.",A1,,,,,,General,,interview,,"interview n., v."
+398,into,prep.,A1,,,,,,General,,into,,into prep.
+399,introduce,v.,A1,,,,,,General,,introduce,,introduce v.
+400,island,n.,A1,,,,,,General,,island,,island n.
+401,it,pron.,A1,,,,,,General,,it,,it pron.
+402,its,det.,A1,,,,,,General,,its,,its det.
+403,jacket,n.,A1,,,,,,General,,jacket,,jacket n.
+404,January,n.,A1,,,,,,General,,january,,January n.
+405,jeans,n.,A1,,,,,,General,,jeans,,jeans n.
+406,job,n.,A1,,,,,,General,,job,,job n.
+407,join,v.,A1,,,,,,General,,join,,join v.
+408,journey,n.,A1,,,,,,General,,journey,,journey n.
+409,juice,n.,A1,,,,,,General,,juice,,juice n.
+410,July,n.,A1,,,,,,General,,july,,July n.
+411,June,n.,A1,,,,,,General,,june,,June n.
+412,just,adv.,A1,,,,,,General,,just,,just adv.
+413,keep,v.,A1,,,,,,General,,keep,,keep v.
+414,key,"n., adj.",A1,,,,,,General,,key,,"key n., adj."
+415,kilometre,n.,A1,,,,,,General,,kilometre,,kilometre n.
+416,kind,n.,A1,,,,,,General,,kind,type,kind (type) n.
+417,kitchen,n.,A1,,,,,,General,,kitchen,,kitchen n.
+418,know,v.,A1,,,,,,General,,know,,know v.
+419,land,n.,A1,,,,,,General,,land,,land n.
+420,language,n.,A1,,,,,,General,,language,,language n.
+421,large,adj.,A1,,,,,,General,,large,,large adj.
+422,last,det.,A1,,,,,,General,,last,final,last1 (final) det.
+423,late,"adj., adv.",A1,,,,,,General,,late,,"late adj., adv."
+424,later,adv.,A1,,,,,,General,,later,,later adv.
+425,laugh,"v., n.",A1,,,,,,General,,laugh,,"laugh v., n."
+426,learn,v.,A1,,,,,,General,,learn,,learn v.
+427,leave,v.,A1,,,,,,General,,leave,,leave v.
+428,left,"adj., adv., n.",A1,,,,,,General,,left,,"left adj., adv., n."
+429,leg,n.,A1,,,,,,General,,leg,,leg n.
+430,lesson,n.,A1,,,,,,General,,lesson,,lesson n.
+431,let,v.,A1,,,,,,General,,let,,let v.
+432,letter,n.,A1,,,,,,General,,letter,,letter n.
+433,library,n.,A1,,,,,,General,,library,,library n.
+434,lie,v.,A1,,,,,,General,,lie,sense 1,lie1 v.
+435,life,n.,A1,,,,,,General,,life,,life n.
+436,light,"n., adj.",A1,,,,,,General,,light,from the sun/a lamp,"light (from the sun/a lamp) n., adj."
+437,like,prep.,A1,,,,,,General,,like,similar,like (similar) prep.
+438,like,v.,A1,,,,,,General,,like,find sb/sth pleasant,like (find sb/sth pleasant) v.
+439,line,n.,A1,,,,,,General,,line,,line n.
+440,lion,n.,A1,,,,,,General,,lion,,lion n.
+441,list,"n., v.",A1,,,,,,General,,list,,"list n., v."
+442,listen,v.,A1,,,,,,General,,listen,,listen v.
+443,little,"adj., det./pron.",A1,,,,,,General,,little,,"little adj., det./pron."
+444,live,v.,A1,,,,,,General,,live,sense 1,live1 v.
+445,local,adj.,A1,,,,,,General,,local,,local adj.
+446,long,"adj. , adv.",A1,,,,,,General,,long,sense 1,"long1 adj. , adv."
+447,look,v.,A1,,,,,,General,,look,,look v.
+448,lose,v.,A1,,,,,,General,,lose,,lose v.
+449,lot,"pron., det., adv.",A1,,,,,,General,,lot,,"lot pron., det., adv."
+450,love,"n., v.",A1,,,,,,General,,love,,"love n., v."
+451,lunch,n.,A1,,,,,,General,,lunch,,lunch n.
+452,machine,n.,A1,,,,,,General,,machine,,machine n.
+453,magazine,n.,A1,,,,,,General,,magazine,,magazine n.
+454,main,adj.,A1,,,,,,General,,main,,main adj.
+455,make,v.,A1,,,,,,General,,make,,make v.
+456,man,n.,A1,,,,,,General,,man,,man n.
+457,many,det./pron.,A1,,,,,,General,,many,,many det./pron.
+458,map,n.,A1,,,,,,General,,map,,map n.
+459,March,n.,A1,,,,,,General,,march,,March n.
+460,market,n.,A1,,,,,,General,,market,,market n.
+461,married,adj.,A1,,,,,,General,,married,,married adj.
+462,match,"n., v.",A1,,,,,,General,,match,contest/correspond,"match (contest/correspond) n., v."
+463,May,n.,A1,,,,,,General,,may,,May n.
+464,maybe,adv.,A1,,,,,,General,,maybe,,maybe adv.
+465,me,pron.,A1,,,,,,General,,me,,me pron.
+466,meal,n.,A1,,,,,,General,,meal,,meal n.
+467,mean,v.,A1,,,,,,General,,mean,,mean v.
+468,meaning,n.,A1,,,,,,General,,meaning,,meaning n.
+469,meat,n.,A1,,,,,,General,,meat,,meat n.
+470,meet,v.,A1,,,,,,General,,meet,,meet v.
+471,meeting,n.,A1,,,,,,General,,meeting,,meeting n.
+472,member,n.,A1,,,,,,General,,member,,member n.
+473,menu,n.,A1,,,,,,General,,menu,,menu n.
+474,message,n.,A1,,,,,,General,,message,,message n.
+475,metre,n.,A1,,,,,,General,,metre,,metre n.
+476,midnight,n.,A1,,,,,,General,,midnight,,midnight n.
+477,mile,n.,A1,,,,,,General,,mile,,mile n.
+478,milk,n.,A1,,,,,,General,,milk,,milk n.
+479,million,number,A1,,,,,,General,,million,,million number
+480,minute,n.,A1,,,,,,General,,minute,sense 1,minute1 n.
+481,miss,v.,A1,,,,,,General,,miss,,miss v.
+482,mistake,n.,A1,,,,,,General,,mistake,,mistake n.
+483,model,n.,A1,,,,,,General,,model,,model n.
+484,modern,adj.,A1,,,,,,General,,modern,,modern adj.
+485,moment,n.,A1,,,,,,General,,moment,,moment n.
+486,Monday,n.,A1,,,,,,General,,monday,,Monday n.
+487,money,n.,A1,,,,,,General,,money,,money n.
+488,month,n.,A1,,,,,,General,,month,,month n.
+489,more,"det./pron., adv.",A1,,,,,,General,,more,,"more det./pron., adv."
+490,morning,n.,A1,,,,,,General,,morning,,morning n.
+491,most,"det./pron., adv.",A1,,,,,,General,,most,,"most det./pron., adv."
+492,mother,n.,A1,,,,,,General,,mother,,mother n.
+493,mountain,n.,A1,,,,,,General,,mountain,,mountain n.
+494,mouse,n.,A1,,,,,,General,,mouse,,mouse n.
+495,mouth,n.,A1,,,,,,General,,mouth,,mouth n.
+496,move,v.,A1,,,,,,General,,move,,move v.
+497,movie,n.,A1,,,,,,General,,movie,,movie n.
+498,much,"det./pron., adv.",A1,,,,,,General,,much,,"much det./pron., adv."
+499,mum,n.,A1,,,,,,General,,mum,,mum n.
+500,museum,n.,A1,,,,,,General,,museum,,museum n.
+501,music,n.,A1,,,,,,General,,music,,music n.
+502,must,modal v.,A1,,,,,,General,,must,,must modal v.
+503,my,det.,A1,,,,,,General,,my,,my det.
+504,name,"n., v.",A1,,,,,,General,,name,,"name n., v."
+505,natural,adj.,A1,,,,,,General,,natural,,natural adj.
+506,near,"prep., adj., adv.",A1,,,,,,General,,near,,"near prep., adj., adv."
+507,need,v.,A1,,,,,,General,,need,,need v.
+508,negative,adj.,A1,,,,,,General,,negative,,negative adj.
+509,neighbour,n.,A1,,,,,,General,,neighbour,,neighbour n.
+510,never,adv.,A1,,,,,,General,,never,,never adv.
+511,new,adj.,A1,,,,,,General,,new,,new adj.
+512,news,n.,A1,,,,,,General,,news,,news n.
+513,newspaper,n.,A1,,,,,,General,,newspaper,,newspaper n.
+514,next,"adj., adv.",A1,,,,,,General,,next,,"next adj., adv."
+515,next to,prep.,A1,,,,,,General,,next_to,,next to prep.
+516,nice,adj.,A1,,,,,,General,,nice,,nice adj.
+517,night,n.,A1,,,,,,General,,night,,night n.
+518,nine,number,A1,,,,,,General,,nine,,nine number
+519,nineteen,number,A1,,,,,,General,,nineteen,,nineteen number
+520,ninety,number,A1,,,,,,General,,ninety,,ninety number
+521,no,"exclam., det.",A1,,,,,,General,,no,,"no exclam., det."
+522,no one,pron.,A1,,,,,,General,,no_one,,no one pron.
+523,nobody,pron.,A1,,,,,,General,,nobody,,nobody pron.
+524,north,"n., adj., adv.",A1,,,,,,General,,north,,"north n., adj., adv."
+525,nose,n.,A1,,,,,,General,,nose,,nose n.
+526,not,adv.,A1,,,,,,General,,not,,not adv.
+527,note,n.,A1,,,,,,General,,note,,note n.
+528,nothing,pron.,A1,,,,,,General,,nothing,,nothing pron.
+529,November,n.,A1,,,,,,General,,november,,November n.
+530,now,adv.,A1,,,,,,General,,now,,now adv.
+531,number,n.,A1,,,,,,General,,number,,number n.
+532,nurse,n.,A1,,,,,,General,,nurse,,nurse n.
+533,object,n.,A1,,,,,,General,,object,,object n.
+534,o’clock,adv.,A1,,,,,,General,,o_clock,,o’clock adv.
+535,October,n.,A1,,,,,,General,,october,,October n.
+536,of,prep.,A1,,,,,,General,,of,,of prep.
+537,off,"adv., prep.",A1,,,,,,General,,off,,"off adv., prep."
+538,office,n.,A1,,,,,,General,,office,,office n.
+539,often,adv.,A1,,,,,,General,,often,,often adv.
+540,oh,exclam.,A1,,,,,,General,,oh,,oh exclam.
+541,OK,"exclam., adj./adv.",A1,,,,,,General,,ok,,"OK exclam., adj./adv."
+542,old,adj.,A1,,,,,,General,,old,,old adj.
+543,on,"prep., adv.",A1,,,,,,General,,on,,"on prep., adv."
+544,once,adv.,A1,,,,,,General,,once,,once adv.
+545,one,"number/det., pron.",A1,,,,,,General,,one,,"one number/det., pron."
+546,onion,n.,A1,,,,,,General,,onion,,onion n.
+547,online,"adj., adv.",A1,,,,,,General,,online,,"online adj., adv."
+548,only,"adj., adv.",A1,,,,,,General,,only,,"only adj., adv."
+549,open,"adj., v.",A1,,,,,,General,,open,,"open adj., v."
+550,opinion,n.,A1,,,,,,General,,opinion,,opinion n.
+551,opposite,"adj., n., prep., adv.",A1,,,,,,General,,opposite,,"opposite adj., n., prep., adv."
+552,or,conj.,A1,,,,,,General,,or,,or conj.
+553,orange,"n., adj.",A1,,,,,,General,,orange,,"orange n., adj."
+554,order,"n., v.",A1,,,,,,General,,order,,"order n., v."
+555,other,adj./pron.,A1,,,,,,General,,other,,other adj./pron.
+556,our,det.,A1,,,,,,General,,our,,our det.
+557,out,adv./prep.,A1,,,,,,General,,out,,out adv./prep.
+558,outside,adv.,A1,,,,,,General,,outside,,outside adv.
+559,over,"prep., adv.",A1,,,,,,General,,over,,"over prep., adv."
+560,own,adj./pron.,A1,,,,,,General,,own,,own adj./pron.
+561,page,n.,A1,,,,,,General,,page,,page n.
+562,paint,"v., n.",A1,,,,,,General,,paint,,"paint v., n."
+563,painting,n.,A1,,,,,,General,,painting,,painting n.
+564,pair,n.,A1,,,,,,General,,pair,,pair n.
+565,paper,n.,A1,,,,,,General,,paper,,paper n.
+566,paragraph,n.,A1,,,,,,General,,paragraph,,paragraph n.
+567,parent,n.,A1,,,,,,General,,parent,,parent n.
+568,park,"n., v.",A1,,,,,,General,,park,,"park n., v."
+569,part,n.,A1,,,,,,General,,part,,part n.
+570,partner,n.,A1,,,,,,General,,partner,,partner n.
+571,party,n.,A1,,,,,,General,,party,,party n.
+572,passport,n.,A1,,,,,,General,,passport,,passport n.
+573,past,"adj., n., prep.",A1,,,,,,General,,past,,"past adj., n., prep."
+574,pay,v.,A1,,,,,,General,,pay,,pay v.
+575,pen,n.,A1,,,,,,General,,pen,,pen n.
+576,pencil,n.,A1,,,,,,General,,pencil,,pencil n.
+577,people,n.,A1,,,,,,General,,people,,people n.
+578,pepper,n.,A1,,,,,,General,,pepper,,pepper n.
+579,perfect,adj.,A1,,,,,,General,,perfect,,perfect adj.
+580,period,n.,A1,,,,,,General,,period,,period n.
+581,person,n.,A1,,,,,,General,,person,,person n.
+582,personal,adj.,A1,,,,,,General,,personal,,personal adj.
+583,phone,"n., v.",A1,,,,,,General,,phone,,"phone n., v."
+584,photo,n.,A1,,,,,,General,,photo,,photo n.
+585,photograph,n.,A1,,,,,,General,,photograph,,photograph n.
+586,phrase,n.,A1,,,,,,General,,phrase,,phrase n.
+587,piano,n.,A1,,,,,,General,,piano,,piano n.
+588,picture,n.,A1,,,,,,General,,picture,,picture n.
+589,piece,n.,A1,,,,,,General,,piece,,piece n.
+590,pig,n.,A1,,,,,,General,,pig,,pig n.
+591,pink,"adj., n.",A1,,,,,,General,,pink,,"pink adj., n."
+592,place,n.,A1,,,,,,General,,place,,place n.
+593,plan,"n., v.",A1,,,,,,General,,plan,,"plan n., v."
+594,plane,n.,A1,,,,,,General,,plane,,plane n.
+595,plant,n.,A1,,,,,,General,,plant,,plant n.
+596,play,"v., n.",A1,,,,,,General,,play,,"play v., n."
+597,player,n.,A1,,,,,,General,,player,,player n.
+598,please,exclam.,A1,,,,,,General,,please,,please exclam.
+599,point,n.,A1,,,,,,General,,point,,point n.
+600,police,n.,A1,,,,,,General,,police,,police n.
+601,policeman,n.,A1,,,,,,General,,policeman,,policeman n.
+602,pool,n.,A1,,,,,,General,,pool,,pool n.
+603,poor,adj.,A1,,,,,,General,,poor,,poor adj.
+604,popular,adj.,A1,,,,,,General,,popular,,popular adj.
+605,positive,adj.,A1,,,,,,General,,positive,,positive adj.
+606,possible,adj.,A1,,,,,,General,,possible,,possible adj.
+607,post,"n., v.",A1,,,,,,General,,post,,"post n., v."
+608,potato,n.,A1,,,,,,General,,potato,,potato n.
+609,pound,n.,A1,,,,,,General,,pound,,pound n.
+610,practice,n.,A1,,,,,,General,,practice,,practice n.
+611,practise,v.,A1,,,,,,General,,practise,,practise v.
+612,prefer,v.,A1,,,,,,General,,prefer,,prefer v.
+613,prepare,v.,A1,,,,,,General,,prepare,,prepare v.
+614,present,"adj., n.",A1,,,,,,General,,present,,"present adj., n."
+615,pretty,"adj., adv.",A1,,,,,,General,,pretty,,"pretty adj., adv."
+616,price,n.,A1,,,,,,General,,price,,price n.
+617,probably,adv.,A1,,,,,,General,,probably,,probably adv.
+618,problem,n.,A1,,,,,,General,,problem,,problem n.
+619,product,n.,A1,,,,,,General,,product,,product n.
+620,programme,n.,A1,,,,,,General,,programme,,programme n.
+621,project,n.,A1,,,,,,General,,project,,project n.
+622,purple,"adj., n.",A1,,,,,,General,,purple,,"purple adj., n."
+623,put,v.,A1,,,,,,General,,put,,put v.
+624,quarter,n.,A1,,,,,,General,,quarter,,quarter n.
+625,question,n.,A1,,,,,,General,,question,,question n.
+626,quick,adj.,A1,,,,,,General,,quick,,quick adj.
+627,quickly,adv.,A1,,,,,,General,,quickly,,quickly adv.
+628,quiet,adj.,A1,,,,,,General,,quiet,,quiet adj.
+629,quite,adv.,A1,,,,,,General,,quite,,quite adv.
+630,radio,n.,A1,,,,,,General,,radio,,radio n.
+631,rain,"n., v.",A1,,,,,,General,,rain,,"rain n., v."
+632,read,v.,A1,,,,,,General,,read,,read v.
+633,reader,n.,A1,,,,,,General,,reader,,reader n.
+634,reading,n.,A1,,,,,,General,,reading,,reading n.
+635,ready,adj.,A1,,,,,,General,,ready,,ready adj.
+636,real,adj.,A1,,,,,,General,,real,,real adj.
+637,really,adv.,A1,,,,,,General,,really,,really adv.
+638,reason,n.,A1,,,,,,General,,reason,,reason n.
+639,red,"adj., n.",A1,,,,,,General,,red,,"red adj., n."
+640,relax,v.,A1,,,,,,General,,relax,,relax v.
+641,remember,v.,A1,,,,,,General,,remember,,remember v.
+642,repeat,v.,A1,,,,,,General,,repeat,,repeat v.
+643,report,n.,A1,,,,,,General,,report,,report n.
+644,restaurant,n.,A1,,,,,,General,,restaurant,,restaurant n.
+645,result,n.,A1,,,,,,General,,result,,result n.
+646,return,"v., n.",A1,,,,,,General,,return,,"return v., n."
+647,rice,n.,A1,,,,,,General,,rice,,rice n.
+648,rich,adj.,A1,,,,,,General,,rich,,rich adj.
+649,ride,v.,A1,,,,,,General,,ride,,ride v.
+650,right,"adj., adv., n.",A1,,,,,,General,,right,,"right adj., adv., n."
+651,river,n.,A1,,,,,,General,,river,,river n.
+652,road,n.,A1,,,,,,General,,road,,road n.
+653,room,n.,A1,,,,,,General,,room,,room n.
+654,routine,n.,A1,,,,,,General,,routine,,routine n.
+655,rule,n.,A1,,,,,,General,,rule,,rule n.
+656,run,v.,A1,,,,,,General,,run,,run v.
+657,sad,adj.,A1,,,,,,General,,sad,,sad adj.
+658,salad,n.,A1,,,,,,General,,salad,,salad n.
+659,salt,n.,A1,,,,,,General,,salt,,salt n.
+660,same,"adj., pron., adv.",A1,,,,,,General,,same,,"same adj., pron., adv."
+661,sandwich,n.,A1,,,,,,General,,sandwich,,sandwich n.
+662,Saturday,n.,A1,,,,,,General,,saturday,,Saturday n.
+663,say,v.,A1,,,,,,General,,say,,say v.
+664,school,n.,A1,,,,,,General,,school,,school n.
+665,science,n.,A1,,,,,,General,,science,,science n.
+666,scientist,n.,A1,,,,,,General,,scientist,,scientist n.
+667,sea,n.,A1,,,,,,General,,sea,,sea n.
+668,second,det./ number,A1,,,,,,General,,second,next after the first,second1 (next after the first) det./ number
+669,second,n.,A1,,,,,,General,,second,unit of time,second1 (unit of time) n.
+670,section,n.,A1,,,,,,General,,section,,section n.
+671,see,v.,A1,,,,,,General,,see,,see v.
+672,sell,v.,A1,,,,,,General,,sell,,sell v.
+673,send,v.,A1,,,,,,General,,send,,send v.
+674,sentence,n.,A1,,,,,,General,,sentence,,sentence n.
+675,September,n.,A1,,,,,,General,,september,,September n.
+676,seven,number,A1,,,,,,General,,seven,,seven number
+677,seventeen,number,A1,,,,,,General,,seventeen,,seventeen number
+678,seventy,number,A1,,,,,,General,,seventy,,seventy number
+679,share,v.,A1,,,,,,General,,share,,share v.
+680,she,pron.,A1,,,,,,General,,she,,she pron.
+681,sheep,n.,A1,,,,,,General,,sheep,,sheep n.
+682,shirt,n.,A1,,,,,,General,,shirt,,shirt n.
+683,shoe,n.,A1,,,,,,General,,shoe,,shoe n.
+684,shop,"n., v.",A1,,,,,,General,,shop,,"shop n., v."
+685,shopping,n.,A1,,,,,,General,,shopping,,shopping n.
+686,short,adj.,A1,,,,,,General,,short,,short adj.
+687,should,modal v.,A1,,,,,,General,,should,,should modal v.
+688,show,"v., n.",A1,,,,,,General,,show,,"show v., n."
+689,shower,n.,A1,,,,,,General,,shower,,shower n.
+690,sick,adj.,A1,,,,,,General,,sick,,sick adj.
+691,similar,adj.,A1,,,,,,General,,similar,,similar adj.
+692,sing,v.,A1,,,,,,General,,sing,,sing v.
+693,singer,n.,A1,,,,,,General,,singer,,singer n.
+694,sister,n.,A1,,,,,,General,,sister,,sister n.
+695,sit,v.,A1,,,,,,General,,sit,,sit v.
+696,situation,n.,A1,,,,,,General,,situation,,situation n.
+697,six,number,A1,,,,,,General,,six,,six number
+698,sixteen,number,A1,,,,,,General,,sixteen,,sixteen number
+699,sixty,number,A1,,,,,,General,,sixty,,sixty number
+700,skill,n.,A1,,,,,,General,,skill,,skill n.
+701,skirt,n.,A1,,,,,,General,,skirt,,skirt n.
+702,sleep,v.,A1,,,,,,General,,sleep,,sleep v.
+703,slow,adj.,A1,,,,,,General,,slow,,slow adj.
+704,small,adj.,A1,,,,,,General,,small,,small adj.
+705,snake,n.,A1,,,,,,General,,snake,,snake n.
+706,snow,"n., v.",A1,,,,,,General,,snow,,"snow n., v."
+707,so,"adv., conj.",A1,,,,,,General,,so,,"so adv., conj."
+708,some,"det., pron.",A1,,,,,,General,,some,,"some det., pron."
+709,somebody,pron.,A1,,,,,,General,,somebody,,somebody pron.
+710,someone,pron.,A1,,,,,,General,,someone,,someone pron.
+711,something,pron.,A1,,,,,,General,,something,,something pron.
+712,sometimes,adv.,A1,,,,,,General,,sometimes,,sometimes adv.
+713,son,n.,A1,,,,,,General,,son,,son n.
+714,song,n.,A1,,,,,,General,,song,,song n.
+715,soon,adv.,A1,,,,,,General,,soon,,soon adv.
+716,sorry,"adj., exclam.",A1,,,,,,General,,sorry,,"sorry adj., exclam."
+717,sound,"n., v.",A1,,,,,,General,,sound,,"sound n., v."
+718,soup,n.,A1,,,,,,General,,soup,,soup n.
+719,south,"n., adj., adv.",A1,,,,,,General,,south,,"south n., adj., adv."
+720,space,n.,A1,,,,,,General,,space,,space n.
+721,speak,v.,A1,,,,,,General,,speak,,speak v.
+722,special,adj.,A1,,,,,,General,,special,,special adj.
+723,spell,v.,A1,,,,,,General,,spell,,spell v.
+724,spelling,n.,A1,,,,,,General,,spelling,,spelling n.
+725,spend,v.,A1,,,,,,General,,spend,,spend v.
+726,sport,n.,A1,,,,,,General,,sport,,sport n.
+727,spring,n.,A1,,,,,,General,,spring,,spring n.
+728,stand,v.,A1,,,,,,General,,stand,,stand v.
+729,star,n.,A1,,,,,,General,,star,,star n.
+730,start,v.,A1,,,,,,General,,start,,start v.
+731,statement,n.,A1,,,,,,General,,statement,,statement n.
+732,station,n.,A1,,,,,,General,,station,,station n.
+733,stay,v.,A1,,,,,,General,,stay,,stay v.
+734,still,adv.,A1,,,,,,General,,still,,still adv.
+735,stop,"v., n.",A1,,,,,,General,,stop,,"stop v., n."
+736,story,n.,A1,,,,,,General,,story,,story n.
+737,street,n.,A1,,,,,,General,,street,,street n.
+738,strong,adj.,A1,,,,,,General,,strong,,strong adj.
+739,student,n.,A1,,,,,,General,,student,,student n.
+740,study,"n., v.",A1,,,,,,General,,study,,"study n., v."
+741,style,n.,A1,,,,,,General,,style,,style n.
+742,subject,n.,A1,,,,,,General,,subject,,subject n.
+743,success,n.,A1,,,,,,General,,success,,success n.
+744,sugar,n.,A1,,,,,,General,,sugar,,sugar n.
+745,summer,n.,A1,,,,,,General,,summer,,summer n.
+746,sun,n.,A1,,,,,,General,,sun,,sun n.
+747,Sunday,n.,A1,,,,,,General,,sunday,,Sunday n.
+748,supermarket,n.,A1,,,,,,General,,supermarket,,supermarket n.
+749,sure,adj.,A1,,,,,,General,,sure,,sure adj.
+750,sweater,n.,A1,,,,,,General,,sweater,,sweater n.
+751,swim,v.,A1,,,,,,General,,swim,,swim v.
+752,swimming,n.,A1,,,,,,General,,swimming,,swimming n.
+753,table,n.,A1,,,,,,General,,table,,table n.
+754,take,v.,A1,,,,,,General,,take,,take v.
+755,talk,v.,A1,,,,,,General,,talk,,talk v.
+756,tall,adj.,A1,,,,,,General,,tall,,tall adj.
+757,taxi,n.,A1,,,,,,General,,taxi,,taxi n.
+758,tea,n.,A1,,,,,,General,,tea,,tea n.
+759,teach,v.,A1,,,,,,General,,teach,,teach v.
+760,teacher,n.,A1,,,,,,General,,teacher,,teacher n.
+761,team,n.,A1,,,,,,General,,team,,team n.
+762,teenager,n.,A1,,,,,,General,,teenager,,teenager n.
+763,telephone,"n., v.",A1,,,,,,General,,telephone,,"telephone n., v."
+764,television,n.,A1,,,,,,General,,television,,television n.
+765,tell,v.,A1,,,,,,General,,tell,,tell v.
+766,ten,number,A1,,,,,,General,,ten,,ten number
+767,tennis,n.,A1,,,,,,General,,tennis,,tennis n.
+768,terrible,adj.,A1,,,,,,General,,terrible,,terrible adj.
+769,test,"n., v.",A1,,,,,,General,,test,,"test n., v."
+770,text,n.,A1,,,,,,General,,text,,text n.
+771,than,conj.,A1,,,,,,General,,than,,than conj.
+772,thank,v.,A1,,,,,,General,,thank,,thank v.
+773,thanks,"exclam., n.",A1,,,,,,General,,thanks,,"thanks exclam., n."
+774,that,"det., pron., conj.",A1,,,,,,General,,that,,"that det., pron., conj."
+775,the,definite article,A1,,,,,,General,,the,,the definite article
+776,theatre,n.,A1,,,,,,General,,theatre,,theatre n.
+777,their,det.,A1,,,,,,General,,their,,their det.
+778,them,pron.,A1,,,,,,General,,them,,them pron.
+779,then,adv.,A1,,,,,,General,,then,,then adv.
+780,there,adv.,A1,,,,,,General,,there,,there adv.
+781,they,pron.,A1,,,,,,General,,they,,they pron.
+782,thing,n.,A1,,,,,,General,,thing,,thing n.
+783,think,v.,A1,,,,,,General,,think,,think v.
+784,third,number,A1,,,,,,General,,third,,third number
+785,thirsty,adj.,A1,,,,,,General,,thirsty,,thirsty adj.
+786,thirteen,number,A1,,,,,,General,,thirteen,,thirteen number
+787,thirty,number,A1,,,,,,General,,thirty,,thirty number
+788,this,det./pron.,A1,,,,,,General,,this,,this det./pron.
+789,thousand,number,A1,,,,,,General,,thousand,,thousand number
+790,three,number,A1,,,,,,General,,three,,three number
+791,through,"prep., adv.",A1,,,,,,General,,through,,"through prep., adv."
+792,Thursday,n.,A1,,,,,,General,,thursday,,Thursday n.
+793,ticket,n.,A1,,,,,,General,,ticket,,ticket n.
+794,time,n.,A1,,,,,,General,,time,,time n.
+795,tired,adj.,A1,,,,,,General,,tired,,tired adj.
+796,title,n.,A1,,,,,,General,,title,,title n.
+797,to,"prep., infinitive marker",A1,,,,,,General,,to,,"to prep., infinitive marker"
+798,today,"adv., n.",A1,,,,,,General,,today,,"today adv., n."
+799,together,adv.,A1,,,,,,General,,together,,together adv.
+800,toilet,n.,A1,,,,,,General,,toilet,,toilet n.
+801,tomato,n.,A1,,,,,,General,,tomato,,tomato n.
+802,tomorrow,"adv., n.",A1,,,,,,General,,tomorrow,,"tomorrow adv., n."
+803,tonight,"adv., n.",A1,,,,,,General,,tonight,,"tonight adv., n."
+804,too,adv.,A1,,,,,,General,,too,,too adv.
+805,tooth,n.,A1,,,,,,General,,tooth,,tooth n.
+806,topic,n.,A1,,,,,,General,,topic,,topic n.
+807,tourist,n.,A1,,,,,,General,,tourist,,tourist n.
+808,town,n.,A1,,,,,,General,,town,,town n.
+809,traffic,n.,A1,,,,,,General,,traffic,,traffic n.
+810,train,n.,A1,,,,,,General,,train,,train n.
+811,travel,"v., n.",A1,,,,,,General,,travel,,"travel v., n."
+812,tree,n.,A1,,,,,,General,,tree,,tree n.
+813,trip,n.,A1,,,,,,General,,trip,,trip n.
+814,trousers,n.,A1,,,,,,General,,trousers,,trousers n.
+815,true,adj.,A1,,,,,,General,,true,,true adj.
+816,try,v.,A1,,,,,,General,,try,,try v.
+817,T-shirt,n.,A1,,,,,,General,,t_shirt,,T-shirt n.
+818,Tuesday,n.,A1,,,,,,General,,tuesday,,Tuesday n.
+819,turn,"v., n.",A1,,,,,,General,,turn,,"turn v., n."
+820,TV,n.,A1,,,,,,General,,tv,,TV n.
+821,twelve,number,A1,,,,,,General,,twelve,,twelve number
+822,twenty,number,A1,,,,,,General,,twenty,,twenty number
+823,twice,adv.,A1,,,,,,General,,twice,,twice adv.
+824,two,number,A1,,,,,,General,,two,,two number
+825,type,n.,A1,,,,,,General,,type,,type n.
+826,umbrella,n.,A1,,,,,,General,,umbrella,,umbrella n.
+827,uncle,n.,A1,,,,,,General,,uncle,,uncle n.
+828,under,"prep., adv.",A1,,,,,,General,,under,,"under prep., adv."
+829,understand,v.,A1,,,,,,General,,understand,,understand v.
+830,university,n.,A1,,,,,,General,,university,,university n.
+831,until,conj./prep.,A1,,,,,,General,,until,,until conj./prep.
+832,up,"adv., prep.",A1,,,,,,General,,up,,"up adv., prep."
+833,upstairs,adv.,A1,,,,,,General,,upstairs,,upstairs adv.
+834,us,pron.,A1,,,,,,General,,us,,us pron.
+835,use,v.,A1,,,,,,General,,use,,use v.
+836,useful,adj.,A1,,,,,,General,,useful,,useful adj.
+837,usually,adv.,A1,,,,,,General,,usually,,usually adv.
+838,vacation,n.,A1,,,,,,General,,vacation,,vacation n.
+839,vegetable,n.,A1,,,,,,General,,vegetable,,vegetable n.
+840,very,adv.,A1,,,,,,General,,very,,very adv.
+841,video,n.,A1,,,,,,General,,video,,video n.
+842,village,n.,A1,,,,,,General,,village,,village n.
+843,visit,"v., n.",A1,,,,,,General,,visit,,"visit v., n."
+844,visitor,n.,A1,,,,,,General,,visitor,,visitor n.
+845,wait,v.,A1,,,,,,General,,wait,,wait v.
+846,waiter,n.,A1,,,,,,General,,waiter,,waiter n.
+847,wake,v.,A1,,,,,,General,,wake,,wake v.
+848,walk,"v., n.",A1,,,,,,General,,walk,,"walk v., n."
+849,wall,n.,A1,,,,,,General,,wall,,wall n.
+850,want,v.,A1,,,,,,General,,want,,want v.
+851,warm,adj.,A1,,,,,,General,,warm,,warm adj.
+852,wash,v.,A1,,,,,,General,,wash,,wash v.
+853,watch,"v., n.",A1,,,,,,General,,watch,,"watch v., n."
+854,water,n.,A1,,,,,,General,,water,,water n.
+855,way,n.,A1,,,,,,General,,way,,way n.
+856,we,pron.,A1,,,,,,General,,we,,we pron.
+857,wear,v.,A1,,,,,,General,,wear,,wear v.
+858,weather,n.,A1,,,,,,General,,weather,,weather n.
+859,website,n.,A1,,,,,,General,,website,,website n.
+860,Wednesday,n.,A1,,,,,,General,,wednesday,,Wednesday n.
+861,week,n.,A1,,,,,,General,,week,,week n.
+862,weekend,n.,A1,,,,,,General,,weekend,,weekend n.
+863,welcome,"exclam., v., adj.",A1,,,,,,General,,welcome,,"welcome exclam., v., adj."
+864,well,"adv., adj., exclam.",A1,,,,,,General,,well,,"well adv., adj., exclam."
+865,west,"n., adj., adv.",A1,,,,,,General,,west,,"west n., adj., adv."
+866,what,pron./det.,A1,,,,,,General,,what,,what pron./det.
+867,when,"adv., pron., conj.",A1,,,,,,General,,when,,"when adv., pron., conj."
+868,where,"adv., conj.",A1,,,,,,General,,where,,"where adv., conj."
+869,which,pron./det.,A1,,,,,,General,,which,,which pron./det.
+870,white,"adj., n.",A1,,,,,,General,,white,,"white adj., n."
+871,who,pron.,A1,,,,,,General,,who,,who pron.
+872,why,adv.,A1,,,,,,General,,why,,why adv.
+873,wife,n.,A1,,,,,,General,,wife,,wife n.
+874,will,modal v.,A1,,,,,,General,,will,,will modal v.
+875,win,v.,A1,,,,,,General,,win,,win v.
+876,window,n.,A1,,,,,,General,,window,,window n.
+877,wine,n.,A1,,,,,,General,,wine,,wine n.
+878,winter,n.,A1,,,,,,General,,winter,,winter n.
+879,with,prep.,A1,,,,,,General,,with,,with prep.
+880,without,prep.,A1,,,,,,General,,without,,without prep.
+881,woman,n.,A1,,,,,,General,,woman,,woman n.
+882,wonderful,adj.,A1,,,,,,General,,wonderful,,wonderful adj.
+883,word,n.,A1,,,,,,General,,word,,word n.
+884,work,"v., n.",A1,,,,,,General,,work,,"work v., n."
+885,worker,n.,A1,,,,,,General,,worker,,worker n.
+886,world,n.,A1,,,,,,General,,world,,world n.
+887,would,modal v.,A1,,,,,,General,,would,,would modal v.
+888,write,v.,A1,,,,,,General,,write,,write v.
+889,writer,n.,A1,,,,,,General,,writer,,writer n.
+890,writing,n.,A1,,,,,,General,,writing,,writing n.
+891,wrong,adj.,A1,,,,,,General,,wrong,,wrong adj.
+892,yeah,exclam.,A1,,,,,,General,,yeah,,yeah exclam.
+893,year,n.,A1,,,,,,General,,year,,year n.
+894,yellow,"adj., n.",A1,,,,,,General,,yellow,,"yellow adj., n."
+895,yes,exclam.,A1,,,,,,General,,yes,,yes exclam.
+896,yesterday,"adv., n.",A1,,,,,,General,,yesterday,,"yesterday adv., n."
+897,you,pron.,A1,,,,,,General,,you,,you pron.
+898,young,adj.,A1,,,,,,General,,young,,young adj.
+899,your,det.,A1,,,,,,General,,your,,your det.
+900,yourself,pron.,A1,,,,,,General,,yourself,,yourself pron.

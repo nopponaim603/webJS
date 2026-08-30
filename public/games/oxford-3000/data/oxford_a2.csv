@@ -1,0 +1,873 @@
+﻿id,word,part_of_speech,cefr_level,phonetic_uk,phonetic_us,thai_meaning,example_sentence,example_translation,category,distractors,audio_key,note,raw_entry
+901,ability,n.,A2,,,,,,General,,ability,,ability n.
+902,able,adj.,A2,,,,,,General,,able,,able adj.
+903,abroad,adv.,A2,,,,,,General,,abroad,,abroad adv.
+904,accept,v.,A2,,,,,,General,,accept,,accept v.
+905,accident,n.,A2,,,,,,General,,accident,,accident n.
+906,according to,prep.,A2,,,,,,General,,according_to,,according to prep.
+907,achieve,v.,A2,,,,,,General,,achieve,,achieve v.
+908,act,v.,A2,,,,,,General,,act,,act v.
+909,active,adj.,A2,,,,,,General,,active,,active adj.
+910,actually,adv.,A2,,,,,,General,,actually,,actually adv.
+911,adult,adj.,A2,,,,,,General,,adult,,adult adj.
+912,advantage,n.,A2,,,,,,General,,advantage,,advantage n.
+913,adventure,n.,A2,,,,,,General,,adventure,,adventure n.
+914,advertise,v.,A2,,,,,,General,,advertise,,advertise v.
+915,advertisement,n.,A2,,,,,,General,,advertisement,,advertisement n.
+916,advertising,n.,A2,,,,,,General,,advertising,,advertising n.
+917,affect,v.,A2,,,,,,General,,affect,,affect v.
+918,after,"conj., adv.",A2,,,,,,General,,after,,"after conj., adv."
+919,against,prep.,A2,,,,,,General,,against,,against prep.
+920,ah,exclam.,A2,,,,,,General,,ah,,ah exclam.
+921,airline,n.,A2,,,,,,General,,airline,,airline n.
+922,alive,adj.,A2,,,,,,General,,alive,,alive adj.
+923,all,adv.,A2,,,,,,General,,all,,all adv.
+924,all right,"adj./adv., exclam.",A2,,,,,,General,,all_right,,"all right adj./adv., exclam."
+925,allow,v.,A2,,,,,,General,,allow,,allow v.
+926,almost,adv.,A2,,,,,,General,,almost,,almost adv.
+927,alone,adj./adv.,A2,,,,,,General,,alone,,alone adj./adv.
+928,along,"prep., adv.",A2,,,,,,General,,along,,"along prep., adv."
+929,already,adv.,A2,,,,,,General,,already,,already adv.
+930,alternative,n.,A2,,,,,,General,,alternative,,alternative n.
+931,although,conj.,A2,,,,,,General,,although,,although conj.
+932,among,prep.,A2,,,,,,General,,among,,among prep.
+933,amount,n.,A2,,,,,,General,,amount,,amount n.
+934,ancient,adj.,A2,,,,,,General,,ancient,,ancient adj.
+935,ankle,n.,A2,,,,,,General,,ankle,,ankle n.
+936,any,adv.,A2,,,,,,General,,any,,any adv.
+937,anybody,pron.,A2,,,,,,General,,anybody,,anybody pron.
+938,any more,adv.,A2,,,,,,General,,any_more,,any more adv.
+939,anyway,adv.,A2,,,,,,General,,anyway,,anyway adv.
+940,anywhere,"adv., pron.",A2,,,,,,General,,anywhere,,"anywhere adv., pron."
+941,app,n.,A2,,,,,,General,,app,,app n.
+942,appear,v.,A2,,,,,,General,,appear,,appear v.
+943,appearance,n.,A2,,,,,,General,,appearance,,appearance n.
+944,apply,v.,A2,,,,,,General,,apply,,apply v.
+945,architect,n.,A2,,,,,,General,,architect,,architect n.
+946,architecture,n.,A2,,,,,,General,,architecture,,architecture n.
+947,argue,v.,A2,,,,,,General,,argue,,argue v.
+948,argument,n.,A2,,,,,,General,,argument,,argument n.
+949,army,n.,A2,,,,,,General,,army,,army n.
+950,arrange,v.,A2,,,,,,General,,arrange,,arrange v.
+951,arrangement,n.,A2,,,,,,General,,arrangement,,arrangement n.
+952,as,"adv., conj.",A2,,,,,,General,,as,,"as adv., conj."
+953,asleep,adj.,A2,,,,,,General,,asleep,,asleep adj.
+954,assistant,"n., adj.",A2,,,,,,General,,assistant,,"assistant n., adj."
+955,athlete,n.,A2,,,,,,General,,athlete,,athlete n.
+956,attack,"n., v.",A2,,,,,,General,,attack,,"attack n., v."
+957,attend,v.,A2,,,,,,General,,attend,,attend v.
+958,attention,"n., exclam.",A2,,,,,,General,,attention,,"attention n., exclam."
+959,attractive,adj.,A2,,,,,,General,,attractive,,attractive adj.
+960,audience,n.,A2,,,,,,General,,audience,,audience n.
+961,author,n.,A2,,,,,,General,,author,,author n.
+962,available,adj.,A2,,,,,,General,,available,,available adj.
+963,average,"adj., n.",A2,,,,,,General,,average,,"average adj., n."
+964,avoid,v.,A2,,,,,,General,,avoid,,avoid v.
+965,award,n.,A2,,,,,,General,,award,,award n.
+966,awful,adj.,A2,,,,,,General,,awful,,awful adj.
+967,back,adj.,A2,,,,,,General,,back,,back adj.
+968,background,n.,A2,,,,,,General,,background,,background n.
+969,badly,adv.,A2,,,,,,General,,badly,,badly adv.
+970,bar,n.,A2,,,,,,General,,bar,,bar n.
+971,baseball,n.,A2,,,,,,General,,baseball,,baseball n.
+972,based,adj.,A2,,,,,,General,,based,,based adj.
+973,basketball,n.,A2,,,,,,General,,basketball,,basketball n.
+974,bean,n.,A2,,,,,,General,,bean,,bean n.
+975,bear,n.,A2,,,,,,General,,bear,animal,bear (animal) n.
+976,beat,v.,A2,,,,,,General,,beat,,beat v.
+977,beef,n.,A2,,,,,,General,,beef,,beef n.
+978,before,"conj., adv.",A2,,,,,,General,,before,,"before conj., adv."
+979,behave,v.,A2,,,,,,General,,behave,,behave v.
+980,behaviour,n.,A2,,,,,,General,,behaviour,,behaviour n.
+981,belong,v.,A2,,,,,,General,,belong,,belong v.
+982,belt,n.,A2,,,,,,General,,belt,,belt n.
+983,benefit,n.,A2,,,,,,General,,benefit,,benefit n.
+984,best,"adv., n.",A2,,,,,,General,,best,,"best adv., n."
+985,better,adv.,A2,,,,,,General,,better,,better adv.
+986,between,adv.,A2,,,,,,General,,between,,between adv.
+987,billion,number,A2,,,,,,General,,billion,,billion number
+988,bin,n.,A2,,,,,,General,,bin,,bin n.
+989,biology,n.,A2,,,,,,General,,biology,,biology n.
+990,birth,n.,A2,,,,,,General,,birth,,birth n.
+991,biscuit,n.,A2,,,,,,General,,biscuit,,biscuit n.
+992,bit,n.,A2,,,,,,General,,bit,,bit n.
+993,blank,"adj., n.",A2,,,,,,General,,blank,,"blank adj., n."
+994,blood,n.,A2,,,,,,General,,blood,,blood n.
+995,blow,v.,A2,,,,,,General,,blow,,blow v.
+996,board,n.,A2,,,,,,General,,board,,board n.
+997,boil,v.,A2,,,,,,General,,boil,,boil v.
+998,bone,n.,A2,,,,,,General,,bone,,bone n.
+999,book,v.,A2,,,,,,General,,book,,book v.
+1000,borrow,v.,A2,,,,,,General,,borrow,,borrow v.
+1001,boss,n.,A2,,,,,,General,,boss,,boss n.
+1002,bottom,"n., adj.",A2,,,,,,General,,bottom,,"bottom n., adj."
+1003,bowl,n.,A2,,,,,,General,,bowl,,bowl n.
+1004,brain,n.,A2,,,,,,General,,brain,,brain n.
+1005,bridge,n.,A2,,,,,,General,,bridge,,bridge n.
+1006,bright,adj.,A2,,,,,,General,,bright,,bright adj.
+1007,brilliant,adj.,A2,,,,,,General,,brilliant,,brilliant adj.
+1008,broken,adj.,A2,,,,,,General,,broken,,broken adj.
+1009,brush,"v., n.",A2,,,,,,General,,brush,,"brush v., n."
+1010,burn,v.,A2,,,,,,General,,burn,,burn v.
+1011,businessman,n.,A2,,,,,,General,,businessman,,businessman n.
+1012,button,n.,A2,,,,,,General,,button,,button n.
+1013,camp,"n., v.",A2,,,,,,General,,camp,,"camp n., v."
+1014,camping,n.,A2,,,,,,General,,camping,,camping n.
+1015,can,n.,A2,,,,,,General,,can,sense 2,can2 n.
+1016,care,"n., v.",A2,,,,,,General,,care,,"care n., v."
+1017,careful,adj.,A2,,,,,,General,,careful,,careful adj.
+1018,carefully,adv.,A2,,,,,,General,,carefully,,carefully adv.
+1019,carpet,n.,A2,,,,,,General,,carpet,,carpet n.
+1020,cartoon,n.,A2,,,,,,General,,cartoon,,cartoon n.
+1021,case,n.,A2,,,,,,General,,case,,case n.
+1022,cash,n.,A2,,,,,,General,,cash,,cash n.
+1023,castle,n.,A2,,,,,,General,,castle,,castle n.
+1024,catch,v.,A2,,,,,,General,,catch,,catch v.
+1025,cause,"n., v.",A2,,,,,,General,,cause,,"cause n., v."
+1026,celebrate,v.,A2,,,,,,General,,celebrate,,celebrate v.
+1027,celebrity,n.,A2,,,,,,General,,celebrity,,celebrity n.
+1028,certain,adj.,A2,,,,,,General,,certain,,certain adj.
+1029,certainly,adv.,A2,,,,,,General,,certainly,,certainly adv.
+1030,chance,n.,A2,,,,,,General,,chance,,chance n.
+1031,character,n.,A2,,,,,,General,,character,,character n.
+1032,charity,n.,A2,,,,,,General,,charity,,charity n.
+1033,chat,"v., n.",A2,,,,,,General,,chat,,"chat v., n."
+1034,check,n.,A2,,,,,,General,,check,,check n.
+1035,chef,n.,A2,,,,,,General,,chef,,chef n.
+1036,chemistry,n.,A2,,,,,,General,,chemistry,,chemistry n.
+1037,chip,n.,A2,,,,,,General,,chip,,chip n.
+1038,choice,n.,A2,,,,,,General,,choice,,choice n.
+1039,church,n.,A2,,,,,,General,,church,,church n.
+1040,cigarette,n.,A2,,,,,,General,,cigarette,,cigarette n.
+1041,circle,"n., v.",A2,,,,,,General,,circle,,"circle n., v."
+1042,classical,adj.,A2,,,,,,General,,classical,,classical adj.
+1043,clear,adj.,A2,,,,,,General,,clear,,clear adj.
+1044,clearly,adv.,A2,,,,,,General,,clearly,,clearly adv.
+1045,clever,adj.,A2,,,,,,General,,clever,,clever adj.
+1046,climate,n.,A2,,,,,,General,,climate,,climate n.
+1047,close,adj.,A2,,,,,,General,,close,sense 2,close2 adj.
+1048,closed,adj.,A2,,,,,,General,,closed,,closed adj.
+1049,clothing,n.,A2,,,,,,General,,clothing,,clothing n.
+1050,cloud,n.,A2,,,,,,General,,cloud,,cloud n.
+1051,coach,n.,A2,,,,,,General,,coach,,coach n.
+1052,coast,n.,A2,,,,,,General,,coast,,coast n.
+1053,code,n.,A2,,,,,,General,,code,,code n.
+1054,colleague,n.,A2,,,,,,General,,colleague,,colleague n.
+1055,collect,v.,A2,,,,,,General,,collect,,collect v.
+1056,column,n.,A2,,,,,,General,,column,,column n.
+1057,comedy,n.,A2,,,,,,General,,comedy,,comedy n.
+1058,comfortable,adj.,A2,,,,,,General,,comfortable,,comfortable adj.
+1059,comment,n.,A2,,,,,,General,,comment,,comment n.
+1060,communicate,v.,A2,,,,,,General,,communicate,,communicate v.
+1061,community,n.,A2,,,,,,General,,community,,community n.
+1062,compete,v.,A2,,,,,,General,,compete,,compete v.
+1063,competition,n.,A2,,,,,,General,,competition,,competition n.
+1064,complain,v.,A2,,,,,,General,,complain,,complain v.
+1065,completely,adv.,A2,,,,,,General,,completely,,completely adv.
+1066,condition,n.,A2,,,,,,General,,condition,,condition n.
+1067,conference,n.,A2,,,,,,General,,conference,,conference n.
+1068,connect,v.,A2,,,,,,General,,connect,,connect v.
+1069,connected,adj.,A2,,,,,,General,,connected,,connected adj.
+1070,consider,v.,A2,,,,,,General,,consider,,consider v.
+1071,contain,v.,A2,,,,,,General,,contain,,contain v.
+1072,context,n.,A2,,,,,,General,,context,,context n.
+1073,continent,n.,A2,,,,,,General,,continent,,continent n.
+1074,continue,v.,A2,,,,,,General,,continue,,continue v.
+1075,control,"n., v.",A2,,,,,,General,,control,,"control n., v."
+1076,cook,n.,A2,,,,,,General,,cook,,cook n.
+1077,cooker,n.,A2,,,,,,General,,cooker,,cooker n.
+1078,copy,"n., v.",A2,,,,,,General,,copy,,"copy n., v."
+1079,corner,n.,A2,,,,,,General,,corner,,corner n.
+1080,correctly,adv.,A2,,,,,,General,,correctly,,correctly adv.
+1081,count,v.,A2,,,,,,General,,count,,count v.
+1082,couple,n.,A2,,,,,,General,,couple,,couple n.
+1083,cover,v.,A2,,,,,,General,,cover,,cover v.
+1084,crazy,adj.,A2,,,,,,General,,crazy,,crazy adj.
+1085,creative,adj.,A2,,,,,,General,,creative,,creative adj.
+1086,credit,n.,A2,,,,,,General,,credit,,credit n.
+1087,crime,n.,A2,,,,,,General,,crime,,crime n.
+1088,criminal,n.,A2,,,,,,General,,criminal,,criminal n.
+1089,cross,"v., n.",A2,,,,,,General,,cross,,"cross v., n."
+1090,crowd,n.,A2,,,,,,General,,crowd,,crowd n.
+1091,crowded,adj.,A2,,,,,,General,,crowded,,crowded adj.
+1092,cry,v.,A2,,,,,,General,,cry,,cry v.
+1093,cupboard,n.,A2,,,,,,General,,cupboard,,cupboard n.
+1094,curly,adj.,A2,,,,,,General,,curly,,curly adj.
+1095,cycle,"n., v.",A2,,,,,,General,,cycle,,"cycle n., v."
+1096,daily,adj.,A2,,,,,,General,,daily,,daily adj.
+1097,danger,n.,A2,,,,,,General,,danger,,danger n.
+1098,dark,n.,A2,,,,,,General,,dark,,dark n.
+1099,data,n.,A2,,,,,,General,,data,,data n.
+1100,dead,adj.,A2,,,,,,General,,dead,,dead adj.
+1101,deal,v.,A2,,,,,,General,,deal,,deal v.
+1102,dear,exclam.,A2,,,,,,General,,dear,,dear exclam.
+1103,death,n.,A2,,,,,,General,,death,,death n.
+1104,decision,n.,A2,,,,,,General,,decision,,decision n.
+1105,deep,adj.,A2,,,,,,General,,deep,,deep adj.
+1106,definitely,adv.,A2,,,,,,General,,definitely,,definitely adv.
+1107,degree,n.,A2,,,,,,General,,degree,,degree n.
+1108,dentist,n.,A2,,,,,,General,,dentist,,dentist n.
+1109,department,n.,A2,,,,,,General,,department,,department n.
+1110,depend,v.,A2,,,,,,General,,depend,,depend v.
+1111,desert,n.,A2,,,,,,General,,desert,,desert n.
+1112,designer,n.,A2,,,,,,General,,designer,,designer n.
+1113,destroy,v.,A2,,,,,,General,,destroy,,destroy v.
+1114,detective,n.,A2,,,,,,General,,detective,,detective n.
+1115,develop,v.,A2,,,,,,General,,develop,,develop v.
+1116,device,n.,A2,,,,,,General,,device,,device n.
+1117,diary,n.,A2,,,,,,General,,diary,,diary n.
+1118,differently,adv.,A2,,,,,,General,,differently,,differently adv.
+1119,digital,adj.,A2,,,,,,General,,digital,,digital adj.
+1120,direct,adj.,A2,,,,,,General,,direct,,direct adj.
+1121,direction,n.,A2,,,,,,General,,direction,,direction n.
+1122,director,n.,A2,,,,,,General,,director,,director n.
+1123,disagree,v.,A2,,,,,,General,,disagree,,disagree v.
+1124,disappear,v.,A2,,,,,,General,,disappear,,disappear v.
+1125,disaster,n.,A2,,,,,,General,,disaster,,disaster n.
+1126,discover,v.,A2,,,,,,General,,discover,,discover v.
+1127,discovery,n.,A2,,,,,,General,,discovery,,discovery n.
+1128,discussion,n.,A2,,,,,,General,,discussion,,discussion n.
+1129,disease,n.,A2,,,,,,General,,disease,,disease n.
+1130,distance,n.,A2,,,,,,General,,distance,,distance n.
+1131,divorced,adj.,A2,,,,,,General,,divorced,,divorced adj.
+1132,document,n.,A2,,,,,,General,,document,,document n.
+1133,double,"adj., det., pron., v.",A2,,,,,,General,,double,,"double adj., det., pron., v."
+1134,download,"v., n.",A2,,,,,,General,,download,,"download v., n."
+1135,downstairs,adj.,A2,,,,,,General,,downstairs,,downstairs adj.
+1136,drama,n.,A2,,,,,,General,,drama,,drama n.
+1137,drawing,n.,A2,,,,,,General,,drawing,,drawing n.
+1138,dream,"n., v.",A2,,,,,,General,,dream,,"dream n., v."
+1139,drive,n.,A2,,,,,,General,,drive,,drive n.
+1140,driving,n.,A2,,,,,,General,,driving,,driving n.
+1141,drop,v.,A2,,,,,,General,,drop,,drop v.
+1142,drug,n.,A2,,,,,,General,,drug,,drug n.
+1143,dry,"adj., v.",A2,,,,,,General,,dry,,"dry adj., v."
+1144,earn,v.,A2,,,,,,General,,earn,,earn v.
+1145,earth,n.,A2,,,,,,General,,earth,,earth n.
+1146,easily,adv.,A2,,,,,,General,,easily,,easily adv.
+1147,education,n.,A2,,,,,,General,,education,,education n.
+1148,effect,n.,A2,,,,,,General,,effect,,effect n.
+1149,either,"det./pron., adv.",A2,,,,,,General,,either,,"either det./pron., adv."
+1150,electric,adj.,A2,,,,,,General,,electric,,electric adj.
+1151,electrical,adj.,A2,,,,,,General,,electrical,,electrical adj.
+1152,electricity,n.,A2,,,,,,General,,electricity,,electricity n.
+1153,electronic,adj.,A2,,,,,,General,,electronic,,electronic adj.
+1154,employ,v.,A2,,,,,,General,,employ,,employ v.
+1155,employee,n.,A2,,,,,,General,,employee,,employee n.
+1156,employer,n.,A2,,,,,,General,,employer,,employer n.
+1157,empty,adj.,A2,,,,,,General,,empty,,empty adj.
+1158,ending,n.,A2,,,,,,General,,ending,,ending n.
+1159,energy,n.,A2,,,,,,General,,energy,,energy n.
+1160,engine,n.,A2,,,,,,General,,engine,,engine n.
+1161,engineer,n.,A2,,,,,,General,,engineer,,engineer n.
+1162,enormous,adj.,A2,,,,,,General,,enormous,,enormous adj.
+1163,enter,v.,A2,,,,,,General,,enter,,enter v.
+1164,environment,n.,A2,,,,,,General,,environment,,environment n.
+1165,equipment,n.,A2,,,,,,General,,equipment,,equipment n.
+1166,error,n.,A2,,,,,,General,,error,,error n.
+1167,especially,adv.,A2,,,,,,General,,especially,,especially adv.
+1168,essay,n.,A2,,,,,,General,,essay,,essay n.
+1169,everyday,adj.,A2,,,,,,General,,everyday,,everyday adj.
+1170,everywhere,adv.,A2,,,,,,General,,everywhere,,everywhere adv.
+1171,evidence,n.,A2,,,,,,General,,evidence,,evidence n.
+1172,exact,adj.,A2,,,,,,General,,exact,,exact adj.
+1173,exactly,adv.,A2,,,,,,General,,exactly,,exactly adv.
+1174,excellent,adj.,A2,,,,,,General,,excellent,,excellent adj.
+1175,except,prep.,A2,,,,,,General,,except,,except prep.
+1176,exist,v.,A2,,,,,,General,,exist,,exist v.
+1177,expect,v.,A2,,,,,,General,,expect,,expect v.
+1178,experience,n.,A2,,,,,,General,,experience,,experience n.
+1179,experiment,n.,A2,,,,,,General,,experiment,,experiment n.
+1180,expert,"n.,adj.",A2,,,,,,General,,expert,,"expert n.,adj."
+1181,explanation,n.,A2,,,,,,General,,explanation,,explanation n.
+1182,express,v.,A2,,,,,,General,,express,,express v.
+1183,expression,n.,A2,,,,,,General,,expression,,expression n.
+1184,extreme,adj.,A2,,,,,,General,,extreme,,extreme adj.
+1185,extremely,adv.,A2,,,,,,General,,extremely,,extremely adv.
+1186,factor,n.,A2,,,,,,General,,factor,,factor n.
+1187,factory,n.,A2,,,,,,General,,factory,,factory n.
+1188,fail,v.,A2,,,,,,General,,fail,,fail v.
+1189,fair,adj.,A2,,,,,,General,,fair,,fair adj.
+1190,fall,n.,A2,,,,,,General,,fall,,fall n.
+1191,fan,n.,A2,,,,,,General,,fan,,fan n.
+1192,farm,v.,A2,,,,,,General,,farm,,farm v.
+1193,farming,n.,A2,,,,,,General,,farming,,farming n.
+1194,fashion,n.,A2,,,,,,General,,fashion,,fashion n.
+1195,fat,n.,A2,,,,,,General,,fat,,fat n.
+1196,fear,n.,A2,,,,,,General,,fear,,fear n.
+1197,feature,n.,A2,,,,,,General,,feature,,feature n.
+1198,feed,v.,A2,,,,,,General,,feed,,feed v.
+1199,female,"adj., n.",A2,,,,,,General,,female,,"female adj., n."
+1200,fiction,n.,A2,,,,,,General,,fiction,,fiction n.
+1201,field,n.,A2,,,,,,General,,field,,field n.
+1202,fight,"v., n.",A2,,,,,,General,,fight,,"fight v., n."
+1203,figure,n.,A2,,,,,,General,,figure,,figure n.
+1204,film,v.,A2,,,,,,General,,film,,film v.
+1205,final,n.,A2,,,,,,General,,final,,final n.
+1206,finally,adv.,A2,,,,,,General,,finally,,finally adv.
+1207,finger,n.,A2,,,,,,General,,finger,,finger n.
+1208,finish,n.,A2,,,,,,General,,finish,,finish n.
+1209,first,n.,A2,,,,,,General,,first,,first n.
+1210,firstly,adv.,A2,,,,,,General,,firstly,,firstly adv.
+1211,fish,v.,A2,,,,,,General,,fish,,fish v.
+1212,fishing,n.,A2,,,,,,General,,fishing,,fishing n.
+1213,fit,"v., adj.",A2,,,,,,General,,fit,,"fit v., adj."
+1214,fix,v.,A2,,,,,,General,,fix,,fix v.
+1215,flat,adj.,A2,,,,,,General,,flat,,flat adj.
+1216,flu,n.,A2,,,,,,General,,flu,,flu n.
+1217,fly,n.,A2,,,,,,General,,fly,,fly n.
+1218,flying,"n., adj.",A2,,,,,,General,,flying,,"flying n., adj."
+1219,focus,"v., n.",A2,,,,,,General,,focus,,"focus v., n."
+1220,following,adj.,A2,,,,,,General,,following,,following adj.
+1221,foreign,adj.,A2,,,,,,General,,foreign,,foreign adj.
+1222,forest,n.,A2,,,,,,General,,forest,,forest n.
+1223,fork,n.,A2,,,,,,General,,fork,,fork n.
+1224,formal,adj.,A2,,,,,,General,,formal,,formal adj.
+1225,fortunately,adv.,A2,,,,,,General,,fortunately,,fortunately adv.
+1226,forward,adv.,A2,,,,,,General,,forward,,forward adv.
+1227,free,adv.,A2,,,,,,General,,free,,free adv.
+1228,fresh,adj.,A2,,,,,,General,,fresh,,fresh adj.
+1229,fridge,n.,A2,,,,,,General,,fridge,,fridge n.
+1230,frog,n.,A2,,,,,,General,,frog,,frog n.
+1231,fun,adj.,A2,,,,,,General,,fun,,fun adj.
+1232,furniture,n.,A2,,,,,,General,,furniture,,furniture n.
+1233,further,adj.,A2,,,,,,General,,further,,further adj.
+1234,future,adj.,A2,,,,,,General,,future,,future adj.
+1235,gallery,n.,A2,,,,,,General,,gallery,,gallery n.
+1236,gap,n.,A2,,,,,,General,,gap,,gap n.
+1237,gas,n.,A2,,,,,,General,,gas,,gas n.
+1238,gate,n.,A2,,,,,,General,,gate,,gate n.
+1239,general,adj.,A2,,,,,,General,,general,,general adj.
+1240,gift,n.,A2,,,,,,General,,gift,,gift n.
+1241,goal,n.,A2,,,,,,General,,goal,,goal n.
+1242,god,n.,A2,,,,,,General,,god,,god n.
+1243,gold,"n., adj.",A2,,,,,,General,,gold,,"gold n., adj."
+1244,golf,n.,A2,,,,,,General,,golf,,golf n.
+1245,good,n.,A2,,,,,,General,,good,,good n.
+1246,government,n.,A2,,,,,,General,,government,,government n.
+1247,grass,n.,A2,,,,,,General,,grass,,grass n.
+1248,greet,v.,A2,,,,,,General,,greet,,greet v.
+1249,ground,n.,A2,,,,,,General,,ground,,ground n.
+1250,guest,n.,A2,,,,,,General,,guest,,guest n.
+1251,guide,"n., v.",A2,,,,,,General,,guide,,"guide n., v."
+1252,gun,n.,A2,,,,,,General,,gun,,gun n.
+1253,guy,n.,A2,,,,,,General,,guy,,guy n.
+1254,habit,n.,A2,,,,,,General,,habit,,habit n.
+1255,half,adv.,A2,,,,,,General,,half,,half adv.
+1256,hall,n.,A2,,,,,,General,,hall,,hall n.
+1257,happily,adv.,A2,,,,,,General,,happily,,happily adv.
+1258,have,auxiliary v.,A2,,,,,,General,,have,,have auxiliary v.
+1259,headache,n.,A2,,,,,,General,,headache,,headache n.
+1260,heart,n.,A2,,,,,,General,,heart,,heart n.
+1261,heat,"n., v.",A2,,,,,,General,,heat,,"heat n., v."
+1262,heavy,adj.,A2,,,,,,General,,heavy,,heavy adj.
+1263,height,n.,A2,,,,,,General,,height,,height n.
+1264,helpful,adj.,A2,,,,,,General,,helpful,,helpful adj.
+1265,hero,n.,A2,,,,,,General,,hero,,hero n.
+1266,hers,pron.,A2,,,,,,General,,hers,,hers pron.
+1267,herself,pron.,A2,,,,,,General,,herself,,herself pron.
+1268,hide,v.,A2,,,,,,General,,hide,,hide v.
+1269,high,adv.,A2,,,,,,General,,high,,high adv.
+1270,hill,n.,A2,,,,,,General,,hill,,hill n.
+1271,himself,pron.,A2,,,,,,General,,himself,,himself pron.
+1272,his,pron.,A2,,,,,,General,,his,,his pron.
+1273,hit,"v., n.",A2,,,,,,General,,hit,,"hit v., n."
+1274,hockey,n.,A2,,,,,,General,,hockey,,hockey n.
+1275,hold,v.,A2,,,,,,General,,hold,,hold v.
+1276,hole,n.,A2,,,,,,General,,hole,,hole n.
+1277,home,adj.,A2,,,,,,General,,home,,home adj.
+1278,hope,n.,A2,,,,,,General,,hope,,hope n.
+1279,huge,adj.,A2,,,,,,General,,huge,,huge adj.
+1280,human,"adj., n.",A2,,,,,,General,,human,,"human adj., n."
+1281,hurt,"v., adj.",A2,,,,,,General,,hurt,,"hurt v., adj."
+1282,ideal,adj.,A2,,,,,,General,,ideal,,ideal adj.
+1283,identify,v.,A2,,,,,,General,,identify,,identify v.
+1284,ill,adj.,A2,,,,,,General,,ill,,ill adj.
+1285,illness,n.,A2,,,,,,General,,illness,,illness n.
+1286,image,n.,A2,,,,,,General,,image,,image n.
+1287,immediately,adv.,A2,,,,,,General,,immediately,,immediately adv.
+1288,impossible,adj.,A2,,,,,,General,,impossible,,impossible adj.
+1289,included,adj.,A2,,,,,,General,,included,,included adj.
+1290,including,prep.,A2,,,,,,General,,including,,including prep.
+1291,increase,"v., n.",A2,,,,,,General,,increase,,"increase v., n."
+1292,incredible,adj.,A2,,,,,,General,,incredible,,incredible adj.
+1293,independent,adj.,A2,,,,,,General,,independent,,independent adj.
+1294,individual,"n., adj.",A2,,,,,,General,,individual,,"individual n., adj."
+1295,industry,n.,A2,,,,,,General,,industry,,industry n.
+1296,informal,adj.,A2,,,,,,General,,informal,,informal adj.
+1297,injury,n.,A2,,,,,,General,,injury,,injury n.
+1298,insect,n.,A2,,,,,,General,,insect,,insect n.
+1299,inside,"prep., adv., n., adj.",A2,,,,,,General,,inside,,"inside prep., adv., n., adj."
+1300,instead,adv.,A2,,,,,,General,,instead,,instead adv.
+1301,instruction,n.,A2,,,,,,General,,instruction,,instruction n.
+1302,instructor,n.,A2,,,,,,General,,instructor,,instructor n.
+1303,instrument,n.,A2,,,,,,General,,instrument,,instrument n.
+1304,intelligent,adj.,A2,,,,,,General,,intelligent,,intelligent adj.
+1305,international,adj.,A2,,,,,,General,,international,,international adj.
+1306,introduction,n.,A2,,,,,,General,,introduction,,introduction n.
+1307,invent,v.,A2,,,,,,General,,invent,,invent v.
+1308,invention,n.,A2,,,,,,General,,invention,,invention n.
+1309,invitation,n.,A2,,,,,,General,,invitation,,invitation n.
+1310,invite,v.,A2,,,,,,General,,invite,,invite v.
+1311,involve,v.,A2,,,,,,General,,involve,,involve v.
+1312,item,n.,A2,,,,,,General,,item,,item n.
+1313,itself,pron.,A2,,,,,,General,,itself,,itself pron.
+1314,jam,n.,A2,,,,,,General,,jam,,jam n.
+1315,jazz,n.,A2,,,,,,General,,jazz,,jazz n.
+1316,jewellery,n.,A2,,,,,,General,,jewellery,,jewellery n.
+1317,joke,"n., v.",A2,,,,,,General,,joke,,"joke n., v."
+1318,journalist,n.,A2,,,,,,General,,journalist,,journalist n.
+1319,jump,"v., n.",A2,,,,,,General,,jump,,"jump v., n."
+1320,kid,n.,A2,,,,,,General,,kid,,kid n.
+1321,kill,v.,A2,,,,,,General,,kill,,kill v.
+1322,king,n.,A2,,,,,,General,,king,,king n.
+1323,knee,n.,A2,,,,,,General,,knee,,knee n.
+1324,knife,n.,A2,,,,,,General,,knife,,knife n.
+1325,knock,v.,A2,,,,,,General,,knock,,knock v.
+1326,knowledge,n.,A2,,,,,,General,,knowledge,,knowledge n.
+1327,lab,n.,A2,,,,,,General,,lab,,lab n.
+1328,lady,n.,A2,,,,,,General,,lady,,lady n.
+1329,lake,n.,A2,,,,,,General,,lake,,lake n.
+1330,lamp,n.,A2,,,,,,General,,lamp,,lamp n.
+1331,land,v.,A2,,,,,,General,,land,,land v.
+1332,laptop,n.,A2,,,,,,General,,laptop,,laptop n.
+1333,last,"adv. , n.",A2,,,,,,General,,last,final,"last1 (final) adv. , n."
+1334,last,v.,A2,,,,,,General,,last,taking time,last1 (taking time) v.
+1335,later,adj.,A2,,,,,,General,,later,,later adj.
+1336,laughter,n.,A2,,,,,,General,,laughter,,laughter n.
+1337,law,n.,A2,,,,,,General,,law,,law n.
+1338,lawyer,n.,A2,,,,,,General,,lawyer,,lawyer n.
+1339,lazy,adj.,A2,,,,,,General,,lazy,,lazy adj.
+1340,lead,v.,A2,,,,,,General,,lead,sense 1,lead1 v.
+1341,leader,n.,A2,,,,,,General,,leader,,leader n.
+1342,learning,n.,A2,,,,,,General,,learning,,learning n.
+1343,least,"det./pron., adv.",A2,,,,,,General,,least,,"least det./pron., adv."
+1344,lecture,"n., v.",A2,,,,,,General,,lecture,,"lecture n., v."
+1345,lemon,n.,A2,,,,,,General,,lemon,,lemon n.
+1346,lend,v.,A2,,,,,,General,,lend,,lend v.
+1347,less,"det./pron., adv.",A2,,,,,,General,,less,,"less det./pron., adv."
+1348,level,n.,A2,,,,,,General,,level,,level n.
+1349,lifestyle,n.,A2,,,,,,General,,lifestyle,,lifestyle n.
+1350,lift,"v., n.",A2,,,,,,General,,lift,,"lift v., n."
+1351,light,v.,A2,,,,,,General,,light,from the sun/a lamp,light (from the sun/a lamp) v.
+1352,light,adj.,A2,,,,,,General,,light,not heavy,light (not heavy) adj.
+1353,likely,adj.,A2,,,,,,General,,likely,,likely adj.
+1354,link,"n., v.",A2,,,,,,General,,link,,"link n., v."
+1355,listener,n.,A2,,,,,,General,,listener,,listener n.
+1356,little,adv.,A2,,,,,,General,,little,,little adv.
+1357,lock,"v., n.",A2,,,,,,General,,lock,,"lock v., n."
+1358,look,n.,A2,,,,,,General,,look,,look n.
+1359,lorry,n.,A2,,,,,,General,,lorry,,lorry n.
+1360,lost,adj.,A2,,,,,,General,,lost,,lost adj.
+1361,loud,"adj., adv.",A2,,,,,,General,,loud,,"loud adj., adv."
+1362,loudly,adv.,A2,,,,,,General,,loudly,,loudly adv.
+1363,lovely,adj.,A2,,,,,,General,,lovely,,lovely adj.
+1364,low,"adj., adv.",A2,,,,,,General,,low,,"low adj., adv."
+1365,luck,n.,A2,,,,,,General,,luck,,luck n.
+1366,lucky,adj.,A2,,,,,,General,,lucky,,lucky adj.
+1367,mail,"n., v.",A2,,,,,,General,,mail,,"mail n., v."
+1368,major,adj.,A2,,,,,,General,,major,,major adj.
+1369,male,"adj., n.",A2,,,,,,General,,male,,"male adj., n."
+1370,manage,v.,A2,,,,,,General,,manage,,manage v.
+1371,manager,n.,A2,,,,,,General,,manager,,manager n.
+1372,manner,n.,A2,,,,,,General,,manner,,manner n.
+1373,mark,"v., n.",A2,,,,,,General,,mark,,"mark v., n."
+1374,marry,v.,A2,,,,,,General,,marry,,marry v.
+1375,material,n.,A2,,,,,,General,,material,,material n.
+1376,mathematics,n.,A2,,,,,,General,,mathematics,,mathematics n.
+1377,maths,n.,A2,,,,,,General,,maths,,maths n.
+1378,matter,"n., v.",A2,,,,,,General,,matter,,"matter n., v."
+1379,may,modal v.,A2,,,,,,General,,may,,may modal v.
+1380,media,n.,A2,,,,,,General,,media,,media n.
+1381,medical,adj.,A2,,,,,,General,,medical,,medical adj.
+1382,medicine,n.,A2,,,,,,General,,medicine,,medicine n.
+1383,memory,n.,A2,,,,,,General,,memory,,memory n.
+1384,mention,v.,A2,,,,,,General,,mention,,mention v.
+1385,metal,n.,A2,,,,,,General,,metal,,metal n.
+1386,method,n.,A2,,,,,,General,,method,,method n.
+1387,middle,"n., adj.",A2,,,,,,General,,middle,,"middle n., adj."
+1388,might,modal v.,A2,,,,,,General,,might,,might modal v.
+1389,mind,"n., v.",A2,,,,,,General,,mind,,"mind n., v."
+1390,mine,pron.,A2,,,,,,General,,mine,belongs to me,mine (belongs to me) pron.
+1391,mirror,n.,A2,,,,,,General,,mirror,,mirror n.
+1392,missing,adj.,A2,,,,,,General,,missing,,missing adj.
+1393,mobile,"adj., n.",A2,,,,,,General,,mobile,,"mobile adj., n."
+1394,monkey,n.,A2,,,,,,General,,monkey,,monkey n.
+1395,moon,n.,A2,,,,,,General,,moon,,moon n.
+1396,mostly,adv.,A2,,,,,,General,,mostly,,mostly adv.
+1397,motorcycle,n.,A2,,,,,,General,,motorcycle,,motorcycle n.
+1398,movement,n.,A2,,,,,,General,,movement,,movement n.
+1399,musical,adj.,A2,,,,,,General,,musical,,musical adj.
+1400,musician,n.,A2,,,,,,General,,musician,,musician n.
+1401,myself,pron.,A2,,,,,,General,,myself,,myself pron.
+1402,narrow,adj.,A2,,,,,,General,,narrow,,narrow adj.
+1403,national,adj.,A2,,,,,,General,,national,,national adj.
+1404,nature,n.,A2,,,,,,General,,nature,,nature n.
+1405,nearly,adv.,A2,,,,,,General,,nearly,,nearly adv.
+1406,necessary,adj.,A2,,,,,,General,,necessary,,necessary adj.
+1407,neck,n.,A2,,,,,,General,,neck,,neck n.
+1408,need,n.,A2,,,,,,General,,need,,need n.
+1409,neither,det./pron.,A2,,,,,,General,,neither,,neither det./pron.
+1410,nervous,adj.,A2,,,,,,General,,nervous,,nervous adj.
+1411,network,n.,A2,,,,,,General,,network,,network n.
+1412,noise,n.,A2,,,,,,General,,noise,,noise n.
+1413,noisy,adj.,A2,,,,,,General,,noisy,,noisy adj.
+1414,none,pron.,A2,,,,,,General,,none,,none pron.
+1415,normal,adj.,A2,,,,,,General,,normal,,normal adj.
+1416,normally,adv.,A2,,,,,,General,,normally,,normally adv.
+1417,notice,"v., n.",A2,,,,,,General,,notice,,"notice v., n."
+1418,novel,n.,A2,,,,,,General,,novel,,novel n.
+1419,nowhere,adv.,A2,,,,,,General,,nowhere,,nowhere adv.
+1420,number,v.,A2,,,,,,General,,number,,number v.
+1421,nut,n.,A2,,,,,,General,,nut,,nut n.
+1422,ocean,n.,A2,,,,,,General,,ocean,,ocean n.
+1423,offer,"v., n.",A2,,,,,,General,,offer,,"offer v., n."
+1424,officer,n.,A2,,,,,,General,,officer,,officer n.
+1425,oil,n.,A2,,,,,,General,,oil,,oil n.
+1426,onto,prep.,A2,,,,,,General,,onto,,onto prep.
+1427,opportunity,n.,A2,,,,,,General,,opportunity,,opportunity n.
+1428,option,n.,A2,,,,,,General,,option,,option n.
+1429,ordinary,adj.,A2,,,,,,General,,ordinary,,ordinary adj.
+1430,organization,n.,A2,,,,,,General,,organization,,organization n.
+1431,organize,v.,A2,,,,,,General,,organize,,organize v.
+1432,original,adj.,A2,,,,,,General,,original,,original adj.
+1433,ourselves,pron.,A2,,,,,,General,,ourselves,,ourselves pron.
+1434,outside,"prep., n., adj.",A2,,,,,,General,,outside,,"outside prep., n., adj."
+1435,oven,n.,A2,,,,,,General,,oven,,oven n.
+1436,own,v.,A2,,,,,,General,,own,,own v.
+1437,owner,n.,A2,,,,,,General,,owner,,owner n.
+1438,pack,v.,A2,,,,,,General,,pack,,pack v.
+1439,pain,n.,A2,,,,,,General,,pain,,pain n.
+1440,painter,n.,A2,,,,,,General,,painter,,painter n.
+1441,palace,n.,A2,,,,,,General,,palace,,palace n.
+1442,pants,n.,A2,,,,,,General,,pants,,pants n.
+1443,parking,n.,A2,,,,,,General,,parking,,parking n.
+1444,particular,adj.,A2,,,,,,General,,particular,,particular adj.
+1445,pass,v.,A2,,,,,,General,,pass,,pass v.
+1446,passenger,n.,A2,,,,,,General,,passenger,,passenger n.
+1447,past,adv.,A2,,,,,,General,,past,,past adv.
+1448,patient,n.,A2,,,,,,General,,patient,,patient n.
+1449,pattern,n.,A2,,,,,,General,,pattern,,pattern n.
+1450,pay,n.,A2,,,,,,General,,pay,,pay n.
+1451,peace,n.,A2,,,,,,General,,peace,,peace n.
+1452,penny,n.,A2,,,,,,General,,penny,,penny n.
+1453,per,prep.,A2,,,,,,General,,per,,per prep.
+1454,per cent,"n., adj./adv.",A2,,,,,,General,,per_cent,,"per cent n., adj./adv."
+1455,perform,v.,A2,,,,,,General,,perform,,perform v.
+1456,perhaps,adv.,A2,,,,,,General,,perhaps,,perhaps adv.
+1457,permission,n.,A2,,,,,,General,,permission,,permission n.
+1458,personality,n.,A2,,,,,,General,,personality,,personality n.
+1459,pet,n.,A2,,,,,,General,,pet,,pet n.
+1460,petrol,n.,A2,,,,,,General,,petrol,,petrol n.
+1461,photograph,v.,A2,,,,,,General,,photograph,,photograph v.
+1462,physical,adj.,A2,,,,,,General,,physical,,physical adj.
+1463,physics,n.,A2,,,,,,General,,physics,,physics n.
+1464,pick,v.,A2,,,,,,General,,pick,,pick v.
+1465,pilot,n.,A2,,,,,,General,,pilot,,pilot n.
+1466,planet,n.,A2,,,,,,General,,planet,,planet n.
+1467,plant,v.,A2,,,,,,General,,plant,,plant v.
+1468,plastic,"n., adj.",A2,,,,,,General,,plastic,,"plastic n., adj."
+1469,plate,n.,A2,,,,,,General,,plate,,plate n.
+1470,platform,n.,A2,,,,,,General,,platform,,platform n.
+1471,please,v.,A2,,,,,,General,,please,,please v.
+1472,pleased,adj.,A2,,,,,,General,,pleased,,pleased adj.
+1473,pocket,n.,A2,,,,,,General,,pocket,,pocket n.
+1474,polite,adj.,A2,,,,,,General,,polite,,polite adj.
+1475,pollution,n.,A2,,,,,,General,,pollution,,pollution n.
+1476,pop,"n., adj.",A2,,,,,,General,,pop,,"pop n., adj."
+1477,population,n.,A2,,,,,,General,,population,,population n.
+1478,position,n.,A2,,,,,,General,,position,,position n.
+1479,possession,n.,A2,,,,,,General,,possession,,possession n.
+1480,possibility,n.,A2,,,,,,General,,possibility,,possibility n.
+1481,poster,n.,A2,,,,,,General,,poster,,poster n.
+1482,power,n.,A2,,,,,,General,,power,,power n.
+1483,predict,v.,A2,,,,,,General,,predict,,predict v.
+1484,present,v.,A2,,,,,,General,,present,,present v.
+1485,president,n.,A2,,,,,,General,,president,,president n.
+1486,prevent,v.,A2,,,,,,General,,prevent,,prevent v.
+1487,print,v.,A2,,,,,,General,,print,,print v.
+1488,printer,n.,A2,,,,,,General,,printer,,printer n.
+1489,prison,n.,A2,,,,,,General,,prison,,prison n.
+1490,prize,n.,A2,,,,,,General,,prize,,prize n.
+1491,process,n.,A2,,,,,,General,,process,,process n.
+1492,produce,v.,A2,,,,,,General,,produce,,produce v.
+1493,professional,adj.,A2,,,,,,General,,professional,,professional adj.
+1494,professor,n.,A2,,,,,,General,,professor,,professor n.
+1495,profile,n.,A2,,,,,,General,,profile,,profile n.
+1496,program,n.,A2,,,,,,General,,program,,program n.
+1497,progress,n.,A2,,,,,,General,,progress,,progress n.
+1498,promise,"v., n.",A2,,,,,,General,,promise,,"promise v., n."
+1499,pronounce,v.,A2,,,,,,General,,pronounce,,pronounce v.
+1500,protect,v.,A2,,,,,,General,,protect,,protect v.
+1501,provide,v.,A2,,,,,,General,,provide,,provide v.
+1502,pub,n.,A2,,,,,,General,,pub,,pub n.
+1503,public,"adj., n.",A2,,,,,,General,,public,,"public adj., n."
+1504,publish,v.,A2,,,,,,General,,publish,,publish v.
+1505,pull,v.,A2,,,,,,General,,pull,,pull v.
+1506,purpose,n.,A2,,,,,,General,,purpose,,purpose n.
+1507,push,v.,A2,,,,,,General,,push,,push v.
+1508,quality,n.,A2,,,,,,General,,quality,,quality n.
+1509,quantity,n.,A2,,,,,,General,,quantity,,quantity n.
+1510,queen,n.,A2,,,,,,General,,queen,,queen n.
+1511,question,v.,A2,,,,,,General,,question,,question v.
+1512,quietly,adv.,A2,,,,,,General,,quietly,,quietly adv.
+1513,race,"n., v.",A2,,,,,,General,,race,competition,"race (competition) n., v."
+1514,railway,n.,A2,,,,,,General,,railway,,railway n.
+1515,raise,v.,A2,,,,,,General,,raise,,raise v.
+1516,rate,n.,A2,,,,,,General,,rate,,rate n.
+1517,rather,adv.,A2,,,,,,General,,rather,,rather adv.
+1518,reach,v.,A2,,,,,,General,,reach,,reach v.
+1519,react,v.,A2,,,,,,General,,react,,react v.
+1520,realize,v.,A2,,,,,,General,,realize,,realize v.
+1521,receive,v.,A2,,,,,,General,,receive,,receive v.
+1522,recent,adj.,A2,,,,,,General,,recent,,recent adj.
+1523,recently,adv.,A2,,,,,,General,,recently,,recently adv.
+1524,reception,n.,A2,,,,,,General,,reception,,reception n.
+1525,recipe,n.,A2,,,,,,General,,recipe,,recipe n.
+1526,recognize,v.,A2,,,,,,General,,recognize,,recognize v.
+1527,recommend,v.,A2,,,,,,General,,recommend,,recommend v.
+1528,record,"n., v.",A2,,,,,,General,,record,,"record n., v."
+1529,recording,n.,A2,,,,,,General,,recording,,recording n.
+1530,recycle,v.,A2,,,,,,General,,recycle,,recycle v.
+1531,reduce,v.,A2,,,,,,General,,reduce,,reduce v.
+1532,refer,v.,A2,,,,,,General,,refer,,refer v.
+1533,refuse,v.,A2,,,,,,General,,refuse,sense 1,refuse1  v.
+1534,region,n.,A2,,,,,,General,,region,,region n.
+1535,regular,adj.,A2,,,,,,General,,regular,,regular adj.
+1536,relationship,n.,A2,,,,,,General,,relationship,,relationship n.
+1537,remove,v.,A2,,,,,,General,,remove,,remove v.
+1538,repair,v.,A2,,,,,,General,,repair,,repair v.
+1539,replace,v.,A2,,,,,,General,,replace,,replace v.
+1540,reply,"v., n.",A2,,,,,,General,,reply,,"reply v., n."
+1541,report,v.,A2,,,,,,General,,report,,report v.
+1542,reporter,n.,A2,,,,,,General,,reporter,,reporter n.
+1543,request,n.,A2,,,,,,General,,request,,request n.
+1544,research,"n., v.",A2,,,,,,General,,research,,"research n., v."
+1545,researcher,n.,A2,,,,,,General,,researcher,,researcher n.
+1546,respond,v.,A2,,,,,,General,,respond,,respond v.
+1547,response,n.,A2,,,,,,General,,response,,response n.
+1548,rest,n.,A2,,,,,,General,,rest,remaining part,rest (remaining part) n.
+1549,rest,"n., v.",A2,,,,,,General,,rest,sleep/relax,"rest (sleep/relax) n., v."
+1550,review,"n., v.",A2,,,,,,General,,review,,"review n., v."
+1551,ride,n.,A2,,,,,,General,,ride,,ride n.
+1552,ring,n.,A2,,,,,,General,,ring,sense 1,ring1 n.
+1553,ring,v.,A2,,,,,,General,,ring,sense 2,ring2 v.
+1554,rise,v.,A2,,,,,,General,,rise,,rise v.
+1555,rock,n.,A2,,,,,,General,,rock,stone,rock (stone) n.
+1556,rock,n.,A2,,,,,,General,,rock,music,rock (music) n.
+1557,role,n.,A2,,,,,,General,,role,,role n.
+1558,roof,n.,A2,,,,,,General,,roof,,roof n.
+1559,round,"adj., adv., prep.",A2,,,,,,General,,round,,"round adj., adv., prep."
+1560,route,n.,A2,,,,,,General,,route,,route n.
+1561,rubbish,n.,A2,,,,,,General,,rubbish,,rubbish n.
+1562,rude,adj.,A2,,,,,,General,,rude,,rude adj.
+1563,run,n.,A2,,,,,,General,,run,,run n.
+1564,runner,n.,A2,,,,,,General,,runner,,runner n.
+1565,running,n.,A2,,,,,,General,,running,,running n.
+1566,sadly,adv.,A2,,,,,,General,,sadly,,sadly adv.
+1567,safe,adj.,A2,,,,,,General,,safe,,safe adj.
+1568,sail,v.,A2,,,,,,General,,sail,,sail v.
+1569,sailing,n.,A2,,,,,,General,,sailing,,sailing n.
+1570,salary,n.,A2,,,,,,General,,salary,,salary n.
+1571,sale,n.,A2,,,,,,General,,sale,,sale n.
+1572,sauce,n.,A2,,,,,,General,,sauce,,sauce n.
+1573,save,v.,A2,,,,,,General,,save,,save v.
+1574,scared,adj.,A2,,,,,,General,,scared,,scared adj.
+1575,scary,adj.,A2,,,,,,General,,scary,,scary adj.
+1576,scene,n.,A2,,,,,,General,,scene,,scene n.
+1577,schedule,n.,A2,,,,,,General,,schedule,,schedule n.
+1578,score,"v., n.",A2,,,,,,General,,score,,"score v., n."
+1579,screen,n.,A2,,,,,,General,,screen,,screen n.
+1580,search,"n., v.",A2,,,,,,General,,search,,"search n., v."
+1581,season,n.,A2,,,,,,General,,season,,season n.
+1582,seat,n.,A2,,,,,,General,,seat,,seat n.
+1583,second,adv.,A2,,,,,,General,,second,next after the first,second1 (next after the first) adv.
+1584,secondly,adv.,A2,,,,,,General,,secondly,,secondly adv.
+1585,secret,"adj., n.",A2,,,,,,General,,secret,,"secret adj., n."
+1586,secretary,n.,A2,,,,,,General,,secretary,,secretary n.
+1587,seem,v.,A2,,,,,,General,,seem,,seem v.
+1588,sense,n.,A2,,,,,,General,,sense,,sense n.
+1589,separate,adj.,A2,,,,,,General,,separate,,separate adj.
+1590,series,n.,A2,,,,,,General,,series,,series n.
+1591,serious,adj.,A2,,,,,,General,,serious,,serious adj.
+1592,serve,v.,A2,,,,,,General,,serve,,serve v.
+1593,service,n.,A2,,,,,,General,,service,,service n.
+1594,several,det./pron.,A2,,,,,,General,,several,,several det./pron.
+1595,shake,v.,A2,,,,,,General,,shake,,shake v.
+1596,shall,modal v.,A2,,,,,,General,,shall,,shall modal v.
+1597,shape,n.,A2,,,,,,General,,shape,,shape n.
+1598,sheet,n.,A2,,,,,,General,,sheet,,sheet n.
+1599,ship,n.,A2,,,,,,General,,ship,,ship n.
+1600,shoulder,n.,A2,,,,,,General,,shoulder,,shoulder n.
+1601,shout,"v., n.",A2,,,,,,General,,shout,,"shout v., n."
+1602,shut,"v., adj.",A2,,,,,,General,,shut,,"shut v., adj."
+1603,side,n.,A2,,,,,,General,,side,,side n.
+1604,sign,"n., v.",A2,,,,,,General,,sign,,"sign n., v."
+1605,silver,"n., adj.",A2,,,,,,General,,silver,,"silver n., adj."
+1606,simple,adj.,A2,,,,,,General,,simple,,simple adj.
+1607,since,"prep., conj.",A2,,,,,,General,,since,,"since prep., conj."
+1608,singing,n.,A2,,,,,,General,,singing,,singing n.
+1609,single,"adj., n.",A2,,,,,,General,,single,,"single adj., n."
+1610,sir,n.,A2,,,,,,General,,sir,,sir n.
+1611,site,n.,A2,,,,,,General,,site,,site n.
+1612,size,n.,A2,,,,,,General,,size,,size n.
+1613,ski,"v., adj., n.",A2,,,,,,General,,ski,,"ski v., adj., n."
+1614,skiing,n.,A2,,,,,,General,,skiing,,skiing n.
+1615,skin,n.,A2,,,,,,General,,skin,,skin n.
+1616,sky,n.,A2,,,,,,General,,sky,,sky n.
+1617,sleep,n.,A2,,,,,,General,,sleep,,sleep n.
+1618,slowly,adv.,A2,,,,,,General,,slowly,,slowly adv.
+1619,smartphone,n.,A2,,,,,,General,,smartphone,,smartphone n.
+1620,smell,"v., n.",A2,,,,,,General,,smell,,"smell v., n."
+1621,smile,"v., n.",A2,,,,,,General,,smile,,"smile v., n."
+1622,smoke,"n., v.",A2,,,,,,General,,smoke,,"smoke n., v."
+1623,smoking,n.,A2,,,,,,General,,smoking,,smoking n.
+1624,soap,n.,A2,,,,,,General,,soap,,soap n.
+1625,soccer,n.,A2,,,,,,General,,soccer,,soccer n.
+1626,social,adj.,A2,,,,,,General,,social,,social adj.
+1627,society,n.,A2,,,,,,General,,society,,society n.
+1628,sock,n.,A2,,,,,,General,,sock,,sock n.
+1629,soft,adj.,A2,,,,,,General,,soft,,soft adj.
+1630,soldier,n.,A2,,,,,,General,,soldier,,soldier n.
+1631,solution,n.,A2,,,,,,General,,solution,,solution n.
+1632,solve,v.,A2,,,,,,General,,solve,,solve v.
+1633,somewhere,"adv., pron.",A2,,,,,,General,,somewhere,,"somewhere adv., pron."
+1634,sort,n.,A2,,,,,,General,,sort,,sort n.
+1635,source,n.,A2,,,,,,General,,source,,source n.
+1636,speaker,n.,A2,,,,,,General,,speaker,,speaker n.
+1637,specific,adj.,A2,,,,,,General,,specific,,specific adj.
+1638,speech,n.,A2,,,,,,General,,speech,,speech n.
+1639,speed,n.,A2,,,,,,General,,speed,,speed n.
+1640,spider,n.,A2,,,,,,General,,spider,,spider n.
+1641,spoon,n.,A2,,,,,,General,,spoon,,spoon n.
+1642,square,"adj., n.",A2,,,,,,General,,square,,"square adj., n."
+1643,stage,n.,A2,,,,,,General,,stage,,stage n.
+1644,stair,n.,A2,,,,,,General,,stair,,stair n.
+1645,stamp,n.,A2,,,,,,General,,stamp,,stamp n.
+1646,star,v.,A2,,,,,,General,,star,,star v.
+1647,start,n.,A2,,,,,,General,,start,,start n.
+1648,state,n.,A2,,,,,,General,,state,,state n.
+1649,stay,n.,A2,,,,,,General,,stay,,stay n.
+1650,steal,v.,A2,,,,,,General,,steal,,steal v.
+1651,step,n.,A2,,,,,,General,,step,,step n.
+1652,stomach,n.,A2,,,,,,General,,stomach,,stomach n.
+1653,stone,n.,A2,,,,,,General,,stone,,stone n.
+1654,store,n.,A2,,,,,,General,,store,,store n.
+1655,storm,n.,A2,,,,,,General,,storm,,storm n.
+1656,straight,"adv., adj.",A2,,,,,,General,,straight,,"straight adv., adj."
+1657,strange,adj.,A2,,,,,,General,,strange,,strange adj.
+1658,strategy,n.,A2,,,,,,General,,strategy,,strategy n.
+1659,stress,"n., v.",A2,,,,,,General,,stress,,"stress n., v."
+1660,structure,n.,A2,,,,,,General,,structure,,structure n.
+1661,stupid,adj.,A2,,,,,,General,,stupid,,stupid adj.
+1662,succeed,v.,A2,,,,,,General,,succeed,,succeed v.
+1663,successful,adj.,A2,,,,,,General,,successful,,successful adj.
+1664,such,det./pron.,A2,,,,,,General,,such,,such det./pron.
+1665,suddenly,adv.,A2,,,,,,General,,suddenly,,suddenly adv.
+1666,suggest,v.,A2,,,,,,General,,suggest,,suggest v.
+1667,suggestion,n.,A2,,,,,,General,,suggestion,,suggestion n.
+1668,suit,n.,A2,,,,,,General,,suit,,suit n.
+1669,support,"v., n.",A2,,,,,,General,,support,,"support v., n."
+1670,suppose,v.,A2,,,,,,General,,suppose,,suppose v.
+1671,sure,adv.,A2,,,,,,General,,sure,,sure adv.
+1672,surprise,"n., v.",A2,,,,,,General,,surprise,,"surprise n., v."
+1673,surprised,adj.,A2,,,,,,General,,surprised,,surprised adj.
+1674,surprising,adj.,A2,,,,,,General,,surprising,,surprising adj.
+1675,survey,n.,A2,,,,,,General,,survey,,survey n.
+1676,sweet,"adj., n.",A2,,,,,,General,,sweet,,"sweet adj., n."
+1677,symbol,n.,A2,,,,,,General,,symbol,,symbol n.
+1678,system,n.,A2,,,,,,General,,system,,system n.
+1679,tablet,n.,A2,,,,,,General,,tablet,,tablet n.
+1680,talk,n.,A2,,,,,,General,,talk,,talk n.
+1681,target,n.,A2,,,,,,General,,target,,target n.
+1682,task,n.,A2,,,,,,General,,task,,task n.
+1683,taste,"n., v.",A2,,,,,,General,,taste,,"taste n., v."
+1684,teaching,n.,A2,,,,,,General,,teaching,,teaching n.
+1685,technology,n.,A2,,,,,,General,,technology,,technology n.
+1686,teenage,adj.,A2,,,,,,General,,teenage,,teenage adj.
+1687,temperature,n.,A2,,,,,,General,,temperature,,temperature n.
+1688,term,n.,A2,,,,,,General,,term,,term n.
+1689,text,v.,A2,,,,,,General,,text,,text v.
+1690,themselves,pron.,A2,,,,,,General,,themselves,,themselves pron.
+1691,thick,adj.,A2,,,,,,General,,thick,,thick adj.
+1692,thief,n.,A2,,,,,,General,,thief,,thief n.
+1693,thin,adj.,A2,,,,,,General,,thin,,thin adj.
+1694,thinking,n.,A2,,,,,,General,,thinking,,thinking n.
+1695,third,n.,A2,,,,,,General,,third,,third n.
+1696,thought,n.,A2,,,,,,General,,thought,,thought n.
+1697,throw,v.,A2,,,,,,General,,throw,,throw v.
+1698,tidy,"adj., v.",A2,,,,,,General,,tidy,,"tidy adj., v."
+1699,tie,"v., n.",A2,,,,,,General,,tie,,"tie v., n."
+1700,tip,n.,A2,,,,,,General,,tip,,tip n.
+1701,tool,n.,A2,,,,,,General,,tool,,tool n.
+1702,top,"n., adj.",A2,,,,,,General,,top,,"top n., adj."
+1703,touch,v.,A2,,,,,,General,,touch,,touch v.
+1704,tour,n.,A2,,,,,,General,,tour,,tour n.
+1705,tourism,n.,A2,,,,,,General,,tourism,,tourism n.
+1706,towards,prep.,A2,,,,,,General,,towards,,towards prep.
+1707,towel,n.,A2,,,,,,General,,towel,,towel n.
+1708,tower,n.,A2,,,,,,General,,tower,,tower n.
+1709,toy,"n., adj.",A2,,,,,,General,,toy,,"toy n., adj."
+1710,track,n.,A2,,,,,,General,,track,,track n.
+1711,tradition,n.,A2,,,,,,General,,tradition,,tradition n.
+1712,traditional,adj.,A2,,,,,,General,,traditional,,traditional adj.
+1713,train,v.,A2,,,,,,General,,train,,train v.
+1714,trainer,n.,A2,,,,,,General,,trainer,,trainer n.
+1715,training,n.,A2,,,,,,General,,training,,training n.
+1716,transport,n.,A2,,,,,,General,,transport,,transport n.
+1717,traveller,n.,A2,,,,,,General,,traveller,,traveller n.
+1718,trouble,n.,A2,,,,,,General,,trouble,,trouble n.
+1719,truck,n.,A2,,,,,,General,,truck,,truck n.
+1720,twin,"n., adj.",A2,,,,,,General,,twin,,"twin n., adj."
+1721,typical,adj.,A2,,,,,,General,,typical,,typical adj.
+1722,underground,"adj., adv.",A2,,,,,,General,,underground,,"underground adj., adv."
+1723,understanding,n.,A2,,,,,,General,,understanding,,understanding n.
+1724,unfortunately,adv.,A2,,,,,,General,,unfortunately,,unfortunately adv.
+1725,unhappy,adj.,A2,,,,,,General,,unhappy,,unhappy adj.
+1726,uniform,n.,A2,,,,,,General,,uniform,,uniform n.
+1727,unit,n.,A2,,,,,,General,,unit,,unit n.
+1728,united,adj.,A2,,,,,,General,,united,,united adj.
+1729,unusual,adj.,A2,,,,,,General,,unusual,,unusual adj.
+1730,upstairs,adj.,A2,,,,,,General,,upstairs,,upstairs adj.
+1731,use,n.,A2,,,,,,General,,use,,use n.
+1732,used to,modal v.,A2,,,,,,General,,used_to,,used to modal v.
+1733,user,n.,A2,,,,,,General,,user,,user n.
+1734,usual,adj.,A2,,,,,,General,,usual,,usual adj.
+1735,valley,n.,A2,,,,,,General,,valley,,valley n.
+1736,van,n.,A2,,,,,,General,,van,,van n.
+1737,variety,n.,A2,,,,,,General,,variety,,variety n.
+1738,vehicle,n.,A2,,,,,,General,,vehicle,,vehicle n.
+1739,view,n.,A2,,,,,,General,,view,,view n.
+1740,virus,n.,A2,,,,,,General,,virus,,virus n.
+1741,voice,n.,A2,,,,,,General,,voice,,voice n.
+1742,wait,n.,A2,,,,,,General,,wait,,wait n.
+1743,war,n.,A2,,,,,,General,,war,,war n.
+1744,wash,n.,A2,,,,,,General,,wash,,wash n.
+1745,washing,n.,A2,,,,,,General,,washing,,washing n.
+1746,wave,n.,A2,,,,,,General,,wave,,wave n.
+1747,weak,adj.,A2,,,,,,General,,weak,,weak adj.
+1748,web,n.,A2,,,,,,General,,web,,web n.
+1749,wedding,n.,A2,,,,,,General,,wedding,,wedding n.
+1750,weight,n.,A2,,,,,,General,,weight,,weight n.
+1751,welcome,n.,A2,,,,,,General,,welcome,,welcome n.
+1752,wet,adj.,A2,,,,,,General,,wet,,wet adj.
+1753,wheel,n.,A2,,,,,,General,,wheel,,wheel n.
+1754,while,conj.,A2,,,,,,General,,while,,while conj.
+1755,whole,adj.,A2,,,,,,General,,whole,,whole adj.
+1756,whose,det./pron.,A2,,,,,,General,,whose,,whose det./pron.
+1757,wide,adj.,A2,,,,,,General,,wide,,wide adj.
+1758,wild,adj.,A2,,,,,,General,,wild,,wild adj.
+1759,wind,n.,A2,,,,,,General,,wind,sense 1,wind1 n.
+1760,winner,n.,A2,,,,,,General,,winner,,winner n.
+1761,wish,"v., n.",A2,,,,,,General,,wish,,"wish v., n."
+1762,wood,n.,A2,,,,,,General,,wood,,wood n.
+1763,wooden,adj.,A2,,,,,,General,,wooden,,wooden adj.
+1764,working,adj.,A2,,,,,,General,,working,,working adj.
+1765,worried,adj.,A2,,,,,,General,,worried,,worried adj.
+1766,worry,v.,A2,,,,,,General,,worry,,worry v.
+1767,worse,adj.,A2,,,,,,General,,worse,,worse adj.
+1768,worst,adj.,A2,,,,,,General,,worst,,worst adj.
+1769,wow,exclam.,A2,,,,,,General,,wow,,wow exclam.
+1770,yet,adv.,A2,,,,,,General,,yet,,yet adv.
+1771,yours,pron.,A2,,,,,,General,,yours,,yours pron.
+1772,zero,number,A2,,,,,,General,,zero,,zero number
