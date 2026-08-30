@@ -222,6 +222,30 @@ const initialGames = [
     url: "/games/dirtline/index.html",
     image: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=400&h=400&fit=crop",
     gradient: "linear-gradient(135deg, #78350F 0%, #F59E0B 100%)"
+  },
+  {
+    id: "water-ring-toss",
+    title: "🌊 Water Ring Toss 3D",
+    category: "Three.js 3D Engine",
+    url: "/games/water-ring-toss/index.html",
+    image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&h=400&fit=crop",
+    gradient: "linear-gradient(135deg, #0284C7 0%, #38BDF8 100%)"
+  },
+  {
+    id: "celadon",
+    title: "🏺 CELADON: The Long Ash 3D",
+    category: "Three.js 3D Engine",
+    url: "/games/celadon/index.html",
+    image: "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=400&h=400&fit=crop",
+    gradient: "linear-gradient(135deg, #1F6B57 0%, #7FBFA4 100%)"
+  },
+  {
+    id: "crumple",
+    title: "📄 Crumple (Paper Arcade)",
+    category: "Three.js 3D Engine",
+    url: "/games/crumple/index.html",
+    image: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400&h=400&fit=crop",
+    gradient: "linear-gradient(135deg, #57534E 0%, #A8A29E 100%)"
   }
 ];
 

@@ -11,6 +11,20 @@ tags:
 # 📜 Documentation Changelog — webJS
 
 
+## [1.35.0] - 2026-08-30
+
+- **🎮 New 3D WebGL / Three.js Games Suite Integration (G032 - G034)**:
+  - **🌊 Water Ring Toss 3D (G032)**:
+    - ติดตั้งเกมฟิสิกส์ตู้ดันน้ำห่วงยางคลาสสิก Three.js แบบ Standalone Offline 100% ที่ [`public/games/water-ring-toss/`](./../public/games/water-ring-toss/)
+    - จัดเก็บ JavaScript Three.js Bundle และ Canvas UI HUD ควบคุมแรงดันน้ำ
+  - **🏺 CELADON — The Long Ash 3D (G033)**:
+    - ติดตั้งเกมจำลองการปั้นและเผาเครื่องเคลือบดินเผา Three.js ที่ [`public/games/celadon/`](./../public/games/celadon/)
+    - ดึงและเชื่อมต่อชุด Audio SFX คุณภาพสูง (`wheel.ogg`, `kiln.ogg`, `room.ogg`, `water.ogg`, `click.ogg`, `thud.ogg`, `splash.ogg`, `shatter.ogg`, `chime.ogg`) เข้าสู่ระบบ
+  - **📄 Crumple (G034)**:
+    - ติดตั้งเกมฟิสิกส์โยนลูกกระดาษและแอนิเมชันพับกระดาษ WebGL Arcade ที่ [`public/games/crumple/`](./../public/games/crumple/)
+  - ลงทะเบียนแสดงผลทั้ง 3 เกมในหน้าหลัก [`src/app/page.js`](./../src/app/page.js) ในหมวดหมู่ `Three.js 3D Engine`
+  - อัปเดต Version ระบบใน [`public/build.json`](./../public/build.json) เป็น **1.35.0**
+
 ## [1.34.0] - 2026-08-30
 
 - **📚 Oxford 3000 Vocab Master Game Design Document & CSV Pipeline (G031)**:

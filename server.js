@@ -27,7 +27,10 @@ const mimeTypes = {
     '.eot': 'application/vnd.ms-fontobject',
     '.otf': 'font/otf',
     '.glb': 'model/gltf-binary',
-    '.gltf': 'model/gltf+json'
+    '.gltf': 'model/gltf+json',
+    '.ogg': 'audio/ogg',
+    '.mp3': 'audio/mpeg',
+    '.wav': 'audio/wav'
 };
 
 // Create HTTP server
