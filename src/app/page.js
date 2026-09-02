@@ -200,6 +200,14 @@ const initialGames = [
     gradient: "linear-gradient(135deg, #0EA5E9 0%, #F59E0B 100%)"
   },
   {
+    id: "overprint-404",
+    title: "🎯 404 OVERPRINT (Tactical Shooter)",
+    category: "ปริศนา / อาเขต",
+    url: "/games/overprint-404/index.html",
+    image: "/games/overprint-404/thumbnail.jpg",
+    gradient: "linear-gradient(135deg, #EC0A63 0%, #161513 100%)"
+  },
+  {
     id: "starter-kit-racing",
     title: "🏎️ Starter Kit Racing 3D",
     category: "Three.js 3D Engine",
