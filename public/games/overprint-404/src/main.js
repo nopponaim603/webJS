@@ -23,31 +23,47 @@ const inp = game.input;
 inp.mx = window.innerWidth / 2;
 inp.my = window.innerHeight / 2;
 
-const KEYMAP = {
-  KeyW: 'up', ArrowUp: 'up',
-  KeyS: 'down', ArrowDown: 'down',
-  KeyA: 'left', ArrowLeft: 'left',
-  KeyD: 'right', ArrowRight: 'right',
-};
+function resolveKeyAction(e) {
+  if (e.code === 'KeyW' || e.code === 'ArrowUp') return 'up';
+  if (e.code === 'KeyS' || e.code === 'ArrowDown') return 'down';
+  if (e.code === 'KeyA' || e.code === 'ArrowLeft') return 'left';
+  if (e.code === 'KeyD' || e.code === 'ArrowRight') return 'right';
+
+  const k = e.key ? e.key.toLowerCase() : '';
+  if (k === 'w' || k === 'arrowup' || k === 'ไ' || k === '"') return 'up';
+  if (k === 's' || k === 'arrowdown' || k === 'ห' || k === 'ฆ') return 'down';
+  if (k === 'a' || k === 'arrowleft' || k === 'ฟ' || k === 'ฤ') return 'left';
+  if (k === 'd' || k === 'arrowright' || k === 'ก' || k === 'ฏ') return 'right';
+
+  return null;
+}
 
 addEventListener('keydown', (e) => {
-  if (KEYMAP[e.code]) { inp[KEYMAP[e.code]] = true; e.preventDefault(); }
-  if (e.code === 'Space') { inp.dash = true; e.preventDefault(); }
-  if (e.code === 'KeyQ') inp.throwIt = true;
+  const action = resolveKeyAction(e);
+  if (action) {
+    inp[action] = true;
+    inp.analog = false;
+    e.preventDefault();
+  }
+  if (e.code === 'Space' || e.key === ' ') { inp.dash = true; e.preventDefault(); }
+  if (e.code === 'KeyQ' || e.key?.toLowerCase() === 'q' || e.key === 'ๆ') inp.throwIt = true;
   if (e.code === 'Backspace' && game.state === 'play') { e.preventDefault(); game.restartFloor(); }
-  if (e.code === 'KeyM') { initAudio(); setMuted(!isMuted()); }
+  if ((e.code === 'KeyM' || e.key?.toLowerCase() === 'm') && !e.ctrlKey && !e.metaKey) { initAudio(); setMuted(!isMuted()); }
   if (e.code === 'Enter' && game.state === 'title') game.begin();
 });
 
 addEventListener('keyup', (e) => {
-  if (KEYMAP[e.code]) inp[KEYMAP[e.code]] = false;
+  const action = resolveKeyAction(e);
+  if (action) inp[action] = false;
 });
 
 addEventListener('mousemove', (e) => { inp.mx = e.clientX; inp.my = e.clientY; });
 
 canvas.addEventListener('mousedown', (e) => {
+  window.focus();
+  canvas.focus();
   e.preventDefault();
-  if (touch.engaged) return;
+  if (touch.engaged && touch.move) return;
   if (hitTab(e.clientX, e.clientY)) return;
   if (game.state === 'title' || game.state === 'won') { game.begin(); return; }
   if (e.button === 0) inp.fire = true;
@@ -55,11 +71,14 @@ canvas.addEventListener('mousedown', (e) => {
 });
 addEventListener('mouseup', (e) => { if (e.button === 0) inp.fire = false; });
 canvas.addEventListener('pointerdown', (e) => {
+  window.focus();
+  canvas.focus();
   if (e.pointerType !== 'touch') return;
   if (hitTab(e.clientX, e.clientY)) { e.preventDefault(); return; }
   if (game.state === 'title' || game.state === 'won') { e.preventDefault(); game.begin(); }
 }, { passive: false });
 canvas.addEventListener('contextmenu', (e) => e.preventDefault());
+window.addEventListener('click', () => { window.focus(); canvas.focus(); });
 
 // keep the player from sprinting off when the tab loses focus
 addEventListener('blur', () => {

@@ -129,8 +129,10 @@ export function createTouch(canvas, game, renderer) {
         inp.axisX = Math.cos(a) * mag;
         inp.axisY = Math.sin(a) * mag;
       } else { inp.analog = true; inp.axisX = 0; inp.axisY = 0; }
-    } else if (t.engaged) {
-      inp.analog = true; inp.axisX = 0; inp.axisY = 0;
+    } else {
+      inp.analog = false;
+      inp.axisX = 0;
+      inp.axisY = 0;
     }
 
     if (t.aim) {
@@ -144,8 +146,7 @@ export function createTouch(canvas, game, renderer) {
     } else if (t.engaged) {
       t.firing = false;
       inp.fire = false;
-      inp.aimAngle = t.aimAngle;
-      inp.hasAim = t.hasAim;
+      inp.hasAim = false;
     }
   };
 

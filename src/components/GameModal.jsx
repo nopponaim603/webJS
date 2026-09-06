@@ -6,6 +6,7 @@ import buildInfo from '../../public/build.json';
 export default function GameModal({ game, onClose }) {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const modalRef = useRef(null);
+  const iframeRef = useRef(null);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -126,10 +127,17 @@ export default function GameModal({ game, onClose }) {
         {/* Modal Content - Iframe (Stretches to fill vertical height) */}
         <div style={{ flex: 1, width: '100%', background: '#000', position: 'relative' }}>
           <iframe 
+            ref={iframeRef}
             src={game.url} 
             title={game.title}
             style={{ width: '100%', height: '100%', border: 'none' }}
             allow="fullscreen; autoplay; gamepad; clipboard-write; clipboard-read"
+            onLoad={() => {
+              try {
+                iframeRef.current?.focus();
+                iframeRef.current?.contentWindow?.focus();
+              } catch (err) {}
+            }}
           />
         </div>
 
