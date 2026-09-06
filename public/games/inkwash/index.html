@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/sdk/v0.js" defer data-aigameshare-sdk></script><style data-aigameshare-play-guard>
+html,
+body {
+  min-height: 100%;
+  overscroll-behavior: none;
+  -webkit-text-size-adjust: 100%;
+  touch-action: manipulation;
+}
+
+html,
+body,
+body * {
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-drag: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
+
+input,
+textarea,
+[contenteditable="true"] {
+  -webkit-touch-callout: default !important;
+  -webkit-user-select: text !important;
+  user-select: text !important;
+}
+</style>
+<script data-aigameshare-play-guard>
+(() => {
+  const createMemoryStorage = () => {
+    const store = new Map();
+
+    return {
+      get length() {
+        return store.size;
+      },
+      clear() {
+        store.clear();
+      },
+      getItem(key) {
+        const normalizedKey = String(key);
+        return store.has(normalizedKey) ? store.get(normalizedKey) : null;
+      },
+      key(index) {
+        return Array.from(store.keys())[Number(index)] ?? null;
+      },
+      removeItem(key) {
+        store.delete(String(key));
+      },
+      setItem(key, value) {
+        store.set(String(key), String(value));
+      },
+    };
+  };
+  const ensureSandboxStorage = (name) => {
+    try {
+      window[name].getItem("__aigameshare_probe__");
+    } catch {
+      try {
+        Object.defineProperty(window, name, {
+          value: createMemoryStorage(),
+          configurable: true,
+        });
+      } catch {
+        // Some browsers may still refuse overrides. Game code should handle that case.
+      }
+    }
+  };
+  const isEditable = (target) =>
+    target instanceof Element &&
+    Boolean(target.closest('input, textarea, [contenteditable="true"]'));
+  const blockBrowserMenu = (event) => {
+    if (!isEditable(event.target)) {
+      event.preventDefault();
+    }
+  };
+
+  // Native modals never render here (the sandbox has no allow-modals) and
+  // confirm() silently returns false, which turns "are you sure?" gates into
+  // dead buttons. Auto-confirm instead and point the developer at the fix.
+  const shimModal = (name, result, note) => {
+    try {
+      Object.defineProperty(window, name, {
+        value: (message) => {
+          console.warn(
+            "[AIGameShare] window." + name + "() is blocked by the iframe sandbox — " + note +
+            " Build an in-game dialog instead.",
+            message ?? "",
+          );
+          return result;
+        },
+        configurable: true,
+        writable: true,
+      });
+    } catch {
+      // Some browsers may refuse the override; native (blocked) behavior remains.
+    }
+  };
+  shimModal("confirm", true, "auto-confirming (returns true).");
+  shimModal("alert", undefined, "the message is not shown.");
+  shimModal("prompt", null, "returning null.");
+
+  ensureSandboxStorage("localStorage");
+  ensureSandboxStorage("sessionStorage");
+  document.addEventListener("contextmenu", blockBrowserMenu, { capture: true });
+  document.addEventListener("selectstart", blockBrowserMenu, { capture: true });
+  document.addEventListener("dragstart", blockBrowserMenu, { capture: true });
+  document.addEventListener("gesturestart", blockBrowserMenu, { capture: true });
+})();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>INKWASH 晕染</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="stage">
+  <canvas id="game"></canvas>
+
+  <!-- ============ TITLE ============ -->
+  <section id="screen-title" class="screen active">
+    <div class="titleCard paperCard">
+      <h1 id="titleName">INKWASH</h1>
+      <div id="titleZh">晕染</div>
+      <p id="tagline"></p>
+      <input id="nickname" maxlength="14" autocomplete="off" spellcheck="false">
+      <button id="btnPlay" class="big primary"></button>
+      <button id="btnFriends" class="big"></button>
+      <div class="titleFoot">
+        <button id="btnSkins" class="mini"></button>
+        <button id="btnHow" class="mini"></button>
+        <button id="btnLang" class="mini">中/EN</button>
+      </div>
+      <div id="titleStats" class="tiny"></div>
+    </div>
+  </section>
+
+  <!-- ============ FRIENDS (invite / join) ============ -->
+  <section id="screen-friends" class="screen">
+    <div class="panel paperCard">
+      <h2 id="frTitle"></h2>
+      <button id="btnHost" class="big primary"></button>
+      <div class="orRow" id="frOr"></div>
+      <input id="joinCode" maxlength="8" autocomplete="off" autocapitalize="characters" spellcheck="false">
+      <button id="btnJoinGo" class="big"></button>
+      <div id="frStatus" class="tiny"></div>
+      <button id="btnFrBack" class="mini"></button>
+    </div>
+  </section>
+
+  <!-- ============ ROOM LOBBY (friends mode) ============ -->
+  <section id="screen-room" class="screen">
+    <div class="panel paperCard">
+      <h2><span id="roomLabel"></span> <b id="roomCode">····</b></h2>
+      <p id="shareHint" class="tiny"></p>
+      <button id="btnCopyLink" class="big primary"></button>
+      <div id="roomSeats" class="seatGrid"></div>
+      <button id="btnRoomGo" class="big go"></button>
+      <div id="roomStatus" class="tiny"></div>
+      <button id="btnRoomBack" class="mini"></button>
+    </div>
+  </section>
+
+  <!-- ============ SKINS ============ -->
+  <section id="screen-skins" class="screen">
+    <div class="panel paperCard">
+      <h2 id="skTitle"></h2>
+      <div id="skinGrid" class="skinGrid"></div>
+      <button id="btnSkBack" class="mini"></button>
+    </div>
+  </section>
+
+  <!-- ============ HOW TO ============ -->
+  <section id="screen-how" class="screen">
+    <div class="panel paperCard">
+      <h2 id="howTitle"></h2>
+      <ol id="howList"></ol>
+      <button id="btnHowBack" class="mini"></button>
+    </div>
+  </section>
+
+  <!-- ============ HUD ============ -->
+  <div id="hud" class="hidden">
+    <div id="hudTop">
+      <div id="hudTimer" class="paperChip">3:00</div>
+      <div id="hudBoard" class="paperChip"></div>
+      <canvas id="minimap" width="140" height="140"></canvas>
+    </div>
+    <div id="announce"></div>
+    <div id="tutor"></div>
+    <div id="netBadge" class="paperChip hidden"></div>
+    <div id="spectate" class="paperChip hidden"></div>
+    <div id="frenzyBanner" class="hidden"></div>
+  </div>
+
+  <!-- ============ PODIUM ============ -->
+  <section id="screen-podium" class="screen">
+    <div class="panel paperCard podium">
+      <div id="podiumSplash"></div>
+      <h2 id="podTitle"></h2>
+      <div id="podiumList"></div>
+      <div id="podYou" class="tiny"></div>
+      <div id="podNext" class="tiny"></div>
+    </div>
+  </section>
+</div>
+<script type="module" src="src/main.js"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"370617c9bf4a4d349b8523b3167bb53f","r":1,"spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>
