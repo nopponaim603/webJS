@@ -67,8 +67,10 @@ tags:
 | G041 | `grapple-knight-storm-siege` | ⚔️ Grapple Knight: Storm Siege | Canvas 2D / Boss Rush | `public/games/grapple-knight-storm-siege/` |
 | G042 | `ink-warden`             | 🖌️ Ink Warden 墨守 (Calligraphy Defense) | WebGL Fluid Dynamics / Canvas | `public/games/ink-warden/`             |
 | G043 | `jelly-baby`              | 👶 Jelly Baby (WebGPU 3D Soft-Body) | WebGPU / Three.js r185 / WASM | `public/games/jelly-baby/`             |
+| G044 | `inkwash`                 | 🎨 INKWASH 晕染 (Territory io Battle) | Canvas 2D / Living Ink / IO | `public/games/inkwash/`                |
 
 ### 🎮 Active Released Game Specifications (`docs/gdd/games/`)
+- [🎨 INKWASH 晕染: Territory io Battle (G044)](./gdd/games/inkwash/spec.md)
 - [👶 Jelly Baby: WebGPU 3D Soft-Body Physics (G043)](./gdd/games/jelly-baby/spec.md)
 - [🪙 Coin Pusher 3D: Copper Cascade (G039)](./gdd/games/coin-pusher-3d-copper-cascade/spec.md)
 - [🐉 Dragon Roguelite: Skywake (G040)](./gdd/games/dragon-roguelite-skywake/spec.md)

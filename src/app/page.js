@@ -334,6 +334,14 @@ const initialGames = [
     url: "/games/jelly-baby/index.html",
     image: "/games/jelly-baby/thumbnail.png",
     gradient: "linear-gradient(135deg, #D97706 0%, #FBBF24 100%)"
+  },
+  {
+    id: "inkwash",
+    title: "🎨 INKWASH 晕染 (Territory io Battle)",
+    category: "Phaser 2D Engine",
+    url: "/games/inkwash/index.html",
+    image: "/games/inkwash/thumbnail.png",
+    gradient: "linear-gradient(135deg, #1E1B4B 0%, #047857 100%)"
   }
 ];
 
