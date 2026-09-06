@@ -65,8 +65,15 @@ const server = http.createServer((req, res) => {
                             }
                         });
                     } else {
-                        res.writeHead(200, { 'Content-Type': contentType });
-                        res.end(contentPublic, 'utf-8');
+                        const headers = { 'Content-Type': contentType };
+                        if (publicFilePath.endsWith('.unityweb')) {
+                            headers['Content-Encoding'] = 'gzip';
+                            if (publicFilePath.endsWith('.wasm.unityweb')) headers['Content-Type'] = 'application/wasm';
+                            else if (publicFilePath.endsWith('.framework.js.unityweb')) headers['Content-Type'] = 'application/javascript';
+                            else if (publicFilePath.endsWith('.data.unityweb')) headers['Content-Type'] = 'application/octet-stream';
+                        }
+                        res.writeHead(200, headers);
+                        res.end(contentPublic);
                     }
                 });
             } else {
@@ -76,8 +83,15 @@ const server = http.createServer((req, res) => {
             }
         } else {
             // Success
-            res.writeHead(200, { 'Content-Type': contentType });
-            res.end(content, 'utf-8');
+            const headers = { 'Content-Type': contentType };
+            if (filePath.endsWith('.unityweb')) {
+                headers['Content-Encoding'] = 'gzip';
+                if (filePath.endsWith('.wasm.unityweb')) headers['Content-Type'] = 'application/wasm';
+                else if (filePath.endsWith('.framework.js.unityweb')) headers['Content-Type'] = 'application/javascript';
+                else if (filePath.endsWith('.data.unityweb')) headers['Content-Type'] = 'application/octet-stream';
+            }
+            res.writeHead(200, headers);
+            res.end(content);
         }
     });
 });

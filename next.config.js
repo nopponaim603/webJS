@@ -21,6 +21,27 @@ const nextConfig = {
           { key: 'Content-Type', value: 'model/gltf-binary' },
           { key: 'Access-Control-Allow-Origin', value: '*' }
         ]
+      },
+      {
+        source: '/:path*.wasm.unityweb',
+        headers: [
+          { key: 'Content-Type', value: 'application/wasm' },
+          { key: 'Content-Encoding', value: 'gzip' }
+        ]
+      },
+      {
+        source: '/:path*.framework.js.unityweb',
+        headers: [
+          { key: 'Content-Type', value: 'application/javascript' },
+          { key: 'Content-Encoding', value: 'gzip' }
+        ]
+      },
+      {
+        source: '/:path*.data.unityweb',
+        headers: [
+          { key: 'Content-Type', value: 'application/octet-stream' },
+          { key: 'Content-Encoding', value: 'gzip' }
+        ]
       }
     ];
   }
