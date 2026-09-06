@@ -1,0 +1,636 @@
+/* ============================================================
+   Ink Warden 墨守 — paper, ink, one drop of vermilion
+   ============================================================ */
+
+:root {
+  --paper: #e9e2d0;
+  --paper-deep: #ded5bf;
+  --ink: #221c15;
+  --ink-faint: rgba(34, 28, 21, 0.55);
+  --ink-ghost: rgba(34, 28, 21, 0.3);
+  --vermilion: #b5402c;
+  --vermilion-deep: #8e2f1f;
+  --font-kai: "Kaiti SC", "STKaiti", "KaiTi", "BiauKai", "DFKai-SB", "TW-Kai",
+    "Noto Serif SC", "Songti SC", serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #2b251c;
+  font-family: var(--font-kai);
+  color: var(--ink);
+  overscroll-behavior: none;
+}
+
+#shell {
+  position: fixed;
+  inset: 0;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#paperCanvas,
+#bgCanvas,
+#fluidCanvas,
+#gameCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#fluidCanvas {
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+#gameCanvas {
+  cursor: crosshair;
+}
+
+/* paper grain + breathing vignette */
+#grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='180' height='180' filter='url(%23n)' opacity='0.16'/></svg>");
+  mix-blend-mode: multiply;
+  opacity: 0.5;
+}
+
+#grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 105% 105% at 50% 46%,
+    transparent 58%,
+    rgba(58, 46, 30, 0.14) 86%,
+    rgba(44, 34, 20, 0.3) 100%
+  );
+}
+
+/* ============================== HUD ============================== */
+
+#hud {
+  position: absolute;
+  inset: 0 0 auto 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: calc(10px + env(safe-area-inset-top)) calc(12px + env(safe-area-inset-right))
+    0 calc(12px + env(safe-area-inset-left));
+  pointer-events: none;
+}
+
+#titleBlock {
+  writing-mode: vertical-rl;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin-top: 2px;
+}
+
+#titleText {
+  font-size: clamp(26px, 4.6vmin, 40px);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--ink);
+  text-shadow: 0 0 12px rgba(34, 28, 21, 0.12);
+}
+
+#chapterLabel {
+  font-size: clamp(12px, 2.2vmin, 16px);
+  letter-spacing: 0.3em;
+  color: var(--ink-faint);
+  padding-top: 6px;
+}
+
+#scoreBlock {
+  text-align: center;
+  margin-top: 4px;
+  min-width: 90px;
+}
+
+#scoreLabel {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.6em;
+  text-indent: 0.6em;
+  color: var(--ink-faint);
+}
+
+#scoreValue {
+  display: block;
+  font-size: clamp(22px, 4vmin, 32px);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+#scoreValue.bump {
+  animation: scoreBump 0.3s ease-out;
+}
+
+@keyframes scoreBump {
+  35% {
+    transform: scale(1.18);
+  }
+}
+
+#hudButtons {
+  display: flex;
+  gap: 10px;
+  pointer-events: auto;
+}
+
+/* hand-carved seal buttons */
+.seal-btn {
+  width: 46px;
+  height: 46px;
+  border: none;
+  border-radius: 46% 54% 51% 49% / 52% 47% 53% 48%;
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255, 235, 215, 0.32), transparent 55%),
+    linear-gradient(160deg, #c14a32, var(--vermilion-deep));
+  color: #f5ecd8;
+  font-family: var(--font-kai);
+  font-size: 21px;
+  font-weight: 700;
+  box-shadow:
+    inset 0 0 0 2px rgba(72, 18, 8, 0.4),
+    inset 0 0 9px rgba(60, 12, 4, 0.45),
+    0 2px 6px rgba(40, 28, 14, 0.35);
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+
+.seal-btn:active {
+  transform: scale(0.9) rotate(-3deg);
+}
+
+.seal-btn.off {
+  filter: grayscale(0.85) brightness(1.15);
+  opacity: 0.6;
+}
+
+/* ============================== inkstone ============================== */
+
+#inkwell {
+  position: absolute;
+  left: calc(10px + env(safe-area-inset-left));
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  pointer-events: none;
+}
+
+#inkFrame {
+  width: 13px;
+  height: clamp(110px, 22vmin, 170px);
+  border-radius: 8px 7px 9px 7px;
+  background: linear-gradient(170deg, #d8cfb6, #c2b89c);
+  border: 2px solid #38312a;
+  box-shadow:
+    inset 0 2px 4px rgba(60, 48, 30, 0.35),
+    0 1px 3px rgba(40, 30, 16, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  padding: 2px;
+}
+
+#inkFill {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  background: linear-gradient(180deg, #4d4438 0%, #14100c 22%);
+  transition: height 0.18s ease-out;
+}
+
+#inkFill.dry {
+  background: linear-gradient(180deg, #8c7f6a 0%, #5c5244 60%);
+  animation: dryPulse 0.9s ease-in-out infinite;
+}
+
+@keyframes dryPulse {
+  50% {
+    opacity: 0.45;
+  }
+}
+
+#inkGlyph {
+  font-size: 15px;
+  color: var(--ink-faint);
+  letter-spacing: 0;
+}
+
+/* ============================== combo ============================== */
+
+#comboTag {
+  position: absolute;
+  right: calc(12px + env(safe-area-inset-right));
+  top: 26%;
+  writing-mode: vertical-rl;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+#comboTag.show {
+  opacity: 1;
+}
+
+#comboWord {
+  font-style: normal;
+  font-size: 13px;
+  letter-spacing: 0.4em;
+  color: var(--ink-faint);
+}
+
+#comboValue {
+  font-size: clamp(20px, 3.6vmin, 30px);
+  color: var(--vermilion);
+  text-shadow: 0 0 10px rgba(181, 64, 44, 0.25);
+}
+
+#comboValue.bump {
+  animation: scoreBump 0.25s ease-out;
+}
+
+/* ============================== banner ============================== */
+
+#banner {
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(26px, 6vmin, 52px);
+  font-weight: 700;
+  letter-spacing: 0.5em;
+  text-indent: 0.5em;
+  color: var(--ink);
+  white-space: nowrap;
+  max-width: 98vw;
+  opacity: 0;
+  pointer-events: none;
+  text-shadow: 0 0 18px rgba(34, 28, 21, 0.15);
+}
+
+#banner.show {
+  animation: bannerIn 2.6s ease forwards;
+}
+
+#banner.grave {
+  color: var(--vermilion-deep);
+}
+
+@keyframes bannerIn {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.5);
+    filter: blur(6px);
+  }
+  18% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    filter: blur(0);
+  }
+  78% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -52%);
+  }
+}
+
+/* ============================== overlays ============================== */
+
+#overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(226, 217, 196, 0.42);
+  backdrop-filter: blur(5px) saturate(0.9);
+  -webkit-backdrop-filter: blur(5px) saturate(0.9);
+  z-index: 10;
+}
+
+#overlay[hidden] {
+  display: none;
+}
+
+.panel {
+  background:
+    linear-gradient(173deg, rgba(255, 252, 240, 0.6), rgba(228, 218, 194, 0.4)),
+    var(--paper);
+  border: 1px solid rgba(82, 68, 44, 0.35);
+  border-radius: 3px 6px 4px 7px;
+  box-shadow:
+    0 18px 50px rgba(40, 30, 14, 0.35),
+    inset 0 0 40px rgba(150, 132, 96, 0.12);
+  padding: clamp(18px, 4vmin, 34px);
+  max-width: min(480px, 94vw);
+  width: 100%;
+  max-height: 94vh;
+  overflow-y: auto;
+  text-align: center;
+  transform: rotate(-0.4deg);
+  animation: panelIn 0.45s cubic-bezier(0.2, 1.4, 0.4, 1);
+}
+
+.panel[hidden] {
+  display: none;
+}
+
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: rotate(-0.4deg) translateY(26px) scale(0.96);
+  }
+}
+
+.panel h2 {
+  font-size: clamp(24px, 4.6vmin, 34px);
+  font-weight: 700;
+  letter-spacing: 0.5em;
+  text-indent: 0.5em;
+  margin-bottom: 6px;
+}
+
+.panel h2::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 3px;
+  margin: 10px auto 0;
+  background: var(--vermilion);
+  border-radius: 2px 5px 3px 6px;
+  opacity: 0.8;
+}
+
+#choiceSub,
+#pauseHint,
+#overNote {
+  font-size: 14px;
+  color: var(--ink-faint);
+  letter-spacing: 0.14em;
+  margin: 10px 0 16px;
+}
+
+/* —— 字帖 cards —— */
+
+#choiceCards {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.manual {
+  flex: 1 1 0;
+  min-width: 0;
+  border: 1px solid rgba(82, 68, 44, 0.4);
+  border-radius: 2px 5px 3px 5px;
+  background: linear-gradient(168deg, #f4eddb, #e3d9c0);
+  font-family: var(--font-kai);
+  color: var(--ink);
+  cursor: pointer;
+  padding: 14px 8px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  box-shadow: 0 3px 10px rgba(50, 38, 18, 0.18);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.manual:hover,
+.manual:focus-visible {
+  transform: translateY(-5px) rotate(0.6deg);
+  box-shadow: 0 10px 22px rgba(50, 38, 18, 0.3);
+  outline: none;
+}
+
+.manual:active {
+  transform: translateY(-1px) scale(0.97);
+}
+
+.manual::after {
+  content: "";
+  position: absolute;
+  right: 7px;
+  bottom: 7px;
+  width: 11px;
+  height: 11px;
+  background: var(--vermilion);
+  border-radius: 38% 62% 55% 45%;
+  opacity: 0.85;
+}
+
+.manual .m-name {
+  writing-mode: vertical-rl;
+  font-size: clamp(17px, 3.4vmin, 23px);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  min-height: 86px;
+}
+
+.manual .m-desc {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--ink-faint);
+  letter-spacing: 0.05em;
+}
+
+/* —— spell cheat sheet (pause) —— */
+
+#spellSheet {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin: 4px auto 18px;
+  max-width: 340px;
+  text-align: left;
+}
+
+.spell-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 7px 12px;
+  border: 1px solid rgba(82, 68, 44, 0.28);
+  border-radius: 2px 6px 3px 6px;
+  background: rgba(255, 252, 240, 0.45);
+}
+
+.spell-row i {
+  font-style: normal;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--vermilion);
+  width: 28px;
+  text-align: center;
+  flex: none;
+}
+
+.spell-row b {
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  flex: none;
+  min-width: 3.2em;
+}
+
+.spell-row span {
+  font-size: 12px;
+  color: var(--ink-faint);
+  line-height: 1.4;
+}
+
+/* —— brush buttons —— */
+
+.panel-actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin-top: 6px;
+}
+
+.brush-btn {
+  font-family: var(--font-kai);
+  font-size: clamp(16px, 3vmin, 20px);
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;
+  padding: 10px 22px;
+  color: #f5ecd8;
+  background: linear-gradient(160deg, #c14a32, var(--vermilion-deep));
+  border: none;
+  border-radius: 4px 14px 6px 12px;
+  box-shadow:
+    inset 0 0 0 2px rgba(72, 18, 8, 0.35),
+    0 3px 9px rgba(40, 28, 14, 0.3);
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+
+.brush-btn:active {
+  transform: scale(0.94);
+}
+
+.brush-btn.ghost {
+  background: transparent;
+  color: var(--ink);
+  box-shadow: inset 0 0 0 2px rgba(34, 28, 21, 0.5);
+}
+
+/* —— relic (遗墨) —— */
+
+#relicCanvas,
+#relicImg {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: 1px solid rgba(82, 68, 44, 0.45);
+  border-radius: 2px;
+  background: var(--paper);
+  box-shadow: inset 0 0 26px rgba(140, 120, 84, 0.18);
+  margin: 6px 0 12px;
+}
+
+#overStats {
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+#overStats .stat {
+  text-align: center;
+}
+
+#overStats .stat span {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.35em;
+  text-indent: 0.35em;
+  color: var(--ink-faint);
+}
+
+#overStats .stat strong {
+  font-size: clamp(20px, 4vmin, 30px);
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+#overStats .stat strong.red {
+  color: var(--vermilion);
+}
+
+/* ============================== small screens ============================== */
+
+@media (max-width: 560px) {
+  #choiceCards {
+    flex-direction: column;
+  }
+  .manual {
+    flex-direction: row;
+    justify-content: flex-start;
+    text-align: left;
+    padding: 10px 26px 10px 12px;
+  }
+  .manual .m-name {
+    writing-mode: horizontal-tb;
+    min-height: 0;
+    letter-spacing: 0.14em;
+  }
+  .manual .m-desc {
+    flex: 1;
+  }
+  #scoreBlock {
+    min-width: 64px;
+  }
+}
+
+@media (max-height: 480px) {
+  #inkwell {
+    top: 58%;
+  }
+  #titleText {
+    font-size: 22px;
+  }
+  #chapterLabel {
+    display: none;
+  }
+  .panel {
+    max-height: 96vh;
+  }
+  #relicCanvas {
+    aspect-ratio: 16 / 7;
+  }
+}

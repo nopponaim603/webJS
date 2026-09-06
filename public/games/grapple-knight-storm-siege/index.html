@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head><style data-aigameshare-play-guard>
+html,
+body {
+  min-height: 100%;
+  overscroll-behavior: none;
+  -webkit-text-size-adjust: 100%;
+  touch-action: manipulation;
+}
+
+html,
+body,
+body * {
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-drag: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
+
+input,
+textarea,
+[contenteditable="true"] {
+  -webkit-touch-callout: default !important;
+  -webkit-user-select: text !important;
+  user-select: text !important;
+}
+</style>
+<script data-aigameshare-play-guard>
+(() => {
+  const createMemoryStorage = () => {
+    const store = new Map();
+
+    return {
+      get length() {
+        return store.size;
+      },
+      clear() {
+        store.clear();
+      },
+      getItem(key) {
+        const normalizedKey = String(key);
+        return store.has(normalizedKey) ? store.get(normalizedKey) : null;
+      },
+      key(index) {
+        return Array.from(store.keys())[Number(index)] ?? null;
+      },
+      removeItem(key) {
+        store.delete(String(key));
+      },
+      setItem(key, value) {
+        store.set(String(key), String(value));
+      },
+    };
+  };
+  const ensureSandboxStorage = (name) => {
+    try {
+      window[name].getItem("__aigameshare_probe__");
+    } catch {
+      try {
+        Object.defineProperty(window, name, {
+          value: createMemoryStorage(),
+          configurable: true,
+        });
+      } catch {
+        // Some browsers may still refuse overrides. Game code should handle that case.
+      }
+    }
+  };
+  const isEditable = (target) =>
+    target instanceof Element &&
+    Boolean(target.closest('input, textarea, [contenteditable="true"]'));
+  const blockBrowserMenu = (event) => {
+    if (!isEditable(event.target)) {
+      event.preventDefault();
+    }
+  };
+
+  // Native modals never render here (the sandbox has no allow-modals) and
+  // confirm() silently returns false, which turns "are you sure?" gates into
+  // dead buttons. Auto-confirm instead and point the developer at the fix.
+  const shimModal = (name, result, note) => {
+    try {
+      Object.defineProperty(window, name, {
+        value: (message) => {
+          console.warn(
+            "[AIGameShare] window." + name + "() is blocked by the iframe sandbox — " + note +
+            " Build an in-game dialog instead.",
+            message ?? "",
+          );
+          return result;
+        },
+        configurable: true,
+        writable: true,
+      });
+    } catch {
+      // Some browsers may refuse the override; native (blocked) behavior remains.
+    }
+  };
+  shimModal("confirm", true, "auto-confirming (returns true).");
+  shimModal("alert", undefined, "the message is not shown.");
+  shimModal("prompt", null, "returning null.");
+
+  ensureSandboxStorage("localStorage");
+  ensureSandboxStorage("sessionStorage");
+  document.addEventListener("contextmenu", blockBrowserMenu, { capture: true });
+  document.addEventListener("selectstart", blockBrowserMenu, { capture: true });
+  document.addEventListener("dragstart", blockBrowserMenu, { capture: true });
+  document.addEventListener("gesturestart", blockBrowserMenu, { capture: true });
+})();
+</script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#173f4b"><title>Grapple Knight: Storm Siege</title>
+<link rel="icon" href="data:,"><link rel="stylesheet" href="./releases/1.1.0/styles.css">
+</head>
+<body>
+<main id="game" aria-label="Grapple Knight: Storm Siege">
+<canvas id="scene" aria-label="Battle arena. Hold to aim at a golden weakpoint, release to grapple." tabindex="0"></canvas>
+<div id="hud">
+<header class="topbar"><div class="wordmark"><span>Grapple Knight</span><small id="subtitle">Storm Siege</small></div><nav aria-label="Game settings"><button id="language" title="Change language" aria-label="Change language">中文</button><button id="sound" title="Toggle sound" aria-label="Mute sound"></button><button id="pause" title="Pause" aria-label="Pause game"></button></nav></header>
+<div class="boss-hud"><div class="boss-caption"><span id="act">I / VI</span><span id="boss-name">The Bellkeeper</span><span id="boss-status">Break the seals</span></div><div class="boss-track"><div id="boss-fill"></div></div><div id="seals" aria-label="Boss armor seals"></div></div>
+<div id="callout" aria-live="polite"></div><div id="mechanic-tip"></div>
+<div id="tutorial"><span class="hook-symbol">↗</span><strong id="tutorial-title">Hold. Aim. Let go.</strong><span id="tutorial-copy">Hook the gold weakpoints.<br>Break the armor. Strike the heart.</span><small id="tutorial-extra">Hold to slow time · Tap for a quick strike</small></div>
+<div class="bottom-hud"><div class="vitals"><div id="hearts" aria-label="Hull"></div><div class="score-line"><span id="score">0</span><span id="score-label">score</span></div></div><div class="combo-block"><strong id="combo"></strong><span id="combo-label"></span></div><button id="burst" class="burst" aria-label="Storm burst" disabled><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M27 6 13 27h11l-3 15 15-23H25Z"/></svg><span id="burst-text">Storm burst</span><small id="burst-percent">0%</small></button></div>
+<div id="controls-line">Hold to aim · Release to grapple · WASD to drift · X to burst</div>
+</div>
+<section id="pause-panel" class="overlay" hidden aria-label="Paused"><div class="pause-card"><div class="crest" aria-hidden="true">✦</div><h1 id="pause-title">Catch your breath.</h1><p id="pause-copy">The sky can wait.</p><button id="resume" class="primary">Return to the sky</button><button id="restart-pause" class="text-button">Restart the journey</button><p id="pause-controls" class="fine-print">Hold and release to grapple. WASD / arrows to drift.<br>Space to hook · X / Shift to burst · P / Esc to pause.</p></div></section>
+<section id="upgrade-panel" class="overlay" hidden aria-label="Choose a relic"><div class="upgrade-content"><span id="upgrade-kicker" class="chapter-line">The Bellkeeper has fallen</span><h1 id="upgrade-title">Take a piece of the storm.</h1><p id="upgrade-copy">Choose one relic. Carry its power into the next battle.</p><div id="journey-upgrade" class="journey"></div><div class="next-stop"><strong id="next-chapter"></strong><span id="next-mechanic"></span></div><div id="upgrade-cards"></div><small id="repair-copy">Hull repaired +2</small></div></section>
+<section id="end-panel" class="overlay" hidden aria-label="Journey complete"><div class="end-content"><div id="end-emblem" class="end-emblem">✦</div><span id="end-kicker" class="chapter-line">Six giants. One unbroken thread.</span><h1 id="end-title">The sky is yours.</h1><p id="end-copy">Even the greatest storm begins to quiet.</p><div class="final-score"><span id="final-score">0</span><div><strong id="rank">S</strong><small id="rank-label">rank</small></div></div><div id="end-stats"></div><div id="journey-end" class="journey"></div><div id="relic-summary"></div><button id="replay" class="primary">Ride the storm again</button><small id="best-score"></small></div></section>
+<div id="fatal" hidden><p>The game could not load. Please reload to try again.</p></div>
+</main>
+<script type="module" src="./releases/1.1.0/main.js"></script>
+
+</body>
+</html>

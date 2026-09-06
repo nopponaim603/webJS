@@ -11,6 +11,23 @@ tags:
 # 📜 Documentation Changelog — webJS
 
 
+## [1.39.0] - 2026-09-06
+
+- **🎮 Batch Integration of 4 Standalone HTML5 Games (G039 - G042) & GDD Specs**:
+  - **🪙 Coin Pusher 3D: Copper Cascade (`coin-pusher-3d-copper-cascade` - G039)**:
+    - นำเข้าตัวเกม 3D Physics Coin Pusher มาจัดเก็บไว้ที่ `public/games/coin-pusher-3d-copper-cascade/`
+    - จัดทำเอกสาร GDD ที่ [`docs/gdd/games/coin-pusher-3d-copper-cascade/spec.md`](./gdd/games/coin-pusher-3d-copper-cascade/spec.md)
+  - **🐉 Dragon Roguelite: Skywake (`dragon-roguelite-skywake` - G040)**:
+    - นำเข้าตัวเกม PixiJS 2D Aerial Action Roguelite (36 Illustrated Skills & Prism Cross Aim) มาจัดเก็บไว้ที่ `public/games/dragon-roguelite-skywake/`
+    - จัดทำเอกสาร GDD ที่ [`docs/gdd/games/dragon-roguelite-skywake/spec.md`](./gdd/games/dragon-roguelite-skywake/spec.md)
+  - **⚔️ Grapple Knight: Storm Siege (`grapple-knight-storm-siege` - G041)**:
+    - นำเข้าตัวเกม 2D Elastic Rope Physics Boss Rush (Six Giant Titans & Storm Mines) มาจัดเก็บไว้ที่ `public/games/grapple-knight-storm-siege/`
+    - จัดทำเอกสาร GDD ที่ [`docs/gdd/games/grapple-knight-storm-siege/spec.md`](./gdd/games/grapple-knight-storm-siege/spec.md)
+  - **🖌️ Ink Warden 墨守 (`ink-warden` - G042)**:
+    - นำเข้าตัวเกม WebGL Living-ink Fluid Dynamics & Calligraphy Gesture Defense มาจัดเก็บไว้ที่ `public/games/ink-warden/`
+    - จัดทำเอกสาร GDD ที่ [`docs/gdd/games/ink-warden/spec.md`](./gdd/games/ink-warden/spec.md)
+  - **ลงทะเบียนใน Web Portal**: เพิ่มการ์ดเกมใหม่ทั้ง 4 รายการลงใน `src/app/page.js` และสารบัญโปรเจกต์ `docs/index.md`
+
 ## [1.38.0] - 2026-09-06
 
 - **🌊 Echo Abyss: Deep-Sea Sonar Survival Integration & GDD Spec (`echo-abyss` - G038)**:

@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head><style data-aigameshare-play-guard>
+html,
+body {
+  min-height: 100%;
+  overscroll-behavior: none;
+  -webkit-text-size-adjust: 100%;
+  touch-action: manipulation;
+}
+
+html,
+body,
+body * {
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-drag: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
+
+input,
+textarea,
+[contenteditable="true"] {
+  -webkit-touch-callout: default !important;
+  -webkit-user-select: text !important;
+  user-select: text !important;
+}
+</style>
+<script data-aigameshare-play-guard>
+(() => {
+  const createMemoryStorage = () => {
+    const store = new Map();
+
+    return {
+      get length() {
+        return store.size;
+      },
+      clear() {
+        store.clear();
+      },
+      getItem(key) {
+        const normalizedKey = String(key);
+        return store.has(normalizedKey) ? store.get(normalizedKey) : null;
+      },
+      key(index) {
+        return Array.from(store.keys())[Number(index)] ?? null;
+      },
+      removeItem(key) {
+        store.delete(String(key));
+      },
+      setItem(key, value) {
+        store.set(String(key), String(value));
+      },
+    };
+  };
+  const ensureSandboxStorage = (name) => {
+    try {
+      window[name].getItem("__aigameshare_probe__");
+    } catch {
+      try {
+        Object.defineProperty(window, name, {
+          value: createMemoryStorage(),
+          configurable: true,
+        });
+      } catch {
+        // Some browsers may still refuse overrides. Game code should handle that case.
+      }
+    }
+  };
+  const isEditable = (target) =>
+    target instanceof Element &&
+    Boolean(target.closest('input, textarea, [contenteditable="true"]'));
+  const blockBrowserMenu = (event) => {
+    if (!isEditable(event.target)) {
+      event.preventDefault();
+    }
+  };
+
+  // Native modals never render here (the sandbox has no allow-modals) and
+  // confirm() silently returns false, which turns "are you sure?" gates into
+  // dead buttons. Auto-confirm instead and point the developer at the fix.
+  const shimModal = (name, result, note) => {
+    try {
+      Object.defineProperty(window, name, {
+        value: (message) => {
+          console.warn(
+            "[AIGameShare] window." + name + "() is blocked by the iframe sandbox — " + note +
+            " Build an in-game dialog instead.",
+            message ?? "",
+          );
+          return result;
+        },
+        configurable: true,
+        writable: true,
+      });
+    } catch {
+      // Some browsers may refuse the override; native (blocked) behavior remains.
+    }
+  };
+  shimModal("confirm", true, "auto-confirming (returns true).");
+  shimModal("alert", undefined, "the message is not shown.");
+  shimModal("prompt", null, "returning null.");
+
+  ensureSandboxStorage("localStorage");
+  ensureSandboxStorage("sessionStorage");
+  document.addEventListener("contextmenu", blockBrowserMenu, { capture: true });
+  document.addEventListener("selectstart", blockBrowserMenu, { capture: true });
+  document.addEventListener("dragstart", blockBrowserMenu, { capture: true });
+  document.addEventListener("gesturestart", blockBrowserMenu, { capture: true });
+})();
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#123f49">
+  <meta name="description" content="Forge a four-weapon dragon arsenal: fire breath, lasers, positron cannons, clones, meteors and black holes. Learn 36 illustrated powers, master charged fire breath and rotating prism beams, then earn Overdrive through your build.">
+  <title>Dragon Roguelite: Skywake</title>
+  <link rel="stylesheet" href="./releases/1.4.0-820c04a7ea52c5b0/styles.css">
+</head>
+<body>
+  <main id="game" aria-label="Dragon Roguelite: Skywake">
+    <div id="world"></div>
+    <div class="vignette"></div>
+    <div id="loading"><span class="loading-mark">✧</span><strong>Skywake</strong><span>Opening the sky…</span></div>
+    <div id="hud" hidden>
+      <header class="topbar">
+        <div class="vitality"><div class="brand">Skywake <span id="level"></span></div><div class="health" aria-label="Health"><i id="health-fill"></i><span id="health-text"></span></div></div>
+        <div class="journey"><span id="chapter-name"></span><div id="journey-dots"></div><span id="objective"></span></div>
+        <div class="right-head"><div class="score"><span id="score-label">Score</span><strong id="score">0</strong></div><nav><button id="language" aria-label="Change language">中</button><button id="mute" aria-label="Mute music"></button><button id="pause" aria-label="Pause"></button></nav></div>
+      </header>
+      <div class="experience"><i id="xp-fill"></i></div>
+      <div id="boss-hud" hidden><span id="boss-name"></span><div><i id="boss-fill"></i></div></div>
+      <div id="chapter-banner"><span id="chapter-number"></span><h1 id="banner-title"></h1><p id="banner-copy"></p></div>
+      <div id="toast" role="status"></div>
+      <div id="overdrive-callout"><span>✦</span><strong id="overdrive-title"></strong><small id="overdrive-weapons"></small></div>
+      <div id="tutorial"><svg viewBox="0 0 150 100" aria-hidden="true"><path class="tutorial-loop" d="M124 77C92 95 31 82 30 48C29 14 100 12 115 44C128 73 91 91 64 67"/><path d="m60 62 12 4-9 8"/></svg><div><strong id="tutorial-title"></strong><p id="tutorial-copy"></p><span id="tutorial-secondary"></span></div></div>
+      <div id="build-strip"></div>
+      <div class="bottom-line"><span id="flight-hint"></span><span id="combo"></span></div>
+      <div id="actions"><button id="ultimate" class="ability ultimate" hidden><span class="ability-icon"></span><strong></strong><small></small></button><button id="nova" class="ability nova" hidden><span class="ability-icon"></span><strong></strong><small></small></button><button id="dash" class="ability dash"><span class="ability-icon"></span><strong></strong><small></small></button></div>
+      <div id="joystick" hidden><i></i></div>
+    </div>
+    <section id="overlay" hidden aria-modal="true" role="dialog"><div id="panel"></div></section>
+    <div id="error" hidden><h1>The sky couldn’t open</h1><p>This game needs WebGL. Reload or try another browser.</p><button onclick="location.reload()">Reload</button></div>
+  </main>
+  <script src="./releases/1.4.0-820c04a7ea52c5b0/vendor/pixi.min.js"></script>
+  <script type="module" src="./releases/1.4.0-820c04a7ea52c5b0/main.js"></script>
+
+</body>
+</html>

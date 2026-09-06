@@ -62,8 +62,16 @@ tags:
 | G033 | `attack-agi`             | ⚡ Attack AGI (3D Horde Shooter)   | Three.js / Procedural     | `public/games/attack-agi/`             |
 | G037 | `boat-roguelite-driftwake` | ⛵ Boat Roguelite: Driftwake (3D Naval Roguelite) | Three.js / WebGL / WebAudio | `public/games/boat-roguelite-driftwake/` |
 | G038 | `echo-abyss`             | 🌊 Echo Abyss (Deep-Sea Sonar Survival) | WebGL 2 / Canvas / Web Audio | `public/games/echo-abyss/`             |
+| G039 | `coin-pusher-3d-copper-cascade` | 🪙 Coin Pusher 3D: Copper Cascade | Three.js / Physics 3D | `public/games/coin-pusher-3d-copper-cascade/` |
+| G040 | `dragon-roguelite-skywake` | 🐉 Dragon Roguelite: Skywake | PixiJS / 2D Action Roguelite | `public/games/dragon-roguelite-skywake/` |
+| G041 | `grapple-knight-storm-siege` | ⚔️ Grapple Knight: Storm Siege | Canvas 2D / Boss Rush | `public/games/grapple-knight-storm-siege/` |
+| G042 | `ink-warden`             | 🖌️ Ink Warden 墨守 (Calligraphy Defense) | WebGL Fluid Dynamics / Canvas | `public/games/ink-warden/`             |
 
 ### 🎮 Active Released Game Specifications (`docs/gdd/games/`)
+- [🪙 Coin Pusher 3D: Copper Cascade (G039)](./gdd/games/coin-pusher-3d-copper-cascade/spec.md)
+- [🐉 Dragon Roguelite: Skywake (G040)](./gdd/games/dragon-roguelite-skywake/spec.md)
+- [⚔️ Grapple Knight: Storm Siege (G041)](./gdd/games/grapple-knight-storm-siege/spec.md)
+- [🖌️ Ink Warden 墨守 (Calligraphy Defense G042)](./gdd/games/ink-warden/spec.md)
 - [🌊 Echo Abyss: Deep-Sea Sonar Survival (G038)](./gdd/games/echo-abyss/spec.md)
 - [⛵ Boat Roguelite: Driftwake (3D Naval Combat & Endless Seas G037)](./gdd/games/boat-roguelite-driftwake/spec.md)
 - [📚 Oxford 3000 Vocab Master (EduGame G031)](./gdd/games/oxford-3000/spec.md)

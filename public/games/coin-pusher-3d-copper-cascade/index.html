@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+  <head><style data-aigameshare-play-guard>
+html,
+body {
+  min-height: 100%;
+  overscroll-behavior: none;
+  -webkit-text-size-adjust: 100%;
+  touch-action: manipulation;
+}
+
+html,
+body,
+body * {
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-drag: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
+
+input,
+textarea,
+[contenteditable="true"] {
+  -webkit-touch-callout: default !important;
+  -webkit-user-select: text !important;
+  user-select: text !important;
+}
+</style>
+<script data-aigameshare-play-guard>
+(() => {
+  const createMemoryStorage = () => {
+    const store = new Map();
+
+    return {
+      get length() {
+        return store.size;
+      },
+      clear() {
+        store.clear();
+      },
+      getItem(key) {
+        const normalizedKey = String(key);
+        return store.has(normalizedKey) ? store.get(normalizedKey) : null;
+      },
+      key(index) {
+        return Array.from(store.keys())[Number(index)] ?? null;
+      },
+      removeItem(key) {
+        store.delete(String(key));
+      },
+      setItem(key, value) {
+        store.set(String(key), String(value));
+      },
+    };
+  };
+  const ensureSandboxStorage = (name) => {
+    try {
+      window[name].getItem("__aigameshare_probe__");
+    } catch {
+      try {
+        Object.defineProperty(window, name, {
+          value: createMemoryStorage(),
+          configurable: true,
+        });
+      } catch {
+        // Some browsers may still refuse overrides. Game code should handle that case.
+      }
+    }
+  };
+  const isEditable = (target) =>
+    target instanceof Element &&
+    Boolean(target.closest('input, textarea, [contenteditable="true"]'));
+  const blockBrowserMenu = (event) => {
+    if (!isEditable(event.target)) {
+      event.preventDefault();
+    }
+  };
+
+  // Native modals never render here (the sandbox has no allow-modals) and
+  // confirm() silently returns false, which turns "are you sure?" gates into
+  // dead buttons. Auto-confirm instead and point the developer at the fix.
+  const shimModal = (name, result, note) => {
+    try {
+      Object.defineProperty(window, name, {
+        value: (message) => {
+          console.warn(
+            "[AIGameShare] window." + name + "() is blocked by the iframe sandbox — " + note +
+            " Build an in-game dialog instead.",
+            message ?? "",
+          );
+          return result;
+        },
+        configurable: true,
+        writable: true,
+      });
+    } catch {
+      // Some browsers may refuse the override; native (blocked) behavior remains.
+    }
+  };
+  shimModal("confirm", true, "auto-confirming (returns true).");
+  shimModal("alert", undefined, "the message is not shown.");
+  shimModal("prompt", null, "returning null.");
+
+  ensureSandboxStorage("localStorage");
+  ensureSandboxStorage("sessionStorage");
+  document.addEventListener("contextmenu", blockBrowserMenu, { capture: true });
+  document.addEventListener("selectstart", blockBrowserMenu, { capture: true });
+  document.addEventListener("dragstart", blockBrowserMenu, { capture: true });
+  document.addEventListener("gesturestart", blockBrowserMenu, { capture: true });
+})();
+</script>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#123f43" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='23' fill='%23e7b65e'/%3E%3Cpath d='m24 7 5 11 12 2-9 9 2 12-10-6-10 6 2-12-9-9 12-2z' fill='%237e532c'/%3E%3C/svg%3E"
+    />
+    <title>Coin Pusher 3D: Copper Cascade</title>
+    <meta
+      name="description"
+      content="Play Coin Pusher 3D free online. Raise rotating coin towers, recover stray coins, pick upgrades and keep playing with your winnings. Desktop and mobile."
+    />
+    <link rel="stylesheet" href="./releases/1.2.2-1550b4b918f99305/styles.css" />
+  </head>
+  <body>
+    <main id="game" aria-label="Coin Pusher 3D: Copper Cascade">
+      <canvas
+        id="scene"
+        tabindex="0"
+        aria-label="3D coin pusher. Aim with arrows or drag, then press Space or Drop coin."
+      ></canvas>
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-star" aria-hidden="true">✦</span>
+          <div>
+            <b>Copper Cascade</b><small id="subtitle">Coin Pusher 3D</small>
+          </div>
+        </div>
+        <nav aria-label="Game settings">
+          <button id="language" class="icon-button" aria-label="切换中文">
+            中</button
+          ><button id="mute" class="icon-button" aria-label="Mute sound">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M11 4 5 9H2v6h3l6 5V4Zm5 4c3 2 3 6 0 8m3-11c5 4 5 10 0 14"
+              />
+            </svg></button
+          ><button id="pause" class="icon-button" aria-label="Pause">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14M16 5v14" /></svg>
+          </button>
+        </nav>
+      </header>
+      <section class="scoreboard" aria-label="Run score">
+        <div class="score-value">
+          <span id="scoreLabel">Total won</span><strong id="score">0</strong
+          ><small id="best">Best —</small>
+        </div>
+        <div class="medal-progress">
+          <div>
+            <span id="medalLabel">Next: bronze</span><b id="goal">100</b>
+          </div>
+          <div class="progress-track"><i id="progress"></i></div>
+          <small id="valueHint">Copper 1 · Silver 5 · Star 10</small>
+          <small id="towerStatus" class="tower-status"
+            >Tower 1 · Charge 40%</small
+          >
+        </div>
+        <div class="reserve-value">
+          <span id="reserveLabel">Coin balance</span
+          ><strong id="reserve">90</strong
+          ><small id="dropsLabel">Winnings refill this</small>
+        </div>
+      </section>
+      <div id="fever" class="fever-banner" hidden role="status">
+        <strong id="feverLabel">FEVER</strong>
+        <span id="feverHint">Copper turns silver</span>
+        <b id="feverTime">10s</b>
+      </div>
+      <div id="coinPopup" aria-live="polite"></div>
+      <div id="combo" class="combo" aria-live="polite">
+        <strong></strong><span></span>
+      </div>
+      <div id="message" class="message" role="status"></div>
+      <div id="guide" class="guide">
+        <span class="guide-line"></span
+        ><b id="guideTitle">Build it. Topple it. Cash in.</b
+        ><span id="guideText"
+          >Drop coins to charge · Raise the tower · Push it down</span
+        >
+      </div>
+      <footer class="control-deck">
+        <div class="aim-control">
+          <label for="aim" id="aimLabel">Drop position</label
+          ><input
+            id="aim"
+            type="range"
+            min="-100"
+            max="100"
+            value="0"
+            aria-label="Drop position"
+          />
+          <div>
+            <span id="timingHint">Time the moving shelf</span
+            ><span class="key-hint">← →</span>
+          </div>
+        </div>
+        <button id="drop" class="drop-button">
+          <span class="button-coin" aria-hidden="true">✦</span
+          ><span
+            ><b id="dropLabel">Drop coin</b
+            ><small id="dropHint">Hold / Space</small></span
+          >
+        </button>
+        <button id="lift" class="lift-button" style="--charge: 40%" disabled>
+          <span class="lift-icon" aria-hidden="true">⇧</span>
+          <span
+            ><b id="liftLabel">Raise tower</b
+            ><small id="liftHint">Charge 40%</small></span
+          >
+        </button>
+        <button id="nudge" class="nudge-button">
+          <svg viewBox="0 0 32 24" aria-hidden="true">
+            <path d="m6 7-4 5 4 5M26 7l4 5-4 5M11 3h10v18H11z" /></svg
+          ><span id="nudgeLabel">Nudge</span><b id="nudges">3</b>
+        </button>
+      </footer>
+      <div id="loading" class="loading">
+        <span class="loading-coin">✦</span
+        ><strong id="loadingText">Filling the machine…</strong
+        ><small id="loadingDetail"
+          >A little copper. A lot of possibility.</small
+        >
+      </div>
+      <section id="pausePanel" class="overlay" hidden aria-label="Paused">
+        <div class="panel">
+          <span class="panel-star">✦</span>
+          <h1 id="pauseTitle">Take a breather.</h1>
+          <p id="pauseText">Your coins aren't going anywhere.</p>
+          <button id="resume" class="primary">Keep playing</button
+          ><button id="bank" class="secondary">Bank score & finish</button
+          ><button id="restartPause" class="text-button">
+            Start a fresh run
+          </button>
+        </div>
+      </section>
+      <section
+        id="upgrades"
+        class="overlay"
+        hidden
+        aria-labelledby="upgradeTitle"
+      >
+        <div class="panel upgrade-panel">
+          <span class="panel-star" aria-hidden="true">✦</span>
+          <h1 id="upgradeTitle">Tower down!</h1>
+          <b id="towerBonus" class="tower-bonus">+35 coins</b>
+          <p id="upgradeHint">Pick a reward. Make the next cascade count.</p>
+          <div id="upgradeChoices"></div>
+        </div>
+      </section>
+      <section id="results" class="overlay" hidden aria-label="Run complete">
+        <div class="panel result-panel">
+          <span id="resultMedal" class="panel-star">✦</span>
+          <p id="resultKicker" class="result-kicker">The tray is yours.</p>
+          <h1 id="resultTitle">Nice haul.</h1>
+          <div class="receipt">
+            <div>
+              <span id="finalScoreLabel">Total won</span
+              ><strong id="finalScore">0</strong>
+            </div>
+            <div>
+              <span id="collectedLabel">Coins collected</span
+              ><b id="finalCollected">0</b>
+            </div>
+            <div>
+              <span id="chainLabel">Biggest cascade</span
+              ><b id="finalChain">0</b>
+            </div>
+            <div>
+              <span id="usedLabel">Coins dropped</span><b id="finalUsed">0</b>
+            </div>
+            <div>
+              <span id="towersLabel">Towers toppled</span
+              ><b id="finalTowers">0</b>
+            </div>
+          </div>
+          <p id="resultNote">A different drop can change everything.</p>
+          <button id="again" class="primary">Fill it up again</button>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="./releases/1.2.2-1550b4b918f99305/main.js"></script>
+  
+</body>
+</html>

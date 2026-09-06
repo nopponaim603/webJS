@@ -294,6 +294,38 @@ const initialGames = [
     url: "/games/echo-abyss/index.html",
     image: "/games/echo-abyss/thumbnail.png",
     gradient: "linear-gradient(135deg, #020604 0%, #064E3B 100%)"
+  },
+  {
+    id: "coin-pusher-3d-copper-cascade",
+    title: "🪙 Coin Pusher 3D: Copper Cascade",
+    category: "Three.js 3D Engine",
+    url: "/games/coin-pusher-3d-copper-cascade/index.html",
+    image: "/games/coin-pusher-3d-copper-cascade/thumbnail.png",
+    gradient: "linear-gradient(135deg, #78350F 0%, #F59E0B 100%)"
+  },
+  {
+    id: "dragon-roguelite-skywake",
+    title: "🐉 Dragon Roguelite: Skywake",
+    category: "Phaser 2D Engine",
+    url: "/games/dragon-roguelite-skywake/index.html",
+    image: "/games/dragon-roguelite-skywake/thumbnail.png",
+    gradient: "linear-gradient(135deg, #0369A1 0%, #38BDF8 100%)"
+  },
+  {
+    id: "grapple-knight-storm-siege",
+    title: "⚔️ Grapple Knight: Storm Siege",
+    category: "Phaser 2D Engine",
+    url: "/games/grapple-knight-storm-siege/index.html",
+    image: "/games/grapple-knight-storm-siege/thumbnail.png",
+    gradient: "linear-gradient(135deg, #312E81 0%, #6366F1 100%)"
+  },
+  {
+    id: "ink-warden",
+    title: "🖌️ Ink Warden 墨守 (Calligraphy Defense)",
+    category: "Three.js 3D Engine",
+    url: "/games/ink-warden/index.html",
+    image: "/games/ink-warden/thumbnail.png",
+    gradient: "linear-gradient(135deg, #18181B 0%, #71717A 100%)"
   }
 ];
 
