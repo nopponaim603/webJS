@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head><style data-aigameshare-play-guard>
+html,
+body {
+  min-height: 100%;
+  overscroll-behavior: none;
+  -webkit-text-size-adjust: 100%;
+  touch-action: manipulation;
+}
+
+html,
+body,
+body * {
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-drag: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
+
+input,
+textarea,
+[contenteditable="true"] {
+  -webkit-touch-callout: default !important;
+  -webkit-user-select: text !important;
+  user-select: text !important;
+}
+</style>
+<script data-aigameshare-play-guard>
+(() => {
+  const createMemoryStorage = () => {
+    const store = new Map();
+
+    return {
+      get length() {
+        return store.size;
+      },
+      clear() {
+        store.clear();
+      },
+      getItem(key) {
+        const normalizedKey = String(key);
+        return store.has(normalizedKey) ? store.get(normalizedKey) : null;
+      },
+      key(index) {
+        return Array.from(store.keys())[Number(index)] ?? null;
+      },
+      removeItem(key) {
+        store.delete(String(key));
+      },
+      setItem(key, value) {
+        store.set(String(key), String(value));
+      },
+    };
+  };
+  const ensureSandboxStorage = (name) => {
+    try {
+      window[name].getItem("__aigameshare_probe__");
+    } catch {
+      try {
+        Object.defineProperty(window, name, {
+          value: createMemoryStorage(),
+          configurable: true,
+        });
+      } catch {
+        // Some browsers may still refuse overrides. Game code should handle that case.
+      }
+    }
+  };
+  const isEditable = (target) =>
+    target instanceof Element &&
+    Boolean(target.closest('input, textarea, [contenteditable="true"]'));
+  const blockBrowserMenu = (event) => {
+    if (!isEditable(event.target)) {
+      event.preventDefault();
+    }
+  };
+
+  // Native modals never render here (the sandbox has no allow-modals) and
+  // confirm() silently returns false, which turns "are you sure?" gates into
+  // dead buttons. Auto-confirm instead and point the developer at the fix.
+  const shimModal = (name, result, note) => {
+    try {
+      Object.defineProperty(window, name, {
+        value: (message) => {
+          console.warn(
+            "[AIGameShare] window." + name + "() is blocked by the iframe sandbox — " + note +
+            " Build an in-game dialog instead.",
+            message ?? "",
+          );
+          return result;
+        },
+        configurable: true,
+        writable: true,
+      });
+    } catch {
+      // Some browsers may refuse the override; native (blocked) behavior remains.
+    }
+  };
+  shimModal("confirm", true, "auto-confirming (returns true).");
+  shimModal("alert", undefined, "the message is not shown.");
+  shimModal("prompt", null, "returning null.");
+
+  ensureSandboxStorage("localStorage");
+  ensureSandboxStorage("sessionStorage");
+  document.addEventListener("contextmenu", blockBrowserMenu, { capture: true });
+  document.addEventListener("selectstart", blockBrowserMenu, { capture: true });
+  document.addEventListener("dragstart", blockBrowserMenu, { capture: true });
+  document.addEventListener("gesturestart", blockBrowserMenu, { capture: true });
+})();
+</script>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#073c45"><meta name="description" content="Sail six seas and continuous Endless Seas. Loot fire, frost and lightning ammunition, burn enemy fleets and master fixed naval cannons.">
+  <title>Boat Roguelite: Driftwake</title><link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<canvas id="sea" aria-label="Driftwake ocean battlefield"></canvas>
+<div id="vignette"></div><div id="hurt"></div>
+<div id="threats" aria-hidden="true"></div>
+<header id="hud">
+  <div class="brand"><span class="eyebrow">BOAT ROGUELITE</span><span class="wordmark">Driftwake<span class="star">✦</span></span></div>
+  <div class="voyage"><span id="regionName">THE JADE SHALLOWS</span><div class="routeLine"><div id="route" aria-label="Voyage progress"></div><span id="stageCount">1 / 4</span></div></div>
+  <div class="tools"><button id="language" aria-label="Switch language">中</button><button id="mute" aria-label="Mute audio">♪</button><button id="pause" aria-label="Pause game">Ⅱ</button></div>
+  <div class="hull"><div class="labelrow"><span id="hullLabel">HULL INTEGRITY</span><span id="hpText">100 / 100</span></div><div class="meter"><i id="hpFill"></i></div><span id="shieldText"></span><small id="statusEffects" hidden></small></div>
+  <div class="scoreboard"><span class="eyebrow" id="scoreLabel">VOYAGE SCORE</span><strong id="score">0</strong><span id="combo"></span></div>
+</header>
+<div id="objectiveHud"><div><strong id="objectiveName">Break the blockade</strong><span id="objectiveCount"></span></div><div class="objectiveMeter"><i id="objectiveFill"></i></div><small id="mutatorLabel" hidden></small></div>
+<div id="bossHud" hidden><div id="bossFleet"><div class="bossRow"><div class="bossLabel"><span id="bossName" class="bossName"></span><span id="bossHealth" class="bossHealth"></span></div><div class="bossmeter"><i id="bossFill"></i></div></div></div><small id="bossDetail"></small></div>
+<div id="chapter" class="chapter"><span id="chapterKicker">CHAPTER I · ENCOUNTER 1 / 24</span><h1 id="chapterTitle">The Jade Shallows</h1><p id="chapterSub">A little ship. An impossible voyage.</p></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<div id="tutorial"><span class="tutorialIcon">↟</span><div><strong id="tutorialTitle">Make your own waves.</strong><p id="tutorialBody">WASD or drag to sail · Turn the ship to aim fixed guns<br><b>SPACE</b> to surge — lure enemies through your wake.</p></div></div>
+<div id="joystick" hidden><i></i></div>
+<footer id="bottom"><div class="voyageNote"><div id="specialWeaponHud" hidden><span id="specialWeaponIcon"></span><div class="specialWeaponCopy"><div><strong id="specialWeaponName"></strong><b id="specialWeaponTime"></b></div><small id="specialWeaponEffect"></small></div><i id="specialWeaponFill"></i></div><div id="xpHud"><div class="xpLabels"><strong id="xpLevel">LV 1</strong><span id="xpValue">0 / 100 XP</span></div><div id="xpMeter" role="progressbar" aria-label="Experience toward the next upgrade" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="xpFill"></i></div></div><div class="voyageActions"><button id="contractsButton">Captain’s log · 0 / 3</button><button id="fieldRefit" disabled>Upgrade +0</button></div><div id="batteries"><span id="bowMount"><b>↑</b><em>Bow</em><i></i></span><span id="sideMount"><b>↔</b><em>Sides</em><i></i></span><span id="sternMount"><b>↓</b><em>Stern</em><i></i></span></div><span id="encounterLabel">ENCOUNTER 01 / 24</span><span id="enemiesLabel">Clear the cursed fleet</span></div><button id="surge" aria-label="Surge: dash and leave an explosive wake"><span class="surgeIcon">»</span><span id="surgeLabel">SURGE</span><small id="surgeTime">SPACE</small><i id="surgeFill"></i></button></footer>
+<section id="overlay" hidden aria-modal="true" role="dialog"><div id="panel"></div></section>
+<div id="loading"><span class="loadingCompass">✦</span><span>Setting sail…</span></div>
+<script type="module" src="./main.js"></script>
+
+</body></html>

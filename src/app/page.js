@@ -278,6 +278,14 @@ const initialGames = [
     url: "/games/attack-agi/index.html",
     image: "/games/attack-agi/thumbnail.jpg",
     gradient: "linear-gradient(135deg, #090D16 0%, #DC2626 100%)"
+  },
+  {
+    id: "boat-roguelite-driftwake",
+    title: "⛵ Boat Roguelite: Driftwake (3D Naval Combat)",
+    category: "Three.js 3D Engine",
+    url: "/games/boat-roguelite-driftwake/index.html",
+    image: "/games/boat-roguelite-driftwake/thumbnail.webp",
+    gradient: "linear-gradient(135deg, #073C45 0%, #0D9488 100%)"
   }
 ];
 
