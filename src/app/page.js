@@ -342,6 +342,30 @@ const initialGames = [
     url: "/games/inkwash/index.html",
     image: "/games/inkwash/thumbnail.png",
     gradient: "linear-gradient(135deg, #1E1B4B 0%, #047857 100%)"
+  },
+  {
+    id: "volta",
+    title: "⚡ VOLTA: Lineman of the Storm",
+    category: "Phaser 2D Engine",
+    url: "/games/volta/index.html",
+    image: "/games/volta/thumbnail.png",
+    gradient: "linear-gradient(135deg, #B45309 0%, #F59E0B 100%)"
+  },
+  {
+    id: "scribble-jump",
+    title: "✏️ Scribble Jump (Vertical Doodler)",
+    category: "Phaser 2D Engine",
+    url: "/games/scribble-jump/index.html",
+    image: "/games/scribble-jump/thumbnail.png",
+    gradient: "linear-gradient(135deg, #10B981 0%, #34D399 100%)"
+  },
+  {
+    id: "k8sgames",
+    title: "☸️ K8s Games (3D Kubernetes Simulator)",
+    category: "Three.js 3D Engine",
+    url: "/games/k8sgames/index.html",
+    image: "/games/k8sgames/thumbnail.png",
+    gradient: "linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%)"
   }
 ];
 

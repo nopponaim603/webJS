@@ -1,0 +1,685 @@
+<!DOCTYPE html><html lang="en"><head><script>window.AIGS={track:()=>{},reportScore:()=>{},gameOver:()=>{}};</script><style data-aigameshare-play-guard>
+html,
+body {
+  min-height: 100%;
+  overscroll-behavior: none;
+  -webkit-text-size-adjust: 100%;
+  touch-action: manipulation;
+}
+
+html,
+body,
+body * {
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-drag: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
+
+input,
+textarea,
+[contenteditable="true"] {
+  -webkit-touch-callout: default !important;
+  -webkit-user-select: text !important;
+  user-select: text !important;
+}
+</style>
+<script data-aigameshare-play-guard>
+(() => {
+  const createMemoryStorage = () => {
+    const store = new Map();
+
+    return {
+      get length() {
+        return store.size;
+      },
+      clear() {
+        store.clear();
+      },
+      getItem(key) {
+        const normalizedKey = String(key);
+        return store.has(normalizedKey) ? store.get(normalizedKey) : null;
+      },
+      key(index) {
+        return Array.from(store.keys())[Number(index)] ?? null;
+      },
+      removeItem(key) {
+        store.delete(String(key));
+      },
+      setItem(key, value) {
+        store.set(String(key), String(value));
+      },
+    };
+  };
+  const ensureSandboxStorage = (name) => {
+    try {
+      window[name].getItem("__aigameshare_probe__");
+    } catch {
+      try {
+        Object.defineProperty(window, name, {
+          value: createMemoryStorage(),
+          configurable: true,
+        });
+      } catch {
+        // Some browsers may still refuse overrides. Game code should handle that case.
+      }
+    }
+  };
+  const isEditable = (target) =>
+    target instanceof Element &&
+    Boolean(target.closest('input, textarea, [contenteditable="true"]'));
+  const blockBrowserMenu = (event) => {
+    if (!isEditable(event.target)) {
+      event.preventDefault();
+    }
+  };
+
+  // Native modals never render here (the sandbox has no allow-modals) and
+  // confirm() silently returns false, which turns "are you sure?" gates into
+  // dead buttons. Auto-confirm instead and point the developer at the fix.
+  const shimModal = (name, result, note) => {
+    try {
+      Object.defineProperty(window, name, {
+        value: (message) => {
+          console.warn(
+            "[AIGameShare] window." + name + "() is blocked by the iframe sandbox — " + note +
+            " Build an in-game dialog instead.",
+            message ?? "",
+          );
+          return result;
+        },
+        configurable: true,
+        writable: true,
+      });
+    } catch {
+      // Some browsers may refuse the override; native (blocked) behavior remains.
+    }
+  };
+  shimModal("confirm", true, "auto-confirming (returns true).");
+  shimModal("alert", undefined, "the message is not shown.");
+  shimModal("prompt", null, "returning null.");
+
+  ensureSandboxStorage("localStorage");
+  ensureSandboxStorage("sessionStorage");
+  document.addEventListener("contextmenu", blockBrowserMenu, { capture: true });
+  document.addEventListener("selectstart", blockBrowserMenu, { capture: true });
+  document.addEventListener("dragstart", blockBrowserMenu, { capture: true });
+  document.addEventListener("gesturestart", blockBrowserMenu, { capture: true });
+})();
+</script><meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Scribble Jump</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #243044;
+      --muted: #687386;
+      --paper: #f8f0dc;
+      --paper-deep: #efe0bd;
+      --blue: #2f7ff7;
+      --green: #43b66e;
+      --orange: #f08b35;
+      --red: #e54d5e;
+      --violet: #8a63d2;
+      --shadow: rgba(35, 42, 58, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      color: var(--ink);
+      font-family: ui-rounded, "SF Pro Rounded", "Nunito", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      overscroll-behavior: none;
+      touch-action: none;
+      user-select: none;
+      background:
+        radial-gradient(circle at 22% 10%, rgba(47, 127, 247, 0.2), transparent 28%),
+        radial-gradient(circle at 78% 18%, rgba(67, 182, 110, 0.18), transparent 24%),
+        radial-gradient(circle at 22% 86%, rgba(240, 139, 53, 0.18), transparent 25%),
+        linear-gradient(135deg, #ddeffc 0%, #fff7df 44%, #f9dfcb 100%);
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .app {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: var(--visible-w, 100vw);
+      height: var(--visible-h, 100vh);
+      display: grid;
+      place-items: center;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    }
+
+    .phone {
+      position: relative;
+      width: var(--game-w, min(calc(100vw - 24px), calc(56.3vh - 14px), 420px));
+      aspect-ratio: 420 / 746;
+      overflow: hidden;
+      border: 0;
+      border-radius: 0;
+      background: var(--paper);
+      box-shadow: 0 18px 50px rgba(39, 55, 84, 0.18);
+      transform: none;
+    }
+
+    @supports (width: 100dvw) {
+      .app {
+        width: var(--visible-w, 100dvw);
+        height: var(--visible-h, 100dvh);
+      }
+
+      .phone {
+        width: var(--game-w, min(calc(100dvw - 24px), calc(56.3dvh - 14px), 420px));
+      }
+    }
+
+    canvas {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: var(--paper);
+      touch-action: none;
+    }
+
+    .hud {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      padding: 14px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .score {
+      min-width: 120px;
+      padding: 8px 10px;
+      border: 2px solid rgba(36, 48, 68, 0.82);
+      border-radius: 8px;
+      background: rgba(255, 250, 236, 0.84);
+      box-shadow: 4px 4px 0 rgba(36, 48, 68, 0.11);
+      backdrop-filter: blur(5px);
+    }
+
+    .score strong {
+      display: block;
+      font-size: clamp(22px, 7vw, 32px);
+      line-height: 0.95;
+      letter-spacing: 0;
+    }
+
+    .score span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .icon-row {
+      display: flex;
+      gap: 6px;
+      pointer-events: auto;
+    }
+
+    .icon-btn {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border: 2px solid rgba(36, 48, 68, 0.82);
+      border-radius: 8px;
+      background: rgba(255, 250, 236, 0.88);
+      color: var(--ink);
+      box-shadow: 3px 3px 0 rgba(36, 48, 68, 0.13);
+      cursor: pointer;
+    }
+
+    .icon-btn:active,
+    .primary:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0 rgba(36, 48, 68, 0.14);
+    }
+
+    .icon-btn svg {
+      width: 18px;
+      height: 18px;
+      display: block;
+      fill: currentColor;
+    }
+
+    .touch {
+      position: absolute;
+      inset: auto 0 0;
+      z-index: 3;
+      display: none;
+      grid-template-columns: 1fr 1fr;
+      height: 34%;
+      pointer-events: none;
+    }
+
+    .touch button {
+      position: relative;
+      border: 0;
+      background: transparent;
+      pointer-events: auto;
+      cursor: pointer;
+    }
+
+    .touch svg {
+      position: absolute;
+      bottom: max(22px, env(safe-area-inset-bottom));
+      width: 34px;
+      height: 34px;
+      opacity: 0.18;
+      fill: var(--ink);
+    }
+
+    .touch-label {
+      position: absolute;
+      bottom: max(18px, env(safe-area-inset-bottom));
+      min-width: 86px;
+      padding: 8px 10px;
+      border: 2px solid rgba(36, 48, 68, 0.34);
+      border-radius: 8px;
+      background: rgba(255, 250, 236, 0.54);
+      color: rgba(36, 48, 68, 0.72);
+      font-size: 12px;
+      font-weight: 950;
+      box-shadow: 3px 3px 0 rgba(36, 48, 68, 0.08);
+    }
+
+    .touch .left svg {
+      left: 26px;
+    }
+
+    .touch .left .touch-label {
+      left: 22px;
+    }
+
+    .touch .right svg {
+      right: 26px;
+      transform: scaleX(-1);
+    }
+
+    .touch .right .touch-label {
+      right: 22px;
+    }
+
+    .run-hint {
+      position: absolute;
+      z-index: 3;
+      left: 50%;
+      bottom: 92px;
+      width: min(300px, calc(100% - 44px));
+      padding: 10px 12px;
+      border: 2px solid rgba(36, 48, 68, 0.38);
+      border-radius: 8px;
+      background: rgba(255, 250, 236, 0.82);
+      box-shadow: 3px 4px 0 rgba(36, 48, 68, 0.12);
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 850;
+      line-height: 1.28;
+      text-align: center;
+      white-space: pre-line;
+      opacity: 0;
+      transform: translate(-50%, 10px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+      pointer-events: none;
+    }
+
+    .run-hint.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .run-facts {
+      display: grid;
+      gap: 4px;
+      margin: 12px 0 4px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 850;
+      line-height: 1.25;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      display: none;
+      place-items: center;
+      padding: 0;
+      background: rgba(248, 240, 220, 0.28);
+      backdrop-filter: blur(2px);
+      pointer-events: auto;
+    }
+
+    .overlay.show {
+      display: grid;
+    }
+
+    .panel {
+      width: 260px;
+      max-width: calc(100% - 56px);
+      padding: 22px;
+      border: 2px solid rgba(36, 48, 68, 0.34);
+      border-radius: 8px;
+      background:
+        linear-gradient(rgba(47, 127, 247, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(47, 127, 247, 0.08) 1px, transparent 1px),
+        rgba(255, 250, 236, 0.94);
+      background-size: 24px 24px;
+      box-shadow: 0 14px 28px rgba(36, 48, 68, 0.16);
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(34px, 11vw, 50px);
+      line-height: 0.9;
+      letter-spacing: 0;
+      color: var(--ink);
+    }
+
+    .subtitle {
+      margin: 12px auto 0;
+      max-width: 260px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1.45;
+    }
+
+    .primary {
+      min-width: 172px;
+      height: 50px;
+      margin-top: 20px;
+      border: 2px solid rgba(36, 48, 68, 0.9);
+      border-radius: 8px;
+      background: var(--green);
+      color: #ffffff;
+      box-shadow: 4px 4px 0 rgba(36, 48, 68, 0.18);
+      font-size: 17px;
+      font-weight: 950;
+      cursor: pointer;
+    }
+
+    .primary.alt {
+      background: var(--blue);
+    }
+
+    .secondary {
+      min-width: 132px;
+      height: 42px;
+      margin-top: 12px;
+      border: 2px solid rgba(36, 48, 68, 0.72);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.5);
+      color: var(--ink);
+      box-shadow: 3px 3px 0 rgba(36, 48, 68, 0.12);
+      font-size: 14px;
+      font-weight: 950;
+      cursor: pointer;
+    }
+
+    .settings-panel {
+      width: 250px;
+      max-width: calc(100% - 64px);
+      max-height: calc(100% - 32px);
+      overflow-y: auto;
+      padding: 18px;
+      text-align: left;
+    }
+
+    .settings-panel h1 {
+      text-align: center;
+      font-size: clamp(30px, 9vw, 38px);
+    }
+
+    .setting-block {
+      margin-top: 8px;
+    }
+
+    .setting-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .segmented {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 9px;
+    }
+
+    .segmented button {
+      height: 36px;
+      border: 2px solid rgba(36, 48, 68, 0.28);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.48);
+      color: var(--ink);
+      font-weight: 950;
+      overflow-wrap: anywhere;
+      cursor: pointer;
+    }
+
+    .segmented button.active {
+      border-color: rgba(36, 48, 68, 0.86);
+      background: var(--blue);
+      color: #ffffff;
+      box-shadow: 3px 3px 0 rgba(36, 48, 68, 0.14);
+    }
+
+    .control-list {
+      display: grid;
+      gap: 6px;
+      margin: 10px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .control-list li {
+      padding: 6px 8px;
+      border: 2px solid rgba(36, 48, 68, 0.15);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.38);
+      color: var(--ink);
+      font-size: 11px;
+      font-weight: 850;
+      line-height: 1.35;
+      overflow-wrap: anywhere;
+    }
+
+    .settings-actions {
+      display: grid;
+      place-items: center;
+    }
+
+    .settings-panel .primary {
+      height: 40px;
+      margin-top: 10px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .mini-stat {
+      padding: 9px 8px;
+      border: 2px solid rgba(36, 48, 68, 0.2);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.42);
+      font-size: 12px;
+      font-weight: 900;
+      color: var(--muted);
+    }
+
+    .mini-stat strong {
+      display: block;
+      margin-top: 5px;
+      color: var(--ink);
+      font-size: 19px;
+      line-height: 1;
+    }
+
+    .hint {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.45;
+    }
+
+    @media (hover: none), (pointer: coarse) {
+      .touch {
+        display: grid;
+      }
+    }
+
+    @media (max-height: 610px) {
+      .panel {
+        padding: 18px;
+      }
+
+      .subtitle,
+      .hint {
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app" aria-label="Scribble Jump game">
+    <section class="phone">
+      <canvas id="game" aria-label="Scribble Jump canvas game" width="420" height="746"></canvas>
+
+      <div class="hud">
+        <div class="topbar">
+          <div class="score" aria-live="polite">
+            <strong id="score">0</strong>
+            <span id="best">BEST 0 · COIN 0</span>
+          </div>
+          <div class="icon-row">
+            <button class="icon-btn" id="soundBtn" aria-label="Mute sound" title="Mute sound" style="opacity: 1;">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4Zm11.8.3a1 1 0 0 0-1.6 1.2 2.5 2.5 0 0 1 0 3 1 1 0 0 0 1.6 1.2 4.5 4.5 0 0 0 0-5.4Zm2.9-2.2a1 1 0 0 0-1.4 1.4 6.5 6.5 0 0 1 0 7 1 1 0 1 0 1.4 1.4 8.5 8.5 0 0 0 0-9.8Z"></path></svg>
+            </button>
+            <button class="icon-btn" id="settingsBtn" aria-label="Settings" title="Settings">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.4 13.5a7.8 7.8 0 0 0 0-3l2-1.5-2-3.5-2.4 1a8.8 8.8 0 0 0-2.6-1.5L14 2.5h-4L9.6 5A8.8 8.8 0 0 0 7 6.5l-2.4-1-2 3.5 2 1.5a7.8 7.8 0 0 0 0 3l-2 1.5 2 3.5 2.4-1a8.8 8.8 0 0 0 2.6 1.5l.4 2.5h4l.4-2.5a8.8 8.8 0 0 0 2.6-1.5l2.4 1 2-3.5-2-1.5ZM12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Z"></path></svg>
+            </button>
+            <button class="icon-btn" id="pauseBtn" aria-label="Pause" title="Pause">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3v14H7V5Zm7 0h3v14h-3V5Z"></path></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="touch" aria-hidden="true">
+        <button class="left" id="leftPad" tabindex="-1">
+          <svg viewBox="0 0 24 24"><path d="m15 5-7 7 7 7V5Z"></path></svg>
+          <span class="touch-label" id="touchLeftLabel">Hold left</span>
+        </button>
+        <button class="right" id="rightPad" tabindex="-1">
+          <svg viewBox="0 0 24 24"><path d="m15 5-7 7 7 7V5Z"></path></svg>
+          <span class="touch-label" id="touchRightLabel">Hold right</span>
+        </button>
+      </div>
+
+      <div class="run-hint" id="runHint">Hold left/right to steer.
+Stomp red enemies from above.
+Blue shields block one hit.</div>
+
+      <div class="overlay" id="menu">
+        <div class="panel">
+          <h1>Scribble<br>Jump</h1>
+          <p class="subtitle" id="menuSubtitle">Jump up, do not fall. Stomp red weirdos, do not face-tank them.</p>
+          <button class="primary" id="startBtn">Start</button>
+          <button class="secondary" id="menuSettingsBtn">Settings</button>
+          <div class="stats">
+            <div class="mini-stat"><span id="menuBestLabel">Best</span><strong id="menuBest">0</strong></div>
+            <div class="mini-stat"><span id="menuControlLabel">Controls</span><strong id="menuControlValue">A / D</strong></div>
+          </div>
+          <p class="hint" id="menuHint">Phone: hold the left or right half. Keyboard: arrows or A/D, Space pauses.</p>
+        </div>
+      </div>
+
+      <div class="overlay" id="pauseMenu">
+        <div class="panel">
+          <h1 id="pauseTitle">Paused</h1>
+          <p class="subtitle" id="pauseSubtitle">The feel is decent now. Next comes more toys and sharper pacing.</p>
+          <button class="primary alt" id="resumeBtn">Resume</button>
+          <button class="secondary" id="pauseSettingsBtn">Settings</button>
+        </div>
+      </div>
+
+      <div class="overlay" id="gameOver">
+        <div class="panel">
+          <h1 id="gameOverTitle">Dropped</h1>
+          <p class="subtitle" id="deathLine">这个角度挺离谱。</p>
+          <button class="primary" id="restartBtn">Again</button>
+          <div class="stats">
+            <div class="mini-stat"><span id="finalScoreLabel">Run</span><strong id="finalScore">0</strong></div>
+            <div class="mini-stat"><span id="finalBestLabel">Best</span><strong id="finalBest">0</strong></div>
+          </div>
+          <div class="run-facts" id="runFacts"></div>
+          <button class="secondary" id="gameOverSettingsBtn">Settings</button>
+        </div>
+      </div>
+
+      <div class="overlay" id="settingsMenu">
+        <div class="panel settings-panel">
+          <h1 id="settingsTitle">Settings</h1>
+          <div class="setting-block">
+            <div class="setting-label" id="languageLabel">Language</div>
+            <div class="segmented" role="group" aria-label="Language">
+              <button id="langZhBtn" type="button" aria-pressed="false">中文</button>
+              <button id="langEnBtn" type="button" class="active" aria-pressed="true">English</button>
+            </div>
+          </div>
+          <div class="setting-block">
+            <div class="setting-label" id="mobileLabel">Phone Controls</div>
+            <ul class="control-list">
+              <li id="mobileLine1">Hold left half to move left; right half to move right.</li>
+              <li id="mobileLine2">Auto-jump is on. Steer and find platforms.</li>
+              <li id="mobileLine3">Stomp red enemies. A blue shield blocks one hit.</li>
+            </ul>
+          </div>
+          <div class="settings-actions">
+            <button class="primary alt" id="settingsDoneBtn">Done</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="./index.inline0.js"></script>
+
+</body></html>

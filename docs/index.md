@@ -68,8 +68,14 @@ tags:
 | G042 | `ink-warden`             | 🖌️ Ink Warden 墨守 (Calligraphy Defense) | WebGL Fluid Dynamics / Canvas | `public/games/ink-warden/`             |
 | G043 | `jelly-baby`              | 👶 Jelly Baby (WebGPU 3D Soft-Body) | WebGPU / Three.js r185 / WASM | `public/games/jelly-baby/`             |
 | G044 | `inkwash`                 | 🎨 INKWASH 晕染 (Territory io Battle) | Canvas 2D / Living Ink / IO | `public/games/inkwash/`                |
+| G045 | `volta`                   | ⚡ VOLTA: Lineman of the Storm      | PixiJS 8 / WPA Swing Arcade  | `public/games/volta/`                  |
+| G046 | `scribble-jump`           | ✏️ Scribble Jump                   | Canvas 2D / Doodle Jumper    | `public/games/scribble-jump/`          |
+| G047 | `k8sgames`                | ☸️ K8s Games (Kubernetes 3D)        | Three.js / WebGL / DevOps    | `public/games/k8sgames/`               |
 
 ### 🎮 Active Released Game Specifications (`docs/gdd/games/`)
+- [☸️ K8s Games: 3D Kubernetes Simulator (G047)](./gdd/games/k8sgames/spec.md)
+- [✏️ Scribble Jump: Vertical Doodler (G046)](./gdd/games/scribble-jump/spec.md)
+- [⚡ VOLTA: Lineman of the Storm (G045)](./gdd/games/volta/spec.md)
 - [🎨 INKWASH 晕染: Territory io Battle (G044)](./gdd/games/inkwash/spec.md)
 - [👶 Jelly Baby: WebGPU 3D Soft-Body Physics (G043)](./gdd/games/jelly-baby/spec.md)
 - [🪙 Coin Pusher 3D: Copper Cascade (G039)](./gdd/games/coin-pusher-3d-copper-cascade/spec.md)

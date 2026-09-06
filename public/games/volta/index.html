@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head><script>window.AIGS={track:()=>{},reportScore:()=>{},gameOver:()=>{}};</script><style data-aigameshare-play-guard>
+html,
+body {
+  min-height: 100%;
+  overscroll-behavior: none;
+  -webkit-text-size-adjust: 100%;
+  touch-action: manipulation;
+}
+
+html,
+body,
+body * {
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-drag: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
+
+input,
+textarea,
+[contenteditable="true"] {
+  -webkit-touch-callout: default !important;
+  -webkit-user-select: text !important;
+  user-select: text !important;
+}
+</style>
+<script data-aigameshare-play-guard>
+(() => {
+  const createMemoryStorage = () => {
+    const store = new Map();
+
+    return {
+      get length() {
+        return store.size;
+      },
+      clear() {
+        store.clear();
+      },
+      getItem(key) {
+        const normalizedKey = String(key);
+        return store.has(normalizedKey) ? store.get(normalizedKey) : null;
+      },
+      key(index) {
+        return Array.from(store.keys())[Number(index)] ?? null;
+      },
+      removeItem(key) {
+        store.delete(String(key));
+      },
+      setItem(key, value) {
+        store.set(String(key), String(value));
+      },
+    };
+  };
+  const ensureSandboxStorage = (name) => {
+    try {
+      window[name].getItem("__aigameshare_probe__");
+    } catch {
+      try {
+        Object.defineProperty(window, name, {
+          value: createMemoryStorage(),
+          configurable: true,
+        });
+      } catch {
+        // Some browsers may still refuse overrides. Game code should handle that case.
+      }
+    }
+  };
+  const isEditable = (target) =>
+    target instanceof Element &&
+    Boolean(target.closest('input, textarea, [contenteditable="true"]'));
+  const blockBrowserMenu = (event) => {
+    if (!isEditable(event.target)) {
+      event.preventDefault();
+    }
+  };
+
+  // Native modals never render here (the sandbox has no allow-modals) and
+  // confirm() silently returns false, which turns "are you sure?" gates into
+  // dead buttons. Auto-confirm instead and point the developer at the fix.
+  const shimModal = (name, result, note) => {
+    try {
+      Object.defineProperty(window, name, {
+        value: (message) => {
+          console.warn(
+            "[AIGameShare] window." + name + "() is blocked by the iframe sandbox — " + note +
+            " Build an in-game dialog instead.",
+            message ?? "",
+          );
+          return result;
+        },
+        configurable: true,
+        writable: true,
+      });
+    } catch {
+      // Some browsers may refuse the override; native (blocked) behavior remains.
+    }
+  };
+  shimModal("confirm", true, "auto-confirming (returns true).");
+  shimModal("alert", undefined, "the message is not shown.");
+  shimModal("prompt", null, "returning null.");
+
+  ensureSandboxStorage("localStorage");
+  ensureSandboxStorage("sessionStorage");
+  document.addEventListener("contextmenu", blockBrowserMenu, { capture: true });
+  document.addEventListener("selectstart", blockBrowserMenu, { capture: true });
+  document.addEventListener("dragstart", blockBrowserMenu, { capture: true });
+  document.addEventListener("gesturestart", blockBrowserMenu, { capture: true });
+})();
+</script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#1B1A17" />
+  <meta name="description" content="VOLTA — swing tower to tower on live power lines ahead of a thunderstorm. Hold to throw your cable, release to fly, and let go before the lightning runs down the wire. A WPA-poster one-finger arcade." />
+  <title>VOLTA: Lineman of the Storm</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div id="app">
+    <div id="stage"></div>
+    <div id="hud">
+      <div id="topline"><span id="dist">0 m</span><span id="score">0</span><span id="zone">I · PRAIRIE</span></div>
+      <div id="storm"><span id="stormLbl">STORM</span><div id="stormTrack"><div id="stormFill"></div></div><span id="stormGap">90 m</span></div>
+      <div id="gear"><span id="gloves" class="hidden">GLOVES</span><span id="combo" class="hidden"></span></div>
+      <div id="btns"><button id="btn-lang" type="button" aria-label="Language">中</button><button id="btn-mute" type="button" aria-label="Mute">♪</button><button id="btn-pause" type="button" aria-label="Pause">II</button></div>
+      <div id="banner" class="hidden"><div id="bannerKick"></div><div id="bannerMain"></div></div>
+      <div id="hint">HOLD TO THROW THE LINE · RELEASE TO FLY</div>
+    </div>
+    <div id="title">
+      <div class="rule"></div>
+      <div class="kick">WORKS PROGRESS · RURAL ELECTRIFICATION</div>
+      <div class="mast">VOLTA</div>
+      <div class="sub">LINEMAN OF THE STORM</div>
+      <div class="meta">HOLD · THROW THE LINE &nbsp;&nbsp;·&nbsp;&nbsp; RELEASE · FLY &nbsp;&nbsp;·&nbsp;&nbsp; LET GO BEFORE THE BOLT</div>
+      <div class="tip">hold anywhere to begin</div>
+      <div class="best hidden" id="titleBest"></div>
+      <div class="rule"></div>
+    </div>
+    <div id="paused" class="hidden"><div>PAUSED</div><div class="small">tap to resume · M mute</div></div>
+    <div id="poster" class="hidden" role="dialog" aria-label="Run over">
+      <div id="posterKick"></div><div id="posterMast"></div><div id="posterScore"></div><div id="posterStats"></div><div id="posterBest"></div>
+      <div id="posterBtns"><button id="btn-again" type="button">PLAY AGAIN</button></div>
+    </div>
+  </div>
+  <script src="./vendor/pixi.min.js"></script>
+  <script type="module" src="./main.js"></script>
+
+</body>
+</html>
