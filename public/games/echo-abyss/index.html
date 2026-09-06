@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><style data-aigameshare-play-guard>
+html,
+body {
+  min-height: 100%;
+  overscroll-behavior: none;
+  -webkit-text-size-adjust: 100%;
+  touch-action: manipulation;
+}
+
+html,
+body,
+body * {
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-drag: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
+
+input,
+textarea,
+[contenteditable="true"] {
+  -webkit-touch-callout: default !important;
+  -webkit-user-select: text !important;
+  user-select: text !important;
+}
+</style>
+<script data-aigameshare-play-guard>
+(() => {
+  const createMemoryStorage = () => {
+    const store = new Map();
+
+    return {
+      get length() {
+        return store.size;
+      },
+      clear() {
+        store.clear();
+      },
+      getItem(key) {
+        const normalizedKey = String(key);
+        return store.has(normalizedKey) ? store.get(normalizedKey) : null;
+      },
+      key(index) {
+        return Array.from(store.keys())[Number(index)] ?? null;
+      },
+      removeItem(key) {
+        store.delete(String(key));
+      },
+      setItem(key, value) {
+        store.set(String(key), String(value));
+      },
+    };
+  };
+  const ensureSandboxStorage = (name) => {
+    try {
+      window[name].getItem("__aigameshare_probe__");
+    } catch {
+      try {
+        Object.defineProperty(window, name, {
+          value: createMemoryStorage(),
+          configurable: true,
+        });
+      } catch {
+        // Some browsers may still refuse overrides. Game code should handle that case.
+      }
+    }
+  };
+  const isEditable = (target) =>
+    target instanceof Element &&
+    Boolean(target.closest('input, textarea, [contenteditable="true"]'));
+  const blockBrowserMenu = (event) => {
+    if (!isEditable(event.target)) {
+      event.preventDefault();
+    }
+  };
+
+  // Native modals never render here (the sandbox has no allow-modals) and
+  // confirm() silently returns false, which turns "are you sure?" gates into
+  // dead buttons. Auto-confirm instead and point the developer at the fix.
+  const shimModal = (name, result, note) => {
+    try {
+      Object.defineProperty(window, name, {
+        value: (message) => {
+          console.warn(
+            "[AIGameShare] window." + name + "() is blocked by the iframe sandbox — " + note +
+            " Build an in-game dialog instead.",
+            message ?? "",
+          );
+          return result;
+        },
+        configurable: true,
+        writable: true,
+      });
+    } catch {
+      // Some browsers may refuse the override; native (blocked) behavior remains.
+    }
+  };
+  shimModal("confirm", true, "auto-confirming (returns true).");
+  shimModal("alert", undefined, "the message is not shown.");
+  shimModal("prompt", null, "returning null.");
+
+  ensureSandboxStorage("localStorage");
+  ensureSandboxStorage("sessionStorage");
+  document.addEventListener("contextmenu", blockBrowserMenu, { capture: true });
+  document.addEventListener("selectstart", blockBrowserMenu, { capture: true });
+  document.addEventListener("dragstart", blockBrowserMenu, { capture: true });
+  document.addEventListener("gesturestart", blockBrowserMenu, { capture: true });
+})();
+</script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+<meta name="theme-color" content="#02050a" />
+<title>Echo Abyss</title>
+<meta name="description" content="A deep-sea descent where sound is sight. Every sonar ping lights the dark and calls the hunters. Dive through sonar shadows, steal light from enemy pings, and chase your deepest score." />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div id="stage">
+  <canvas id="scene"></canvas>
+  <canvas id="gl"></canvas>
+
+  <div id="hud">
+    <div id="depthWrap"><span id="depth">0</span><span id="depthUnit">m</span></div>
+    <div id="vitals">
+      <div id="hearts"></div>
+      <div id="pearlWrap">◉ <span id="pearls">0</span></div>
+    </div>
+    <div id="topBtns">
+      <button id="btnPause" type="button" aria-label="Pause 暂停">❚❚</button>
+      <button id="btnMute" type="button" aria-label="Sound 声音">♪</button>
+      <button id="btnLang" type="button" aria-label="Language 语言">EN</button>
+    </div>
+    <div id="hint"></div>
+    <div id="joy" hidden><div id="joyKnob"></div></div>
+    <div id="goalIntro">
+      <div class="g1" id="g1"></div>
+      <div class="g2" id="g2"></div>
+      <div class="g3" id="g3"></div>
+    </div>
+    <div id="tut"></div>
+  </div>
+
+  <div id="gateOverlay" class="overlay" hidden>
+    <div class="gateTitle" id="gateTitle"></div>
+    <div class="gateSub" id="gateSub"></div>
+    <div id="gateCards"></div>
+  </div>
+
+  <div id="pauseOverlay" class="overlay" hidden>
+    <div class="bigTitle" id="pauseTitle"></div>
+    <div class="menuRow">
+      <button id="btnResume" type="button"></button>
+      <button id="btnRestart" type="button"></button>
+    </div>
+    <div class="tips" id="pauseTips"></div>
+  </div>
+
+  <div id="deathOverlay" class="overlay" hidden>
+    <canvas id="afterglow"></canvas>
+    <div id="deathPanel">
+      <div class="bigTitle" id="deathTitle"></div>
+      <div id="deathStats"></div>
+      <div class="menuRow"><button id="btnAgain" type="button"></button><button id="btnShare" type="button"></button></div>
+    </div>
+  </div>
+</div>
+<script src="audio.js"></script>
+<script src="render-gl.js"></script>
+<script src="game.js"></script>
+</body>
+</html>

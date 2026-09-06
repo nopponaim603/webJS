@@ -286,6 +286,14 @@ const initialGames = [
     url: "/games/boat-roguelite-driftwake/index.html",
     image: "/games/boat-roguelite-driftwake/thumbnail.webp",
     gradient: "linear-gradient(135deg, #073C45 0%, #0D9488 100%)"
+  },
+  {
+    id: "echo-abyss",
+    title: "🌊 Echo Abyss: Deep-Sea Sonar Survival",
+    category: "Three.js 3D Engine",
+    url: "/games/echo-abyss/index.html",
+    image: "/games/echo-abyss/thumbnail.png",
+    gradient: "linear-gradient(135deg, #020604 0%, #064E3B 100%)"
   }
 ];
 

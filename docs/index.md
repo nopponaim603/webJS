@@ -61,8 +61,10 @@ tags:
 | G032 | `silent-viper`           | 🎯 SILENT VIPER (Sniper 3D)        | Three.js / Vite           | `public/games/silent-viper/`           |
 | G033 | `attack-agi`             | ⚡ Attack AGI (3D Horde Shooter)   | Three.js / Procedural     | `public/games/attack-agi/`             |
 | G037 | `boat-roguelite-driftwake` | ⛵ Boat Roguelite: Driftwake (3D Naval Roguelite) | Three.js / WebGL / WebAudio | `public/games/boat-roguelite-driftwake/` |
+| G038 | `echo-abyss`             | 🌊 Echo Abyss (Deep-Sea Sonar Survival) | WebGL 2 / Canvas / Web Audio | `public/games/echo-abyss/`             |
 
 ### 🎮 Active Released Game Specifications (`docs/gdd/games/`)
+- [🌊 Echo Abyss: Deep-Sea Sonar Survival (G038)](./gdd/games/echo-abyss/spec.md)
 - [⛵ Boat Roguelite: Driftwake (3D Naval Combat & Endless Seas G037)](./gdd/games/boat-roguelite-driftwake/spec.md)
 - [📚 Oxford 3000 Vocab Master (EduGame G031)](./gdd/games/oxford-3000/spec.md)
 - [⚡ GODAWFUL (Cute Town God Sim G028)](./gdd/games/godawful/spec.md)

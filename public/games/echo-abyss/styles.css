@@ -1,0 +1,271 @@
+:root {
+  --ink: #02050a;
+  --glow: #7ef2e0;
+  --glow-dim: rgba(126, 242, 224, 0.55);
+  --warn: #ff7a59;
+  --gold: #ffd98a;
+  --sans: "Avenir Next", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", system-ui, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%; height: 100%;
+  background: var(--ink);
+  overflow: hidden;
+  font-family: var(--sans);
+  -webkit-user-select: none; user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: none;
+  overscroll-behavior: none;
+}
+
+#stage { position: fixed; inset: 0; background: var(--ink); }
+
+#scene, #gl {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  display: block;
+}
+#gl { display: none; }
+body.gl-on #gl { display: block; }
+body.gl-on #scene { visibility: hidden; }
+
+/* ---------- HUD ---------- */
+#hud { position: absolute; inset: 0; pointer-events: none; color: var(--glow-dim); }
+
+#depthWrap {
+  position: absolute; top: max(10px, env(safe-area-inset-top)); left: 50%;
+  transform: translateX(-50%);
+  font-size: 26px; font-weight: 200; letter-spacing: 2px;
+  color: var(--glow-dim);
+  text-shadow: 0 0 14px rgba(126, 242, 224, 0.35);
+  font-variant-numeric: tabular-nums;
+  transition: color 1.2s linear;
+}
+#depthUnit { font-size: 14px; opacity: 0.7; margin-left: 3px; }
+
+#vitals {
+  position: absolute; top: max(12px, env(safe-area-inset-top)); left: 14px;
+  display: flex; flex-direction: column; gap: 6px;
+}
+#hearts { display: flex; gap: 5px; }
+#hearts i {
+  width: 13px; height: 13px; border-radius: 50% 50% 50% 4px;
+  transform: rotate(-45deg);
+  background: radial-gradient(circle at 35% 35%, #b8fff1, #2bbfa6 65%, rgba(43,191,166,0.25));
+  box-shadow: 0 0 9px rgba(126, 242, 224, 0.7);
+}
+#hearts i.lost { background: rgba(126,242,224,0.08); box-shadow: none; }
+#pearlWrap { font-size: 14px; letter-spacing: 1px; color: var(--gold); opacity: 0.85; text-shadow: 0 0 10px rgba(255,217,138,0.5); }
+
+#topBtns {
+  position: absolute; top: max(8px, env(safe-area-inset-top)); right: 10px;
+  display: flex; gap: 8px; pointer-events: auto;
+}
+#topBtns button {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid rgba(126, 242, 224, 0.25);
+  background: rgba(2, 8, 14, 0.5);
+  color: var(--glow-dim); font-size: 15px;
+  cursor: pointer; backdrop-filter: blur(2px);
+}
+#topBtns button.off { color: rgba(126,242,224,0.2); text-decoration: line-through; }
+
+#hint {
+  position: absolute; bottom: max(56px, calc(env(safe-area-inset-bottom) + 44px));
+  left: 50%; transform: translateX(-50%);
+  width: min(86vw, 460px); text-align: center;
+  font-size: 15px; line-height: 1.6; letter-spacing: 1px;
+  color: rgba(190, 250, 238, 0.85);
+  text-shadow: 0 0 12px rgba(126, 242, 224, 0.4);
+  opacity: 0; transition: opacity 0.8s ease;
+}
+#hint.show { opacity: 1; }
+
+#goalIntro {
+  position: absolute; top: 22%; left: 50%; transform: translateX(-50%);
+  width: min(90vw, 520px); text-align: center;
+  opacity: 0; transition: opacity 1.2s ease;
+  pointer-events: none;
+}
+#goalIntro.show { opacity: 1; }
+#goalIntro .g1 {
+  font-size: 30px; font-weight: 200; letter-spacing: 7px;
+  color: #cdf6ec; text-shadow: 0 0 26px rgba(126, 242, 224, 0.6);
+}
+#goalIntro .g2 {
+  margin-top: 12px; font-size: 14.5px; line-height: 1.9; letter-spacing: 2px;
+  color: rgba(190, 250, 238, 0.75);
+}
+#goalIntro .g3 {
+  margin-top: 20px; display: inline-block;
+  padding: 12px 28px; border-radius: 999px;
+  border: 1.5px solid rgba(255, 217, 138, 0.7);
+  font-size: 18px; font-weight: 500; letter-spacing: 2.5px;
+  color: var(--gold);
+  background: rgba(60, 46, 16, 0.45);
+  text-shadow: 0 0 16px rgba(255, 217, 138, 0.8);
+  box-shadow: 0 0 24px rgba(255, 217, 138, 0.25);
+  animation: glowPulse 1.6s ease-in-out infinite;
+}
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+#tut {
+  position: absolute; top: 58%; left: 50%; transform: translateX(-50%);
+  width: min(88vw, 480px); text-align: center;
+  font-size: 19px; letter-spacing: 2.5px; line-height: 1.7;
+  color: #eafff9;
+  text-shadow: 0 0 18px rgba(126, 242, 224, 0.7);
+  opacity: 0; transition: opacity 0.5s ease;
+  animation: tutPulse 1.6s ease-in-out infinite;
+  pointer-events: none;
+}
+#tut.show { opacity: 1; }
+#tut .sub { display: block; font-size: 12px; letter-spacing: 2px; opacity: 0.55; margin-top: 4px; }
+@keyframes tutPulse {
+  0%, 100% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(1.06); }
+}
+
+#joy {
+  position: absolute; width: 104px; height: 104px;
+  border: 1.5px solid rgba(126, 242, 224, 0.3);
+  border-radius: 50%;
+  background: rgba(8, 18, 24, 0.22);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+#joy[hidden] { display: none; }
+#joyKnob {
+  position: absolute; left: 50%; top: 50%;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: radial-gradient(circle at 38% 35%, rgba(190, 250, 240, 0.55), rgba(126, 242, 224, 0.25));
+  box-shadow: 0 0 14px rgba(126, 242, 224, 0.4);
+  transform: translate(-50%, -50%);
+}
+
+/* ---------- overlays ---------- */
+.overlay {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 14px; text-align: center;
+  background: rgba(1, 3, 7, 0.78);
+  color: #cdf6ec;
+  z-index: 10;
+}
+.overlay[hidden] { display: none; }
+
+.bigTitle { font-size: 30px; font-weight: 200; letter-spacing: 6px; text-shadow: 0 0 22px rgba(126,242,224,0.5); }
+.gateTitle { font-size: 24px; font-weight: 200; letter-spacing: 5px; color: var(--gold); text-shadow: 0 0 18px rgba(255,217,138,0.5); }
+.gateSub { font-size: 13px; opacity: 0.65; letter-spacing: 2px; margin-bottom: 6px; }
+
+#gateCards { display: flex; gap: 12px; padding: 0 12px; flex-wrap: wrap; justify-content: center; }
+.gateCard {
+  position: relative;
+  width: min(28vw, 168px); min-width: 108px; min-height: 158px;
+  padding: 14px 10px;
+  border: 1px solid rgba(126, 242, 224, 0.3);
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(10, 28, 34, 0.85), rgba(3, 10, 16, 0.9));
+  color: #cdf6ec; cursor: pointer;
+  display: flex; flex-direction: column; gap: 8px; align-items: center;
+  font-family: var(--sans);
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.gateCard:hover, .gateCard:focus-visible {
+  transform: translateY(-4px);
+  border-color: rgba(126, 242, 224, 0.8);
+  box-shadow: 0 0 24px rgba(126, 242, 224, 0.25);
+}
+.gateCard .ico { font-size: 30px; filter: drop-shadow(0 0 8px rgba(126,242,224,0.6)); }
+.gateCard .nm { font-size: 16px; letter-spacing: 2px; }
+.gateCard .en { font-size: 10px; opacity: 0.5; letter-spacing: 1px; text-transform: uppercase; }
+.gateCard .fx { font-size: 12px; line-height: 1.5; opacity: 0.8; }
+.gateCard .key {
+  position: absolute; top: 6px; left: 8px;
+  width: 18px; height: 18px; line-height: 18px;
+  font-size: 11px; text-align: center;
+  border: 1px solid rgba(126, 242, 224, 0.45);
+  border-radius: 5px;
+  color: rgba(126, 242, 224, 0.75);
+}
+/* the keycap hint only makes sense where a keyboard does */
+@media (hover: none) and (pointer: coarse) {
+  .gateCard .key { display: none; }
+}
+
+.menuRow { display: flex; gap: 14px; margin-top: 8px; }
+.menuRow button {
+  padding: 12px 26px;
+  font-size: 15px; letter-spacing: 3px;
+  color: #02141a;
+  background: linear-gradient(180deg, #9df5e4, #4cc7b2);
+  border: 0; border-radius: 999px; cursor: pointer;
+  box-shadow: 0 0 22px rgba(126, 242, 224, 0.35);
+  font-family: var(--sans);
+}
+.menuRow button:active { transform: scale(0.97); }
+#btnRestart { background: rgba(126,242,224,0.08); color: var(--glow-dim); border: 1px solid rgba(126,242,224,0.3); box-shadow: none; }
+#btnShare { background: rgba(255,217,138,0.08); color: var(--gold); border: 1px solid rgba(255,217,138,0.35); box-shadow: none; }
+
+.tips { font-size: 12.5px; line-height: 1.9; opacity: 0.55; letter-spacing: 1.5px; }
+
+/* ---------- death / afterglow ---------- */
+#deathOverlay { background: #010205; justify-content: flex-end; }
+#afterglow { position: absolute; inset: 0; width: 100%; height: 100%; }
+#deathPanel {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  padding-bottom: max(34px, calc(env(safe-area-inset-bottom) + 22px));
+  width: 100%;
+  background: linear-gradient(180deg, transparent, rgba(1,2,5,0.88) 40%);
+  padding-top: 60px;
+}
+#deathStats { font-size: 14px; line-height: 2; letter-spacing: 1.5px; color: rgba(205,246,236,0.85); font-variant-numeric: tabular-nums; }
+#deathStats .score { font-size: 34px; font-weight: 200; letter-spacing: 4px; color: var(--gold); text-shadow: 0 0 24px rgba(255,217,138,0.6); }
+#deathStats .cause { font-size: 13px; letter-spacing: 2px; color: rgba(255,150,140,0.85); }
+#shareImg {
+  max-width: min(58vw, 260px); max-height: 30vh;
+  border: 1px solid rgba(255,217,138,0.4); border-radius: 10px;
+  box-shadow: 0 0 26px rgba(255,217,138,0.18);
+  /* the page suppresses selection globally; the keepsake must stay
+     long-pressable so iOS offers "Add to Photos" */
+  -webkit-user-select: auto; user-select: auto;
+  -webkit-touch-callout: default;
+  pointer-events: auto;
+}
+#deathStats .nb { color: rgba(205,246,236,0.5); font-size: 12px; }
+#deathStats .discHead { margin-top: 6px; font-size: 12px; letter-spacing: 3px; color: rgba(205,246,236,0.7); }
+.discGrid {
+  display: flex; gap: 7px; flex-wrap: nowrap;
+  width: fit-content; max-width: 94vw;
+  margin: 4px auto 2px;
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+  padding-bottom: 2px;
+}
+.discTile {
+  width: 56px; padding: 6px 2px 5px;
+  border: 1px solid rgba(126, 242, 224, 0.14);
+  border-radius: 9px;
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  background: rgba(8, 18, 24, 0.6);
+}
+.discTile i { font-style: normal; font-size: 17px; line-height: 1.2; color: rgba(140, 180, 175, 0.35); }
+.discTile b { font-weight: 400; font-size: 8.5px; letter-spacing: 0.5px; color: rgba(170, 215, 208, 0.4); text-align: center; line-height: 1.3; }
+.discTile.got {
+  border-color: rgba(255, 217, 138, 0.55);
+  background: rgba(40, 32, 14, 0.55);
+  box-shadow: 0 0 14px rgba(255, 217, 138, 0.18);
+}
+.discTile.got i { color: var(--gold); text-shadow: 0 0 10px rgba(255, 217, 138, 0.7); }
+.discTile.got b { color: rgba(255, 230, 180, 0.95); }
+
+@media (max-width: 520px) {
+  .gateCard { width: 29vw; min-height: 150px; }
+  .gateCard .nm { font-size: 14px; }
+  .bigTitle { font-size: 24px; }
+}

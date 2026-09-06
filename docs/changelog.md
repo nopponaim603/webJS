@@ -11,6 +11,18 @@ tags:
 # 📜 Documentation Changelog — webJS
 
 
+## [1.38.0] - 2026-09-06
+
+- **🌊 Echo Abyss: Deep-Sea Sonar Survival Integration & GDD Spec (`echo-abyss` - G038)**:
+  - **นำเข้าตัวเกมแบบ Standalone 100%**: ดึงไฟล์เกม Echo Abyss (WebGL 2.0 2D SDF Raymarching, Volumetric Shaders, Dual-pass Bloom, Procedural Web Audio API Synthesizer) มาจัดเก็บไว้ที่ `public/games/echo-abyss/`
+  - **ทำความสะอาดโค้ด**: ปลดล็อค Dependency ภายนอก (ตัด SDK cloudflare/tracking scripts) ให้รันแบบ Offline/Standalone ได้ 100%
+  - **สร้างเอกสาร Game Design Document (GDD)**: จัดทำเอกสารสเปกเกมอย่างละเอียดที่ [`docs/gdd/games/echo-abyss/spec.md`](./gdd/games/echo-abyss/spec.md) ครอบคลุม:
+    - คอนเซปต์ **"Sound is Sight" (เสียงคือการมองเห็น)** ผ่านระบบ Echolocation & Sound Shadow Stealth
+    - กราฟิกและ Shaders Pipeline (`render-gl.js`) ทั้ง SDF Raymarching, Volumetric Godrays, Chromatic Aberration, Bloom, Film Grain & Vignette
+    - ระบบเสียงสังเคราะห์อัตโนมัติ (`audio.js`) ทั้ง Adaptive Ambient Sub-drone ตามระดับความลึก, Harmonic Pentatonic Pings, Hunter Doppler Sweeps และ Leviathan Roar Synth
+    - ระบบ Evolution Gates และ Roguelite Progression
+  - **ลงทะเบียนใน Web Portal**: เพิ่มรายการเกมลงใน `src/app/page.js` และสารบัญโปรเจกต์ `docs/index.md`
+
 ## [1.37.0] - 2026-09-06
 
 - **⛵ Boat Roguelite: Driftwake (3D Naval Combat & Endless Seas v2.5.0) Integration & GDD Spec (`boat-roguelite-driftwake` - G037)**:
