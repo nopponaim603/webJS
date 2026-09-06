@@ -12,6 +12,7 @@ tags:
   - survival
   - deep-sea
   - sonar
+  - claude-fable-5
   - ai-generated
 ---
 
@@ -20,30 +21,44 @@ tags:
 **Code Name:** `echo-abyss`  
 **Game ID:** `G038`  
 **Creator:** [nilni](https://www.aigameshare.com/profile/nil)  
-**Version:** `1.0.0` (Abyssal Descent Edition)  
-**Age Rating:** All Ages / 10+  
-**Target Playtime:** 2–10 Minutes per Run (Roguelike Descent Session)  
-**Supported Platforms:** Desktop & Mobile (One-finger Touch, Virtual Joystick, Mouse, Keyboard WASD / Arrows)  
-**Engine & Tech Stack:** WebGL 2.0 (Custom GLSL Shaders, 2D SDF Raymarching, Volumetric Godrays, Chromatic Aberration, Bloom PostFX, Dynamic Particle Simulation), HTML5 Canvas, Web Audio API Procedural Sound Synthesizer  
+**Version:** `1.0.0` (Top Version / Masterpiece Build)  
+**Age Rating:** 13+  
+**Target Playtime:** 1–5 Minutes per Run (Deep Descent Session)  
+**Supported Platforms:** Mobile & Desktop (One-finger Touch / Two-handed, Mouse, Keyboard WASD / Arrows)  
+**AI Generation & Tech Stack:** Claude Fable 5, WebGL 2.0 (Custom GLSL Shaders, 2D SDF Raymarched Soft Sound-shadows, GPU Plankton Field), HTML5 Canvas Fallback, CSS3, JavaScript (ES6+), Procedural WebAudio Convolution Reverb Synthesizer  
 **Original Live Source:** [AIGameShare Echo Abyss](https://www.aigameshare.com/games/echo-abyss?play=1&mode=fullscreen)  
-**Tagline:** *"A deep-sea descent where sound is sight. Every sonar ping lights the dark and calls the hunters. Dive through sonar shadows, steal light from enemy pings, and chase your deepest score."*  
+**Tagline:** *"A deep-sea descent where sound is sight. Every sonar ping lights the pitch-black abyss in fading phosphorescence — and calls the blind hunters. Hide in sonar shadows, steal light from enemy pings, evolve at depth gates, and dive as deep as you dare."*  
 
 ---
 
 ## 1. Executive Summary & Concept
 
 ### 1.1 Elevator Pitch
-**Echo Abyss** เป็นเกมจำลองการดำดิ่งสู่ห้วงลึกมหาสมุทรแบบ Real-time Survival Roguelite ในความมืดมิดสนิทที่ **"เสียงคือการมองเห็น" (Sound is Sight)** 
+**Echo Abyss** เป็นเกมจำลองการดำดิ่งสู่ห้วงลึกมหาสมุทรแบบ One-finger Survival Roguelite ในความมืดมิดสนิทที่ **"เสียงคือการมองเห็น" (Sound is Sight)** เล่นได้ทันทีแบบ Direct-start (No Start Screen)
 
-ผู้เล่นจะควบคุม "Sonarling" สิ่งมีชีวิตเรืองแสงใต้น้ำลึก ดำดิ่งลงสู่ก้นบึ้งของมหาสมุทรผ่านถ้ำหินใต้ทะเลที่ซับซ้อน ทุกการส่งสัญญาณโซนาร์ (Ping) จะปลดปล่อยคลื่นเสียงสะท้อนโครงสร้างหินและไอเทมในความมืดด้วยระบบ **2D SDF Raymarching & Volumetric Lighting** แต่ในขณะเดียวกัน เสียงโซนาร์ก็จะดึงดูดสัตว์ประหลาดตาบอดใต้ทะเลลึก (Blind Abyssal Hunters) เข้ามาจู่โจมทันที!
+ผู้เล่นจะควบคุม "Sonarling" สิ่งมีชีวิตที่มี 3 เยื่อหุ้มพลังชีวิต (Three Membranes) ดำดิ่งลงสู่ก้นบึ้งของมหาสมุทรผ่านถ้ำหินใต้ทะเลที่สร้างขึ้นแบบโพรซีเดอรัล (Pitch-black Procedural Caves) ทุกการส่งสัญญาณโซนาร์ (Sonar Wavefront) จะปลดปล่อยคลื่นเสียงสะท้อนโครงสร้างหินและไอเทมในความมืดด้วยระบบ **2D SDF Raymarching & Soft Sound-shadows** และปลุกสนามแพลงก์ตอน GPU (GPU Plankton Field) ให้เรืองแสงเฉพาะบริเวณที่คลื่นแสงกระทบ
 
-ผู้เล่นต้องอาศัย **"เงาเสียง" (Sound Shadows)** หลังแนวหิน หลบการสแกนของนักล่า อาศัยแสงจากคลื่นโซนาร์ของศัตรูในการเดินทาง เก็บสะสมไข่มุกเรืองแสง (Bioluminescent Pearls) เพื่อพัฒนาขีดความสามารถที่ประตูวิวัฒนาการ (Evolution Gates) และเอาชีวิตรอดจากเสียงคำรามของสัตว์ประหลาดขนาดยักษ์ (Leviathan Roar) ให้ลึกที่สุดเท่าที่จะทำได้
+ทว่าในความมืดมี **Blind Abyssal Hunters** ที่คอยฟังทุกการเคลื่อนไหว, เหยื่อล่อปลาตกเบ็ด (Anglerfish Lure) ที่คอยดักทำร้ายผู้เล่นที่ละโมบ, ปล่องน้ำร้อนใต้ทะเลที่ปะทุขึ้น (Erupting Abyssal Vents), และเสียงคำรามของ **Leviathan Roar** ที่ส่องสว่างทั่วทั้งแผนที่ให้ทุกชีวิตได้เห็น
 
 ### 1.2 Core Pillars
-1. **Echolocation as Core Mechanic (Sound is Sight):** ในความมืดสนิท ผู้เล่นจะมองไม่เห็นเส้นทางจนกว่าจะปล่อย Ping คลื่นเสียงจะสะท้อนกลับมาเป็นภาพความสว่างชั่วคราว
-2. **Sound Shadow Stealth & Risk/Reward:** การส่งเสียงทำให้มองเห็น แต่ก็เป็นการส่งตำแหน่งให้ศัตรูทราบ ผู้เล่นสามารถใช้หินเป็นเกราะกำบังเงาเสียง (Sound Shadow) หรือแอบดูเส้นทางจากคลื่นโซนาร์ของสิ่งมีชีวิตอื่น
-3. **Deep Evolution & Roguelite Progression:** สะสมไข่มุกใต้สมุทรเพื่อผ่านประตูวิวัฒนาการ (Evolution Gates) เลือกอัปเกรดความสามารถ เช่น เพิ่มระยะคลื่นเสียง, คลื่นเสียงชาร์จทำลายล้าง, ความเร็วในการเคลื่อนที่, และพลังชีวิต
-4. **100% Procedural & Standalone Simulation:** กราฟิกแสงเงา Volumetric Godrays, Bloom, Chromatic Aberration, และเสียงดนตรี Web Audio API ทั้งหมดถูกสังเคราะห์แบบ Procedural 100% โดยไม่ต้องพึ่งพาไฟล์เสียงภายนอก
+1. **Sound is Sight (Echolocation via SDF Raymarching):** ในความมืดสนิท ผู้เล่นจะมองไม่เห็นอะไรจนกว่าจะปล่อยคลื่น Ping คลื่นเสียงจะสะท้อนกลับมาเป็นภาพความสว่างชั่วคราวและค่อยๆ เลือนหาย (Fading Phosphorescence)
+2. **Sound Shadow Stealth & Painted Hunter Danger:** การส่งเสียงทำให้มองเห็น แต่ก็เป็นการส่งตำแหน่งให้นักล่าตาบอด คลื่นเสียงของศัตรูก็ช่วยส่องสว่างให้เราเช่นกัน แต่ถ้าคลื่นเสียงของศัตรูสัมผัสโดนตัวเรา เราจะถูก "Painted" และถูกตามล่าทันที
+3. **12 Stackable Evolutions at Depth Gates:** สะสมไข่มุกใต้สมุทรเพื่อผ่านประตูความลึก (Depth Gates) และเลือก 1 ใน 12 การ์ดวิวัฒนาการที่สามารถสะสมความสามารถทับซ้อนกันได้
+4. **Physically-correct WebAudio Echo & Convolution Reverb:** ทุกเสียงสะท้อนของโน้ตดนตรีจะเดินทางกลับมาตามระยะทางจริงทางฟิสิกส์ และจำลองเสียงสะท้อนก้อง (Convolution Reverb) ตามขนาดของถ้ำรอบตัว
+5. **Luminous Afterglow Death Screen:** หน้าจอจบเกมจะวาดเส้นทางการดำดิ่งทั้งหมดเป็นเส้นใยเรืองแสง (Luminous Afterglow Thread) และคำนวณคะแนนตามสูตร:
+   $$\text{Score} = \text{Depth} + (\text{Pearls} \times \text{Unharmed Combo})$$
+
+### 1.3 Creator Versions & Release Changelog (Current Top Pick)
+
+> [!NOTE]
+> **AIGameShare Creator Top Pick:** [nilni](https://www.aigameshare.com/profile/nil)  
+> **Community Metrics:** 12 Votes / 422 Plays / 9h 22m Total Played  
+> **Categories & Tags:** `Action` `Roguelite` `Stealth` `Deep Sea` `Sonar` `Atmospheric` `One Finger` `Mobile` `HTML5` `Claude` `Fable 5` `fable` `Adventure` `Survival` `Exploration`
+
+#### 📜 Official Version Release Notes
+> *"A one-finger deep-sea sonar survival roguelite with no start screen. Pitch-black procedural caves are revealed only by expanding sonar wavefronts with SDF-raymarched soft sound-shadows (WebGL2 with full Canvas 2D fallback), a GPU plankton field that exists only where light touches, blind hunters that hear your every move, an anglerfish lure that punishes greed, erupting abyssal vents, a leviathan whose roar lights the whole map for everyone, 12 stackable evolutions at depth gates, fully synthesized WebAudio whose echo notes return at physically correct times and whose convolution reverb measures the cave around you, and a death screen that paints your entire dive as one luminous Afterglow thread. Score = depth + pearls × unharmed combo, submitted to the leaderboard.*
+> 
+> *By [nilni](https://www.aigameshare.com/profile/nil) — 12 votes / 422 plays / 9h 22m"*
 
 ---
 
@@ -61,26 +76,28 @@ tags:
 │  (WebGL 2.0)  │       │  (Web Audio)  │       │ (Game Engine) │
 └───────┬───────┘       └───────┬───────┘       └───────┬───────┘
         │                       │                       │
-        │ • SDF Raymarching     │ • Adaptive Sub-drone  │ • Descent & Depth
-        │ • Volumetric Lighting │ • Sonar Harmonic Ping │ • Hunter AI & Vision
-        │ • Dual-pass Bloom     │ • Hunter Sonar Sweep  │ • Evolution Gates
-        │ • Godrays & Vignette  │ • Siren & King Songs  │ • Touch & Joy Input
-        │ • Chromatic Fringe    │ • Leviathan Roar Synth│ • Score & Highscores
+        │ • SDF Raymarching     │ • Adaptive Sub-drone  │ • 3 Membranes & Life
+        │ • Soft Sound Shadows  │ • Physically Echo Ret │ • Hunter AI & Vision
+        │ • GPU Plankton Field  │ • Cave Convol. Reverb │ • 12 Depth Evolutions
+        │ • Dual-pass Bloom     │ • Doppler Sweeps      │ • One-finger / 2-Hand
+        │ • Volumetric Godrays  │ • Siren & King Songs  │ • Shriek Charge Blast
+        │ • Chromatic Aberr.    │ • Leviathan Roar Synth│ • Afterglow Path Map
 ```
 
 ### 2.1 Graphics & Shader Pipeline (`render-gl.js`)
-- **WebGL 2.0 Pipeline:** ใช้ Quad Vertex Shader ร่วมกับ Fragment Shaders สำหรับการคำนวณแสงและเงา
-- **SDF Raymarching Canvas:** เรนเดอร์แผนที่ถ้ำแบบ Signed Distance Field (SDF) คำนวณการตกกระทบและการสะท้อนของคลื่นเสียงตามระยะทาง
-- **Volumetric Light & Godrays:** จำลองลำแสงแบบ Radial Streaks พุ่งจากจุดกำเนิดเสียงคำรามของ Leviathan
-- **Multi-pass Post Processing:**
+- **WebGL 2.0 & Canvas 2D Fallback:** รองรับการเรนเดอร์คุณภาพสูงบน WebGL2 พร้อมระบบสำรองอัตโนมัติบน Canvas 2D
+- **SDF Raymarching & Soft Sound-shadows:** คำนวณแนวการตกกระทบของคลื่นเสียงสะท้อนและเงาเสียงแบบนุ่มนวล
+- **GPU Plankton Field:** อนุภาคแพลงก์ตอนเรืองแสงที่คำนวณผ่าน GPU Vertex Shader และจะสว่างขึ้นเฉพาะบริเวณที่คลื่นเสียงส่องถึง
+- **Volumetric Godrays & PostFX:**
   - `uBloom`: Dual-pass Box/Gaussian Blur แยก Channel ความสว่าง
   - `Chromatic Aberration`: การเหลื่อมสี RGB แยกตามความเสียหายที่ได้รับและการสั่นสะเทือน
   - `Film Grain & Vignette`: ละอองน้ำลึกและเงาดำรอบขอบจอ
 
 ### 2.2 Procedural Web Audio Synthesizer (`audio.js`)
-- **Adaptive Ambient Drone:** ปรับระดับความถี่เบสต่ำ (Sub-bass drone oscillator) ให้ต่ำลงเรื่อยๆ ตามความลึกระดับเมตร
+- **Physically-timed Echoes:** ทุกการส่งเสียง จะคำนวณเวลาสะท้อนกลับของโน้ตตามระยะทางจริงจากผนังถ้ำ
+- **Cave Convolution Reverb:** ปรับความกังวานของเสียงสะท้อนตามปริมาตรความกว้างของถ้ำแบบ Real-time
+- **Adaptive Ambient Drone:** ปรับระดับความถี่เบสต่ำ (Sub-bass drone oscillator) ให้ต่ำลงเรื่อยๆ ตามความลึก
 - **Harmonic Pentatonic Pings:** คลื่นเสียง Ping ของผู้เล่นใช้คอร์ดเสียง Harmonic เพลงสังเคราะห์ 5 โน้ต
-- **Hunter Pings & Doppler Sweep:** เสียงคลื่นความถี่สูง/ต่ำของนักล่าและปลาไหลไฟฟ้า
 - **Leviathan Roar Synthesizer:** เสียงคำรามต่ำสั่นสะเทือน (Sub-oscillator + Bandpass Sweep + Noise Burst Buffer)
 
 ---
@@ -88,21 +105,33 @@ tags:
 ## 3. Gameplay Mechanics & Systems
 
 ### 3.1 Controls & Input Handling
-- **Mobile Touch:** แตะหน้าจอเพื่อส่ง Sonar Ping, ลากนิ้วเพื่อเคลื่อนที่ผ่าน Virtual Floating Joystick
-- **Keyboard & Mouse:** 
-  - `W, A, S, D` หรือ `Arrow Keys`: เคลื่อนที่ตัวละคร Sonarling
-  - `Spacebar` หรือ `Left Mouse Click`: ส่ง Sonar Ping
-  - `P` หรือปุ่มบนจอ: Pause / Resume
-  - `M` หรือปุ่มบนจอ: ปิด/เปิดเสียงสังเคราะห์
+- **Mobile One-finger Mode (มือเดียว):** 
+  - นิ้วแรกแตะหน้าจอจะกลายเป็น Floating Virtual Joystick (กดค้างแล้วลากเพื่อว่ายน้ำ)
+  - แตะเร็ว (Quick Tap) เพื่อส่ง Sonar Ping
+- **Mobile Two-handed Mode (สองมือ):**
+  - นิ้วหนึ่งบังคับทิศทาง อีกนิ้วหนึ่งแตะส่ง Ping หรือกดค้างเพื่อ **Charge the Shriek** (คลื่นเสียงทำลายล้างรอบทิศ)
+- **Keyboard & Mouse (Desktop):**
+  - `W, A, S, D` หรือ `Arrow Keys` หรือลากเมาส์: เคลื่อนที่ตัวละคร Sonarling
+  - `Spacebar` หรือ `Left Click`: ส่ง Sonar Ping
+  - กดค้างเพื่อชาร์จ Shriek Blast
+  - `P` / `Escape`: พักเกม (Pause / Resume)
+  - `M`: ปิด/เปิดเสียงสังเคราะห์
   - `L`: สลับภาษา (EN / ZH)
 
-### 3.2 Evolution Gates (ระบบวิวัฒนาการ)
-เมื่อดำดิ่งลึกถึงระดับความลึกที่กำหนด ผู้เล่นจะเข้าสู่ประตูวิวัฒนาการ (Evolution Gates) เพื่อเลือกบัฟอัปเกรด 1 ใน 3 ตัวเลือก:
-- **Resonance Pulse (ขยายรัศมีคลื่นเสียง):** เพิ่มระยะตรวจจับและระยะการมองเห็นของ Ping
-- **Phosphor Persistence (แสงค้างนานขึ้น):** คลื่นแสงสะท้อนจากแนวหินสว่างค้างอยู่นานขึ้นก่อนเลือนหาย
-- **Eel Agility (ความเร็วการเคลื่อนที่):** ว่ายน้ำได้เร็วและคล่องตัวขึ้น
-- **Shockwave Repel (คลื่นกระแทกผลักศัตรู):** ปล่อยคลื่นชาร์จผลักดันศัตรูรอบตัวเมื่อชาร์จเต็ม
-- **Vitality Surge (ฟื้นฟูและเพิ่มเลือด):** เพิ่มหลอดหัวใจสูงสุดและฟื้นฟูพลังชีวิต
+### 3.2 12 Stackable Evolutions (ระบบวิวัฒนาการ 12 รูปแบบ)
+เมื่อดำดิ่งผ่านประตูความลึก (Depth Gates) ผู้เล่นจะเลือกบัฟ 1 ใน 3 ตัวเลือก ซึ่งสามารถสะสมทับซ้อนกันได้ (Stackable):
+1. **Resonance Pulse:** เพิ่มรัศมีการกระจายตัวของคลื่นเสียง Ping
+2. **Phosphor Persistence:** แสงสะท้อนจากแนวหินสว่างค้างอยู่นานขึ้นก่อนเลือนหาย
+3. **Eel Agility:** เพิ่มความเร็วในการว่ายน้ำและความคล่องตัว
+4. **Shriek Charge:** ลดเวลาในการชาร์จคลื่นระเบิดเสียง Shriek Blast
+5. **Shockwave Repel:** เพิ่มระยะผลักดันศัตรูเมื่อปลดปล่อยคลื่นเสียง
+6. **Pearl Magnet:** ดูดไข่มุกเรืองแสงเข้าหาตัวจากระยะไกล
+7. **Bioluminescent Cloak:** ลดการมองเห็นของศัตรูเมื่ออยู่ในแนวเงาเสียง
+8. **Vitality Surge:** ซ่อมแซมและเพิ่มเยื่อหุ้มพลังชีวิต (Membranes)
+9. **Echo Echo:** ปล่อยคลื่นสะท้อนระลอกที่สองโดยอัตโนมัติ
+10. **Abyssal Sense:** ตรวจจับตำแหน่งสัตว์ประหลาดและปล่องความร้อนล่วงหน้า
+11. **Tide Breaker:** ทนทานต่อแรงกระแทกจากกระแสน้ำวน
+12. **Deep Harmony:** เพิ่มตัวคูณคะแนน Unharmed Combo จากการไม่โดนดาเมจ
 
 ---
 
@@ -113,7 +142,7 @@ tags:
 | **Catalog ID** | `G038` |
 | **Directory** | `public/games/echo-abyss/` |
 | **Main URL** | `/games/echo-abyss/index.html` |
-| **Portal Status** | Active Showcase Ready |
-| **Thumbnail** | `/games/echo-abyss/thumbnail.png` |
+| **AI Generation Tools** | Claude Fable 5 + WebGL2 / GLSL / Canvas / WebAudio |
+| **Tech Stack** | WebGL 2.0 2D SDF / GPU Plankton / Web Audio API |
 | **Category** | `Three.js 3D / WebGL` & `ปริศนา / เอาชีวิตรอด` |
 | **Standalone Ready** | 100% Offline Compatible (No CDN / External SDK dependency) |
