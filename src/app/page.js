@@ -326,6 +326,14 @@ const initialGames = [
     url: "/games/ink-warden/index.html",
     image: "/games/ink-warden/thumbnail.png",
     gradient: "linear-gradient(135deg, #18181B 0%, #71717A 100%)"
+  },
+  {
+    id: "jelly-baby",
+    title: "👶 Jelly Baby (WebGPU 3D Soft-Body Physics)",
+    category: "Three.js 3D Engine",
+    url: "/games/jelly-baby/index.html",
+    image: "/games/jelly-baby/thumbnail.png",
+    gradient: "linear-gradient(135deg, #D97706 0%, #FBBF24 100%)"
   }
 ];
 
