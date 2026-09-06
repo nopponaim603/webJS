@@ -13,6 +13,16 @@ tags:
 
 ## [1.37.0] - 2026-09-06
 
+- **⛵ Boat Roguelite: Driftwake (3D Naval Combat & Endless Seas v2.5.0) Integration & GDD Spec (`boat-roguelite-driftwake` - G037)**:
+  - **นำเข้าตัวเกมแบบ Standalone**: ดึงไฟล์เกม Driftwake (Three.js 0.180.0, Blender 5.2.1, Web Audio Synthesizer, Deterministic Simulation) มาจัดเก็บไว้ที่ `public/games/boat-roguelite-driftwake/` โดยทำความสะอาด tracking scripts ภายนอก และจัดระเบียบ vendor dependencies (`three.module.min.js`, `three.core.min.js`) ให้รันแบบ Offline/Standalone ได้ 100%
+  - **สร้างเอกสาร Game Design Document (GDD)**: จัดทำเอกสารข้อกำหนดการออกแบบอย่างละเอียดตามมาตรฐาน `game-doc-manager` ที่ [`docs/gdd/games/boat-roguelite-driftwake/spec.md`](./gdd/games/boat-roguelite-driftwake/spec.md) ครอบคลุม:
+    - AI Generation Pipeline (OpenAI GPT-6 + Codex, Three.js, Blender 5.2.1, WebAudio)
+    - ระบบการบังคับและเล็งปืนใหญ่ประจำตำแหน่งรอบลำเรือ (Fixed Battery Cannon Alignment: Bow 0°, Broadsides ±90°, Stern 180°)
+    - กลไก Surge Dash และ Explosive Wake Traps
+    - ระบบ **Eight Gated Mastery Upgrades** (v2.5.0 Signature) พร้อม *Deadeye Salvo* (Critical Strike 40% / 2x Hits) และ Infinite Critical Damage Stacking
+    - แผนผัง 6 มหาสมุทร (The Six Seas / 24 Encounters) และ Flagship Bosses สู่โหมด Endless Seas
+  - **ลงทะเบียนใน Web Portal**: เพิ่มรายการเกมลงใน `src/app/page.js` และสารบัญโปรเจกต์ `docs/index.md`
+
 - **🛠️ Fix 404 OVERPRINT Game Walking & Controls Issue (`overprint-404`)**:
   - **ปัญหาที่พบ**: ตัวละครในเกม 404 OVERPRINT ไม่สามารถเดินด้วยปุ่ม W, A, S, D หรือปุ่มลูกศร (Arrow Keys) ได้
   - **สาเหตุและการแก้ไข**:
