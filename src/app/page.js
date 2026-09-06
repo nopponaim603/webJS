@@ -262,6 +262,22 @@ const initialGames = [
     url: "/games/crumple/index.html",
     image: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400&h=400&fit=crop",
     gradient: "linear-gradient(135deg, #57534E 0%, #A8A29E 100%)"
+  },
+  {
+    id: "silent-viper",
+    title: "🎯 SILENT VIPER (Sniper 3D)",
+    category: "Three.js 3D Engine",
+    url: "/games/silent-viper/index.html",
+    image: "/games/silent-viper/thumbnail.webp",
+    gradient: "linear-gradient(135deg, #1E1B4B 0%, #E11D48 100%)"
+  },
+  {
+    id: "attack-agi",
+    title: "⚡ Attack AGI (3D Horde Shooter)",
+    category: "Three.js 3D Engine",
+    url: "/games/attack-agi/index.html",
+    image: "/games/attack-agi/thumbnail.jpg",
+    gradient: "linear-gradient(135deg, #090D16 0%, #DC2626 100%)"
   }
 ];
 

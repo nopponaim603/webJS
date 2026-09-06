@@ -58,6 +58,8 @@ tags:
 | G029 | `survive-10-waves`       | 🛡️ SURVIVE 10 WAVES (Extraction 3D)| Three.js / ES Modules     | `public/games/survive-10-waves/`       |
 | G030 | `dirtline`               | 🏍️ DIRT LINE (Trials Dirt Bike 3D)  | Three.js / Spring Physics | `public/games/dirtline/`               |
 | G031 | `oxford-3000`            | 📚 Oxford 3000 Vocab Master        | HTML5 / Canvas / TTS     | `public/games/oxford-3000/`            |
+| G032 | `silent-viper`           | 🎯 SILENT VIPER (Sniper 3D)        | Three.js / Vite           | `public/games/silent-viper/`           |
+| G033 | `attack-agi`             | ⚡ Attack AGI (3D Horde Shooter)   | Three.js / Procedural     | `public/games/attack-agi/`             |
 
 ### 🎮 Active Released Game Specifications (`docs/gdd/games/`)
 - [📚 Oxford 3000 Vocab Master (EduGame G031)](./gdd/games/oxford-3000/spec.md)
