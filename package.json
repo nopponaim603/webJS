@@ -4,7 +4,7 @@
   "description": "เว็บไซต์สำหรับแสดงผลงานเกม HTML5 และเกมที่สามารถรันผ่าน Browser",
   "main": "server.js",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -H 0.0.0.0",
     "build": "next build",
     "start": "next start",
     "deploy": "vercel",

@@ -4,7 +4,7 @@ import PWAInstallButton from '@/components/PWAInstallButton';
 
 export default function Header({ searchKeyword, setSearchKeyword }) {
   return (
-    <header style={{
+    <header suppressHydrationWarning style={{
       position: 'sticky',
       top: 0,
       zIndex: 50,

@@ -4,6 +4,10 @@ const nextConfig = {
     '172.23.64.1',
     'localhost',
     '127.0.0.1',
+    '192.168.1.47',
+    '192.168.1.*',
+    '192.168.*',
+    '*.local',
   ],
   async headers() {
     return [
