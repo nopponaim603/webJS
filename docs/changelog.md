@@ -27,6 +27,9 @@ tags:
     - นำเข้าตัวเกม WebGL Living-ink Fluid Dynamics & Calligraphy Gesture Defense มาจัดเก็บไว้ที่ `public/games/ink-warden/`
     - จัดทำเอกสาร GDD ที่ [`docs/gdd/games/ink-warden/spec.md`](./gdd/games/ink-warden/spec.md)
   - **ลงทะเบียนใน Web Portal**: เพิ่มการ์ดเกมใหม่ทั้ง 4 รายการลงใน `src/app/page.js` และสารบัญโปรเจกต์ `docs/index.md`
+  - **🛠️ Fix Coin Pusher 3D & Water Ring Toss 3D Asset Loading**:
+    - **Coin Pusher 3D (`coin-pusher-3d-copper-cascade`)**: ดาวน์โหลดโมดูล ES ย่อย (`physics.js`, `render.js`, `audio.js`, `progression.js`, `vendor/rapier-0.19.0.mjs`), ติดตั้งไฟล์ WebAssembly binary `rapier_wasm3d_bg.wasm`, และแก้ปัญหา URL loader ให้ดึงผ่าน `import.meta.url` อย่างถูกต้อง
+    - **Water Ring Toss 3D (`water-ring-toss`)**: ดาวน์โหลด 3D Model (`WaterRingGame3.glb`), Texture Maps (`NormalMap.png`, `RoughnessMap.png`, `littlewhale.svg`), ติดตั้งไฟล์ `rapier_wasm3d_bg.wasm`, และแก้ไข URL base path ใน `index-CE0Eqk-1.js` ให้โหลดสมบูรณ์ 100%
 
 ## [1.38.0] - 2026-09-06
 
