@@ -1,6 +1,6 @@
 {
   "name": "gamedevjs-hub",
-  "version": "1.26.0",
+  "version": "1.37.0",
   "description": "เว็บไซต์สำหรับแสดงผลงานเกม HTML5 และเกมที่สามารถรันผ่าน Browser",
   "main": "server.js",
   "scripts": {

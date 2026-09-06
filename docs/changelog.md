@@ -2,7 +2,7 @@
 title: "📜 Documentation Changelog — webJS"
 project: "Game Portfolio (webJS)"
 version: "1.0.0"
-last_updated: "2026-08-16"
+last_updated: "2026-09-06"
 owner: "Antigravity AI & Dev Team"
 status: "Active"
 tags:
@@ -10,6 +10,23 @@ tags:
 ---
 # 📜 Documentation Changelog — webJS
 
+
+## [1.37.0] - 2026-09-06
+
+- **🛠️ Fix 404 OVERPRINT Game Walking & Controls Issue (`overprint-404`)**:
+  - **ปัญหาที่พบ**: ตัวละครในเกม 404 OVERPRINT ไม่สามารถเดินด้วยปุ่ม W, A, S, D หรือปุ่มลูกศร (Arrow Keys) ได้
+  - **สาเหตุและการแก้ไข**:
+    1. **ปลดล็อค Touch Analog Input (`public/games/overprint-404/src/touch.js`)**: เดิมระบบตรวจจับ Pointer Event สัมผัสแล้วล็อค `inp.analog = true` และบังคับ `axisX = 0, axisY = 0` ค้างไว้ตลอดเวลา ทำให้เกมไม่สนใจการกดปุ่มคีย์บอร์ด ได้แก้ไขให้สลับกลับเป็น `inp.analog = false` ทันทีเมื่อไม่ได้กำลังลากจอยสติ๊กสัมผัสบนหน้าจอ
+    2. **เพิ่มระบบ Keyboard Action Resolution (`public/games/overprint-404/src/main.js`)**: รองรับทั้ง Physical KeyCode (`KeyW`, `KeyA`, `KeyS`, `KeyD`, `ArrowUp`, `ArrowDown`, `ArrowLeft`, `ArrowRight`), ปุ่มปกติพิมพ์เล็ก/ใหญ่ และแป้นพิมพ์ภาษาไทย (`ไ`, `ฟ`, `ห`, `ก`, `"`, `ฆ`, `ฤ`, `ฏ`)
+    3. **แก้ปัญหา Iframe Focus & Pointer Cancellation (`public/games/overprint-404/index.html` & `src/components/GameModal.jsx`)**:
+       - กำหนด `tabindex="0"` และ `outline: none` บน Canvas ใน `index.html` เพื่อให้ Canvas สามารถรับ Keyboard Focus ได้อย่างสมบูรณ์
+       - ปรับปรุง `GameModal.jsx` ให้ Auto-focus เข้าไปใน iframe อัตโนมัติเมื่อเปิดหน้าต่าง Modal
+       - แก้ไข `mousedown` ใน `main.js` ให้เรียก `window.focus()` และ `canvas.focus()` และไม่บล็อก Mouse Events ในกรณีที่ไม่ใช่การลากทัชสติ๊ก
+- **🚀 ปรับปรุง PowerShell Startup Script (`run.ps1` & `start-web.ps1`)**:
+  - เพิ่มระบบตรวจสอบสภาพแวดล้อมอัตโนมัติ (Pre-flight Checks) 4 ขั้นตอน: Node.js, npm, dependencies (`node_modules`/Next.js), และเคลียร์พอร์ต 3000
+  - ติดตั้ง dependencies อัตโนมัติด้วย `npm install` หากตรวจพบว่าไฟล์ขาดหาย
+  - เปลี่ยนการเปิดเบราว์เซอร์เป็น Smart Polling รอจนกว่า Localhost:3000 จะพร้อมตอบสนอง HTTP 200
+  - บันทึกไฟล์ด้วย UTF-8 with BOM ป้องกันข้อผิดพลาด Parsing บน Windows PowerShell 5.1
 
 ## [1.36.0] - 2026-08-30
 

@@ -17,6 +17,7 @@ kanban-plugin: board
 
 ## ✅ DONE
 
+- [x] Fix: 404 OVERPRINT Controls & WASD Walking Fix + run.ps1 Pre-flight Checks (v1.37.0)
 - [x] [US-G028-00](./user-stories/archive/US-G028-00.md): GODAWFUL — Game Design Document & Architecture Spec (G028)
 - [x] [US-G028-01](./user-stories/archive/US-G028-01.md): GODAWFUL — Asset & Vite Bundle Scraping (G028)
 - [x] [US-G028-02](./user-stories/archive/US-G028-02.md): GODAWFUL — God Controls & Town Simulation Loop (G028)
