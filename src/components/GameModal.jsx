@@ -131,7 +131,7 @@ export default function GameModal({ game, onClose }) {
             src={game.url} 
             title={game.title}
             style={{ width: '100%', height: '100%', border: 'none' }}
-            allow="fullscreen; autoplay; gamepad; clipboard-write; clipboard-read"
+            allow="fullscreen; autoplay; gamepad; clipboard-write; clipboard-read; pointer-lock"
             onLoad={() => {
               try {
                 iframeRef.current?.focus();
